@@ -86,7 +86,7 @@ const heroImageAspectRatio =
 const heroImageHeight = Math.round(heroImageWidth * heroImageAspectRatio);
 const [rawTitle, ...titleRest] = title.split(' in ');
 const inlineLocation = titleRest.length > 0 ? titleRest.join(' in ') : undefined;
-const highlightLocation = locationLabel ?? inlineLocation ?? 'Louisville, KY';
+const highlightLocation = locationLabel ?? inlineLocation ?? 'Cincinnati, OH';
 const heroHeading = showLocationHeading ? rawTitle || title : title;
 const highlightHubLinks = hubLinks.filter((link) => link?.name && link?.slug);
 const hasHighlightHubLinks = highlightHubLinks.length > 0;

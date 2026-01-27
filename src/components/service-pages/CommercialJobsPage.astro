@@ -63,7 +63,7 @@ const locationDisplayName = activeLocation ? `${activeLocation.name}, ${activeLo
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
   ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
-  : 'Louisville, Lexington & Northern Kentucky';
+  : 'Cincinnati, OH';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
   items.filter((item): item is string => Boolean(item));
@@ -83,19 +83,19 @@ const zipCoverageLabel =
 
 const pageTitle = activeLocation
   ? `Commercial Overhead Door Service in ${locationDisplayName} | Derby Strong Garage Doors`
-  : 'Commercial Overhead Door Service in Kentucky | Louisville, Lexington & Northern Kentucky';
+  : 'Commercial Overhead Door Service in Cincinnati, OH | Derby Strong Garage Doors';
 const pageDescription = activeLocation
   ? `Commercial garage door repair, loading dock safety service, and warehouse maintenance for facilities in ${coverageAreaLabel}. Safety-certified technicians on call.`
-  : 'Commercial garage door repair, loading dock safety service, and warehouse maintenance for Louisville, Lexington, and Northern Kentucky facilities. Safety-certified technicians on call.';
+  : 'Commercial garage door repair, loading dock safety service, and warehouse maintenance for Cincinnati metro facilities. Safety-certified technicians on call.';
 const heroHeading = activeLocation
   ? `Commercial Door Support for ${locationDisplayName}`
-  : 'Commercial Door Support for Louisville, Lexington & Northern Kentucky';
+  : 'Commercial Door Support for Cincinnati, OH';
 const heroSubheading = activeLocation
   ? `Rapid-response repairs and preventive maintenance for warehouses, logistics centers, and municipal fleets. Crews cover ${coverageAreaLabel} with clear arrival updates.`
-  : 'Rapid-response repairs and preventive maintenance for warehouses, logistics centers, and municipal fleets. Crews work across Kentucky’s busiest corridors with clear arrival updates.';
+  : 'Rapid-response repairs and preventive maintenance for warehouses, logistics centers, and municipal fleets. Crews work across the Cincinnati metro with clear arrival updates.';
 const heroAlt = activeLocation
   ? `Commercial garage door technicians servicing facilities across ${coverageAreaLabel}`
-  : 'Commercial garage door technicians servicing facilities across Kentucky';
+  : 'Commercial garage door technicians servicing facilities across the Cincinnati metro';
 const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
 const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
 const callMarkets = CALL_MARKETS;
@@ -105,44 +105,44 @@ const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
 const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
 const businessEntityId = `${getSiteOrigin()}#business`;
 const callModalId = 'header-call-modal';
-const areaServed = activeLocation ? coverageAreaLabel : 'Louisville, Lexington & Northern Kentucky, KY';
+const areaServed = activeLocation ? coverageAreaLabel : 'Cincinnati, OH';
 const schemaServiceName = activeLocation
   ? `Commercial Garage Door Service in ${locationDisplayName}`
   : 'Commercial Garage Door Service';
 const schemaDescription = activeLocation
   ? `Commercial garage door repair, preventative maintenance, and equipment upgrades for warehouses, retail storefronts, and municipal facilities across ${coverageAreaLabel}.`
-  : 'Commercial garage door repair, preventative maintenance, and equipment upgrades for warehouses, retail storefronts, and municipal facilities across Louisville, Lexington, and Northern Kentucky.';
+  : 'Commercial garage door repair, preventative maintenance, and equipment upgrades for warehouses, retail storefronts, and municipal facilities across the Cincinnati metro.';
 const canonicalPath = activeLocation
   ? buildLocationServiceCanonicalPath(activeLocation.slug, 'commercial-jobs')
   : '/services/commercial-jobs';
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const warehouseAlt = activeLocation
   ? `Technician inspecting warehouse garage door system in ${coverageAreaLabel}`
-  : 'Technician inspecting warehouse garage door system in Kentucky';
+  : 'Technician inspecting warehouse garage door system in Cincinnati';
 const dockAlt = activeLocation
   ? `Dock leveler maintenance performed for ${coverageAreaLabel} logistics hub`
-  : 'Dock leveler maintenance performed for Kentucky logistics hub';
+  : 'Dock leveler maintenance performed for a Cincinnati logistics hub';
 const storefrontAlt = activeLocation
-  ? `Commercial service truck outside a ${locationDisplayName ?? 'Kentucky'} storefront garage bay`
-  : 'Commercial service truck outside a Kentucky storefront garage bay';
+  ? `Commercial service truck outside a ${locationDisplayName ?? 'Cincinnati'} storefront garage bay`
+  : 'Commercial service truck outside a Cincinnati storefront garage bay';
 const estimateAlt = activeLocation
   ? `Commercial door technicians reviewing a ${locationDisplayName ?? coverageAreaLabel} service plan`
-  : 'Commercial door technicians reviewing a Kentucky service plan';
+  : 'Commercial door technicians reviewing a Cincinnati service plan';
 const facilitiesHeading = activeLocation
   ? `Facilities We Support Across ${coverageAreaLabel}`
-  : 'Facilities We Support Across Kentucky';
+  : 'Facilities We Support Across Cincinnati';
 const facilitiesIntroCopy = activeLocation
   ? `Facility leaders call our team for quick support that keeps bays secure and compliant throughout ${coverageAreaLabel}. We plan around shift changes, weekend deliveries, and municipal response schedules to cut downtime while honoring safety rules.`
   : 'Facility leaders call our team for quick support that keeps bays secure and compliant. We plan around shift changes, weekend deliveries, and municipal response schedules to cut downtime while honoring safety rules.';
 const facilitiesDetailsCopy = activeLocation
   ? `From dock levelers and vehicle restraints to high-speed doors and insulated panels, we maintain the infrastructure that powers ${coverageAreaLabel}. Technicians arrive with stocked trucks, concise inspection reports, and clear recommendations that boost uptime.`
-  : 'From dock levelers and vehicle restraints to high-speed doors and insulated panels, we maintain the infrastructure that powers Kentucky logistics. Technicians arrive with stocked trucks, concise inspection reports, and clear recommendations that boost uptime.';
+  : 'From dock levelers and vehicle restraints to high-speed doors and insulated panels, we maintain the infrastructure that powers Cincinnati logistics. Technicians arrive with stocked trucks, concise inspection reports, and clear recommendations that boost uptime.';
 const commercialFormSubtitle = activeLocation
   ? `Tell us about your facility in ${coverageAreaLabel} and we will prepare a tailored service plan.`
   : 'Tell us about your facility and we will prepare a tailored service plan.';
 const specialistsHeading = activeLocation
   ? `Commercial Specialists On Call in ${locationDisplayName}`
-  : 'Kentucky Commercial Specialists On Call';
+  : 'Cincinnati Commercial Specialists On Call';
 const specialistsIntro = activeLocation
   ? `Emergency dispatch is available day or night for stuck bays, vehicle impacts, or security concerns. Quarterly preventive routes keep inspections on schedule across ${coverageAreaLabel}.`
   : 'Emergency dispatch is available day or night for stuck bays, vehicle impacts, or security concerns. Quarterly preventive routes keep inspections on schedule across every market we serve.';
@@ -500,11 +500,11 @@ const specialistsIntro = activeLocation
     paragraphs={filterStrings([
       activeLocation
         ? `Facilities across ${coverageAreaLabel} rely on Derby Strong Garage Doors for rolling steel curtains, sectional overhead doors, dock equipment, and high-speed door maintenance. Crews log gate codes, access rules, and badging needs for quicker return visits.`
-        : 'Facilities across Louisville, Lexington, and Northern Kentucky rely on Derby Strong Garage Doors for rolling steel curtains, sectional overhead doors, dock equipment, and high-speed door maintenance. Crews log gate codes, access rules, and badging needs for quicker return visits.',
+        : 'Facilities across the Cincinnati metro rely on Derby Strong Garage Doors for rolling steel curtains, sectional overhead doors, dock equipment, and high-speed door maintenance. Crews log gate codes, access rules, and badging needs for quicker return visits.',
       'Preventive maintenance visits include counterbalance checks, track cleaning, hinge and roller replacements, photo eye alignment, and safety reversing tests. We keep bays moving while documenting the exact settings for each opening.',
       activeLocation
         ? `We schedule work around shift changes and delivery windows throughout ${coverageAreaLabel}. Digital service records show completed repairs, recommended upgrades, and dates for the next visit.`
-        : 'We schedule work around shift changes and delivery windows throughout our Kentucky markets. Digital service records show completed repairs, recommended upgrades, and dates for the next visit.',
+        : 'We schedule work around shift changes and delivery windows throughout the Cincinnati metro. Digital service records show completed repairs, recommended upgrades, and dates for the next visit.',
       surroundingAreasLabel
     ])}
     bullets={filterStrings([

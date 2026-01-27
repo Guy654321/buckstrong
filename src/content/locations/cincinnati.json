@@ -1,0 +1,35 @@
+{
+  "name": "Cincinnati",
+  "slug": "cincinnati",
+  "state": "OH",
+  "phone": "(513) 440-5123",
+  "market": "Cincinnati Metro",
+  "showAddress": true,
+  "serviceAreaBusiness": false,
+  "address": {
+    "streetAddress": "120 E 8th Street, Suite 200",
+    "addressLocality": "Cincinnati",
+    "addressRegion": "OH",
+    "postalCode": "45202",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "lat": 39.1031,
+    "lng": -84.5120
+  },
+  "gbpUrl": "https://maps.google.com/?cid=cincinnati-derby-strong",
+  "metaTitle": "Garage Door Repair & Installation Cincinnati | Derby Strong",
+  "metaDescription": "Ohio-based garage door specialists serving the Cincinnati metro with same-day repair, opener service, and new installations.",
+  "surroundingAreas": [
+    "Downtown Cincinnati",
+    "Over-the-Rhine",
+    "Oakley",
+    "Hyde Park",
+    "Mount Lookout",
+    "Blue Ash",
+    "West Chester",
+    "Norwood",
+    "Fort Thomas",
+    "Newport"
+  ]
+}

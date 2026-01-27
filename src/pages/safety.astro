@@ -18,19 +18,19 @@ const breadcrumbs = [
 const resourceLinks = [
   {
     title: 'Request an Inspection',
-    description: 'Book a professional tune-up with the Louisville, Lexington, or Northern Kentucky teams to keep your door operating safely year-round.',
+    description: 'Book a professional tune-up with the Cincinnati team to keep your door operating safely year-round.',
     href: '/contact',
     icon: 'mdi:calendar-clock'
   },
   {
     title: 'Review Garage Door Services',
-    description: 'See how we repair springs, replace panels, and modernize openers across Louisville, Lexington, and Northern Kentucky.',
+    description: 'See how we repair springs, replace panels, and modernize openers across the Cincinnati metro.',
     href: '/services',
     icon: 'mdi:tools'
   },
   {
     title: 'Explore Service Areas',
-    description: 'Verify coverage for your neighborhood and discover nearby communities across our three Kentucky service hubs.',
+    description: 'Verify coverage for your neighborhood and discover nearby Cincinnati communities.',
     href: '/locations',
     icon: 'mdi:map-marker-radius'
   },
@@ -56,22 +56,10 @@ const marketMap = Object.fromEntries(callMarkets.map((market) => [market.id, mar
 
 const locationSafetyHighlights = [
   {
-    marketId: 'louisville',
-    title: 'Louisville Metro & Southern Indiana',
+    marketId: 'cincinnati',
+    title: 'Cincinnati Metro',
     description:
-      'From the Highlands to Prospect and over the bridge into Jeffersonville and New Albany, our Louisville technicians reinforce every opener and safety sensor to handle high-traffic garages.'
-  },
-  {
-    marketId: 'lexington',
-    title: 'Lexington & Bluegrass Communities',
-    description:
-      'Homeowners in Hamburg, Nicholasville, Georgetown, and the horse farm corridors count on us for balance checks, photo-eye calibration, and seasonal safety tune-ups that withstand the Bluegrass climate.'
-  },
-  {
-    marketId: 'northern-kentucky',
-    title: 'Northern Kentucky & Cincinnati Suburbs',
-    description:
-      'Whether you live in Florence, Covington, Hebron, or cross-river neighborhoods, our Northern Kentucky crew keeps torsion systems safe and responds quickly to Ohio River Valley weather emergencies.'
+      'From Downtown and Over-the-Rhine to Hyde Park and West Chester, our Cincinnati technicians reinforce every opener and safety sensor to handle high-traffic garages.'
   }
 ];
 const defaultCallMarket = DEFAULT_CALL_MARKET;
@@ -151,7 +139,7 @@ const safetyTips = [
           Garage Door Safety Tips
         </h1>
         <p class="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-          Your safety is our top priority across Louisville, Lexington, and Northern Kentucky. Learn essential garage door safety tips to protect your family and property.
+          Your safety is our top priority across the Cincinnati metro. Learn essential garage door safety tips to protect your family and property.
         </p>
         <div class="relative flex flex-col sm:flex-row gap-4 justify-center max-w-3xl mx-auto">
           {callMarkets.length > 0 && defaultCallMarket ? (
@@ -307,7 +295,7 @@ const safetyTips = [
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Local Safety Support in Every Service Hub</h2>
         <p class="text-xl text-ink/70">
-          Meet the dedicated teams safeguarding garages throughout Louisville, Lexington, and Northern Kentucky with localized inspections and rapid-response repairs.
+          Meet the dedicated team safeguarding garages throughout the Cincinnati metro with localized inspections and rapid-response repairs.
         </p>
       </div>
 
@@ -340,7 +328,7 @@ const safetyTips = [
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Stay Proactive With Trusted Resources</h2>
         <p class="text-xl text-ink/70">
-          Connect with the guides homeowners across Louisville, Lexington, and Northern Kentucky use to prevent emergencies and plan repairs.
+          Connect with the guides homeowners across the Cincinnati metro use to prevent emergencies and plan repairs.
         </p>
       </div>
 

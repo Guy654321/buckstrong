@@ -61,13 +61,13 @@ type AltContext = {
 };
 
 const serviceAltBuilders: Record<ServiceSlug, (context: AltContext) => string> = {
-  'garage-door-repair': ({ displayName = 'Louisville, KY' }) =>
+  'garage-door-repair': ({ displayName = 'Cincinnati, OH' }) =>
     `Professional garage door repair technician working on broken springs, cables, and rollers in ${displayName} showing expert repair service`,
-  'garage-door-installation': ({ displayName = 'Louisville, KY' }) =>
+  'garage-door-installation': ({ displayName = 'Cincinnati, OH' }) =>
     `Finished double garage door installation with premium carriage-style doors and clean exterior trim on a home in ${displayName}`,
-  'opener-repair': ({ displayName = 'Louisville, KY' }) =>
+  'opener-repair': ({ displayName = 'Cincinnati, OH' }) =>
     `Certified garage door technician calibrating a belt-drive opener motor with ladder, safety sensors, and precision tools inside a ${displayName} residential garage`,
-  'commercial-jobs': ({ displayName = 'Louisville, KY', market }) =>
+  'commercial-jobs': ({ displayName = 'Cincinnati, OH', market }) =>
     `Commercial garage door service at a modern warehouse supporting operations across ${market ? `${market} facilities` : displayName}`
 };
 
@@ -85,7 +85,7 @@ const altContext: AltContext = {
 };
 const serviceAlt = serviceAltBuilders[service.slug](altContext);
 const serviceProviderPhone = locationContext?.phone?.trim() || BUSINESS_INFO.telephone;
-const serviceAreaServed = locationDisplayName ?? 'Louisville, KY';
+const serviceAreaServed = locationDisplayName ?? 'Cincinnati, OH';
 const primaryCtaText = primaryLinkText ?? `Learn About ${service.name}`;
 ---
 

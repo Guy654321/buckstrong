@@ -9,21 +9,9 @@ export const sanitizePhoneNumberValue = (value: string) => value.replace(/[^0-9+
 
 export const CALL_MARKETS: CallMarket[] = [
   {
-    id: "louisville",
-    label: "Louisville",
-    phoneDisplay: "502-619-5198",
-    phoneHref: "",
-  },
-  {
-    id: "lexington",
-    label: "Lexington",
-    phoneDisplay: "859-436-2954",
-    phoneHref: "",
-  },
-  {
-    id: "northern-kentucky",
-    label: "Northern Kentucky",
-    phoneDisplay: "(859) 306-0782",
+    id: "cincinnati",
+    label: "Cincinnati",
+    phoneDisplay: "513-440-5123",
     phoneHref: "",
   },
 ].map((market) => ({
