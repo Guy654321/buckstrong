@@ -1,0 +1,22 @@
+{
+  "name": "Versailles",
+  "slug": "versailles",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0526,
+    "lng": -84.7299
+  },
+  "zips": [
+    "40383"
+  ],
+  "surroundingAreas": [
+    "Woodford County",
+    "Midway",
+    "Downtown Versailles"
+  ]
+}

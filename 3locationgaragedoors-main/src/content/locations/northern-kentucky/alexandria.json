@@ -1,0 +1,22 @@
+{
+  "name": "Alexandria",
+  "slug": "alexandria",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.9598,
+    "lng": -84.387
+  },
+  "zips": [
+    "41001"
+  ],
+  "surroundingAreas": [
+    "Campbell County",
+    "Four Mile",
+    "Cold Spring"
+  ]
+}

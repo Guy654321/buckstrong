@@ -1,0 +1,22 @@
+{
+  "name": "Beaverlick",
+  "slug": "nky-beaverlick",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.8449,
+    "lng": -84.7678
+  },
+  "zips": [
+    "41005"
+  ],
+  "surroundingAreas": [
+    "US-42",
+    "Big Bone",
+    "Walton"
+  ]
+}

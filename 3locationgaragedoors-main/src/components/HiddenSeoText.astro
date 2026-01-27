@@ -1,0 +1,29 @@
+---
+interface Props {
+  title: string;
+  paragraphs?: string | string[];
+  bullets?: string | string[];
+}
+
+const { title, paragraphs = [], bullets = [] } = Astro.props;
+const paragraphList = Array.isArray(paragraphs)
+  ? paragraphs
+  : [paragraphs].filter(Boolean);
+const bulletList = Array.isArray(bullets)
+  ? bullets
+  : [bullets].filter(Boolean);
+---
+
+<section class="sr-only" aria-hidden="true" data-seo-text-block>
+  <h2>{title}</h2>
+  {paragraphList.map(paragraph => (
+    <p>{paragraph}</p>
+  ))}
+  {bulletList.length > 0 && (
+    <ul>
+      {bulletList.map(item => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  )}
+</section>

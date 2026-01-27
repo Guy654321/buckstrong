@@ -1,0 +1,22 @@
+{
+  "name": "Newburg",
+  "slug": "louisville-newburg",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.1609,
+    "lng": -85.6887
+  },
+  "zips": [
+    "40218"
+  ],
+  "surroundingAreas": [
+    "Indian Trail",
+    "Fern Valley",
+    "Jefferson Mall"
+  ]
+}

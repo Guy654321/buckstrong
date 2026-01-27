@@ -1,0 +1,62 @@
+---
+import type { Location } from '../../lib/locations';
+
+interface Props {
+  currentSlug: 'garage-door-repair' | 'garage-door-installation' | 'opener-repair' | 'commercial-jobs';
+  location?: Location;
+  background?: 'white' | 'muted';
+}
+
+const { currentSlug, location, background = 'white' } = Astro.props as Props;
+
+const locationName = location ? `${location.name}, ${location.state}` : 'your area';
+const buildHref = (slug: string) =>
+  location ? `/locations/${location.slug}/services/${slug}` : `/services/${slug}`;
+
+const serviceLinks = [
+  {
+    slug: 'garage-door-repair',
+    title: 'Garage Door Repair',
+    description: `Same-day repair for springs, cables, rollers, and tracks across ${locationName}.`
+  },
+  {
+    slug: 'garage-door-installation',
+    title: 'Garage Door Installation',
+    description: `New doors measured, installed, and balanced for lasting performance in ${locationName}.`
+  },
+  {
+    slug: 'opener-repair',
+    title: 'Garage Door Opener Repair',
+    description: `Belt-drive, chain-drive, and smart opener service with quiet, reliable operation.`
+  },
+  {
+    slug: 'commercial-jobs',
+    title: 'Commercial Overhead Doors',
+    description: `Rolling steel, sectional, and dock equipment support for local businesses.`
+  }
+].filter((service) => service.slug !== currentSlug);
+---
+
+<section class={`py-14 ${background === 'white' ? 'bg-white' : 'bg-muted'} border-t border-ink/10`}>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-8 text-center">
+      <h2 class="text-3xl font-bold text-ink mb-3">Related garage door services</h2>
+      <p class="text-ink/70 max-w-3xl mx-auto">
+        Explore other ways our team supports homeowners and businesses in {locationName}. Every service links you with the same local experts.
+      </p>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {serviceLinks.map((service) => (
+        <a
+          href={buildHref(service.slug)}
+          class="group block h-full rounded-lg border border-ink/10 bg-card p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md"
+          title={`${service.title} in ${locationName}`}
+        >
+          <h3 class="text-xl font-semibold text-ink mb-2 group-hover:text-accent">{service.title}</h3>
+          <p class="text-sm text-ink/80 leading-relaxed">{service.description}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+{
+  "name": "Greenville, IN",
+  "slug": "louisville-greenville-in",
+  "state": "IN",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.3764,
+    "lng": -85.9822
+  },
+  "zips": [
+    "47124"
+  ],
+  "surroundingAreas": [
+    "Navilleton",
+    "Floyd County",
+    "Georgetown"
+  ]
+}

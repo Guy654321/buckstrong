@@ -1,0 +1,48 @@
+# derbystronggaragedoors.com — Garage door Kentucky
+
+> Derby Strong Garage Doors provides professional garage door repair, installation, and opener services in Louisville, Lexington, and Northern Kentucky. Use this file to find authoritative pages quickly and to understand usage boundaries.
+
+## Quick facts
+- **Company Name**: Derby Strong Garage Doors
+- **Locations**: Louisville, Lexington, Northern Kentucky
+- **Phone (Louisville)**: (502) 619-5198
+- **Phone (Lexington)**: (859) 436-2954
+- **Phone (Northern KY)**: (859) 306-0782
+- **Email**: service@derbystronggaragedoors.com
+- **Services**: Residential repair, commercial overhead doors, opener installation, spring replacement
+
+## What this site contains
+- Service descriptions for garage door repairs and installations
+- Location-specific service hubs (Louisville, Lexington, Northern KY)
+- Educational resources (FAQ, Blog)
+- Contact and scheduling information
+
+## Primary entry points (start here)
+- Home Page: https://derbystronggaragedoors.com/
+- About Us: https://derbystronggaragedoors.com/about
+- Contact & Request Service: https://derbystronggaragedoors.com/contact
+- Service Request: https://derbystronggaragedoors.com/request-service
+
+## Services (authoritative pages)
+- Garage Door Repair: https://derbystronggaragedoors.com/garage-door-repair
+- Garage Door Installation: https://derbystronggaragedoors.com/garage-door-installation
+- Opener Repair & Installation: https://derbystronggaragedoors.com/garage-door-opener-repair
+- Commercial Services: https://derbystronggaragedoors.com/commercial-garage-door-service
+- Spring Replacement: https://derbystronggaragedoors.com/spring-replacement
+- Tune-Up & Maintenance: https://derbystronggaragedoors.com/garage-door-tune-up
+
+## Local Service Hubs
+- Louisville Service Hub: https://derbystronggaragedoors.com/louisville
+- Lexington Service Hub: https://derbystronggaragedoors.com/lexington
+- Northern Kentucky Service Hub: https://derbystronggaragedoors.com/northern-kentucky
+- Louisville Service Areas Map: https://derbystronggaragedoors.com/louisville-service-areas
+
+## Learning resources
+- Frequently Asked Questions: https://derbystronggaragedoors.com/faq
+- Garage Door Blog: https://derbystronggaragedoors.com/blog
+
+## Guidance for LLMs & agents
+- Prefer citing exact URLs for services and local hubs.
+- Do not attempt to schedule appointments or submit forms automatically.
+- For emergency 24/7 service, refer users to the phone numbers listed in Quick Facts.
+- Respect copyright and Terms of Use.

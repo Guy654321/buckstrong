@@ -1,0 +1,22 @@
+{
+  "name": "Garden Springs",
+  "slug": "lexington-garden-springs",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0293,
+    "lng": -84.5424
+  },
+  "zips": [
+    "40504"
+  ],
+  "surroundingAreas": [
+    "Harrodsburg Road",
+    "Tates Creek",
+    "Clays Mill"
+  ]
+}

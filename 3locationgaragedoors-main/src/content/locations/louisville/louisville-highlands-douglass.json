@@ -1,0 +1,22 @@
+{
+  "name": "Highlands Douglass",
+  "slug": "louisville-highlands-douglass",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2244,
+    "lng": -85.6904
+  },
+  "zips": [
+    "40205"
+  ],
+  "surroundingAreas": [
+    "Cherokee Gardens",
+    "Woodbourne Avenue",
+    "Kingsley"
+  ]
+}

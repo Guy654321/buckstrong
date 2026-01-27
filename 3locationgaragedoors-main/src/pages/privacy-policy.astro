@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CallNowButton from '../components/CallNowButton.astro';
+import { BUSINESS_INFO } from '../data/business';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Privacy Policy' }
+];
+
+const lastUpdated = 'November 2024';
+
+const policySections = [
+  {
+    title: 'Information We Collect',
+    points: [
+      'Contact details you provide when requesting service (name, phone number, email, and address).',
+      'Service details you share when describing an issue, booking an appointment, or completing a job.',
+      'Technical data captured through our website such as IP address, browser type, and pages visited for security and analytics.'
+    ]
+  },
+  {
+    title: 'How We Use Your Information',
+    points: [
+      'Responding to service inquiries, scheduling appointments, and providing estimates.',
+      'Improving our website experience, including troubleshooting errors and measuring performance.',
+      'Sending important updates about scheduled work or changes to this policy when relevant.'
+    ]
+  },
+  {
+    title: 'When We Share Information',
+    points: [
+      'Trusted service partners who help deliver, schedule, or complete your garage door project.',
+      'Vendors that provide secure hosting, analytics, and communication tools needed to operate our website.',
+      'Legal or safety reasons, including complying with lawful requests or protecting our customers and business.'
+    ]
+  },
+  {
+    title: 'Your Choices & Data Stewardship',
+    points: [
+      'You can update or request deletion of your contact details by emailing our team.',
+      'Most browsers allow you to manage cookies and tracking preferences. Disabling them may affect site performance.',
+      'We retain service records only as long as needed for scheduling, warranty, legal, or operational purposes.'
+    ]
+  }
+];
+---
+
+<Base
+  title="Privacy Policy | Derby Strong Garage Doors"
+  description="Learn how Derby Strong Garage Doors collects, uses, and protects your information across service requests and website visits."
+  canonical="/privacy-policy"
+  noindex={false}
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+
+  <main class="bg-muted py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <section class="bg-white rounded-2xl shadow-sm ring-1 ring-black/5 p-8 sm:p-10">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-accent mb-3">Privacy Policy</p>
+        <h1 class="text-3xl sm:text-4xl font-bold text-ink mb-4">Your privacy matters to Derby Strong Garage Doors</h1>
+        <p class="text-base text-ink/80 leading-relaxed">
+          We collect only the information needed to schedule garage door service, communicate with you, and keep our website secure. This page explains what we collect, how we use it, and the choices available to you when working with our Louisville, Lexington, and Northern Kentucky teams.
+        </p>
+        <p class="text-sm text-ink/60 mt-6">Last updated: {lastUpdated}</p>
+      </section>
+
+      <section class="space-y-6">
+        {policySections.map(section => (
+          <article class="bg-white rounded-xl shadow-sm ring-1 ring-black/5 p-6 sm:p-8">
+            <h2 class="text-2xl font-semibold text-ink mb-4">{section.title}</h2>
+            <ul class="space-y-3 text-base text-ink/80 leading-relaxed list-disc list-inside">
+              {section.points.map(point => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </section>
+
+      <section class="bg-primary text-white rounded-2xl p-8 sm:p-10 shadow-lg shadow-primary/20">
+        <div class="space-y-4">
+          <h2 class="text-2xl font-semibold">Questions about this policy?</h2>
+          <p class="text-white/80 leading-relaxed">
+            We are committed to transparent communication. If you have questions about how we handle your data or want to request an update, reach out anytime.
+          </p>
+          <div class="space-y-2 text-white/90">
+            <p><span class="font-semibold">Email:</span> <a class="underline underline-offset-4" href={`mailto:${BUSINESS_INFO.email}`}>{BUSINESS_INFO.email}</a></p>
+            <p><span class="font-semibold">Phone:</span> <a class="underline underline-offset-4" href={`tel:${BUSINESS_INFO.telephone.replace(/[^0-9+]/g, '')}`}>{BUSINESS_INFO.telephone}</a></p>
+            <p><span class="font-semibold">Mailing Address:</span> {BUSINESS_INFO.address.streetAddress}, {BUSINESS_INFO.address.addressLocality}, {BUSINESS_INFO.address.addressRegion} {BUSINESS_INFO.address.postalCode}</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <CallNowButton />
+  <Footer />
+</Base>

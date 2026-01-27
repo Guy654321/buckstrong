@@ -1,0 +1,22 @@
+{
+  "name": "Walton",
+  "slug": "nky-walton",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.8753,
+    "lng": -84.6091
+  },
+  "zips": [
+    "41094"
+  ],
+  "surroundingAreas": [
+    "Old Union",
+    "Walton Verona",
+    "Boone County Fair"
+  ]
+}

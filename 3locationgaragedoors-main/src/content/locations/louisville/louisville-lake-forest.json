@@ -1,0 +1,22 @@
+{
+  "name": "Lake Forest",
+  "slug": "louisville-lake-forest",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2527,
+    "lng": -85.4728
+  },
+  "zips": [
+    "40245"
+  ],
+  "surroundingAreas": [
+    "Arnold Palmer Golf Course",
+    "Shelbyville Road",
+    "Glen Lakes"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Pewee Valley",
+  "slug": "louisville-pewee-valley",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.3081,
+    "lng": -85.485
+  },
+  "zips": [
+    "40056"
+  ],
+  "surroundingAreas": [
+    "Central Avenue",
+    "Oldham County",
+    "Crestwood"
+  ]
+}

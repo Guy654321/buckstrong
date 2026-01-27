@@ -1,0 +1,22 @@
+{
+  "name": "Crestwood",
+  "slug": "louisville-crestwood",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.3242,
+    "lng": -85.4721
+  },
+  "zips": [
+    "40014"
+  ],
+  "surroundingAreas": [
+    "KY-22",
+    "Oldham County",
+    "Briar Hill Park"
+  ]
+}

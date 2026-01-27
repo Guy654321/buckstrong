@@ -1,0 +1,530 @@
+---
+import { Schema } from 'astro-seo-schema';
+import { Icon } from 'astro-icon/components';
+import Base from '../../layouts/Base.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import Breadcrumbs from '../Breadcrumbs.astro';
+import ContactForm from '../ContactForm.astro';
+import CallNowButton from '../CallNowButton.astro';
+import FAQInteractive from '../FAQInteractive.astro';
+import ServiceInternalLinks from './ServiceInternalLinks.astro';
+import HiddenSeoText from '../HiddenSeoText.astro';
+import { Image } from 'astro:assets';
+import heroImage from '../../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
+import beltDriveImage from '../../assets/images/repairs/opener-belt-drive.jpg';
+import chainDriveImage from '../../assets/images/repairs/opener-chain-drive.jpg';
+import directDriveImage from '../../assets/images/repairs/opener-direct-drive.jpg';
+import screwDriveImage from '../../assets/images/repairs/opener-screw-drive.jpg';
+import { BUSINESS_INFO } from '../../data/business';
+import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../../data/call-markets';
+import type { Location } from '../../lib/locations';
+import { buildLocationServiceCanonicalPath } from '../../lib/canonical';
+import { getSiteOrigin } from '../../utils/site-origin';
+
+const faqs = [
+  {
+    question: 'Can you repair my opener or will it need to be replaced?',
+    answer: 'We diagnose the motor, logic board, and safety sensors to see if a repair is cost-effective. If replacement is better long term, we review options before moving forward.'
+  },
+  {
+    question: 'Do you work on all opener brands and drive types?',
+    answer: 'Yes. We repair belt-drive, chain-drive, screw-drive, and jackshaft openers from LiftMaster, Genie, Chamberlain, Craftsman, and other major brands.'
+  },
+  {
+    question: 'Can you program remotes or keypads during the visit?',
+    answer: 'Absolutely. Remote programming, keypad setup, and smart home integration are included with every opener repair service.'
+  },
+  {
+    question: 'What causes opener sensors to stop working?',
+    answer: 'Misalignment, wiring issues, debris on the lenses, or failed sensors can stop the door from closing. We clean, realign, or replace them as needed.'
+  }
+] satisfies Array<{ question: string; answer: string }>;
+
+interface Props {
+  location?: Location;
+}
+
+const { location } = Astro.props as Props;
+const activeLocation = location;
+const breadcrumbs = activeLocation
+  ? [
+      { label: 'Home', href: '/' },
+      { label: 'Locations', href: '/locations' },
+      { label: `${activeLocation.name}, ${activeLocation.state}`, href: `/locations/${activeLocation.slug}` },
+      { label: 'Garage Door Opener Repair' }
+    ]
+  : [
+      { label: 'Home', href: '/' },
+      { label: 'Services', href: '/services' },
+      { label: 'Garage Door Opener Repair' }
+    ];
+const locationDisplayName = activeLocation ? `${activeLocation.name}, ${activeLocation.state}` : undefined;
+const marketDisplayName = activeLocation?.market;
+const coverageAreaLabel = activeLocation
+  ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
+  : 'Louisville, Lexington & Northern Kentucky';
+
+const filterStrings = (items: Array<string | undefined>): string[] =>
+  items.filter((item): item is string => Boolean(item));
+
+const surroundingAreas = filterStrings(
+  (activeLocation?.surroundingAreas ?? []).map((area) => area?.trim())
+);
+const zipCodes = filterStrings((activeLocation?.zips ?? []).map((zip) => zip?.trim()));
+const surroundingAreasLabel =
+  surroundingAreas.length > 0
+    ? `Nearby neighborhoods we regularly support include ${surroundingAreas.join(', ')}.`
+    : undefined;
+const zipCoverageLabel =
+  zipCodes.length > 0
+    ? `Primary ZIP codes covered: ${zipCodes.join(', ')}.`
+    : undefined;
+
+const pageTitle = activeLocation
+  ? `Garage Door Opener Repair in ${locationDisplayName} | Derby Strong Garage Doors`
+  : 'Garage Door Opener Repair in Kentucky | Louisville, Lexington & Northern Kentucky';
+const pageDescription = activeLocation
+  ? `Certified opener repair specialists serving ${coverageAreaLabel}. Motors, remotes, sensors, and smart upgrades with same-day appointments.`
+  : 'Certified opener repair specialists serving Louisville, Lexington, and Northern Kentucky. Motors, remotes, sensors, and smart upgrades with same-day appointments.';
+const heroHeading = activeLocation
+  ? `Garage Door Opener Repair in ${locationDisplayName}`
+  : 'Garage Door Opener Repair in Louisville, Lexington & Northern Kentucky';
+const heroSubheading = activeLocation
+  ? `Local technicians troubleshoot motors, keypads, sensors, and smart controls across ${coverageAreaLabel} with fully stocked trucks and same-day appointments.`
+  : 'Local technicians troubleshoot motors, keypads, sensors, and smart controls across Kentucky’s three major markets with fully stocked trucks and same-day appointments.';
+const heroAlt = activeLocation
+  ? `Garage door opener repair technician supporting homeowners in ${coverageAreaLabel}`
+  : 'Garage door opener repair technician supporting homeowners across Louisville, Lexington, and Northern Kentucky';
+const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
+const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
+const callMarkets = CALL_MARKETS;
+const defaultCallMarket = DEFAULT_CALL_MARKET;
+const heroCallMarkets = !activeLocation ? callMarkets : [];
+const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
+const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
+const businessEntityId = `${getSiteOrigin()}#business`;
+const callModalId = 'header-call-modal';
+const areaServed = activeLocation ? coverageAreaLabel : 'Louisville, Lexington & Northern Kentucky, KY';
+const schemaServiceName = activeLocation ? `Garage Door Opener Repair in ${locationDisplayName}` : 'Garage Door Opener Repair';
+const schemaDescription = activeLocation
+  ? `Professional garage door opener repair services across ${coverageAreaLabel} including motors, remotes, sensors, programming, and smart opener installations.`
+  : 'Professional garage door opener repair services across Louisville, Lexington, and Northern Kentucky including motors, remotes, sensors, programming, and smart opener installations.';
+const canonicalPath = activeLocation
+  ? buildLocationServiceCanonicalPath(activeLocation.slug, 'opener-repair')
+  : '/services/opener-repair';
+const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
+const whyChooseCoverage = activeLocation
+  ? `Same-day service for most repairs across ${coverageAreaLabel}`
+  : 'Same-day service for most repairs across Kentucky';
+const faqIntro = activeLocation
+  ? `Helpful answers about repairing and upgrading garage door openers for ${coverageAreaLabel} homeowners`
+  : 'Helpful answers about repairing and upgrading garage door openers';
+const contactTitle = activeLocation
+  ? `Need Opener Repair in ${locationDisplayName}?`
+  : 'Need Opener Repair?';
+const contactSubtitle = activeLocation
+  ? `Get a free quote and schedule your opener repair service in ${coverageAreaLabel}`
+  : 'Get a free quote and schedule your opener repair service today';
+---
+
+<Base
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonicalPath}
+  callNowPhoneNumber={displayPhoneNumber}
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: schemaServiceName,
+      description: schemaDescription,
+      provider: {
+        '@type': 'LocalBusiness',
+        name: BUSINESS_INFO.name,
+        legalName: BUSINESS_INFO.legalName,
+        '@id': businessEntityId,
+        telephone: displayPhoneNumber,
+        email: BUSINESS_INFO.email,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: BUSINESS_INFO.address.streetAddress,
+          addressLocality: BUSINESS_INFO.address.addressLocality,
+          addressRegion: BUSINESS_INFO.address.addressRegion,
+          postalCode: BUSINESS_INFO.address.postalCode,
+          addressCountry: BUSINESS_INFO.address.addressCountry
+        }
+      },
+      areaServed,
+      serviceType: 'Garage Door Opener Repair',
+      offers: {
+        '@type': 'Offer',
+        priceRange: '$$',
+        availability: 'https://schema.org/InStock',
+        priceCurrency: 'USD'
+      }
+    }}
+  />
+
+  <section class="relative py-20 lg:py-32 text-white overflow-visible lg:overflow-hidden">
+    <div class="absolute inset-0">
+      <Image
+        src={heroImage}
+        alt={heroAlt}
+        width="1200"
+        height="675"
+        class="w-full h-full object-cover"
+        fetchpriority="high"
+        loading="eager"
+        decoding="sync"
+        quality={80}
+        sizes="100vw"
+      />
+      <div class="absolute inset-0 bg-primary/75"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">
+        {heroHeading}
+      </h1>
+      <p class="text-xl text-white/95 mb-8 max-w-3xl mx-auto leading-relaxed">
+        {heroSubheading}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        {hasGenericCallCTA && heroDefaultCallMarket ? (
+          <button
+            type="button"
+            class="btn-accent text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2 sm:order-first"
+            data-call-modal-trigger
+            aria-controls={callModalId}
+            aria-expanded="false"
+            aria-haspopup="dialog"
+            aria-label="Choose a service area phone number"
+          >
+            <Icon name="mdi:phone" size="20" class="inline" aria-hidden="true" />
+            <span>Call Now</span>
+            <span class="sr-only">for the {heroDefaultCallMarket.label} market</span>
+          </button>
+        ) : (
+          <a
+            href={telephoneHref}
+            class="btn-accent text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2 sm:order-first"
+          >
+            <Icon name="mdi:phone" size="20" class="inline" aria-hidden="true" />
+            <span>Call Now: <span class="nap-phone">{displayPhoneNumber}</span></span>
+          </a>
+        )}
+        <a
+          href="/contact"
+          class="btn-outline-light text-lg px-8 py-4 bg-white/5 hover:bg-white/10 border-white/80 sm:order-last"
+        >
+          Schedule Service
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Opener Types We Service</h2>
+        <p class="text-xl text-ink/70">Expert repairs and upgrades for every drive system</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1">
+          <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
+            <Image
+              src={beltDriveImage}
+              alt="Quiet belt-drive garage door opener with DC motor"
+              width="200"
+              height="200"
+              class="w-full h-full object-cover object-center"
+              loading="lazy"
+              fetchpriority="low"
+              decoding="async"
+              quality={70}
+            />
+          </div>
+
+          <div class="p-3">
+            <h3 class="text-sm font-semibold text-ink mb-2 group-hover:text-primary transition-colors">
+              Belt-Drive Openers
+            </h3>
+            <p class="text-xs text-ink/80 mb-3 leading-relaxed">
+              Smooth, quiet operation ideal for attached garages and bonus rooms.
+            </p>
+
+            <div class="space-y-1 text-xs">
+              <div class="flex justify-between">
+                <span class="text-ink/60">Noise:</span>
+                <span class="font-medium text-green-600">Low</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-ink/60">Maintenance:</span>
+                <span class="font-medium text-green-600">Low</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-ink/60">Best for:</span>
+                <span class="font-medium text-ink text-xs">Attached garages</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1">
+          <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
+            <Image
+              src={chainDriveImage}
+              alt="Chain-drive garage door opener with durable metal trolley"
+              width="200"
+              height="200"
+              class="w-full h-full object-cover object-center"
+              loading="lazy"
+              fetchpriority="low"
+              decoding="async"
+              quality={70}
+            />
+          </div>
+
+          <div class="p-3">
+            <h3 class="text-sm font-semibold text-ink mb-2 group-hover:text-primary transition-colors">
+              Chain-Drive Openers
+            </h3>
+            <p class="text-xs text-ink/80 mb-3 leading-relaxed">
+              Durable and budget-friendly metal chain that pulls the trolley.
+            </p>
+
+            <div class="space-y-1 text-xs">
+              <div class="flex justify-between">
+                <span class="text-ink/60">Noise:</span>
+                <span class="font-medium text-yellow-600">Medium</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-ink/60">Maintenance:</span>
+                <span class="font-medium text-yellow-600">Medium</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-ink/60">Best for:</span>
+                <span class="font-medium text-ink text-xs">Everyday use</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1">
+          <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
+            <Image
+              src={directDriveImage}
+              alt="Direct-drive jackshaft opener mounted beside garage door"
+              width="200"
+              height="200"
+              class="w-full h-full object-cover object-center"
+              loading="lazy"
+              fetchpriority="low"
+              decoding="async"
+              quality={70}
+            />
+          </div>
+
+          <div class="p-3">
+            <h3 class="text-sm font-semibold text-ink mb-2 group-hover:text-primary transition-colors">
+              Direct-Drive / Jackshaft Openers
+            </h3>
+            <p class="text-xs text-ink/80 mb-3 leading-relaxed">
+              Mounts beside the door on the torsion bar—frees up ceiling space.
+            </p>
+
+            <div class="space-y-1 text-xs">
+              <div class="flex justify-between">
+                <span class="text-ink/60">Noise:</span>
+                <span class="font-medium text-green-600">Low</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-ink/60">Maintenance:</span>
+                <span class="font-medium text-green-600">Low</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-ink/60">Best for:</span>
+                <span class="font-medium text-ink text-xs">Low ceilings, car lifts</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1">
+          <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
+            <Image
+              src={screwDriveImage}
+              alt="Screw-drive garage door opener with threaded steel rod"
+              width="200"
+              height="200"
+              class="w-full h-full object-cover object-center"
+              loading="lazy"
+              fetchpriority="low"
+              decoding="async"
+              quality={70}
+            />
+          </div>
+
+          <div class="p-3">
+            <h3 class="text-sm font-semibold text-ink mb-2 group-hover:text-primary transition-colors">
+              Screw-Drive Openers
+            </h3>
+            <p class="text-xs text-ink/80 mb-3 leading-relaxed">
+              Threaded steel rod lifts the door with strong, fast motion.
+            </p>
+
+            <div class="space-y-1 text-xs">
+              <div class="flex justify-between">
+                <span class="text-ink/60">Noise:</span>
+                <span class="font-medium text-orange-600">Medium-High</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-ink/60">Maintenance:</span>
+                <span class="font-medium text-green-600">Low</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-ink/60">Best for:</span>
+                <span class="font-medium text-ink text-xs">Heavy doors, warm climates</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-muted">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <h2 class="text-3xl font-bold text-ink mb-6">Why Choose Our Opener Repair?</h2>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <Icon name="mdi:check-circle" size="24" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span class="text-ink/80">{whyChooseCoverage}</span>
+            </li>
+            <li class="flex items-start">
+              <Icon name="mdi:check-circle" size="24" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span class="text-ink/80">All major brands serviced</span>
+            </li>
+            <li class="flex items-start">
+              <Icon name="mdi:check-circle" size="24" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span class="text-ink/80">Professional programming and setup</span>
+            </li>
+            <li class="flex items-start">
+              <Icon name="mdi:check-circle" size="24" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span class="text-ink/80">Smart opener upgrades available</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-lg p-8 shadow-sm border border-gray-100">
+          <h3 class="text-2xl font-bold text-ink mb-6">What's Included</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <Icon name="mdi:check" size="20" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span class="text-ink/80">Complete opener diagnostic</span>
+            </li>
+            <li class="flex items-start">
+              <Icon name="mdi:check" size="20" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span class="text-ink/80">Professional repair with quality parts</span>
+            </li>
+            <li class="flex items-start">
+              <Icon name="mdi:check" size="20" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span class="text-ink/80">Remote control programming</span>
+            </li>
+            <li class="flex items-start">
+              <Icon name="mdi:check" size="20" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span class="text-ink/80">Safety system testing and calibration</span>
+            </li>
+          </ul>
+
+          <div class="mt-6 pt-6 border-t border-ink/10">
+            <a href="/contact" class="btn-primary w-full text-center">
+              Get Your Free Quote
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-card">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Opener Repair FAQs</h2>
+        <p class="text-xl text-ink/70">
+          {faqIntro}
+        </p>
+      </div>
+
+      <FAQInteractive faqs={faqs} />
+    </div>
+  </section>
+
+  <ServiceInternalLinks currentSlug="opener-repair" location={activeLocation} background="muted" />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(faq => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer
+        }
+      }))
+    }}
+  />
+
+  <ContactForm
+    title={contactTitle}
+    subtitle={contactSubtitle}
+    bgColor="white"
+  />
+
+  <HiddenSeoText
+    title={`Garage door opener expertise${locationDisplayName ? ` for ${locationDisplayName}` : ''}`}
+    paragraphs={filterStrings([
+      activeLocation
+        ? `Technicians serving ${coverageAreaLabel} repair belt-drive, chain-drive, and jackshaft openers along with keypads, safety sensors, and wall consoles. We stock gears, rail assemblies, logic boards, and travel modules so most fixes stay on one visit.`
+        : 'Technicians across Kentucky repair belt-drive, chain-drive, and jackshaft openers along with keypads, safety sensors, and wall consoles. We stock gears, rail assemblies, logic boards, and travel modules so most fixes stay on one visit.',
+      'Every opener visit includes force and travel calibration, photo eye alignment, and backup battery tests to keep doors operating safely. We also set up smart controls, Wi-Fi connectivity, and myQ-style integrations when requested.',
+      activeLocation
+        ? `Same-day appointments are available throughout ${coverageAreaLabel} for doors stuck open, reversing unexpectedly, or failing to respond to remotes.`
+        : 'Same-day appointments are available across Louisville, Lexington, and Northern Kentucky for doors stuck open, reversing unexpectedly, or failing to respond to remotes.',
+      surroundingAreasLabel
+    ])}
+    bullets={filterStrings([
+      'Common fixes: travel limit resets, broken drive belts, stripped gears, misaligned safety sensors, and keypad replacement',
+      `Service coverage: ${coverageAreaLabel}`,
+      'Upgrades available: smart opener conversions, LED lighting improvements, and quiet-drive rail replacements',
+      zipCoverageLabel
+    ])}
+  />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: pageTitle,
+      url: pageUrl,
+      mainEntity: {
+        '@type': 'Service',
+        name: schemaServiceName,
+        areaServed
+      }
+    }}
+  />
+
+  <Footer />
+  <CallNowButton phoneNumber={displayPhoneNumber} />
+</Base>

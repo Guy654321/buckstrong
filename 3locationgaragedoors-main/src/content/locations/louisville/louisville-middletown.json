@@ -1,0 +1,22 @@
+{
+  "name": "Middletown",
+  "slug": "louisville-middletown",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2454,
+    "lng": -85.5284
+  },
+  "zips": [
+    "40243"
+  ],
+  "surroundingAreas": [
+    "Historic Middletown",
+    "Wetherby Park",
+    "Middletown Commons"
+  ]
+}

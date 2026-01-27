@@ -1,0 +1,22 @@
+{
+  "name": "Shawnee",
+  "slug": "louisville-shawnee",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2701,
+    "lng": -85.8206
+  },
+  "zips": [
+    "40212"
+  ],
+  "surroundingAreas": [
+    "Shawnee Park",
+    "Algonquin Parkway",
+    "Portland"
+  ]
+}

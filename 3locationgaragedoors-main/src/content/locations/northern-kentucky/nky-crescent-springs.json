@@ -1,0 +1,22 @@
+{
+  "name": "Crescent Springs",
+  "slug": "nky-crescent-springs",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.0414,
+    "lng": -84.5813
+  },
+  "zips": [
+    "41017"
+  ],
+  "surroundingAreas": [
+    "Buttermilk Pike",
+    "Villa Hills",
+    "Fort Mitchell"
+  ]
+}

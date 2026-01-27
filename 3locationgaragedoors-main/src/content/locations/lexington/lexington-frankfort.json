@@ -1,0 +1,22 @@
+{
+  "name": "Frankfort",
+  "slug": "lexington-frankfort",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2009,
+    "lng": -84.8733
+  },
+  "zips": [
+    "40601"
+  ],
+  "surroundingAreas": [
+    "State Capitol",
+    "Kentucky River",
+    "South Frankfort"
+  ]
+}

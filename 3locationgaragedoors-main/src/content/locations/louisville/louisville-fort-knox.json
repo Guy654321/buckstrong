@@ -1,0 +1,22 @@
+{
+  "name": "Fort Knox",
+  "slug": "louisville-fort-knox",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 37.8916,
+    "lng": -85.9632
+  },
+  "zips": [
+    "40121"
+  ],
+  "surroundingAreas": [
+    "U.S. Army Garrison",
+    "Gold Vault",
+    "Hardin County"
+  ]
+}

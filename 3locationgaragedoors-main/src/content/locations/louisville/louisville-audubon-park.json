@@ -1,0 +1,22 @@
+{
+  "name": "Audubon Park",
+  "slug": "louisville-audubon-park",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2032,
+    "lng": -85.7143
+  },
+  "zips": [
+    "40213"
+  ],
+  "surroundingAreas": [
+    "Audubon Parkway",
+    "Joe Creason Park",
+    "Camp Taylor"
+  ]
+}

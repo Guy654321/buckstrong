@@ -1,0 +1,22 @@
+{
+  "name": "Charlestown",
+  "slug": "louisville-charlestown",
+  "state": "IN",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.449,
+    "lng": -85.6702
+  },
+  "zips": [
+    "47111"
+  ],
+  "surroundingAreas": [
+    "Charlestown State Park",
+    "River Ridge",
+    "Clark County"
+  ]
+}

@@ -1,0 +1,1312 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "on"
+        }
+      ]
+    },
+    {
+      "source": "/((?!api/.*).*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' data: https://fonts.googleapis.com https://vitals.vercel-insights.com https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://assets.sendowl.com https://www.clarity.ms https://static.clarity.ms https://scripts.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://vitals.vercel-insights.com https://challenges.cloudflare.com https://*.challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://c.clarity.ms https://n.clarity.ms https://n.clarity.ms/collect; frame-src 'self' https://challenges.cloudflare.com https://www.google.com https://www.google.com/maps https://www.google.com/maps/embed; frame-ancestors 'none'; base-uri 'self';"
+        }
+      ]
+    },
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/((?!.*\\.).*)",
+      "headers": [
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
+        }
+      ]
+    }
+  ],
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/:city(alexandria|covington|erlanger|florence|fort-mitchell|fort-thomas|georgetown|hamburg|independence|lexington|lexington-andover|lexington-beaumont|lexington-bell-court|lexington-berea|lexington-bryan-station|lexington-cardinal-valley|lexington-chevy-chase|lexington-chilesburg|lexington-downtown|lexington-frankfort|lexington-garden-springs|lexington-greendale|lexington-harrods-hill|lexington-harrodsburg|lexington-hartland|lexington-horse-park|lexington-kenwick|lexington-lancaster|lexington-lansdowne|lexington-lawrenceburg|lexington-leestown|lexington-liberty-road|lexington-masterson-station|lexington-meadowthorpe|lexington-midway|lexington-morehead|lexington-palomar|lexington-paris|lexington-raven-run|lexington-south-elkhorn|lexington-southland|lexington-spindletop|lexington-stanton|lexington-stonewall|lexington-tates-creek|lexington-tatesbrook|lexington-wellington|lexington-wilmore|lexington-winchester-road|lexington-woodhill|louisville|louisville-algonquin|louisville-anchorage|louisville-audubon-park|louisville-beechmont|louisville-beechwood-village|louisville-bluegrass-commerce|louisville-bonnycastle|louisville-bowman-field|louisville-brandenburg|louisville-brooks|louisville-buechel|louisville-butchertown|louisville-california|louisville-camp-taylor|louisville-charlestown|louisville-cherokee-triangle|louisville-churchill-downs|louisville-clarksville|louisville-clifton|louisville-clifton-heights|louisville-cloverleaf|louisville-corydon|louisville-crescent-hill|louisville-crestwood|louisville-deer-park|louisville-douglass-hills|louisville-downtown|louisville-eastwood|louisville-fairdale|louisville-fern-creek|louisville-fisherville|louisville-floyds-knobs|louisville-fort-knox|louisville-gaslight|louisville-georgetown-in|louisville-germantown|louisville-goshen|louisville-greenville-in|louisville-hebron-estates|louisville-highlands|louisville-highlands-douglass|louisville-highview|louisville-hikes-point|louisville-hillview|louisville-hurstbourne|louisville-irish-hill|louisville-iroquois-park|louisville-jacobs|louisville-jeffersontown|louisville-jeffersonville-in|louisville-lake-forest|louisville-lanesville|louisville-limerick|louisville-locust-creek|louisville-lyndon|louisville-medical-district|louisville-middletown|louisville-mt-washington|louisville-muldraugh|louisville-new-albany|louisville-newburg|louisville-norbourne-estates|louisville-norton-commons|louisville-nulu|louisville-okolona|louisville-old-louisville|louisville-paristown|louisville-park-duvalle|louisville-parkland|louisville-parkway-village|louisville-pewee-valley|louisville-phoenix-hill|louisville-pioneer-village|louisville-plainview|louisville-pleasure-ridge-park|louisville-poplar-level|louisville-portland|louisville-portland-wharf|louisville-prairie-village|louisville-prospect|louisville-russell|louisville-schnitzelburg|louisville-sellersburg|louisville-seneca-gardens|louisville-shawnee|louisville-shelby-park|louisville-shelbyville|louisville-shepherdsville|louisville-shippingport|louisville-shively|louisville-simpsonville|louisville-smoketown|louisville-springhurst|louisville-st-matthews|louisville-taylor-berry|louisville-taylorsville|louisville-uofl|louisville-valley-station|louisville-west-point|louisville-wilder-park|louisville-worthington|louisville-zoneton|newport|nicholasville|nky-airport-corridor|nky-beaverlick|nky-bellevue|nky-big-bone|nky-bromley|nky-burlington|nky-california|nky-camp-springs|nky-claryville|nky-cold-spring|nky-crescent-springs)",
+      "destination": "/locations/:city"
+    },
+    {
+      "source": "/:city(alexandria|covington|erlanger|florence|fort-mitchell|fort-thomas|georgetown|hamburg|independence|lexington|lexington-andover|lexington-beaumont|lexington-bell-court|lexington-berea|lexington-bryan-station|lexington-cardinal-valley|lexington-chevy-chase|lexington-chilesburg|lexington-downtown|lexington-frankfort|lexington-garden-springs|lexington-greendale|lexington-harrods-hill|lexington-harrodsburg|lexington-hartland|lexington-horse-park|lexington-kenwick|lexington-lancaster|lexington-lansdowne|lexington-lawrenceburg|lexington-leestown|lexington-liberty-road|lexington-masterson-station|lexington-meadowthorpe|lexington-midway|lexington-morehead|lexington-palomar|lexington-paris|lexington-raven-run|lexington-south-elkhorn|lexington-southland|lexington-spindletop|lexington-stanton|lexington-stonewall|lexington-tates-creek|lexington-tatesbrook|lexington-wellington|lexington-wilmore|lexington-winchester-road|lexington-woodhill|louisville|louisville-algonquin|louisville-anchorage|louisville-audubon-park|louisville-beechmont|louisville-beechwood-village|louisville-bluegrass-commerce|louisville-bonnycastle|louisville-bowman-field|louisville-brandenburg|louisville-brooks|louisville-buechel|louisville-butchertown|louisville-california|louisville-camp-taylor|louisville-charlestown|louisville-cherokee-triangle|louisville-churchill-downs|louisville-clarksville|louisville-clifton|louisville-clifton-heights|louisville-cloverleaf|louisville-corydon|louisville-crescent-hill|louisville-crestwood|louisville-deer-park|louisville-douglass-hills|louisville-downtown|louisville-eastwood|louisville-fairdale|louisville-fern-creek|louisville-fisherville|louisville-floyds-knobs|louisville-fort-knox|louisville-gaslight|louisville-georgetown-in|louisville-germantown|louisville-goshen|louisville-greenville-in|louisville-hebron-estates|louisville-highlands|louisville-highlands-douglass|louisville-highview|louisville-hikes-point|louisville-hillview|louisville-hurstbourne|louisville-irish-hill|louisville-iroquois-park|louisville-jacobs|louisville-jeffersontown|louisville-jeffersonville-in|louisville-lake-forest|louisville-lanesville|louisville-limerick|louisville-locust-creek|louisville-lyndon|louisville-medical-district|louisville-middletown|louisville-mt-washington|louisville-muldraugh|louisville-new-albany|louisville-newburg|louisville-norbourne-estates|louisville-norton-commons|louisville-nulu|louisville-okolona|louisville-old-louisville|louisville-paristown|louisville-park-duvalle|louisville-parkland|louisville-parkway-village|louisville-pewee-valley|louisville-phoenix-hill|louisville-pioneer-village|louisville-plainview|louisville-pleasure-ridge-park|louisville-poplar-level|louisville-portland|louisville-portland-wharf|louisville-prairie-village|louisville-prospect|louisville-russell|louisville-schnitzelburg|louisville-sellersburg|louisville-seneca-gardens|louisville-shawnee|louisville-shelby-park|louisville-shelbyville|louisville-shepherdsville|louisville-shippingport|louisville-shively|louisville-simpsonville|louisville-smoketown|louisville-springhurst|louisville-st-matthews|louisville-taylor-berry|louisville-taylorsville|louisville-uofl|louisville-valley-station|louisville-west-point|louisville-wilder-park|louisville-worthington|louisville-zoneton|newport|nicholasville|nky-airport-corridor|nky-beaverlick|nky-bellevue|nky-big-bone|nky-bromley|nky-burlington|nky-california|nky-camp-springs|nky-claryville|nky-cold-spring|nky-crescent-springs)/",
+      "destination": "/locations/:city"
+    },
+    {
+      "source": "/:city(alexandria|covington|erlanger|florence|fort-mitchell|fort-thomas|georgetown|hamburg|independence|lexington|lexington-andover|lexington-beaumont|lexington-bell-court|lexington-berea|lexington-bryan-station|lexington-cardinal-valley|lexington-chevy-chase|lexington-chilesburg|lexington-downtown|lexington-frankfort|lexington-garden-springs|lexington-greendale|lexington-harrods-hill|lexington-harrodsburg|lexington-hartland|lexington-horse-park|lexington-kenwick|lexington-lancaster|lexington-lansdowne|lexington-lawrenceburg|lexington-leestown|lexington-liberty-road|lexington-masterson-station|lexington-meadowthorpe|lexington-midway|lexington-morehead|lexington-palomar|lexington-paris|lexington-raven-run|lexington-south-elkhorn|lexington-southland|lexington-spindletop|lexington-stanton|lexington-stonewall|lexington-tates-creek|lexington-tatesbrook|lexington-wellington|lexington-wilmore|lexington-winchester-road|lexington-woodhill|louisville|louisville-algonquin|louisville-anchorage|louisville-audubon-park|louisville-beechmont|louisville-beechwood-village|louisville-bluegrass-commerce|louisville-bonnycastle|louisville-bowman-field|louisville-brandenburg|louisville-brooks|louisville-buechel|louisville-butchertown|louisville-california|louisville-camp-taylor|louisville-charlestown|louisville-cherokee-triangle|louisville-churchill-downs|louisville-clarksville|louisville-clifton|louisville-clifton-heights|louisville-cloverleaf|louisville-corydon|louisville-crescent-hill|louisville-crestwood|louisville-deer-park|louisville-douglass-hills|louisville-downtown|louisville-eastwood|louisville-fairdale|louisville-fern-creek|louisville-fisherville|louisville-floyds-knobs|louisville-fort-knox|louisville-gaslight|louisville-georgetown-in|louisville-germantown|louisville-goshen|louisville-greenville-in|louisville-hebron-estates|louisville-highlands|louisville-highlands-douglass|louisville-highview|louisville-hikes-point|louisville-hillview|louisville-hurstbourne|louisville-irish-hill|louisville-iroquois-park|louisville-jacobs|louisville-jeffersontown|louisville-jeffersonville-in|louisville-lake-forest|louisville-lanesville|louisville-limerick|louisville-locust-creek|louisville-lyndon|louisville-medical-district|louisville-middletown|louisville-mt-washington|louisville-muldraugh|louisville-new-albany|louisville-newburg|louisville-norbourne-estates|louisville-norton-commons|louisville-nulu|louisville-okolona|louisville-old-louisville|louisville-paristown|louisville-park-duvalle|louisville-parkland|louisville-parkway-village|louisville-pewee-valley|louisville-phoenix-hill|louisville-pioneer-village|louisville-plainview|louisville-pleasure-ridge-park|louisville-poplar-level|louisville-portland|louisville-portland-wharf|louisville-prairie-village|louisville-prospect|louisville-russell|louisville-schnitzelburg|louisville-sellersburg|louisville-seneca-gardens|louisville-shawnee|louisville-shelby-park|louisville-shelbyville|louisville-shepherdsville|louisville-shippingport|louisville-shively|louisville-simpsonville|louisville-smoketown|louisville-springhurst|louisville-st-matthews|louisville-taylor-berry|louisville-taylorsville|louisville-uofl|louisville-valley-station|louisville-west-point|louisville-wilder-park|louisville-worthington|louisville-zoneton|newport|nicholasville|nky-airport-corridor|nky-beaverlick|nky-bellevue|nky-big-bone|nky-bromley|nky-burlington|nky-california|nky-camp-springs|nky-claryville|nky-cold-spring|nky-crescent-springs)/:service(garage-door-repair|opener-repair|commercial-jobs)",
+      "destination": "/locations/:city/:service"
+    },
+    {
+      "source": "/:city(alexandria|covington|erlanger|florence|fort-mitchell|fort-thomas|georgetown|hamburg|independence|lexington|lexington-andover|lexington-beaumont|lexington-bell-court|lexington-berea|lexington-bryan-station|lexington-cardinal-valley|lexington-chevy-chase|lexington-chilesburg|lexington-downtown|lexington-frankfort|lexington-garden-springs|lexington-greendale|lexington-harrods-hill|lexington-harrodsburg|lexington-hartland|lexington-horse-park|lexington-kenwick|lexington-lancaster|lexington-lansdowne|lexington-lawrenceburg|lexington-leestown|lexington-liberty-road|lexington-masterson-station|lexington-meadowthorpe|lexington-midway|lexington-morehead|lexington-palomar|lexington-paris|lexington-raven-run|lexington-south-elkhorn|lexington-southland|lexington-spindletop|lexington-stanton|lexington-stonewall|lexington-tates-creek|lexington-tatesbrook|lexington-wellington|lexington-wilmore|lexington-winchester-road|lexington-woodhill|louisville|louisville-algonquin|louisville-anchorage|louisville-audubon-park|louisville-beechmont|louisville-beechwood-village|louisville-bluegrass-commerce|louisville-bonnycastle|louisville-bowman-field|louisville-brandenburg|louisville-brooks|louisville-buechel|louisville-butchertown|louisville-california|louisville-camp-taylor|louisville-charlestown|louisville-cherokee-triangle|louisville-churchill-downs|louisville-clarksville|louisville-clifton|louisville-clifton-heights|louisville-cloverleaf|louisville-corydon|louisville-crescent-hill|louisville-crestwood|louisville-deer-park|louisville-douglass-hills|louisville-downtown|louisville-eastwood|louisville-fairdale|louisville-fern-creek|louisville-fisherville|louisville-floyds-knobs|louisville-fort-knox|louisville-gaslight|louisville-georgetown-in|louisville-germantown|louisville-goshen|louisville-greenville-in|louisville-hebron-estates|louisville-highlands|louisville-highlands-douglass|louisville-highview|louisville-hikes-point|louisville-hillview|louisville-hurstbourne|louisville-irish-hill|louisville-iroquois-park|louisville-jacobs|louisville-jeffersontown|louisville-jeffersonville-in|louisville-lake-forest|louisville-lanesville|louisville-limerick|louisville-locust-creek|louisville-lyndon|louisville-medical-district|louisville-middletown|louisville-mt-washington|louisville-muldraugh|louisville-new-albany|louisville-newburg|louisville-norbourne-estates|louisville-norton-commons|louisville-nulu|louisville-okolona|louisville-old-louisville|louisville-paristown|louisville-park-duvalle|louisville-parkland|louisville-parkway-village|louisville-pewee-valley|louisville-phoenix-hill|louisville-pioneer-village|louisville-plainview|louisville-pleasure-ridge-park|louisville-poplar-level|louisville-portland|louisville-portland-wharf|louisville-prairie-village|louisville-prospect|louisville-russell|louisville-schnitzelburg|louisville-sellersburg|louisville-seneca-gardens|louisville-shawnee|louisville-shelby-park|louisville-shelbyville|louisville-shepherdsville|louisville-shippingport|louisville-shively|louisville-simpsonville|louisville-smoketown|louisville-springhurst|louisville-st-matthews|louisville-taylor-berry|louisville-taylorsville|louisville-uofl|louisville-valley-station|louisville-west-point|louisville-wilder-park|louisville-worthington|louisville-zoneton|newport|nicholasville|nky-airport-corridor|nky-beaverlick|nky-bellevue|nky-big-bone|nky-bromley|nky-burlington|nky-california|nky-camp-springs|nky-claryville|nky-cold-spring|nky-crescent-springs)/:service(garage-door-repair|opener-repair|commercial-jobs)/",
+      "destination": "/locations/:city/:service"
+    },
+    {
+      "source": "/:city(nky-crestview-hills|nky-crittenden|nky-dayton|nky-dayton-pike|nky-downtown-covington|nky-dry-ridge|nky-edgewood|nky-elsmere|nky-elsmere-industrial|nky-erlanger-lakes|nky-fort-wright|nky-hebron|nky-highland-heights|nky-lakeside-park|nky-latonia|nky-latonia-lakes|nky-ludlow|nky-mainstrasse|nky-melbourne|nky-mentor|nky-morning-view|nky-oakbrook|nky-park-hills|nky-petersburg|nky-piner|nky-rabbit-hash|nky-richwood|nky-ryland-heights|nky-silver-grove|nky-southgate|nky-taylor-mill|nky-triple-crown|nky-union|nky-verona|nky-villa-hills|nky-visalia|nky-walton|nky-wilder|northern-kentucky|richmond|versailles|winchester)",
+      "destination": "/locations/:city"
+    },
+    {
+      "source": "/:city(nky-crestview-hills|nky-crittenden|nky-dayton|nky-dayton-pike|nky-downtown-covington|nky-dry-ridge|nky-edgewood|nky-elsmere|nky-elsmere-industrial|nky-erlanger-lakes|nky-fort-wright|nky-hebron|nky-highland-heights|nky-lakeside-park|nky-latonia|nky-latonia-lakes|nky-ludlow|nky-mainstrasse|nky-melbourne|nky-mentor|nky-morning-view|nky-oakbrook|nky-park-hills|nky-petersburg|nky-piner|nky-rabbit-hash|nky-richwood|nky-ryland-heights|nky-silver-grove|nky-southgate|nky-taylor-mill|nky-triple-crown|nky-union|nky-verona|nky-villa-hills|nky-visalia|nky-walton|nky-wilder|northern-kentucky|richmond|versailles|winchester)/",
+      "destination": "/locations/:city"
+    },
+    {
+      "source": "/:city(nky-crestview-hills|nky-crittenden|nky-dayton|nky-dayton-pike|nky-downtown-covington|nky-dry-ridge|nky-edgewood|nky-elsmere|nky-elsmere-industrial|nky-erlanger-lakes|nky-fort-wright|nky-hebron|nky-highland-heights|nky-lakeside-park|nky-latonia|nky-latonia-lakes|nky-ludlow|nky-mainstrasse|nky-melbourne|nky-mentor|nky-morning-view|nky-oakbrook|nky-park-hills|nky-petersburg|nky-piner|nky-rabbit-hash|nky-richwood|nky-ryland-heights|nky-silver-grove|nky-southgate|nky-taylor-mill|nky-triple-crown|nky-union|nky-verona|nky-villa-hills|nky-visalia|nky-walton|nky-wilder|northern-kentucky|richmond|versailles|winchester)/:service(garage-door-repair|opener-repair|commercial-jobs)",
+      "destination": "/locations/:city/:service"
+    },
+    {
+      "source": "/:city(nky-crestview-hills|nky-crittenden|nky-dayton|nky-dayton-pike|nky-downtown-covington|nky-dry-ridge|nky-edgewood|nky-elsmere|nky-elsmere-industrial|nky-erlanger-lakes|nky-fort-wright|nky-hebron|nky-highland-heights|nky-lakeside-park|nky-latonia|nky-latonia-lakes|nky-ludlow|nky-mainstrasse|nky-melbourne|nky-mentor|nky-morning-view|nky-oakbrook|nky-park-hills|nky-petersburg|nky-piner|nky-rabbit-hash|nky-richwood|nky-ryland-heights|nky-silver-grove|nky-southgate|nky-taylor-mill|nky-triple-crown|nky-union|nky-verona|nky-villa-hills|nky-visalia|nky-walton|nky-wilder|northern-kentucky|richmond|versailles|winchester)/:service(garage-door-repair|opener-repair|commercial-jobs)/",
+      "destination": "/locations/:city/:service"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/lexington",
+      "destination": "/louisville",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/",
+      "destination": "/louisville",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/garage-door-installation",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/garage-door-installation/",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/garage-door-repair",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/garage-door-repair/",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/opener-installation",
+      "destination": "/louisville/opener-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/opener-installation/",
+      "destination": "/louisville/opener-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/opener-repair",
+      "destination": "/louisville/opener-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/opener-repair/",
+      "destination": "/louisville/opener-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/repairs",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/repairs/",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/spring-replacement",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/spring-replacement/",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/tune-up",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/lexington/tune-up/",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky",
+      "destination": "/louisville",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/",
+      "destination": "/louisville",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/garage-door-installation",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/garage-door-installation/",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/garage-door-repair",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/garage-door-repair/",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/opener-installation",
+      "destination": "/louisville/opener-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/opener-installation/",
+      "destination": "/louisville/opener-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/opener-repair",
+      "destination": "/louisville/opener-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/opener-repair/",
+      "destination": "/louisville/opener-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/repairs",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/repairs/",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/spring-replacement",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/spring-replacement/",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/tune-up",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/northern-kentucky/tune-up/",
+      "destination": "/louisville/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/services/opener-installation",
+      "destination": "/services/opener-repair",
+      "permanent": true
+    },
+    {
+      "source": "/services/opener-installation/",
+      "destination": "/services/opener-repair",
+      "permanent": true
+    },
+    {
+      "source": "/services/spring-replacement",
+      "destination": "/services/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/services/spring-replacement/",
+      "destination": "/services/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/services/tune-up",
+      "destination": "/services/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/services/tune-up/",
+      "destination": "/services/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/services/repairs",
+      "destination": "/services/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/services/repairs/",
+      "destination": "/services/garage-door-repair",
+      "permanent": true
+    },
+    {
+      "source": "/locations/algonquin",
+      "destination": "/locations/louisville-algonquin",
+      "permanent": true
+    },
+    {
+      "source": "/locations/algonquin/",
+      "destination": "/locations/louisville-algonquin",
+      "permanent": true
+    },
+    {
+      "source": "/locations/anchorage",
+      "destination": "/locations/louisville-anchorage",
+      "permanent": true
+    },
+    {
+      "source": "/locations/anchorage/",
+      "destination": "/locations/louisville-anchorage",
+      "permanent": true
+    },
+    {
+      "source": "/locations/audubon-park",
+      "destination": "/locations/louisville-audubon-park",
+      "permanent": true
+    },
+    {
+      "source": "/locations/audubon-park/",
+      "destination": "/locations/louisville-audubon-park",
+      "permanent": true
+    },
+    {
+      "source": "/locations/beechmont",
+      "destination": "/locations/louisville-beechmont",
+      "permanent": true
+    },
+    {
+      "source": "/locations/beechmont/",
+      "destination": "/locations/louisville-beechmont",
+      "permanent": true
+    },
+    {
+      "source": "/locations/beechwood-village",
+      "destination": "/locations/louisville-beechwood-village",
+      "permanent": true
+    },
+    {
+      "source": "/locations/beechwood-village/",
+      "destination": "/locations/louisville-beechwood-village",
+      "permanent": true
+    },
+    {
+      "source": "/locations/bluegrass-commerce",
+      "destination": "/locations/louisville-bluegrass-commerce",
+      "permanent": true
+    },
+    {
+      "source": "/locations/bluegrass-commerce/",
+      "destination": "/locations/louisville-bluegrass-commerce",
+      "permanent": true
+    },
+    {
+      "source": "/locations/bonnycastle",
+      "destination": "/locations/louisville-bonnycastle",
+      "permanent": true
+    },
+    {
+      "source": "/locations/bonnycastle/",
+      "destination": "/locations/louisville-bonnycastle",
+      "permanent": true
+    },
+    {
+      "source": "/locations/bowman-field",
+      "destination": "/locations/louisville-bowman-field",
+      "permanent": true
+    },
+    {
+      "source": "/locations/bowman-field/",
+      "destination": "/locations/louisville-bowman-field",
+      "permanent": true
+    },
+    {
+      "source": "/locations/brandenburg",
+      "destination": "/locations/louisville-brandenburg",
+      "permanent": true
+    },
+    {
+      "source": "/locations/brandenburg/",
+      "destination": "/locations/louisville-brandenburg",
+      "permanent": true
+    },
+    {
+      "source": "/locations/brooks",
+      "destination": "/locations/louisville-brooks",
+      "permanent": true
+    },
+    {
+      "source": "/locations/brooks/",
+      "destination": "/locations/louisville-brooks",
+      "permanent": true
+    },
+    {
+      "source": "/locations/buechel",
+      "destination": "/locations/louisville-buechel",
+      "permanent": true
+    },
+    {
+      "source": "/locations/buechel/",
+      "destination": "/locations/louisville-buechel",
+      "permanent": true
+    },
+    {
+      "source": "/locations/butchertown",
+      "destination": "/locations/louisville-butchertown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/butchertown/",
+      "destination": "/locations/louisville-butchertown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/california",
+      "destination": "/locations/louisville-california",
+      "permanent": true
+    },
+    {
+      "source": "/locations/california/",
+      "destination": "/locations/louisville-california",
+      "permanent": true
+    },
+    {
+      "source": "/locations/camp-taylor",
+      "destination": "/locations/louisville-camp-taylor",
+      "permanent": true
+    },
+    {
+      "source": "/locations/camp-taylor/",
+      "destination": "/locations/louisville-camp-taylor",
+      "permanent": true
+    },
+    {
+      "source": "/locations/charlestown",
+      "destination": "/locations/louisville-charlestown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/charlestown/",
+      "destination": "/locations/louisville-charlestown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/cherokee-triangle",
+      "destination": "/locations/louisville-cherokee-triangle",
+      "permanent": true
+    },
+    {
+      "source": "/locations/cherokee-triangle/",
+      "destination": "/locations/louisville-cherokee-triangle",
+      "permanent": true
+    },
+    {
+      "source": "/locations/churchill-downs",
+      "destination": "/locations/louisville-churchill-downs",
+      "permanent": true
+    },
+    {
+      "source": "/locations/churchill-downs/",
+      "destination": "/locations/louisville-churchill-downs",
+      "permanent": true
+    },
+    {
+      "source": "/locations/clarksville",
+      "destination": "/locations/louisville-clarksville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/clarksville/",
+      "destination": "/locations/louisville-clarksville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/clifton",
+      "destination": "/locations/louisville-clifton",
+      "permanent": true
+    },
+    {
+      "source": "/locations/clifton/",
+      "destination": "/locations/louisville-clifton",
+      "permanent": true
+    },
+    {
+      "source": "/locations/clifton-heights",
+      "destination": "/locations/louisville-clifton-heights",
+      "permanent": true
+    },
+    {
+      "source": "/locations/clifton-heights/",
+      "destination": "/locations/louisville-clifton-heights",
+      "permanent": true
+    },
+    {
+      "source": "/locations/cloverleaf",
+      "destination": "/locations/louisville-cloverleaf",
+      "permanent": true
+    },
+    {
+      "source": "/locations/cloverleaf/",
+      "destination": "/locations/louisville-cloverleaf",
+      "permanent": true
+    },
+    {
+      "source": "/locations/corydon",
+      "destination": "/locations/louisville-corydon",
+      "permanent": true
+    },
+    {
+      "source": "/locations/corydon/",
+      "destination": "/locations/louisville-corydon",
+      "permanent": true
+    },
+    {
+      "source": "/locations/crescent-hill",
+      "destination": "/locations/louisville-crescent-hill",
+      "permanent": true
+    },
+    {
+      "source": "/locations/crescent-hill/",
+      "destination": "/locations/louisville-crescent-hill",
+      "permanent": true
+    },
+    {
+      "source": "/locations/crestwood",
+      "destination": "/locations/louisville-crestwood",
+      "permanent": true
+    },
+    {
+      "source": "/locations/crestwood/",
+      "destination": "/locations/louisville-crestwood",
+      "permanent": true
+    },
+    {
+      "source": "/locations/deer-park",
+      "destination": "/locations/louisville-deer-park",
+      "permanent": true
+    },
+    {
+      "source": "/locations/deer-park/",
+      "destination": "/locations/louisville-deer-park",
+      "permanent": true
+    },
+    {
+      "source": "/locations/douglass-hills",
+      "destination": "/locations/louisville-douglass-hills",
+      "permanent": true
+    },
+    {
+      "source": "/locations/douglass-hills/",
+      "destination": "/locations/louisville-douglass-hills",
+      "permanent": true
+    },
+    {
+      "source": "/locations/downtown",
+      "destination": "/locations/louisville-downtown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/downtown/",
+      "destination": "/locations/louisville-downtown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/eastwood",
+      "destination": "/locations/louisville-eastwood",
+      "permanent": true
+    },
+    {
+      "source": "/locations/eastwood/",
+      "destination": "/locations/louisville-eastwood",
+      "permanent": true
+    },
+    {
+      "source": "/locations/fairdale",
+      "destination": "/locations/louisville-fairdale",
+      "permanent": true
+    },
+    {
+      "source": "/locations/fairdale/",
+      "destination": "/locations/louisville-fairdale",
+      "permanent": true
+    },
+    {
+      "source": "/locations/fern-creek",
+      "destination": "/locations/louisville-fern-creek",
+      "permanent": true
+    },
+    {
+      "source": "/locations/fern-creek/",
+      "destination": "/locations/louisville-fern-creek",
+      "permanent": true
+    },
+    {
+      "source": "/locations/fisherville",
+      "destination": "/locations/louisville-fisherville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/fisherville/",
+      "destination": "/locations/louisville-fisherville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/floyds-knobs",
+      "destination": "/locations/louisville-floyds-knobs",
+      "permanent": true
+    },
+    {
+      "source": "/locations/floyds-knobs/",
+      "destination": "/locations/louisville-floyds-knobs",
+      "permanent": true
+    },
+    {
+      "source": "/locations/fort-knox",
+      "destination": "/locations/louisville-fort-knox",
+      "permanent": true
+    },
+    {
+      "source": "/locations/fort-knox/",
+      "destination": "/locations/louisville-fort-knox",
+      "permanent": true
+    },
+    {
+      "source": "/locations/gaslight",
+      "destination": "/locations/louisville-gaslight",
+      "permanent": true
+    },
+    {
+      "source": "/locations/gaslight/",
+      "destination": "/locations/louisville-gaslight",
+      "permanent": true
+    },
+    {
+      "source": "/locations/germantown",
+      "destination": "/locations/louisville-germantown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/germantown/",
+      "destination": "/locations/louisville-germantown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/goshen",
+      "destination": "/locations/louisville-goshen",
+      "permanent": true
+    },
+    {
+      "source": "/locations/goshen/",
+      "destination": "/locations/louisville-goshen",
+      "permanent": true
+    },
+    {
+      "source": "/locations/greenville",
+      "destination": "/locations/louisville-greenville-in",
+      "permanent": true
+    },
+    {
+      "source": "/locations/greenville/",
+      "destination": "/locations/louisville-greenville-in",
+      "permanent": true
+    },
+    {
+      "source": "/locations/hebron-estates",
+      "destination": "/locations/louisville-hebron-estates",
+      "permanent": true
+    },
+    {
+      "source": "/locations/hebron-estates/",
+      "destination": "/locations/louisville-hebron-estates",
+      "permanent": true
+    },
+    {
+      "source": "/locations/highlands",
+      "destination": "/locations/louisville-highlands",
+      "permanent": true
+    },
+    {
+      "source": "/locations/highlands/",
+      "destination": "/locations/louisville-highlands",
+      "permanent": true
+    },
+    {
+      "source": "/locations/highlands-douglass",
+      "destination": "/locations/louisville-highlands-douglass",
+      "permanent": true
+    },
+    {
+      "source": "/locations/highlands-douglass/",
+      "destination": "/locations/louisville-highlands-douglass",
+      "permanent": true
+    },
+    {
+      "source": "/locations/highview",
+      "destination": "/locations/louisville-highview",
+      "permanent": true
+    },
+    {
+      "source": "/locations/highview/",
+      "destination": "/locations/louisville-highview",
+      "permanent": true
+    },
+    {
+      "source": "/locations/hikes-point",
+      "destination": "/locations/louisville-hikes-point",
+      "permanent": true
+    },
+    {
+      "source": "/locations/hikes-point/",
+      "destination": "/locations/louisville-hikes-point",
+      "permanent": true
+    },
+    {
+      "source": "/locations/hillview",
+      "destination": "/locations/louisville-hillview",
+      "permanent": true
+    },
+    {
+      "source": "/locations/hillview/",
+      "destination": "/locations/louisville-hillview",
+      "permanent": true
+    },
+    {
+      "source": "/locations/hurstbourne",
+      "destination": "/locations/louisville-hurstbourne",
+      "permanent": true
+    },
+    {
+      "source": "/locations/hurstbourne/",
+      "destination": "/locations/louisville-hurstbourne",
+      "permanent": true
+    },
+    {
+      "source": "/locations/irish-hill",
+      "destination": "/locations/louisville-irish-hill",
+      "permanent": true
+    },
+    {
+      "source": "/locations/irish-hill/",
+      "destination": "/locations/louisville-irish-hill",
+      "permanent": true
+    },
+    {
+      "source": "/locations/iroquois-park",
+      "destination": "/locations/louisville-iroquois-park",
+      "permanent": true
+    },
+    {
+      "source": "/locations/iroquois-park/",
+      "destination": "/locations/louisville-iroquois-park",
+      "permanent": true
+    },
+    {
+      "source": "/locations/jacobs",
+      "destination": "/locations/louisville-jacobs",
+      "permanent": true
+    },
+    {
+      "source": "/locations/jacobs/",
+      "destination": "/locations/louisville-jacobs",
+      "permanent": true
+    },
+    {
+      "source": "/locations/jeffersontown",
+      "destination": "/locations/louisville-jeffersontown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/jeffersontown/",
+      "destination": "/locations/louisville-jeffersontown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/jeffersonville",
+      "destination": "/locations/louisville-jeffersonville-in",
+      "permanent": true
+    },
+    {
+      "source": "/locations/jeffersonville/",
+      "destination": "/locations/louisville-jeffersonville-in",
+      "permanent": true
+    },
+    {
+      "source": "/locations/lake-forest",
+      "destination": "/locations/louisville-lake-forest",
+      "permanent": true
+    },
+    {
+      "source": "/locations/lake-forest/",
+      "destination": "/locations/louisville-lake-forest",
+      "permanent": true
+    },
+    {
+      "source": "/locations/lanesville",
+      "destination": "/locations/louisville-lanesville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/lanesville/",
+      "destination": "/locations/louisville-lanesville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/limerick",
+      "destination": "/locations/louisville-limerick",
+      "permanent": true
+    },
+    {
+      "source": "/locations/limerick/",
+      "destination": "/locations/louisville-limerick",
+      "permanent": true
+    },
+    {
+      "source": "/locations/locust-creek",
+      "destination": "/locations/louisville-locust-creek",
+      "permanent": true
+    },
+    {
+      "source": "/locations/locust-creek/",
+      "destination": "/locations/louisville-locust-creek",
+      "permanent": true
+    },
+    {
+      "source": "/locations/lyndon",
+      "destination": "/locations/louisville-lyndon",
+      "permanent": true
+    },
+    {
+      "source": "/locations/lyndon/",
+      "destination": "/locations/louisville-lyndon",
+      "permanent": true
+    },
+    {
+      "source": "/locations/medical-district",
+      "destination": "/locations/louisville-medical-district",
+      "permanent": true
+    },
+    {
+      "source": "/locations/medical-district/",
+      "destination": "/locations/louisville-medical-district",
+      "permanent": true
+    },
+    {
+      "source": "/locations/middletown",
+      "destination": "/locations/louisville-middletown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/middletown/",
+      "destination": "/locations/louisville-middletown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/mt-washington",
+      "destination": "/locations/louisville-mt-washington",
+      "permanent": true
+    },
+    {
+      "source": "/locations/mt-washington/",
+      "destination": "/locations/louisville-mt-washington",
+      "permanent": true
+    },
+    {
+      "source": "/locations/muldraugh",
+      "destination": "/locations/louisville-muldraugh",
+      "permanent": true
+    },
+    {
+      "source": "/locations/muldraugh/",
+      "destination": "/locations/louisville-muldraugh",
+      "permanent": true
+    },
+    {
+      "source": "/locations/new-albany",
+      "destination": "/locations/louisville-new-albany",
+      "permanent": true
+    },
+    {
+      "source": "/locations/new-albany/",
+      "destination": "/locations/louisville-new-albany",
+      "permanent": true
+    },
+    {
+      "source": "/locations/newburg",
+      "destination": "/locations/louisville-newburg",
+      "permanent": true
+    },
+    {
+      "source": "/locations/newburg/",
+      "destination": "/locations/louisville-newburg",
+      "permanent": true
+    },
+    {
+      "source": "/locations/norbourne-estates",
+      "destination": "/locations/louisville-norbourne-estates",
+      "permanent": true
+    },
+    {
+      "source": "/locations/norbourne-estates/",
+      "destination": "/locations/louisville-norbourne-estates",
+      "permanent": true
+    },
+    {
+      "source": "/locations/norton-commons",
+      "destination": "/locations/louisville-norton-commons",
+      "permanent": true
+    },
+    {
+      "source": "/locations/norton-commons/",
+      "destination": "/locations/louisville-norton-commons",
+      "permanent": true
+    },
+    {
+      "source": "/locations/nulu",
+      "destination": "/locations/louisville-nulu",
+      "permanent": true
+    },
+    {
+      "source": "/locations/nulu/",
+      "destination": "/locations/louisville-nulu",
+      "permanent": true
+    },
+    {
+      "source": "/locations/okolona",
+      "destination": "/locations/louisville-okolona",
+      "permanent": true
+    },
+    {
+      "source": "/locations/okolona/",
+      "destination": "/locations/louisville-okolona",
+      "permanent": true
+    },
+    {
+      "source": "/locations/old-louisville",
+      "destination": "/locations/louisville-old-louisville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/old-louisville/",
+      "destination": "/locations/louisville-old-louisville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/paristown",
+      "destination": "/locations/louisville-paristown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/paristown/",
+      "destination": "/locations/louisville-paristown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/park-duvalle",
+      "destination": "/locations/louisville-park-duvalle",
+      "permanent": true
+    },
+    {
+      "source": "/locations/park-duvalle/",
+      "destination": "/locations/louisville-park-duvalle",
+      "permanent": true
+    },
+    {
+      "source": "/locations/parkland",
+      "destination": "/locations/louisville-parkland",
+      "permanent": true
+    },
+    {
+      "source": "/locations/parkland/",
+      "destination": "/locations/louisville-parkland",
+      "permanent": true
+    },
+    {
+      "source": "/locations/parkway-village",
+      "destination": "/locations/louisville-parkway-village",
+      "permanent": true
+    },
+    {
+      "source": "/locations/parkway-village/",
+      "destination": "/locations/louisville-parkway-village",
+      "permanent": true
+    },
+    {
+      "source": "/locations/pewee-valley",
+      "destination": "/locations/louisville-pewee-valley",
+      "permanent": true
+    },
+    {
+      "source": "/locations/pewee-valley/",
+      "destination": "/locations/louisville-pewee-valley",
+      "permanent": true
+    },
+    {
+      "source": "/locations/phoenix-hill",
+      "destination": "/locations/louisville-phoenix-hill",
+      "permanent": true
+    },
+    {
+      "source": "/locations/phoenix-hill/",
+      "destination": "/locations/louisville-phoenix-hill",
+      "permanent": true
+    },
+    {
+      "source": "/locations/pioneer-village",
+      "destination": "/locations/louisville-pioneer-village",
+      "permanent": true
+    },
+    {
+      "source": "/locations/pioneer-village/",
+      "destination": "/locations/louisville-pioneer-village",
+      "permanent": true
+    },
+    {
+      "source": "/locations/plainview",
+      "destination": "/locations/louisville-plainview",
+      "permanent": true
+    },
+    {
+      "source": "/locations/plainview/",
+      "destination": "/locations/louisville-plainview",
+      "permanent": true
+    },
+    {
+      "source": "/locations/pleasure-ridge-park",
+      "destination": "/locations/louisville-pleasure-ridge-park",
+      "permanent": true
+    },
+    {
+      "source": "/locations/pleasure-ridge-park/",
+      "destination": "/locations/louisville-pleasure-ridge-park",
+      "permanent": true
+    },
+    {
+      "source": "/locations/poplar-level",
+      "destination": "/locations/louisville-poplar-level",
+      "permanent": true
+    },
+    {
+      "source": "/locations/poplar-level/",
+      "destination": "/locations/louisville-poplar-level",
+      "permanent": true
+    },
+    {
+      "source": "/locations/portland",
+      "destination": "/locations/louisville-portland",
+      "permanent": true
+    },
+    {
+      "source": "/locations/portland/",
+      "destination": "/locations/louisville-portland",
+      "permanent": true
+    },
+    {
+      "source": "/locations/portland-wharf",
+      "destination": "/locations/louisville-portland-wharf",
+      "permanent": true
+    },
+    {
+      "source": "/locations/portland-wharf/",
+      "destination": "/locations/louisville-portland-wharf",
+      "permanent": true
+    },
+    {
+      "source": "/locations/prairie-village",
+      "destination": "/locations/louisville-prairie-village",
+      "permanent": true
+    },
+    {
+      "source": "/locations/prairie-village/",
+      "destination": "/locations/louisville-prairie-village",
+      "permanent": true
+    },
+    {
+      "source": "/locations/prospect",
+      "destination": "/locations/louisville-prospect",
+      "permanent": true
+    },
+    {
+      "source": "/locations/prospect/",
+      "destination": "/locations/louisville-prospect",
+      "permanent": true
+    },
+    {
+      "source": "/locations/russell",
+      "destination": "/locations/louisville-russell",
+      "permanent": true
+    },
+    {
+      "source": "/locations/russell/",
+      "destination": "/locations/louisville-russell",
+      "permanent": true
+    },
+    {
+      "source": "/locations/schnitzelburg",
+      "destination": "/locations/louisville-schnitzelburg",
+      "permanent": true
+    },
+    {
+      "source": "/locations/schnitzelburg/",
+      "destination": "/locations/louisville-schnitzelburg",
+      "permanent": true
+    },
+    {
+      "source": "/locations/sellersburg",
+      "destination": "/locations/louisville-sellersburg",
+      "permanent": true
+    },
+    {
+      "source": "/locations/sellersburg/",
+      "destination": "/locations/louisville-sellersburg",
+      "permanent": true
+    },
+    {
+      "source": "/locations/seneca-gardens",
+      "destination": "/locations/louisville-seneca-gardens",
+      "permanent": true
+    },
+    {
+      "source": "/locations/seneca-gardens/",
+      "destination": "/locations/louisville-seneca-gardens",
+      "permanent": true
+    },
+    {
+      "source": "/locations/shawnee",
+      "destination": "/locations/louisville-shawnee",
+      "permanent": true
+    },
+    {
+      "source": "/locations/shawnee/",
+      "destination": "/locations/louisville-shawnee",
+      "permanent": true
+    },
+    {
+      "source": "/locations/shelby-park",
+      "destination": "/locations/louisville-shelby-park",
+      "permanent": true
+    },
+    {
+      "source": "/locations/shelby-park/",
+      "destination": "/locations/louisville-shelby-park",
+      "permanent": true
+    },
+    {
+      "source": "/locations/shelbyville",
+      "destination": "/locations/louisville-shelbyville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/shelbyville/",
+      "destination": "/locations/louisville-shelbyville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/shepherdsville",
+      "destination": "/locations/louisville-shepherdsville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/shepherdsville/",
+      "destination": "/locations/louisville-shepherdsville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/shippingport",
+      "destination": "/locations/louisville-shippingport",
+      "permanent": true
+    },
+    {
+      "source": "/locations/shippingport/",
+      "destination": "/locations/louisville-shippingport",
+      "permanent": true
+    },
+    {
+      "source": "/locations/shively",
+      "destination": "/locations/louisville-shively",
+      "permanent": true
+    },
+    {
+      "source": "/locations/shively/",
+      "destination": "/locations/louisville-shively",
+      "permanent": true
+    },
+    {
+      "source": "/locations/simpsonville",
+      "destination": "/locations/louisville-simpsonville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/simpsonville/",
+      "destination": "/locations/louisville-simpsonville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/smoketown",
+      "destination": "/locations/louisville-smoketown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/smoketown/",
+      "destination": "/locations/louisville-smoketown",
+      "permanent": true
+    },
+    {
+      "source": "/locations/springhurst",
+      "destination": "/locations/louisville-springhurst",
+      "permanent": true
+    },
+    {
+      "source": "/locations/springhurst/",
+      "destination": "/locations/louisville-springhurst",
+      "permanent": true
+    },
+    {
+      "source": "/locations/st-matthews",
+      "destination": "/locations/louisville-st-matthews",
+      "permanent": true
+    },
+    {
+      "source": "/locations/st-matthews/",
+      "destination": "/locations/louisville-st-matthews",
+      "permanent": true
+    },
+    {
+      "source": "/locations/taylor-berry",
+      "destination": "/locations/louisville-taylor-berry",
+      "permanent": true
+    },
+    {
+      "source": "/locations/taylor-berry/",
+      "destination": "/locations/louisville-taylor-berry",
+      "permanent": true
+    },
+    {
+      "source": "/locations/taylorsville",
+      "destination": "/locations/louisville-taylorsville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/taylorsville/",
+      "destination": "/locations/louisville-taylorsville",
+      "permanent": true
+    },
+    {
+      "source": "/locations/uofl",
+      "destination": "/locations/louisville-uofl",
+      "permanent": true
+    },
+    {
+      "source": "/locations/uofl/",
+      "destination": "/locations/louisville-uofl",
+      "permanent": true
+    },
+    {
+      "source": "/locations/valley-station",
+      "destination": "/locations/louisville-valley-station",
+      "permanent": true
+    },
+    {
+      "source": "/locations/valley-station/",
+      "destination": "/locations/louisville-valley-station",
+      "permanent": true
+    },
+    {
+      "source": "/locations/west-point",
+      "destination": "/locations/louisville-west-point",
+      "permanent": true
+    },
+    {
+      "source": "/locations/west-point/",
+      "destination": "/locations/louisville-west-point",
+      "permanent": true
+    },
+    {
+      "source": "/locations/wilder-park",
+      "destination": "/locations/louisville-wilder-park",
+      "permanent": true
+    },
+    {
+      "source": "/locations/wilder-park/",
+      "destination": "/locations/louisville-wilder-park",
+      "permanent": true
+    },
+    {
+      "source": "/locations/worthington-hills",
+      "destination": "/locations/louisville-worthington",
+      "permanent": true
+    },
+    {
+      "source": "/locations/worthington-hills/",
+      "destination": "/locations/louisville-worthington",
+      "permanent": true
+    },
+    {
+      "source": "/locations/zoneton",
+      "destination": "/locations/louisville-zoneton",
+      "permanent": true
+    },
+    {
+      "source": "/locations/zoneton/",
+      "destination": "/locations/louisville-zoneton",
+      "permanent": true
+    }
+  ]
+}

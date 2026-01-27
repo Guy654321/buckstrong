@@ -1,0 +1,23 @@
+{
+  "name": "Liberty Road",
+  "slug": "lexington-liberty-road",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0332,
+    "lng": -84.4495
+  },
+  "zips": [
+    "40505",
+    "40509"
+  ],
+  "surroundingAreas": [
+    "Hamburg",
+    "Kenawood",
+    "Bryan Station"
+  ]
+}

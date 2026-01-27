@@ -1,0 +1,249 @@
+---
+import { Icon } from 'astro-icon/components';
+import { BUSINESS_INFO } from '../data/business';
+import { getServices } from '../lib/services';
+import { getLocationsByMarket, getLocationHubs } from '../lib/locations';
+
+const services = await getServices();
+const locationGroups = await getLocationsByMarket();
+const hubLocations = await getLocationHubs();
+
+const isDefined = <T,>(value: T | null | undefined): value is T =>
+  value !== null && value !== undefined;
+
+const footerLocationGroups = locationGroups.map(group => ({
+  market: group.market,
+  locations: [group.hub, ...group.areas].filter(isDefined),
+}));
+const sanitizeTelephone = (value: string) => value.replace(/[^0-9+]/g, '');
+
+const footerHubs = hubLocations.map(location => {
+  const hasAddress = Boolean(location.showAddress && location.address?.streetAddress);
+  return {
+    ...location,
+    hasAddress,
+    phoneHref: `tel:${sanitizeTelephone(location.phone)}`,
+    serviceMessage: !hasAddress ? `Serving ${location.name} & surrounding communities` : null,
+  };
+});
+
+---
+
+<footer class="bg-primary text-white" itemscope itemtype="https://schema.org/WPFooter">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+    <header class="text-center lg:text-left">
+      <h2 class="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+        Explore Derby Strong Garage Doors
+      </h2>
+      <p class="mt-3 text-base text-white/70">
+        Find services, resources, and the right team for every community we serve.
+      </p>
+    </header>
+
+    <div class="grid gap-10 lg:grid-cols-12">
+
+      <div class="lg:col-span-4" itemscope itemtype="https://schema.org/LocalBusiness">
+        <meta itemprop="name" content={BUSINESS_INFO.name} />
+        <meta itemprop="image" content="/derby-city-logo.png" />
+        <meta itemprop="telephone" content={BUSINESS_INFO.telephone} />
+        <meta itemprop="email" content={BUSINESS_INFO.email} />
+        <meta itemprop="url" content={BUSINESS_INFO.url} />
+        <div class="sr-only" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+          <span itemprop="streetAddress">{BUSINESS_INFO.address.streetAddress}</span>
+          <span itemprop="addressLocality">{BUSINESS_INFO.address.addressLocality}</span>
+          <span itemprop="addressRegion">{BUSINESS_INFO.address.addressRegion}</span>
+          <span itemprop="postalCode">{BUSINESS_INFO.address.postalCode}</span>
+          <span itemprop="addressCountry">{BUSINESS_INFO.address.addressCountry}</span>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/10 backdrop-blur">
+          <div class="space-y-2 text-white/80">
+            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-white">Derby Strong Garage Doors</p>
+            <p class="text-sm leading-relaxed">Professional garage door repair across Kentucky</p>
+            <a
+              href={`mailto:${BUSINESS_INFO.email}`}
+              class="inline-flex items-center gap-2 text-sm font-medium text-white transition-colors duration-200 hover:text-white/80"
+            >
+              <span aria-hidden="true">📧</span>
+              <span>{BUSINESS_INFO.email}</span>
+            </a>
+            <p class="text-xs uppercase tracking-wide text-white/60">Emergency service available 24/7</p>
+          </div>
+
+          <p class="mt-6 text-xs font-semibold uppercase tracking-[0.3em] text-white/60">Our Locations</p>
+          <div class="mt-5 divide-y divide-white/10">
+            {footerHubs.map(location => (
+              <div class="flex flex-col gap-4 py-5 first:pt-0 last:pb-0" itemscope itemtype="https://schema.org/LocalBusiness">
+                <meta itemprop="name" content={`${location.name} - ${BUSINESS_INFO.name}`} />
+                <div class="flex items-start gap-3">
+                  <span class="rounded-full bg-accent/20 p-2 flex-shrink-0">
+                    <Icon name="mdi:map-marker" size="20" class="text-white" aria-hidden="true" />
+                  </span>
+                  <div class="flex-1 space-y-2">
+                    <p class="text-base font-semibold tracking-tight text-white">
+                      {location.name} Office
+                    </p>
+
+                    {location.hasAddress && location.address ? (
+                      <div class="space-y-1 text-sm text-white/70" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        {location.address.streetAddress && (
+                          <span class="block text-white/80" itemprop="streetAddress">{location.address.streetAddress}</span>
+                        )}
+                        <span class="block">
+                          {location.address.addressLocality && (
+                            <span itemprop="addressLocality">{location.address.addressLocality}</span>
+                          )}
+                          {location.address.addressRegion && (
+                            <>
+                              {location.address.addressLocality ? ', ' : ''}
+                              <span itemprop="addressRegion">{location.address.addressRegion}</span>
+                            </>
+                          )}
+                          {location.address.postalCode && (
+                            <>
+                              {' '}
+                              <span itemprop="postalCode">{location.address.postalCode}</span>
+                            </>
+                          )}
+                        </span>
+                        {location.address.addressCountry && (
+                          <meta itemprop="addressCountry" content={location.address.addressCountry} />
+                        )}
+                      </div>
+                    ) : (
+                      <div class="text-sm text-white/70 space-y-2">
+                        <p>{location.serviceMessage}</p>
+                        <div class="sr-only" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                          <span itemprop="streetAddress">{BUSINESS_INFO.address.streetAddress}</span>
+                          <span itemprop="addressLocality">{BUSINESS_INFO.address.addressLocality}</span>
+                          <span itemprop="addressRegion">{BUSINESS_INFO.address.addressRegion}</span>
+                          <span itemprop="postalCode">{BUSINESS_INFO.address.postalCode}</span>
+                          <span itemprop="addressCountry">{BUSINESS_INFO.address.addressCountry}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    <div class="flex flex-col gap-1 text-sm text-white/70">
+                      <a
+                        href={location.phoneHref}
+                        class="text-base font-medium text-white transition-colors duration-200 hover:text-white/80"
+                        itemprop="telephone"
+                      >
+                        {location.phone}
+                      </a>
+                      <span class="text-xs uppercase tracking-wide text-white/80">Direct line</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:col-span-8 xl:grid-cols-3">
+        <div>
+          <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider text-white/90">Services</h3>
+          <ul class="space-y-3">
+            {services.map(service => (
+              <li>
+                <a
+                  href={`/services/${service.slug}`}
+                  class="text-base text-white/70 transition-colors duration-200 hover:text-white leading-relaxed"
+                >
+                  {service.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider text-white/90">Resources</h3>
+          <ul class="space-y-3">
+            <li>
+              <a
+                href="/faq"
+                class="text-base text-white/70 transition-colors duration-200 hover:text-white leading-relaxed"
+              >
+                FAQ
+              </a>
+            </li>
+            <li>
+              <a
+                href="/blog"
+                class="text-base text-white/70 transition-colors duration-200 hover:text-white leading-relaxed"
+              >
+                Blog
+              </a>
+            </li>
+            <li>
+              <a
+                href="/safety"
+                class="text-base text-white/70 transition-colors duration-200 hover:text-white leading-relaxed"
+              >
+                Safety Tips
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider text-white/90">Contact</h3>
+            <a
+              href="/contact"
+              class="block text-base text-white/70 transition-colors duration-200 hover:text-white leading-relaxed"
+            >
+              Contact Us
+            </a>
+          </div>
+
+          <details class="group rounded-lg border border-white/10 bg-white/5 text-white/80">
+            <summary class="flex cursor-pointer items-center justify-between gap-3 px-4 py-3 text-sm font-semibold uppercase tracking-wide transition-colors duration-200 group-open:text-white hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60">
+              All Locations
+              <Icon
+                name="mdi:chevron-down"
+                size="20"
+                class="transition-transform duration-200 group-open:rotate-180"
+                aria-hidden="true"
+              />
+            </summary>
+            <div class="px-4 pb-4 pt-2 space-y-4 text-base leading-relaxed">
+              {footerLocationGroups.map(group => (
+                <div>
+                  <p class="text-xs uppercase tracking-wide text-white/80 mb-1">
+                    {group.market}
+                  </p>
+                  <ul class="space-y-1">
+                    {group.locations.map(location => (
+                      <li>
+                        <a
+                          href={`/locations/${location.slug}`}
+                          class="text-white/70 transition-colors duration-200 hover:text-white"
+                        >
+                          {location.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10 py-6">
+    <div class="max-w-7xl mx-auto flex flex-col gap-4 px-4 text-sm text-white/70 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+      <p>&copy; {new Date().getFullYear()} Derby Strong Garage Doors. All rights reserved.</p>
+      <a
+        href="/privacy-policy"
+        class="text-[11px] uppercase tracking-wide text-white/60 transition-colors duration-200 hover:text-white/80 sm:text-xs"
+      >
+        Privacy Policy
+      </a>
+    </div>
+  </div>
+</footer>

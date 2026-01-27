@@ -1,0 +1,22 @@
+{
+  "name": "Cloverleaf",
+  "slug": "louisville-cloverleaf",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.1887,
+    "lng": -85.8042
+  },
+  "zips": [
+    "40216"
+  ],
+  "surroundingAreas": [
+    "Shively",
+    "Taylor Boulevard",
+    "Cane Run Road"
+  ]
+}

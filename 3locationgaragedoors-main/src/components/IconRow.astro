@@ -1,0 +1,46 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const trustIcons = [
+  {
+    icon: "mdi:shield-check",
+    text: "Insured",
+    description: "Fully insured for your protection"
+  },
+  { 
+    icon: "mdi:clock-time-four", 
+    text: "24/7 Emergency Service",
+    description: "Available 24/7 for urgent repairs"
+  },
+  { 
+    icon: "mdi:tools", 
+    text: "All Repairs",
+    description: "Complete garage door repair and maintenance"
+  },
+  { 
+    icon: "mdi:star", 
+    text: "5-Star Service",
+    description: "Highly rated by Louisville customers"
+  }
+];
+---
+
+<section class="py-12 bg-white border-b border-ink/5">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {trustIcons.map(item => (
+        <div class="text-center">
+          <div class="flex items-center justify-center text-primary mb-3">
+            <Icon name={item.icon} size="24" class="text-primary" aria-hidden="true" />
+          </div>
+          <p class="text-base font-semibold text-ink mb-2">
+            {item.text}
+          </p>
+          <p class="text-sm text-ink/60 leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

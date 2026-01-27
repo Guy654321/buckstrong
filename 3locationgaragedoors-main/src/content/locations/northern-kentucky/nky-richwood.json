@@ -1,0 +1,22 @@
+{
+  "name": "Richwood",
+  "slug": "nky-richwood",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.944,
+    "lng": -84.6472
+  },
+  "zips": [
+    "41094"
+  ],
+  "surroundingAreas": [
+    "I-75",
+    "Burlington",
+    "Walton"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Cold Spring",
+  "slug": "nky-cold-spring",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.0214,
+    "lng": -84.4399
+  },
+  "zips": [
+    "41076"
+  ],
+  "surroundingAreas": [
+    "Alexandria Pike",
+    "NKU",
+    "Highland Heights"
+  ]
+}

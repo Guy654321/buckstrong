@@ -1,0 +1,22 @@
+{
+  "name": "Kentucky Horse Park",
+  "slug": "lexington-horse-park",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.1491,
+    "lng": -84.5214
+  },
+  "zips": [
+    "40511"
+  ],
+  "surroundingAreas": [
+    "Newtown Pike",
+    "Iron Works",
+    "Spindletop"
+  ]
+}

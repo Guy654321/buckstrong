@@ -1,0 +1,22 @@
+{
+  "name": "Bryan Station",
+  "slug": "lexington-bryan-station",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0654,
+    "lng": -84.4468
+  },
+  "zips": [
+    "40505"
+  ],
+  "surroundingAreas": [
+    "Bryan Station Road",
+    "Williamsburg",
+    "Northland"
+  ]
+}

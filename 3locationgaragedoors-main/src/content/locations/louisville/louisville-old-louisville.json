@@ -1,0 +1,22 @@
+{
+  "name": "Old Louisville",
+  "slug": "louisville-old-louisville",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2299,
+    "lng": -85.7584
+  },
+  "zips": [
+    "40203"
+  ],
+  "surroundingAreas": [
+    "Historic Preservation District",
+    "St. James Court",
+    "Central Park"
+  ]
+}

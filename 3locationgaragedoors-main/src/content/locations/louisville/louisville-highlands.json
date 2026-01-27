@@ -1,0 +1,22 @@
+{
+  "name": "The Highlands",
+  "slug": "louisville-highlands",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2378,
+    "lng": -85.7069
+  },
+  "zips": [
+    "40204"
+  ],
+  "surroundingAreas": [
+    "Bardstown Road",
+    "Douglass Loop",
+    "Cherokee Park"
+  ]
+}

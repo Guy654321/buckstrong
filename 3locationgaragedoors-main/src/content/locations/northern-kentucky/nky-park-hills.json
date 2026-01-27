@@ -1,0 +1,22 @@
+{
+  "name": "Park Hills",
+  "slug": "nky-park-hills",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.0745,
+    "lng": -84.5384
+  },
+  "zips": [
+    "41011"
+  ],
+  "surroundingAreas": [
+    "Amsterdam Road",
+    "Covington",
+    "Devou Park"
+  ]
+}

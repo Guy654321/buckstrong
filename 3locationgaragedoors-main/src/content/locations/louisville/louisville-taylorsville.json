@@ -1,0 +1,22 @@
+{
+  "name": "Taylorsville",
+  "slug": "louisville-taylorsville",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0335,
+    "lng": -85.3433
+  },
+  "zips": [
+    "40071"
+  ],
+  "surroundingAreas": [
+    "Salt River",
+    "Spencer County",
+    "Taylorsville Lake"
+  ]
+}

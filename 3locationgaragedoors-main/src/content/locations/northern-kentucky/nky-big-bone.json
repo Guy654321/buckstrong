@@ -1,0 +1,22 @@
+{
+  "name": "Big Bone",
+  "slug": "nky-big-bone",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.8748,
+    "lng": -84.7506
+  },
+  "zips": [
+    "41091"
+  ],
+  "surroundingAreas": [
+    "Big Bone Lick State Park",
+    "Union",
+    "Beaverlick"
+  ]
+}

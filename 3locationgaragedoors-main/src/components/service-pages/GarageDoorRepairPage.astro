@@ -1,0 +1,593 @@
+---
+import { Image } from 'astro:assets';
+import { Schema } from 'astro-seo-schema';
+import { Icon } from 'astro-icon/components';
+import Base from '../../layouts/Base.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import Breadcrumbs from '../Breadcrumbs.astro';
+import ContactForm from '../ContactForm.astro';
+import CallNowButton from '../CallNowButton.astro';
+import FAQInteractive from '../FAQInteractive.astro';
+import ServiceInternalLinks from './ServiceInternalLinks.astro';
+import HiddenSeoText from '../HiddenSeoText.astro';
+import { REPAIRS } from '../../data/repairs';
+import heroImage from '../../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
+import { BUSINESS_INFO } from '../../data/business';
+import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../../data/call-markets';
+import type { Location } from '../../lib/locations';
+import { buildLocationServiceCanonicalPath } from '../../lib/canonical';
+import { getSiteOrigin } from '../../utils/site-origin';
+
+// Import all repair images as modules for optimization
+import springReplacementImage from '../../assets/images/repairs/spring-replacement.jpg';
+import openerRepairImage from '../../assets/images/repairs/opener-repair.jpg';
+import cableRepairImage from '../../assets/images/repairs/cable-repair.jpg';
+import trackAlignmentImage from '../../assets/images/repairs/track-alignment.jpg';
+import panelReplacementImage from '../../assets/images/repairs/panel-replacement.jpg';
+import rollersHingesImage from '../../assets/images/repairs/rollers-hinges.jpg';
+import sensorAlignmentImage from '../../assets/images/repairs/sensor-alignment.jpg';
+import weatherstrippingImage from '../../assets/images/repairs/weatherstripping.jpg';
+import maintenanceImage from '../../assets/images/repairs/maintenance.jpg';
+import balanceAdjustmentImage from '../../assets/images/repairs/balance-adjustment.jpg';
+
+const repairImageMap = {
+  "spring-replacement": springReplacementImage,
+  "opener-repair": openerRepairImage,
+  "cable-repair": cableRepairImage,
+  "track-alignment": trackAlignmentImage,
+  "panel-replacement": panelReplacementImage,
+  "rollers-hinges": rollersHingesImage,
+  "sensor-alignment": sensorAlignmentImage,
+  "weatherstripping": weatherstrippingImage,
+  "maintenance": maintenanceImage,
+  "balance-adjustment": balanceAdjustmentImage
+};
+
+interface Props {
+  location?: Location;
+}
+
+const { location } = Astro.props as Props;
+const activeLocation = location;
+const serviceCityName = activeLocation
+  ? activeLocation.isHub
+    ? activeLocation.address?.addressLocality?.trim() || activeLocation.name
+    : activeLocation.name
+  : undefined;
+const breadcrumbs = activeLocation
+  ? [
+      { label: 'Home', href: '/' },
+      { label: 'Locations', href: '/locations' },
+      { label: `${activeLocation.name}, ${activeLocation.state}`, href: `/locations/${activeLocation.slug}` },
+      { label: 'Garage Door Repair' }
+    ]
+  : [
+      { label: 'Home', href: '/' },
+      { label: 'Services', href: '/services' },
+      { label: 'Garage Door Repair' }
+    ];
+const locationDisplayName = activeLocation && serviceCityName
+  ? `${serviceCityName}, ${activeLocation.state}`
+  : undefined;
+const marketDisplayName = activeLocation?.market;
+const coverageAreaLabel = activeLocation
+  ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
+  : 'Louisville, Lexington & Northern Kentucky';
+
+const filterStrings = (items: Array<string | undefined>): string[] =>
+  items.filter((item): item is string => Boolean(item));
+
+const surroundingAreas = filterStrings(
+  (activeLocation?.surroundingAreas ?? []).map((area) => area?.trim())
+);
+const zipCodes = filterStrings((activeLocation?.zips ?? []).map((zip) => zip?.trim()));
+const surroundingAreasLabel =
+  surroundingAreas.length > 0
+    ? `Nearby neighborhoods we frequently serve include ${surroundingAreas.join(', ')}.`
+    : undefined;
+const zipCoverageLabel =
+  zipCodes.length > 0
+    ? `Primary ZIP codes covered: ${zipCodes.join(', ')}.`
+    : undefined;
+
+const localizedSurroundingList = surroundingAreas.length > 0 ? surroundingAreas.slice(0, 6) : [];
+const localizedNeighborhoodLine = localizedSurroundingList.length > 0
+  ? `Recent calls came from ${localizedSurroundingList.join(', ')}${surroundingAreas.length > localizedSurroundingList.length
+      ? `, plus ${surroundingAreas.length - localizedSurroundingList.length} nearby neighborhoods we visit weekly.`
+      : '.'}`
+  : undefined;
+
+const localizedZipLine = zipCodes.length > 0
+  ? `ZIP focus areas: ${zipCodes.join(', ')}.`
+  : undefined;
+
+const localizedDispatchNote = activeLocation
+  ? `${locationDisplayName} homeowners are routed through our ${activeLocation.parentHub?.trim() || activeLocation.market} dispatch team for faster scheduling and stocked parts.`
+  : 'Kentucky homeowners are routed through our dispatch team for faster scheduling and stocked parts.';
+
+const localizedAccessNote = activeLocation
+  ? `We keep site notes for ${locationDisplayName} properties—gate codes, parking details, and HOA or property manager contacts—so follow-up repairs stay smooth.`
+  : 'We keep site notes for every property—gate codes, parking details, and HOA or property manager contacts—so follow-up repairs stay smooth.';
+
+const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
+const pageTitle = activeLocation && serviceCityName
+  ? `Garage Door Repair ${serviceCityName} ${activeLocation.state} | Derby Strong Garage Doors`
+  : 'Garage Door Repair in Kentucky | Louisville, Lexington & Northern Kentucky';
+const pageDescription = activeLocation && serviceCityName
+  ? `Trusted garage door supplier offering same-day repair in ${serviceCityName}, ${activeLocation.state}. 5.0-star service for broken springs, openers, and cables. 24/7 emergency help. Call ${displayPhoneNumber}!`
+  : 'Trusted garage door supplier serving Louisville, Lexington, and Northern Kentucky with same-day service for springs, rollers, cables, tracks, and safety inspections.';
+const heroHeading = activeLocation
+  ? `Garage Door Repair in ${locationDisplayName}`
+  : 'Garage Door Repair in Louisville, Lexington & Northern Kentucky';
+const heroSubheading = activeLocation
+  ? `Professional garage door repair services for homeowners in ${coverageAreaLabel}. Springs, rollers, cables, tracks, and emergency fixes handled by trusted local crews.`
+  : "Professional garage door repair services throughout Kentucky's major metros. Springs, rollers, cables, tracks, and emergency fixes handled by trusted local crews.";
+const heroAlt = activeLocation
+  ? `Garage door repair technician assisting homeowners in ${coverageAreaLabel}`
+  : 'Garage door repair technician assisting homeowners across Louisville, Lexington, and Northern Kentucky';
+const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
+const callMarkets = CALL_MARKETS;
+const defaultCallMarket = DEFAULT_CALL_MARKET;
+const heroCallMarkets = !activeLocation ? callMarkets : [];
+const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
+const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
+const businessEntityId = `${getSiteOrigin()}#business`;
+const callModalId = 'header-call-modal';
+const areaServed = activeLocation ? coverageAreaLabel : 'Louisville, Lexington & Northern Kentucky, KY';
+const schemaServiceName = activeLocation ? `Garage Door Repair in ${locationDisplayName}` : 'Garage Door Repair';
+const schemaDescription = activeLocation
+  ? `Professional garage door repair services across ${coverageAreaLabel} including springs, rollers, cables, tracks, panels, and emergency repairs.`
+  : 'Professional garage door repair services across Louisville, Lexington, and Northern Kentucky including springs, rollers, cables, tracks, panels, and emergency repairs.';
+const canonicalPath = activeLocation
+  ? buildLocationServiceCanonicalPath(activeLocation.slug, 'garage-door-repair')
+  : '/services/garage-door-repair';
+const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
+const dailyServicesIntro = activeLocation
+  ? `From historic neighborhoods to new builds across ${coverageAreaLabel}, we resolve noisy rollers, bent tracks, and uneven doors every day. We arrive in stocked trucks so we can replace broken torsion springs, snapped cables, worn hinges, and weatherstripping in one visit.`
+  : 'From Lexington suburbs to river cities in Northern Kentucky, we resolve noisy rollers, bent tracks, and uneven doors every day. We arrive in stocked trucks so we can replace broken torsion springs, snapped cables, worn hinges, and weatherstripping in one visit.';
+const emergencyServiceIntro = activeLocation
+  ? `Need emergency help tonight? Call for same-day garage door repair anywhere in ${coverageAreaLabel}. We also support opener repair and smart-home upgrades across nearby communities.`
+  : 'Need emergency help tonight? Call for same-day garage door repair anywhere in Louisville, Lexington, or Northern Kentucky. We also support opener repair and smart-home upgrades across surrounding suburbs and cross-river communities.';
+const whyChooseCoverage = activeLocation
+  ? `Same-day emergency repairs throughout ${coverageAreaLabel}`
+  : 'Same-day emergency repairs throughout Kentucky';
+const inspectionCopy = activeLocation
+  ? 'Our local technicians arrive prepared for emergencies with diagnostic tools and safety equipment. We perform a comprehensive inspection to identify all issues, not just the obvious problem, ensuring we address root causes.'
+  : 'Our Kentucky technicians arrive prepared for emergencies with diagnostic tools and safety equipment. We perform a comprehensive inspection to identify all issues, not just the obvious problem, ensuring we address root causes.';
+const faqIntro = activeLocation
+  ? `Quick answers to common questions from ${coverageAreaLabel} homeowners`
+  : 'Quick answers to common questions from Kentucky homeowners';
+const contactTitle = activeLocation
+  ? `Need Garage Door Repair in ${locationDisplayName}?`
+  : 'Need Garage Door Repair?';
+const contactSubtitle = activeLocation
+  ? `Get a free quote and schedule your repair service in ${coverageAreaLabel} today`
+  : 'Get a free quote and schedule your repair service today';
+
+const faqs = [
+  {
+    question: 'Do you offer same-day emergency garage door repair?',
+    answer: activeLocation
+      ? `Yes. Our experienced technicians serving ${coverageAreaLabel} are available for same-day and after-hours service, and most emergency repairs are completed during the initial visit.`
+      : 'Yes. Our Kentucky technicians serving Louisville, Lexington, and Northern Kentucky are available for same-day and after-hours service, and most emergency repairs are completed during the initial visit.'
+  },
+  {
+    question: 'What types of parts do you carry on your service trucks?',
+    answer:
+      'We stock high-cycle springs, lift cables, rollers, hinges, opener gears, sensors, and hardware so we can repair the majority of issues without extra trips.'
+  },
+  {
+    question: 'Will my garage door be tested for safety after the repair?',
+    answer:
+      'Absolutely. Every repair includes a complete balance check, safety reversal test, and hardware inspection to verify the door is operating safely.'
+  },
+  {
+    question: 'How much will my garage door repair cost?',
+    answer:
+      'We provide an upfront written estimate before any work begins and review repair options so there are no surprises on your final invoice.'
+  }
+] satisfies Array<{ question: string; answer: string }>;
+---
+
+<Base
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonicalPath}
+  callNowPhoneNumber={displayPhoneNumber}
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: schemaServiceName,
+      description: schemaDescription,
+      provider: {
+        '@type': 'LocalBusiness',
+        name: BUSINESS_INFO.name,
+        legalName: BUSINESS_INFO.legalName,
+        '@id': businessEntityId,
+        telephone: displayPhoneNumber,
+        email: BUSINESS_INFO.email,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: BUSINESS_INFO.address.streetAddress,
+          addressLocality: BUSINESS_INFO.address.addressLocality,
+          addressRegion: BUSINESS_INFO.address.addressRegion,
+          postalCode: BUSINESS_INFO.address.postalCode,
+          addressCountry: BUSINESS_INFO.address.addressCountry
+        }
+      },
+      areaServed,
+      serviceType: 'Garage Door Repair',
+      offers: {
+        '@type': 'Offer',
+        priceRange: '$$',
+        availability: 'https://schema.org/InStock',
+        priceCurrency: 'USD'
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Garage Door Repair Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Spring Replacement',
+              description: 'Replace fatigued torsion/extension springs and rebalance the door for safe lifting'
+            }
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Cable Repair',
+              description: 'Replace frayed or off-spool lift cables and reset drums for even, smooth travel'
+            }
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Track Alignment',
+              description: 'Straighten bent rails, realign hardware, and safely reset off-track doors'
+            }
+          }
+        ]
+      }
+    }}
+  />
+
+  <section class="relative py-20 lg:py-32 text-white overflow-visible lg:overflow-hidden">
+    <div class="absolute inset-0">
+      <Image
+        src={heroImage}
+        alt={heroAlt}
+        width="1200"
+        height="675"
+        class="w-full h-full object-cover"
+        fetchpriority="high"
+        loading="eager"
+        decoding="sync"
+        quality={80}
+        sizes="100vw"
+      />
+      <div class="absolute inset-0 bg-primary/75"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">
+        {heroHeading}
+      </h1>
+      <p class="text-xl text-white/95 mb-8 max-w-3xl mx-auto leading-relaxed">
+        {heroSubheading}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        {hasGenericCallCTA && heroDefaultCallMarket ? (
+          <button
+            type="button"
+            class="btn-accent text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2 sm:order-first"
+            data-call-modal-trigger
+            aria-controls={callModalId}
+            aria-expanded="false"
+            aria-haspopup="dialog"
+            aria-label="Choose a service area phone number"
+          >
+            <Icon name="mdi:phone" size="20" class="inline" aria-hidden="true" />
+            <span>Call Now</span>
+            <span class="sr-only">for the {heroDefaultCallMarket.label} market</span>
+          </button>
+        ) : (
+          <a
+            href={telephoneHref}
+            class="btn-accent text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2 sm:order-first"
+          >
+            <Icon name="mdi:phone" size="20" class="inline" aria-hidden="true" />
+            <span>Call Now: <span class="nap-phone">{displayPhoneNumber}</span></span>
+          </a>
+        )}
+        <a
+          href="/contact"
+          class="btn-outline-light text-lg px-8 py-4 bg-white/5 hover:bg-white/10 border-white/80 sm:order-last"
+        >
+          Get Free Quote
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="repair-services" class="py-16 bg-muted">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Our Repair Services</h2>
+        <p class="text-xl text-ink/70">Professional solutions for every garage door problem</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {REPAIRS.map(repair => (
+          <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-lg transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1">
+            <div class="aspect-square bg-gray-100 flex items-center justify-center">
+              {repairImageMap[repair.slug] ? (
+                <Image
+                  src={repairImageMap[repair.slug]}
+                  alt={repair.alt}
+                  width="400"
+                  height="400"
+                  class="w-full h-full object-cover object-center"
+                  loading="lazy"
+                  fetchpriority="low"
+                  decoding="async"
+                  quality={90}
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                />
+              ) : (
+                <div class="w-full h-full bg-muted flex items-center justify-center text-ink/60">
+                  Image unavailable
+                </div>
+              )}
+            </div>
+
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-ink mb-3 group-hover:text-primary transition-colors">
+                {repair.title}
+              </h3>
+              <p class="text-ink/70 mb-4 leading-relaxed">
+                {repair.blurb}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Common Garage Door Problems We Repair</h2>
+        <p class="text-xl text-ink/70">Our technicians resolve these issues with fully stocked trucks for quick, same-day fixes</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <h3 class="text-2xl font-semibold text-ink mb-4">Daily Repair Services</h3>
+          <p class="text-lg text-ink/70 mb-4">
+            {dailyServicesIntro}
+          </p>
+          <ul class="list-disc list-inside text-ink/80 space-y-2">
+            <li>Garage door not opening, closing, or staying balanced</li>
+            <li>Overhead door off track or closing crooked on the floor</li>
+            <li>Opener remotes, keypads, and safety sensors not responding</li>
+            <li>Damaged panels, dented sections, or roll-up slats needing replacement</li>
+            <li>Planned tune-ups, lubrication, and seasonal safety inspections</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-2xl font-semibold text-ink mb-4">Emergency & After-Hours Service</h3>
+          <p class="text-lg text-ink/70 mb-4">
+            {emergencyServiceIntro}
+          </p>
+          <ul class="list-disc list-inside text-ink/80 space-y-2">
+            <li>Broken springs with immediate safety hazards</li>
+            <li>Doors stuck open compromising home security</li>
+            <li>Complete opener failures preventing car access</li>
+            <li>Storm damage requiring urgent repairs</li>
+            <li>Off-track doors needing professional realignment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14 bg-muted">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10 max-w-3xl mx-auto space-y-2">
+        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-primary/70">Repair process</p>
+        <p class="text-lg text-ink/70 leading-relaxed">
+          We've refined our garage door repair process to minimize disruption to your day while ensuring every repair meets the highest safety standards. Our systematic approach combines thorough diagnosis with efficient execution and comprehensive testing.
+        </p>
+      </div>
+      <div class="grid gap-6 lg:grid-cols-12 items-stretch">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-7 lg:p-8 lg:col-span-5 flex flex-col gap-6">
+          <div class="space-y-2">
+            <h2 class="text-2xl sm:text-3xl font-bold text-ink">Why Choose Our Garage Door Repair?</h2>
+            <p class="text-ink/70 text-base leading-relaxed">
+              Faster appointments, clear communication, and fully stocked trucks keep your home secure and downtime low.
+            </p>
+          </div>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <li class="flex items-start">
+              <Icon name="mdi:check-circle" size="24" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span class="text-ink/80">{whyChooseCoverage}</span>
+            </li>
+            <li class="flex items-start">
+              <Icon name="mdi:check-circle" size="24" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span class="text-ink/80">All makes and models serviced</span>
+            </li>
+            <li class="flex items-start">
+              <Icon name="mdi:check-circle" size="24" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span class="text-ink/80">Comprehensive safety inspection</span>
+            </li>
+            <li class="flex items-start">
+              <Icon name="mdi:check-circle" size="24" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span class="text-ink/80">Upfront pricing with no surprises</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-xl p-7 lg:p-8 shadow-sm border border-gray-100 lg:col-span-7 flex flex-col gap-6">
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="text-2xl font-bold text-ink">What's Included</h3>
+              <span class="text-sm font-medium text-primary/80">From first call to final test</span>
+            </div>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <li class="flex items-start">
+                <Icon name="mdi:check" size="20" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <span class="text-ink/80">Complete diagnostic assessment</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="mdi:check" size="20" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <span class="text-ink/80">Professional repair of broken components</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="mdi:check" size="20" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <span class="text-ink/80">Safety system testing and adjustment</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="mdi:check" size="20" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <span class="text-ink/80">Post-repair performance verification</span>
+              </li>
+            </ul>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2 pt-4 border-t border-ink/10">
+            <div class="bg-card/60 p-5 md:p-6 rounded-lg md:col-span-2 text-left">
+              <h3 class="text-lg font-semibold text-ink mb-2">Thorough Inspection & Clear Options</h3>
+              <p class="text-ink/80 text-sm leading-relaxed">
+                We explain our findings in plain language, provide multiple repair options when available, and present a detailed written estimate with no hidden fees. You'll understand exactly what needs repair before any work begins.
+              </p>
+            </div>
+            <div class="bg-card/60 p-5 md:p-6 rounded-lg text-left">
+              <h3 class="text-lg font-semibold text-ink mb-2">Emergency Response & Diagnosis</h3>
+              <p class="text-ink/80 text-sm leading-relaxed">
+                {inspectionCopy}
+              </p>
+            </div>
+            <div class="bg-card/60 p-5 md:p-6 rounded-lg text-left">
+              <h3 class="text-lg font-semibold text-ink mb-2">Professional Repair & Safety Testing</h3>
+              <p class="text-ink/80 text-sm leading-relaxed">
+                Using premium parts and proven techniques, we complete the repair efficiently while maintaining a clean work area. Every repair concludes with balance verification, auto-reverse checks, and sensor alignment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-3">Local insight</p>
+        <h2 class="text-3xl font-bold text-ink mb-4">
+          {activeLocation ? `${locationDisplayName} Service Notes` : 'Local Garage Door Repair Notes'}
+        </h2>
+        <p class="text-lg text-ink/70 leading-relaxed">
+          {activeLocation
+            ? `Here are the details we keep on file for ${coverageAreaLabel} so every visit is faster and more relevant to the properties we service most.`
+            : 'Here are the details we keep on file for Kentucky homeowners so every visit is faster and more relevant to the properties we service most.'}
+        </p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        {filterStrings([
+          localizedNeighborhoodLine,
+          localizedZipLine,
+          localizedDispatchNote,
+          localizedAccessNote,
+        ]).map((line) => (
+          <div class="bg-card border border-ink/5 rounded-2xl p-6 shadow-sm">
+            <p class="text-ink/80 leading-relaxed">{line}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-muted">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Garage Door Repair FAQs</h2>
+        <p class="text-xl text-ink/70">
+          {faqIntro}
+        </p>
+      </div>
+
+      <FAQInteractive faqs={faqs} />
+    </div>
+  </section>
+
+  <ServiceInternalLinks currentSlug="garage-door-repair" location={activeLocation} />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(faq => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer
+        }
+      }))
+    }}
+  />
+
+  <ContactForm
+    title={contactTitle}
+    subtitle={contactSubtitle}
+    bgColor="muted"
+  />
+
+  <HiddenSeoText
+    title={`Detailed garage door repair support${locationDisplayName ? ` for ${locationDisplayName}` : ''}`}
+    paragraphs={filterStrings([
+      activeLocation
+        ? `Our ${locationDisplayName} crews handle broken torsion and extension springs, misaligned tracks, frayed cables, damaged panels, and opener failures with stocked trucks so most repairs finish the same day.`
+        : 'Our Kentucky crews handle broken torsion and extension springs, misaligned tracks, frayed cables, damaged panels, and opener failures with stocked trucks so most repairs finish the same day.',
+      'Every appointment includes balance testing, photo eye calibration, fastener checks, and weather-seal inspections. We record access preferences, HOA requirements, and past repairs so future visits stay fast.',
+      activeLocation
+        ? `Emergency scheduling is available across ${coverageAreaLabel}. If your door is stuck open or closed, we secure the opening, complete safety checks, and leave written notes for your records.`
+        : 'Emergency scheduling is available across Louisville, Lexington, and Northern Kentucky. If your door is stuck open or closed, we secure the opening, complete safety checks, and leave written notes for your records.',
+      surroundingAreasLabel
+    ])}
+    bullets={filterStrings([
+      `Common repairs: spring replacement, cable resets, roller and hinge swaps, track alignment, and opener troubleshooting`,
+      `Service coverage: ${coverageAreaLabel}`,
+      'Appointment options include same-day arrival windows, after-hours requests, and contactless approvals',
+      zipCoverageLabel
+    ])}
+  />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: pageTitle,
+      url: pageUrl,
+      mainEntity: {
+        '@type': 'Service',
+        name: schemaServiceName,
+        areaServed
+      }
+    }}
+  />
+
+  <Footer />
+  <CallNowButton phoneNumber={displayPhoneNumber} />
+</Base>

@@ -1,0 +1,22 @@
+{
+  "name": "Verona",
+  "slug": "nky-verona",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.816,
+    "lng": -84.6544
+  },
+  "zips": [
+    "41092"
+  ],
+  "surroundingAreas": [
+    "Boone County",
+    "Stephens Road",
+    "Walton"
+  ]
+}

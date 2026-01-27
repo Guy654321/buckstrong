@@ -1,0 +1,22 @@
+{
+  "name": "Fern Creek",
+  "slug": "louisville-fern-creek",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.1401,
+    "lng": -85.5862
+  },
+  "zips": [
+    "40291"
+  ],
+  "surroundingAreas": [
+    "Bardstown Road",
+    "Glenmary",
+    "Highview"
+  ]
+}

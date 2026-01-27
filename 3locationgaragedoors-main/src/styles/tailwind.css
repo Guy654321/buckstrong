@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  html {
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  
+  :focus-visible {
+    outline: 2px solid theme('colors.accent');
+    outline-offset: 2px;
+  }
+
+  body.call-modal-open {
+    overflow: hidden;
+  }
+
+}
+
+@layer components {
+  
+  .btn-primary {
+    @apply bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200;
+    
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px 0 rgba(15, 61, 62, 0.25);
+  }
+  
+  .btn-accent {
+    @apply text-white px-6 py-3 font-semibold transition-colors duration-300 rounded-full;
+    background-color: #dc2626 !important;
+    border: 2px solid #b91c1c;
+    box-shadow: 0 14px 32px 0 rgba(185, 28, 28, 0.35);
+    transition-property: background-color, color, box-shadow, transform;
+    min-height: 48px;
+    min-width: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-accent:hover,
+  .btn-accent:focus-visible {
+    background-color: #b91c1c !important;
+    box-shadow: 0 16px 36px 0 rgba(185, 28, 28, 0.45);
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px 0 rgba(15, 61, 62, 0.15);
+  }
+
+  .btn-outline-light {
+    @apply border-2 border-white bg-transparent text-white hover:bg-white/10 px-6 py-3 rounded-full font-semibold transition-colors duration-300;
+    min-height: 48px;
+    min-width: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 28px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .inline-link {
+    @apply text-primary font-semibold underline decoration-2 decoration-accent underline-offset-4 transition-colors duration-200 hover:text-primary/80 hover:decoration-primary focus-visible:text-primary/80 focus-visible:decoration-primary;
+  }
+}
+
+
+@layer utilities {
+  .content-visibility-auto {
+    content-visibility: auto;
+  }
+  
+  .contain-layout {
+    contain: layout;
+  }
+  
+  
+  .hero-image {
+    
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: center;
+    
+    image-rendering: auto;
+    will-change: auto;
+  }
+
+  .card-image {
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    object-position: center;
+    image-rendering: auto;
+  }
+
+  .card-image-opener {
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    object-position: center;
+    image-rendering: auto;
+  }
+
+  .composite-surface {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+}
+
+@supports (image-rendering: high-quality) {
+  .hero-image,
+  .card-image,
+  .card-image-opener {
+    image-rendering: high-quality;
+  }
+}
+
+
+nav {
+  contain: layout;
+}
+
+
+.hero-section {
+  contain: layout;
+  min-height: 60vh;
+}
+
+
+@media (max-width: 640px) {
+  .hero-section {
+    min-height: 70vh;
+  }
+  
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 12px rgba(15, 61, 62, 0.8), 0 2px 6px rgba(0, 0, 0, 0.6);
+  }
+  
+  .text-shadow {
+    text-shadow: 0 2px 8px rgba(15, 61, 62, 0.6), 0 1px 4px rgba(0, 0, 0, 0.4);
+  }
+}
+
+
+@media (min-width: 768px) {
+  .hero-section {
+    min-height: 65vh;
+  }
+}
+
+
+:root {
+  --primary: #0F3D3E;
+  --accent: #FFB703;
+  --ink: #0E121B;
+  --muted: #F4F6F8;
+  --card: #FFFFFF;
+}
+
+
+@media (prefers-contrast: high) {
+  :root {
+    --primary: #000000;
+    --accent: #FFB703;
+    --ink: #000000;
+    --muted: #FFFFFF;
+    --card: #FFFFFF;
+  }
+}

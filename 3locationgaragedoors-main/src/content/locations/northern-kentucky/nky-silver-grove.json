@@ -1,0 +1,22 @@
+{
+  "name": "Silver Grove",
+  "slug": "nky-silver-grove",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.0414,
+    "lng": -84.4068
+  },
+  "zips": [
+    "41085"
+  ],
+  "surroundingAreas": [
+    "Riverfront",
+    "Dayton",
+    "Camp Springs"
+  ]
+}

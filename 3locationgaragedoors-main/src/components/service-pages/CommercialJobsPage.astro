@@ -1,0 +1,533 @@
+---
+import { Image } from 'astro:assets';
+import { Schema } from 'astro-seo-schema';
+import { Icon } from 'astro-icon/components';
+import Base from '../../layouts/Base.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import Breadcrumbs from '../Breadcrumbs.astro';
+import ContactForm from '../ContactForm.astro';
+import CallNowButton from '../CallNowButton.astro';
+import FAQInteractive from '../FAQInteractive.astro';
+import ServiceInternalLinks from './ServiceInternalLinks.astro';
+import HiddenSeoText from '../HiddenSeoText.astro';
+import heroImage from '../../assets/images/commercial/logistic-center-storage-units.jpg';
+import warehouseServiceImage from '../../assets/images/commercial/storage-warehouse-2089775_1280.jpg';
+import dockServiceImage from '../../assets/images/commercial/dock-service-maintenance.jpg';
+import storefrontServiceImage from '../../assets/images/commercial/retail-storefront-service.jpg';
+import estimateImage from '../../assets/images/commercial/estimate-consultation.jpg';
+import { BUSINESS_INFO } from '../../data/business';
+import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../../data/call-markets';
+import type { Location } from '../../lib/locations';
+import { buildLocationServiceCanonicalPath } from '../../lib/canonical';
+import { getSiteOrigin } from '../../utils/site-origin';
+
+const faqs = [
+  {
+    question: 'Do you service sectional, rolling steel, and high-speed commercial doors?',
+    answer: 'Yes. Our team repairs and maintains sectional overhead doors, rolling steel curtains, high-speed fabric doors, and dock levelers for warehouses, retail, and municipal facilities.'
+  },
+  {
+    question: 'Can you schedule work outside of normal business hours?',
+    answer: 'We offer overnight and weekend appointments so your operations stay on schedule. Emergency dispatch is available for stuck bays or damaged doors that compromise security.'
+  },
+  {
+    question: 'Do you provide maintenance plans for commercial accounts?',
+    answer: 'Absolutely. We build quarterly or semi-annual maintenance plans that include safety inspections, lubrication, balance tests, and written performance reports for each door.'
+  },
+  {
+    question: 'What safety training do your technicians complete?',
+    answer: 'Every commercial technician completes comprehensive safety training, carries full insurance, and follows lockout-tagout procedures before work begins.'
+  }
+] satisfies Array<{ question: string; answer: string }>;
+
+interface Props {
+  location?: Location;
+}
+
+const { location } = Astro.props as Props;
+const activeLocation = location;
+const breadcrumbs = activeLocation
+  ? [
+      { label: 'Home', href: '/' },
+      { label: 'Locations', href: '/locations' },
+      { label: `${activeLocation.name}, ${activeLocation.state}`, href: `/locations/${activeLocation.slug}` },
+      { label: 'Commercial Garage Door Service' }
+    ]
+  : [
+      { label: 'Home', href: '/' },
+      { label: 'Services', href: '/services' },
+      { label: 'Commercial Garage Door Service' }
+    ];
+const locationDisplayName = activeLocation ? `${activeLocation.name}, ${activeLocation.state}` : undefined;
+const marketDisplayName = activeLocation?.market;
+const coverageAreaLabel = activeLocation
+  ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
+  : 'Louisville, Lexington & Northern Kentucky';
+
+const filterStrings = (items: Array<string | undefined>): string[] =>
+  items.filter((item): item is string => Boolean(item));
+
+const surroundingAreas = filterStrings(
+  (activeLocation?.surroundingAreas ?? []).map((area) => area?.trim())
+);
+const zipCodes = filterStrings((activeLocation?.zips ?? []).map((zip) => zip?.trim()));
+const surroundingAreasLabel =
+  surroundingAreas.length > 0
+    ? `Nearby areas we regularly service include ${surroundingAreas.join(', ')}.`
+    : undefined;
+const zipCoverageLabel =
+  zipCodes.length > 0
+    ? `Primary ZIP codes covered: ${zipCodes.join(', ')}.`
+    : undefined;
+
+const pageTitle = activeLocation
+  ? `Commercial Overhead Door Service in ${locationDisplayName} | Derby Strong Garage Doors`
+  : 'Commercial Overhead Door Service in Kentucky | Louisville, Lexington & Northern Kentucky';
+const pageDescription = activeLocation
+  ? `Commercial garage door repair, loading dock safety service, and warehouse maintenance for facilities in ${coverageAreaLabel}. Safety-certified technicians on call.`
+  : 'Commercial garage door repair, loading dock safety service, and warehouse maintenance for Louisville, Lexington, and Northern Kentucky facilities. Safety-certified technicians on call.';
+const heroHeading = activeLocation
+  ? `Commercial Door Support for ${locationDisplayName}`
+  : 'Commercial Door Support for Louisville, Lexington & Northern Kentucky';
+const heroSubheading = activeLocation
+  ? `Rapid-response repairs and preventive maintenance for warehouses, logistics centers, and municipal fleets. Crews cover ${coverageAreaLabel} with clear arrival updates.`
+  : 'Rapid-response repairs and preventive maintenance for warehouses, logistics centers, and municipal fleets. Crews work across Kentucky’s busiest corridors with clear arrival updates.';
+const heroAlt = activeLocation
+  ? `Commercial garage door technicians servicing facilities across ${coverageAreaLabel}`
+  : 'Commercial garage door technicians servicing facilities across Kentucky';
+const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
+const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
+const callMarkets = CALL_MARKETS;
+const defaultCallMarket = DEFAULT_CALL_MARKET;
+const heroCallMarkets = !activeLocation ? callMarkets : [];
+const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
+const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
+const businessEntityId = `${getSiteOrigin()}#business`;
+const callModalId = 'header-call-modal';
+const areaServed = activeLocation ? coverageAreaLabel : 'Louisville, Lexington & Northern Kentucky, KY';
+const schemaServiceName = activeLocation
+  ? `Commercial Garage Door Service in ${locationDisplayName}`
+  : 'Commercial Garage Door Service';
+const schemaDescription = activeLocation
+  ? `Commercial garage door repair, preventative maintenance, and equipment upgrades for warehouses, retail storefronts, and municipal facilities across ${coverageAreaLabel}.`
+  : 'Commercial garage door repair, preventative maintenance, and equipment upgrades for warehouses, retail storefronts, and municipal facilities across Louisville, Lexington, and Northern Kentucky.';
+const canonicalPath = activeLocation
+  ? buildLocationServiceCanonicalPath(activeLocation.slug, 'commercial-jobs')
+  : '/services/commercial-jobs';
+const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
+const warehouseAlt = activeLocation
+  ? `Technician inspecting warehouse garage door system in ${coverageAreaLabel}`
+  : 'Technician inspecting warehouse garage door system in Kentucky';
+const dockAlt = activeLocation
+  ? `Dock leveler maintenance performed for ${coverageAreaLabel} logistics hub`
+  : 'Dock leveler maintenance performed for Kentucky logistics hub';
+const storefrontAlt = activeLocation
+  ? `Commercial service truck outside a ${locationDisplayName ?? 'Kentucky'} storefront garage bay`
+  : 'Commercial service truck outside a Kentucky storefront garage bay';
+const estimateAlt = activeLocation
+  ? `Commercial door technicians reviewing a ${locationDisplayName ?? coverageAreaLabel} service plan`
+  : 'Commercial door technicians reviewing a Kentucky service plan';
+const facilitiesHeading = activeLocation
+  ? `Facilities We Support Across ${coverageAreaLabel}`
+  : 'Facilities We Support Across Kentucky';
+const facilitiesIntroCopy = activeLocation
+  ? `Facility leaders call our team for quick support that keeps bays secure and compliant throughout ${coverageAreaLabel}. We plan around shift changes, weekend deliveries, and municipal response schedules to cut downtime while honoring safety rules.`
+  : 'Facility leaders call our team for quick support that keeps bays secure and compliant. We plan around shift changes, weekend deliveries, and municipal response schedules to cut downtime while honoring safety rules.';
+const facilitiesDetailsCopy = activeLocation
+  ? `From dock levelers and vehicle restraints to high-speed doors and insulated panels, we maintain the infrastructure that powers ${coverageAreaLabel}. Technicians arrive with stocked trucks, concise inspection reports, and clear recommendations that boost uptime.`
+  : 'From dock levelers and vehicle restraints to high-speed doors and insulated panels, we maintain the infrastructure that powers Kentucky logistics. Technicians arrive with stocked trucks, concise inspection reports, and clear recommendations that boost uptime.';
+const commercialFormSubtitle = activeLocation
+  ? `Tell us about your facility in ${coverageAreaLabel} and we will prepare a tailored service plan.`
+  : 'Tell us about your facility and we will prepare a tailored service plan.';
+const specialistsHeading = activeLocation
+  ? `Commercial Specialists On Call in ${locationDisplayName}`
+  : 'Kentucky Commercial Specialists On Call';
+const specialistsIntro = activeLocation
+  ? `Emergency dispatch is available day or night for stuck bays, vehicle impacts, or security concerns. Quarterly preventive routes keep inspections on schedule across ${coverageAreaLabel}.`
+  : 'Emergency dispatch is available day or night for stuck bays, vehicle impacts, or security concerns. Quarterly preventive routes keep inspections on schedule across every market we serve.';
+---
+
+<Base
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonicalPath}
+  callNowPhoneNumber={displayPhoneNumber}
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: schemaServiceName,
+      description: schemaDescription,
+      provider: {
+        '@type': 'LocalBusiness',
+        name: BUSINESS_INFO.name,
+        legalName: BUSINESS_INFO.legalName,
+        '@id': businessEntityId,
+        telephone: displayPhoneNumber,
+        email: BUSINESS_INFO.email,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: BUSINESS_INFO.address.streetAddress,
+          addressLocality: BUSINESS_INFO.address.addressLocality,
+          addressRegion: BUSINESS_INFO.address.addressRegion,
+          postalCode: BUSINESS_INFO.address.postalCode,
+          addressCountry: BUSINESS_INFO.address.addressCountry
+        }
+      },
+      areaServed,
+      serviceType: 'Commercial Garage Door Service',
+      offers: {
+        '@type': 'Offer',
+        priceRange: '$$$',
+        availability: 'https://schema.org/InStock',
+        priceCurrency: 'USD'
+      }
+    }}
+  />
+
+  <section class="relative py-20 lg:py-32 text-white overflow-visible lg:overflow-hidden">
+    <div class="absolute inset-0">
+      <Image
+        src={heroImage}
+        alt={heroAlt}
+        width={1200}
+        height={675}
+        class="w-full h-full object-cover"
+        fetchpriority="high"
+        loading="eager"
+        decoding="sync"
+        sizes="100vw"
+        quality={80}
+      />
+      <div class="absolute inset-0 bg-primary/75"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">
+        {heroHeading}
+      </h1>
+      <p class="text-xl text-white/95 mb-8 max-w-3xl mx-auto leading-relaxed">
+        {heroSubheading}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        {hasGenericCallCTA && heroDefaultCallMarket ? (
+          <button
+            type="button"
+            class="btn-accent text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2 sm:order-first"
+            data-call-modal-trigger
+            aria-controls={callModalId}
+            aria-expanded="false"
+            aria-haspopup="dialog"
+            aria-label="Choose a service area phone number"
+          >
+            <Icon name="mdi:phone" size="20" class="inline" aria-hidden="true" />
+            <span>Call Now</span>
+            <span class="sr-only">for the {heroDefaultCallMarket.label} market</span>
+          </button>
+        ) : (
+          <a
+            href={telephoneHref}
+            class="btn-accent text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2 sm:order-first"
+          >
+            <Icon name="mdi:phone" size="20" class="inline" aria-hidden="true" />
+            <span>Call Now: <span class="nap-phone">{displayPhoneNumber}</span></span>
+          </a>
+        )}
+        <a
+          href="/contact"
+          class="btn-outline-light text-lg px-8 py-4 bg-white/5 hover:bg-white/10 border-white/80 sm:order-last"
+        >
+          Request Estimate
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-ink">{facilitiesHeading}</h2>
+    </div>
+    <div class="mt-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto rounded-[2.75rem] bg-gradient-to-br from-muted/90 via-muted/70 to-muted/60 p-6 sm:p-10 lg:p-12 shadow-[0_35px_120px_-60px_rgba(15,23,42,0.4)]">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div class="bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md">
+            <Image
+              src={warehouseServiceImage}
+              alt={warehouseAlt}
+              width={400}
+              height={300}
+              class="w-full h-48 object-cover"
+              loading="lazy"
+              decoding="async"
+              quality={80}
+            />
+            <div class="p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary/70 mb-3">Core Coverage</p>
+              <h3 class="text-xl font-semibold text-ink mb-2">Warehouses & Distribution</h3>
+              <p class="text-sm text-ink/70 leading-relaxed">
+                Reset sectional doors, balance counterweights, and tune photo-eyes to keep freight moving.
+              </p>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md">
+            <Image
+              src={dockServiceImage}
+              alt={dockAlt}
+              width={400}
+              height={300}
+              class="w-full h-48 object-cover"
+              loading="lazy"
+              decoding="async"
+              quality={80}
+            />
+            <div class="p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary/70 mb-3">Core Coverage</p>
+              <h3 class="text-xl font-semibold text-ink mb-2">Dock & Industrial Equipment</h3>
+              <p class="text-sm text-ink/70 leading-relaxed">
+                Service dock levelers, vehicle restraints, and rolling steel curtains with full safety documentation.
+              </p>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md">
+            <Image
+              src={storefrontServiceImage}
+              alt={storefrontAlt}
+              width={400}
+              height={300}
+              class="w-full h-48 object-cover"
+              loading="lazy"
+              decoding="async"
+              quality={80}
+            />
+            <div class="p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary/70 mb-3">Core Coverage</p>
+              <h3 class="text-xl font-semibold text-ink mb-2">Retail & Municipal Sites</h3>
+              <p class="text-sm text-ink/70 leading-relaxed">
+                Quiet storefront shutters, fire stations, and fleet garages stay mission ready with proactive maintenance visits.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-24 bg-muted">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:grid lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:items-start">
+        <div class="space-y-10 max-w-3xl">
+          <div class="space-y-5">
+            <div class="inline-flex items-center gap-3 rounded-full bg-white/70 px-4 py-2 text-sm font-semibold uppercase tracking-[0.3em] text-primary/80 ring-1 ring-white/80">
+              <span>Facility Support</span>
+            </div>
+            <p class="text-lg text-ink/85 leading-relaxed">
+              {facilitiesIntroCopy}
+            </p>
+            <p class="text-lg text-ink/85 leading-relaxed">
+              {facilitiesDetailsCopy}
+            </p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5">
+              <p class="text-sm font-semibold uppercase tracking-wide text-primary/80">Coverage Highlights</p>
+              <ul class="mt-3 space-y-2 text-base text-ink/80 leading-relaxed list-disc list-inside">
+                <li>Crews schedule around shift changes, security protocols, and delivery windows.</li>
+                <li>Inspections and repairs stay on track without stalling operations.</li>
+              </ul>
+            </div>
+            <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5">
+              <p class="text-sm font-semibold uppercase tracking-wide text-primary/80">Compliance Ready</p>
+              <ul class="mt-3 space-y-2 text-base text-ink/80 leading-relaxed list-disc list-inside">
+                <li>Safety-certified technicians follow lockout-tagout steps.</li>
+                <li>Each visit includes clear notes and maintenance recommendations.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 lg:mt-0">
+          <div class="rounded-3xl bg-white p-8 shadow-xl ring-1 ring-black/5 space-y-6">
+            <h3 class="text-2xl font-bold text-ink">Rapid response for:</h3>
+            <ul class="space-y-4 text-base text-ink/80 leading-relaxed">
+              <li class="flex items-start gap-3">
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <span>Warehouses needing rapid sectional door resets and calibrated dock levelers.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <span>Distribution centers balancing multiple bays, high-speed doors, and traffic controls.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <span>Cold storage campuses relying on tight seals, insulated curtains, and vehicle restraints.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <span>Manufacturing plants coordinating overhead cranes with rugged rolling steel doors.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <span>Fleet garages scheduling bay maintenance around dispatch-ready service trucks.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <span>Municipal facilities protecting emergency corridors with monitored security grilles.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 xl:grid-cols-[1.05fr_0.95fr] gap-10 xl:gap-14 items-stretch">
+        <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-8 space-y-6 flex flex-col h-full">
+          <div class="space-y-4">
+            <h2 class="text-3xl font-bold text-ink">Commercial Service Process</h2>
+          <p class="text-lg text-ink/75 leading-relaxed">
+            Every visit is scheduled to minimize downtime. Your service manager receives short updates before, during, and after each appointment.
+          </p>
+          </div>
+          <ul class="space-y-4 text-ink/80 leading-relaxed">
+            <li class="flex items-start gap-3">
+              <Icon name="mdi:clipboard-text-outline" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+              <span><strong>Site assessment.</strong> We document door counts, opener models, and safety equipment before presenting options.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <Icon name="mdi:shield-check" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+              <span><strong>Safety-first repairs.</strong> Technicians follow lockout-tagout procedures, secure counterbalance systems, and verify fall protection.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <Icon name="mdi:file-document-check-outline" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+              <span><strong>Detailed reporting.</strong> You receive post-service summaries with compliance notes and next steps for budgeting.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 overflow-hidden flex flex-col">
+          <div class="relative h-48 sm:h-56">
+            <Image
+              src={estimateImage}
+              alt={estimateAlt}
+              class="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+              width={400}
+              height={300}
+              quality={80}
+            />
+            <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+          </div>
+          <div class="p-8 flex flex-col gap-6 flex-1">
+            <div class="space-y-3">
+              <h3 class="text-2xl font-bold text-ink">Request a Commercial Estimate</h3>
+              <p class="text-base text-ink/70 leading-relaxed">
+                Share door counts, facility hours, and recent maintenance history. We plan the visit to avoid disrupting operations.
+              </p>
+            </div>
+            <ul class="space-y-4 text-base text-ink/75 leading-relaxed">
+              <li class="flex items-start gap-3">
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <span><strong>Walkthrough on your terms.</strong> We book around shift changes and secure areas.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <span><strong>Dedicated coordinator.</strong> Expect confirmations, arrival updates, and photos from the field.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <span><strong>Clear next steps.</strong> Receive one proposal outlining safety priorities, parts, and scheduling options.</span>
+              </li>
+            </ul>
+            <div class="mt-auto flex flex-col gap-3">
+              <a
+                href="#commercial-contact"
+                class="btn-primary w-full sm:w-auto justify-center text-lg px-6 py-3"
+              >
+                Plan My Service Visit
+              </a>
+              <p class="text-sm text-ink/60 text-center sm:text-left">
+                Prefer email? We'll confirm the details within one business hour.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ContactForm
+    id="commercial-contact"
+    title="Schedule Commercial Service"
+    subtitle={commercialFormSubtitle}
+    bgColor="muted"
+  />
+
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 px-6 py-10 sm:px-10 space-y-8">
+        <div class="space-y-4">
+          <h2 class="text-3xl font-bold text-ink">{specialistsHeading}</h2>
+          <p class="text-lg text-ink/70 leading-relaxed">
+            {specialistsIntro}
+          </p>
+        </div>
+        <div class="flex flex-col items-center gap-4">
+          <CallNowButton phoneNumber={displayPhoneNumber} />
+          <p class="text-sm text-ink/60">
+            Prefer to write it down? <a href="#commercial-contact" class="font-semibold text-primary hover:underline">Send your project details online</a> and our coordinator will follow up fast.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ServiceInternalLinks currentSlug="commercial-jobs" location={activeLocation} background="muted" />
+
+  <section class="py-16 lg:py-20 bg-white border-t border-ink/10">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <FAQInteractive faqs={faqs} title="Commercial Service FAQs" />
+    </div>
+  </section>
+
+  <HiddenSeoText
+    title={`Commercial garage door support${locationDisplayName ? ` for ${locationDisplayName}` : ''}`}
+    paragraphs={filterStrings([
+      activeLocation
+        ? `Facilities across ${coverageAreaLabel} rely on Derby Strong Garage Doors for rolling steel curtains, sectional overhead doors, dock equipment, and high-speed door maintenance. Crews log gate codes, access rules, and badging needs for quicker return visits.`
+        : 'Facilities across Louisville, Lexington, and Northern Kentucky rely on Derby Strong Garage Doors for rolling steel curtains, sectional overhead doors, dock equipment, and high-speed door maintenance. Crews log gate codes, access rules, and badging needs for quicker return visits.',
+      'Preventive maintenance visits include counterbalance checks, track cleaning, hinge and roller replacements, photo eye alignment, and safety reversing tests. We keep bays moving while documenting the exact settings for each opening.',
+      activeLocation
+        ? `We schedule work around shift changes and delivery windows throughout ${coverageAreaLabel}. Digital service records show completed repairs, recommended upgrades, and dates for the next visit.`
+        : 'We schedule work around shift changes and delivery windows throughout our Kentucky markets. Digital service records show completed repairs, recommended upgrades, and dates for the next visit.',
+      surroundingAreasLabel
+    ])}
+    bullets={filterStrings([
+      'Common services: spring and cable replacement, dock leveler tuning, rolling steel door repair, and smart access integrations',
+      `Service coverage: ${coverageAreaLabel}`,
+      'Coordination available for badging, safety orientations, and after-hours access to reduce disruption',
+      zipCoverageLabel
+    ])}
+  />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: pageTitle,
+      url: pageUrl,
+      mainEntity: {
+        '@type': 'Service',
+        name: schemaServiceName,
+        areaServed
+      }
+    }}
+  />
+
+  <Footer />
+</Base>

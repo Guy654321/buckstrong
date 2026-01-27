@@ -1,0 +1,22 @@
+{
+  "name": "Algonquin",
+  "slug": "louisville-algonquin",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2314,
+    "lng": -85.79
+  },
+  "zips": [
+    "40210"
+  ],
+  "surroundingAreas": [
+    "Algonquin Parkway",
+    "Taylor Berry",
+    "California"
+  ]
+}

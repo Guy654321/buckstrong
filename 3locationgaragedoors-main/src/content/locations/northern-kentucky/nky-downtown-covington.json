@@ -1,0 +1,22 @@
+{
+  "name": "Downtown Covington",
+  "slug": "nky-downtown-covington",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.0846,
+    "lng": -84.517
+  },
+  "zips": [
+    "41011"
+  ],
+  "surroundingAreas": [
+    "Roebling Suspension Bridge",
+    "Pike Street",
+    "Goebel Park"
+  ]
+}

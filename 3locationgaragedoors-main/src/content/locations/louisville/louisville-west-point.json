@@ -1,0 +1,22 @@
+{
+  "name": "West Point",
+  "slug": "louisville-west-point",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0026,
+    "lng": -85.9485
+  },
+  "zips": [
+    "40177"
+  ],
+  "surroundingAreas": [
+    "Ohio River",
+    "Fort Knox",
+    "Meade County"
+  ]
+}

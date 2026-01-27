@@ -1,0 +1,22 @@
+{
+  "name": "Harrodsburg",
+  "slug": "lexington-harrodsburg",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 37.7623,
+    "lng": -84.8433
+  },
+  "zips": [
+    "40330"
+  ],
+  "surroundingAreas": [
+    "Shaker Village",
+    "Mercer County",
+    "Downtown Harrodsburg"
+  ]
+}

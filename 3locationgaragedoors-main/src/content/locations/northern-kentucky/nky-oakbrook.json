@@ -1,0 +1,22 @@
+{
+  "name": "Oakbrook",
+  "slug": "nky-oakbrook",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.9779,
+    "lng": -84.6634
+  },
+  "zips": [
+    "41042"
+  ],
+  "surroundingAreas": [
+    "Tanner Road",
+    "Pleasant Valley",
+    "Florence"
+  ]
+}

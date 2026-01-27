@@ -1,0 +1,22 @@
+{
+  "name": "Wilder",
+  "slug": "nky-wilder",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.0512,
+    "lng": -84.4823
+  },
+  "zips": [
+    "41071"
+  ],
+  "surroundingAreas": [
+    "Licking Pike",
+    "I-275",
+    "Fort Thomas"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Seneca Gardens",
+  "slug": "louisville-seneca-gardens",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2298,
+    "lng": -85.6838
+  },
+  "zips": [
+    "40205"
+  ],
+  "surroundingAreas": [
+    "Gardiner Lane",
+    "Strathmoor",
+    "Kingsley"
+  ]
+}

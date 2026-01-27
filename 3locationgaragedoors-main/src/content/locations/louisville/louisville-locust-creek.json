@@ -1,0 +1,22 @@
+{
+  "name": "Locust Creek",
+  "slug": "louisville-locust-creek",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2106,
+    "lng": -85.4409
+  },
+  "zips": [
+    "40023"
+  ],
+  "surroundingAreas": [
+    "Shelbyville Road",
+    "Eastwood",
+    "Fisherville"
+  ]
+}

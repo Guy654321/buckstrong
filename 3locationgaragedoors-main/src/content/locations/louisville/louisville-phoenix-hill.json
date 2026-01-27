@@ -1,0 +1,22 @@
+{
+  "name": "Phoenix Hill",
+  "slug": "louisville-phoenix-hill",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2508,
+    "lng": -85.7424
+  },
+  "zips": [
+    "40204"
+  ],
+  "surroundingAreas": [
+    "Liberty Green",
+    "Campbell Street",
+    "East Broadway"
+  ]
+}

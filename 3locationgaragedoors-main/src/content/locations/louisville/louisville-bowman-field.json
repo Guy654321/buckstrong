@@ -1,0 +1,23 @@
+{
+  "name": "Bowman Field",
+  "slug": "louisville-bowman-field",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2218,
+    "lng": -85.6625
+  },
+  "zips": [
+    "40205",
+    "40207"
+  ],
+  "surroundingAreas": [
+    "Bowman Field Airport",
+    "Audubon Park",
+    "Seneca Park"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Florence",
+  "slug": "florence",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.9989,
+    "lng": -84.6266
+  },
+  "zips": [
+    "41042"
+  ],
+  "surroundingAreas": [
+    "Florence Mall",
+    "I-75",
+    "Oakbrook"
+  ]
+}

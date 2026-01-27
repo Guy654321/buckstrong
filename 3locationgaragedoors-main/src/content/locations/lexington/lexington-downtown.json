@@ -1,0 +1,22 @@
+{
+  "name": "Downtown Lexington",
+  "slug": "lexington-downtown",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0464,
+    "lng": -84.497
+  },
+  "zips": [
+    "40507"
+  ],
+  "surroundingAreas": [
+    "Rupp Arena",
+    "Town Branch",
+    "Gratz Park"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Beaumont",
+  "slug": "lexington-beaumont",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0158,
+    "lng": -84.5662
+  },
+  "zips": [
+    "40513"
+  ],
+  "surroundingAreas": [
+    "Palomar",
+    "Lexington Green",
+    "Raven Run"
+  ]
+}

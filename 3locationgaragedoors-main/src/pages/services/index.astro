@@ -1,0 +1,306 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { getServices } from '../../lib/services';
+import heroImage from '../../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
+
+const services = await getServices();
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services' }
+];
+
+const serviceResources = [
+  {
+    title: 'Schedule Service Now',
+    description: 'Connect with our Kentucky technicians for same-day repair, opener service, or commercial support from Louisville to Northern Kentucky.',
+    href: '/contact',
+    icon: 'mdi:calendar-clock'
+  },
+  {
+    title: 'Read Maintenance Tips',
+    description: 'Get step-by-step guidance on caring for your garage door system between visits.',
+    href: '/blog',
+    icon: 'mdi:newspaper-variant-outline'
+  },
+  {
+    title: 'Review Safety Guidelines',
+    description: 'Learn how to keep your family safe around springs, cables, and door openers.',
+    href: '/safety',
+    icon: 'mdi:shield-check'
+  },
+  {
+    title: 'Garage Door Installation in South Elkhorn, KY',
+    description:
+      'Explore installation options, insulated door styles, and scheduling for South Elkhorn homeowners.',
+    href: '/locations/lexington-south-elkhorn/services/garage-door-installation',
+    icon: 'mdi:garage-variant'
+  },
+  {
+    title: 'Explore Service Areas',
+    description: 'Confirm we serve your neighborhood and see nearby Louisville, Lexington, and Northern Kentucky communities.',
+    href: '/locations',
+    icon: 'mdi:map-marker-radius'
+  },
+  {
+    title: 'Check Frequently Asked Questions',
+    description: 'Find fast answers about pricing, warranties, emergency service, and more.',
+    href: '/faq',
+    icon: 'mdi:comment-question-outline'
+  }
+];
+---
+
+<Base
+  title="Derby Strong Garage Doors | Louisville, Lexington & Northern Kentucky Services"
+  description="Comprehensive garage door repair, opener expertise, and commercial maintenance for Louisville, Lexington, and Northern Kentucky. Same-day service available statewide from trusted, insured professionals."
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+  
+  
+  <section class="relative py-20 text-white overflow-hidden">
+    <div class="absolute inset-0">
+      <Image
+        src={heroImage}
+        alt="Professional garage door services in Louisville, Lexington, and Northern Kentucky"
+        width="1200"
+        height="675"
+        class="w-full h-full object-cover" 
+        fetchpriority="high"
+        loading="eager"
+        decoding="sync"
+        quality={80}
+        sizes="100vw"
+      />
+      <div class="absolute inset-0 bg-primary/75"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="relative">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          Professional Garage Door Services for Louisville, Lexington & Northern Kentucky
+        </h1>
+        <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed">
+          From emergency repairs to commercial bay maintenance, our highly trained technicians deliver reliable garage door solutions with same-day service available across Kentucky.
+        </p>
+        <a href="/contact" class="btn-accent text-lg px-8 py-4">
+        Get Free Quote
+      </a>
+      </div>
+    </div>
+  </section>
+  
+  
+  <section class="py-16 bg-card">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {services.map(service => (
+          <ServiceCard service={service} />
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  
+  <section class="py-16 bg-muted">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Trusted Across Kentucky</p>
+        <h2 class="text-3xl font-bold text-ink mb-6">Why Kentucky Homeowners Choose Derby Strong Garage Doors</h2>
+        <p class="text-lg text-ink/70 leading-relaxed max-w-3xl mx-auto">
+          Homeowners throughout Louisville, Lexington, and Northern Kentucky trust Derby Strong Garage Doors for dependable repairs, precise opener work, and proactive maintenance. Our regional technicians arrive prepared, respect your property, and make sure every visit ends with a door that operates smoothly and safely.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-card rounded-2xl p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-ink mb-3">Local Expertise</h3>
+          <p class="text-ink/70 text-sm leading-relaxed">
+            Kentucky-based technicians who understand neighborhood requirements, seasonal weather, and regional building codes from Jefferson County to the Ohio River Valley.
+          </p>
+        </div>
+        <div class="bg-card rounded-2xl p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-ink mb-3">Professional Standards</h3>
+          <p class="text-ink/70 text-sm leading-relaxed">
+            Trusted, insured contractors with ongoing safety training, stocked trucks, and premium parts backed by solid manufacturer warranties.
+          </p>
+        </div>
+        <div class="bg-card rounded-2xl p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-ink mb-3">Customer-First Service</h3>
+          <p class="text-ink/70 text-sm leading-relaxed">
+            Clear communication, upfront estimates, and flexible scheduling—including same-day repairs and 24/7 emergency support when you need it.
+          </p>
+        </div>
+        <div class="bg-card rounded-2xl p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-ink mb-3">Safety Obsessed</h3>
+          <p class="text-ink/70 text-sm leading-relaxed">
+            Every visit ends with a detailed safety checklist, balance test, and maintenance guidance so your door keeps operating reliably long after we leave.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="py-16 bg-card">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Plan Your Next Garage Door Project</h2>
+        <p class="text-xl text-ink/70">
+          Use these resources to choose the right service, prepare for appointments, and keep doors running smoothly.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {serviceResources.map(resource => (
+          <a
+            href={resource.href}
+            class="group bg-white rounded-xl shadow-sm ring-1 ring-black/5 hover:shadow-lg transform-gpu transition-[transform,opacity] duration-300 p-6 text-left composite-surface hover:-translate-y-1 focus-visible:-translate-y-1"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div class="bg-accent/10 text-accent w-12 h-12 rounded-full flex items-center justify-center">
+                <Icon name={resource.icon} size="28" aria-hidden="true" />
+              </div>
+              <span class="text-primary font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Explore
+              </span>
+            </div>
+            <h3 class="text-xl font-semibold text-ink mb-2 group-hover:text-primary transition-colors">
+              {resource.title}
+            </h3>
+            <p class="text-ink/70 leading-relaxed text-sm">
+              {resource.description}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="py-16 bg-muted">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Why Kentucky Homeowners Choose Derby Strong Garage Doors</h2>
+        <p class="text-xl text-ink/70">Professional service and quality results you can count on statewide</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="bg-card rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
+          <h3 class="text-2xl font-semibold text-ink mb-4">Our Kentucky Advantage</h3>
+          <ul class="list-disc list-inside text-ink/80 space-y-2">
+            <li>Local, background-checked technicians who live in the Kentucky communities we serve</li>
+            <li>Upfront, itemized quotes before we start any spring replacement or panel swap</li>
+            <li>Quality parts from trusted brands backed by multi-year warranties</li>
+            <li>Commercial overhead door expertise for warehouses, docks, and car dealerships</li>
+            <li>Preventive maintenance plans that keep doors quiet and safe all year</li>
+          </ul>
+        </div>
+        <div class="bg-card rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
+          <h3 class="text-2xl font-semibold text-ink mb-4">Service Commitment</h3>
+          <ul class="list-disc list-inside text-ink/80 space-y-2">
+            <li>Same-day emergency service throughout Louisville, Lexington, and Northern Kentucky</li>
+            <li>Background-checked and insured Kentucky contractors</li>
+            <li>Comprehensive safety testing with every repair</li>
+            <li>24/7 availability for urgent garage door issues</li>
+            <li>100% satisfaction guarantee on all work performed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="py-16 bg-card" id="pricing">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-10">
+        <h2 class="text-3xl font-bold text-ink mb-4">Transparent pricing for every garage door project</h2>
+        <p class="text-lg text-ink/70">
+          You receive a detailed estimate before we tighten a bolt. Pricing varies by door size, parts, and labor, but these ranges help you plan. Financing is available for large replacements.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-muted p-6 rounded-2xl shadow-sm">
+          <h3 class="text-xl font-semibold text-ink mb-3">Repair visits</h3>
+          <ul class="list-disc list-inside text-ink/80 space-y-2">
+            <li>Service call, safety inspection, and written recommendations</li>
+            <li>Torsion or extension spring swaps with balance testing</li>
+            <li>Opener troubleshooting, sensor alignment, and keypad resets</li>
+          </ul>
+        </div>
+        <div class="bg-muted p-6 rounded-2xl shadow-sm">
+          <h3 class="text-xl font-semibold text-ink mb-3">Commercial service projects</h3>
+          <ul class="list-disc list-inside text-ink/80 space-y-2">
+            <li>Rolling steel, sectional, and high-speed door repairs</li>
+            <li>Dock equipment service with safety documentation</li>
+            <li>After-hours scheduling to limit facility downtime</li>
+          </ul>
+        </div>
+        <div class="bg-muted p-6 rounded-2xl shadow-sm">
+          <h3 class="text-xl font-semibold text-ink mb-3">Maintenance plans</h3>
+          <ul class="list-disc list-inside text-ink/80 space-y-2">
+            <li>Annual tune-ups with lubrication and safety testing</li>
+            <li>Seasonal fleet inspections for property managers</li>
+            <li>Priority scheduling and loyal-customer savings</li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-lg text-ink/70 mt-8">
+        Ask about bundled savings when pairing emergency repair coverage with preventative maintenance or commercial service plans. Our technicians coordinate with facility managers to keep every bay operating safely.
+      </p>
+    </div>
+  </section>
+
+  <ContactForm
+    title="Ready to Get Started?"
+    subtitle="Contact us today for a free quote on any of our services"
+    bgColor="muted"
+  />
+
+  <Footer />
+
+  
+  <section class="py-16 bg-muted">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Specialized Opener & Commercial Solutions</h2>
+        <p class="text-xl text-ink/70">From smart opener upgrades to commercial roll-up doors, we keep every entry operating safely.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="bg-card rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
+          <h3 class="text-2xl font-semibold text-ink mb-4">Opener Service & Upgrades</h3>
+          <p class="text-ink/70 mb-6">
+            Quiet belt drives, jackshaft motors, and smart controls are calibrated, repaired, or replaced with precision programming and safety testing.
+          </p>
+          <ul class="space-y-2 text-ink/80">
+            <li>• LiftMaster, Genie, and Chamberlain certified repairs</li>
+            <li>• Keypad, remote, and smart home integrations</li>
+            <li>• Battery backup and soft-start motor upgrades</li>
+            <li>• Safety sensor alignment and force recalibration</li>
+          </ul>
+        </div>
+
+        <div class="bg-card rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
+          <h3 class="text-2xl font-semibold text-ink mb-4">Commercial Roll-Up Solutions</h3>
+          <p class="text-ink/70 mb-6">
+            We service resilient commercial systems and compact roll-up units for facilities across Louisville, Lexington, and Northern Kentucky with minimal downtime.
+          </p>
+          <ul class="space-y-2 text-ink/80">
+            <li>• Rolling steel door repair and preventative maintenance</li>
+            <li>• Dock equipment service with safety compliance reports</li>
+            <li>• After-hours scheduling for warehouses and storefronts</li>
+            <li>• Comprehensive inspections for municipal fleets</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,22 @@
+{
+  "name": "Portland",
+  "slug": "louisville-portland",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2691,
+    "lng": -85.7923
+  },
+  "zips": [
+    "40212"
+  ],
+  "surroundingAreas": [
+    "Portland Wharf Park",
+    "Shippingport",
+    "Riverwalk"
+  ]
+}

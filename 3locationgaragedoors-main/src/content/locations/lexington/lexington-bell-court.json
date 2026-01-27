@@ -1,0 +1,22 @@
+{
+  "name": "Bell Court",
+  "slug": "lexington-bell-court",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0399,
+    "lng": -84.4857
+  },
+  "zips": [
+    "40508"
+  ],
+  "surroundingAreas": [
+    "Downtown",
+    "Kenwick",
+    "Chesnut Street"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Churchill Downs",
+  "slug": "louisville-churchill-downs",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2012,
+    "lng": -85.771
+  },
+  "zips": [
+    "40208"
+  ],
+  "surroundingAreas": [
+    "Central Avenue",
+    "UofL",
+    "Wilder Park"
+  ]
+}

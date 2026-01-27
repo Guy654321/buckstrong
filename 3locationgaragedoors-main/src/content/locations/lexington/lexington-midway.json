@@ -1,0 +1,22 @@
+{
+  "name": "Midway",
+  "slug": "lexington-midway",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.1501,
+    "lng": -84.6838
+  },
+  "zips": [
+    "40347"
+  ],
+  "surroundingAreas": [
+    "Midway University",
+    "Woodford County",
+    "Leestown Road"
+  ]
+}

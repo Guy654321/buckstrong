@@ -1,0 +1,19 @@
+---
+import GarageDoorRepairPage from '../../../../components/service-pages/GarageDoorRepairPage.astro';
+import type { Location } from '../../../../lib/locations';
+import { getLocations } from '../../../../lib/locations';
+
+export async function getStaticPaths() {
+  const locations = await getLocations();
+  return locations.map((location) => ({
+    params: { slug: location.slug },
+    props: { location }
+  }));
+}
+
+export const prerender = true;
+
+const { location } = Astro.props as { location: Location };
+---
+
+<GarageDoorRepairPage location={location} />

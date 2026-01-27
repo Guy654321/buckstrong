@@ -1,0 +1,332 @@
+---
+import { getImage } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import type { ImageMetadata } from 'astro';
+import type { JSX } from 'astro/jsx-runtime';
+import { BUSINESS_INFO } from '../data/business';
+import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../data/call-markets';
+import {
+  HERO_IMAGE_ASPECT_RATIO,
+  HERO_IMAGE_QUALITY,
+  HERO_IMAGE_QUALITY_AVIF,
+  HERO_IMAGE_QUALITY_JPEG,
+  HERO_IMAGE_QUALITY_WEBP,
+  HERO_IMAGE_SIZES,
+  HERO_IMAGE_WIDTHS
+} from '../data/image-config';
+
+type SubtitleProp = string | string[] | JSX.Element | JSX.Element[];
+type SubtitleSegment = string | JSX.Element;
+
+export interface Props {
+  title: string;
+  subtitle?: SubtitleProp;
+  ctaText?: string;
+  ctaLink?: string;
+  ctaTriggersCallModal?: boolean;
+  phoneNumber?: string;
+  priority?: boolean;
+  heroImage: ImageMetadata;
+  locationLabel?: string;
+  imageAlt?: string;
+  hubLinks?: { name: string; slug: string }[];
+  showPhoneNumber?: boolean;
+  showLocationHeading?: boolean;
+  showPrimaryCta?: boolean;
+  primaryAsPhone?: boolean;
+  showPrimaryPhoneNumber?: boolean;
+  compact?: boolean;
+}
+
+const {
+  title,
+  subtitle,
+  ctaText = "Get Free Quote",
+  ctaLink = "/contact",
+  ctaTriggersCallModal = false,
+  phoneNumber = BUSINESS_INFO.telephone,
+  priority = true,
+  heroImage,
+  locationLabel,
+  imageAlt,
+  hubLinks = [],
+  showPhoneNumber = true,
+  showLocationHeading = true,
+  showPrimaryCta = true,
+  primaryAsPhone = false,
+  showPrimaryPhoneNumber = true,
+  compact = false,
+} = Astro.props;
+
+const sanitizedPhoneNumber = phoneNumber.replace(/[^0-9+]/g, '');
+const phoneHref = `tel:${sanitizedPhoneNumber || phoneNumber}`;
+const callMarkets = CALL_MARKETS;
+const defaultCallMarket = DEFAULT_CALL_MARKET;
+const hasCallModalTrigger = !showPhoneNumber && callMarkets.length > 0 && defaultCallMarket !== null;
+const callLinkHref = hasCallModalTrigger && defaultCallMarket ? defaultCallMarket.phoneHref : phoneHref;
+const callModalId = 'header-call-modal';
+const hasSubtitleSlot = Astro.slots.has('subtitle');
+
+const isPriority = priority !== false;
+const imageLoading = isPriority ? 'eager' : 'lazy';
+const imageDecoding = isPriority ? 'sync' : 'async';
+const imageFetchPriority = isPriority ? 'high' : 'auto';
+const heroImageWidths = HERO_IMAGE_WIDTHS;
+const heroImageSizes = HERO_IMAGE_SIZES;
+const heroImageQualityAvif = HERO_IMAGE_QUALITY_AVIF ?? HERO_IMAGE_QUALITY;
+const heroImageQualityWebp = HERO_IMAGE_QUALITY_WEBP ?? HERO_IMAGE_QUALITY;
+const heroImageQualityJpeg = HERO_IMAGE_QUALITY_JPEG ?? HERO_IMAGE_QUALITY;
+const heroImageMaxWidth = heroImageWidths.at(-1) ?? 1600;
+const heroImageIntrinsicWidth = heroImage.width ?? heroImageMaxWidth;
+const heroImageWidth = Math.min(heroImageIntrinsicWidth, heroImageMaxWidth);
+const heroImageAspectRatio =
+  heroImage.width && heroImage.height
+    ? heroImage.height / heroImage.width
+    : HERO_IMAGE_ASPECT_RATIO;
+const heroImageHeight = Math.round(heroImageWidth * heroImageAspectRatio);
+const [rawTitle, ...titleRest] = title.split(' in ');
+const inlineLocation = titleRest.length > 0 ? titleRest.join(' in ') : undefined;
+const highlightLocation = locationLabel ?? inlineLocation ?? 'Louisville, KY';
+const heroHeading = showLocationHeading ? rawTitle || title : title;
+const highlightHubLinks = hubLinks.filter((link) => link?.name && link?.slug);
+const hasHighlightHubLinks = highlightHubLinks.length > 0;
+const hasSecondaryHeading =
+  showLocationHeading && (Boolean(highlightLocation) || hasHighlightHubLinks);
+const heroImageAlt = imageAlt ?? `Professional garage door technician repairing garage door in ${highlightLocation}`;
+const heroImageBaseOptions = {
+  src: heroImage,
+  widths: heroImageWidths
+};
+const [heroImageAvif, heroImageWebp, heroImageJpeg] = await Promise.all([
+  getImage({ ...heroImageBaseOptions, format: 'avif', quality: heroImageQualityAvif }),
+  getImage({ ...heroImageBaseOptions, format: 'webp', quality: heroImageQualityWebp }),
+  getImage({ ...heroImageBaseOptions, format: 'jpeg', quality: heroImageQualityJpeg })
+]);
+const heroImageAvifSrcSet = heroImageAvif.srcSet?.attribute ?? undefined;
+const heroImageWebpSrcSet = heroImageWebp.srcSet?.attribute ?? undefined;
+const heroImageJpegSrcSet = heroImageJpeg.srcSet?.attribute ?? undefined;
+const heroImageFallbackSrc = heroImageJpeg.src ?? heroImage.src;
+const showSecondaryCallAction = !primaryAsPhone;
+const sanitizeStringSubtitle = (value: string | string[]) => {
+  if (Array.isArray(value)) {
+    return value.filter((segment): segment is string => Boolean(segment && segment.trim()));
+  }
+
+  return value
+    .split(/\r?\n\s*\r?\n/)
+    .map((segment) => segment.trim())
+    .filter(Boolean);
+};
+
+const normalizeSubtitleSegments = (value: SubtitleProp | undefined): SubtitleSegment[] => {
+  if (!value) {
+    return [];
+  }
+
+  if (typeof value === 'string') {
+    return sanitizeStringSubtitle(value);
+  }
+
+  if (Array.isArray(value)) {
+    return value.filter((segment): segment is SubtitleSegment => {
+      if (typeof segment === 'string') {
+        return Boolean(segment && segment.trim());
+      }
+
+      return Boolean(segment);
+    });
+  }
+
+  return [value];
+};
+
+const subtitleSegments = normalizeSubtitleSegments(subtitle);
+const hasSubtitle = subtitleSegments.length > 0;
+const heroSectionHeight = compact
+  ? 'min-h-[82vh] sm:min-h-[68vh] md:min-h-[58vh]'
+  : 'min-h-screen sm:min-h-[70vh] md:min-h-[60vh]';
+const heroContentHeight = compact
+  ? 'min-h-[82vh] sm:min-h-[68vh] md:min-h-[58vh]'
+  : 'min-h-[85vh] sm:min-h-[70vh] md:min-h-[60vh]';
+const heroContentAlignment = compact
+  ? 'items-start pt-14 sm:pt-16 lg:pt-20 pb-10 sm:pb-12'
+  : 'items-center py-12 sm:py-14 lg:py-20';
+---
+
+{isPriority && (
+  <Fragment slot="head">
+    {heroImageAvifSrcSet && (
+      <link
+        rel="preload"
+        as="image"
+        imagesrcset={heroImageAvifSrcSet}
+        imagesizes={heroImageSizes}
+        type="image/avif"
+        fetchpriority="high"
+      />
+    )}
+    {heroImageWebpSrcSet && (
+      <link
+        rel="preload"
+        as="image"
+        imagesrcset={heroImageWebpSrcSet}
+        imagesizes={heroImageSizes}
+        type="image/webp"
+        fetchpriority="high"
+      />
+    )}
+    <link
+      rel="preload"
+      as="image"
+      href={heroImageFallbackSrc}
+      imagesrcset={heroImageJpegSrcSet}
+      imagesizes={heroImageSizes}
+      fetchpriority="high"
+    />
+  </Fragment>
+)}
+
+<section class={`relative text-white overflow-visible lg:overflow-hidden hero-section shadow-lg ${heroSectionHeight}`}>
+  <div class="absolute inset-0">
+    <picture>
+      {heroImageAvifSrcSet && (
+        <source srcset={heroImageAvifSrcSet} sizes={heroImageSizes} type="image/avif" />
+      )}
+      {heroImageWebpSrcSet && (
+        <source srcset={heroImageWebpSrcSet} sizes={heroImageSizes} type="image/webp" />
+      )}
+      <img
+        src={heroImageFallbackSrc}
+        srcset={heroImageJpegSrcSet}
+        sizes={heroImageSizes}
+        alt={heroImageAlt}
+        width={heroImageWidth}
+        height={heroImageHeight}
+        class="w-full h-full hero-image"
+        loading={imageLoading}
+        decoding={imageDecoding}
+        fetchpriority={imageFetchPriority}
+      />
+    </picture>
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/70 via-primary/60 to-black/75"></div>
+  </div>
+
+  <div class={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex ${heroContentAlignment} ${heroContentHeight}`}>
+    <div class="text-center max-w-5xl mx-auto flex flex-col gap-4 sm:gap-6 lg:gap-7">
+
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.5rem] font-extrabold leading-tight text-shadow-lg tracking-tight">
+        {heroHeading}
+      </h1>
+
+      {hasSecondaryHeading && (
+        <>
+            {hasHighlightHubLinks ? null : (
+            <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-accent tracking-wide">
+              {highlightLocation}
+            </h2>
+          )}
+        </>
+      )}
+
+      {hasSubtitleSlot ? (
+        <div class="flex flex-col gap-3 sm:gap-4 lg:gap-5 max-w-3xl mx-auto">
+          <div class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-3xl mx-auto text-shadow font-medium whitespace-pre-line">
+            <slot name="subtitle" />
+          </div>
+        </div>
+      ) : (
+        hasSubtitle && (
+          <div class="flex flex-col gap-3 sm:gap-4 lg:gap-5 max-w-3xl mx-auto">
+            {subtitleSegments.map((segment) => (
+              <p
+                class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-3xl mx-auto text-shadow font-medium whitespace-pre-line"
+              >
+                {segment}
+              </p>
+            ))}
+          </div>
+        )
+      )}
+
+      <div
+        class="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center items-stretch sm:items-center max-w-xl mx-auto w-full sm:w-auto"
+      >
+        {showPrimaryCta &&
+          (primaryAsPhone ? (
+            <a
+              href={phoneHref}
+              class="btn-accent text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
+            >
+              <Icon name="mdi:phone" size="22" class="inline" aria-hidden="true" />
+              <span>{ctaText || 'Call Now'}</span>
+              {showPrimaryPhoneNumber && (
+                <span class="nap-phone font-semibold">{phoneNumber}</span>
+              )}
+            </a>
+          ) : ctaTriggersCallModal && hasCallModalTrigger ? (
+            <button
+              type="button"
+              class="btn-accent text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
+              data-call-modal-trigger
+              aria-controls={callModalId}
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              aria-label="Choose a location to call"
+            >
+              <Icon name="mdi:phone" size="22" class="inline" aria-hidden="true" />
+              <span>{ctaText}</span>
+            </button>
+          ) : (
+            <a
+              href={ctaLink}
+              class="btn-outline-light text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto bg-white/10 hover:bg-white/20 gap-3"
+            >
+              <Icon name="mdi:clipboard-text" size="22" class="inline" aria-hidden="true" />
+              {ctaText}
+            </a>
+          ))}
+        {showSecondaryCallAction &&
+          (showPhoneNumber ? (
+            <a
+              href={phoneHref}
+              class="btn-accent text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
+            >
+              <Icon name="mdi:phone" size="22" class="inline" aria-hidden="true" />
+              <span>Call Now:</span>
+              <span class="nap-phone font-semibold">{phoneNumber}</span>
+            </a>
+          ) : hasCallModalTrigger && defaultCallMarket && !ctaTriggersCallModal ? (
+            <button
+              type="button"
+              class="btn-accent text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
+              data-call-modal-trigger
+              aria-controls={callModalId}
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              aria-label="Choose a location to call"
+            >
+              <Icon name="mdi:phone" size="22" class="inline" aria-hidden="true" />
+              <span>Call Now</span>
+              <span class="sr-only">for the {defaultCallMarket.label} market</span>
+            </button>
+          ) : !ctaTriggersCallModal ? (
+            <a
+              href={callLinkHref}
+              class="btn-accent text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
+            >
+              <Icon name="mdi:phone" size="22" class="inline" aria-hidden="true" />
+              <span>Call Now</span>
+            </a>
+          ) : null)}
+        <a
+          href={ctaLink}
+          class="btn-outline-light text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto bg-white/10 hover:bg-white/20 gap-3"
+        >
+          <Icon name="mdi:clipboard-text" size="22" class="inline" aria-hidden="true" />
+          Get a Quote
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>

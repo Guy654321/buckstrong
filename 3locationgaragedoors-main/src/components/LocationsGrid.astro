@@ -1,0 +1,69 @@
+---
+import { getLocationsByMarket } from '../lib/locations';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  limit?: number;
+}
+
+const {
+  title = "Kentucky Areas We Serve",
+  subtitle = "Professional garage door services across Louisville, Lexington, and Northern Kentucky neighborhoods",
+  limit,
+} = Astro.props;
+
+const locationGroups = await getLocationsByMarket();
+const locations = locationGroups.flatMap(group => {
+  const entries = [group.hub, ...group.areas].filter(
+    (entry): entry is NonNullable<typeof entry> => Boolean(entry)
+  );
+
+  return entries.map(entry => ({
+    ...entry,
+    market: group.market,
+  }));
+});
+
+const displayLocations = limit ? locations.slice(0, limit) : locations;
+const hasMore = typeof limit === 'number' && locations.length > limit;
+---
+
+<section class="py-16 bg-card">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-ink mb-4">{title}</h2>
+      <p class="text-xl text-ink/70">{subtitle}</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {displayLocations.map(location => (
+        <div class="bg-muted rounded-lg p-6 hover:shadow-lg transform-gpu transition-transform duration-300 hover:-translate-y-1">
+          <p class="text-xs uppercase tracking-wide text-ink/50 mb-2">{location.market}</p>
+          <h3 class="text-lg font-semibold text-ink mb-2">
+            {location.name}
+          </h3>
+          <p class="text-ink/70 mb-4">
+            <a href={`tel:${location.phone}`} class="hover:text-primary transition-colors">
+              {location.phone}
+            </a>
+          </p>
+        <a
+          href={`/locations/${location.slug}`}
+          class="inline-link inline-flex items-center gap-1"
+        >
+          View Service Area →
+        </a>
+      </div>
+    ))}
+    </div>
+
+    {hasMore && (
+      <div class="text-center mt-8">
+        <a href="/locations" class="btn-outline">
+          View All Locations
+        </a>
+      </div>
+    )}
+  </div>
+</section>

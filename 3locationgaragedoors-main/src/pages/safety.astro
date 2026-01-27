@@ -1,0 +1,376 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CallNowButton from '../components/CallNowButton.astro';
+import heroImage from '../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
+import { BUSINESS_INFO } from '../data/business';
+import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../data/call-markets';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Safety Tips' }
+];
+
+const resourceLinks = [
+  {
+    title: 'Request an Inspection',
+    description: 'Book a professional tune-up with the Louisville, Lexington, or Northern Kentucky teams to keep your door operating safely year-round.',
+    href: '/contact',
+    icon: 'mdi:calendar-clock'
+  },
+  {
+    title: 'Review Garage Door Services',
+    description: 'See how we repair springs, replace panels, and modernize openers across Louisville, Lexington, and Northern Kentucky.',
+    href: '/services',
+    icon: 'mdi:tools'
+  },
+  {
+    title: 'Explore Service Areas',
+    description: 'Verify coverage for your neighborhood and discover nearby communities across our three Kentucky service hubs.',
+    href: '/locations',
+    icon: 'mdi:map-marker-radius'
+  },
+  {
+    title: 'Check the FAQ',
+    description: 'Find answers about maintenance schedules, warranties, emergency support, and more.',
+    href: '/faq',
+    icon: 'mdi:comment-question-outline'
+  },
+  {
+    title: 'Read the Latest Blog Posts',
+    description: 'Stay updated with seasonal safety checklists and DIY inspection tips from our experts.',
+    href: '/blog',
+    icon: 'mdi:newspaper-variant-outline'
+  }
+];
+
+const displayPhoneNumber = BUSINESS_INFO.telephone;
+const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
+
+const callMarkets = CALL_MARKETS;
+const marketMap = Object.fromEntries(callMarkets.map((market) => [market.id, market]));
+
+const locationSafetyHighlights = [
+  {
+    marketId: 'louisville',
+    title: 'Louisville Metro & Southern Indiana',
+    description:
+      'From the Highlands to Prospect and over the bridge into Jeffersonville and New Albany, our Louisville technicians reinforce every opener and safety sensor to handle high-traffic garages.'
+  },
+  {
+    marketId: 'lexington',
+    title: 'Lexington & Bluegrass Communities',
+    description:
+      'Homeowners in Hamburg, Nicholasville, Georgetown, and the horse farm corridors count on us for balance checks, photo-eye calibration, and seasonal safety tune-ups that withstand the Bluegrass climate.'
+  },
+  {
+    marketId: 'northern-kentucky',
+    title: 'Northern Kentucky & Cincinnati Suburbs',
+    description:
+      'Whether you live in Florence, Covington, Hebron, or cross-river neighborhoods, our Northern Kentucky crew keeps torsion systems safe and responds quickly to Ohio River Valley weather emergencies.'
+  }
+];
+const defaultCallMarket = DEFAULT_CALL_MARKET;
+const callModalId = 'header-call-modal';
+const callLinkHref = defaultCallMarket?.phoneHref ?? telephoneHref;
+const safetyCtaId = 'safety-call-cta';
+
+const ctaCallButtonClasses =
+  'btn-accent text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-3';
+const quoteButtonClasses =
+  'btn-outline-light text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-3';
+const emergencyCallButtonClasses =
+  'mt-4 btn-accent text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 inline-flex items-center justify-center gap-2 w-full sm:w-auto';
+
+const safetyTips = [
+  {
+    title: "Never Attempt Spring Repairs Yourself",
+    description: "Garage door springs are under extreme tension and can cause serious injury or death if handled improperly. Always call a professional.",
+    icon: "mdi:alert-circle"
+  },
+  {
+    title: "Test Safety Features Monthly",
+    description: "Test your garage door's auto-reverse feature by placing a 2x4 under the door. It should reverse when it hits the board.",
+    icon: "mdi:wrench"
+  },
+  {
+    title: "Keep Remote Controls Secure",
+    description: "Don't leave garage door remotes in your car where they can be stolen. Consider using rolling code technology.",
+    icon: "mdi:lock"
+  },
+  {
+    title: "Regular Visual Inspections",
+    description: "Look for frayed cables, worn rollers, and bent tracks. Address issues early before they become dangerous.",
+    icon: "mdi:eye"
+  },
+  {
+    title: "Keep Fingers Clear",
+    description: "Never place fingers between door sections or near rollers and tracks when the door is moving.",
+    icon: "mdi:hand-back-right-off"
+  },
+  {
+    title: "Professional Maintenance",
+    description: "Schedule annual professional maintenance to ensure all safety features are working properly.",
+    icon: "mdi:tools"
+  }
+];
+---
+
+<Base 
+  title="Derby Strong Garage Doors | Safety Tips"
+  description="Essential garage door safety tips to protect your family. Learn about spring safety, maintenance, and when to call professionals. Safety first with Derby Strong Garage Doors."
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+  
+  
+  <section id={safetyCtaId} class="relative py-20 text-white overflow-hidden">
+    <div class="absolute inset-0">
+      <Image 
+        src={heroImage}
+        alt="Professional garage door safety information and guidelines" 
+        width="1200"
+        height="675"
+        class="w-full h-full object-cover" 
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+        sizes="100vw"
+        quality={72}
+      />
+      <div class="absolute inset-0 bg-primary/75"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="relative">
+        
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+          Garage Door Safety Tips
+        </h1>
+        <p class="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+          Your safety is our top priority across Louisville, Lexington, and Northern Kentucky. Learn essential garage door safety tips to protect your family and property.
+        </p>
+        <div class="relative flex flex-col sm:flex-row gap-4 justify-center max-w-3xl mx-auto">
+          {callMarkets.length > 0 && defaultCallMarket ? (
+            <button
+              type="button"
+              class={ctaCallButtonClasses}
+              data-call-modal-trigger
+              aria-controls={callModalId}
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              aria-label="Choose a service area phone number"
+            >
+              <Icon name="mdi:phone" size="22" class="inline" aria-hidden="true" />
+              <span>Call Now</span>
+              <span class="sr-only">for the {defaultCallMarket.label} market</span>
+            </button>
+          ) : (
+            <a href={telephoneHref} class={ctaCallButtonClasses}>
+              <Icon name="mdi:phone" size="22" class="inline" aria-hidden="true" />
+              <span>Call Now:</span>
+              <span class="nap-phone font-semibold">{displayPhoneNumber}</span>
+            </a>
+          )}
+          <a href="/contact" class={quoteButtonClasses}>
+            <Icon name="mdi:clipboard-text" size="22" class="inline" aria-hidden="true" />
+            <span>Get a Quote</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <section class="py-16 bg-muted">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {safetyTips.map(tip => (
+          <div class="bg-white rounded-lg p-6 shadow-sm ring-1 ring-black/5">
+            <div class="text-accent mb-4">
+              <Icon name={tip.icon} size="48" aria-hidden="true" />
+            </div>
+            <h3 class="text-xl font-semibold text-ink mb-4">{tip.title}</h3>
+            <p class="text-ink/80">{tip.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  
+  <section class="py-16 bg-red-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-red-100 border border-red-200 rounded-lg p-8">
+        <div class="flex items-start">
+          <div class="text-red-600 mr-4">
+            <Icon name="mdi:alarm-light" size="48" aria-hidden="true" />
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold text-red-800 mb-4">Emergency Situations</h2>
+            <div class="text-red-700 space-y-4">
+              <p class="font-semibold">If you experience any of these situations, stop using your garage door immediately and call a professional:</p>
+              <ul class="list-disc list-inside space-y-2 ml-4">
+                <li>Door falls rapidly or won't stay open</li>
+                <li>Visible broken springs or cables</li>
+                <li>Door is off its tracks</li>
+                <li>Unusual noises or grinding sounds</li>
+                <li>Door opens or closes by itself</li>
+                <li>Remote control doesn't work consistently</li>
+              </ul>
+              <div class="bg-red-200 rounded-lg p-4 mt-6">
+                <p class="font-bold text-red-800">Emergency Service Available 24/7</p>
+                <p class="text-red-700">
+                  Call us immediately — tap below to reach the right local team for your neighborhood.
+                </p>
+                <a href={`#${safetyCtaId}`} class={emergencyCallButtonClasses}>
+                  <Icon name="mdi:phone" size="22" aria-hidden="true" />
+                  <span>Call Now</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-8 text-center">Recommended Maintenance Schedule</h2>
+
+      <div class="space-y-8">
+        <div class="bg-muted rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-ink mb-4">Monthly</h3>
+          <ul class="space-y-2 text-ink/80">
+            <li class="flex items-start">
+              <span class="text-accent mr-2">•</span>
+              Test auto-reverse safety feature
+            </li>
+            <li class="flex items-start">
+              <span class="text-accent mr-2">•</span>
+              Check photo-eye sensors for alignment
+            </li>
+            <li class="flex items-start">
+              <span class="text-accent mr-2">•</span>
+              Listen for unusual noises during operation
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-muted rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-ink mb-4">Every 3 Months</h3>
+          <ul class="space-y-2 text-ink/80">
+            <li class="flex items-start">
+              <span class="text-accent mr-2">•</span>
+              Lubricate moving parts with garage door lubricant
+            </li>
+            <li class="flex items-start">
+              <span class="text-accent mr-2">•</span>
+              Clean tracks and remove debris
+            </li>
+            <li class="flex items-start">
+              <span class="text-accent mr-2">•</span>
+              Check weather stripping for wear
+            </li>
+          </ul>
+        </div>
+        
+        <div class="bg-muted rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-ink mb-4">Annually</h3>
+          <ul class="space-y-2 text-ink/80">
+            <li class="flex items-start">
+              <span class="text-accent mr-2">•</span>
+              Professional safety inspection and tune-up
+            </li>
+            <li class="flex items-start">
+              <span class="text-accent mr-2">•</span>
+              Spring tension adjustment if needed
+            </li>
+            <li class="flex items-start">
+              <span class="text-accent mr-2">•</span>
+              Complete system performance evaluation
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="py-16 bg-muted">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Local Safety Support in Every Service Hub</h2>
+        <p class="text-xl text-ink/70">
+          Meet the dedicated teams safeguarding garages throughout Louisville, Lexington, and Northern Kentucky with localized inspections and rapid-response repairs.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {locationSafetyHighlights.map(region => {
+          const market = marketMap[region.marketId];
+
+          return (
+            <div class="bg-muted rounded-xl p-6 h-full flex flex-col shadow-sm ring-1 ring-black/5">
+              <h3 class="text-xl font-semibold text-ink mb-3">{region.title}</h3>
+              <p class="text-ink/70 leading-relaxed flex-1">{region.description}</p>
+              {market ? (
+                <div class="mt-6 pt-4 border-t border-ink/10 flex items-center justify-between gap-3 text-sm">
+                  <span class="text-ink/60">Direct safety line</span>
+                  <a href={market.phoneHref} class="text-primary font-semibold hover:underline focus-visible:underline">
+                    {market.phoneDisplay}
+                  </a>
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Stay Proactive With Trusted Resources</h2>
+        <p class="text-xl text-ink/70">
+          Connect with the guides homeowners across Louisville, Lexington, and Northern Kentucky use to prevent emergencies and plan repairs.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {resourceLinks.map(resource => (
+          <a
+            href={resource.href}
+            class="group bg-white rounded-xl shadow-sm ring-1 ring-black/5 hover:shadow-lg transform-gpu transition-[transform,opacity] duration-300 p-6 text-left composite-surface hover:-translate-y-1 focus-visible:-translate-y-1"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div class="bg-accent/10 text-accent w-12 h-12 rounded-full flex items-center justify-center">
+                <Icon name={resource.icon} size="28" aria-hidden="true" />
+              </div>
+              <span class="text-primary font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Explore
+              </span>
+            </div>
+            <h3 class="text-xl font-semibold text-ink mb-2 group-hover:text-primary transition-colors">
+              {resource.title}
+            </h3>
+            <p class="text-ink/70 leading-relaxed text-sm">
+              {resource.description}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  
+  <Footer />
+  <CallNowButton />
+</Base>

@@ -1,0 +1,22 @@
+{
+  "name": "Hebron Estates",
+  "slug": "louisville-hebron-estates",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0627,
+    "lng": -85.6633
+  },
+  "zips": [
+    "40150"
+  ],
+  "surroundingAreas": [
+    "Brooks Hill Road",
+    "Mount Washington",
+    "Pioneer Village"
+  ]
+}

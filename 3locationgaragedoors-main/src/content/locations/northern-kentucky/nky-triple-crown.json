@@ -1,0 +1,22 @@
+{
+  "name": "Triple Crown",
+  "slug": "nky-triple-crown",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.946,
+    "lng": -84.72
+  },
+  "zips": [
+    "41091"
+  ],
+  "surroundingAreas": [
+    "US-42",
+    "Richwood",
+    "Union"
+  ]
+}

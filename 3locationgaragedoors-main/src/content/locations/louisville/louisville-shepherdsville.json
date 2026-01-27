@@ -1,0 +1,22 @@
+{
+  "name": "Shepherdsville",
+  "slug": "louisville-shepherdsville",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 37.9886,
+    "lng": -85.7144
+  },
+  "zips": [
+    "40165"
+  ],
+  "surroundingAreas": [
+    "Bullitt County Courthouse",
+    "Zoneton",
+    "Fort Knox Area"
+  ]
+}

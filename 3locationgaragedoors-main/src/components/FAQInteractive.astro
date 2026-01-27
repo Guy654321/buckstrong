@@ -1,0 +1,24 @@
+---
+// FAQ interactive component with accessible disclosure behavior
+type FAQItem = { question: string; answer: string };
+const { faqs } = Astro.props as { faqs: FAQItem[] };
+---
+
+<div class="space-y-6">
+  {faqs.map((faq, index) => (
+    <details class="bg-card rounded-lg shadow-sm group" data-faq-index={index}>
+      <summary class="faq-button w-full list-none cursor-pointer text-left p-6 focus:outline-none focus:ring-2 focus:ring-accent">
+        <div class="flex justify-between items-center">
+          <h3 class="text-lg font-semibold text-ink pr-4">{faq.question}</h3>
+          <svg class="faq-icon w-5 h-5 text-ink/60 transform transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <title>Expand answer</title>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </div>
+      </summary>
+      <div class="px-6 pb-6">
+        <p class="text-ink/80">{faq.answer}</p>
+      </div>
+    </details>
+  ))}
+</div>

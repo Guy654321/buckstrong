@@ -1,0 +1,37 @@
+{
+  "name": "derby-city-garage-doors",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build && node scripts/minify-js.js && node scripts/minify-html.js && node scripts/enforce-vercel-runtime.mjs && node scripts/check-orphaned-pages.js",
+    "preview": "astro preview",
+    "astro": "astro",
+    "validate-sitemap": "node scripts/validate-sitemap.js",
+    "check:orphaned": "node scripts/check-orphaned-pages.js",
+    "sitemap:build": "npm run build && npm run validate-sitemap",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^3.1.7",
+    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/tailwind": "^5.1.1",
+    "@astrojs/vercel": "^7.8.1",
+    "@iconify-json/mdi": "^1.2.3",
+    "@vercel/speed-insights": "^1.0.12",
+    "astro": "^4.15.12",
+    "astro-icon": "^1.1.1",
+    "astro-seo-schema": "^4.0.2",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "esbuild": "^0.25.0"
+  },
+  "engines": {
+    "node": ">=20.11.1 <21"
+  }
+}

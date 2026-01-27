@@ -1,0 +1,22 @@
+{
+  "name": "Chevy Chase",
+  "slug": "lexington-chevy-chase",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0285,
+    "lng": -84.4838
+  },
+  "zips": [
+    "40502"
+  ],
+  "surroundingAreas": [
+    "Ashland Estate",
+    "Euclid Avenue",
+    "Woodhill"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Latonia Lakes",
+  "slug": "nky-latonia-lakes",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.9955,
+    "lng": -84.4709
+  },
+  "zips": [
+    "41015"
+  ],
+  "surroundingAreas": [
+    "Rural Kenton",
+    "Ryland Heights",
+    "Visalia"
+  ]
+}

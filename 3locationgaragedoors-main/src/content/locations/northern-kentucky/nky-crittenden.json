@@ -1,0 +1,22 @@
+{
+  "name": "Crittenden",
+  "slug": "nky-crittenden",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.7876,
+    "lng": -84.6058
+  },
+  "zips": [
+    "41030"
+  ],
+  "surroundingAreas": [
+    "Grant County",
+    "I-75",
+    "Sherman"
+  ]
+}

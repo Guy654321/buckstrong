@@ -1,0 +1,109 @@
+---
+import { Icon } from 'astro-icon/components';
+import { BUSINESS_INFO } from '../data/business';
+import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../data/call-markets';
+
+interface Props {
+  phoneNumber?: string;
+}
+
+const { phoneNumber } = Astro.props as Props;
+const displayPhoneNumber = phoneNumber?.trim() || BUSINESS_INFO.telephone;
+const sanitizedPhoneNumber = displayPhoneNumber.replace(/[^0-9+]/g, '');
+const telephoneHref = `tel:${sanitizedPhoneNumber || displayPhoneNumber}`;
+const hasCustomPhoneNumber = Boolean(phoneNumber?.trim());
+const callModalId = 'header-call-modal';
+const defaultCallMarket = DEFAULT_CALL_MARKET;
+const hasCallModalTrigger = !hasCustomPhoneNumber && CALL_MARKETS.length > 1;
+const callLinkHref = hasCustomPhoneNumber
+  ? telephoneHref
+  : defaultCallMarket?.phoneHref || telephoneHref;
+const callLabel = hasCustomPhoneNumber ? 'Call Now:' : 'Call Now';
+---
+
+<div
+  class="fixed bottom-4 right-4 z-50 md:hidden opacity-0 pointer-events-none translate-y-3 transition-all duration-300 ease-out data-[visible=true]:opacity-100 data-[visible=true]:pointer-events-auto data-[visible=true]:translate-y-0"
+  data-floating-call
+  data-visible="false"
+  aria-hidden="true"
+>
+  {hasCallModalTrigger ? (
+    <button
+      type="button"
+      class="bg-accent hover:bg-accent/90 text-white px-4 py-3 text-sm rounded-full shadow-md flex items-center space-x-2 transition-colors min-h-[44px] min-w-[44px]"
+      data-call-modal-trigger
+      aria-controls={callModalId}
+      aria-expanded="false"
+      aria-haspopup="dialog"
+      aria-label="Choose a location to call"
+    >
+      <Icon name="mdi:phone" size="20" aria-hidden="true" />
+      <span class="font-semibold">Call Now</span>
+      <span class="sr-only">Open call options</span>
+    </button>
+  ) : (
+    <a
+      href={callLinkHref}
+      class="bg-accent hover:bg-accent/90 text-white px-4 py-3 text-sm rounded-full shadow-md flex items-center space-x-2 transition-colors min-h-[44px] min-w-[44px]"
+    >
+      <Icon name="mdi:phone" size="20" aria-hidden="true" />
+      <span class="font-semibold">{callLabel}</span>
+      {hasCustomPhoneNumber && (
+        <span class="nap-phone font-semibold">{displayPhoneNumber}</span>
+      )}
+    </a>
+  )}
+</div>
+
+<script>
+  if (typeof window !== 'undefined') {
+    queueMicrotask(() => {
+      const callButtons = Array.from(
+        document.querySelectorAll<HTMLElement>('[data-floating-call]')
+      );
+      if (callButtons.length === 0) {
+        return;
+      }
+
+      const setVisibility = (isVisible: boolean) => {
+        callButtons.forEach((callButton: HTMLElement) => {
+          callButton.dataset.visible = isVisible ? 'true' : 'false';
+          callButton.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+        });
+      };
+
+      setVisibility(false);
+
+      const heroSection = document.querySelector('[data-hero], .hero-section');
+
+      if (heroSection && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const [entry] = entries;
+            const shouldShow = entry ? !entry.isIntersecting : true;
+            setVisibility(shouldShow);
+          },
+          { threshold: 0.05 }
+        );
+
+        observer.observe(heroSection);
+        window.addEventListener(
+          'beforeunload',
+          () => {
+            observer.disconnect();
+          },
+          { once: true }
+        );
+      } else {
+        const heroHeight = heroSection instanceof HTMLElement ? heroSection.offsetHeight : 240;
+        const handleScroll = () => {
+          const shouldShow = window.scrollY > heroHeight;
+          setVisibility(shouldShow);
+        };
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+      }
+    });
+  }
+</script>

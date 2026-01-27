@@ -1,0 +1,22 @@
+{
+  "name": "Crescent Hill",
+  "slug": "louisville-crescent-hill",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2578,
+    "lng": -85.6895
+  },
+  "zips": [
+    "40206"
+  ],
+  "surroundingAreas": [
+    "Frankfort Avenue",
+    "Peterson-Dumesnil House",
+    "Crescent Avenue"
+  ]
+}

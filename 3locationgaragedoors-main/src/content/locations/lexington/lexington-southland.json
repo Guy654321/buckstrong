@@ -1,0 +1,22 @@
+{
+  "name": "Southland",
+  "slug": "lexington-southland",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0141,
+    "lng": -84.521
+  },
+  "zips": [
+    "40503"
+  ],
+  "surroundingAreas": [
+    "Southland Drive",
+    "Clays Mill",
+    "Regency"
+  ]
+}

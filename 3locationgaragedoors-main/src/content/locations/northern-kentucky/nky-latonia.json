@@ -1,0 +1,22 @@
+{
+  "name": "Latonia",
+  "slug": "nky-latonia",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.0473,
+    "lng": -84.508
+  },
+  "zips": [
+    "41015"
+  ],
+  "surroundingAreas": [
+    "Ritte's Corner",
+    "Taylor Mill",
+    "Covington"
+  ]
+}

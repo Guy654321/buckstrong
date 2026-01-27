@@ -1,0 +1,82 @@
+---
+// Custom MDX image component that uses Astro's Image optimization
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+export interface Props {
+  src: string | ImageMetadata;
+  alt: string;
+  width?: number;
+  height?: number;
+  title?: string;
+  loading?: 'eager' | 'lazy';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  quality?: number;
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 450,
+  title,
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  quality = 75
+} = Astro.props;
+
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/**/*.{png,jpg,jpeg,jpe,gif,webp,avif,svg}',
+  { eager: true }
+);
+
+const metadataByBasename = new Map<string, ImageMetadata>();
+for (const [path, module] of Object.entries(imageModules)) {
+  const fileName = path.split('/').pop();
+  if (fileName && module?.default) {
+    metadataByBasename.set(fileName, module.default);
+  }
+}
+
+const isStringSource = typeof src === 'string';
+const stringSource = isStringSource ? (src as string) : undefined;
+const isAbsoluteUrl = stringSource
+  ? stringSource.startsWith('http') || stringSource.startsWith('//')
+  : false;
+
+let imageMetadata: ImageMetadata | undefined =
+  !isStringSource && src ? (src as ImageMetadata) : undefined;
+
+if (!imageMetadata && stringSource && !isAbsoluteUrl) {
+  const fileName = stringSource.split('/').pop() ?? stringSource;
+  imageMetadata = metadataByBasename.get(fileName);
+}
+
+const fallbackSrc = stringSource ?? '';
+---
+
+{imageMetadata ? (
+  <Image
+    src={imageMetadata}
+    alt={alt}
+    width={width}
+    height={height}
+    title={title}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    quality={quality}
+    class="w-full h-auto rounded-lg shadow-sm"
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+  />
+) : (
+  <img
+    src={fallbackSrc}
+    alt={alt}
+    width={width}
+    height={height}
+    title={title}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    class="w-full h-auto rounded-lg shadow-sm"
+  />
+)}

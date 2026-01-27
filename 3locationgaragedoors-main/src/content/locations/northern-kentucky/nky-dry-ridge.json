@@ -1,0 +1,22 @@
+{
+  "name": "Dry Ridge",
+  "slug": "nky-dry-ridge",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.6823,
+    "lng": -84.5986
+  },
+  "zips": [
+    "41035"
+  ],
+  "surroundingAreas": [
+    "Grant County",
+    "Ark Encounter",
+    "Crittenden"
+  ]
+}

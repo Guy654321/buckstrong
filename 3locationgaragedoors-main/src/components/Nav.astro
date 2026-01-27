@@ -1,0 +1,494 @@
+---
+import { Icon } from "astro-icon/components";
+import BrandLogo from "./BrandLogo.astro";
+import { getServices } from "../lib/services";
+import { getLocationHubs } from "../lib/locations";
+import { BUSINESS_INFO } from "../data/business";
+import navDropdownScriptUrl from "../scripts/nav-dropdown.js?url";
+import headerCallModalScriptUrl from "../scripts/header-call-modal.js?url";
+import { CALL_MARKETS, sanitizePhoneNumberValue } from "../data/call-markets";
+
+const navDropdownModuleHref = navDropdownScriptUrl;
+const navModuleUrl = navDropdownScriptUrl;
+const headerCallModalModuleHref = headerCallModalScriptUrl;
+const headerCallModalModuleUrl = headerCallModalScriptUrl;
+
+const services = await getServices();
+const locationHubs = await getLocationHubs();
+const displayPhoneNumber = BUSINESS_INFO.telephone;
+const sanitizedPhoneNumber = displayPhoneNumber.replace(/[^0-9+]/g, "");
+const phoneHref = `tel:${sanitizedPhoneNumber || displayPhoneNumber}`;
+
+const callMarkets = CALL_MARKETS;
+const sanitizedDefaultPhone = sanitizePhoneNumberValue(BUSINESS_INFO.telephone);
+const safeCallMarkets =
+  callMarkets.length > 0
+    ? callMarkets
+    : [
+        {
+          id: "primary",
+          label: `Call ${sanitizedDefaultPhone || BUSINESS_INFO.telephone}`,
+          phoneDisplay: BUSINESS_INFO.telephone,
+      phoneHref: `tel:${sanitizedDefaultPhone || BUSINESS_INFO.telephone}`,
+    },
+  ];
+const callModalId = "header-call-modal";
+const primaryCallMarket = safeCallMarkets[0];
+const primaryCallHref = primaryCallMarket?.phoneHref || phoneHref;
+const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
+---
+
+<Fragment slot="head">
+  <link rel="modulepreload" href={navDropdownModuleHref} />
+  <link rel="modulepreload" href={headerCallModalModuleHref} />
+</Fragment>
+
+<nav
+  class="bg-card shadow-lg sticky top-0 z-50"
+  data-nav-root
+  data-nav-module={navModuleUrl}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16 sm:h-20">
+      <div class="flex-shrink-0">
+        <a href="/" class="flex items-center space-x-0">
+          <BrandLogo
+            size="sm"
+            class="h-8 sm:h-12 mr-2 sm:mr-3 drop-shadow-sm"
+            priority
+            alt="Derby Strong Garage Doors - Professional Garage Door Services logo"
+          />
+          <span
+            class="text-lg sm:text-xl md:text-2xl font-bold text-primary whitespace-nowrap"
+          >
+            Derby Strong Garage Doors
+          </span>
+        </a>
+      </div>
+
+      <div class="hidden md:block">
+        <div class="flex items-center space-x-8">
+          <div class="relative group" data-dropdown data-open="false">
+            <button
+              id="desktop-services-trigger"
+              class="text-ink hover:text-primary px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-controls="desktop-services-menu"
+              type="button"
+              data-dropdown-trigger
+            >
+              Services
+              <svg
+                class="ml-1 h-3 w-3 text-current transition-transform duration-200 group-data-[open=true]:rotate-180"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M4 6l4 4 4-4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"></path>
+              </svg>
+            </button>
+            <div
+              id="desktop-services-menu"
+              class="dropdown-panel absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg border z-50 focus:outline-none transition-[opacity,transform] duration-200 transform-gpu origin-top scale-95 opacity-0 invisible pointer-events-none data-[open=true]:opacity-100 data-[open=true]:visible data-[open=true]:pointer-events-auto data-[open=true]:scale-100 composite-surface"
+              aria-labelledby="desktop-services-trigger"
+              data-dropdown-panel
+            >
+              <div class="py-2">
+                <a
+                  href="/services"
+                  class="block px-4 py-2 text-sm text-ink hover:bg-gray-100 font-semibold"
+                >
+                  All Services
+                </a>
+                <div
+                  class="border-t border-gray-200 my-2"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                </div>
+                {
+                  services.map((service) => (
+                    <a
+                      href={`/services/${service.slug}`}
+                      class="block px-4 py-2 text-sm text-ink hover:bg-gray-100"
+                    >
+                      <div class="font-medium">{service.name}</div>
+                      <div class="text-xs text-ink/60">{service.short}</div>
+                    </a>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="relative group" data-dropdown data-open="false">
+            <button
+              id="desktop-resources-trigger"
+              class="text-ink hover:text-primary px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-controls="desktop-resources-menu"
+              type="button"
+              data-dropdown-trigger
+            >
+              Resources
+              <svg
+                class="ml-1 h-3 w-3 text-current transition-transform duration-200 group-data-[open=true]:rotate-180"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M4 6l4 4 4-4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"></path>
+              </svg>
+            </button>
+            <div
+              id="desktop-resources-menu"
+              class="dropdown-panel absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg border z-50 focus:outline-none transition-[opacity,transform] duration-200 transform-gpu origin-top scale-95 opacity-0 invisible pointer-events-none data-[open=true]:opacity-100 data-[open=true]:visible data-[open=true]:pointer-events-auto data-[open=true]:scale-100 composite-surface"
+              aria-labelledby="desktop-resources-trigger"
+              data-dropdown-panel
+            >
+              <div class="py-2">
+                <a
+                  href="/faq"
+                  class="block px-4 py-2 text-sm text-ink hover:bg-gray-100"
+                >
+                  <div class="font-medium">Frequently Asked Questions</div>
+                  <div class="text-xs text-ink/60">
+                    Common garage door questions
+                  </div>
+                </a>
+                <a
+                  href="/blog"
+                  class="block px-4 py-2 text-sm text-ink hover:bg-gray-100"
+                >
+                  <div class="font-medium">Blog</div>
+                  <div class="text-xs text-ink/60">
+                    Tips, guides & maintenance advice
+                  </div>
+                </a>
+                <a
+                  href="/safety"
+                  class="block px-4 py-2 text-sm text-ink hover:bg-gray-100"
+                >
+                  <div class="font-medium">Safety Tips</div>
+                  <div class="text-xs text-ink/60">
+                    Important safety information
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {
+            locationHubs.length > 0 ? (
+              <div class="relative group" data-dropdown data-open="false">
+                <button
+                  id="desktop-locations-trigger"
+                  class="text-ink hover:text-primary px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  aria-controls="desktop-locations-menu"
+                  type="button"
+                  data-dropdown-trigger
+                >
+                  Locations
+                  <svg
+                    class="ml-1 h-3 w-3 text-current transition-transform duration-200 group-data-[open=true]:rotate-180"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path
+                      d="M4 6l4 4 4-4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"></path>
+                  </svg>
+                </button>
+                <div
+                  id="desktop-locations-menu"
+                  class="dropdown-panel absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg border z-50 focus:outline-none transition-[opacity,transform] duration-200 transform-gpu origin-top scale-95 opacity-0 invisible pointer-events-none data-[open=true]:opacity-100 data-[open=true]:visible data-[open=true]:pointer-events-auto data-[open=true]:scale-100 composite-surface"
+                  aria-labelledby="desktop-locations-trigger"
+                  data-dropdown-panel
+                >
+                  <div class="py-2">
+                    <a
+                      href="/locations"
+                      class="block px-4 py-2 text-sm text-ink hover:bg-gray-100 font-semibold"
+                    >
+                      All Service Areas
+                    </a>
+                    <div
+                      class="border-t border-gray-200 my-2"
+                      role="presentation"
+                      aria-hidden="true"
+                    ></div>
+                    {
+                      locationHubs.map((hub) => (
+                        <a
+                          href={`/locations/${hub.slug}`}
+                          class="block px-4 py-2 text-sm text-ink hover:bg-gray-100"
+                        >
+                          <div class="font-medium">{hub.name}</div>
+                          <div class="text-xs text-ink/60">{hub.market} Hub</div>
+                        </a>
+                      ))
+                    }
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <a
+                href="/locations"
+                class="text-ink hover:text-primary px-3 py-2 text-sm font-medium"
+              >
+                Locations
+              </a>
+            )
+          }
+
+          <a
+            href="/contact"
+            class="text-ink hover:text-primary px-3 py-2 text-sm font-medium"
+          >
+            Contact
+          </a>
+        </div>
+      </div>
+
+<div class="flex items-center ml-3 mr-0 gap-2">
+  {safeCallMarkets.length > 0 ? (
+    <>
+      {/* Mobile call button - compact size */}
+      <button
+        type="button"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-md transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:hidden"
+        style="min-height: 40px; min-width: 40px;"
+        data-call-modal-trigger
+        aria-controls={callModalId}
+        aria-expanded="false"
+        aria-haspopup="dialog"
+        aria-label={`Call ${primaryCallLabel}`}
+      >
+        <Icon name="mdi:phone" class="h-4 w-4" aria-hidden="true" />
+        <span class="sr-only">Open call options</span>
+      </button>
+      
+      {/* Desktop call button - original size */}
+      <button
+        type="button"
+        class="hidden md:inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+        style="min-height: 44px; min-width: 44px;"
+        data-call-modal-trigger
+        aria-controls={callModalId}
+        aria-expanded="false"
+        aria-haspopup="dialog"
+        aria-label="Choose a location to call"
+      >
+        <Icon name="mdi:phone" class="h-5 w-5" aria-hidden="true" />
+        <span class="sr-only">Open call options</span>
+      </button>
+      
+      <noscript>
+        <a
+          href={phoneHref}
+          class="ml-3 hidden md:inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+          style="min-height: 44px; min-width: 44px;"
+          aria-label={`Call ${displayPhoneNumber}`}
+        >
+          <Icon name="mdi:phone" class="h-5 w-5" aria-hidden="true" />
+          <span class="sr-only">Call now</span>
+        </a>
+      </noscript>
+    </>
+  ) : (
+    <a
+      href={phoneHref}
+      class="btn-primary text-xs sm:text-sm px-3 sm:px-4 py-2 whitespace-nowrap"
+    >
+      <span class="inline md:hidden">Call Now</span>
+      <span class="hidden md:inline">Call Now</span>
+    </a>
+  )}
+</div>
+      {safeCallMarkets.length > 0 && (
+        <noscript>
+          <div class="ml-4 text-xs sm:text-sm text-ink/80">
+            <p class="font-semibold text-ink">Call us directly:</p>
+            <ul class="mt-1 space-y-1">
+              {safeCallMarkets.map((market) => (
+                <li>
+                  <a class="underline" href={market.phoneHref}>
+                    {market.label}: {market.phoneDisplay}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </noscript>
+      )}
+
+      <details class="md:hidden group relative">
+        <summary
+          class="mobile-menu-button text-ink hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent inline-flex items-center justify-center p-2 transition list-none appearance-none [&::-webkit-details-marker]:hidden [&::marker]:hidden"
+          aria-label="Toggle mobile navigation menu"
+          aria-controls="mobile-nav-menu"
+        >
+          <Icon
+            name="mdi:menu"
+            size="24"
+            aria-hidden="true"
+            class="transition-transform duration-200 group-open:rotate-180"
+          />
+        </summary>
+
+        <div
+          id="mobile-nav-menu"
+          class="mobile-menu hidden group-open:block border-t border-gray-200 bg-white absolute right-0 mt-3 w-64 rounded-lg shadow-lg"
+        >
+          <div class="px-4 py-4 space-y-1 bg-white">
+            <a
+              href="/services"
+              class="block px-3 py-2 text-base font-medium text-ink hover:text-primary hover:bg-gray-100 rounded-lg"
+              >Services</a
+            >
+            <div class="pl-6 space-y-1">
+              {
+                services.map((service) => (
+                  <a
+                    href={`/services/${service.slug}`}
+                    class="block px-3 py-2 text-sm text-ink/80 hover:text-primary hover:bg-gray-100 rounded-lg"
+                  >
+                    {service.name}
+                  </a>
+                ))
+              }
+            </div>
+            <a
+              href="/faq"
+              class="block px-3 py-2 text-base font-medium text-ink hover:text-primary hover:bg-gray-100 rounded-lg"
+              >FAQ</a
+            >
+            <a
+              href="/blog"
+              class="block px-3 py-2 text-base font-medium text-ink hover:text-primary hover:bg-gray-100 rounded-lg"
+              >Blog</a
+            >
+            <a
+              href="/safety"
+              class="block px-3 py-2 text-base font-medium text-ink hover:text-primary hover:bg-gray-100 rounded-lg"
+              >Safety Tips</a
+            >
+            <a
+              href="/locations"
+              class="block px-3 py-2 text-base font-medium text-ink hover:text-primary hover:bg-gray-100 rounded-lg"
+              >Locations</a
+            >
+            {locationHubs.length > 0 && (
+              <div class="pl-6 space-y-1">
+                {locationHubs.map((hub) => (
+                  <a
+                    href={`/locations/${hub.slug}`}
+                    class="block px-3 py-2 text-sm text-ink/80 hover:text-primary hover:bg-gray-100 rounded-lg"
+                  >
+                    {hub.name}
+                    <span class="block text-xs text-ink/50">{hub.market} Hub</span>
+                  </a>
+                ))}
+              </div>
+            )}
+            <a
+              href="/contact"
+              class="block px-3 py-2 text-base font-medium text-ink hover:text-primary hover:bg-gray-100 rounded-lg"
+              >Contact</a
+            >
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</nav>
+{safeCallMarkets.length > 0 && (
+  <div
+    id={callModalId}
+    class="fixed inset-0 z-[60] pointer-events-none invisible data-[state=open]:visible data-[state=open]:pointer-events-auto"
+    data-call-modal
+    data-state="closed"
+    aria-hidden="true"
+  >
+    <div
+      class="absolute inset-0 bg-ink/70 opacity-0 transition-opacity duration-200 data-[state=open]:opacity-100"
+      data-call-modal-overlay
+      data-state="closed"
+      aria-hidden="true"
+    ></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
+      <section
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="header-call-modal-title"
+        aria-describedby="header-call-modal-description"
+        class="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl transition-all duration-200 data-[state=open]:scale-100 data-[state=open]:opacity-100 data-[state=closed]:scale-95 data-[state=closed]:opacity-0"
+        data-call-modal-dialog
+        data-state="closed"
+      >
+        <button
+          type="button"
+          class="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full text-ink/70 transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          data-call-modal-close
+          aria-label="Close call options"
+        >
+          <span aria-hidden="true" class="text-xl leading-none">×</span>
+        </button>
+        <div class="space-y-4">
+          <div class="space-y-2">
+            <h2 id="header-call-modal-title" class="text-2xl font-bold text-ink">
+              Choose a Location to Call
+            </h2>
+            <p id="header-call-modal-description" class="text-sm text-ink/70">
+              Select the market closest to you so we can connect you with the right team.
+            </p>
+          </div>
+          <div class="space-y-3">
+            {safeCallMarkets.map((market) => (
+              <a
+                href={market.phoneHref}
+                class="flex items-center justify-between rounded-xl border border-primary/10 px-4 py-3 text-left shadow-sm transition hover:border-primary hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              >
+                <div>
+                  <span class="block font-semibold text-ink">{market.label}</span>
+                  <span class="block text-sm text-ink/70">{market.phoneDisplay}</span>
+                </div>
+                <Icon name="mdi:phone" class="h-5 w-5 text-primary" aria-hidden="true" />
+              </a>
+            ))}
+          </div>
+          <button
+            type="button"
+            class="w-full text-sm font-medium text-ink/70 underline-offset-4 transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+            data-call-modal-close
+          >
+            Cancel
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+)}
+<script is:inline type="module" src={navDropdownScriptUrl}></script>
+<script is:inline type="module" src={headerCallModalModuleUrl}></script>

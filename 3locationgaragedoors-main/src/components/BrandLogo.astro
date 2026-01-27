@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import brandLogo from '../assets/images/derby-city-logo.png';
+
+export interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  priority?: boolean;
+  alt?: string;
+  itemprop?: string;
+  ariaHidden?: boolean;
+}
+
+const {
+  size = 'md',
+  class: className = '',
+  priority = false,
+  alt = 'Derby Strong Garage Doors logo',
+  itemprop,
+  ariaHidden = false
+} = Astro.props;
+
+const widthMap = {
+  sm: 64,
+  md: 96,
+  lg: 128
+} as const;
+
+const baseWidth = widthMap[size];
+const aspectRatio = brandLogo.height / brandLogo.width;
+const baseHeight = Math.round(baseWidth * aspectRatio);
+
+const decoding = priority ? 'sync' : 'async';
+const fetchPriority = priority ? 'high' : 'auto';
+
+const sizes =
+  size === 'sm'
+    ? '(max-width: 640px) 32px, 40px'
+    : size === 'lg'
+      ? '(max-width: 768px) 48px, (max-width: 1280px) 64px, 80px'
+      : '(max-width: 640px) 36px, (max-width: 1024px) 48px, 56px';
+---
+<Image
+  src={brandLogo}
+  alt={alt}
+  width={baseWidth}
+  height={baseHeight}
+  densities={[1, 1.5, 2]}
+  class={`w-auto ${className}`.trim()}
+  loading="eager"
+  decoding={decoding}
+  fetchpriority={fetchPriority}
+  sizes={sizes}
+  quality={85}
+  format="webp"
+  itemprop={itemprop}
+  aria-hidden={ariaHidden ? 'true' : undefined}
+/>

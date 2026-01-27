@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { BUSINESS_INFO } from '../data/business';
+
+const displayPhoneNumber = BUSINESS_INFO.telephone;
+const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
+---
+
+<Base
+  title="Page Not Found | Derby Strong Garage Doors"
+  description="The page you're looking for doesn't exist. Find garage door repair, opener service, and commercial door support in Louisville, KY at Derby Strong Garage Doors."
+  noindex={true}
+>
+  <Nav />
+  
+  
+  <section class="py-20 bg-card">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="text-8xl font-bold text-ink/20 mb-8">404</div>
+      <h1 class="text-4xl font-bold text-ink mb-6">Page Not Found</h1>
+      <p class="text-xl text-ink/70 mb-8 max-w-2xl mx-auto">
+        Sorry, we couldn't find the page you're looking for. It may have been moved, deleted, or you may have typed the URL incorrectly.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <a href="/" class="btn-primary text-lg px-8 py-4">
+          Go Home
+        </a>
+        <a href="/contact" class="btn-outline text-lg px-8 py-4">
+          Contact Us
+        </a>
+      </div>
+      
+      
+      <div class="bg-muted rounded-lg p-8 max-w-2xl mx-auto">
+        <h2 class="text-2xl font-semibold text-ink mb-6">Popular Pages</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="space-y-3">
+            <h3 class="font-semibold text-ink">Services</h3>
+            <ul class="space-y-2 text-ink/70">
+              <li><a href="/services/garage-door-repair" class="hover:text-primary transition-colors">Garage Door Repair</a></li>
+              <li><a href="/services/garage-door-installation" class="hover:text-primary transition-colors">Garage Door Installation</a></li>
+              <li><a href="/services/opener-repair" class="hover:text-primary transition-colors">Opener Repair</a></li>
+              <li><a href="/services/commercial-jobs" class="hover:text-primary transition-colors">Commercial Service</a></li>
+            </ul>
+          </div>
+          <div class="space-y-3">
+            <h3 class="font-semibold text-ink">Information</h3>
+            <ul class="space-y-2 text-ink/70">
+              <li><a href="/locations" class="hover:text-primary transition-colors">Service Areas</a></li>
+              <li><a href="/faq" class="hover:text-primary transition-colors">FAQ</a></li>
+              <li><a href="/blog" class="hover:text-primary transition-colors">Blog</a></li>
+              <li><a href="/contact" class="hover:text-primary transition-colors">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <section class="py-16 bg-primary text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-6">Need Emergency Service?</h2>
+      <p class="text-xl text-white/90 mb-8">
+        Don't let a broken garage door ruin your day. We're here to help 24/7 in Louisville, KY.
+      </p>
+      <a href={telephoneHref} class="btn-accent text-lg px-8 py-4">
+        Call Now: <span class="nap-phone">{displayPhoneNumber}</span>
+      </a>
+    </div>
+  </section>
+  
+  <Footer />
+</Base>

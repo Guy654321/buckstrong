@@ -1,0 +1,22 @@
+{
+  "name": "Jeffersontown Gaslight District",
+  "slug": "louisville-gaslight",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.1946,
+    "lng": -85.5632
+  },
+  "zips": [
+    "40299"
+  ],
+  "surroundingAreas": [
+    "Historic Gaslight Square",
+    "Taylorsville Road",
+    "Plainview"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "California",
+  "slug": "louisville-california",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.238,
+    "lng": -85.7812
+  },
+  "zips": [
+    "40211"
+  ],
+  "surroundingAreas": [
+    "Chestnut Street",
+    "Parkland",
+    "Russell"
+  ]
+}

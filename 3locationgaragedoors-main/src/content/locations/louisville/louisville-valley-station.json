@@ -1,0 +1,22 @@
+{
+  "name": "Valley Station",
+  "slug": "louisville-valley-station",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0964,
+    "lng": -85.8707
+  },
+  "zips": [
+    "40272"
+  ],
+  "surroundingAreas": [
+    "Dixie Highway",
+    "Pleasure Ridge Park",
+    "Kosmosdale"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Paris",
+  "slug": "lexington-paris",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.209,
+    "lng": -84.2527
+  },
+  "zips": [
+    "40361"
+  ],
+  "surroundingAreas": [
+    "Downtown Paris",
+    "Hopewell",
+    "Stoner Creek"
+  ]
+}

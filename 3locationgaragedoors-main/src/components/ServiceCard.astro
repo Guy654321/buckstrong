@@ -1,0 +1,158 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { ServiceSummary } from '../lib/services';
+import { BUSINESS_INFO } from '../data/business';
+import garageDoorRepairImage from '../assets/images/garage-door-repair.jpg';
+import garageDoorInstallationImage from '../assets/images/garage-door-installation.jpg';
+import garageOpenerRepairImage from '../assets/images/repairs/opener-repair.jpg';
+import commercialServiceImage from '../assets/images/commercial/storage-warehouse-2089775_1280.jpg';
+
+type LocationContext = {
+  name: string;
+  state: string;
+  market?: string;
+  phone?: string;
+};
+
+export interface Props {
+  service: ServiceSummary;
+  priority?: boolean;
+  aboveFold?: boolean;
+  href?: string;
+  primaryLinkText?: string;
+  locationContext?: LocationContext;
+}
+
+const {
+  service,
+  priority = false,
+  aboveFold = false,
+  href,
+  primaryLinkText,
+  locationContext
+} = Astro.props;
+
+const primaryLink = href ?? `/services/${service.slug}`;
+
+const isPriority = Boolean(priority && aboveFold);
+const imageLoading = isPriority ? 'eager' : 'lazy';
+const imageDecoding = isPriority ? 'sync' : 'async';
+const imageFetchPriority = isPriority ? 'high' : 'auto';
+const serviceImageDimensions = { width: 480, height: 360 } as const;
+const serviceImageDensities: (number | `${number}x`)[] = [1, 1.5, 2];
+const serviceImageQuality = 65;
+const serviceImageFormat = 'avif';
+const serviceImageSizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw';
+
+type ServiceSlug = ServiceSummary['slug'];
+
+const serviceImages: Record<ServiceSlug, ImageMetadata> = {
+  'garage-door-repair': garageDoorRepairImage,
+  'garage-door-installation': garageDoorInstallationImage,
+  'opener-repair': garageOpenerRepairImage,
+  'commercial-jobs': commercialServiceImage
+};
+
+type AltContext = {
+  displayName?: string;
+  market?: string;
+};
+
+const serviceAltBuilders: Record<ServiceSlug, (context: AltContext) => string> = {
+  'garage-door-repair': ({ displayName = 'Louisville, KY' }) =>
+    `Professional garage door repair technician working on broken springs, cables, and rollers in ${displayName} showing expert repair service`,
+  'garage-door-installation': ({ displayName = 'Louisville, KY' }) =>
+    `Finished double garage door installation with premium carriage-style doors and clean exterior trim on a home in ${displayName}`,
+  'opener-repair': ({ displayName = 'Louisville, KY' }) =>
+    `Certified garage door technician calibrating a belt-drive opener motor with ladder, safety sensors, and precision tools inside a ${displayName} residential garage`,
+  'commercial-jobs': ({ displayName = 'Louisville, KY', market }) =>
+    `Commercial garage door service at a modern warehouse supporting operations across ${market ? `${market} facilities` : displayName}`
+};
+
+const serviceIcons: Record<ServiceSlug, string> = {
+  'garage-door-repair': 'mdi:tools',
+  'garage-door-installation': 'mdi:hammer-wrench',
+  'opener-repair': 'mdi:garage-open-variant',
+  'commercial-jobs': 'mdi:warehouse'
+};
+
+const locationDisplayName = locationContext ? `${locationContext.name}, ${locationContext.state}` : undefined;
+const altContext: AltContext = {
+  displayName: locationDisplayName,
+  market: locationContext?.market
+};
+const serviceAlt = serviceAltBuilders[service.slug](altContext);
+const serviceProviderPhone = locationContext?.phone?.trim() || BUSINESS_INFO.telephone;
+const serviceAreaServed = locationDisplayName ?? 'Louisville, KY';
+const primaryCtaText = primaryLinkText ?? `Learn About ${service.name}`;
+---
+
+<div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-lg transform-gpu transition-transform duration-300 group composite-surface hover:-translate-y-1 focus-within:-translate-y-1">
+  
+  <div class="aspect-video overflow-hidden content-visibility-auto" itemscope itemtype="https://schema.org/ImageObject">
+    <Image
+      src={serviceImages[service.slug]}
+      alt={serviceAlt}
+      width={serviceImageDimensions.width}
+      height={serviceImageDimensions.height}
+      densities={serviceImageDensities}
+      class={`w-full h-full ${service.slug === 'opener-repair' ? 'card-image-opener' : 'card-image'} group-hover:scale-105 transition-transform duration-300`}
+      fetchpriority={imageFetchPriority}
+      loading={imageLoading}
+      decoding={imageDecoding}
+      sizes={serviceImageSizes}
+      quality={serviceImageQuality}
+      format={serviceImageFormat}
+      itemprop="contentUrl"
+    />
+    <meta itemprop="name" content={service.name} />
+    <meta itemprop="description" content={serviceAlt} />
+  </div>
+
+  
+  <div class="p-8" itemscope itemtype="https://schema.org/Service">
+    <div class="flex items-center mb-4">
+      <Icon name={serviceIcons[service.slug]} size="24" class="text-accent mr-3" aria-hidden="true" />
+      <h3 class="text-2xl font-bold text-ink group-hover:text-primary transition-colors" itemprop="name">
+        {service.name}
+      </h3>
+    </div>
+    <p class="text-ink/70 mb-6 text-lg leading-relaxed" itemprop="description">
+      {service.short}
+    </p>
+
+    
+    <div class="hidden" itemprop="provider" itemscope itemtype="https://schema.org/LocalBusiness">
+      <span itemprop="name">{BUSINESS_INFO.name}</span>
+      <span itemprop="telephone" class="nap-phone">{serviceProviderPhone}</span>
+      <span itemprop="areaServed">{serviceAreaServed}</span>
+      <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+        <span itemprop="streetAddress">{BUSINESS_INFO.address.streetAddress}</span>
+        <span itemprop="addressLocality">{BUSINESS_INFO.address.addressLocality}</span>
+        <span itemprop="addressRegion">{BUSINESS_INFO.address.addressRegion}</span>
+        <span itemprop="postalCode">{BUSINESS_INFO.address.postalCode}</span>
+        <span itemprop="addressCountry">{BUSINESS_INFO.address.addressCountry}</span>
+      </div>
+    </div>
+
+    
+    <div class="flex flex-col gap-3 sm:gap-2 lg:gap-3">
+      <a
+        href={primaryLink}
+        class="btn-outline w-full py-3 px-4 sm:px-6 text-sm sm:text-base font-medium"
+      >
+        <Icon name="mdi:information" size="16" class="mr-2" aria-hidden="true" />
+        {primaryCtaText}
+      </a>
+      <a
+        href="/contact"
+        class="btn-primary w-full py-3 px-4 sm:px-6 text-sm sm:text-base font-medium"
+      >
+        <Icon name="mdi:calculator" size="16" class="mr-2" aria-hidden="true" />
+        Get Quote
+      </a>
+    </div>
+  </div>
+</div>

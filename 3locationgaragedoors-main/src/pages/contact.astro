@@ -1,0 +1,416 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Schema } from 'astro-seo-schema';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ContactForm from '../components/ContactForm.astro';
+import heroImage from '../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
+import { BUSINESS_INFO } from '../data/business';
+import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../data/call-markets';
+import { getSiteOrigin } from '../utils/site-origin';
+
+const siteOrigin = getSiteOrigin();
+const displayPhoneNumber = BUSINESS_INFO.telephone;
+const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
+const emailHref = `mailto:${BUSINESS_INFO.email}`;
+
+const callMarkets = CALL_MARKETS;
+const defaultCallMarket = DEFAULT_CALL_MARKET;
+const callModalId = 'header-call-modal';
+const callLinkHref = defaultCallMarket?.phoneHref ?? telephoneHref;
+const locationAddress = `${BUSINESS_INFO.address.streetAddress}, ${BUSINESS_INFO.address.addressLocality}, ${BUSINESS_INFO.address.addressRegion} ${BUSINESS_INFO.address.postalCode}`;
+const mapApiKey = 'AIzaSyBCrB1WJEkydzguNjR71uUVxg7O-mCpAVQ';
+const mapEmbedSrc = `https://www.google.com/maps/embed/v1/place?key=${mapApiKey}&q=${encodeURIComponent(locationAddress)}`;
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Contact' }
+];
+
+const supportResources = [
+  {
+    title: 'View Service Areas',
+    description: 'Confirm we serve your neighborhood across Louisville, Lexington, and Northern Kentucky.',
+    href: '/locations',
+    icon: 'mdi:map-marker-radius'
+  },
+  {
+    title: 'Review Our Services',
+    description: 'See repair, installation, and opener options available for your project.',
+    href: '/services',
+    icon: 'mdi:tools'
+  },
+  {
+    title: 'Browse the FAQ',
+    description: 'Find answers to pricing, scheduling, and warranty questions before you call.',
+    href: '/faq',
+    icon: 'mdi:comment-question-outline'
+  },
+  {
+    title: 'Read Expert Tips',
+    description: 'Learn maintenance advice and safety insights from our garage door specialists.',
+    href: '/blog',
+    icon: 'mdi:newspaper-variant-outline'
+  },
+  {
+    title: 'Check Safety Guidelines',
+    description: 'Review best practices for keeping your family safe around garage door equipment.',
+    href: '/safety',
+    icon: 'mdi:shield-check'
+  }
+];
+---
+
+<Base
+  title="Contact Us | Derby Strong Garage Doors Kentucky Service Areas"
+  description={`Contact Derby Strong Garage Doors for fast, reliable garage door repair and installation across Louisville, Lexington, and Northern Kentucky. Same-day service available. Call ${displayPhoneNumber} or request a free quote online.`}
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+  
+  
+  <section id="contact-hero" class="relative py-20 text-white">
+    <div class="absolute inset-0 overflow-hidden">
+      <Image
+        src={heroImage}
+        alt="Contact Derby Strong Garage Doors offices serving Louisville, Lexington, and Northern Kentucky with professional customer service teams ready to help with garage door repairs and installations"
+        width="1200"
+        height="675"
+        class="w-full h-full object-cover"
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+        quality={60}
+        format="webp"
+        sizes="100vw"
+      />
+      <div class="absolute inset-0 bg-primary/75"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="relative">
+        
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          Contact Us
+        </h1>
+        <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed">
+          Ready to get your garage door fixed? Contact us today for fast, reliable service throughout Louisville, Lexington, and Northern Kentucky. Same-day appointments available in every market.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center">
+          {callMarkets.length > 0 && defaultCallMarket ? (
+            <button
+              type="button"
+              class="btn-accent text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
+              data-call-modal-trigger
+              aria-controls={callModalId}
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              aria-label="Choose a service area phone number"
+            >
+              <Icon name="mdi:phone" size="22" class="inline" aria-hidden="true" />
+              <span>Call Now</span>
+              <span class="sr-only">for the {defaultCallMarket.label} market</span>
+            </button>
+          ) : (
+            <a
+              href={telephoneHref}
+              class="btn-accent text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
+            >
+              <Icon name="mdi:phone" size="22" class="inline" aria-hidden="true" />
+              <span>Call Now:</span>
+              <span class="nap-phone">{displayPhoneNumber}</span>
+            </a>
+          )}
+          <a
+            href="#contact-form"
+            class="btn-outline-light text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 inline-flex items-center justify-center font-semibold w-full sm:w-auto bg-white/10 hover:bg-white/20 gap-3"
+          >
+            <Icon name="mdi:clipboard-text" size="22" class="inline" aria-hidden="true" />
+            <span>Get a Quote</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <section class="py-16 bg-muted">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-ink mb-6">Get Professional Garage Door Help Today</h2>
+        <p class="text-lg text-ink/80 leading-relaxed mb-6">
+          Ready to solve your garage door problems? Our Kentucky-based teams in Louisville, Lexington, and Northern Kentucky make it easy to get expert help when you need it. Whether you're dealing with an emergency repair, planning a new installation, or need routine maintenance, we're here to provide honest recommendations, upfront pricing, and professional service you can trust.
+        </p>
+        <p class="text-lg text-ink/80 leading-relaxed mb-12">
+          We welcome questions about garage door safety, repair costs, service scheduling, product recommendations, and warranty coverage. Our knowledgeable staff provides accurate information to help you make informed decisions about your garage door needs, and we're committed to responding promptly to every inquiry.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div class="rounded-2xl bg-white shadow-sm ring-1 ring-black/5 px-6 py-8 text-left md:text-center">
+          <div class="bg-primary/10 text-primary w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-0 md:mx-auto">
+            <Icon name="mdi:phone" size="28" aria-hidden="true" />
+          </div>
+          <h3 class="text-xl font-semibold text-ink mb-2">Call Us Today</h3>
+          <p class="text-ink/70 mb-6 text-base">Speak directly with our team</p>
+          <a
+            href="#contact-hero"
+            class="inline-flex items-center justify-center text-base font-semibold text-primary underline decoration-2 underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+          >
+            Call Now
+          </a>
+        </div>
+
+        <div class="rounded-2xl bg-white shadow-sm ring-1 ring-black/5 px-6 py-8 text-left md:text-center">
+          <div class="bg-primary/10 text-primary w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-0 md:mx-auto">
+            <Icon name="mdi:email" size="28" aria-hidden="true" />
+          </div>
+          <h3 class="text-xl font-semibold text-ink mb-2">Email Us Today</h3>
+          <p class="text-ink/70 mb-4 text-base">Send us your questions</p>
+          <a href={emailHref} class="inline-link text-base font-semibold break-words">
+            {BUSINESS_INFO.email}
+          </a>
+        </div>
+
+        <div class="rounded-2xl bg-white shadow-sm ring-1 ring-black/5 px-6 py-8 text-left md:text-center">
+          <div class="bg-primary/10 text-primary w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-0 md:mx-auto">
+            <Icon name="mdi:clock" size="28" aria-hidden="true" />
+          </div>
+          <h3 class="text-xl font-semibold text-ink mb-2">Available 24/7</h3>
+          <p class="text-ink/70 mb-4 text-base">Every Day</p>
+          <p class="font-semibold text-ink">Always open</p>
+          <p class="text-sm text-ink/60 mt-2">Schedule service whenever you need us.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary/70 mb-4">What To Expect</p>
+        <h3 class="text-3xl font-bold text-ink mb-4">What Happens After You Contact Us</h3>
+        <p class="text-lg text-ink/70 leading-relaxed">
+          From the first call to the final invoice, our team keeps you informed and moving forward with fast updates and reliable service.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white/90 backdrop-blur rounded-2xl p-6 shadow-lg shadow-primary/5 ring-1 ring-black/5 text-center">
+          <div class="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Icon name="mdi:phone" size="24" class="text-primary" aria-hidden="true" />
+          </div>
+          <h4 class="font-semibold text-ink mb-2">Immediate Response</h4>
+          <p class="text-sm text-ink/70">
+            Expect a call back within 15 minutes during business hours, or immediate response for emergency situations. We'll discuss your garage door issue and schedule a convenient service time.
+          </p>
+        </div>
+        <div class="bg-white/90 backdrop-blur rounded-2xl p-6 shadow-lg shadow-primary/5 ring-1 ring-black/5 text-center">
+          <div class="bg-accent/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Icon name="mdi:calendar-clock" size="24" class="text-accent" aria-hidden="true" />
+          </div>
+          <h4 class="font-semibold text-ink mb-2">Flexible Scheduling</h4>
+          <p class="text-sm text-ink/70">
+            We offer same-day appointments for urgent repairs and convenient scheduling for installations. Our technicians arrive on time with fully stocked trucks and proper safety equipment.
+          </p>
+        </div>
+        <div class="bg-white/90 backdrop-blur rounded-2xl p-6 shadow-lg shadow-primary/5 ring-1 ring-black/5 text-center">
+          <div class="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Icon name="mdi:check-circle" size="24" class="text-green-600" aria-hidden="true" />
+          </div>
+          <h4 class="font-semibold text-ink mb-2">Professional Service</h4>
+          <p class="text-sm text-ink/70">
+            Expert technicians provide thorough diagnosis, upfront pricing, quality repairs using premium parts, and complete safety testing to ensure your garage door operates reliably.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="py-16 bg-muted">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">How We Coordinate Your Garage Door Service</h2>
+      <div class="space-y-6 text-lg text-ink/80 leading-relaxed">
+        <p>
+          Every request is reviewed by a service manager who understands the neighborhoods we serve. We confirm your preferred contact method,
+          double-check the door style and opener brand, and match you with a technician who regularly works on similar equipment. That preparation
+          means your appointment starts with a plan instead of a guess, keeping disruption to a minimum.
+        </p>
+        <p>
+          If you are scheduling from work or coordinating for a rental property, let us know. We are happy to send text updates when the technician
+          is in route, share photos of completed repairs, and store digital invoices in your customer portal for easy record keeping. You can even
+          request multi-property scheduling so routine maintenance visits happen on the same day.
+        </p>
+        <p>
+          Need paperwork for a warranty claim or HOA approval? Our office staff prepares detailed estimates, proof of insurance, and follow-up
+          documentation within one business day. From the first phone call to the final receipt, we make sure every step is transparent and convenient.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div class="space-y-6">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary/70 mb-3">Visit Our Louisville Office</p>
+          <h3 class="text-3xl font-bold text-ink mb-4">See Where Our Team Works From</h3>
+          <p class="text-lg text-ink/70 leading-relaxed">
+            Stop by or plan your service with confidence. Use the map to get quick directions to our Louisville office and see
+            the surrounding neighborhoods we regularly serve across Jefferson, Fayette, and Northern Kentucky counties.
+          </p>
+        </div>
+        <div class="bg-muted rounded-2xl p-6 shadow-sm ring-1 ring-black/5 space-y-4">
+          <div>
+            <p class="text-sm text-ink/60">Address</p>
+            <p class="font-semibold text-ink">{locationAddress}</p>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <p class="text-sm text-ink/60">Phone</p>
+              <a href={telephoneHref} class="font-semibold text-primary underline decoration-2 underline-offset-4">
+                {displayPhoneNumber}
+              </a>
+            </div>
+            <div>
+              <p class="text-sm text-ink/60">Email</p>
+              <a href={emailHref} class="font-semibold text-primary underline decoration-2 underline-offset-4 break-words">
+                {BUSINESS_INFO.email}
+              </a>
+            </div>
+          </div>
+          <div>
+            <p class="text-sm text-ink/60">Service Areas</p>
+            <p class="font-semibold text-ink">Louisville • Lexington • Northern Kentucky</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg ring-1 ring-black/5 overflow-hidden h-[420px] md:h-[520px]">
+        <iframe
+          title="Map of our Louisville office"
+          width="100%"
+          height="100%"
+          style="border:0; min-height:300px;"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src={mapEmbedSrc}
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Get Answers Before You Reach Out</h2>
+        <p class="text-xl text-ink/70">
+          Explore popular guides and service hubs that help homeowners across our Kentucky service areas plan their next step.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {supportResources.map(resource => (
+          <a
+            href={resource.href}
+            class="group bg-white rounded-xl shadow-sm ring-1 ring-black/5 hover:shadow-lg transform-gpu transition-[transform,opacity] duration-300 p-6 text-left composite-surface hover:-translate-y-1 focus-visible:-translate-y-1"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div class="bg-accent/10 text-accent w-12 h-12 rounded-full flex items-center justify-center">
+                <Icon name={resource.icon} size="28" aria-hidden="true" />
+              </div>
+              <span class="text-primary font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Explore
+              </span>
+            </div>
+            <h3 class="text-xl font-semibold text-ink mb-2 group-hover:text-primary transition-colors">
+              {resource.title}
+            </h3>
+            <p class="text-ink/70 leading-relaxed text-sm">
+              {resource.description}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ContactForm bgColor="muted" />
+
+  <Footer />
+</Base>
+
+
+<Schema
+  item={{
+    '@context': 'https://schema.org',
+    '@type': 'ContactPoint',
+    telephone: displayPhoneNumber,
+    contactType: 'customer service',
+    email: BUSINESS_INFO.email,
+    availableLanguage: 'English',
+    areaServed: [
+      {
+        '@type': 'City',
+        name: 'Louisville',
+        addressRegion: 'KY'
+      },
+      {
+        '@type': 'City',
+        name: 'Lexington',
+        addressRegion: 'KY'
+      },
+      {
+        '@type': 'AdministrativeArea',
+        name: 'Northern Kentucky',
+        addressRegion: 'KY'
+      }
+    ],
+    hoursAvailable: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'Monday',
+        'Tuesday', 
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+      ],
+      opens: '00:00',
+      closes: '23:59'
+    }
+  }}
+/>
+
+
+<Schema
+  item={{
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Derby Strong Garage Doors',
+    url: siteOrigin,
+    logo: BUSINESS_INFO.logo,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: BUSINESS_INFO.telephone,
+      contactType: 'customer service',
+      email: BUSINESS_INFO.email
+    },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: BUSINESS_INFO.address.streetAddress,
+      addressLocality: BUSINESS_INFO.address.addressLocality,
+      addressRegion: BUSINESS_INFO.address.addressRegion,
+      postalCode: BUSINESS_INFO.address.postalCode,
+      addressCountry: BUSINESS_INFO.address.addressCountry
+    }
+  }}
+/>

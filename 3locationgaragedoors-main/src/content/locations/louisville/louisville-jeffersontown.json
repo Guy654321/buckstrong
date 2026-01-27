@@ -1,0 +1,22 @@
+{
+  "name": "Jeffersontown",
+  "slug": "louisville-jeffersontown",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.194,
+    "lng": -85.564
+  },
+  "zips": [
+    "40299"
+  ],
+  "surroundingAreas": [
+    "Bluegrass Commerce Park",
+    "Gaslight Square",
+    "Plainview"
+  ]
+}

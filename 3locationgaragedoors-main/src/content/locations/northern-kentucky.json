@@ -1,0 +1,35 @@
+{
+  "name": "Northern Kentucky",
+  "slug": "northern-kentucky",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "showAddress": true,
+  "serviceAreaBusiness": false,
+  "address": {
+    "streetAddress": "7628 Dixie Hwy, Suite #8",
+    "addressLocality": "Florence",
+    "addressRegion": "KY",
+    "postalCode": "41042",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "lat": 38.9989,
+    "lng": -84.6266
+  },
+  "gbpUrl": "https://maps.google.com/?cid=northern-kentucky-derby-strong",
+  "metaTitle": "Garage Door Repair & Installation Florence | Derby Strong",
+  "metaDescription": "Rapid-response garage door supplier for Northern Kentucky homes and riverfront businesses from Covington to Florence.",
+  "surroundingAreas": [
+    "Covington",
+    "Newport",
+    "Florence",
+    "Erlanger",
+    "Fort Thomas",
+    "Independence",
+    "Burlington",
+    "Alexandria",
+    "Hebron",
+    "Union"
+  ]
+}

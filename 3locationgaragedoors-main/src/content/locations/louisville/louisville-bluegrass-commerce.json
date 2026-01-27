@@ -1,0 +1,22 @@
+{
+  "name": "Bluegrass Commerce Park",
+  "slug": "louisville-bluegrass-commerce",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.1976,
+    "lng": -85.552
+  },
+  "zips": [
+    "40299"
+  ],
+  "surroundingAreas": [
+    "Commerce Crossings",
+    "Watterson Trail",
+    "Jeffersontown"
+  ]
+}

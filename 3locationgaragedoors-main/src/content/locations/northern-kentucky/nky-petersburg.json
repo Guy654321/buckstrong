@@ -1,0 +1,22 @@
+{
+  "name": "Petersburg",
+  "slug": "nky-petersburg",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.0592,
+    "lng": -84.867
+  },
+  "zips": [
+    "41080"
+  ],
+  "surroundingAreas": [
+    "Ohio River",
+    "Boone Cliffs",
+    "Hebron"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Bellevue",
+  "slug": "nky-bellevue",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.1014,
+    "lng": -84.477
+  },
+  "zips": [
+    "41073"
+  ],
+  "surroundingAreas": [
+    "Fairfield Avenue",
+    "Taylor's Landing",
+    "Reserve at Bellevue"
+  ]
+}

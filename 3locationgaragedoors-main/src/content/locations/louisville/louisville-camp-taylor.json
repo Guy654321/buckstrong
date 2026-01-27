@@ -1,0 +1,22 @@
+{
+  "name": "Camp Taylor",
+  "slug": "louisville-camp-taylor",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.1968,
+    "lng": -85.7065
+  },
+  "zips": [
+    "40213"
+  ],
+  "surroundingAreas": [
+    "Louisville Mega Cavern",
+    "Poplar Level",
+    "Belmar"
+  ]
+}

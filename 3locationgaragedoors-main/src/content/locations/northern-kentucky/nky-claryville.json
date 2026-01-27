@@ -1,0 +1,22 @@
+{
+  "name": "Claryville",
+  "slug": "nky-claryville",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.9252,
+    "lng": -84.3906
+  },
+  "zips": [
+    "41001"
+  ],
+  "surroundingAreas": [
+    "AA Highway",
+    "Alexandria",
+    "California"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Kenwick",
+  "slug": "lexington-kenwick",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0324,
+    "lng": -84.4741
+  },
+  "zips": [
+    "40502"
+  ],
+  "surroundingAreas": [
+    "National Avenue",
+    "Bell Court",
+    "Fairway"
+  ]
+}

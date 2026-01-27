@@ -1,0 +1,22 @@
+{
+  "name": "Crestview Hills",
+  "slug": "nky-crestview-hills",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.0213,
+    "lng": -84.5614
+  },
+  "zips": [
+    "41017"
+  ],
+  "surroundingAreas": [
+    "Thomas More University",
+    "Turkeyfoot Road",
+    "Edgewood"
+  ]
+}

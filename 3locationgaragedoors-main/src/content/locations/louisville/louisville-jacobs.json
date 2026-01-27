@@ -1,0 +1,22 @@
+{
+  "name": "Jacobs",
+  "slug": "louisville-jacobs",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2129,
+    "lng": -85.7933
+  },
+  "zips": [
+    "40215"
+  ],
+  "surroundingAreas": [
+    "Taylor Boulevard",
+    "UofL",
+    "Beechmont"
+  ]
+}

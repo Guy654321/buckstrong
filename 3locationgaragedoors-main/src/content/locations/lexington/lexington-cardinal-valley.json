@@ -1,0 +1,22 @@
+{
+  "name": "Cardinal Valley",
+  "slug": "lexington-cardinal-valley",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.0451,
+    "lng": -84.551
+  },
+  "zips": [
+    "40504"
+  ],
+  "surroundingAreas": [
+    "Village Drive",
+    "Red Mile",
+    "Garden Springs"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Berea",
+  "slug": "lexington-berea",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 37.5687,
+    "lng": -84.2963
+  },
+  "zips": [
+    "40403"
+  ],
+  "surroundingAreas": [
+    "Berea College",
+    "Artisan Village",
+    "Madison County"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Fort Mitchell",
+  "slug": "fort-mitchell",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.0467,
+    "lng": -84.5647
+  },
+  "zips": [
+    "41017"
+  ],
+  "surroundingAreas": [
+    "I-75",
+    "Beechwood",
+    "Crestview Hills"
+  ]
+}

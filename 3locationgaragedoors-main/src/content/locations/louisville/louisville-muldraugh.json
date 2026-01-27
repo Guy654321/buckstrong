@@ -1,0 +1,22 @@
+{
+  "name": "Muldraugh",
+  "slug": "louisville-muldraugh",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 37.8142,
+    "lng": -85.9876
+  },
+  "zips": [
+    "40155"
+  ],
+  "surroundingAreas": [
+    "Fort Knox",
+    "Otter Creek",
+    "Meade County"
+  ]
+}

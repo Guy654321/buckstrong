@@ -1,0 +1,366 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Schema } from 'astro-seo-schema';
+import contactFormModuleUrl from '../scripts/contact-form.js?url';
+import contactFormLoaderInline from '../scripts/contact-form-loader.js?raw';
+import { BUSINESS_INFO } from '../data/business';
+
+export interface Props {
+  id?: string;
+  title?: string;
+  subtitle?: string;
+  bgColor?: 'gray' | 'muted' | 'white';
+  formBgColor?: 'white' | 'muted';
+}
+
+const {
+  id,
+  title = "Get Your Free Quote",
+  subtitle = "Fill out the form below and we'll contact you within a few minutes",
+  bgColor = 'white',
+  formBgColor = 'white'
+} = Astro.props;
+
+const rawTurnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+
+const getEnvString = (key: string): string | undefined => {
+  const env = import.meta.env;
+  const value = (env as Record<string, string | boolean | undefined>)[key];
+  return typeof value === 'string' ? value : undefined;
+};
+
+const getHostnameCandidates = () => {
+  const hostnames = new Set<string>();
+
+  const addHostname = (value?: string | null) => {
+    if (typeof value !== 'string') {
+      return;
+    }
+
+    const trimmed = value.trim();
+    if (!trimmed) {
+      return;
+    }
+
+    hostnames.add(trimmed.toLowerCase());
+
+    if (trimmed.startsWith('www.')) {
+      hostnames.add(trimmed.slice(4).toLowerCase());
+    } else {
+      hostnames.add(`www.${trimmed}`.toLowerCase());
+    }
+  };
+
+  try {
+    if (Astro.url?.hostname) {
+      addHostname(Astro.url.hostname);
+    }
+  } catch {}
+
+  try {
+    if (Astro.site) {
+      addHostname(new URL(Astro.site).hostname);
+    }
+  } catch {}
+
+  addHostname(getEnvString('PUBLIC_SITE_HOSTNAME') ?? null);
+
+  return Array.from(hostnames).filter(Boolean);
+};
+
+const getEnvironmentKeyCandidates = () => {
+  const envKeys = new Set<string>();
+  const append = (value?: string | null) => {
+    if (typeof value === 'string' && value.trim()) {
+      envKeys.add(value.trim().toLowerCase());
+    }
+  };
+
+  append(getEnvString('PUBLIC_DEPLOYMENT_ENV') ?? null);
+  append(getEnvString('PUBLIC_RUNTIME_ENV') ?? null);
+  append(import.meta.env.MODE ?? null);
+  append(import.meta.env.PROD ? 'production' : 'development');
+  append('preview');
+  append('prod');
+  append('dev');
+  append('default');
+
+  return Array.from(envKeys).filter(Boolean);
+};
+
+const selectSiteKeyFromMapping = (candidate: unknown): string => {
+  if (!candidate || typeof candidate !== 'object') {
+    return '';
+  }
+
+  const normalizedEntries = Object.entries(candidate as Record<string, unknown>)
+    .filter(([, value]) => typeof value === 'string' && value.trim().length > 0)
+    .reduce<Record<string, string>>((acc, [key, value]) => {
+      acc[key.trim().toLowerCase()] = (value as string).trim();
+      return acc;
+    }, {});
+
+  if (Object.keys(normalizedEntries).length === 0) {
+    return '';
+  }
+
+  const candidateKeys = [...getHostnameCandidates(), ...getEnvironmentKeyCandidates()];
+  for (const key of candidateKeys) {
+    const match = normalizedEntries[key];
+    if (match) {
+      return match;
+    }
+  }
+
+  return '';
+};
+
+const parseSiteKeyString = (value: string): string => {
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return '';
+  }
+
+  try {
+    const parsed = JSON.parse(trimmed);
+    if (
+      typeof parsed === 'string' ||
+      typeof parsed === 'number' ||
+      typeof parsed === 'boolean' ||
+      typeof parsed === 'bigint'
+    ) {
+      return String(parsed);
+    }
+
+    const extracted = selectSiteKeyFromMapping(parsed);
+    if (extracted) {
+      return extracted;
+    }
+  } catch {
+    // Not JSON, treat as literal string
+  }
+
+  return trimmed;
+};
+
+const turnstileSiteKey = (() => {
+  const type = typeof rawTurnstileSiteKey;
+  if (type === 'string') {
+    return parseSiteKeyString(rawTurnstileSiteKey);
+  }
+
+  if (type === 'number' || type === 'boolean' || type === 'bigint') {
+    return String(rawTurnstileSiteKey);
+  }
+
+  const extracted = selectSiteKeyFromMapping(rawTurnstileSiteKey);
+  if (extracted) {
+    return extracted;
+  }
+
+  if (rawTurnstileSiteKey) {
+    console.warn(
+      'Invalid Turnstile site key configuration detected. Widget will not render.'
+    );
+  }
+
+  return '';
+})();
+
+const isTurnstileEnabled = Boolean(turnstileSiteKey);
+const turnstileScriptSrc = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+---
+
+<section id={id} class={`py-16 ${bgColor === 'white' ? 'bg-white' : 'bg-muted'}`}>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-ink mb-4">{title}</h2>
+      <p class="text-xl text-ink/70">{subtitle}</p>
+    </div>
+    
+    <form
+      id="contact-form"
+      name="contact"
+      method="POST"
+      action="/api/contact"
+      class={`${formBgColor === 'muted' ? 'bg-muted' : 'bg-white'} rounded-lg shadow-lg px-4 sm:px-5 lg:px-6 py-8`}
+      data-contact-form-module={contactFormModuleUrl}
+      data-turnstile-src={isTurnstileEnabled ? turnstileScriptSrc : undefined}
+    >
+      <div class="hidden">
+        <label>Don't fill this out: <input name="bot-field" /></label>
+        <input type="hidden" name="company" data-decoy-company />
+        <input type="hidden" name="form_loaded_at" data-form-loaded-at />
+      </div>
+
+      {isTurnstileEnabled && (
+        <div
+          class="cf-turnstile mb-6"
+          data-sitekey={turnstileSiteKey}
+          data-theme="light"
+          data-action="contact"
+        ></div>
+      )}
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label for="name" class="block text-sm font-medium text-ink mb-2">
+            <Icon name="mdi:account" size="16" class="inline mr-1" aria-hidden="true" />
+            Full Name *
+          </label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            required 
+            aria-describedby="name-required"
+            class="w-full px-4 py-3 border border-ink/20 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+          />
+          <span id="name-required" class="sr-only">Required field</span>
+        </div>
+        
+        <div>
+          <label for="phone" class="block text-sm font-medium text-ink mb-2">
+            <Icon name="mdi:phone" size="16" class="inline mr-1" aria-hidden="true" />
+            Phone Number *
+          </label>
+          <input 
+            type="tel" 
+            id="phone" 
+            name="phone" 
+            required 
+            aria-describedby="phone-required"
+            class="w-full px-4 py-3 border border-ink/20 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+          />
+          <span id="phone-required" class="sr-only">Required field</span>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label for="email" class="block text-sm font-medium text-ink mb-2">
+            <Icon name="mdi:email" size="16" class="inline mr-1" aria-hidden="true" />
+            Email Address
+          </label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            class="w-full px-4 py-3 border border-ink/20 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+          />
+        </div>
+        
+        <div>
+          <label for="zip" class="block text-sm font-medium text-ink mb-2">
+            <Icon name="mdi:map-marker" size="16" class="inline mr-1" aria-hidden="true" />
+            ZIP Code *
+          </label>
+          <input 
+            type="text" 
+            id="zip" 
+            name="zip" 
+            required 
+            class="w-full px-4 py-3 border border-ink/20 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+          />
+        </div>
+      </div>
+      
+      <div class="mb-6">
+        <label for="issue" class="block text-sm font-medium text-ink mb-2">
+          <Icon name="mdi:tools" size="16" class="inline mr-1" aria-hidden="true" />
+          What's the issue? *
+        </label>
+        <select 
+          id="issue" 
+          name="issue" 
+          required 
+          class="w-full px-4 py-3 border border-ink/20 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+        >
+          <option value="">Select an issue...</option>
+          <option value="door-wont-open">Door won't open</option>
+          <option value="door-wont-close">Door won't close</option>
+          <option value="broken-spring">Broken spring</option>
+          <option value="opener-problems">Opener problems</option>
+          <option value="new-installation">New installation</option>
+          <option value="maintenance">Maintenance/tune-up</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      
+      <div class="mb-6">
+        <label for="message" class="block text-sm font-medium text-ink mb-2">
+          <Icon name="mdi:message-text" size="16" class="inline mr-1" aria-hidden="true" />
+          Additional Details
+        </label>
+        <textarea 
+          id="message" 
+          name="message" 
+          rows="4" 
+          class="w-full px-4 py-3 border border-ink/20 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+          placeholder="Please describe the problem or what you need..."
+        ></textarea>
+      </div>
+      
+      <div class="mb-6">
+        <label class="flex items-start">
+          <input 
+            type="checkbox" 
+            name="consent" 
+            required 
+            aria-describedby="consent-required"
+            class="mt-1 mr-3 h-4 w-4 text-accent focus:ring-accent border-ink/20 rounded"
+          />
+          <span class="text-sm text-ink/80">
+            I consent to being contacted by Derby Strong Garage Doors regarding my service request. *
+          </span>
+          <span id="consent-required" class="sr-only">Required field</span>
+        </label>
+      </div>
+
+      <button type="submit" class="w-full btn-primary text-lg py-4">
+        <Icon name="mdi:send" size="20" class="inline mr-2" aria-hidden="true" />
+        Send My Request
+      </button>
+
+      <p
+        data-status
+        role="status"
+        aria-live="polite"
+        class="mt-4 text-sm text-ink/80"
+        hidden
+      ></p>
+    </form>
+  </div>
+</section>
+
+
+<Schema
+  item={{
+    '@context': 'https://schema.org',
+    '@type': 'ContactPoint',
+    telephone: BUSINESS_INFO.telephone,
+    contactType: 'customer service',
+    email: BUSINESS_INFO.email,
+    availableLanguage: 'English',
+    hoursAvailable: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'Monday',
+        'Tuesday', 
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+      ],
+      opens: '00:00',
+      closes: '23:59'
+    },
+    areaServed: {
+      '@type': 'City',
+      name: 'Louisville'
+    }
+  }}
+/>
+
+<script type="module" is:inline set:html={contactFormLoaderInline}></script>

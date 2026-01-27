@@ -1,0 +1,22 @@
+{
+  "name": "Prairie Village",
+  "slug": "louisville-prairie-village",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.1248,
+    "lng": -85.8598
+  },
+  "zips": [
+    "40258"
+  ],
+  "surroundingAreas": [
+    "Bethany Lane",
+    "Greenwood Road",
+    "PRP"
+  ]
+}

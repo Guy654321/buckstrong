@@ -1,0 +1,22 @@
+{
+  "name": "Mentor",
+  "slug": "nky-mentor",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.9361,
+    "lng": -84.288
+  },
+  "zips": [
+    "41007"
+  ],
+  "surroundingAreas": [
+    "River Road",
+    "California",
+    "Moscow"
+  ]
+}

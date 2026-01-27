@@ -1,0 +1,433 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { Image } from 'astro:assets';
+import { getLocationsByMarket, PRIMARY_MARKET_PRIORITY } from '../../lib/locations';
+import heroImage from '../../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
+import { BUSINESS_INFO } from '../../data/business';
+import HiddenSeoText from '../../components/HiddenSeoText.astro';
+
+const locationGroups = await getLocationsByMarket();
+const locations = locationGroups.flatMap(group => [group.hub, ...group.areas].filter(
+  (entry): entry is NonNullable<typeof entry> => Boolean(entry)
+));
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Locations' }
+];
+
+const filterStrings = (value: string | undefined | null): value is string =>
+  typeof value === 'string' && value.trim().length > 0;
+
+const buildTelephoneHref = (phone: string) => `tel:${phone.replace(/[^0-9+]/g, '') || phone}`;
+const resolvePhoneDetails = (location?: (typeof locations)[number]) => {
+  const phoneDisplay = location?.phone?.trim() || BUSINESS_INFO.telephone;
+  return {
+    phoneDisplay,
+    phoneHref: buildTelephoneHref(phoneDisplay),
+  };
+};
+
+const buildAddressLines = (location: (typeof locations)[number]) => {
+  if (!location.address) {
+    return [] as string[];
+  }
+
+  const { streetAddress, addressLocality, addressRegion, postalCode } = location.address;
+  const lines: string[] = [];
+  const street = streetAddress?.trim();
+  if (street) {
+    lines.push(street);
+  }
+  const cityParts = [addressLocality?.trim(), addressRegion?.trim()].filter(filterStrings);
+  const postal = postalCode?.trim();
+  let localityLine = '';
+  if (cityParts.length) {
+    localityLine = cityParts.join(', ');
+    if (postal) {
+      localityLine = `${localityLine} ${postal}`;
+    }
+  } else if (postal) {
+    localityLine = postal;
+  }
+  if (filterStrings(localityLine)) {
+    lines.push(localityLine);
+  }
+  return lines;
+};
+
+const buildMarketAnchor = (label: string) =>
+  label
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+const metroCoverage = locationGroups.map(group => {
+  const hub = group.hub;
+  const coverageLocations = group.areas;
+  const allLocations = [hub, ...coverageLocations].filter(
+    (entry): entry is NonNullable<typeof entry> => Boolean(entry)
+  );
+
+  const zipSet = new Set<string>();
+  allLocations.forEach(location => {
+    const zips = Array.isArray(location.zips) ? location.zips : [];
+    zips.forEach(zip => zipSet.add(zip));
+  });
+
+  const { phoneDisplay, phoneHref } = resolvePhoneDetails(hub ?? allLocations[0]);
+
+  return {
+    market: group.market,
+    hub,
+    coverageLocations,
+    allLocations,
+    zipCount: zipSet.size,
+    addressLines: hub ? buildAddressLines(hub) : [],
+    anchor: buildMarketAnchor(group.market),
+    phoneDisplay,
+    phoneHref,
+  };
+});
+
+const hubNeighborhoodGroups = locationGroups
+  .map(group => {
+    const hub = group.hub;
+    const areaLocations = group.areas;
+    const fallbackAreas =
+      areaLocations.length === 0 && hub
+        ? (Array.isArray(hub.surroundingAreas) ? hub.surroundingAreas.filter(filterStrings) : [])
+        : [];
+
+    return {
+      market: group.market,
+      hub,
+      anchor: buildMarketAnchor(group.market),
+      areas: areaLocations,
+      fallbackAreas,
+      count: areaLocations.length > 0 ? areaLocations.length : fallbackAreas.length,
+    };
+  })
+  .filter(group => group.hub || group.areas.length > 0 || group.fallbackAreas.length > 0);
+
+const listFormatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
+const marketPriority = new Map<string, number>(
+  PRIMARY_MARKET_PRIORITY.map((market, index) => [market, index]),
+);
+const heroCoverage = [...metroCoverage].sort((a, b) => {
+  const aPriority = marketPriority.get(a.market) ?? Number.POSITIVE_INFINITY;
+  const bPriority = marketPriority.get(b.market) ?? Number.POSITIVE_INFINITY;
+
+  if (aPriority !== bPriority) {
+    return aPriority - bPriority;
+  }
+
+  return a.market.localeCompare(b.market);
+});
+const heroMarketNames = heroCoverage.map(group => group.market);
+const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMarketNames) : '';
+---
+
+<Base
+  title="Derby Strong Garage Doors | Kentucky Service Areas"
+  description="Derby Strong Garage Doors serves Louisville, Lexington, and Northern Kentucky with professional garage door repair, installation, and opener service."
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+
+
+  <section class="relative py-20 text-white overflow-hidden">
+    <div class="absolute inset-0">
+      <Image
+        src={heroImage}
+        alt="Kentucky service areas for professional garage door repair"
+        width="1200"
+        height="675"
+        class="w-full h-full object-cover"
+        fetchpriority="high"
+        loading="eager"
+        decoding="sync"
+        quality={80}
+        sizes="100vw"
+      />
+      <div class="absolute inset-0 bg-primary/75"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="relative">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          Kentucky Metro Garage Door Service
+        </h1>
+        <p class="text-xl md:text-2xl text-white/90 mb-10 max-w-4xl mx-auto leading-relaxed">
+          Same-day garage door coverage spans {heroMarketList || 'Kentucky'}. Each market has a dedicated crew for repairs, installations, and opener emergencies.
+        </p>
+
+        {heroCoverage.length > 0 && (
+          <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+            {heroCoverage.map(({ market, hub, allLocations, zipCount, anchor, phoneDisplay, phoneHref }) => (
+              <div class="bg-white/10 border border-white/20 rounded-2xl p-6 h-full">
+                <h2 class="text-2xl font-semibold text-white mb-3">{market}</h2>
+                <p class="text-white/80 leading-relaxed mb-4">
+                  {hub
+                    ? `Served from our ${hub.name} hub with ${allLocations.length} neighborhoods and ${zipCount} ZIP codes.`
+                    : `Covering ${allLocations.length} neighborhoods across ${zipCount} ZIP codes.`}
+                </p>
+                <p class="text-white text-lg font-semibold mb-4">
+                  <a
+                    href={phoneHref}
+                    class="inline-flex items-center gap-2 hover:text-accent transition-colors"
+                    title={`Call ${hub?.name ?? market} at ${phoneDisplay}`}
+                  >
+                    Call Now: <span class="nap-phone">{phoneDisplay}</span>
+                  </a>
+                </p>
+                <div class="flex flex-wrap gap-3">
+                {hub && (
+                  <a
+                    href={`/locations/${hub.slug}`}
+                    class="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-white/60 text-sm font-semibold uppercase tracking-wide text-white hover:bg-white hover:text-primary transition-colors"
+                  >
+                    Explore {hub.name}
+                  </a>
+                )}
+                  <a
+                    href={`#${anchor}`}
+                    class="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-white/40 text-sm font-semibold uppercase tracking-wide text-white/90 hover:bg-white hover:text-primary transition-colors"
+                  >
+                    View neighborhoods
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+
+  <section class="py-12 bg-muted">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-lg text-ink/80 mb-4">
+        Need more than a map? Compare <a href="/services" class="inline-link">garage door services</a>, review
+        <a href="/faq" class="inline-link">common repair questions</a>, or request a
+        <a href="/contact" class="inline-link">fast quote from our team</a>.
+      </p>
+      <p class="text-lg text-ink/80">
+        Homeowners also love our <a href="/blog" class="inline-link">garage door blog</a> for seasonal maintenance tips
+        and safety advice tailored to Kentucky weather.
+      </p>
+    </div>
+  </section>
+
+
+  {metroCoverage.length > 0 && (
+    <section class="py-16 bg-card">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl font-bold text-ink mb-4">Kentucky Metro Service Coverage</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {metroCoverage.map(({ market, hub, coverageLocations, allLocations, zipCount, anchor, phoneDisplay, phoneHref }) => {
+            const highlightedAreas = coverageLocations.slice(0, 8);
+            const featuredAreas = highlightedAreas.length > 0 ? highlightedAreas : allLocations.slice(0, 8);
+            const popularAreas = hub?.surroundingAreas?.slice(0, 3) ?? [];
+            const totalLocations = allLocations.length;
+
+            return (
+              <div class="bg-white rounded-lg p-6 hover:shadow-lg transform-gpu transition-transform duration-300 hover:-translate-y-1">
+                <p class="text-xs uppercase tracking-wide text-ink/50 mb-2">{market}</p>
+                <h3 class="text-xl font-semibold text-ink mb-2">
+                  {hub ? `${hub.name} Garage Door Team` : `${market} Garage Door Service`}
+                </h3>
+                <p class="text-ink/70 mb-3">
+                  <a
+                    href={phoneHref}
+                    class="hover:text-primary transition-colors"
+                  >
+                    <span class="nap-phone">{phoneDisplay}</span>
+                  </a>
+                </p>
+                {hub?.serviceAreaBusiness && !hub.showAddress && (
+                  <p class="text-xs uppercase tracking-wide text-ink/50 mb-4">
+                    Mobile service – appointments required
+                  </p>
+                )}
+                <div class="flex flex-wrap items-center gap-6 text-ink/60 mb-4">
+                  <div>
+                    <p class="text-3xl font-bold text-primary">{totalLocations}</p>
+                    <p class="text-xs uppercase tracking-wide">Service areas</p>
+                  </div>
+                  <div>
+                    <p class="text-3xl font-bold text-primary">{zipCount}</p>
+                    <p class="text-xs uppercase tracking-wide">ZIP codes</p>
+                  </div>
+                </div>
+                {popularAreas.length > 0 && (
+                  <p class="text-sm text-ink/70 mb-4">
+                    Popular areas: {popularAreas.join(', ')}
+                  </p>
+                )}
+                {featuredAreas.length > 0 && (
+                  <div class="text-sm text-ink/70 mb-6">
+                    <p class="font-semibold text-ink/80 mb-2">Featured neighborhoods</p>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {featuredAreas.map(area => (
+                        <li>
+                          <a
+                            href={`/locations/${area.slug}`}
+                            class="inline-flex items-center gap-2 hover:text-primary transition-colors"
+                          >
+                            <span class="inline-flex h-1.5 w-1.5 rounded-full bg-primary/40"></span>
+                            <span>{area.name}</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                <div class="mt-6 flex flex-col gap-3">
+                  {hub && (
+                    <a
+                      href={`/locations/${hub.slug}`}
+                      class="btn-outline"
+                    >
+                      Explore {hub.name}
+                    </a>
+                  )}
+                  <a
+                    href={`#${anchor}`}
+                    class="inline-link inline-flex items-center gap-1"
+                  >
+                    View all {market} areas →
+                  </a>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {hubNeighborhoodGroups.length > 0 && (
+    <section class="py-16 bg-muted">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center mb-10">
+          <h2 class="text-3xl font-bold text-ink mb-4">Neighborhood Service Areas</h2>
+          <p class="text-lg text-ink/70">
+            Browse the complete list of geo-targeted locations we service across each metro. Every link below opens a dedicated
+            landing page with localized copy, ZIP codes, and structured data to reinforce search visibility.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {hubNeighborhoodGroups.map(group => (
+            <div id={group.anchor} class="bg-muted rounded-lg p-6">
+              <div class="flex flex-wrap items-baseline justify-between gap-2 mb-4">
+                <div>
+                  <h3 class="text-lg font-semibold text-ink">
+                    {group.hub ? (
+                      <a
+                        href={`/locations/${group.hub.slug}`}
+                        class="inline-flex items-center gap-2 hover:text-primary transition-colors"
+                      >
+                        <span>{group.hub.name}</span>
+                        <span class="text-xs uppercase tracking-wide text-ink/40">Hub</span>
+                      </a>
+                    ) : (
+                      group.market
+                    )}
+                  </h3>
+                  <p class="text-sm text-ink/60">
+                    Serving {group.market}
+                  </p>
+                </div>
+                {group.count > 0 && (
+                  <span class="text-xs uppercase tracking-wide text-ink/50">{group.count} locations</span>
+                )}
+              </div>
+              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-ink/70">
+                {group.areas.map(location => (
+                  <li>
+                    <a
+                      href={`/locations/${location.slug}`}
+                      class="inline-flex items-center gap-2 hover:text-primary transition-colors"
+                    >
+                      <span class="inline-flex h-1.5 w-1.5 rounded-full bg-primary/40"></span>
+                      <span>{location.name}</span>
+                    </a>
+                  </li>
+                ))}
+                {group.areas.length === 0 &&
+                  group.fallbackAreas.map(areaName => (
+                    <li class="inline-flex items-center gap-2 text-ink/60">
+                      <span class="inline-flex h-1.5 w-1.5 rounded-full bg-primary/20"></span>
+                      <span>{areaName}</span>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+
+  <section class="py-16 bg-card">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-ink mb-6">Our Kentucky Service Promise</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div>
+          <div class="text-4xl mb-4">⚡</div>
+          <h3 class="text-xl font-semibold mb-2">Same-Day Service</h3>
+          <p class="text-ink/70">Most repairs completed the same day you call</p>
+        </div>
+        <div>
+          <div class="text-4xl mb-4">🛡️</div>
+          <h3 class="text-xl font-semibold mb-2">Insured & Safety Focused</h3>
+          <p class="text-ink/70">Fully insured in Kentucky with rigorous safety training</p>
+        </div>
+        <div>
+          <div class="text-4xl mb-4">✅</div>
+          <h3 class="text-xl font-semibold mb-2">Satisfaction Guaranteed</h3>
+          <p class="text-ink/70">We stand behind our work with comprehensive warranties</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <HiddenSeoText
+    title="Expanded Kentucky service area details"
+    paragraphs={[
+      'Our Louisville, Lexington, and Northern Kentucky hubs coordinate garage door repairs, opener service, and installations across nearby suburbs and rural communities. Each crew documents access needs, HOA preferences, and gate codes so follow-up visits stay smooth.',
+      'Customers receive balance testing, track alignment, photo eye calibration, and hardware inspections as part of every appointment. Service trucks arrive stocked with springs, cables, rollers, hinges, and common opener parts to finish most work in one trip.',
+      'We also support commercial and property management partners with rolling steel door maintenance, dock door tune-ups, and scheduled safety inspections that fit around loading schedules and tenant activity.'
+    ]}
+    bullets={[
+      `Primary hubs: ${locationGroups
+        .filter(group => PRIMARY_MARKET_PRIORITY.some(market => market === group.market))
+        .map(group => group.market)
+        .join(', ')}`,
+      'Common requests: emergency garage door repair, opener troubleshooting, new door installation, and commercial overhead door maintenance',
+      'Scheduling options include same-day arrivals, after-hours visits, and contactless approvals'
+    ]}
+  />
+
+  <HiddenSeoText
+    title="How our Kentucky locations support homeowners and businesses"
+    paragraphs={[
+      'Technicians share pre-arrival updates with identification details and estimated windows to reduce surprises for property managers and homeowners. Service notes stay attached to each location so returning crews know access instructions and past repairs.',
+      'Weather-readiness is part of every visit. We review seal compression, insulation values, and opener force settings to account for Kentucky humidity, wind, and temperature swings that impact garage door performance.',
+      'Facilities and retail partners can schedule grouped visits across multiple locations. Coordinated dispatch keeps loading docks, apartment garages, and warehouses compliant with safety checks while minimizing downtime.'
+    ]}
+    bullets={[
+      'Dispatch coverage spans residential neighborhoods, commercial corridors, and light industrial parks throughout each metro',
+      'Stocked trucks carry high-cycle springs, galvanized cables, nylon rollers, struts, hinges, weather seals, and common opener components',
+      'Digital approvals, contactless payments, and documented photo reports keep communication clear for all stakeholders'
+    ]}
+  />
+
+  <Footer />
+</Base>

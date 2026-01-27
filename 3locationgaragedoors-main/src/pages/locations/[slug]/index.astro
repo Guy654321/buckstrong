@@ -1,0 +1,790 @@
+---
+import { Schema } from 'astro-seo-schema';
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import ServiceCard from '../../../components/ServiceCard.astro';
+import ContactForm from '../../../components/ContactForm.astro';
+import Hero from '../../../components/Hero.astro';
+import IconRow from '../../../components/IconRow.astro';
+import HiddenSeoText from '../../../components/HiddenSeoText.astro';
+import { getLocations, getHubForLocation } from '../../../lib/locations';
+import { getServices, type ServiceSummary } from '../../../lib/services';
+import { buildLocationCanonicalPath } from '../../../lib/canonical';
+import heroImage from '../../../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
+import { BUSINESS_INFO } from '../../../data/business';
+import { buildAbsoluteUrl, getSiteOrigin } from '../../../utils/site-origin';
+
+export async function getStaticPaths() {
+  const locations = await getLocations();
+  return locations.map(location => ({
+    params: { slug: location.slug },
+    props: { location }
+  }));
+}
+
+const { location } = Astro.props;
+
+const services = await getServices();
+const allLocations = await getLocations();
+
+const parentHubLocation = (await getHubForLocation(location)) ?? location;
+const marketLocations = allLocations.filter(loc => loc.market === parentHubLocation.market);
+const familyParentSlug = parentHubLocation.slug;
+const siblingLocations = marketLocations.filter(loc => {
+  if (loc.slug === location.slug) {
+    return false;
+  }
+
+  return loc.parentHub?.trim() === familyParentSlug;
+});
+
+const relatedCandidates = location.isHub
+  ? siblingLocations
+  : [
+      ...(parentHubLocation && parentHubLocation.slug !== location.slug ? [parentHubLocation] : []),
+      ...siblingLocations
+    ];
+
+const nearbyLocations = relatedCandidates;
+const primaryNearbyLocations = nearbyLocations.slice(0, 3);
+const additionalNearbyLocations = nearbyLocations.slice(3);
+const hasAdditionalNearbyLocations = additionalNearbyLocations.length > 0;
+
+const trimStrings = (values: Array<string | undefined | null>) =>
+  values
+    .map(value => value?.trim())
+    .filter((value): value is string => Boolean(value));
+
+const locationZipCodes = trimStrings(Array.isArray(location.zips) ? location.zips : []);
+const siblingZipCodes = location.isHub
+  ? trimStrings(
+      siblingLocations.flatMap(loc => (Array.isArray(loc.zips) ? loc.zips : []))
+    )
+  : [];
+const zipCodes = locationZipCodes.length > 0 ? locationZipCodes : siblingZipCodes;
+const marketDisplayRaw = parentHubLocation?.market ?? location.market;
+const marketDisplayName = marketDisplayRaw.replace(/\s*Metro$/, '');
+const marketPossessiveSource = marketDisplayName || marketDisplayRaw;
+const marketPossessive = marketPossessiveSource.endsWith('s')
+  ? `${marketPossessiveSource}'`
+  : `${marketPossessiveSource}'s`;
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Locations', href: '/locations' },
+  { label: `${location.name}, ${location.state}` }
+];
+
+const siteOrigin = getSiteOrigin();
+const canonicalPath = buildLocationCanonicalPath(location.slug);
+const locationUrl = buildAbsoluteUrl(canonicalPath, siteOrigin);
+const locationHeroImage = buildAbsoluteUrl(heroImage.src, siteOrigin);
+const businessEntityId = `${siteOrigin}#business`;
+const locationTelephoneDisplay = location.phone?.trim() || BUSINESS_INFO.telephone;
+const buildTelephoneHref = (phone: string) => `tel:${phone.replace(/[^0-9+]/g, '') || phone}`;
+const regionCode = `US-${location.state}`;
+const locationDisplayName = `${location.name}, ${location.state}`;
+const hubCityName = location.isHub
+  ? location.address?.addressLocality?.trim() || location.name
+  : location.name;
+const hubLocationDisplayName = `${hubCityName}, ${location.state}`;
+const locationMarketName = marketDisplayName || location.market;
+const locationHeroSubtitle =
+  'We provide fast, same-day garage door repair and installation with a focus on safety and quality. Whether it\'s a broken spring, a faulty opener, or a full door replacement, our trained technicians use reliable parts and careful adjustments to ensure smooth, dependable operation.';
+const locationHeroTitle = location.isHub
+  ? `Garage Door Repair & Installation in ${hubLocationDisplayName}`
+  : `Garage Door Repair & Installation in ${locationDisplayName} and surrounding areas`;
+type ServiceSlug = ServiceSummary['slug'];
+
+const locationServiceShortBuilders: Record<ServiceSlug, (context: { displayName: string; market: string }) => string> = {
+  'garage-door-repair': ({ displayName, market }) =>
+    `Same-day garage door repair for broken springs, cables, rollers, and off-track doors in ${displayName}. Trusted Derby Strong technicians keep ${market} homeowners safe with stocked trucks and rapid response.`,
+  'garage-door-installation': ({ displayName, market }) =>
+    `Custom garage door installation for properties in ${displayName}. Precision measurements, insulated panels, and carriage-style upgrades that complement ${market} architecture and withstand the climate.`,
+  'opener-repair': ({ displayName, market }) =>
+    `Professional garage door opener repair and smart control upgrades in ${displayName}. We service belt-drive, chain-drive, and jackshaft motors throughout the ${market} area with same-day scheduling.`,
+  'commercial-jobs': ({ displayName, market }) =>
+    `Commercial overhead door repair and maintenance for facilities in ${displayName}. Rolling steel, sectional, and dock equipment support tailored to ${market} warehouses, auto shops, and logistics centers.`
+};
+
+const localizedServices = services.map(service => {
+  const builder = locationServiceShortBuilders[service.slug as ServiceSlug];
+  const localizedShort = builder
+    ? builder({ displayName: locationDisplayName, market: locationMarketName })
+    : service.short;
+
+  return {
+    ...service,
+    name: `${service.name} in ${locationDisplayName}`,
+    short: localizedShort
+  } satisfies ServiceSummary;
+});
+
+const PRIMARY_SERVICE_SLUGS: ServiceSlug[] = [
+  'garage-door-repair',
+  'opener-repair',
+  'garage-door-installation'
+];
+const localizedPrimaryServices = PRIMARY_SERVICE_SLUGS
+  .map(slug => localizedServices.find(service => service.slug === slug))
+  .filter((service): service is ServiceSummary => Boolean(service));
+const featuredServices =
+  localizedPrimaryServices.length > 0 ? localizedPrimaryServices : localizedServices.slice(0, 3);
+
+const serviceCardLocationContext = {
+  name: location.name,
+  state: location.state,
+  market: locationMarketName,
+  phone: locationTelephoneDisplay
+};
+const repairLinkText = location.isHub ? `Garage Door Repair in ${hubCityName}` : undefined;
+
+const PROCESS_STEPS = [
+  {
+    number: '1',
+    title: 'Schedule your visit',
+    copy: [
+      'Call our local team or ',
+      {
+        type: 'link' as const,
+        href: '/contact',
+        text: 'request service online',
+        title: `Request garage door service in ${locationDisplayName}`
+      },
+      `. We offer same-day and after-hours appointments across ${marketDisplayName}.`
+    ]
+  },
+  {
+    number: '2',
+    title: 'On-site diagnosis',
+    copy: [
+      `A technician arrives on time, inspects tracks, hardware, opener settings, and safety sensors, then outlines repair options tailored to ${locationDisplayName} properties with clear pricing.`
+    ]
+  },
+  {
+    number: '3',
+    title: 'Same-day completion',
+    copy: [
+      `We complete the approved work, balance and test the door, perform a full safety check, and send a digital summary with maintenance reminders for ${marketDisplayName} weather.`
+    ]
+  }
+];
+
+const buildServiceHref = (slug: string) => `/locations/${location.slug}/services/${slug}`;
+const defaultMetaTitle = `${locationDisplayName} Garage Door Services | Derby Strong Garage Doors`;
+const pageMetaTitle = location.metaTitle?.trim() || defaultMetaTitle;
+const defaultMetaDescription = `Professional garage door supplier offering repair, installation, opener service, and commercial overhead door work in ${locationDisplayName}. Same-day service across the ${marketDisplayName} communities. Trusted, insured technicians. Call ${locationTelephoneDisplay}`;
+const pageMetaDescription = location.metaDescription?.trim() || defaultMetaDescription;
+const zipAreas = [...zipCodes];
+
+const hubCoverageAreas = location.isHub
+  ? siblingLocations.map(loc => loc.name).filter(Boolean)
+  : [];
+const fallbackCoverageAreas = !location.isHub
+  ? trimStrings(Array.isArray(location.surroundingAreas) ? location.surroundingAreas : [])
+  : [];
+const surroundingAreaList = location.isHub
+  ? hubCoverageAreas
+  : fallbackCoverageAreas.length > 0
+  ? fallbackCoverageAreas
+  : parentHubLocation?.name
+  ? [parentHubLocation.name]
+  : [];
+
+const surroundingAreaSummary = surroundingAreaList.length
+  ? `${surroundingAreaList.slice(0, 5).join(', ')}${
+      surroundingAreaList.length > 5 ? `, and ${surroundingAreaList.length - 5} more nearby areas` : ''
+    }`
+  : `${marketDisplayName} neighborhoods and business districts`;
+
+const zipCoverageSummary = zipAreas.length
+  ? `ZIP coverage includes ${zipAreas.slice(0, 8).join(', ')}${
+      zipAreas.length > 8 ? `, plus ${zipAreas.length - 8} additional codes we service regularly` : ''
+    }`
+  : `Service coverage flexes across ${marketDisplayName} addresses, including new construction and established properties.`;
+
+const responseTimeSummary = location.isHub
+  ? `${locationDisplayName} is our hub for ${marketDisplayName}, so technicians are dispatched locally for same-day and after-hours calls.`
+  : `Calls from ${locationDisplayName} route through our ${parentHubLocation.name} hub for coordinated same-day scheduling.`;
+
+const localizedMaintenanceNotes = [
+  `Technicians frequently service carriage-style, steel, and insulated garage doors across ${locationDisplayName}, noting hinge tension, roller type, and opener age so we can anticipate parts before we arrive.`,
+  `${marketPossessive} weather swings can loosen hardware and wear out seals; our maintenance notes log humidity exposure, insulation gaps, and track alignment to reduce repeat problems.`,
+  `Property managers in ${marketDisplayName} rely on our visit summaries to schedule preventive maintenance around deliveries and resident access, keeping docks, shared garages, and townhome bays running smoothly.`
+];
+
+const localizedMaintenanceBullets = [
+  `Inspection history for ${locationDisplayName} includes balance tests, cable condition, drum wear, hinge torque, and opener force calibration.`,
+  `We document door construction (single-layer, insulated, or carriage) and opener models to speed up return visits with the correct hardware.`,
+  `Scheduling preferences can include gate codes, loading dock hours, and after-hours contact names so crews arrive prepared.`,
+  `Seasonal adjustments account for ${marketPossessive} temperature shifts, helping keep weather seals tight and springs properly tensioned.`
+];
+
+const localizedFaqParagraphs = [
+  `${locationDisplayName} homeowners often ask when to replace versus repair existing doors. We explain cycle counts on springs, opener lifespan expectations, and cost ranges so you can plan upgrades at the right time.`,
+  `Noise concerns are common in ${marketDisplayName}; we recommend quieter rollers, belt-drive openers, and fresh lubrication plans to reduce vibration for bedrooms above garages.`,
+  `For rental properties and community garages, we map out approval steps, insurance certificates, and digital sign-offs so facility teams can keep projects documented.`
+];
+
+const localizedFaqBullets = [
+  `Common emergency calls: broken torsion springs, snapped lift cables, off-track doors, and malfunctioning safety sensors.`,
+  `Upgrade options: insulated steel panels for energy savings, modern glass doors for curb appeal, and smart openers with battery backup.`,
+  `Access planning: photo confirmations, text updates, and contactless approval links keep ${locationDisplayName} projects moving when owners are offsite.`,
+  `Safety standards: we follow UL 325 opener guidelines and local building codes for ${location.state}, documenting checks in each visit summary.`
+];
+
+const locationPostalCode = zipCodes.length > 0
+  ? zipCodes[0]
+  : BUSINESS_INFO.address.postalCode;
+
+const canDisplayAddress = Boolean(location.showAddress && !location.serviceAreaBusiness);
+
+const normalizedAddress = canDisplayAddress && location.address
+  ? {
+      streetAddress: location.address.streetAddress?.trim(),
+      addressLocality: location.address.addressLocality?.trim() ?? location.name,
+      addressRegion: location.address.addressRegion?.trim() ?? location.state,
+      postalCode: location.address.postalCode?.trim() ?? locationPostalCode,
+      addressCountry: location.address.addressCountry?.trim() ?? 'US'
+    }
+  : null;
+
+const hasDedicatedAddress = Boolean(canDisplayAddress && normalizedAddress?.streetAddress);
+const locationAddress = hasDedicatedAddress ? normalizedAddress : null;
+const locationAddressLines = locationAddress
+  ? [
+      locationAddress.streetAddress,
+      `${locationAddress.addressLocality}, ${locationAddress.addressRegion} ${locationAddress.postalCode}`
+    ]
+  : [];
+const locationMapUrl = locationAddress
+  ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationAddressLines.join(', '))}`
+  : undefined;
+
+const additionalNearbyContainerId = `nearby-service-areas-${location.slug}`;
+const additionalNearbyToggleButtonId = `nearby-service-areas-toggle-${location.slug}`;
+const additionalNearbyCalloutId = `nearby-service-callout-${location.slug}`;
+
+const serviceArea = zipAreas.length
+  ? zipAreas.map(zip => ({
+      '@type': 'PostalCodeRangeSpecification',
+      postalCodeBegin: zip,
+      postalCodeEnd: zip
+    }))
+  : surroundingAreaList.length
+  ? surroundingAreaList.map(area => ({
+      '@type': 'City',
+      name: area,
+      addressRegion: location.state,
+      addressCountry: 'US'
+    }))
+  : [
+      {
+        '@type': 'City',
+        name: location.name,
+        addressRegion: location.state,
+        addressCountry: 'US'
+      }
+    ];
+
+const parentBusinessReference = {
+  '@type': 'Organization',
+  '@id': businessEntityId,
+  name: BUSINESS_INFO.name,
+  url: BUSINESS_INFO.url,
+  logo: BUSINESS_INFO.logo,
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: BUSINESS_INFO.telephone,
+    contactType: 'customer service',
+    areaServed: 'US'
+  },
+  address: {
+    '@type': 'PostalAddress',
+    ...BUSINESS_INFO.address
+  }
+};
+
+const schemaAddress = locationAddress ?? BUSINESS_INFO.address;
+
+const locationBusinessSchema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${locationUrl}#local-business`,
+  name: `Derby Strong Garage Doors — ${locationDisplayName}`,
+  description: pageMetaDescription,
+  url: locationUrl,
+  image: locationHeroImage,
+  telephone: locationTelephoneDisplay,
+  email: BUSINESS_INFO.email,
+  priceRange: '$$ - $$$',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: BUSINESS_INFO.aggregateRating.ratingValue,
+    reviewCount: BUSINESS_INFO.aggregateRating.reviewCount
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: location.lat,
+    longitude: location.lng
+  },
+  areaServed: serviceArea,
+  parentOrganization: parentBusinessReference,
+  sameAs: [
+    'https://www.facebook.com/DerbyStrongGarageDoors',
+    'https://www.instagram.com/DerbyStrongGarageDoors'
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    ...schemaAddress
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '07:00',
+      closes: '19:00'
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Saturday'],
+      opens: '08:00',
+      closes: '16:00'
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Sunday'],
+      opens: '09:00',
+      closes: '13:00'
+    }
+  ]
+};
+
+if (locationAddress && locationMapUrl) {
+  locationBusinessSchema.hasMap = locationMapUrl;
+}
+
+---
+
+<Base
+  title={pageMetaTitle}
+  description={pageMetaDescription}
+  canonical={canonicalPath}
+  callNowPhoneNumber={locationTelephoneDisplay}
+>
+  
+  <meta name="geo.region" content={regionCode} />
+  <meta name="geo.placename" content={locationDisplayName} />
+  <meta name="geo.position" content={`${location.lat};${location.lng}`} />
+
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+
+
+  <Schema item={locationBusinessSchema as any} />
+
+
+  <Hero
+    title={locationHeroTitle}
+    subtitle={locationHeroSubtitle}
+    heroImage={heroImage}
+    ctaText="Emergency? Call Now"
+    ctaLink="/contact"
+    phoneNumber={locationTelephoneDisplay}
+    primaryAsPhone={true}
+    showPrimaryPhoneNumber={false}
+    showPhoneNumber={false}
+    ctaTriggersCallModal={false}
+    showLocationHeading={false}
+    compact={true}
+  />
+
+  <main class="bg-white">
+    <IconRow />
+    <section class="py-20 bg-muted">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Local Services</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-ink mb-6">
+            Professional Garage Door Help in {locationDisplayName}
+          </h2>
+          <p class="text-lg sm:text-xl text-ink/70 leading-relaxed max-w-3xl mx-auto">
+            Start with the three core services {location.name} homeowners call us for most&mdash;fast repairs, opener expertise,
+            and professional installs across the {marketDisplayName} area.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {featuredServices.map((service, index) => (
+            <ServiceCard
+              service={service}
+              href={buildServiceHref(service.slug)}
+              locationContext={serviceCardLocationContext}
+              primaryLinkText={service.slug === 'garage-door-repair' ? repairLinkText : undefined}
+            />
+          ))}
+        </div>
+
+        <div class="text-center mt-12">
+          <a
+            href="/services"
+            class="inline-flex items-center gap-2 text-base font-semibold text-primary hover:text-primary/80 transition-colors"
+          >
+            Explore All Our Services
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Our Process</p>
+          <h2 class="text-3xl font-bold text-ink mb-6">From First Call to Final Safety Check</h2>
+          <p class="text-lg text-ink/70 leading-relaxed max-w-3xl mx-auto">
+            The moment you contact Derby Strong Garage Doors, we begin mapping out your service visit. Our coordinated approach keeps {locationDisplayName} projects on schedule with no surprises.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {PROCESS_STEPS.map(step => (
+            <div class="text-center">
+              <div class="bg-accent text-ink w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg">
+                {step.number}
+              </div>
+              <h3 class="text-xl font-semibold text-ink mb-4">{step.title}</h3>
+              <p class="text-ink/70 leading-relaxed">
+                {step.copy.map(segment =>
+                  typeof segment === 'string' ? (
+                    segment
+                  ) : (
+                    <a
+                      href={segment.href}
+                      title={segment.title}
+                      class="inline-link"
+                    >
+                      {segment.text}
+                    </a>
+                  )
+                )}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-muted">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl font-bold text-ink mb-4">Our {locationDisplayName} Service Commitment</h2>
+          <p class="text-lg text-ink/70 leading-relaxed">
+            From emergency repairs to opener upgrades and commercial projects, we bring reliable garage door support to
+            {marketDisplayName} properties.
+          </p>
+          <p class="text-lg text-ink/70 leading-relaxed mt-4">
+            Our scheduling team tracks community events, school calendars, and peak commuter times in {locationDisplayName} so
+            service happens when it fits your routine.
+          </p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-6">
+            <h3 class="text-xl font-semibold text-ink mb-2">Fast Emergency Response</h3>
+            <p class="text-sm text-ink/80 leading-relaxed">
+              Garage door issues in {marketDisplayName} get same-day attention. Our technicians arrive within two hours with
+              fully stocked trucks to tackle broken springs, stuck doors, and opener failures on the first visit.
+            </p>
+          </div>
+          <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-6">
+            <h3 class="text-xl font-semibold text-ink mb-2">Quality Parts &amp; Installation</h3>
+            <p class="text-sm text-ink/80 leading-relaxed">
+              We only install premium torsion springs, galvanized cables, sealed rollers, and weather-resistant hardware.
+              Every job wraps with a full safety check so your door operates smoothly and keeps your family secure.
+            </p>
+          </div>
+          <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-6">
+            <h3 class="text-xl font-semibold text-ink mb-2">Local Building Compliance</h3>
+            <p class="text-sm text-ink/80 leading-relaxed">
+              Our team handles permits, HOA approvals, and code requirements unique to {locationDisplayName}. We build to
+              {location.state === 'KY' ? 'Kentucky' : 'Indiana'} residential standards so inspections and approvals stay
+              stress-free.
+            </p>
+          </div>
+          <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-6">
+            <h3 class="text-xl font-semibold text-ink mb-2">Weather-Ready Solutions</h3>
+            <p class="text-sm text-ink/80 leading-relaxed">
+              {marketPossessive} rapid temperature swings call for durable materials. We add insulation, upgraded seals, and
+              hardware that stand up to ice, humidity, and wind so your door performs year-round.
+            </p>
+          </div>
+          <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-6">
+            <h3 class="text-xl font-semibold text-ink mb-2">Coordinated Scheduling &amp; Access</h3>
+            <p class="text-sm text-ink/80 leading-relaxed">
+              We plan around school schedules, community events, and gated access needs. Property managers and HOA boards get
+              clear updates so your project stays on track without extra paperwork.
+            </p>
+            <ul class="mt-3 space-y-1 text-sm text-ink/70 list-disc pl-5">
+              <li>Flexible appointment windows for busy households</li>
+              <li>On-site notes capture past repairs and door specs</li>
+              <li>Proactive follow-ups prevent repeat disruptions</li>
+            </ul>
+          </div>
+          <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-6">
+            <h3 class="text-xl font-semibold text-ink mb-2">Proactive Maintenance Guidance</h3>
+            <p class="text-sm text-ink/80 leading-relaxed">
+              After every visit you receive photos, service notes, and an easy checklist tailored to {locationDisplayName}
+              weather. You will know exactly how to care for your door between professional tune-ups.
+            </p>
+            <ul class="mt-3 space-y-1 text-sm text-ink/70 list-disc pl-5">
+              <li>Safety inspections review springs, cables, and rollers</li>
+              <li>Seasonal adjustments keep insulation and seals tight</li>
+              <li>Documented recommendations simplify future repairs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ContactForm
+      title={`Get Service in ${locationDisplayName}`}
+      subtitle="Contact us today for fast, reliable garage door service"
+      bgColor="white"
+      formBgColor="muted"
+    />
+
+  {nearbyLocations.length > 0 && (
+   <section class="py-16 bg-muted">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-ink mb-4">Nearby Service Areas</h2>
+          <div class="w-24 h-1 bg-accent mx-auto rounded-full mb-6"></div>
+          <p class="text-xl text-ink/70 max-w-2xl mx-auto">
+            Derby Strong Garage Doors provides same-day{' '}
+            <a
+              href={buildServiceHref('garage-door-repair')}
+              class="inline-link"
+              title={`Garage door repair services in ${locationDisplayName}`}
+            >
+              garage door repair
+            </a>
+            ,{' '}
+            <a
+              href={buildServiceHref('opener-repair')}
+              class="inline-link"
+              title={`Garage door opener repair in ${locationDisplayName}`}
+            >
+              opener repair
+            </a>
+            , and{' '}
+            <a
+              href={buildServiceHref('commercial-jobs')}
+              class="inline-link"
+              title={`Commercial garage door service in ${locationDisplayName}`}
+            >
+              commercial overhead door service
+            </a>
+            {' '}throughout the {marketDisplayName} area.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          {primaryNearbyLocations.map(nearbyLocation => (
+            <div class="space-y-3 rounded-xl border border-ink/10 bg-white/90 p-4 shadow-sm transition-shadow hover:shadow-md focus-within:shadow-md">
+              <h3 class="text-lg font-semibold text-ink">{nearbyLocation.name}</h3>
+              {nearbyLocation.zips && nearbyLocation.zips.length > 0 && (
+                <p class="text-sm text-ink/60">
+                  ZIP: {nearbyLocation.zips.slice(0, 2).join(', ')}
+                  {nearbyLocation.zips.length > 2 && ` +${nearbyLocation.zips.length - 2} more`}
+                </p>
+              )}
+
+              <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <a
+                  href={buildTelephoneHref(nearbyLocation.phone)}
+                  class="inline-flex items-center gap-2 text-ink/80 hover:text-primary transition-colors font-medium"
+                >
+                  <svg class="h-4 w-4 text-accent" aria-hidden="true" focusable="false">
+                    <use href="#icon-phone" />
+                  </svg>
+                  <span class="nap-phone">{nearbyLocation.phone}</span>
+                </a>
+
+                <a
+                  href={`/locations/${nearbyLocation.slug}`}
+                  class="inline-flex items-center justify-center gap-2 rounded-lg border border-accent px-3 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white"
+                >
+                  <span>View Service Area</span>
+                  <svg class="h-4 w-4" aria-hidden="true" focusable="false">
+                    <use href="#icon-arrow-right" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {hasAdditionalNearbyLocations && (
+          <Fragment>
+            <div class="mt-8 flex justify-center">
+              <button
+                id={additionalNearbyToggleButtonId}
+                class="inline-flex items-center justify-center px-6 py-3 border border-accent bg-white text-accent font-semibold rounded-lg shadow-sm transition-colors hover:bg-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent"
+                type="button"
+                aria-controls={additionalNearbyContainerId}
+                aria-expanded="false"
+                data-open-text="Hide Full Service Area List"
+                data-closed-text="View Full Service Area List"
+                data-nearby-toggle
+                data-target-id={additionalNearbyContainerId}
+                data-callout-id={additionalNearbyCalloutId}
+              >
+                View Full Service Area List
+              </button>
+            </div>
+
+            <div
+              id={additionalNearbyContainerId}
+              class="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 hidden"
+              aria-hidden="true"
+            >
+              {additionalNearbyLocations.map(nearbyLocation => (
+                <div class="space-y-3 rounded-xl border border-ink/10 bg-white/90 p-4 shadow-sm transition-shadow hover:shadow-md focus-within:shadow-md">
+                  <h3 class="text-lg font-semibold text-ink">{nearbyLocation.name}</h3>
+                  {nearbyLocation.zips && nearbyLocation.zips.length > 0 && (
+                    <p class="text-sm text-ink/60">
+                      ZIP: {nearbyLocation.zips.slice(0, 2).join(', ')}
+                      {nearbyLocation.zips.length > 2 && ` +${nearbyLocation.zips.length - 2} more`}
+                    </p>
+                  )}
+
+                  <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <a
+                      href={buildTelephoneHref(nearbyLocation.phone)}
+                      class="inline-flex items-center gap-2 text-ink/80 hover:text-primary transition-colors font-medium"
+                    >
+                      <svg class="h-4 w-4 text-accent" aria-hidden="true" focusable="false">
+                        <use href="#icon-phone" />
+                      </svg>
+                      <span class="nap-phone">{nearbyLocation.phone}</span>
+                    </a>
+
+                    <a
+                      href={`/locations/${nearbyLocation.slug}`}
+                      class="inline-flex items-center justify-center gap-2 rounded-lg border border-accent px-3 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white"
+                    >
+                      <span>View Service Area</span>
+                      <svg class="h-4 w-4" aria-hidden="true" focusable="false">
+                        <use href="#icon-arrow-right" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div
+              id={additionalNearbyCalloutId}
+              class="mt-10 text-center hidden"
+              aria-hidden="true"
+            >
+              <div class="bg-white rounded-xl shadow-sm ring-1 ring-black/5 p-8 max-w-3xl mx-auto">
+                <h3 class="text-2xl font-bold text-ink mb-4">Don't See Your Area?</h3>
+                <p class="text-ink/70 mb-6">
+                  We serve many more {marketDisplayName} neighborhoods and surrounding areas. Contact us to see if we provide service in your location.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                  <a href="/contact" class="btn-primary px-6 py-3">
+                    Contact Us
+                  </a>
+                  <a href={`mailto:${BUSINESS_INFO.email}`} class="inline-link">
+                    {BUSINESS_INFO.email}
+                  </a>
+                </div>
+              </div>
+            </div>
+            <script type="module" src="/scripts/nearby-toggle.js" is:inline></script>
+          </Fragment>
+        )}
+      </div>
+    </section>
+  )}
+
+  </main>
+
+  <HiddenSeoText
+    title={`Garage door service coverage for ${locationDisplayName}`}
+    paragraphs={[
+      `Derby Strong Garage Doors supports homeowners and facility managers throughout ${marketDisplayName} with ${
+        locationDisplayName
+      }-based crews. We service common torsion and extension spring failures, frayed cables, damaged panels, off-track doors, and opener problems with stocked trucks prepared for same-day completion.`,
+      `Our technicians provide thorough inspections that include balance testing, track alignment, safety sensor calibration, and weather-seal checks tailored to ${marketPossessive} seasonal humidity and temperature swings. Each visit ends with written notes so you can track past repairs and plan proactive maintenance.`,
+      `Commercial and residential customers receive clear arrival windows, contactless approvals, and tidy work areas. If your project requires HOA coordination or building access codes, we note those preferences for future calls to minimize disruption.`
+    ]}
+    bullets={[
+      `Primary service ZIP coverage: ${zipAreas.length > 0 ? zipAreas.join(', ') : 'local neighborhoods surrounding the service area'}`,
+      surroundingAreaList.length > 0
+        ? `Nearby communities we regularly visit: ${surroundingAreaList.join(', ')}`
+        : `Hub coverage extends to surrounding ${marketDisplayName} communities and suburbs`,
+      `Core services available in ${locationDisplayName}: garage door repair, opener troubleshooting, new door installation, and commercial overhead door maintenance`
+    ]}
+  />
+
+  <HiddenSeoText
+    title={`What to expect from our ${locationDisplayName} garage door team`}
+    paragraphs={[
+      `Every appointment begins with a safety-focused walkthrough that documents spring cycles, roller wear, hinge tension, cable condition, and opener performance. We share options for repair versus replacement so ${locationDisplayName} homeowners and facility managers can choose the best approach for their timeline and budget.`,
+      `When new doors are required, we provide insulated steel, carriage house, and modern glass options sized precisely for ${marketDisplayName} driveways and loading bays. Opener repairs include force calibration, Wi-Fi configuration, keypad programming, and battery backups tested before we leave.`,
+      `Our trucks stay stocked with high-cycle springs, lift cables, drums, bearings, rollers, struts, and weather seals. That inventory lets us finish most jobs the same day, even during peak season demand across ${marketDisplayName}.`
+    ]}
+    bullets={[
+      'Inspection checklist: balance testing, track alignment, sensor verification, hardware tightening, and lubrication',
+      'Installations include haul-away of old doors, new seals, reinforced struts, and final safety reversal testing',
+      'Commercial support covers rolling steel curtains, sectional overheads, dock plates, and scheduled maintenance routes'
+    ]}
+  />
+
+  <HiddenSeoText
+    title={`${locationDisplayName} garage door coverage specifics`}
+    paragraphs={[
+      `Customers in ${locationDisplayName} receive transparent communication before dispatch. ${responseTimeSummary} Arrival updates, license and insurance details, and vehicle descriptions are included in confirmation messages.`,
+      `${zipCoverageSummary} ${location.isHub ? 'Technicians are staged in-market to limit drive time.' : 'Teams depart from the nearby hub with stocked trucks to minimize repeat visits.'}`,
+      `We routinely coordinate with property managers, HOAs, and facilities teams in ${marketDisplayName}. Scheduled maintenance routes keep loading areas, apartment garages, and fleet bays compliant with safety checks and documented lubrication routines.`,
+      `Seasonal adjustments are tailored to ${marketPossessive} climate. Cold snaps, humidity, and wind exposure influence seal selection, opener force calibration, and the hardware we recommend for long-term reliability.`
+    ]}
+    bullets={[
+      `Primary service focus areas: ${surroundingAreaSummary}`,
+      `Technician coverage for residential neighborhoods, retail storefronts, warehouses, and light industrial sites across ${marketDisplayName}`,
+      `Appointment flexibility includes weekend options, after-hours emergency dispatch, and contactless approvals sent via SMS or email`
+    ]}
+  />
+
+  <HiddenSeoText
+    title={`Maintenance insights for ${locationDisplayName} garage doors`}
+    paragraphs={localizedMaintenanceNotes}
+    bullets={localizedMaintenanceBullets}
+  />
+
+  <nav class="sr-only" aria-hidden="true">
+    <ul>
+      {localizedServices.map(service => (
+        <li>
+          <a href={buildServiceHref(service.slug)} title={service.name}>
+            {service.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <HiddenSeoText
+    title={`Answers to common ${locationDisplayName} garage door questions`}
+    paragraphs={localizedFaqParagraphs}
+    bullets={localizedFaqBullets}
+  />
+
+  <Footer />
+</Base>

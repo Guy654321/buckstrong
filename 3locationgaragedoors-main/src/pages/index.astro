@@ -1,0 +1,409 @@
+---
+import { getImage } from 'astro:assets';
+import { Schema } from 'astro-seo-schema';
+import heroImage from '../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import IconRow from '../components/IconRow.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { getServices, type ServiceSummary } from '../lib/services';
+import { getLocationHubs } from '../lib/locations';
+import { BUSINESS_INFO } from '../data/business';
+import HiddenSeoText from '../components/HiddenSeoText.astro';
+import CallNowButton from '../components/CallNowButton.astro';
+import {
+  HERO_IMAGE_QUALITY,
+  HERO_IMAGE_QUALITY_AVIF,
+  HERO_IMAGE_QUALITY_JPEG,
+  HERO_IMAGE_QUALITY_WEBP,
+  HERO_IMAGE_SIZES,
+  HERO_IMAGE_WIDTHS
+} from '../data/image-config';
+import { buildAbsoluteUrl, getSiteOrigin } from '../utils/site-origin';
+
+const siteOrigin = getSiteOrigin();
+const services = await getServices();
+const heroImageAbsoluteUrl = buildAbsoluteUrl(heroImage.src, siteOrigin);
+const businessEntityId = `${siteOrigin}#business`;
+const homepageUrl = buildAbsoluteUrl('/', siteOrigin);
+const PRIMARY_SERVICE_SLUGS = [
+  'opener-repair',
+  'garage-door-repair',
+  'garage-door-installation'
+];
+const PRIMARY_SERVICES: ServiceSummary[] = PRIMARY_SERVICE_SLUGS
+  .map((slug) => services.find((service) => service.slug === slug))
+  .filter((service): service is ServiceSummary => Boolean(service));
+const PROCESS_STEPS = [
+  {
+    number: '1',
+    title: 'Schedule your visit',
+    copy: [
+      'Call our office or ',
+      {
+        type: 'link' as const,
+        href: '/contact',
+        text: 'request service online',
+        title: 'Request garage door service online'
+      },
+      '. We offer same-day and after-hours appointments for urgent spring breaks or doors stuck open.'
+    ]
+  },
+  {
+    number: '2',
+    title: 'On-site diagnosis',
+    copy: [
+      'A technician arrives on time, inspects tracks, hardware, opener settings, and safety sensors, then presents repair options with clear pricing.'
+    ]
+  },
+  {
+    number: '3',
+    title: 'Same-day completion',
+    copy: [
+  'We complete the approved work, balance and test the door, perform a full safety check, and send a digital summary with maintenance reminders.'
+    ]
+  }
+];
+const heroImageQualityAvif = HERO_IMAGE_QUALITY_AVIF ?? HERO_IMAGE_QUALITY;
+const heroImageQualityWebp = HERO_IMAGE_QUALITY_WEBP ?? HERO_IMAGE_QUALITY;
+const heroImageQualityJpeg = HERO_IMAGE_QUALITY_JPEG ?? HERO_IMAGE_QUALITY;
+const heroImagePreloadBase = {
+  src: heroImage,
+  widths: HERO_IMAGE_WIDTHS
+};
+const [heroImagePreloadJpeg, heroImagePreloadAvif, heroImagePreloadWebp] = await Promise.all([
+  getImage({ ...heroImagePreloadBase, format: 'jpeg', quality: heroImageQualityJpeg }),
+  getImage({ ...heroImagePreloadBase, format: 'avif', quality: heroImageQualityAvif }),
+  getImage({ ...heroImagePreloadBase, format: 'webp', quality: heroImageQualityWebp })
+]);
+const heroImagePreloadJpegSrcSet = heroImagePreloadJpeg.srcSet?.attribute || undefined;
+const heroImagePreloadAvifSrcSet = heroImagePreloadAvif.srcSet?.attribute || undefined;
+const heroImagePreloadWebpSrcSet = heroImagePreloadWebp.srcSet?.attribute || undefined;
+const hubLocations = (await getLocationHubs()).slice(0, 3);
+
+const breadcrumbSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: homepageUrl
+    }
+  ]
+});
+---
+
+<Base
+  title="Kentucky Garage Door Repair & Install | Derby Strong Garage Doors"
+  description="Kentucky garage door repair, opener fixes, and commercial overhead door service across Louisville, Lexington, and Northern Kentucky. Same-day emergency support, free estimates, friendly techs."
+  schemaType="LocalBusiness"
+>
+  <Fragment slot="head">
+    {heroImagePreloadAvifSrcSet && (
+      <link
+        rel="preload"
+        as="image"
+        imagesrcset={heroImagePreloadAvifSrcSet}
+        imagesizes={HERO_IMAGE_SIZES}
+        fetchpriority="high"
+        type="image/avif"
+      />
+    )}
+    {heroImagePreloadWebpSrcSet && (
+      <link
+        rel="preload"
+        as="image"
+        imagesrcset={heroImagePreloadWebpSrcSet}
+        imagesizes={HERO_IMAGE_SIZES}
+        fetchpriority="high"
+        type="image/webp"
+      />
+    )}
+    <link
+      rel="preload"
+      as="image"
+      href={heroImagePreloadJpeg.src}
+      imagesrcset={heroImagePreloadJpegSrcSet}
+      imagesizes={HERO_IMAGE_SIZES}
+      fetchpriority="high"
+    />
+    <script type="application/ld+json" is:inline set:html={breadcrumbSchema}></script>
+  </Fragment>
+  <Nav />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      '@id': businessEntityId,
+      name: BUSINESS_INFO.name,
+      legalName: BUSINESS_INFO.legalName,
+      alternateName: 'Derby Strong Garage Door Services',
+      description:
+        'Same-day garage door repair, opener fixes, and commercial overhead door service across Louisville, Lexington, and Northern Kentucky with highly trained technicians and stocked trucks.',
+      url: BUSINESS_INFO.url,
+      logo: BUSINESS_INFO.logo,
+      image: heroImageAbsoluteUrl,
+      telephone: BUSINESS_INFO.telephone,
+      email: BUSINESS_INFO.email,
+      priceRange: '$$ - $$$',
+      paymentAccepted: ['Cash', 'Credit Card', 'Check'],
+      currenciesAccepted: 'USD',
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: BUSINESS_INFO.aggregateRating.ratingValue,
+        reviewCount: BUSINESS_INFO.aggregateRating.reviewCount
+      },
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: BUSINESS_INFO.address.streetAddress,
+        addressLocality: BUSINESS_INFO.address.addressLocality,
+        addressRegion: BUSINESS_INFO.address.addressRegion,
+        postalCode: BUSINESS_INFO.address.postalCode,
+        addressCountry: BUSINESS_INFO.address.addressCountry
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: BUSINESS_INFO.geo.latitude,
+        longitude: BUSINESS_INFO.geo.longitude
+      },
+      areaServed: {
+        '@type': 'GeoCircle',
+        geoMidpoint: {
+          '@type': 'GeoCoordinates',
+          latitude: BUSINESS_INFO.geo.latitude,
+          longitude: BUSINESS_INFO.geo.longitude
+        },
+        geoRadius: 80000,
+        name: 'Louisville · Lexington · Northern Kentucky',
+        addressRegion: 'KY'
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Garage Door Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Garage Door Repair',
+              description: 'Professional garage door repair services including springs, cables, rollers, and tracks'
+            }
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Garage Door Installation',
+              description: 'New garage door installation with premium hardware, insulation, and safety testing'
+            }
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Garage Door Opener Repair',
+              description: 'Garage door opener repair, alignment, and replacement services'
+            }
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Commercial Garage Door Service',
+              description: 'Repairs, maintenance, and upgrades for commercial overhead, roll-up, and dock doors'
+            }
+          }
+        ]
+      },
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        opens: '00:00',
+        closes: '23:59'
+      },
+      sameAs: [
+        'https://www.facebook.com/DerbyStrongGarageDoors',
+        'https://www.instagram.com/DerbyStrongGarageDoors'
+      ],
+      foundingDate: '2010',
+      slogan: 'Professional garage door services across Kentucky'
+    }}
+  />
+
+  <Hero
+    title="Kentucky's Local Garage Door Company"
+    heroImage={heroImage}
+    priority={true}
+    hubLinks={hubLocations.map(({ name, slug }) => ({ name, slug }))}
+    showPhoneNumber={false}
+    ctaText="Emergency? Call Now"
+    ctaTriggersCallModal={true}
+    ctaLink="#quote"
+  >
+    <Fragment slot="subtitle">
+      Proudly serving{' '}
+      <a
+        href="/locations/louisville"
+        class="inline-block align-middle text-yellow-300 font-semibold underline decoration-2 decoration-yellow-300/70 underline-offset-2 hover:text-yellow-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400 transition-colors duration-200"
+      >
+        Louisville
+      </a>
+      ,{' '}
+      <a
+        href="/locations/northern-kentucky"
+        class="inline-block align-middle text-yellow-300 font-semibold underline decoration-2 decoration-yellow-300/70 underline-offset-2 hover:text-yellow-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400 transition-colors duration-200"
+      >
+        Northern Kentucky
+      </a>
+      , and{' '}
+      <a
+        href="/locations/lexington"
+        class="inline-block align-middle text-yellow-300 font-semibold underline decoration-2 decoration-yellow-300/70 underline-offset-2 hover:text-yellow-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400 transition-colors duration-200"
+      >
+        Lexington
+      </a>{' '}
+      with fast same-day garage door repair and installation. From worn springs to failing openers to full replacements, every job is handled by a trained technician using quality parts and precise adjustments to keep your door running safely and smoothly.
+    </Fragment>
+  </Hero>
+
+  <main class="bg-white">
+    <IconRow />
+
+    
+    <section class="py-20 bg-muted" id="services">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Core Services</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-ink mb-6">
+            Kentucky Garage Door Services You Can Count On
+          </h2>
+          <p class="text-lg sm:text-xl text-ink/70 leading-relaxed max-w-3xl mx-auto">
+            Start with the three core services Kentucky homeowners and facility managers call us for most&mdash;fast repairs, opener expertise, and professional new door installs across Louisville, Lexington, and Northern Kentucky.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {PRIMARY_SERVICES.map((service, index) => (
+            <ServiceCard service={service} priority={index === 0} aboveFold={true} />
+          ))}
+        </div>
+        
+        <div class="text-center mt-12">
+          <a
+            href="/services"
+            class="inline-flex items-center gap-2 text-base font-semibold text-primary hover:text-primary/80 transition-colors"
+          >
+            Explore All Our Services
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="py-20 bg-white" id="process">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Our Process</p>
+          <h2 class="text-3xl font-bold text-ink mb-6">From First Call to Final Safety Check</h2>
+          <p class="text-lg text-ink/70 leading-relaxed max-w-3xl mx-auto">
+            The moment you contact Derby Strong Garage Doors, we begin mapping out the service experience. Our coordinated approach ensures same-day completion with no surprises.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {PROCESS_STEPS.map((step) => (
+            <div class="text-center">
+              <div class="bg-accent text-ink w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg">
+                {step.number}
+              </div>
+              <h3 class="text-xl font-semibold text-ink mb-4">{step.title}</h3>
+              <p class="text-ink/70 leading-relaxed">
+                {step.copy.map((segment) =>
+                  typeof segment === 'string' ? (
+                    segment
+                  ) : (
+                    <a
+                      href={segment.href}
+                      title={segment.title}
+                      class="inline-link"
+                    >
+                      {segment.text}
+                    </a>
+                  )
+                )}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <ContactForm
+      id="quote"
+      title="Ready to Get Started?"
+      subtitle="Contact us today for a free quote on any of our services"
+      bgColor="muted"
+    />
+
+  <HiddenSeoText
+    title="In-depth Kentucky garage door service details"
+    paragraphs={[
+      'Derby Strong Garage Doors supports Kentucky homeowners and facility managers with same-day appointments for broken springs, stuck doors, failed openers, and hardware damage. Each crew arrives with stocked trucks to finish most repairs in one visit.',
+        'Our technicians complete balance checks, track alignment, photo eye calibration, and weather-seal inspections on every job to ensure safe performance after we leave. Customers receive digital estimates, approvals, and receipts for easy recordkeeping.',
+        'Beyond repairs, we manage design consultations and installations for insulated steel, carriage-style, and modern glass doors that suit Kentucky architecture. Commercial overhead door maintenance and dock door tune-ups are scheduled around facility downtime to reduce disruptions.'
+      ]}
+      bullets={[
+        'Primary service hubs: Louisville, Lexington, and the Northern Kentucky metro area',
+        'Core offerings: garage door repair, opener troubleshooting, new door installation, and commercial overhead door maintenance',
+      'Convenient scheduling with after-hours availability and contactless approvals'
+    ]}
+  />
+
+  <HiddenSeoText
+    title="Additional garage door service assurances across Kentucky"
+    paragraphs={[
+      'Arrival notifications include technician names, vehicle descriptions, and license details so customers know exactly who is on the way. We document access instructions, gate codes, and HOA preferences for future visits.',
+      'Garage door weatherization guidance is tailored to Kentucky humidity, wind, and rapid temperature swings. We adjust opener force settings, recommend insulated panels, and replace perimeter seals to keep garages energy efficient.',
+      'Commercial partners receive maintenance routes that align with loading dock schedules, shift changes, and retail hours. Detailed service notes and photos simplify recordkeeping for safety audits and warranty claims.'
+    ]}
+    bullets={[
+      'Dispatch coverage includes emergency weekend availability and coordinated multi-property visits',
+      'Technicians carry high-cycle springs, reinforced cables, nylon rollers, struts, hinges, and modern opener components',
+      'Digital estimates, approvals, and receipts keep communication transparent for homeowners and facility managers'
+    ]}
+  />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: `${BUSINESS_INFO.name} | Kentucky Garage Door Services`,
+      url: homepageUrl,
+      about: {
+        '@id': businessEntityId,
+        '@type': 'LocalBusiness',
+        name: BUSINESS_INFO.name,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: BUSINESS_INFO.address.streetAddress,
+          addressLocality: BUSINESS_INFO.address.addressLocality,
+          addressRegion: BUSINESS_INFO.address.addressRegion,
+          postalCode: BUSINESS_INFO.address.postalCode,
+          addressCountry: BUSINESS_INFO.address.addressCountry
+        }
+      }
+    }}
+  />
+
+  <CallNowButton />
+  </main>
+
+  <Footer />
+</Base>

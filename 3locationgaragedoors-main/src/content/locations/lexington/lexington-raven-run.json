@@ -1,0 +1,22 @@
+{
+  "name": "Raven Run",
+  "slug": "lexington-raven-run",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 37.8858,
+    "lng": -84.3943
+  },
+  "zips": [
+    "40515"
+  ],
+  "surroundingAreas": [
+    "Raven Run Nature Sanctuary",
+    "Tates Creek",
+    "Chilesburg"
+  ]
+}

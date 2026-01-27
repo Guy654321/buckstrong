@@ -1,0 +1,22 @@
+{
+  "name": "Shelby Park",
+  "slug": "louisville-shelby-park",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2354,
+    "lng": -85.7432
+  },
+  "zips": [
+    "40203"
+  ],
+  "surroundingAreas": [
+    "Rubel Avenue",
+    "Shelby Street",
+    "Logan Street"
+  ]
+}

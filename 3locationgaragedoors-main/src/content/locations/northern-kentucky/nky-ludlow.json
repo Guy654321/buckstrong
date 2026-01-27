@@ -1,0 +1,22 @@
+{
+  "name": "Ludlow",
+  "slug": "nky-ludlow",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.092,
+    "lng": -84.5485
+  },
+  "zips": [
+    "41016"
+  ],
+  "surroundingAreas": [
+    "Elm Street",
+    "Covington",
+    "Bromley"
+  ]
+}

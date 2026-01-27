@@ -1,0 +1,22 @@
+{
+  "name": "Portland Wharf",
+  "slug": "louisville-portland-wharf",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2664,
+    "lng": -85.7928
+  },
+  "zips": [
+    "40212"
+  ],
+  "surroundingAreas": [
+    "Riverwalk",
+    "Downtown",
+    "Shawnee"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Camp Springs",
+  "slug": "nky-camp-springs",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.9775,
+    "lng": -84.3786
+  },
+  "zips": [
+    "41059"
+  ],
+  "surroundingAreas": [
+    "KY-547",
+    "Campbell County",
+    "Claryville"
+  ]
+}

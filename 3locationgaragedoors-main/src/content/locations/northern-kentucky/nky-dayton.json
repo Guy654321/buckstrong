@@ -1,0 +1,22 @@
+{
+  "name": "Dayton",
+  "slug": "nky-dayton",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.112,
+    "lng": -84.4705
+  },
+  "zips": [
+    "41074"
+  ],
+  "surroundingAreas": [
+    "Manhattan Harbour",
+    "Riverfront",
+    "Lincoln Heights"
+  ]
+}

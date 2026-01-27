@@ -1,0 +1,500 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { Schema } from 'astro-seo-schema';
+import { Icon } from 'astro-icon/components';
+import Base from '../../layouts/Base.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import Breadcrumbs from '../Breadcrumbs.astro';
+import ContactForm from '../ContactForm.astro';
+import FAQInteractive from '../FAQInteractive.astro';
+import ServiceInternalLinks from './ServiceInternalLinks.astro';
+import HiddenSeoText from '../HiddenSeoText.astro';
+import heroImage from '../../assets/images/garage-door-installation.jpg';
+import expertProcessImage from '../../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
+import completeSystemImage from '../../assets/images/repairs/finished-installation.jpg';
+import finishedResultsImage from '../../assets/images/garage-door-installation.jpg';
+import { BUSINESS_INFO } from '../../data/business';
+import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../../data/call-markets';
+import type { Location } from '../../lib/locations';
+import { buildLocationServiceCanonicalPath } from '../../lib/canonical';
+import { getSiteOrigin } from '../../utils/site-origin';
+
+const faqs = [
+  {
+    question: 'How long does a garage door installation take?',
+    answer:
+      'Most residential installations are completed in one day. Complex projects with custom framing or opener upgrades may extend into a second visit, but we schedule everything in advance.'
+  },
+  {
+    question: 'Can you help me choose the right insulation level?',
+    answer:
+      'Absolutely. We compare R-values, construction materials, and budget considerations so you can balance efficiency with aesthetics. Our team explains how insulation impacts comfort and noise.'
+  },
+  {
+    question: 'Do you remove and dispose of my old garage door?',
+    answer:
+      'Yes. Removal, disposal, and jobsite cleanup are part of every installation package so your driveway is spotless when we finish.'
+  },
+  {
+    question: 'Will my opener need to be replaced too?',
+    answer:
+      'We test existing openers for compatibility with the new door. If a replacement is recommended, we outline options and can install a new unit during the same appointment.'
+  }
+] satisfies Array<{ question: string; answer: string }>;
+
+interface Props {
+  location?: Location;
+}
+
+const { location } = Astro.props as Props;
+const activeLocation = location;
+const serviceCityName = activeLocation
+  ? activeLocation.isHub
+    ? activeLocation.address?.addressLocality?.trim() || activeLocation.name
+    : activeLocation.name
+  : undefined;
+const breadcrumbs = activeLocation
+  ? [
+      { label: 'Home', href: '/' },
+      { label: 'Locations', href: '/locations' },
+      { label: `${activeLocation.name}, ${activeLocation.state}`, href: `/locations/${activeLocation.slug}` },
+      { label: 'Garage Door Installation' }
+    ]
+  : [
+      { label: 'Home', href: '/' },
+      { label: 'Services', href: '/services' },
+      { label: 'Garage Door Installation' }
+    ];
+const locationDisplayName = activeLocation && serviceCityName
+  ? `${serviceCityName}, ${activeLocation.state}`
+  : undefined;
+const marketDisplayName = activeLocation?.market;
+const coverageAreaLabel = activeLocation
+  ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
+  : 'Louisville Metro, Lexington-Fayette & Northern Kentucky neighborhoods';
+
+const filterStrings = (items: Array<string | undefined>): string[] =>
+  items.filter((item): item is string => Boolean(item));
+
+const surroundingAreas = filterStrings(
+  (activeLocation?.surroundingAreas ?? []).map((area) => area?.trim())
+);
+const zipCodes = filterStrings((activeLocation?.zips ?? []).map((zip) => zip?.trim()));
+const surroundingAreasLabel =
+  surroundingAreas.length > 0
+    ? `Nearby neighborhoods we often serve include ${surroundingAreas.join(', ')}.`
+    : undefined;
+const zipCoverageLabel =
+  zipCodes.length > 0
+    ? `Primary ZIP codes covered: ${zipCodes.join(', ')}.`
+    : undefined;
+
+const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
+const pageTitle = activeLocation && serviceCityName
+  ? `Garage Door Installation ${serviceCityName} | Derby Strong Garage Doors`
+  : 'Kentucky Garage Door Installation | Derby Strong Garage Doors';
+const pageDescription = activeLocation && serviceCityName
+  ? `Professional garage door installation in ${serviceCityName}, ${activeLocation.state}. 5.0-star local team. Choose from modern, steel, or carriage doors. Call ${displayPhoneNumber} for a free quote!`
+  : 'Expert garage door installation teams serving Louisville Metro, Lexington-Fayette, and Northern Kentucky communities with custom sizing, premium hardware, and comprehensive safety testing.';
+const heroHeading = activeLocation
+  ? `Garage Door Installation in ${locationDisplayName}`
+  : 'Garage Door Installation for Louisville Metro, Lexington-Fayette & Northern Kentucky';
+const heroSubheading = activeLocation
+  ? `Precision crews install custom doors across ${coverageAreaLabel}. Choose carriage house, contemporary glass, or insulated steel options that fit your climate.`
+  : 'Precision crews install custom doors for Jefferson, Fayette, Boone, Kenton, and Campbell County homeowners. Choose carriage house, contemporary glass, or insulated steel options that fit your climate.';
+const heroAlt = activeLocation
+  ? `New garage door installation completed for homeowners in ${coverageAreaLabel}`
+  : 'New garage door installation completed for homeowners in Louisville Metro, Lexington-Fayette, and Northern Kentucky neighborhoods';
+const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
+const callMarkets = CALL_MARKETS;
+const defaultCallMarket = DEFAULT_CALL_MARKET;
+const heroCallMarkets = !activeLocation ? callMarkets : [];
+const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
+const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
+const businessEntityId = `${getSiteOrigin()}#business`;
+const callModalId = 'header-call-modal';
+const areaServed = activeLocation
+  ? coverageAreaLabel
+  : 'Louisville Metro, Lexington-Fayette & Northern Kentucky, KY';
+const schemaServiceName = activeLocation ? `Garage Door Installation in ${locationDisplayName}` : 'Garage Door Installation';
+const schemaDescription = activeLocation
+  ? `Professional garage door installation services across ${coverageAreaLabel} featuring custom measurements, premium hardware, insulation upgrades, and safety testing.`
+  : 'Professional garage door installation services across Louisville Metro, Lexington-Fayette, and Northern Kentucky featuring custom measurements, premium hardware, insulation upgrades, and safety testing.';
+const canonicalPath = activeLocation
+  ? buildLocationServiceCanonicalPath(activeLocation.slug, 'garage-door-installation')
+  : '/services/garage-door-installation';
+const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
+const installationIntroCopy = activeLocation
+  ? `From first measurement to final walkthrough, we manage every detail so your new garage door looks great and runs smoothly for ${coverageAreaLabel}.`
+  : 'From first measurement to final walkthrough, we manage every detail so your new garage door looks great and runs smoothly for Louisville Metro, Lexington-Fayette, and Northern Kentucky homeowners.';
+const faqIntro = activeLocation
+  ? `Answers to common installation questions from homeowners in ${coverageAreaLabel}.`
+  : 'Answers to common installation questions from homeowners across Louisville Metro, Lexington-Fayette, and Northern Kentucky.';
+const contactTitle = activeLocation
+  ? `Request an Installation Quote in ${locationDisplayName}`
+  : 'Request an Installation Quote';
+const contactSubtitle = activeLocation
+  ? `Get precise measurements, style recommendations, and a guaranteed installation date for your ${coverageAreaLabel} home.`
+  : 'Get precise measurements, style recommendations, and a guaranteed installation date for your home.';
+
+const galleryCards = [
+  {
+    title: 'Expert Installation Process',
+    description: activeLocation
+      ? `On-site consultations, precise measurements, and safety-first crews deliver a seamless installation for homeowners across ${coverageAreaLabel}.`
+      : 'On-site consultations, precise measurements, and safety-first crews deliver a seamless installation for Louisville Metro, Lexington-Fayette, and Northern Kentucky homeowners.',
+    image: expertProcessImage,
+    alt: 'Completed garage door installation on a suburban home'
+  },
+  {
+    title: 'Complete System Installation',
+    description: activeLocation
+      ? `We install openers, balance springs, and upgrade hardware so every component works together for dependable performance in ${coverageAreaLabel}.`
+      : 'We install openers, balance springs, and upgrade hardware so every component works together for dependable performance.',
+    image: completeSystemImage,
+    alt: 'Technicians completing a full garage door system install'
+  },
+  {
+    title: 'Beautiful Finished Results',
+    description: activeLocation
+      ? `Premium materials, curated styles, and meticulous finishing touches give ${coverageAreaLabel} homes instant curb appeal.`
+      : 'Premium materials, curated styles, and meticulous finishing touches give homes across Louisville Metro, Lexington-Fayette, and Northern Kentucky instant curb appeal.',
+    image: finishedResultsImage,
+    alt: 'Elegant garage door upgrade on a brick home'
+  }
+  ] satisfies Array<{ title: string; description: string; image: ImageMetadata; alt: string }>;
+
+const processIntroHeading = activeLocation
+  ? `Our ${locationDisplayName} Installation Process`
+  : 'Our Louisville, Lexington & Northern Kentucky Installation Process';
+
+const processIntroCopy = activeLocation
+  ? `Choosing a new garage door is a big investment in your ${locationDisplayName} home. Our installers start with a simple design consultation. We confirm measurements, review accessories, and explain options so you feel confident before we begin.`
+  : 'Choosing a new garage door is a big investment in your home. Our installers start with a simple design consultation. We confirm measurements, review accessories, and explain options so you feel confident before we begin.';
+
+const processBodyCopy = activeLocation
+  ? `On installation day we remove the existing door, upgrade hardware, and set each panel with level alignment. We program openers, balance springs, and walk you through the new system. A final safety inspection wraps up the visit for your ${locationDisplayName} property.`
+  : 'On installation day we remove the existing door, upgrade hardware, and set each panel with level alignment. We program openers, balance springs, and walk you through the new system. A final safety inspection wraps up the visit for your property.';
+
+const doorTypesHeading = activeLocation
+  ? `Garage Door Types We Install in ${locationDisplayName}`
+  : 'Garage Door Types We Install in Louisville Metro, Lexington-Fayette & Northern Kentucky';
+
+const doorTypes = [
+  {
+    title: 'Steel Garage Doors',
+    description: 'Durable, low-maintenance construction with insulation upgrades for comfort and efficiency.',
+    theme: 'steel'
+  },
+  {
+    title: 'Wood Garage Doors',
+    description: 'Handcrafted styles, custom stain matches, and premium craftsmanship for standout curb appeal.',
+    theme: 'wood'
+  },
+  {
+    title: 'Aluminum Garage Doors',
+    description: 'Lightweight, rust-resistant frames with modern glass or solid panel configurations.',
+    theme: 'aluminum'
+  },
+  {
+    title: 'Elegant Garage Doors',
+    description: 'Carriage house overlays, decorative hardware, and designer windows tailored to your architecture.',
+    theme: 'elegant'
+  }
+] satisfies Array<{ title: string; description: string; theme: 'steel' | 'wood' | 'aluminum' | 'elegant' }>;
+
+const chooseUsHeading = activeLocation
+  ? 'Why Choose Our Installation?'
+  : 'Why Choose Our Installation?';
+
+const chooseUsItems = [
+  'Professional installation by extensively trained technicians',
+  'Quality products from trusted manufacturers',
+  'Removal and disposal of old door and systems',
+  'Quality warranty on parts and labor'
+];
+
+const whatsIncludedItems = [
+  'Complete system installation',
+  'Premium springs and balancing',
+  'Safety inspection and testing',
+  'Old system removal and disposal'
+];
+
+const expertiseHeading = activeLocation
+  ? `Local Expertise ${coverageAreaLabel} Can Trust`
+  : 'Louisville, Lexington & Northern Kentucky Expertise You Can Trust';
+
+const expertiseCopy = activeLocation
+  ? `Derby Strong Garage Doors has served ${coverageAreaLabel} homeowners for more than a decade. Our responsive teams handle scheduling, permitting, and on-site coordination so your project stays on time and on budget. Whether you need insulated carriage house doors or a sleek modern upgrade, we make sure you love the results.`
+  : 'Derby Strong Garage Doors has served homeowners across Louisville Metro, Lexington-Fayette, and Northern Kentucky for more than a decade. Our responsive teams handle scheduling, permitting, and on-site coordination so your project stays on time and on budget. Whether you need insulated carriage house doors or a sleek modern upgrade, we make sure you love the results.';
+---
+
+<Base
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonicalPath}
+  callNowPhoneNumber={displayPhoneNumber}
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: schemaServiceName,
+      description: schemaDescription,
+      provider: {
+        '@type': 'LocalBusiness',
+        name: BUSINESS_INFO.name,
+        legalName: BUSINESS_INFO.legalName,
+        '@id': businessEntityId,
+        telephone: displayPhoneNumber,
+        email: BUSINESS_INFO.email,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: BUSINESS_INFO.address.streetAddress,
+          addressLocality: BUSINESS_INFO.address.addressLocality,
+          addressRegion: BUSINESS_INFO.address.addressRegion,
+          postalCode: BUSINESS_INFO.address.postalCode,
+          addressCountry: BUSINESS_INFO.address.addressCountry
+        }
+      },
+      areaServed,
+      serviceType: 'Garage Door Installation',
+      offers: {
+        '@type': 'Offer',
+        priceRange: '$$$',
+        availability: 'https://schema.org/InStock',
+        priceCurrency: 'USD'
+      }
+    }}
+  />
+
+  <section class="relative py-20 lg:py-32 text-white overflow-visible lg:overflow-hidden">
+    <div class="absolute inset-0">
+      <Image
+        src={heroImage}
+        alt={heroAlt}
+        width={1024}
+        height={576}
+        class="w-full h-full object-cover object-center"
+        fetchpriority="high"
+        loading="eager"
+        decoding="sync"
+        quality={65}
+        sizes="100vw"
+      />
+      <div class="absolute inset-0 bg-primary/75"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.3em] text-white/80 mb-4">Professional Installation</p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">{heroHeading}</h1>
+      <p class="text-xl text-white/95 mb-8 max-w-3xl mx-auto leading-relaxed">{heroSubheading}</p>
+      {!activeLocation && (
+        <p class="text-base text-white/85 mb-8 max-w-3xl mx-auto leading-relaxed">
+          We specialize in garage door installation in Louisville, KY, delivering the same dependable craftsmanship in Lexington-Fayette and Northern Kentucky.
+        </p>
+      )}
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        {hasGenericCallCTA && heroDefaultCallMarket ? (
+          <button
+            type="button"
+            class="btn-accent text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2 sm:order-first"
+            data-call-modal-trigger
+            aria-controls={callModalId}
+            aria-expanded="false"
+            aria-haspopup="dialog"
+            aria-label="Choose a service area phone number"
+          >
+            <Icon name="mdi:phone" size="20" class="inline" aria-hidden="true" />
+            <span>Call Now</span>
+            <span class="sr-only">for the {heroDefaultCallMarket.label} market</span>
+          </button>
+        ) : (
+          <a
+            href={telephoneHref}
+            class="btn-accent text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2 sm:order-first"
+          >
+            <Icon name="mdi:phone" size="20" class="inline" aria-hidden="true" />
+            <span>Call Now: <span class="nap-phone">{displayPhoneNumber}</span></span>
+          </a>
+        )}
+        <a
+          href="/contact"
+          class="btn-outline-light text-lg px-8 py-4 bg-white/5 hover:bg-white/10 border-white/80 sm:order-last"
+        >
+          Get Free Quote
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-3xl font-bold text-ink sm:text-4xl">Professional Installation Gallery</h2>
+        <p class="mt-4 text-lg text-ink/70 leading-relaxed">{installationIntroCopy}</p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+        {galleryCards.map((card) => (
+          <div class="overflow-hidden rounded-2xl bg-card shadow-sm ring-1 ring-black/5">
+            <div class="aspect-[4/3]">
+              <Image
+                src={card.image}
+                alt={card.alt}
+                width="480"
+                height="360"
+                class="h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+                quality={82}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-ink">{card.title}</h3>
+              <p class="mt-3 text-ink/70 leading-relaxed">{card.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-muted py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="text-3xl font-bold text-ink sm:text-4xl">{processIntroHeading}</h2>
+        <p class="mt-6 text-lg text-ink/75 leading-relaxed">{processIntroCopy}</p>
+        <p class="mt-4 text-lg text-ink/75 leading-relaxed">{processBodyCopy}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-3xl font-bold text-ink sm:text-4xl">{doorTypesHeading}</h2>
+        <p class="mt-4 text-lg text-ink/70">Explore a variety of styles, materials, and finishes to match your home.</p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {doorTypes.map((door) => (
+          <div
+            class:list={['rounded-2xl border p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg', {
+              'border-[#C4D4FF] bg-[#F4F7FF]': door.theme === 'steel',
+              'border-[#FFD7B2] bg-[#FFF4E9]': door.theme === 'wood',
+              'border-[#B4F0FF] bg-[#ECFCFF]': door.theme === 'aluminum',
+              'border-[#F5D6FF] bg-[#FDF0FF]': door.theme === 'elegant'
+            }]}
+          >
+            <h3 class="text-xl font-semibold text-ink">{door.title}</h3>
+            <p class="mt-3 text-ink/70 leading-relaxed">{door.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-muted py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-[1.1fr,0.9fr] lg:items-start">
+        <div>
+          <h2 class="text-3xl font-bold text-ink sm:text-4xl">{chooseUsHeading}</h2>
+          <p class="mt-6 text-lg text-ink/75 leading-relaxed">
+            Experienced installers deliver precision craftsmanship and dependable service from consultation through clean-up.
+          </p>
+          <ul class="mt-6 space-y-3 text-ink/80">
+            {chooseUsItems.map((item) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-1 inline-flex h-2.5 w-2.5 flex-none rounded-full bg-primary"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="rounded-3xl bg-white p-8 shadow-lg ring-1 ring-black/5">
+          <h3 class="text-2xl font-semibold text-ink">What's Included</h3>
+          <p class="mt-3 text-ink/70 leading-relaxed">Comprehensive service ensures a smooth installation day.</p>
+          <ul class="mt-6 space-y-3 text-ink/80">
+            {whatsIncludedItems.map((item) => (
+              <li class="flex items-start gap-3">
+                <Icon name="mdi:check-circle" class="mt-0.5 h-5 w-5 text-primary" aria-hidden="true" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="/contact" class="mt-8 inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 font-semibold text-white shadow hover:bg-primary/90">
+            Get Free Quote
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink sm:text-4xl">{expertiseHeading}</h2>
+      <p class="mt-6 text-lg text-ink/75 leading-relaxed">{expertiseCopy}</p>
+    </div>
+  </section>
+
+  <section class="bg-muted py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="text-3xl font-bold text-ink sm:text-4xl">Installation FAQs</h2>
+        <p class="mt-4 text-lg text-ink/70">{faqIntro}</p>
+      </div>
+      <div class="mt-10">
+        <FAQInteractive faqs={faqs} />
+      </div>
+    </div>
+  </section>
+
+  <ServiceInternalLinks currentSlug="garage-door-installation" location={activeLocation} />
+
+  <ContactForm title={contactTitle} subtitle={contactSubtitle} bgColor="muted" />
+
+  <HiddenSeoText
+    title={`Garage door installation details${locationDisplayName ? ` for ${locationDisplayName}` : ''}`}
+    paragraphs={filterStrings([
+      activeLocation
+        ? `Homeowners in ${coverageAreaLabel} can choose insulated steel, carriage-house, or modern glass garage doors that match local weather and architecture. We confirm measurements, track clearances, and opener compatibility before ordering.`
+        : 'Homeowners across Kentucky can choose insulated steel, carriage-house, or modern glass garage doors that match local weather and architecture. We confirm measurements, track clearances, and opener compatibility before ordering.',
+      'Installations include spring and hardware balancing, weather-seal upgrades, and haul-away of removed materials. We manage HOA approvals, permits, and access details to keep projects on schedule.',
+      activeLocation
+        ? `After installation, we share maintenance tips suited to ${coverageAreaLabel} humidity and temperature swings. Short routines keep the door quiet and efficient.`
+        : 'After installation, we share maintenance tips suited to Kentucky humidity and temperature swings. Short routines keep the door quiet and efficient.',
+      surroundingAreasLabel
+    ])}
+    bullets={filterStrings([
+      'Installation options: insulated steel, carriage-style, modern glass, and custom design consults',
+      `Service coverage: ${coverageAreaLabel}`,
+      'Every project includes balance testing, safety verification, and disposal of old materials',
+      zipCoverageLabel
+    ])}
+  />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: pageTitle,
+      url: pageUrl,
+      mainEntity: {
+        '@type': 'Service',
+        name: schemaServiceName,
+        areaServed
+      }
+    }}
+  />
+
+  <Footer />
+</Base>

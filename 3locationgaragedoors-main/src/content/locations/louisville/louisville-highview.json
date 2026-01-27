@@ -1,0 +1,22 @@
+{
+  "name": "Highview",
+  "slug": "louisville-highview",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.1349,
+    "lng": -85.5839
+  },
+  "zips": [
+    "40291"
+  ],
+  "surroundingAreas": [
+    "Outer Loop",
+    "Fern Creek",
+    "Glenmary"
+  ]
+}

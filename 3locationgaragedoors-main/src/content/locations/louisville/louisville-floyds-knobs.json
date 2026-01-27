@@ -1,0 +1,22 @@
+{
+  "name": "Floyds Knobs",
+  "slug": "louisville-floyds-knobs",
+  "state": "IN",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.3333,
+    "lng": -85.9058
+  },
+  "zips": [
+    "47119"
+  ],
+  "surroundingAreas": [
+    "Paoli Pike",
+    "Highlander Point",
+    "Floyd County"
+  ]
+}

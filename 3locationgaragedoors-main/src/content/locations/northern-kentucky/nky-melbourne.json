@@ -1,0 +1,22 @@
+{
+  "name": "Melbourne",
+  "slug": "nky-melbourne",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.0223,
+    "lng": -84.361
+  },
+  "zips": [
+    "41059"
+  ],
+  "surroundingAreas": [
+    "Dayton",
+    "Silver Grove",
+    "Wilder"
+  ]
+}

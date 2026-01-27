@@ -1,0 +1,22 @@
+{
+  "name": "Bromley",
+  "slug": "nky-bromley",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.0848,
+    "lng": -84.565
+  },
+  "zips": [
+    "41016"
+  ],
+  "surroundingAreas": [
+    "Riverfront",
+    "Villa Hills",
+    "Ludlow"
+  ]
+}

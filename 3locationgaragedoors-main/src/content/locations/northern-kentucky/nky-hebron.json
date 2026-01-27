@@ -1,0 +1,22 @@
+{
+  "name": "Hebron",
+  "slug": "nky-hebron",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.0664,
+    "lng": -84.7016
+  },
+  "zips": [
+    "41048"
+  ],
+  "surroundingAreas": [
+    "CVG Airport",
+    "Petersburg",
+    "Burlington"
+  ]
+}

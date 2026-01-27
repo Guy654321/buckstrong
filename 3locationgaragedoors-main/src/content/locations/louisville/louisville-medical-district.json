@@ -1,0 +1,22 @@
+{
+  "name": "Medical District",
+  "slug": "louisville-medical-district",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2495,
+    "lng": -85.7512
+  },
+  "zips": [
+    "40202"
+  ],
+  "surroundingAreas": [
+    "UofL Hospital",
+    "Jewish Hospital",
+    "Norton Hospital"
+  ]
+}

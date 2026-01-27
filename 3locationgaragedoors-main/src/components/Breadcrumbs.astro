@@ -1,0 +1,64 @@
+---
+import { Schema } from 'astro-seo-schema';
+
+export interface Props {
+  items: Array<{
+    label: string;
+    href?: string;
+  }>;
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="bg-muted py-4" aria-label="Breadcrumb">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <ol class="flex items-center space-x-2 text-sm">
+      {items.map((item, index) => (
+        <li class="flex items-center" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          {index > 0 && (
+            <svg
+              class="w-4 h-4 text-ink/40 mx-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          )}
+          {item.href ? (
+            <a href={item.href} class="text-ink/70 hover:text-primary transition-colors" itemprop="item">
+              <span itemprop="name">{item.label}</span>
+            </a>
+          ) : (
+            <span class="text-ink font-medium" itemprop="name">{item.label}</span>
+          )}
+          <meta itemprop="position" content={(index + 1).toString()} />
+        </li>
+      ))}
+    </ol>
+  </div>
+</nav>
+
+
+<Schema
+  item={{
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.label,
+      ...(item.href && { 
+        item: {
+          '@type': 'WebPage',
+          '@id': new URL(item.href, Astro.site).toString(),
+          url: new URL(item.href, Astro.site).toString(),
+          name: item.label
+        }
+      })
+    }))
+  }}
+/>

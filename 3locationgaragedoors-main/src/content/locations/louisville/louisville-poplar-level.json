@@ -1,0 +1,22 @@
+{
+  "name": "Poplar Level",
+  "slug": "louisville-poplar-level",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.2064,
+    "lng": -85.7221
+  },
+  "zips": [
+    "40213"
+  ],
+  "surroundingAreas": [
+    "Louisville Zoo",
+    "Joe Creason Park",
+    "Camp Zachary Taylor"
+  ]
+}

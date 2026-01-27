@@ -1,0 +1,22 @@
+{
+  "name": "Corydon",
+  "slug": "louisville-corydon",
+  "state": "IN",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.212,
+    "lng": -86.121
+  },
+  "zips": [
+    "47112"
+  ],
+  "surroundingAreas": [
+    "Harrison County Courthouse",
+    "Hayswood Nature Reserve",
+    "Downtown Corydon"
+  ]
+}

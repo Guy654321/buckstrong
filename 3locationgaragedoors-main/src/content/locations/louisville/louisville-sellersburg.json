@@ -1,0 +1,22 @@
+{
+  "name": "Sellersburg",
+  "slug": "louisville-sellersburg",
+  "state": "IN",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.3987,
+    "lng": -85.7577
+  },
+  "zips": [
+    "47172"
+  ],
+  "surroundingAreas": [
+    "Silver Creek",
+    "Memphis",
+    "Clark County"
+  ]
+}

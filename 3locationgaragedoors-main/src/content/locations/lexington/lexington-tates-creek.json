@@ -1,0 +1,22 @@
+{
+  "name": "Tates Creek",
+  "slug": "lexington-tates-creek",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 37.9811,
+    "lng": -84.4888
+  },
+  "zips": [
+    "40517"
+  ],
+  "surroundingAreas": [
+    "Kirklevington",
+    "River Park",
+    "Hartland"
+  ]
+}

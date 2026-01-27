@@ -1,0 +1,22 @@
+{
+  "name": "Dayton Pike Corridor",
+  "slug": "nky-dayton-pike",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.1087,
+    "lng": -84.4795
+  },
+  "zips": [
+    "41074"
+  ],
+  "surroundingAreas": [
+    "Kentucky Route 1120",
+    "Bellevue",
+    "Newport"
+  ]
+}

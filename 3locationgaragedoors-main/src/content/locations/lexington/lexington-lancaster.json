@@ -1,0 +1,22 @@
+{
+  "name": "Lancaster",
+  "slug": "lexington-lancaster",
+  "state": "KY",
+  "phone": "(859) 436-2954",
+  "market": "Lexington",
+  "parentHub": "lexington",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 37.6195,
+    "lng": -84.5794
+  },
+  "zips": [
+    "40444"
+  ],
+  "surroundingAreas": [
+    "Garrard County",
+    "Historic Courthouse",
+    "Camp Dick"
+  ]
+}

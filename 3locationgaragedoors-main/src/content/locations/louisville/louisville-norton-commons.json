@@ -1,0 +1,22 @@
+{
+  "name": "Norton Commons",
+  "slug": "louisville-norton-commons",
+  "state": "KY",
+  "phone": "(502) 619-5198",
+  "market": "Louisville Metro",
+  "parentHub": "louisville",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.3415,
+    "lng": -85.5661
+  },
+  "zips": [
+    "40059"
+  ],
+  "surroundingAreas": [
+    "Town Center",
+    "South Village",
+    "North Village"
+  ]
+}

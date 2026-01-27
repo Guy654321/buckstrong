@@ -1,0 +1,22 @@
+{
+  "name": "Independence",
+  "slug": "independence",
+  "state": "KY",
+  "phone": "(859) 306-0782",
+  "market": "Northern Kentucky",
+  "parentHub": "northern-kentucky",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 38.9431,
+    "lng": -84.5441
+  },
+  "zips": [
+    "41051"
+  ],
+  "surroundingAreas": [
+    "Kenton County Courthouse",
+    "Richardson Road",
+    "Taylor Mill"
+  ]
+}

@@ -1,0 +1,750 @@
+---
+import { Schema } from 'astro-seo-schema';
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FAQInteractive from '../components/FAQInteractive.astro';
+import CallNowButton from '../components/CallNowButton.astro';
+import HiddenSeoText from '../components/HiddenSeoText.astro';
+import heroImage from '../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
+import { BUSINESS_INFO } from '../data/business';
+import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../data/call-markets';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'FAQ' }
+];
+
+const resourceLinks = [
+  {
+    title: 'Schedule Service',
+    description: 'Request same-day repair or installation support from our Louisville, Lexington, and Northern Kentucky technicians.',
+    href: '/contact',
+    icon: 'mdi:calendar-clock'
+  },
+  {
+    title: 'Explore Garage Door Services',
+    description: 'Compare repair, installation, and opener packages tailored to homes across Kentucky.',
+    href: '/services',
+    icon: 'mdi:tools'
+  },
+  {
+    title: 'Find Your Neighborhood',
+    description: 'View detailed coverage for Louisville, Lexington, Northern Kentucky, and Southern Indiana communities.',
+    href: '/locations',
+    icon: 'mdi:map-marker-radius'
+  },
+  {
+    title: 'Read Safety Guidelines',
+    description: 'Follow professional checklists to keep your overhead door operating safely.',
+    href: '/safety',
+    icon: 'mdi:shield-check'
+  },
+  {
+    title: 'Visit the Blog',
+    description: 'Learn maintenance tips and troubleshooting advice from our experts.',
+    href: '/blog',
+    icon: 'mdi:newspaper-variant-outline'
+  }
+];
+
+const displayPhoneNumber = BUSINESS_INFO.telephone;
+const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
+
+const callMarkets = CALL_MARKETS;
+const defaultCallMarket = DEFAULT_CALL_MARKET;
+const callModalId = 'header-call-modal';
+const callLinkHref = defaultCallMarket?.phoneHref ?? telephoneHref;
+
+// Categorized FAQs for better organization
+const generalFaqs = [
+  {
+    question: "Do you provide upfront pricing for garage door repairs?",
+    answer:
+      "Yes. We diagnose the issue, share a written estimate before work starts, and explain every line item so there are no surprises."
+  },
+  {
+    question: "What are typical costs for garage door services in Kentucky?",
+    answer:
+      "Pricing depends on your door size, the parts required, and labor complexity. We inspect the system, review options, and provide a written estimate so Louisville, Lexington, and Northern Kentucky homeowners can choose with confidence."
+  },
+  {
+    question: "How quickly can you repair my garage door in Louisville, Lexington, or Northern Kentucky?",
+    answer:
+      "We staff trained technicians in each service hub. That lets us offer same-day garage door repair across Louisville, Lexington, and Northern Kentucky. Emergencies go to the first open slot."
+  },
+  {
+    question: "Do you provide warranties on garage door repairs?",
+    answer:
+      "Yes. Repairs and installations include manufacturer warranties plus our satisfaction guarantee. If anything falls short, we return quickly to make it right."
+  }
+];
+
+const serviceFaqs = [
+  {
+    question: "What garage door brands do you service across Kentucky?",
+    answer:
+      "We service major brands such as Clopay, Wayne Dalton, Amarr, Overhead Door, Raynor, LiftMaster, Genie, and Chamberlain. Our technicians train on both residential and commercial systems across Louisville, Lexington, Northern Kentucky, and Southern Indiana."
+  },
+  {
+    question: "Can you repair garage door springs safely?",
+    answer:
+      "Yes. Spring repair needs special tools and training because of the high tension. We handle torsion, extension, and high-cycle springs with strict safety steps to protect your home."
+  },
+  {
+    question: "Do you install smart garage door openers?",
+    answer:
+      "Yes. We install and service smart openers with WiFi, phone apps, and smart home connections, including LiftMaster MyQ and Genie Aladdin Connect."
+  },
+  {
+    question: "Which garage door services do you offer in Louisville, Lexington, and Northern Kentucky?",
+    answer:
+      "We handle tune-ups, balancing, broken spring repair, opener upgrades, panel replacement, weather sealing, and full installations. Services are available for homes and businesses in Louisville, Lexington, Northern Kentucky, and Southern Indiana."
+  },
+  {
+    question: "Do you service commercial overhead and roll-up doors?",
+    answer:
+      "Yes. Our commercial team maintains sectional overhead doors, rolling steel doors, dock levelers, and security grilles for Kentucky and Southern Indiana businesses."
+  }
+];
+
+const emergencyFaqs = [
+  {
+    question: "What should I do if my garage door won't open?",
+    answer:
+      "Confirm the opener is plugged in and the remote batteries are fresh. Check the tracks and sensors for obstructions. If it still will not move, stop forcing the door and call us to avoid a safety risk."
+  },
+  {
+    question: "Do you provide emergency garage door repair?",
+    answer:
+      "Yes. We offer 24/7 emergency repair from Louisville to Lexington and Northern Kentucky. Call anytime if the door is stuck open, will not close, or creates a security risk."
+  }
+];
+
+const maintenanceFaqs = [
+  {
+    question: "How often should I have my garage door serviced?",
+    answer:
+      "Schedule professional maintenance once a year for spring adjustments, lubrication, and safety tests. Add simple monthly DIY checks to keep everything running smoothly."
+  },
+  {
+    question: "Is it safe to repair my garage door myself?",
+    answer:
+      "Cleaning and lubrication are safe DIY tasks. Leave spring, cable, or opener repairs to a pro because those parts stay under high tension."
+  },
+  {
+    question: "What causes garage door springs to break?",
+    answer:
+      "Springs wear out after thousands of cycles. Metal fatigue, moisture, temperature swings, and skipped maintenance speed up failure. Most last seven to ten years before replacement."
+  },
+  {
+    question: "Do you offer maintenance plans for garage doors?",
+    answer:
+      "Yes. Our tune-up program includes lubrication, track alignment, safety testing, and sensor cleaning to extend the life of your overhead door."
+  }
+];
+
+const locationFaqs = [
+  {
+    question: "Which Louisville neighborhoods do you serve?",
+    answer:
+      "We cover the Louisville metro, including The Highlands, Clifton, Downtown, St. Matthews, Jeffersontown, Middletown, Prospect, and Shepherdsville. We also serve nearby Southern Indiana communities such as New Albany and Jeffersonville."
+  },
+  {
+    question: "What parts of Lexington do you cover?",
+    answer:
+      "Our Lexington team serves Fayette County neighborhoods like Hamburg, Beaumont, Chevy Chase, and Masterson Station. We also visit nearby suburbs including Nicholasville, Georgetown, and Versailles."
+  },
+  {
+    question: "Do you service Northern Kentucky communities?",
+    answer:
+      "Yes. We dispatch technicians across Boone, Kenton, and Campbell counties, including Florence, Covington, Newport, Fort Thomas, Burlington, and Independence. Same-day response is available."
+  },
+  {
+    question: "Are you insured for work in Kentucky and Southern Indiana?",
+    answer:
+      "Yes. We maintain full liability and workers compensation coverage for Kentucky and Southern Indiana. All technicians are background-checked, trained, and follow strict safety standards."
+  }
+];
+
+const troubleshootingFaqs = [
+  {
+    question: "Can you match my existing garage door for repairs?",
+    answer:
+      "In most cases we can match your existing door because we stock common panels, hardware, and parts. For custom or discontinued doors, we source close matches or suggest alternatives that blend in."
+  },
+  {
+    question: "Why is my garage door making loud noises?",
+    answer:
+      "Worn rollers, loose hardware, dry hinges, or worn drive chains and belts often cause noise. Grinding sounds can signal serious issues, so call a professional to inspect and repair them."
+  },
+  {
+    question: "Do you service commercial garage doors?",
+    answer:
+      "Yes. We service residential and commercial garage doors across Louisville, Lexington, Northern Kentucky, and Southern Indiana. Our commercial work covers roll-up doors, sectional doors, dock doors, and overhead systems for warehouses, dealerships, and logistics hubs."
+  },
+  {
+    question: "How do I know if my garage door needs professional service?",
+    answer:
+      "Call us when the door hangs uneven, slams shut, shakes during operation, or the opener light flashes repeatedly. These symptoms often signal worn springs or misaligned tracks."
+  }
+];
+
+// Combine all FAQs for schema markup
+const allFaqs = [...generalFaqs, ...serviceFaqs, ...emergencyFaqs, ...maintenanceFaqs, ...locationFaqs, ...troubleshootingFaqs];
+
+const faqSchemaItems = allFaqs.map(faq => ({
+  '@type': 'Question' as const,
+  name: faq.question,
+  acceptedAnswer: {
+    '@type': 'Answer' as const,
+    text: faq.answer
+  }
+})) satisfies {
+  '@type': 'Question';
+  name: string;
+  acceptedAnswer: {
+    '@type': 'Answer';
+    text: string;
+  };
+}[];
+
+const faqSections = [
+  {
+    id: 'general',
+    title: 'General Information',
+    description: 'Basic information about our services and policies',
+    icon: 'mdi:information',
+    iconClass: 'text-primary',
+    iconBg: 'bg-primary/10',
+    faqs: generalFaqs
+  },
+  {
+    id: 'services',
+    title: 'Our Services',
+    description: 'What we repair, install, and maintain',
+    icon: 'mdi:tools',
+    iconClass: 'text-accent',
+    iconBg: 'bg-accent/10',
+    faqs: serviceFaqs
+  },
+  {
+    id: 'emergency',
+    title: 'Emergency Situations',
+    description: 'What to do when your garage door fails',
+    icon: 'mdi:alert-circle',
+    iconClass: 'text-red-600',
+    iconBg: 'bg-red-100',
+    faqs: emergencyFaqs
+  },
+  {
+    id: 'maintenance',
+    title: 'Maintenance & Safety',
+    description: 'Keeping your garage door in top condition',
+    icon: 'mdi:wrench',
+    iconClass: 'text-green-600',
+    iconBg: 'bg-green-100',
+    faqs: maintenanceFaqs
+  },
+  {
+    id: 'location',
+    title: 'Service Area & Licensing',
+    description: 'Where we serve and our credentials',
+    icon: 'mdi:map-marker',
+    iconClass: 'text-blue-600',
+    iconBg: 'bg-blue-100',
+    faqs: locationFaqs
+  },
+  {
+    id: 'troubleshooting',
+    title: 'Troubleshooting & Repairs',
+    description: 'Common problems and professional solutions',
+    icon: 'mdi:help-circle',
+    iconClass: 'text-purple-600',
+    iconBg: 'bg-purple-100',
+    faqs: troubleshootingFaqs
+  }
+] as const;
+---
+
+<Base
+  title="Derby Strong Garage Doors FAQ | Kentucky Service Answers"
+  description="⭐ Get answers to common garage door questions across Louisville, Lexington, and Northern Kentucky. Learn about repair costs, warranties, service times, and more from our expert technicians. FREE consultations!"
+  schemaType="FAQPage"
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+  <div id="top" class="sr-only" aria-hidden="true"></div>
+  
+  
+  <section class="relative py-20 text-white overflow-hidden">
+    <div class="absolute inset-0">
+      <Image 
+        src={heroImage}
+        alt="Derby Strong Garage Doors FAQ knowledge center serving Louisville, Lexington, and Northern Kentucky with expert technicians ready to answer garage door repair and maintenance questions"
+        width="1200"
+        height="675"
+        class="w-full h-full object-cover" 
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+        quality={72}
+        sizes="100vw"
+      />
+      <div class="absolute inset-0 bg-primary/75"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="relative">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          Frequently Asked Questions
+        </h1>
+        <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed">
+          Expert answers to your garage door questions. Louisville, Lexington, and Northern Kentucky technicians share quick tips you can use today.
+        </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            {callMarkets.length > 0 && defaultCallMarket ? (
+              <button
+                type="button"
+                class="btn-accent text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-3 sm:py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2"
+                data-call-modal-trigger
+                aria-controls={callModalId}
+                aria-expanded="false"
+                aria-haspopup="dialog"
+                aria-label="Choose a service area phone number"
+              >
+                <Icon name="mdi:phone" size="20" class="inline" aria-hidden="true" />
+                <span>Call Now</span>
+                <span class="sr-only">for the {defaultCallMarket.label} market</span>
+              </button>
+            ) : (
+              <a href={telephoneHref} class="btn-accent text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2">
+                <Icon name="mdi:phone" size="20" class="inline" aria-hidden="true" />
+                <span>Call Now</span>
+                <span class="nap-phone">{displayPhoneNumber}</span>
+              </a>
+            )}
+            <a href="/contact" class="btn-outline-light text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto bg-white/10 hover:bg-white/20 gap-2">
+              <Icon name="mdi:email" size="20" class="inline" aria-hidden="true" />
+              Get Free Quote
+            </a>
+          </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <section class="py-16 bg-muted">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Find Your Answer</h2>
+        <p class="text-xl text-ink/70">Browse by category or search for specific topics</p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <a href="#general" class="bg-white rounded-lg p-4 text-center hover:shadow-lg transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-visible:-translate-y-1">
+          <div class="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/20 transition-colors">
+            <Icon name="mdi:information" size="24" class="text-primary" aria-hidden="true" />
+          </div>
+          <span class="text-sm font-semibold text-ink">General Info</span>
+        </a>
+        
+        <a href="#services" class="bg-white rounded-lg p-4 text-center hover:shadow-lg transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-visible:-translate-y-1">
+          <div class="bg-accent/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-accent/20 transition-colors">
+            <Icon name="mdi:tools" size="24" class="text-accent" aria-hidden="true" />
+          </div>
+          <span class="text-sm font-semibold text-ink">Services</span>
+        </a>
+        
+        <a href="#emergency" class="bg-white rounded-lg p-4 text-center hover:shadow-lg transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-visible:-translate-y-1">
+          <div class="bg-red-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-red-200 transition-colors">
+            <Icon name="mdi:alert-circle" size="24" class="text-red-600" aria-hidden="true" />
+          </div>
+          <span class="text-sm font-semibold text-ink">Emergency</span>
+        </a>
+        
+        <a href="#maintenance" class="bg-white rounded-lg p-4 text-center hover:shadow-lg transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-visible:-translate-y-1">
+          <div class="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-green-200 transition-colors">
+            <Icon name="mdi:wrench" size="24" class="text-green-600" aria-hidden="true" />
+          </div>
+          <span class="text-sm font-semibold text-ink">Maintenance</span>
+        </a>
+        
+        <a href="#location" class="bg-white rounded-lg p-4 text-center hover:shadow-lg transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-visible:-translate-y-1">
+          <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-blue-200 transition-colors">
+            <Icon name="mdi:map-marker" size="24" class="text-blue-600" aria-hidden="true" />
+          </div>
+          <span class="text-sm font-semibold text-ink">Location</span>
+        </a>
+        
+        <a href="#troubleshooting" class="bg-white rounded-lg p-4 text-center hover:shadow-lg transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-visible:-translate-y-1">
+          <div class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-purple-200 transition-colors">
+            <Icon name="mdi:help-circle" size="24" class="text-purple-600" aria-hidden="true" />
+          </div>
+          <span class="text-sm font-semibold text-ink">Troubleshooting</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="py-12 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+        <div class="space-y-3">
+          <h2 class="text-3xl font-bold text-ink">Quick answers in plain language</h2>
+          <p class="text-lg text-ink/75 leading-relaxed">
+            Start with these simple guidelines before diving into the detailed FAQs.
+          </p>
+          <ul class="list-disc list-inside space-y-2 text-base text-ink/80 leading-relaxed">
+            <li>Keep remotes stocked with fresh batteries and check photo-eye sensors for dust.</li>
+            <li>Do not force a stuck door; disconnect power and call for help to avoid injuries.</li>
+            <li>Schedule annual tune-ups for springs, rollers, and opener safety tests.</li>
+            <li>Ask for written estimates so pricing stays clear before work begins.</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl bg-muted p-6 shadow-sm ring-1 ring-black/5 space-y-3">
+          <h3 class="text-2xl font-semibold text-ink">Need it fast?</h3>
+          <p class="text-base text-ink/75 leading-relaxed">
+            Call our on-call team or send a quick note. We respond with next steps and a firm arrival window.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href={callLinkHref} class="btn-accent w-full sm:w-auto justify-center text-base">Call dispatch</a>
+            <a href="/contact" class="btn-outline w-full sm:w-auto justify-center text-base">Send details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="py-16 bg-muted">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Browse Answers by Topic</h2>
+        <p class="text-xl text-ink/70">Explore the most requested garage door questions, organized for quick scanning.</p>
+      </div>
+
+      <div class="space-y-10">
+        {faqSections.map((section, index) => (
+          <div id={section.id} class="scroll-mt-28">
+            <div class={`rounded-2xl p-6 md:p-8 shadow-sm ring-1 ring-black/5 ${index % 2 === 0 ? 'bg-white' : 'bg-card'}`}>
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                <div class="flex items-center gap-4">
+                  <div class={`${section.iconBg} w-12 h-12 rounded-full flex items-center justify-center`}>
+                    <Icon name={section.icon} size="24" class={section.iconClass} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h2 class="text-2xl font-bold text-ink">{section.title}</h2>
+                    <p class="text-ink/70">{section.description}</p>
+                  </div>
+                </div>
+                <a href="#top" class="text-sm font-semibold text-primary hover:text-accent transition-colors hidden md:inline-flex items-center gap-2">
+                  Back to top
+                  <Icon name="mdi:arrow-up" size="18" aria-hidden="true" />
+                </a>
+              </div>
+              <FAQInteractive faqs={section.faqs} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  
+  <section class="py-16 bg-card">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Why Kentucky Homeowners Choose Derby Strong Garage Doors</h2>
+        <p class="text-xl text-ink/70">Trusted expertise across Louisville, Lexington, and Northern Kentucky</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="bg-muted rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
+          <h3 class="text-2xl font-semibold text-ink mb-4">Louisville Metro</h3>
+          <ul class="list-disc list-inside text-ink/80 space-y-2">
+            <li>Local, background-checked technicians serving Jefferson County and Southern Indiana</li>
+            <li>Same-day repairs for Highlands, St. Matthews, Jeffersontown, Middletown, and beyond</li>
+            <li>Commercial overhead door expertise for distilleries, dealerships, and riverfront warehouses</li>
+            <li>Preventive maintenance plans that keep high-traffic doors safe all year long</li>
+          </ul>
+        </div>
+        <div class="bg-muted rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
+          <h3 class="text-2xl font-semibold text-ink mb-4">Lexington & Central KY</h3>
+          <ul class="list-disc list-inside text-ink/80 space-y-2">
+            <li>Rapid response for Fayette County neighborhoods plus Nicholasville, Georgetown, and Versailles</li>
+            <li>Equestrian property expertise with oversized and custom carriage-house doors</li>
+            <li>Smart opener upgrades and MyQ integrations for modern homes and townhomes</li>
+            <li>Comprehensive safety testing with every repair or installation</li>
+          </ul>
+        </div>
+        <div class="bg-muted rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
+          <h3 class="text-2xl font-semibold text-ink mb-4">Northern Kentucky</h3>
+          <ul class="list-disc list-inside text-ink/80 space-y-2">
+            <li>Dedicated crews covering Boone, Kenton, and Campbell counties with evening availability</li>
+            <li>Flexible scheduling for commuters along the I-71/I-75 corridor and Cincinnati suburbs</li>
+            <li>Heavy-duty hardware designed for river valley temperature swings and humidity</li>
+            <li>24/7 emergency dispatch plus 100% satisfaction guarantee on all work performed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="py-16 bg-muted">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Trusted Garage Door Brands & Quality Parts</h2>
+        <p class="text-xl text-ink/70">We stock premium components engineered for Kentucky's weather swings and built to last</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div class="bg-card rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
+          <h3 class="text-2xl font-bold text-ink mb-4">Professional Brands We Install & Service</h3>
+          <p class="text-lg text-ink/70 mb-4">
+            We match your home or facility with durable parts designed for everything from Ohio River humidity to Bluegrass winters. Our team carries torsion springs rated for thousands of cycles, corrosion-resistant cables, and quiet nylon rollers.
+          </p>
+          <p class="text-lg text-ink/70 mb-4">
+            Whether you prefer LiftMaster, Chamberlain, Genie, Craftsman, Raynor, CHI Overhead Door, or other premium brands, we install and program them all. We also integrate smart keypads, battery backups, and LED lighting upgrades.
+          </p>
+          <p class="text-lg text-ink/70">
+            Every component is installed to manufacturer specifications and includes comprehensive safety testing.
+          </p>
+        </div>
+        <div class="bg-card rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
+          <h3 class="text-2xl font-semibold text-ink mb-4">Quality Replacement Parts Available</h3>
+          <ul class="list-disc list-inside text-ink/80 space-y-2">
+            <li>High-cycle torsion and extension springs for extended lifespan</li>
+            <li>LiftMaster, Chamberlain, and Genie belt-drive and chain-drive openers</li>
+            <li>MyQ smart technology, HomeLink, and universal remote programming</li>
+            <li>Insulated steel, wood composite, and aluminum panels</li>
+            <li>Roll-up door slats, guides, and counterbalance drum systems</li>
+            <li>Premium weather seals, bottom rubber, and perimeter trim</li>
+            <li>Commercial-grade hardware for heavy-duty applications</li>
+            <li>Energy-efficient insulation and weatherproofing materials</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="py-16 bg-card">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Popular Garage Door Sizes & Dimensions</h2>
+        <p class="text-xl text-ink/70">From compact single doors to oversized multi-bay installations, we handle all standard and custom sizes</p>
+      </div>
+
+      <div class="bg-muted rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
+        <h3 class="text-2xl font-semibold text-ink mb-6">Common Residential Door Sizes</h3>
+        <p class="text-ink/70 mb-6">
+          Whether you're wondering "how much is a garage door" or need pricing for a double garage door replacement, we stock the dimensions homeowners across Louisville, Lexington, and Northern Kentucky request most often.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-ink/80">
+          <div>
+            <h4 class="font-semibold text-ink mb-3">Standard Single Doors</h4>
+            <ul class="space-y-2">
+              <li>• 8×7 garage door (most common)</li>
+              <li>• 9×7 garage door</li>
+              <li>• 10×7 garage door</li>
+              <li>• 8×8 garage door</li>
+              <li>• 9×8 garage door</li>
+              <li>• 10×8 garage door</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-ink mb-3">Double/Two-Car Doors</h4>
+            <ul class="space-y-2">
+              <li>• 16×7 garage door</li>
+              <li>• 16×8 garage door</li>
+              <li>• 18×7 garage door</li>
+              <li>• 18×8 garage door</li>
+              <li>• 16×10 garage door</li>
+              <li>• 18×10 garage door</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-ink mb-3">Commercial & Custom</h4>
+            <ul class="space-y-2">
+              <li>• 12×10 overhead door</li>
+              <li>• 12×12 overhead door</li>
+              <li>• Custom width and height options</li>
+              <li>• Roll-up doors for tight spaces</li>
+              <li>• Loading dock door systems</li>
+              <li>• Multi-panel sectional doors</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="py-16 bg-muted">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Kentucky Garage Door Company You Can Trust</h2>
+        <p class="text-xl text-ink/70">Derby Strong Garage Doors: Trusted service for Louisville, Lexington, Northern Kentucky, and Southern Indiana</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="bg-card rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
+          <h3 class="text-2xl font-semibold text-ink mb-4">Why Homeowners Across Kentucky Trust Us</h3>
+          <p class="text-ink/70 mb-6">
+            Derby Strong Garage Doors is a leading Kentucky garage door company. We provide dependable repairs and installations for Louisville, Lexington, Northern Kentucky, and Southern Indiana homes.
+          </p>
+          <ul class="space-y-3 text-ink/80">
+            <li>✔️ Same-day dispatch from regional hubs in Louisville, Lexington, and Northern Kentucky</li>
+            <li>✔️ Insured technicians with ongoing safety and manufacturer training</li>
+            <li>✔️ Transparent, itemized estimates before we begin any repair or installation</li>
+            <li>✔️ Locally owned team that understands neighborhood-specific building requirements</li>
+            <li>✔️ 24/7 emergency support when you need the best garage door company near you</li>
+          </ul>
+        </div>
+
+        <div class="bg-card rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
+          <h3 class="text-2xl font-semibold text-ink mb-4">Complete Service Solutions</h3>
+          <p class="text-ink/70 mb-6">
+            We handle emergency spring repairs and premium carriage-house installations. Our locally owned company delivers reliable service with transparent pricing across every market we serve.
+          </p>
+          <ul class="space-y-3 text-ink/80">
+            <li>✔️ Expert garage door replacements and new construction installs</li>
+            <li>✔️ Professional garage door installers with decades of combined experience</li>
+            <li>✔️ Quality door and opener selections curated for Kentucky homes and businesses</li>
+            <li>✔️ Reliable maintenance plans that extend the life of your system</li>
+            <li>✔️ Comprehensive warranties on every part and labor hour we provide</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-card">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-ink mb-4">Need More Help?</h2>
+        <p class="text-xl text-ink/70">Browse our most requested resources for pricing, scheduling, and safety guidance.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {resourceLinks.map(resource => (
+          <a
+            href={resource.href}
+            class="group bg-white rounded-xl shadow-sm ring-1 ring-black/5 hover:shadow-lg transform-gpu transition-[transform,opacity] duration-300 p-6 text-left composite-surface hover:-translate-y-1 focus-visible:-translate-y-1"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div class="bg-accent/10 text-accent w-12 h-12 rounded-full flex items-center justify-center">
+                <Icon name={resource.icon} size="28" aria-hidden="true" />
+              </div>
+              <span class="text-primary font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Explore
+              </span>
+            </div>
+            <h3 class="text-xl font-semibold text-ink mb-2 group-hover:text-primary transition-colors">
+              {resource.title}
+            </h3>
+            <p class="text-ink/70 leading-relaxed text-sm">
+              {resource.description}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-muted">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+        <div class="bg-accent/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+          <Icon name="mdi:account-question" size="32" class="text-accent" aria-hidden="true" />
+        </div>
+        <h2 class="text-3xl font-bold text-ink mb-4">Still Have Questions?</h2>
+        <p class="text-xl text-ink/70 mb-8">
+          Our expert technicians are here to help. Get personalized answers to your garage door questions.
+        </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            {callMarkets.length > 0 && defaultCallMarket ? (
+              <button
+                type="button"
+                class="btn-accent text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto"
+                data-call-modal-trigger
+                aria-controls={callModalId}
+                aria-expanded="false"
+                aria-haspopup="dialog"
+                aria-label="Choose a service area phone number"
+              >
+                <Icon name="mdi:phone" size="20" class="inline mr-2" aria-hidden="true" />
+                <span>Call Now</span>
+                <span class="sr-only">for the {defaultCallMarket.label} market</span>
+              </button>
+            ) : (
+              <a href={telephoneHref} class="btn-accent text-lg px-8 py-4">
+                <Icon name="mdi:phone" size="20" class="inline mr-2" aria-hidden="true" />
+                Call Now: <span class="nap-phone">{displayPhoneNumber}</span>
+              </a>
+            )}
+            <a href="/contact" class="btn-outline text-lg px-8 py-4">
+              <Icon name="mdi:email" size="20" class="inline mr-2" aria-hidden="true" />
+              Contact Us Online
+            </a>
+          </div>
+        
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 pt-8 border-t border-ink/10">
+          <div class="text-center">
+            <div class="bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Icon name="mdi:clock" size="20" class="text-primary" aria-hidden="true" />
+            </div>
+            <h3 class="font-semibold text-ink mb-1">Available 24/7</h3>
+            <p class="text-sm text-ink/70">Emergency service anytime</p>
+          </div>
+          <div class="text-center">
+            <div class="bg-accent/10 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Icon name="mdi:map-marker" size="20" class="text-accent" aria-hidden="true" />
+            </div>
+            <h3 class="font-semibold text-ink mb-1">Kentucky Service Area</h3>
+            <p class="text-sm text-ink/70">Louisville, Lexington &amp; Northern Kentucky</p>
+          </div>
+          <div class="text-center">
+            <div class="bg-green-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Icon name="mdi:shield-check" size="20" class="text-green-600" aria-hidden="true" />
+            </div>
+            <h3 class="font-semibold text-ink mb-1">Insured</h3>
+            <p class="text-sm text-ink/70">Full protection guaranteed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <HiddenSeoText
+    title="Garage door FAQ coverage details"
+    paragraphs={[
+      'This FAQ library collects the most common garage door repair, installation, and opener questions from homeowners and facility managers across Kentucky and Southern Indiana.',
+      'Each answer references Louisville, Lexington, Northern Kentucky, and Southern Indiana conditions such as weather, permitting, and safety practices our technicians handle daily.',
+      'Topics cover pricing transparency, warranty expectations, emergency response, neighborhood coverage, and preventative maintenance steps to keep overhead doors running smoothly.'
+    ]}
+    bullets={[
+      'Service hubs: Louisville Metro, Lexington-Fayette, Northern Kentucky, and nearby Southern Indiana communities',
+      'Coverage examples: neighborhoods like The Highlands, Clifton, Jeffersontown, Hamburg, Beaumont, Florence, Covington, and Newport',
+      'Specialties: broken spring repair, opener troubleshooting, panel replacement, commercial overhead door support, and smart control upgrades'
+    ]}
+  />
+
+  <Footer />
+  <CallNowButton />
+</Base>
+
+
+<Schema
+  item={{
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqSchemaItems
+  }}
+/>
