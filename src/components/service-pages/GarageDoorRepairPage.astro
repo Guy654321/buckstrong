@@ -73,7 +73,7 @@ const locationDisplayName = activeLocation && serviceCityName
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
   ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
-  : 'Louisville, Lexington & Northern Kentucky';
+  : 'Cincinnati, OH';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
   items.filter((item): item is string => Boolean(item));
@@ -104,7 +104,7 @@ const localizedZipLine = zipCodes.length > 0
 
 const localizedDispatchNote = activeLocation
   ? `${locationDisplayName} homeowners are routed through our ${activeLocation.parentHub?.trim() || activeLocation.market} dispatch team for faster scheduling and stocked parts.`
-  : 'Kentucky homeowners are routed through our dispatch team for faster scheduling and stocked parts.';
+  : 'Cincinnati homeowners are routed through our dispatch team for faster scheduling and stocked parts.';
 
 const localizedAccessNote = activeLocation
   ? `We keep site notes for ${locationDisplayName} properties—gate codes, parking details, and HOA or property manager contacts—so follow-up repairs stay smooth.`
@@ -113,19 +113,19 @@ const localizedAccessNote = activeLocation
 const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
 const pageTitle = activeLocation && serviceCityName
   ? `Garage Door Repair ${serviceCityName} ${activeLocation.state} | Derby Strong Garage Doors`
-  : 'Garage Door Repair in Kentucky | Louisville, Lexington & Northern Kentucky';
+  : 'Garage Door Repair in Cincinnati, OH | Derby Strong Garage Doors';
 const pageDescription = activeLocation && serviceCityName
   ? `Trusted garage door supplier offering same-day repair in ${serviceCityName}, ${activeLocation.state}. 5.0-star service for broken springs, openers, and cables. 24/7 emergency help. Call ${displayPhoneNumber}!`
-  : 'Trusted garage door supplier serving Louisville, Lexington, and Northern Kentucky with same-day service for springs, rollers, cables, tracks, and safety inspections.';
+  : 'Trusted garage door supplier serving the Cincinnati metro with same-day service for springs, rollers, cables, tracks, and safety inspections.';
 const heroHeading = activeLocation
   ? `Garage Door Repair in ${locationDisplayName}`
-  : 'Garage Door Repair in Louisville, Lexington & Northern Kentucky';
+  : 'Garage Door Repair in Cincinnati, OH';
 const heroSubheading = activeLocation
   ? `Professional garage door repair services for homeowners in ${coverageAreaLabel}. Springs, rollers, cables, tracks, and emergency fixes handled by trusted local crews.`
-  : "Professional garage door repair services throughout Kentucky's major metros. Springs, rollers, cables, tracks, and emergency fixes handled by trusted local crews.";
+  : 'Professional garage door repair services throughout the Cincinnati metro. Springs, rollers, cables, tracks, and emergency fixes handled by trusted local crews.';
 const heroAlt = activeLocation
   ? `Garage door repair technician assisting homeowners in ${coverageAreaLabel}`
-  : 'Garage door repair technician assisting homeowners across Louisville, Lexington, and Northern Kentucky';
+  : 'Garage door repair technician assisting homeowners across the Cincinnati metro';
 const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
 const callMarkets = CALL_MARKETS;
 const defaultCallMarket = DEFAULT_CALL_MARKET;
@@ -134,30 +134,30 @@ const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
 const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
 const businessEntityId = `${getSiteOrigin()}#business`;
 const callModalId = 'header-call-modal';
-const areaServed = activeLocation ? coverageAreaLabel : 'Louisville, Lexington & Northern Kentucky, KY';
+const areaServed = activeLocation ? coverageAreaLabel : 'Cincinnati, OH';
 const schemaServiceName = activeLocation ? `Garage Door Repair in ${locationDisplayName}` : 'Garage Door Repair';
 const schemaDescription = activeLocation
   ? `Professional garage door repair services across ${coverageAreaLabel} including springs, rollers, cables, tracks, panels, and emergency repairs.`
-  : 'Professional garage door repair services across Louisville, Lexington, and Northern Kentucky including springs, rollers, cables, tracks, panels, and emergency repairs.';
+  : 'Professional garage door repair services across the Cincinnati metro including springs, rollers, cables, tracks, panels, and emergency repairs.';
 const canonicalPath = activeLocation
   ? buildLocationServiceCanonicalPath(activeLocation.slug, 'garage-door-repair')
   : '/services/garage-door-repair';
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const dailyServicesIntro = activeLocation
   ? `From historic neighborhoods to new builds across ${coverageAreaLabel}, we resolve noisy rollers, bent tracks, and uneven doors every day. We arrive in stocked trucks so we can replace broken torsion springs, snapped cables, worn hinges, and weatherstripping in one visit.`
-  : 'From Lexington suburbs to river cities in Northern Kentucky, we resolve noisy rollers, bent tracks, and uneven doors every day. We arrive in stocked trucks so we can replace broken torsion springs, snapped cables, worn hinges, and weatherstripping in one visit.';
+  : 'From Cincinnati neighborhoods to cross-river communities, we resolve noisy rollers, bent tracks, and uneven doors every day. We arrive in stocked trucks so we can replace broken torsion springs, snapped cables, worn hinges, and weatherstripping in one visit.';
 const emergencyServiceIntro = activeLocation
   ? `Need emergency help tonight? Call for same-day garage door repair anywhere in ${coverageAreaLabel}. We also support opener repair and smart-home upgrades across nearby communities.`
-  : 'Need emergency help tonight? Call for same-day garage door repair anywhere in Louisville, Lexington, or Northern Kentucky. We also support opener repair and smart-home upgrades across surrounding suburbs and cross-river communities.';
+  : 'Need emergency help tonight? Call for same-day garage door repair anywhere in the Cincinnati metro. We also support opener repair and smart-home upgrades across surrounding suburbs and cross-river communities.';
 const whyChooseCoverage = activeLocation
   ? `Same-day emergency repairs throughout ${coverageAreaLabel}`
-  : 'Same-day emergency repairs throughout Kentucky';
+  : 'Same-day emergency repairs throughout the Cincinnati metro';
 const inspectionCopy = activeLocation
   ? 'Our local technicians arrive prepared for emergencies with diagnostic tools and safety equipment. We perform a comprehensive inspection to identify all issues, not just the obvious problem, ensuring we address root causes.'
-  : 'Our Kentucky technicians arrive prepared for emergencies with diagnostic tools and safety equipment. We perform a comprehensive inspection to identify all issues, not just the obvious problem, ensuring we address root causes.';
+  : 'Our Ohio technicians arrive prepared for emergencies with diagnostic tools and safety equipment. We perform a comprehensive inspection to identify all issues, not just the obvious problem, ensuring we address root causes.';
 const faqIntro = activeLocation
   ? `Quick answers to common questions from ${coverageAreaLabel} homeowners`
-  : 'Quick answers to common questions from Kentucky homeowners';
+  : 'Quick answers to common questions from Cincinnati homeowners';
 const contactTitle = activeLocation
   ? `Need Garage Door Repair in ${locationDisplayName}?`
   : 'Need Garage Door Repair?';
@@ -170,7 +170,7 @@ const faqs = [
     question: 'Do you offer same-day emergency garage door repair?',
     answer: activeLocation
       ? `Yes. Our experienced technicians serving ${coverageAreaLabel} are available for same-day and after-hours service, and most emergency repairs are completed during the initial visit.`
-      : 'Yes. Our Kentucky technicians serving Louisville, Lexington, and Northern Kentucky are available for same-day and after-hours service, and most emergency repairs are completed during the initial visit.'
+      : 'Yes. Our Cincinnati technicians are available for same-day and after-hours service, and most emergency repairs are completed during the initial visit.'
   },
   {
     question: 'What types of parts do you carry on your service trucks?',
@@ -499,7 +499,7 @@ const faqs = [
         <p class="text-lg text-ink/70 leading-relaxed">
           {activeLocation
             ? `Here are the details we keep on file for ${coverageAreaLabel} so every visit is faster and more relevant to the properties we service most.`
-            : 'Here are the details we keep on file for Kentucky homeowners so every visit is faster and more relevant to the properties we service most.'}
+            : 'Here are the details we keep on file for Cincinnati homeowners so every visit is faster and more relevant to the properties we service most.'}
         </p>
       </div>
 
@@ -559,11 +559,11 @@ const faqs = [
     paragraphs={filterStrings([
       activeLocation
         ? `Our ${locationDisplayName} crews handle broken torsion and extension springs, misaligned tracks, frayed cables, damaged panels, and opener failures with stocked trucks so most repairs finish the same day.`
-        : 'Our Kentucky crews handle broken torsion and extension springs, misaligned tracks, frayed cables, damaged panels, and opener failures with stocked trucks so most repairs finish the same day.',
+        : 'Our Ohio crews handle broken torsion and extension springs, misaligned tracks, frayed cables, damaged panels, and opener failures with stocked trucks so most repairs finish the same day.',
       'Every appointment includes balance testing, photo eye calibration, fastener checks, and weather-seal inspections. We record access preferences, HOA requirements, and past repairs so future visits stay fast.',
       activeLocation
         ? `Emergency scheduling is available across ${coverageAreaLabel}. If your door is stuck open or closed, we secure the opening, complete safety checks, and leave written notes for your records.`
-        : 'Emergency scheduling is available across Louisville, Lexington, and Northern Kentucky. If your door is stuck open or closed, we secure the opening, complete safety checks, and leave written notes for your records.',
+        : 'Emergency scheduling is available across the Cincinnati metro. If your door is stuck open or closed, we secure the opening, complete safety checks, and leave written notes for your records.',
       surroundingAreasLabel
     ])}
     bullets={filterStrings([

@@ -38,10 +38,10 @@ export type LocationGroup = {
 };
 
 export const PRIMARY_MARKET_PRIORITY = [
-  'Louisville Metro',
-  'Lexington Metro',
-  'Northern Kentucky',
+  'Cincinnati Metro',
 ] as const;
+
+const ACTIVE_MARKETS = new Set<string>(['Cincinnati Metro']);
 
 function resolveMarketPriority(market: string): number {
   const index = PRIMARY_MARKET_PRIORITY.indexOf(market as (typeof PRIMARY_MARKET_PRIORITY)[number]);
@@ -104,6 +104,7 @@ export async function getLocations(): Promise<Location[]> {
   const entries = await getCollection('locations');
   return entries
     .map(mapLocationEntry)
+    .filter((location) => ACTIVE_MARKETS.has(location.market))
     .sort((a, b) => {
       const marketCompare = a.market.localeCompare(b.market);
       if (marketCompare !== 0) {

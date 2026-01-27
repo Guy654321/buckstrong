@@ -73,7 +73,7 @@ const locationDisplayName = activeLocation && serviceCityName
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
   ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
-  : 'Louisville Metro, Lexington-Fayette & Northern Kentucky neighborhoods';
+  : 'Cincinnati metro neighborhoods';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
   items.filter((item): item is string => Boolean(item));
@@ -94,19 +94,19 @@ const zipCoverageLabel =
 const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
 const pageTitle = activeLocation && serviceCityName
   ? `Garage Door Installation ${serviceCityName} | Derby Strong Garage Doors`
-  : 'Kentucky Garage Door Installation | Derby Strong Garage Doors';
+  : 'Cincinnati Garage Door Installation | Derby Strong Garage Doors';
 const pageDescription = activeLocation && serviceCityName
   ? `Professional garage door installation in ${serviceCityName}, ${activeLocation.state}. 5.0-star local team. Choose from modern, steel, or carriage doors. Call ${displayPhoneNumber} for a free quote!`
-  : 'Expert garage door installation teams serving Louisville Metro, Lexington-Fayette, and Northern Kentucky communities with custom sizing, premium hardware, and comprehensive safety testing.';
+  : 'Expert garage door installation teams serving the Cincinnati metro with custom sizing, premium hardware, and comprehensive safety testing.';
 const heroHeading = activeLocation
   ? `Garage Door Installation in ${locationDisplayName}`
-  : 'Garage Door Installation for Louisville Metro, Lexington-Fayette & Northern Kentucky';
+  : 'Garage Door Installation for Cincinnati, OH';
 const heroSubheading = activeLocation
   ? `Precision crews install custom doors across ${coverageAreaLabel}. Choose carriage house, contemporary glass, or insulated steel options that fit your climate.`
   : 'Precision crews install custom doors for Jefferson, Fayette, Boone, Kenton, and Campbell County homeowners. Choose carriage house, contemporary glass, or insulated steel options that fit your climate.';
 const heroAlt = activeLocation
   ? `New garage door installation completed for homeowners in ${coverageAreaLabel}`
-  : 'New garage door installation completed for homeowners in Louisville Metro, Lexington-Fayette, and Northern Kentucky neighborhoods';
+  : 'New garage door installation completed for homeowners in Cincinnati metro neighborhoods';
 const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
 const callMarkets = CALL_MARKETS;
 const defaultCallMarket = DEFAULT_CALL_MARKET;
@@ -117,21 +117,21 @@ const businessEntityId = `${getSiteOrigin()}#business`;
 const callModalId = 'header-call-modal';
 const areaServed = activeLocation
   ? coverageAreaLabel
-  : 'Louisville Metro, Lexington-Fayette & Northern Kentucky, KY';
+  : 'Cincinnati, OH';
 const schemaServiceName = activeLocation ? `Garage Door Installation in ${locationDisplayName}` : 'Garage Door Installation';
 const schemaDescription = activeLocation
   ? `Professional garage door installation services across ${coverageAreaLabel} featuring custom measurements, premium hardware, insulation upgrades, and safety testing.`
-  : 'Professional garage door installation services across Louisville Metro, Lexington-Fayette, and Northern Kentucky featuring custom measurements, premium hardware, insulation upgrades, and safety testing.';
+  : 'Professional garage door installation services across the Cincinnati metro featuring custom measurements, premium hardware, insulation upgrades, and safety testing.';
 const canonicalPath = activeLocation
   ? buildLocationServiceCanonicalPath(activeLocation.slug, 'garage-door-installation')
   : '/services/garage-door-installation';
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const installationIntroCopy = activeLocation
   ? `From first measurement to final walkthrough, we manage every detail so your new garage door looks great and runs smoothly for ${coverageAreaLabel}.`
-  : 'From first measurement to final walkthrough, we manage every detail so your new garage door looks great and runs smoothly for Louisville Metro, Lexington-Fayette, and Northern Kentucky homeowners.';
+  : 'From first measurement to final walkthrough, we manage every detail so your new garage door looks great and runs smoothly for Cincinnati metro homeowners.';
 const faqIntro = activeLocation
   ? `Answers to common installation questions from homeowners in ${coverageAreaLabel}.`
-  : 'Answers to common installation questions from homeowners across Louisville Metro, Lexington-Fayette, and Northern Kentucky.';
+  : 'Answers to common installation questions from homeowners across the Cincinnati metro.';
 const contactTitle = activeLocation
   ? `Request an Installation Quote in ${locationDisplayName}`
   : 'Request an Installation Quote';
@@ -144,7 +144,7 @@ const galleryCards = [
     title: 'Expert Installation Process',
     description: activeLocation
       ? `On-site consultations, precise measurements, and safety-first crews deliver a seamless installation for homeowners across ${coverageAreaLabel}.`
-      : 'On-site consultations, precise measurements, and safety-first crews deliver a seamless installation for Louisville Metro, Lexington-Fayette, and Northern Kentucky homeowners.',
+      : 'On-site consultations, precise measurements, and safety-first crews deliver a seamless installation for Cincinnati metro homeowners.',
     image: expertProcessImage,
     alt: 'Completed garage door installation on a suburban home'
   },
@@ -160,7 +160,7 @@ const galleryCards = [
     title: 'Beautiful Finished Results',
     description: activeLocation
       ? `Premium materials, curated styles, and meticulous finishing touches give ${coverageAreaLabel} homes instant curb appeal.`
-      : 'Premium materials, curated styles, and meticulous finishing touches give homes across Louisville Metro, Lexington-Fayette, and Northern Kentucky instant curb appeal.',
+      : 'Premium materials, curated styles, and meticulous finishing touches give homes across the Cincinnati metro instant curb appeal.',
     image: finishedResultsImage,
     alt: 'Elegant garage door upgrade on a brick home'
   }
@@ -168,7 +168,7 @@ const galleryCards = [
 
 const processIntroHeading = activeLocation
   ? `Our ${locationDisplayName} Installation Process`
-  : 'Our Louisville, Lexington & Northern Kentucky Installation Process';
+  : 'Our Cincinnati Installation Process';
 
 const processIntroCopy = activeLocation
   ? `Choosing a new garage door is a big investment in your ${locationDisplayName} home. Our installers start with a simple design consultation. We confirm measurements, review accessories, and explain options so you feel confident before we begin.`
@@ -180,7 +180,7 @@ const processBodyCopy = activeLocation
 
 const doorTypesHeading = activeLocation
   ? `Garage Door Types We Install in ${locationDisplayName}`
-  : 'Garage Door Types We Install in Louisville Metro, Lexington-Fayette & Northern Kentucky';
+  : 'Garage Door Types We Install in Cincinnati, OH';
 
 const doorTypes = [
   {
@@ -225,11 +225,11 @@ const whatsIncludedItems = [
 
 const expertiseHeading = activeLocation
   ? `Local Expertise ${coverageAreaLabel} Can Trust`
-  : 'Louisville, Lexington & Northern Kentucky Expertise You Can Trust';
+  : 'Cincinnati Expertise You Can Trust';
 
 const expertiseCopy = activeLocation
   ? `Derby Strong Garage Doors has served ${coverageAreaLabel} homeowners for more than a decade. Our responsive teams handle scheduling, permitting, and on-site coordination so your project stays on time and on budget. Whether you need insulated carriage house doors or a sleek modern upgrade, we make sure you love the results.`
-  : 'Derby Strong Garage Doors has served homeowners across Louisville Metro, Lexington-Fayette, and Northern Kentucky for more than a decade. Our responsive teams handle scheduling, permitting, and on-site coordination so your project stays on time and on budget. Whether you need insulated carriage house doors or a sleek modern upgrade, we make sure you love the results.';
+  : 'Derby Strong Garage Doors has served homeowners across the Cincinnati metro for more than a decade. Our responsive teams handle scheduling, permitting, and on-site coordination so your project stays on time and on budget. Whether you need insulated carriage house doors or a sleek modern upgrade, we make sure you love the results.';
 ---
 
 <Base
@@ -297,7 +297,7 @@ const expertiseCopy = activeLocation
       <p class="text-xl text-white/95 mb-8 max-w-3xl mx-auto leading-relaxed">{heroSubheading}</p>
       {!activeLocation && (
         <p class="text-base text-white/85 mb-8 max-w-3xl mx-auto leading-relaxed">
-          We specialize in garage door installation in Louisville, KY, delivering the same dependable craftsmanship in Lexington-Fayette and Northern Kentucky.
+          We specialize in garage door installation in Cincinnati, OH, delivering the same dependable craftsmanship across the metro.
         </p>
       )}
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -467,11 +467,11 @@ const expertiseCopy = activeLocation
     paragraphs={filterStrings([
       activeLocation
         ? `Homeowners in ${coverageAreaLabel} can choose insulated steel, carriage-house, or modern glass garage doors that match local weather and architecture. We confirm measurements, track clearances, and opener compatibility before ordering.`
-        : 'Homeowners across Kentucky can choose insulated steel, carriage-house, or modern glass garage doors that match local weather and architecture. We confirm measurements, track clearances, and opener compatibility before ordering.',
+        : 'Homeowners across Cincinnati can choose insulated steel, carriage-house, or modern glass garage doors that match local weather and architecture. We confirm measurements, track clearances, and opener compatibility before ordering.',
       'Installations include spring and hardware balancing, weather-seal upgrades, and haul-away of removed materials. We manage HOA approvals, permits, and access details to keep projects on schedule.',
       activeLocation
         ? `After installation, we share maintenance tips suited to ${coverageAreaLabel} humidity and temperature swings. Short routines keep the door quiet and efficient.`
-        : 'After installation, we share maintenance tips suited to Kentucky humidity and temperature swings. Short routines keep the door quiet and efficient.',
+        : 'After installation, we share maintenance tips suited to Cincinnati humidity and temperature swings. Short routines keep the door quiet and efficient.',
       surroundingAreasLabel
     ])}
     bullets={filterStrings([

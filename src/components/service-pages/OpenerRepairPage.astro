@@ -63,7 +63,7 @@ const locationDisplayName = activeLocation ? `${activeLocation.name}, ${activeLo
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
   ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
-  : 'Louisville, Lexington & Northern Kentucky';
+  : 'Cincinnati, OH';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
   items.filter((item): item is string => Boolean(item));
@@ -83,19 +83,19 @@ const zipCoverageLabel =
 
 const pageTitle = activeLocation
   ? `Garage Door Opener Repair in ${locationDisplayName} | Derby Strong Garage Doors`
-  : 'Garage Door Opener Repair in Kentucky | Louisville, Lexington & Northern Kentucky';
+  : 'Garage Door Opener Repair in Cincinnati, OH | Derby Strong Garage Doors';
 const pageDescription = activeLocation
   ? `Certified opener repair specialists serving ${coverageAreaLabel}. Motors, remotes, sensors, and smart upgrades with same-day appointments.`
-  : 'Certified opener repair specialists serving Louisville, Lexington, and Northern Kentucky. Motors, remotes, sensors, and smart upgrades with same-day appointments.';
+  : 'Certified opener repair specialists serving the Cincinnati metro. Motors, remotes, sensors, and smart upgrades with same-day appointments.';
 const heroHeading = activeLocation
   ? `Garage Door Opener Repair in ${locationDisplayName}`
-  : 'Garage Door Opener Repair in Louisville, Lexington & Northern Kentucky';
+  : 'Garage Door Opener Repair in Cincinnati, OH';
 const heroSubheading = activeLocation
   ? `Local technicians troubleshoot motors, keypads, sensors, and smart controls across ${coverageAreaLabel} with fully stocked trucks and same-day appointments.`
-  : 'Local technicians troubleshoot motors, keypads, sensors, and smart controls across Kentucky’s three major markets with fully stocked trucks and same-day appointments.';
+  : 'Local technicians troubleshoot motors, keypads, sensors, and smart controls across the Cincinnati metro with fully stocked trucks and same-day appointments.';
 const heroAlt = activeLocation
   ? `Garage door opener repair technician supporting homeowners in ${coverageAreaLabel}`
-  : 'Garage door opener repair technician supporting homeowners across Louisville, Lexington, and Northern Kentucky';
+  : 'Garage door opener repair technician supporting homeowners across the Cincinnati metro';
 const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
 const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
 const callMarkets = CALL_MARKETS;
@@ -105,18 +105,18 @@ const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
 const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
 const businessEntityId = `${getSiteOrigin()}#business`;
 const callModalId = 'header-call-modal';
-const areaServed = activeLocation ? coverageAreaLabel : 'Louisville, Lexington & Northern Kentucky, KY';
+const areaServed = activeLocation ? coverageAreaLabel : 'Cincinnati, OH';
 const schemaServiceName = activeLocation ? `Garage Door Opener Repair in ${locationDisplayName}` : 'Garage Door Opener Repair';
 const schemaDescription = activeLocation
   ? `Professional garage door opener repair services across ${coverageAreaLabel} including motors, remotes, sensors, programming, and smart opener installations.`
-  : 'Professional garage door opener repair services across Louisville, Lexington, and Northern Kentucky including motors, remotes, sensors, programming, and smart opener installations.';
+  : 'Professional garage door opener repair services across the Cincinnati metro including motors, remotes, sensors, programming, and smart opener installations.';
 const canonicalPath = activeLocation
   ? buildLocationServiceCanonicalPath(activeLocation.slug, 'opener-repair')
   : '/services/opener-repair';
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const whyChooseCoverage = activeLocation
   ? `Same-day service for most repairs across ${coverageAreaLabel}`
-  : 'Same-day service for most repairs across Kentucky';
+  : 'Same-day service for most repairs across the Cincinnati metro';
 const faqIntro = activeLocation
   ? `Helpful answers about repairing and upgrading garage door openers for ${coverageAreaLabel} homeowners`
   : 'Helpful answers about repairing and upgrading garage door openers';
@@ -496,11 +496,11 @@ const contactSubtitle = activeLocation
     paragraphs={filterStrings([
       activeLocation
         ? `Technicians serving ${coverageAreaLabel} repair belt-drive, chain-drive, and jackshaft openers along with keypads, safety sensors, and wall consoles. We stock gears, rail assemblies, logic boards, and travel modules so most fixes stay on one visit.`
-        : 'Technicians across Kentucky repair belt-drive, chain-drive, and jackshaft openers along with keypads, safety sensors, and wall consoles. We stock gears, rail assemblies, logic boards, and travel modules so most fixes stay on one visit.',
+        : 'Technicians across the Cincinnati metro repair belt-drive, chain-drive, and jackshaft openers along with keypads, safety sensors, and wall consoles. We stock gears, rail assemblies, logic boards, and travel modules so most fixes stay on one visit.',
       'Every opener visit includes force and travel calibration, photo eye alignment, and backup battery tests to keep doors operating safely. We also set up smart controls, Wi-Fi connectivity, and myQ-style integrations when requested.',
       activeLocation
         ? `Same-day appointments are available throughout ${coverageAreaLabel} for doors stuck open, reversing unexpectedly, or failing to respond to remotes.`
-        : 'Same-day appointments are available across Louisville, Lexington, and Northern Kentucky for doors stuck open, reversing unexpectedly, or failing to respond to remotes.',
+        : 'Same-day appointments are available across the Cincinnati metro for doors stuck open, reversing unexpectedly, or failing to respond to remotes.',
       surroundingAreasLabel
     ])}
     bullets={filterStrings([

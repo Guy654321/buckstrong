@@ -1,8 +1,6 @@
-export const LEGACY_MARKET_REDIRECTS: Record<string, string> = {
-  jeffersontown: 'louisville-jeffersontown',
-};
+export const LEGACY_MARKET_REDIRECTS: Record<string, string> = {};
 
-const CANONICAL_HUB_SLUGS = new Set(['lexington', 'northern-kentucky']);
+const CANONICAL_HUB_SLUGS = new Set(['cincinnati']);
 
 function normalizeSlug(slug: string | undefined | null): string {
   return typeof slug === 'string' ? slug.trim() : '';
