@@ -1,0 +1,16 @@
+---
+import { getLocationHubs } from '../../lib/locations';
+import { buildLocationCanonicalPath } from '../../lib/canonical';
+
+export async function getStaticPaths() {
+  const hubs = await getLocationHubs();
+  return hubs.map((hub) => ({
+    params: { city: hub.slug }
+  }));
+}
+
+const { city } = Astro.params;
+const canonicalPath = buildLocationCanonicalPath(city);
+
+return Astro.redirect(canonicalPath, 301);
+---

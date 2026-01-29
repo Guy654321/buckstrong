@@ -1,4 +1,6 @@
 import { defineConfig } from 'astro/config';
+import fs from 'node:fs';
+import path from 'node:path';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
@@ -22,6 +24,22 @@ function normalizeSiteOrigin(candidate, fallback = DEFAULT_SITE_ORIGIN) {
 }
 
 const siteOrigin = normalizeSiteOrigin(process.env.PUBLIC_SITE_URL, DEFAULT_SITE_ORIGIN);
+const LOCATIONS_DIR = path.resolve(process.cwd(), 'src', 'content', 'locations');
+const HUB_SLUGS = (() => {
+  try {
+    const entries = fs.readdirSync(LOCATIONS_DIR, { withFileTypes: true });
+    return entries
+      .filter((entry) => entry.isFile() && entry.name.endsWith('.json'))
+      .map((entry) => {
+        const raw = fs.readFileSync(path.join(LOCATIONS_DIR, entry.name), 'utf-8');
+        const data = JSON.parse(raw);
+        return typeof data?.slug === 'string' ? data.slug.trim() : '';
+      })
+      .filter((slug) => slug.length > 0);
+  } catch {
+    return [];
+  }
+})();
 
 export default defineConfig({
   site: siteOrigin,
@@ -41,7 +59,40 @@ export default defineConfig({
     mdx(),
     sitemap({
       filter(page) {
-        const excludedPaths = new Set();
+        const excludedPaths = new Set(HUB_SLUGS.map((slug) => `/${slug}`));
+        const resolvePathname = (input) => {
+          if (!input) {
+            return '';
+          }
+
+          if (input instanceof URL) {
+            return input.pathname;
+          }
+
+          if (typeof input === 'object' && typeof input.pathname === 'string') {
+            return input.pathname;
+          }
+
+          if (typeof input === 'string') {
+            try {
+              return new URL(input, siteOrigin).pathname;
+            } catch {
+              return input;
+            }
+          }
+
+          return '';
+        };
+
+        const rawPathname = resolvePathname(page?.url ?? page?.pathname ?? page ?? '');
+        const normalizedPathname =
+          rawPathname && rawPathname !== '/'
+            ? rawPathname.replace(/\/+$/, '')
+            : rawPathname || '/';
+
+        if (excludedPaths.has(normalizedPathname)) {
+          return false;
+        }
 
         try {
           const url = new URL(page?.url ?? '', siteOrigin);
