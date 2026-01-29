@@ -262,6 +262,12 @@ const locationAddressLines = locationAddress
 const locationMapUrl = locationAddress
   ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationAddressLines.join(', '))}`
   : undefined;
+const napDisplayName = BUSINESS_INFO.name;
+const napPhoneDisplay = locationTelephoneDisplay;
+const napPhoneHref = buildTelephoneHref(napPhoneDisplay);
+const serviceAreaNotice = location.serviceAreaBusiness
+  ? `Service-area business serving ${marketDisplayName}.`
+  : 'Visit our local office or call for same-day service.';
 
 const additionalNearbyContainerId = `nearby-service-areas-${location.slug}`;
 const additionalNearbyToggleButtonId = `nearby-service-areas-toggle-${location.slug}`;
@@ -403,6 +409,102 @@ if (locationAddress && locationMapUrl) {
 
   <main class="bg-white">
     <IconRow />
+    <section class="py-14 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <div class="rounded-2xl border border-ink/10 bg-card p-6 shadow-sm">
+            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Local NAP</p>
+            <h2 class="text-2xl font-bold text-ink mb-4">{napDisplayName}</h2>
+            <div class="space-y-3 text-base text-ink/80">
+              <p class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-accent" aria-hidden="true" focusable="false">
+                  <use href="#icon-phone" />
+                </svg>
+                <a href={napPhoneHref} class="nap-phone font-semibold text-ink hover:text-primary">
+                  {napPhoneDisplay}
+                </a>
+              </p>
+              {locationAddressLines.length > 0 ? (
+                <p class="flex items-start gap-3">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-accent" aria-hidden="true"></span>
+                  <span class="font-medium text-ink/80">
+                    {locationAddressLines.map((line, index) => (
+                      <Fragment>
+                        {line}
+                        {index < locationAddressLines.length - 1 && <br />}
+                      </Fragment>
+                    ))}
+                  </span>
+                </p>
+              ) : (
+                <p class="text-ink/70">{serviceAreaNotice}</p>
+              )}
+              {locationMapUrl && (
+                <a
+                  href={locationMapUrl}
+                  class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80"
+                >
+                  View on Google Maps
+                  <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-ink/10 bg-muted/60 p-6">
+            <h3 class="text-xl font-semibold text-ink mb-4">Cincinnati Service Links</h3>
+            <ul class="space-y-3 text-sm font-semibold">
+              {localizedPrimaryServices.map(service => (
+                <li>
+                  <a
+                    href={buildServiceHref(service.slug)}
+                    class="inline-flex items-center gap-2 text-primary hover:text-primary/80"
+                  >
+                    {service.name}
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p class="mt-6 text-sm text-ink/70">
+              Each link routes directly to Cincinnati service details under <span class="font-semibold">/locations/cincinnati/services/</span>.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div class="rounded-2xl border border-ink/10 bg-card p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-ink mb-4">ZIP Codes We Service</h3>
+            {zipAreas.length > 0 ? (
+              <ul class="grid grid-cols-2 gap-2 text-sm text-ink/70 sm:grid-cols-3">
+                {zipAreas.map(zip => (
+                  <li class="rounded-lg bg-white px-3 py-2 text-center font-medium text-ink/80">
+                    {zip}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p class="text-sm text-ink/70">{zipCoverageSummary}</p>
+            )}
+          </div>
+          <div class="rounded-2xl border border-ink/10 bg-card p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-ink mb-4">Neighborhoods &amp; Nearby Areas</h3>
+            {surroundingAreaList.length > 0 ? (
+              <ul class="grid grid-cols-1 gap-2 text-sm text-ink/70 sm:grid-cols-2">
+                {surroundingAreaList.map(area => (
+                  <li class="flex items-center gap-2">
+                    <span class="h-2 w-2 rounded-full bg-accent" aria-hidden="true"></span>
+                    <span class="font-medium text-ink/80">{area}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p class="text-sm text-ink/70">{surroundingAreaSummary}</p>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="py-20 bg-muted">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
