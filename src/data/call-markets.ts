@@ -7,14 +7,16 @@ export interface CallMarket {
 
 export const sanitizePhoneNumberValue = (value: string) => value.replace(/[^0-9+]/g, "");
 
-export const CALL_MARKETS: CallMarket[] = [
+const LAUNCH_CALL_MARKETS: CallMarket[] = [
   {
     id: "cincinnati",
     label: "Cincinnati",
     phoneDisplay: "513-440-5123",
     phoneHref: "",
   },
-].map((market) => ({
+];
+
+export const CALL_MARKETS: CallMarket[] = LAUNCH_CALL_MARKETS.map((market) => ({
   ...market,
   phoneHref: `tel:${sanitizePhoneNumberValue(market.phoneDisplay)}`,
 }));
