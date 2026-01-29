@@ -15,6 +15,8 @@ const headerCallModalModuleUrl = headerCallModalScriptUrl;
 
 const services = await getServices();
 const locationHubs = await getLocationHubs();
+const launchHubSlugs = new Set(["cincinnati"]);
+const launchHubs = locationHubs.filter((hub) => launchHubSlugs.has(hub.slug));
 const displayPhoneNumber = BUSINESS_INFO.telephone;
 const sanitizedPhoneNumber = displayPhoneNumber.replace(/[^0-9+]/g, "");
 const phoneHref = `tel:${sanitizedPhoneNumber || displayPhoneNumber}`;
@@ -193,7 +195,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
           </div>
 
           {
-            locationHubs.length > 0 ? (
+            launchHubs.length > 0 ? (
               <div class="relative group" data-dropdown data-open="false">
                 <button
                   id="desktop-locations-trigger"
@@ -239,7 +241,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
                       aria-hidden="true"
                     ></div>
                     {
-                      locationHubs.map((hub) => (
+                      launchHubs.map((hub) => (
                         <a
                           href={`/locations/${hub.slug}`}
                           class="block px-4 py-2 text-sm text-ink hover:bg-gray-100"
@@ -399,9 +401,9 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
               class="block px-3 py-2 text-base font-medium text-ink hover:text-primary hover:bg-gray-100 rounded-lg"
               >Locations</a
             >
-            {locationHubs.length > 0 && (
+            {launchHubs.length > 0 && (
               <div class="pl-6 space-y-1">
-                {locationHubs.map((hub) => (
+                {launchHubs.map((hub) => (
                   <a
                     href={`/locations/${hub.slug}`}
                     class="block px-3 py-2 text-sm text-ink/80 hover:text-primary hover:bg-gray-100 rounded-lg"

@@ -7,17 +7,22 @@ import { getLocationsByMarket, getLocationHubs } from '../lib/locations';
 const services = await getServices();
 const locationGroups = await getLocationsByMarket();
 const hubLocations = await getLocationHubs();
+const launchHubSlugs = new Set(['cincinnati']);
+const launchHubs = hubLocations.filter(location => launchHubSlugs.has(location.slug));
+const launchLocationGroups = locationGroups.filter(group => {
+  return group.hub && launchHubSlugs.has(group.hub.slug);
+});
 
 const isDefined = <T,>(value: T | null | undefined): value is T =>
   value !== null && value !== undefined;
 
-const footerLocationGroups = locationGroups.map(group => ({
+const footerLocationGroups = launchLocationGroups.map(group => ({
   market: group.market,
   locations: [group.hub, ...group.areas].filter(isDefined),
 }));
 const sanitizeTelephone = (value: string) => value.replace(/[^0-9+]/g, '');
 
-const footerHubs = hubLocations.map(location => {
+const footerHubs = launchHubs.map(location => {
   const hasAddress = Boolean(location.showAddress && location.address?.streetAddress);
   return {
     ...location,
