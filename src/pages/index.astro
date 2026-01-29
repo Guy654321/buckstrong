@@ -101,7 +101,7 @@ const breadcrumbSchema = JSON.stringify({
 <Base
   title="Ohio Garage Door Repair & Installation | Derby Strong Garage Doors"
   description="Ohio-based garage door repair, opener fixes, and commercial overhead door service currently serving the Cincinnati metro. Same-day repair and installation, free estimates, friendly techs."
-  schemaType="LocalBusiness"
+  schemaType="Service"
 >
   <Fragment slot="head">
     {heroImagePreloadAvifSrcSet && (
@@ -139,7 +139,7 @@ const breadcrumbSchema = JSON.stringify({
   <Schema
     item={{
       '@context': 'https://schema.org',
-      '@type': 'LocalBusiness',
+      '@type': 'Organization',
       '@id': businessEntityId,
       name: BUSINESS_INFO.name,
       legalName: BUSINESS_INFO.legalName,
@@ -158,30 +158,6 @@ const breadcrumbSchema = JSON.stringify({
         '@type': 'AggregateRating',
         ratingValue: BUSINESS_INFO.aggregateRating.ratingValue,
         reviewCount: BUSINESS_INFO.aggregateRating.reviewCount
-      },
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: BUSINESS_INFO.address.streetAddress,
-        addressLocality: BUSINESS_INFO.address.addressLocality,
-        addressRegion: BUSINESS_INFO.address.addressRegion,
-        postalCode: BUSINESS_INFO.address.postalCode,
-        addressCountry: BUSINESS_INFO.address.addressCountry
-      },
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: BUSINESS_INFO.geo.latitude,
-        longitude: BUSINESS_INFO.geo.longitude
-      },
-      areaServed: {
-        '@type': 'GeoCircle',
-        geoMidpoint: {
-          '@type': 'GeoCoordinates',
-          latitude: BUSINESS_INFO.geo.latitude,
-          longitude: BUSINESS_INFO.geo.longitude
-        },
-        geoRadius: 45000,
-        name: 'Cincinnati Metro',
-        addressRegion: 'OH'
       },
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
@@ -254,7 +230,7 @@ const breadcrumbSchema = JSON.stringify({
       >
         Cincinnati metro
       </a>{' '}
-      with fast same-day garage door repair and installation. Currently serving Cincinnati metro. More Ohio cities coming soon. From worn springs to failing openers to full replacements, every job is handled by a trained technician using quality parts and precise adjustments to keep your door running safely and smoothly.
+      with fast same-day garage door repair and installation. More Ohio cities coming soon. From worn springs to failing openers to full replacements, every job is handled by a trained technician using quality parts and precise adjustments to keep your door running safely and smoothly.
     </Fragment>
   </Hero>
 
@@ -267,10 +243,10 @@ const breadcrumbSchema = JSON.stringify({
         <div class="text-center mb-16">
           <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Core Services</p>
           <h2 class="text-3xl sm:text-4xl font-bold text-ink mb-6">
-            Cincinnati Garage Door Services You Can Count On
+            Ohio Garage Door Services You Can Count On
           </h2>
           <p class="text-lg sm:text-xl text-ink/70 leading-relaxed max-w-3xl mx-auto">
-            Start with the three core services Cincinnati homeowners and facility managers call us for most&mdash;fast repairs, opener expertise, and professional new door installs across the metro.
+            Start with the three core services homeowners and facility managers call us for most&mdash;fast repairs, opener expertise, and professional new door installs across the Cincinnati metro.
           </p>
         </div>
 
@@ -339,24 +315,24 @@ const breadcrumbSchema = JSON.stringify({
     />
 
   <HiddenSeoText
-    title="In-depth Cincinnati garage door service details"
+    title="In-depth Ohio garage door service details"
     paragraphs={[
-      'Derby Strong Garage Doors is Ohio-based and supports Cincinnati-area homeowners and facility managers with same-day appointments for broken springs, stuck doors, failed openers, and hardware damage. Each crew arrives with stocked trucks to finish most repairs in one visit.',
-        'Our technicians complete balance checks, track alignment, photo eye calibration, and weather-seal inspections on every job to ensure safe performance after we leave. Customers receive digital estimates, approvals, and receipts for easy recordkeeping.',
-        'Beyond repairs, we manage design consultations and installations for insulated steel, carriage-style, and modern glass doors that suit Cincinnati architecture. Commercial overhead door maintenance and dock door tune-ups are scheduled around facility downtime to reduce disruptions.'
+      'Derby Strong Garage Doors is Ohio-based and currently serves the Cincinnati metro with same-day appointments for broken springs, stuck doors, failed openers, and hardware damage. Each crew arrives with stocked trucks to finish most repairs in one visit.',
+      'Our technicians complete balance checks, track alignment, photo eye calibration, and weather-seal inspections on every job to ensure safe performance after we leave. Customers receive digital estimates, approvals, and receipts for easy recordkeeping.',
+      'Beyond repairs, we manage design consultations and installations for insulated steel, carriage-style, and modern glass doors that suit Ohio architecture. Commercial overhead door maintenance and dock door tune-ups are scheduled around facility downtime to reduce disruptions.'
       ]}
       bullets={[
         'Primary service hub: Cincinnati metro',
         'Core offerings: garage door repair, opener troubleshooting, new door installation, and commercial overhead door maintenance',
-      'Convenient scheduling with after-hours availability and contactless approvals'
+        'Convenient scheduling with after-hours availability and contactless approvals'
     ]}
   />
 
   <HiddenSeoText
-    title="Additional garage door service assurances across Cincinnati"
+    title="Additional garage door service assurances across Ohio"
     paragraphs={[
       'Arrival notifications include technician names, vehicle descriptions, and license details so customers know exactly who is on the way. We document access instructions, gate codes, and HOA preferences for future visits.',
-      'Garage door weatherization guidance is tailored to Cincinnati humidity, wind, and temperature swings. We adjust opener force settings, recommend insulated panels, and replace perimeter seals to keep garages energy efficient.',
+      'Garage door weatherization guidance is tailored to Ohio humidity, wind, and temperature swings. We adjust opener force settings, recommend insulated panels, and replace perimeter seals to keep garages energy efficient.',
       'Commercial partners receive maintenance routes that align with loading dock schedules, shift changes, and retail hours across the Cincinnati metro. Detailed service notes and photos simplify recordkeeping for safety audits and warranty claims.'
     ]}
     bullets={[
@@ -374,16 +350,8 @@ const breadcrumbSchema = JSON.stringify({
       url: homepageUrl,
       about: {
         '@id': businessEntityId,
-        '@type': 'LocalBusiness',
-        name: BUSINESS_INFO.name,
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: BUSINESS_INFO.address.streetAddress,
-          addressLocality: BUSINESS_INFO.address.addressLocality,
-          addressRegion: BUSINESS_INFO.address.addressRegion,
-          postalCode: BUSINESS_INFO.address.postalCode,
-          addressCountry: BUSINESS_INFO.address.addressCountry
-        }
+        '@type': 'Organization',
+        name: BUSINESS_INFO.name
       }
     }}
   />

@@ -8,7 +8,7 @@ export const BUSINESS_INFO = {
   legalName: 'Derby Strong Garage Doors LLC',
   telephone: '(513) 440-5123',
   email: 'service@derbystronggaragedoors.com',
-  url: SITE_ORIGIN,
+  url: buildAbsoluteUrl('/locations/cincinnati', SITE_ORIGIN),
   logo: buildAbsoluteUrl(LOGO_PATH, SITE_ORIGIN),
   address: {
     streetAddress: '120 E 8th Street, Suite 200',
