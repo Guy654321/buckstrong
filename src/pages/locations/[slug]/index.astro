@@ -140,6 +140,8 @@ const serviceCardLocationContext = {
   phone: locationTelephoneDisplay
 };
 const repairLinkText = location.isHub ? `Garage Door Repair in ${hubCityName}` : undefined;
+const serviceLinksHeading = `${locationDisplayName} Service Links`;
+const serviceLinksPath = `/locations/${location.slug}/services/`;
 
 const PROCESS_STEPS = [
   {
@@ -452,7 +454,7 @@ if (locationAddress && locationMapUrl) {
           </div>
 
           <div class="rounded-2xl border border-ink/10 bg-muted/60 p-6">
-            <h3 class="text-xl font-semibold text-ink mb-4">Cincinnati Service Links</h3>
+            <h3 class="text-xl font-semibold text-ink mb-4">{serviceLinksHeading}</h3>
             <ul class="space-y-3 text-sm font-semibold">
               {localizedPrimaryServices.map(service => (
                 <li>
@@ -467,7 +469,7 @@ if (locationAddress && locationMapUrl) {
               ))}
             </ul>
             <p class="mt-6 text-sm text-ink/70">
-              Each link routes directly to Cincinnati service details under <span class="font-semibold">/locations/cincinnati/services/</span>.
+              Each link routes directly to {locationDisplayName} service details under <span class="font-semibold">{serviceLinksPath}</span>.
             </p>
           </div>
         </div>
@@ -529,15 +531,6 @@ if (locationAddress && locationMapUrl) {
           ))}
         </div>
 
-        <div class="text-center mt-12">
-          <a
-            href="/services"
-            class="inline-flex items-center gap-2 text-base font-semibold text-primary hover:text-primary/80 transition-colors"
-          >
-            Explore All Our Services
-            <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
       </div>
     </section>
 
