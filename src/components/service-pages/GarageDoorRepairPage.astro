@@ -73,7 +73,7 @@ const locationDisplayName = activeLocation && serviceCityName
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
   ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
-  : 'Cincinnati, OH';
+  : 'Cincinnati, Ohio';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
   items.filter((item): item is string => Boolean(item));
@@ -113,19 +113,19 @@ const localizedAccessNote = activeLocation
 const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
 const pageTitle = activeLocation && serviceCityName
   ? `Garage Door Repair ${serviceCityName} ${activeLocation.state} | Buck Strong Garage Doors`
-  : 'Garage Door Repair in Cincinnati, OH | Buck Strong Garage Doors';
+  : 'Garage Door Repair in Cincinnati, Ohio | Buck Strong Garage Doors';
 const pageDescription = activeLocation && serviceCityName
   ? `Trusted garage door supplier offering same-day repair in ${serviceCityName}, ${activeLocation.state}. 5.0-star service for broken springs, openers, and cables. 24/7 emergency help. Call ${displayPhoneNumber}!`
   : 'Trusted garage door supplier serving the Cincinnati metro with same-day service for springs, rollers, cables, tracks, and safety inspections.';
 const heroHeading = activeLocation
   ? `Garage Door Repair in ${locationDisplayName}`
-  : 'Garage Door Repair in Cincinnati, OH';
+  : 'Garage Door Repair in Cincinnati, Ohio';
 const heroSubheading = activeLocation
   ? `Professional garage door repair services for homeowners in ${coverageAreaLabel}. Springs, rollers, cables, tracks, and emergency fixes handled by trusted local crews.`
   : 'Professional garage door repair services throughout the Cincinnati metro. Springs, rollers, cables, tracks, and emergency fixes handled by trusted local crews.';
 const heroAlt = activeLocation
   ? `Garage door repair technician assisting homeowners in ${coverageAreaLabel}`
-  : 'Garage door repair technician assisting homeowners across the Cincinnati metro';
+  : 'Garage door repair technician assisting homeowners across Cincinnati, Ohio';
 const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
 const callMarkets = CALL_MARKETS;
 const defaultCallMarket = DEFAULT_CALL_MARKET;
@@ -134,7 +134,7 @@ const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
 const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
 const businessEntityId = `${getSiteOrigin()}#business`;
 const callModalId = 'header-call-modal';
-const areaServed = activeLocation ? coverageAreaLabel : 'Cincinnati, OH';
+const areaServed = activeLocation ? coverageAreaLabel : 'Cincinnati, Ohio';
 const schemaServiceName = activeLocation ? `Garage Door Repair in ${locationDisplayName}` : 'Garage Door Repair';
 const schemaDescription = activeLocation
   ? `Professional garage door repair services across ${coverageAreaLabel} including springs, rollers, cables, tracks, panels, and emergency repairs.`
@@ -145,19 +145,19 @@ const canonicalPath = activeLocation
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const dailyServicesIntro = activeLocation
   ? `From historic neighborhoods to new builds across ${coverageAreaLabel}, we resolve noisy rollers, bent tracks, and uneven doors every day. We arrive in stocked trucks so we can replace broken torsion springs, snapped cables, worn hinges, and weatherstripping in one visit.`
-  : 'From Cincinnati neighborhoods to cross-river communities, we resolve noisy rollers, bent tracks, and uneven doors every day. We arrive in stocked trucks so we can replace broken torsion springs, snapped cables, worn hinges, and weatherstripping in one visit.';
+  : 'From Cincinnati, Ohio neighborhoods to cross-river communities, we resolve noisy rollers, bent tracks, and uneven doors every day. We arrive in stocked trucks so we can replace broken torsion springs, snapped cables, worn hinges, and weatherstripping in one visit.';
 const emergencyServiceIntro = activeLocation
   ? `Need emergency help tonight? Call for same-day garage door repair anywhere in ${coverageAreaLabel}. We also support opener repair and smart-home upgrades across nearby communities.`
-  : 'Need emergency help tonight? Call for same-day garage door repair anywhere in the Cincinnati metro. We also support opener repair and smart-home upgrades across surrounding suburbs and cross-river communities.';
+  : 'Need emergency help tonight? Call for same-day garage door repair anywhere in Cincinnati, Ohio. We also support opener repair and smart-home upgrades across surrounding suburbs and cross-river communities.';
 const whyChooseCoverage = activeLocation
   ? `Same-day emergency repairs throughout ${coverageAreaLabel}`
-  : 'Same-day emergency repairs throughout the Cincinnati metro';
+  : 'Same-day emergency repairs throughout Cincinnati, Ohio';
 const inspectionCopy = activeLocation
   ? 'Our local technicians arrive prepared for emergencies with diagnostic tools and safety equipment. We perform a comprehensive inspection to identify all issues, not just the obvious problem, ensuring we address root causes.'
   : 'Our Ohio technicians arrive prepared for emergencies with diagnostic tools and safety equipment. We perform a comprehensive inspection to identify all issues, not just the obvious problem, ensuring we address root causes.';
 const faqIntro = activeLocation
   ? `Quick answers to common questions from ${coverageAreaLabel} homeowners`
-  : 'Quick answers to common questions from Cincinnati homeowners';
+  : 'Quick answers to common questions from Cincinnati, Ohio homeowners';
 const contactTitle = activeLocation
   ? `Need Garage Door Repair in ${locationDisplayName}?`
   : 'Need Garage Door Repair?';
@@ -275,6 +275,8 @@ const faqs = [
         decoding="sync"
         quality={80}
         sizes="100vw"
+        data-geo-lat="39.1031"
+        data-geo-lng="-84.5120"
       />
       <div class="absolute inset-0 bg-primary/75"></div>
     </div>
@@ -343,6 +345,8 @@ const faqs = [
                   decoding="async"
                   quality={90}
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  data-geo-lat="39.1031"
+                  data-geo-lng="-84.5120"
                 />
               ) : (
                 <div class="w-full h-full bg-muted flex items-center justify-center text-ink/60">

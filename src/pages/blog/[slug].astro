@@ -87,18 +87,20 @@ const ogImage = heroImageUrl
       {heroImageIsString ? (
         <img
           src={heroImageUrl}
-          alt={`${post.data.title} - Professional garage door guidance`}
+          alt={`${post.data.title} - Professional garage door guidance in Cincinnati, Ohio`}
           class="w-full h-full object-cover"
           width="1200"
           height="675"
           loading="eager"
           decoding="sync"
           fetchpriority="high"
+          data-geo-lat="39.1031"
+          data-geo-lng="-84.5120"
         />
       ) : (
         <Image
           src={heroImageMetadata}
-          alt={`${post.data.title} - Professional garage door guidance`}
+          alt={`${post.data.title} - Professional garage door guidance in Cincinnati, Ohio`}
           class="w-full h-full object-cover"
           width="1200"
           height="675"
@@ -107,6 +109,8 @@ const ogImage = heroImageUrl
           decoding="sync"
           quality={80}
           sizes="100vw"
+          data-geo-lat="39.1031"
+          data-geo-lng="-84.5120"
         />
       )}
       <div class="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary/75"></div>
@@ -180,18 +184,20 @@ const ogImage = heroImageUrl
                   {relatedImageIsString ? (
                     <img
                       src={relatedImageUrl}
-                      alt={`${relatedPost.data.title} - Expert garage door advice and guidance from Buck Strong Garage Doors professionals in Cincinnati, OH`}
+                      alt={`${relatedPost.data.title} - Expert garage door advice and guidance from Buck Strong Garage Doors professionals in Cincinnati, Ohio`}
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       width="400"
                       height="225"
                       loading="lazy"
                       decoding="async"
                       fetchpriority="low"
+                      data-geo-lat="39.1031"
+                      data-geo-lng="-84.5120"
                     />
                   ) : (
                     <Image
                       src={relatedImageMetadata}
-                      alt={`${relatedPost.data.title} - Expert garage door advice and guidance from Buck Strong Garage Doors professionals in Cincinnati, OH`}
+                      alt={`${relatedPost.data.title} - Expert garage door advice and guidance from Buck Strong Garage Doors professionals in Cincinnati, Ohio`}
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       width="400"
                       height="225"
@@ -199,6 +205,8 @@ const ogImage = heroImageUrl
                       fetchpriority="low"
                       decoding="async"
                       quality={75}
+                      data-geo-lat="39.1031"
+                      data-geo-lng="-84.5120"
                     />
                   )}
                 </div>

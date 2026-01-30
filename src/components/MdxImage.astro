@@ -67,6 +67,8 @@ const fallbackSrc = stringSource ?? '';
     quality={quality}
     class="w-full h-auto rounded-lg shadow-sm"
     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+    data-geo-lat="39.1031"
+    data-geo-lng="-84.5120"
   />
 ) : (
   <img
@@ -78,5 +80,7 @@ const fallbackSrc = stringSource ?? '';
     loading={loading}
     fetchpriority={fetchpriority}
     class="w-full h-auto rounded-lg shadow-sm"
+    data-geo-lat="39.1031"
+    data-geo-lng="-84.5120"
   />
 )}

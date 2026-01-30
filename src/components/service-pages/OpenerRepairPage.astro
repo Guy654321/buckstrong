@@ -63,7 +63,7 @@ const locationDisplayName = activeLocation ? `${activeLocation.name}, ${activeLo
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
   ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
-  : 'Cincinnati, OH';
+  : 'Cincinnati, Ohio';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
   items.filter((item): item is string => Boolean(item));
@@ -83,19 +83,19 @@ const zipCoverageLabel =
 
 const pageTitle = activeLocation
   ? `Garage Door Opener Repair in ${locationDisplayName} | Buck Strong Garage Doors`
-  : 'Garage Door Opener Repair in Cincinnati, OH | Buck Strong Garage Doors';
+  : 'Garage Door Opener Repair in Cincinnati, Ohio | Buck Strong Garage Doors';
 const pageDescription = activeLocation
   ? `Certified opener repair specialists serving ${coverageAreaLabel}. Motors, remotes, sensors, and smart upgrades with same-day appointments.`
   : 'Certified opener repair specialists serving the Cincinnati metro. Motors, remotes, sensors, and smart upgrades with same-day appointments.';
 const heroHeading = activeLocation
   ? `Garage Door Opener Repair in ${locationDisplayName}`
-  : 'Garage Door Opener Repair in Cincinnati, OH';
+  : 'Garage Door Opener Repair in Cincinnati, Ohio';
 const heroSubheading = activeLocation
   ? `Local technicians troubleshoot motors, keypads, sensors, and smart controls across ${coverageAreaLabel} with fully stocked trucks and same-day appointments.`
   : 'Local technicians troubleshoot motors, keypads, sensors, and smart controls across the Cincinnati metro with fully stocked trucks and same-day appointments.';
 const heroAlt = activeLocation
   ? `Garage door opener repair technician supporting homeowners in ${coverageAreaLabel}`
-  : 'Garage door opener repair technician supporting homeowners across the Cincinnati metro';
+  : 'Garage door opener repair technician supporting homeowners across Cincinnati, Ohio';
 const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
 const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
 const callMarkets = CALL_MARKETS;
@@ -105,7 +105,7 @@ const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
 const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
 const businessEntityId = `${getSiteOrigin()}#business`;
 const callModalId = 'header-call-modal';
-const areaServed = activeLocation ? coverageAreaLabel : 'Cincinnati, OH';
+const areaServed = activeLocation ? coverageAreaLabel : 'Cincinnati, Ohio';
 const schemaServiceName = activeLocation ? `Garage Door Opener Repair in ${locationDisplayName}` : 'Garage Door Opener Repair';
 const schemaDescription = activeLocation
   ? `Professional garage door opener repair services across ${coverageAreaLabel} including motors, remotes, sensors, programming, and smart opener installations.`
@@ -183,6 +183,8 @@ const contactSubtitle = activeLocation
         decoding="sync"
         quality={80}
         sizes="100vw"
+        data-geo-lat="39.1031"
+        data-geo-lng="-84.5120"
       />
       <div class="absolute inset-0 bg-primary/75"></div>
     </div>
@@ -240,7 +242,7 @@ const contactSubtitle = activeLocation
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={beltDriveImage}
-              alt="Quiet belt-drive garage door opener with DC motor"
+              alt="Quiet belt-drive garage door opener with DC motor in Cincinnati, Ohio"
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -248,6 +250,8 @@ const contactSubtitle = activeLocation
               fetchpriority="low"
               decoding="async"
               quality={70}
+              data-geo-lat="39.1031"
+              data-geo-lng="-84.5120"
             />
           </div>
 
@@ -280,7 +284,7 @@ const contactSubtitle = activeLocation
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={chainDriveImage}
-              alt="Chain-drive garage door opener with durable metal trolley"
+              alt="Chain-drive garage door opener with durable metal trolley in Cincinnati, Ohio"
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -288,6 +292,8 @@ const contactSubtitle = activeLocation
               fetchpriority="low"
               decoding="async"
               quality={70}
+              data-geo-lat="39.1031"
+              data-geo-lng="-84.5120"
             />
           </div>
 
@@ -320,7 +326,7 @@ const contactSubtitle = activeLocation
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={directDriveImage}
-              alt="Direct-drive jackshaft opener mounted beside garage door"
+              alt="Direct-drive jackshaft opener mounted beside garage door in Cincinnati, Ohio"
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -328,6 +334,8 @@ const contactSubtitle = activeLocation
               fetchpriority="low"
               decoding="async"
               quality={70}
+              data-geo-lat="39.1031"
+              data-geo-lng="-84.5120"
             />
           </div>
 
@@ -360,7 +368,7 @@ const contactSubtitle = activeLocation
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={screwDriveImage}
-              alt="Screw-drive garage door opener with threaded steel rod"
+              alt="Screw-drive garage door opener with threaded steel rod in Cincinnati, Ohio"
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -368,6 +376,8 @@ const contactSubtitle = activeLocation
               fetchpriority="low"
               decoding="async"
               quality={70}
+              data-geo-lat="39.1031"
+              data-geo-lng="-84.5120"
             />
           </div>
 
