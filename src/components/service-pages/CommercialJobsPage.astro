@@ -63,7 +63,7 @@ const locationDisplayName = activeLocation ? `${activeLocation.name}, ${activeLo
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
   ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
-  : 'Cincinnati, OH';
+  : 'Cincinnati, Ohio';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
   items.filter((item): item is string => Boolean(item));
@@ -83,19 +83,19 @@ const zipCoverageLabel =
 
 const pageTitle = activeLocation
   ? `Commercial Overhead Door Service in ${locationDisplayName} | Buck Strong Garage Doors`
-  : 'Commercial Overhead Door Service in Cincinnati, OH | Buck Strong Garage Doors';
+  : 'Commercial Overhead Door Service in Cincinnati, Ohio | Buck Strong Garage Doors';
 const pageDescription = activeLocation
   ? `Commercial garage door repair, loading dock safety service, and warehouse maintenance for facilities in ${coverageAreaLabel}. Safety-certified technicians on call.`
   : 'Commercial garage door repair, loading dock safety service, and warehouse maintenance for Cincinnati metro facilities. Safety-certified technicians on call.';
 const heroHeading = activeLocation
   ? `Commercial Door Support for ${locationDisplayName}`
-  : 'Commercial Door Support for Cincinnati, OH';
+  : 'Commercial Door Support for Cincinnati, Ohio';
 const heroSubheading = activeLocation
   ? `Rapid-response repairs and preventive maintenance for warehouses, logistics centers, and municipal fleets. Crews cover ${coverageAreaLabel} with clear arrival updates.`
   : 'Rapid-response repairs and preventive maintenance for warehouses, logistics centers, and municipal fleets. Crews work across the Cincinnati metro with clear arrival updates.';
 const heroAlt = activeLocation
   ? `Commercial garage door technicians servicing facilities across ${coverageAreaLabel}`
-  : 'Commercial garage door technicians servicing facilities across the Cincinnati metro';
+  : 'Commercial garage door technicians servicing facilities across Cincinnati, Ohio';
 const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
 const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
 const callMarkets = CALL_MARKETS;
@@ -105,7 +105,7 @@ const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
 const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
 const businessEntityId = `${getSiteOrigin()}#business`;
 const callModalId = 'header-call-modal';
-const areaServed = activeLocation ? coverageAreaLabel : 'Cincinnati, OH';
+const areaServed = activeLocation ? coverageAreaLabel : 'Cincinnati, Ohio';
 const schemaServiceName = activeLocation
   ? `Commercial Garage Door Service in ${locationDisplayName}`
   : 'Commercial Garage Door Service';
@@ -118,19 +118,19 @@ const canonicalPath = activeLocation
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const warehouseAlt = activeLocation
   ? `Technician inspecting warehouse garage door system in ${coverageAreaLabel}`
-  : 'Technician inspecting warehouse garage door system in Cincinnati';
+  : 'Technician inspecting warehouse garage door system in Cincinnati, Ohio';
 const dockAlt = activeLocation
   ? `Dock leveler maintenance performed for ${coverageAreaLabel} logistics hub`
-  : 'Dock leveler maintenance performed for a Cincinnati logistics hub';
+  : 'Dock leveler maintenance performed for a Cincinnati, Ohio logistics hub';
 const storefrontAlt = activeLocation
   ? `Commercial service truck outside a ${locationDisplayName ?? 'Cincinnati'} storefront garage bay`
-  : 'Commercial service truck outside a Cincinnati storefront garage bay';
+  : 'Commercial service truck outside a Cincinnati, Ohio storefront garage bay';
 const estimateAlt = activeLocation
   ? `Commercial door technicians reviewing a ${locationDisplayName ?? coverageAreaLabel} service plan`
-  : 'Commercial door technicians reviewing a Cincinnati service plan';
+  : 'Commercial door technicians reviewing a Cincinnati, Ohio service plan';
 const facilitiesHeading = activeLocation
   ? `Facilities We Support Across ${coverageAreaLabel}`
-  : 'Facilities We Support Across Cincinnati';
+  : 'Facilities We Support Across Cincinnati, Ohio';
 const facilitiesIntroCopy = activeLocation
   ? `Facility leaders call our team for quick support that keeps bays secure and compliant throughout ${coverageAreaLabel}. We plan around shift changes, weekend deliveries, and municipal response schedules to cut downtime while honoring safety rules.`
   : 'Facility leaders call our team for quick support that keeps bays secure and compliant. We plan around shift changes, weekend deliveries, and municipal response schedules to cut downtime while honoring safety rules.';
@@ -203,6 +203,8 @@ const specialistsIntro = activeLocation
         decoding="sync"
         sizes="100vw"
         quality={80}
+        data-geo-lat="39.1031"
+        data-geo-lng="-84.5120"
       />
       <div class="absolute inset-0 bg-primary/75"></div>
     </div>
@@ -265,6 +267,8 @@ const specialistsIntro = activeLocation
               loading="lazy"
               decoding="async"
               quality={80}
+              data-geo-lat="39.1031"
+              data-geo-lng="-84.5120"
             />
             <div class="p-6">
               <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary/70 mb-3">Core Coverage</p>
@@ -284,6 +288,8 @@ const specialistsIntro = activeLocation
               loading="lazy"
               decoding="async"
               quality={80}
+              data-geo-lat="39.1031"
+              data-geo-lng="-84.5120"
             />
             <div class="p-6">
               <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary/70 mb-3">Core Coverage</p>
@@ -303,6 +309,8 @@ const specialistsIntro = activeLocation
               loading="lazy"
               decoding="async"
               quality={80}
+              data-geo-lat="39.1031"
+              data-geo-lng="-84.5120"
             />
             <div class="p-6">
               <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary/70 mb-3">Core Coverage</p>
@@ -420,6 +428,8 @@ const specialistsIntro = activeLocation
               width={400}
               height={300}
               quality={80}
+              data-geo-lat="39.1031"
+              data-geo-lng="-84.5120"
             />
             <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
           </div>
