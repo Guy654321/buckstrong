@@ -4,8 +4,8 @@ const SITE_ORIGIN = getSiteOrigin();
 const LOGO_PATH = '/images/derby-city-logo.png';
 
 export const BUSINESS_INFO = {
-  name: 'Derby Strong Garage Doors',
-  legalName: 'Derby Strong Garage Doors LLC',
+  name: 'Buck Strong Garage Doors',
+  legalName: 'Buck Strong Garage Doors LLC',
   telephone: '(513) 440-5123',
   email: 'service@derbystronggaragedoors.com',
   url: buildAbsoluteUrl('/locations/cincinnati', SITE_ORIGIN),

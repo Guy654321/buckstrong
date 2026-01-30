@@ -261,7 +261,7 @@ const isMalformedPhoneNumber = (value: string): boolean => {
 
 const createTextBody = (submission: Submission): string => {
   return [
-    'New contact form submission from Derby Strong Garage Doors',
+    'New contact form submission from Buck Strong Garage Doors',
     `Received at: ${submission.submittedAt}`,
     submission.page ? `Source page: ${submission.page}` : null,
     '',
@@ -338,7 +338,7 @@ const createHtmlBody = (submission: Submission, textBody: string): string => {
 const deliverWithResend = async (submission: Submission, textBody: string, htmlBody: string): Promise<void> => {
   const apiKey = process.env.RESEND_API_KEY;
   const recipients = process.env.CONTACT_FORM_RECIPIENT ?? BUSINESS_EMAIL;
-  const fromAddress = process.env.CONTACT_FORM_FROM ?? 'Derby Strong Garage Doors <service@derbystronggaragedoors.com>';
+  const fromAddress = process.env.CONTACT_FORM_FROM ?? 'Buck Strong Garage Doors <service@derbystronggaragedoors.com>';
 
   if (!apiKey || !recipients) {
     throw new Error('Resend integration is not configured.');

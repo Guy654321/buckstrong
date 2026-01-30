@@ -100,7 +100,7 @@ type ServiceSlug = ServiceSummary['slug'];
 
 const locationServiceShortBuilders: Record<ServiceSlug, (context: { displayName: string; market: string }) => string> = {
   'garage-door-repair': ({ displayName, market }) =>
-    `Same-day garage door repair for broken springs, cables, rollers, and off-track doors in ${displayName}. Trusted Derby Strong technicians keep ${market} homeowners safe with stocked trucks and rapid response.`,
+    `Same-day garage door repair for broken springs, cables, rollers, and off-track doors in ${displayName}. Trusted Buck Strong technicians keep ${market} homeowners safe with stocked trucks and rapid response.`,
   'garage-door-installation': ({ displayName, market }) =>
     `Custom garage door installation for properties in ${displayName}. Precision measurements, insulated panels, and carriage-style upgrades that complement ${market} architecture and withstand the climate.`,
   'opener-repair': ({ displayName, market }) =>
@@ -175,7 +175,7 @@ const PROCESS_STEPS = [
 ];
 
 const buildServiceHref = (slug: string) => `/locations/${location.slug}/services/${slug}`;
-const defaultMetaTitle = `${locationDisplayName} Garage Door Services | Derby Strong Garage Doors`;
+const defaultMetaTitle = `${locationDisplayName} Garage Door Services | Buck Strong Garage Doors`;
 const pageMetaTitle = location.metaTitle?.trim() || defaultMetaTitle;
 const defaultMetaDescription = `Professional garage door supplier offering repair, installation, opener service, and commercial overhead door work in ${locationDisplayName}. Same-day service across the ${marketDisplayName} communities. Trusted, insured technicians. Call ${locationTelephoneDisplay}`;
 const pageMetaDescription = location.metaDescription?.trim() || defaultMetaDescription;
@@ -321,7 +321,7 @@ const locationBusinessSchema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   '@id': `${locationUrl}#local-business`,
-  name: `Derby Strong Garage Doors — ${locationDisplayName}`,
+  name: `Buck Strong Garage Doors — ${locationDisplayName}`,
   description: pageMetaDescription,
   url: locationUrl,
   image: locationHeroImage,
@@ -541,7 +541,7 @@ if (locationAddress && locationMapUrl) {
           <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Our Process</p>
           <h2 class="text-3xl font-bold text-ink mb-6">From First Call to Final Safety Check</h2>
           <p class="text-lg text-ink/70 leading-relaxed max-w-3xl mx-auto">
-            The moment you contact Derby Strong Garage Doors, we begin mapping out your service visit. Our coordinated approach keeps {locationDisplayName} projects on schedule with no surprises.
+            The moment you contact Buck Strong Garage Doors, we begin mapping out your service visit. Our coordinated approach keeps {locationDisplayName} projects on schedule with no surprises.
           </p>
         </div>
 
@@ -662,7 +662,7 @@ if (locationAddress && locationMapUrl) {
           <h2 class="text-3xl font-bold text-ink mb-4">Nearby Service Areas</h2>
           <div class="w-24 h-1 bg-accent mx-auto rounded-full mb-6"></div>
           <p class="text-xl text-ink/70 max-w-2xl mx-auto">
-            Derby Strong Garage Doors provides same-day{' '}
+            Buck Strong Garage Doors provides same-day{' '}
             <a
               href={buildServiceHref('garage-door-repair')}
               class="inline-link"
@@ -816,7 +816,7 @@ if (locationAddress && locationMapUrl) {
   <HiddenSeoText
     title={`Garage door service coverage for ${locationDisplayName}`}
     paragraphs={[
-      `Derby Strong Garage Doors supports homeowners and facility managers throughout ${marketDisplayName} with ${
+      `Buck Strong Garage Doors supports homeowners and facility managers throughout ${marketDisplayName} with ${
         locationDisplayName
       }-based crews. We service common torsion and extension spring failures, frayed cables, damaged panels, off-track doors, and opener problems with stocked trucks prepared for same-day completion.`,
       `Our technicians provide thorough inspections that include balance testing, track alignment, safety sensor calibration, and weather-seal checks tailored to ${marketPossessive} seasonal humidity and temperature swings. Each visit ends with written notes so you can track past repairs and plan proactive maintenance.`,
