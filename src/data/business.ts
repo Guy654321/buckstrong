@@ -11,10 +11,10 @@ export const BUSINESS_INFO = {
   url: buildAbsoluteUrl('/locations/cincinnati', SITE_ORIGIN),
   logo: buildAbsoluteUrl(LOGO_PATH, SITE_ORIGIN),
   address: {
-    streetAddress: '120 E 8th Street, Suite 200',
+    streetAddress: '2337 Victory Parkway, Suite 120',
     addressLocality: 'Cincinnati',
     addressRegion: 'OH',
-    postalCode: '45202',
+    postalCode: '45206',
     addressCountry: 'US'
   },
   geo: {
