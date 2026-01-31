@@ -27,21 +27,21 @@
 @layer components {
   
   .btn-primary {
-    @apply bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200;
+    @apply bg-primary hover:bg-primary/90 text-white px-7 py-3.5 rounded-xl font-medium transition-colors duration-200;
     
     min-height: 44px;
     min-width: 44px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 14px 0 rgba(51, 65, 85, 0.25);
+    box-shadow: 0 3px 10px 0 rgba(51, 65, 85, 0.2);
   }
   
   .btn-accent {
-    @apply text-white px-6 py-3 font-semibold transition-colors duration-300 rounded-full;
+    @apply text-white px-7 py-3.5 font-semibold transition-colors duration-300 rounded-xl;
     background-color: #dc2626 !important;
     border: 2px solid #b91c1c;
-    box-shadow: 0 14px 32px 0 rgba(185, 28, 28, 0.35);
+    box-shadow: 0 10px 24px 0 rgba(185, 28, 28, 0.25);
     transition-property: background-color, color, box-shadow, transform;
     min-height: 48px;
     min-width: 48px;
@@ -53,28 +53,27 @@
   .btn-accent:hover,
   .btn-accent:focus-visible {
     background-color: #b91c1c !important;
-    box-shadow: 0 16px 36px 0 rgba(185, 28, 28, 0.45);
-    transform: translateY(-1px);
+    box-shadow: 0 12px 28px 0 rgba(185, 28, 28, 0.3);
   }
 
   .btn-outline {
-    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300;
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white px-7 py-3.5 rounded-xl font-medium transition-colors duration-300;
     min-height: 44px;
     min-width: 44px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 14px 0 rgba(51, 65, 85, 0.15);
+    box-shadow: 0 3px 10px 0 rgba(51, 65, 85, 0.12);
   }
 
   .btn-outline-light {
-    @apply border-2 border-white bg-transparent text-white hover:bg-white/10 px-6 py-3 rounded-full font-semibold transition-colors duration-300;
+    @apply border-2 border-white bg-transparent text-white hover:bg-white/10 px-7 py-3.5 rounded-xl font-semibold transition-colors duration-300;
     min-height: 48px;
     min-width: 48px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 28px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 22px 0 rgba(0, 0, 0, 0.16);
   }
 
   .inline-link {
