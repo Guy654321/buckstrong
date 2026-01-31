@@ -34,7 +34,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 14px 0 rgba(15, 61, 62, 0.25);
+    box-shadow: 0 4px 14px 0 rgba(51, 65, 85, 0.25);
   }
   
   .btn-accent {
@@ -64,7 +64,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 14px 0 rgba(15, 61, 62, 0.15);
+    box-shadow: 0 4px 14px 0 rgba(51, 65, 85, 0.15);
   }
 
   .btn-outline-light {
@@ -151,11 +151,11 @@ nav {
   
   
   .text-shadow-lg {
-    text-shadow: 0 4px 12px rgba(15, 61, 62, 0.8), 0 2px 6px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 4px 12px rgba(51, 65, 85, 0.8), 0 2px 6px rgba(0, 0, 0, 0.6);
   }
   
   .text-shadow {
-    text-shadow: 0 2px 8px rgba(15, 61, 62, 0.6), 0 1px 4px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 2px 8px rgba(51, 65, 85, 0.6), 0 1px 4px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -168,7 +168,7 @@ nav {
 
 
 :root {
-  --primary: #0F3D3E;
+  --primary: #334155;
   --accent: #FFB703;
   --ink: #0E121B;
   --muted: #F4F6F8;
