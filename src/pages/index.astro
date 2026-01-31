@@ -226,7 +226,7 @@ const breadcrumbSchema = JSON.stringify({
       Ohio-based team, currently serving the{' '}
       <a
         href="/locations/cincinnati"
-        class="inline-block align-middle text-yellow-300 font-semibold underline decoration-2 decoration-yellow-300/70 underline-offset-2 hover:text-yellow-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400 transition-colors duration-200"
+        class="inline-block align-middle text-primary font-semibold underline decoration-2 decoration-primary/60 underline-offset-2 hover:text-primary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors duration-200"
       >
         Cincinnati metro
       </a>{' '}
@@ -234,13 +234,13 @@ const breadcrumbSchema = JSON.stringify({
     </Fragment>
   </Hero>
 
-  <main class="bg-white">
+  <main class="bg-muted">
     <IconRow />
 
     {hubLocations.length > 0 && (
-      <section class="py-16 bg-white" id="locations">
+      <section class="py-16 bg-card" id="locations">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Service Hubs</p>
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-ink/60 mb-4">Service Hubs</p>
           <h2 class="text-3xl sm:text-4xl font-bold text-ink mb-6">
             Find Your Local Buck Strong Hub
           </h2>
@@ -265,7 +265,7 @@ const breadcrumbSchema = JSON.stringify({
     <section class="py-20 bg-muted" id="services">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Core Services</p>
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-ink/60 mb-4">Core Services</p>
           <h2 class="text-3xl sm:text-4xl font-bold text-ink mb-6">
             Ohio Garage Door Services You Can Count On
           </h2>
@@ -283,7 +283,7 @@ const breadcrumbSchema = JSON.stringify({
         <div class="text-center mt-12">
           <a
             href="/services"
-            class="inline-flex items-center gap-2 text-base font-semibold text-primary hover:text-primary/80 transition-colors"
+            class="inline-flex items-center gap-2 text-base font-semibold text-ink hover:text-ink/80 transition-colors"
           >
             Explore All Our Services
             <span aria-hidden="true">&rarr;</span>
@@ -293,10 +293,10 @@ const breadcrumbSchema = JSON.stringify({
     </section>
 
     
-    <section class="py-20 bg-white" id="process">
+    <section class="py-20 bg-card" id="process">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Our Process</p>
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-ink/60 mb-4">Our Process</p>
           <h2 class="text-3xl font-bold text-ink mb-6">From First Call to Final Safety Check</h2>
           <p class="text-lg text-ink/70 leading-relaxed max-w-3xl mx-auto">
             The moment you contact Buck Strong Garage Doors, we begin mapping out the service experience. Our coordinated approach ensures same-day completion with no surprises.
@@ -306,7 +306,7 @@ const breadcrumbSchema = JSON.stringify({
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {PROCESS_STEPS.map((step) => (
             <div class="text-center">
-              <div class="bg-accent text-ink w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg">
+              <div class="bg-ink/10 text-ink w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg">
                 {step.number}
               </div>
               <h3 class="text-xl font-semibold text-ink mb-4">{step.title}</h3>

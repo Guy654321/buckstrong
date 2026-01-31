@@ -132,7 +132,7 @@ const safetyTips = [
         data-geo-lat="39.1031"
         data-geo-lng="-84.5120"
       />
-      <div class="absolute inset-0 bg-primary/75"></div>
+      <div class="absolute inset-0 bg-charcoal/75"></div>
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="relative">
@@ -179,8 +179,8 @@ const safetyTips = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {safetyTips.map(tip => (
-          <div class="bg-white rounded-lg p-6 shadow-sm ring-1 ring-black/5">
-            <div class="text-accent mb-4">
+          <div class="bg-card rounded-lg p-6 shadow-sm ring-1 ring-black/5">
+            <div class="text-ink mb-4">
               <Icon name={tip.icon} size="48" aria-hidden="true" />
             </div>
             <h3 class="text-xl font-semibold text-ink mb-4">{tip.title}</h3>
@@ -192,16 +192,16 @@ const safetyTips = [
   </section>
   
   
-  <section class="py-16 bg-red-50">
+  <section class="py-16 bg-muted">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-red-100 border border-red-200 rounded-lg p-8">
+      <div class="bg-card border border-ink/10 rounded-lg p-8">
         <div class="flex items-start">
-          <div class="text-red-600 mr-4">
+          <div class="text-ink mr-4">
             <Icon name="mdi:alarm-light" size="48" aria-hidden="true" />
           </div>
           <div>
-            <h2 class="text-2xl font-bold text-red-800 mb-4">Emergency Situations</h2>
-            <div class="text-red-700 space-y-4">
+            <h2 class="text-2xl font-bold text-ink mb-4">Emergency Situations</h2>
+            <div class="text-ink/80 space-y-4">
               <p class="font-semibold">If you experience any of these situations, stop using your garage door immediately and call a professional:</p>
               <ul class="list-disc list-inside space-y-2 ml-4">
                 <li>Door falls rapidly or won't stay open</li>
@@ -211,9 +211,9 @@ const safetyTips = [
                 <li>Door opens or closes by itself</li>
                 <li>Remote control doesn't work consistently</li>
               </ul>
-              <div class="bg-red-200 rounded-lg p-4 mt-6">
-                <p class="font-bold text-red-800">Emergency Service Available 24/7</p>
-                <p class="text-red-700">
+              <div class="bg-ink/5 rounded-lg p-4 mt-6">
+                <p class="font-bold text-ink">Emergency Service Available 24/7</p>
+                <p class="text-ink/70">
                   Call us immediately — tap below to reach the right local team for your neighborhood.
                 </p>
                 <a href={`#${safetyCtaId}`} class={emergencyCallButtonClasses}>
@@ -229,7 +229,7 @@ const safetyTips = [
   </section>
   
   
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-card">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-ink mb-8 text-center">Recommended Maintenance Schedule</h2>
 
@@ -312,7 +312,7 @@ const safetyTips = [
               {market ? (
                 <div class="mt-6 pt-4 border-t border-ink/10 flex items-center justify-between gap-3 text-sm">
                   <span class="text-ink/60">Direct safety line</span>
-                  <a href={market.phoneHref} class="text-primary font-semibold hover:underline focus-visible:underline">
+                  <a href={market.phoneHref} class="text-ink font-semibold hover:text-ink/80 hover:underline focus-visible:underline">
                     {market.phoneDisplay}
                   </a>
                 </div>
@@ -325,7 +325,7 @@ const safetyTips = [
   </section>
 
 
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-card">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Stay Proactive With Trusted Resources</h2>
@@ -338,17 +338,17 @@ const safetyTips = [
         {resourceLinks.map(resource => (
           <a
             href={resource.href}
-            class="group bg-white rounded-xl shadow-sm ring-1 ring-black/5 hover:shadow-lg transform-gpu transition-[transform,opacity] duration-300 p-6 text-left composite-surface hover:-translate-y-1 focus-visible:-translate-y-1"
+            class="group bg-card rounded-xl shadow-sm ring-1 ring-black/5 hover:shadow-lg transform-gpu transition-[transform,opacity] duration-300 p-6 text-left composite-surface hover:-translate-y-1 focus-visible:-translate-y-1"
           >
             <div class="flex items-center justify-between mb-4">
-              <div class="bg-accent/10 text-accent w-12 h-12 rounded-full flex items-center justify-center">
+              <div class="bg-ink/10 text-ink w-12 h-12 rounded-full flex items-center justify-center">
                 <Icon name={resource.icon} size="28" aria-hidden="true" />
               </div>
-              <span class="text-primary font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span class="text-ink font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 Explore
               </span>
             </div>
-            <h3 class="text-xl font-semibold text-ink mb-2 group-hover:text-primary transition-colors">
+            <h3 class="text-xl font-semibold text-ink mb-2 transition-colors">
               {resource.title}
             </h3>
             <p class="text-ink/70 leading-relaxed text-sm">

@@ -206,7 +206,7 @@ const specialistsIntro = activeLocation
         data-geo-lat="39.1031"
         data-geo-lng="-84.5120"
       />
-      <div class="absolute inset-0 bg-primary/75"></div>
+      <div class="absolute inset-0 bg-charcoal/75"></div>
     </div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -242,7 +242,7 @@ const specialistsIntro = activeLocation
         )}
         <a
           href="/contact"
-          class="btn-outline-light text-lg px-8 py-4 bg-white/5 hover:bg-white/10 border-white/80 sm:order-last"
+          class="btn-outline-light text-lg px-8 py-4 sm:order-last"
         >
           Request Estimate
         </a>
@@ -250,14 +250,14 @@ const specialistsIntro = activeLocation
     </div>
   </section>
 
-  <section class="py-16 lg:py-20 bg-white">
+  <section class="py-16 lg:py-20 bg-card">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-ink">{facilitiesHeading}</h2>
     </div>
     <div class="mt-12 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto rounded-[2.75rem] bg-gradient-to-br from-muted/90 via-muted/70 to-muted/60 p-6 sm:p-10 lg:p-12 shadow-[0_35px_120px_-60px_rgba(15,23,42,0.4)]">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          <div class="bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md">
+          <div class="bg-card rounded-2xl shadow-sm ring-1 ring-ink/10 overflow-hidden transition-shadow duration-200 hover:shadow-md">
             <Image
               src={warehouseServiceImage}
               alt={warehouseAlt}
@@ -271,14 +271,14 @@ const specialistsIntro = activeLocation
               data-geo-lng="-84.5120"
             />
             <div class="p-6">
-              <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary/70 mb-3">Core Coverage</p>
+              <p class="text-xs font-semibold uppercase tracking-[0.35em] text-ink/60 mb-3">Core Coverage</p>
               <h3 class="text-xl font-semibold text-ink mb-2">Warehouses & Distribution</h3>
               <p class="text-sm text-ink/70 leading-relaxed">
                 Reset sectional doors, balance counterweights, and tune photo-eyes to keep freight moving.
               </p>
             </div>
           </div>
-          <div class="bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md">
+          <div class="bg-card rounded-2xl shadow-sm ring-1 ring-ink/10 overflow-hidden transition-shadow duration-200 hover:shadow-md">
             <Image
               src={dockServiceImage}
               alt={dockAlt}
@@ -292,14 +292,14 @@ const specialistsIntro = activeLocation
               data-geo-lng="-84.5120"
             />
             <div class="p-6">
-              <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary/70 mb-3">Core Coverage</p>
+              <p class="text-xs font-semibold uppercase tracking-[0.35em] text-ink/60 mb-3">Core Coverage</p>
               <h3 class="text-xl font-semibold text-ink mb-2">Dock & Industrial Equipment</h3>
               <p class="text-sm text-ink/70 leading-relaxed">
                 Service dock levelers, vehicle restraints, and rolling steel curtains with full safety documentation.
               </p>
             </div>
           </div>
-          <div class="bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md">
+          <div class="bg-card rounded-2xl shadow-sm ring-1 ring-ink/10 overflow-hidden transition-shadow duration-200 hover:shadow-md">
             <Image
               src={storefrontServiceImage}
               alt={storefrontAlt}
@@ -313,7 +313,7 @@ const specialistsIntro = activeLocation
               data-geo-lng="-84.5120"
             />
             <div class="p-6">
-              <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary/70 mb-3">Core Coverage</p>
+              <p class="text-xs font-semibold uppercase tracking-[0.35em] text-ink/60 mb-3">Core Coverage</p>
               <h3 class="text-xl font-semibold text-ink mb-2">Retail & Municipal Sites</h3>
               <p class="text-sm text-ink/70 leading-relaxed">
                 Quiet storefront shutters, fire stations, and fleet garages stay mission ready with proactive maintenance visits.
@@ -330,7 +330,7 @@ const specialistsIntro = activeLocation
       <div class="lg:grid lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:items-start">
         <div class="space-y-10 max-w-3xl">
           <div class="space-y-5">
-            <div class="inline-flex items-center gap-3 rounded-full bg-white/70 px-4 py-2 text-sm font-semibold uppercase tracking-[0.3em] text-primary/80 ring-1 ring-white/80">
+            <div class="inline-flex items-center gap-3 rounded-full bg-card/80 px-4 py-2 text-sm font-semibold uppercase tracking-[0.3em] text-ink/70 ring-1 ring-ink/10">
               <span>Facility Support</span>
             </div>
             <p class="text-lg text-ink/85 leading-relaxed">
@@ -341,15 +341,15 @@ const specialistsIntro = activeLocation
             </p>
           </div>
           <div class="grid gap-4 sm:grid-cols-2">
-            <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5">
-              <p class="text-sm font-semibold uppercase tracking-wide text-primary/80">Coverage Highlights</p>
+            <div class="rounded-2xl bg-card p-6 shadow-sm ring-1 ring-black/5">
+              <p class="text-sm font-semibold uppercase tracking-wide text-ink/70">Coverage Highlights</p>
               <ul class="mt-3 space-y-2 text-base text-ink/80 leading-relaxed list-disc list-inside">
                 <li>Crews schedule around shift changes, security protocols, and delivery windows.</li>
                 <li>Inspections and repairs stay on track without stalling operations.</li>
               </ul>
             </div>
-            <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5">
-              <p class="text-sm font-semibold uppercase tracking-wide text-primary/80">Compliance Ready</p>
+            <div class="rounded-2xl bg-card p-6 shadow-sm ring-1 ring-black/5">
+              <p class="text-sm font-semibold uppercase tracking-wide text-ink/70">Compliance Ready</p>
               <ul class="mt-3 space-y-2 text-base text-ink/80 leading-relaxed list-disc list-inside">
                 <li>Safety-certified technicians follow lockout-tagout steps.</li>
                 <li>Each visit includes clear notes and maintenance recommendations.</li>
@@ -358,31 +358,31 @@ const specialistsIntro = activeLocation
           </div>
         </div>
         <div class="mt-12 lg:mt-0">
-          <div class="rounded-3xl bg-white p-8 shadow-xl ring-1 ring-black/5 space-y-6">
+          <div class="rounded-3xl bg-card p-8 shadow-xl ring-1 ring-black/5 space-y-6">
             <h3 class="text-2xl font-bold text-ink">Rapid response for:</h3>
             <ul class="space-y-4 text-base text-ink/80 leading-relaxed">
               <li class="flex items-start gap-3">
-                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-ink shrink-0" aria-hidden="true" />
                 <span>Warehouses needing rapid sectional door resets and calibrated dock levelers.</span>
               </li>
               <li class="flex items-start gap-3">
-                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-ink shrink-0" aria-hidden="true" />
                 <span>Distribution centers balancing multiple bays, high-speed doors, and traffic controls.</span>
               </li>
               <li class="flex items-start gap-3">
-                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-ink shrink-0" aria-hidden="true" />
                 <span>Cold storage campuses relying on tight seals, insulated curtains, and vehicle restraints.</span>
               </li>
               <li class="flex items-start gap-3">
-                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-ink shrink-0" aria-hidden="true" />
                 <span>Manufacturing plants coordinating overhead cranes with rugged rolling steel doors.</span>
               </li>
               <li class="flex items-start gap-3">
-                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-ink shrink-0" aria-hidden="true" />
                 <span>Fleet garages scheduling bay maintenance around dispatch-ready service trucks.</span>
               </li>
               <li class="flex items-start gap-3">
-                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-ink shrink-0" aria-hidden="true" />
                 <span>Municipal facilities protecting emergency corridors with monitored security grilles.</span>
               </li>
             </ul>
@@ -392,7 +392,7 @@ const specialistsIntro = activeLocation
     </div>
   </section>
 
-  <section class="py-16 lg:py-20 bg-white">
+  <section class="py-16 lg:py-20 bg-card">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 xl:grid-cols-[1.05fr_0.95fr] gap-10 xl:gap-14 items-stretch">
         <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-8 space-y-6 flex flex-col h-full">
@@ -404,15 +404,15 @@ const specialistsIntro = activeLocation
           </div>
           <ul class="space-y-4 text-ink/80 leading-relaxed">
             <li class="flex items-start gap-3">
-              <Icon name="mdi:clipboard-text-outline" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+              <Icon name="mdi:clipboard-text-outline" size="22" class="mt-1 text-ink shrink-0" aria-hidden="true" />
               <span><strong>Site assessment.</strong> We document door counts, opener models, and safety equipment before presenting options.</span>
             </li>
             <li class="flex items-start gap-3">
-              <Icon name="mdi:shield-check" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+              <Icon name="mdi:shield-check" size="22" class="mt-1 text-ink shrink-0" aria-hidden="true" />
               <span><strong>Safety-first repairs.</strong> Technicians follow lockout-tagout procedures, secure counterbalance systems, and verify fall protection.</span>
             </li>
             <li class="flex items-start gap-3">
-              <Icon name="mdi:file-document-check-outline" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+              <Icon name="mdi:file-document-check-outline" size="22" class="mt-1 text-ink shrink-0" aria-hidden="true" />
               <span><strong>Detailed reporting.</strong> You receive post-service summaries with compliance notes and next steps for budgeting.</span>
             </li>
           </ul>
@@ -431,7 +431,7 @@ const specialistsIntro = activeLocation
               data-geo-lat="39.1031"
               data-geo-lng="-84.5120"
             />
-            <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+            <div class="absolute inset-0 bg-charcoal/20 mix-blend-multiply"></div>
           </div>
           <div class="p-8 flex flex-col gap-6 flex-1">
             <div class="space-y-3">
@@ -442,15 +442,15 @@ const specialistsIntro = activeLocation
             </div>
             <ul class="space-y-4 text-base text-ink/75 leading-relaxed">
               <li class="flex items-start gap-3">
-                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-ink shrink-0" aria-hidden="true" />
                 <span><strong>Walkthrough on your terms.</strong> We book around shift changes and secure areas.</span>
               </li>
               <li class="flex items-start gap-3">
-                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-ink shrink-0" aria-hidden="true" />
                 <span><strong>Dedicated coordinator.</strong> Expect confirmations, arrival updates, and photos from the field.</span>
               </li>
               <li class="flex items-start gap-3">
-                <Icon name="mdi:check-circle" size="22" class="mt-1 text-primary shrink-0" aria-hidden="true" />
+                <Icon name="mdi:check-circle" size="22" class="mt-1 text-ink shrink-0" aria-hidden="true" />
                 <span><strong>Clear next steps.</strong> Receive one proposal outlining safety priorities, parts, and scheduling options.</span>
               </li>
             </ul>
@@ -478,7 +478,7 @@ const specialistsIntro = activeLocation
     bgColor="muted"
   />
 
-  <section class="py-16 lg:py-20 bg-white">
+  <section class="py-16 lg:py-20 bg-card">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 px-6 py-10 sm:px-10 space-y-8">
         <div class="space-y-4">
@@ -490,7 +490,7 @@ const specialistsIntro = activeLocation
         <div class="flex flex-col items-center gap-4">
           <CallNowButton phoneNumber={displayPhoneNumber} />
           <p class="text-sm text-ink/60">
-            Prefer to write it down? <a href="#commercial-contact" class="font-semibold text-primary hover:underline">Send your project details online</a> and our coordinator will follow up fast.
+            Prefer to write it down? <a href="#commercial-contact" class="font-semibold text-ink hover:text-ink/80 hover:underline">Send your project details online</a> and our coordinator will follow up fast.
           </p>
         </div>
       </div>
@@ -499,7 +499,7 @@ const specialistsIntro = activeLocation
 
   <ServiceInternalLinks currentSlug="commercial-jobs" location={activeLocation} background="muted" />
 
-  <section class="py-16 lg:py-20 bg-white border-t border-ink/10">
+  <section class="py-16 lg:py-20 bg-card border-t border-ink/10">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <FAQInteractive faqs={faqs} title="Commercial Service FAQs" />
     </div>

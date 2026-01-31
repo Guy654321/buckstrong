@@ -53,7 +53,7 @@ const callLinkHref = defaultCallMarket?.phoneHref ?? telephoneHref;
 const heroCallStandaloneClasses =
   'btn-accent text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-3 sm:py-4 w-full sm:w-auto gap-2';
 const heroQuoteStandaloneClasses =
-  'btn-outline-light text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-3 sm:py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto bg-white/10 hover:bg-white/20 gap-2';
+  'btn-outline-light text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-3 sm:py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2';
 
 const inlineCallStandaloneClasses =
   'btn-accent text-base sm:text-lg px-6 sm:px-7 py-3.5 sm:py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2';
@@ -96,7 +96,7 @@ try {
         data-geo-lat="39.1031"
         data-geo-lng="-84.5120"
       />
-      <div class="absolute inset-0 bg-gradient-to-br from-primary/85 to-primary/70"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-charcoal/85 to-charcoal/70"></div>
     </div>
     
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -136,7 +136,7 @@ try {
   </section>
 
   
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-card">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
       <h2 class="text-3xl font-bold text-ink mb-6">Why Our Garage Door Guides Matter</h2>
       <p class="text-lg text-ink/80 leading-relaxed mb-6">
@@ -167,7 +167,7 @@ try {
   </section>
 
 
-  <section class="py-20 bg-white">
+  <section class="py-20 bg-card">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-3xl font-bold text-ink mb-4">Latest Articles</h2>
@@ -182,14 +182,14 @@ try {
               <div class="p-8">
                 <div class="flex flex-wrap gap-2 mb-6">
                   {post.data.tags.map(tag => (
-                    <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium border border-accent/20">
+                    <span class="bg-ink/10 text-ink px-3 py-1 rounded-full text-sm font-medium border border-ink/20">
                       {tag}
                     </span>
                   ))}
                 </div>
                 
-                <h2 class="text-2xl md:text-3xl font-bold text-ink mb-4 group-hover:text-primary transition-colors leading-tight">
-                  <a href={`/blog/${post.slug}`} class="hover:text-primary transition-colors">
+                <h2 class="text-2xl md:text-3xl font-bold text-ink mb-4 transition-colors leading-tight">
+                  <a href={`/blog/${post.slug}`} class="hover:underline">
                     {post.data.title}
                   </a>
                 </h2>
@@ -200,9 +200,9 @@ try {
                 
                 <div class="flex items-center justify-between">
                   <div class="flex items-center text-sm text-ink/60">
-                    <div class="bg-accent/10 w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                    <div class="bg-ink/10 w-8 h-8 rounded-full flex items-center justify-center mr-3">
                       <svg
-                        class="w-4 h-4 text-accent"
+                        class="w-4 h-4 text-ink"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -258,17 +258,17 @@ try {
         {resourceLinks.map(resource => (
           <a
             href={resource.href}
-            class="group bg-white rounded-xl shadow-sm ring-1 ring-black/5 hover:shadow-lg transform-gpu transition-[transform,opacity] duration-300 p-6 text-left composite-surface hover:-translate-y-1 focus-visible:-translate-y-1"
+            class="group bg-card rounded-xl shadow-sm ring-1 ring-black/5 hover:shadow-lg transform-gpu transition-[transform,opacity] duration-300 p-6 text-left composite-surface hover:-translate-y-1 focus-visible:-translate-y-1"
           >
             <div class="flex items-center justify-between mb-4">
-              <div class="bg-accent/10 text-accent w-12 h-12 rounded-full flex items-center justify-center">
+              <div class="bg-ink/10 text-ink w-12 h-12 rounded-full flex items-center justify-center">
                 <Icon name={resource.icon} size="28" aria-hidden="true" />
               </div>
-              <span class="text-primary font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span class="text-ink font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 Learn more
               </span>
             </div>
-            <h3 class="text-xl font-semibold text-ink mb-2 group-hover:text-primary transition-colors">
+            <h3 class="text-xl font-semibold text-ink mb-2 transition-colors">
               {resource.title}
             </h3>
             <p class="text-ink/70 leading-relaxed text-sm">
@@ -281,7 +281,7 @@ try {
   </section>
 
   
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-card">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         

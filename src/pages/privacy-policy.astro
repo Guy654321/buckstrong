@@ -60,8 +60,8 @@ const policySections = [
 
   <main class="bg-muted py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-      <section class="bg-white rounded-2xl shadow-sm ring-1 ring-black/5 p-8 sm:p-10">
-        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-accent mb-3">Privacy Policy</p>
+      <section class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-8 sm:p-10">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-ink/60 mb-3">Privacy Policy</p>
         <h1 class="text-3xl sm:text-4xl font-bold text-ink mb-4">Your privacy matters to Buck Strong Garage Doors</h1>
         <p class="text-base text-ink/80 leading-relaxed">
           We collect only the information needed to schedule garage door service, communicate with you, and keep our website secure. This page explains what we collect, how we use it, and the choices available to you when working with our Cincinnati metro team.
@@ -71,7 +71,7 @@ const policySections = [
 
       <section class="space-y-6">
         {policySections.map(section => (
-          <article class="bg-white rounded-xl shadow-sm ring-1 ring-black/5 p-6 sm:p-8">
+          <article class="bg-card rounded-xl shadow-sm ring-1 ring-black/5 p-6 sm:p-8">
             <h2 class="text-2xl font-semibold text-ink mb-4">{section.title}</h2>
             <ul class="space-y-3 text-base text-ink/80 leading-relaxed list-disc list-inside">
               {section.points.map(point => (
@@ -82,7 +82,7 @@ const policySections = [
         ))}
       </section>
 
-      <section class="bg-primary text-white rounded-2xl p-8 sm:p-10 shadow-lg shadow-primary/20">
+      <section class="bg-charcoal text-white rounded-2xl p-8 sm:p-10 shadow-lg shadow-black/20">
         <div class="space-y-4">
           <h2 class="text-2xl font-semibold">Questions about this policy?</h2>
           <p class="text-white/80 leading-relaxed">

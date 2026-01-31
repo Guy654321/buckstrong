@@ -171,7 +171,7 @@ const isTurnstileEnabled = Boolean(turnstileSiteKey);
 const turnstileScriptSrc = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
 ---
 
-<section id={id} class={`py-16 ${bgColor === 'white' ? 'bg-white' : 'bg-muted'}`}>
+<section id={id} class={`py-16 ${bgColor === 'white' ? 'bg-card' : 'bg-muted'}`}>
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-8">
       <h2 class="text-3xl font-bold text-ink mb-4">{title}</h2>
@@ -183,7 +183,7 @@ const turnstileScriptSrc = 'https://challenges.cloudflare.com/turnstile/v0/api.j
       name="contact"
       method="POST"
       action="/api/contact"
-      class={`${formBgColor === 'muted' ? 'bg-muted' : 'bg-white'} rounded-lg shadow-lg px-4 sm:px-5 lg:px-6 py-8`}
+      class={`${formBgColor === 'muted' ? 'bg-muted' : 'bg-card'} rounded-lg shadow-lg px-4 sm:px-5 lg:px-6 py-8`}
       data-contact-form-module={contactFormModuleUrl}
       data-turnstile-src={isTurnstileEnabled ? turnstileScriptSrc : undefined}
     >
@@ -308,7 +308,7 @@ const turnstileScriptSrc = 'https://challenges.cloudflare.com/turnstile/v0/api.j
             name="consent" 
             required 
             aria-describedby="consent-required"
-            class="mt-1 mr-3 h-4 w-4 text-accent focus:ring-accent border-ink/20 rounded"
+            class="mt-1 mr-3 h-4 w-4 text-ink focus:ring-accent border-ink/20 rounded"
           />
           <span class="text-sm text-ink/80">
             I consent to being contacted by Buck Strong Garage Doors regarding my service request. *

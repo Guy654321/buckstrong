@@ -210,7 +210,7 @@ const heroContentAlignment = compact
         data-geo-lng="-84.5120"
       />
     </picture>
-    <div class="absolute inset-0 bg-gradient-to-br from-primary/70 via-primary/60 to-black/75"></div>
+    <div class="absolute inset-0 bg-charcoal/75"></div>
   </div>
 
   <div class={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex ${heroContentAlignment} ${heroContentHeight}`}>
@@ -223,7 +223,7 @@ const heroContentAlignment = compact
       {hasSecondaryHeading && (
         <>
             {hasHighlightHubLinks ? null : (
-            <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-accent tracking-wide">
+            <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-primary tracking-wide">
               {highlightLocation}
             </h2>
           )}
@@ -281,7 +281,7 @@ const heroContentAlignment = compact
           ) : (
             <a
               href={ctaLink}
-              class="btn-outline-light text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto bg-white/10 hover:bg-white/20 gap-3"
+              class="btn-outline-light text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
             >
               <Icon name="mdi:clipboard-text" size="22" class="inline" aria-hidden="true" />
               {ctaText}
@@ -291,7 +291,7 @@ const heroContentAlignment = compact
           (showPhoneNumber ? (
             <a
               href={phoneHref}
-              class="btn-accent text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
+              class="btn-outline-light text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
             >
               <Icon name="mdi:phone" size="22" class="inline" aria-hidden="true" />
               <span>Call Now:</span>
@@ -300,7 +300,7 @@ const heroContentAlignment = compact
           ) : hasCallModalTrigger && defaultCallMarket && !ctaTriggersCallModal ? (
             <button
               type="button"
-              class="btn-accent text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
+              class="btn-outline-light text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
               data-call-modal-trigger
               aria-controls={callModalId}
               aria-expanded="false"
@@ -314,19 +314,12 @@ const heroContentAlignment = compact
           ) : !ctaTriggersCallModal ? (
             <a
               href={callLinkHref}
-              class="btn-accent text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
+              class="btn-outline-light text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto gap-3"
             >
               <Icon name="mdi:phone" size="22" class="inline" aria-hidden="true" />
               <span>Call Now</span>
             </a>
           ) : null)}
-        <a
-          href={ctaLink}
-          class="btn-outline-light text-base sm:text-lg lg:text-xl px-6 sm:px-7 lg:px-9 py-3.5 sm:py-4.5 flex items-center justify-center font-semibold w-full sm:w-auto bg-white/10 hover:bg-white/20 gap-3"
-        >
-          <Icon name="mdi:clipboard-text" size="22" class="inline" aria-hidden="true" />
-          Get a Quote
-        </a>
       </div>
 
     </div>

@@ -29,7 +29,7 @@ const { items } = Astro.props;
             </svg>
           )}
           {item.href ? (
-            <a href={item.href} class="text-ink/70 hover:text-primary transition-colors" itemprop="item">
+            <a href={item.href} class="text-ink/70 hover:text-ink hover:underline transition-colors" itemprop="item">
               <span itemprop="name">{item.label}</span>
             </a>
           ) : (

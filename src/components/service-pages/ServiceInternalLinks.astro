@@ -37,7 +37,7 @@ const serviceLinks = [
 ].filter((service) => service.slug !== currentSlug);
 ---
 
-<section class={`py-14 ${background === 'white' ? 'bg-white' : 'bg-muted'} border-t border-ink/10`}>
+<section class={`py-14 ${background === 'white' ? 'bg-card' : 'bg-muted'} border-t border-ink/10`}>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="mb-8 text-center">
       <h2 class="text-3xl font-bold text-ink mb-3">Related garage door services</h2>
@@ -53,7 +53,7 @@ const serviceLinks = [
           class="group block h-full rounded-lg border border-ink/10 bg-card p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md"
           title={`${service.title} in ${locationName}`}
         >
-          <h3 class="text-xl font-semibold text-ink mb-2 group-hover:text-accent">{service.title}</h3>
+          <h3 class="text-xl font-semibold text-ink mb-2">{service.title}</h3>
           <p class="text-sm text-ink/80 leading-relaxed">{service.description}</p>
         </a>
       ))}

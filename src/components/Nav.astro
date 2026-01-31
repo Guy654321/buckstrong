@@ -46,7 +46,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
 </Fragment>
 
 <nav
-  class="bg-card shadow-lg sticky top-0 z-50"
+  class="bg-charcoal shadow-lg sticky top-0 z-50"
   data-nav-root
   data-nav-module={navModuleUrl}
 >
@@ -61,7 +61,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
             alt="Buck Strong Garage Doors - Professional Garage Door Services logo"
           />
           <span
-            class="text-lg sm:text-xl md:text-2xl font-bold text-primary whitespace-nowrap"
+            class="text-lg sm:text-xl md:text-2xl font-bold text-white whitespace-nowrap"
           >
             Buck Strong Garage Doors
           </span>
@@ -73,7 +73,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
           <div class="relative group" data-dropdown data-open="false">
             <button
               id="desktop-services-trigger"
-              class="text-ink hover:text-primary px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
+              class="text-white/80 hover:text-white px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded focus:ring-offset-charcoal"
               aria-expanded="false"
               aria-haspopup="true"
               aria-controls="desktop-services-menu"
@@ -98,19 +98,19 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
             </button>
             <div
               id="desktop-services-menu"
-              class="dropdown-panel absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg border z-50 focus:outline-none transition-[opacity,transform] duration-200 transform-gpu origin-top scale-95 opacity-0 invisible pointer-events-none data-[open=true]:opacity-100 data-[open=true]:visible data-[open=true]:pointer-events-auto data-[open=true]:scale-100 composite-surface"
+              class="dropdown-panel absolute left-0 mt-2 w-64 bg-card rounded-md shadow-lg border border-ink/10 z-50 focus:outline-none transition-[opacity,transform] duration-200 transform-gpu origin-top scale-95 opacity-0 invisible pointer-events-none data-[open=true]:opacity-100 data-[open=true]:visible data-[open=true]:pointer-events-auto data-[open=true]:scale-100 composite-surface"
               aria-labelledby="desktop-services-trigger"
               data-dropdown-panel
             >
               <div class="py-2">
                 <a
                   href="/services"
-                  class="block px-4 py-2 text-sm text-ink hover:bg-gray-100 font-semibold"
+                  class="block px-4 py-2 text-sm text-ink hover:bg-ink/10 font-semibold"
                 >
                   All Services
                 </a>
                 <div
-                  class="border-t border-gray-200 my-2"
+                  class="border-t border-ink/10 my-2"
                   role="presentation"
                   aria-hidden="true"
                 >
@@ -119,7 +119,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
                   services.map((service) => (
                     <a
                       href={`/services/${service.slug}`}
-                      class="block px-4 py-2 text-sm text-ink hover:bg-gray-100"
+                      class="block px-4 py-2 text-sm text-ink hover:bg-ink/10"
                     >
                       <div class="font-medium">{service.name}</div>
                       <div class="text-xs text-ink/60">{service.short}</div>
@@ -133,7 +133,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
           <div class="relative group" data-dropdown data-open="false">
             <button
               id="desktop-resources-trigger"
-              class="text-ink hover:text-primary px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
+              class="text-white/80 hover:text-white px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded focus:ring-offset-charcoal"
               aria-expanded="false"
               aria-haspopup="true"
               aria-controls="desktop-resources-menu"
@@ -158,14 +158,14 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
             </button>
             <div
               id="desktop-resources-menu"
-              class="dropdown-panel absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg border z-50 focus:outline-none transition-[opacity,transform] duration-200 transform-gpu origin-top scale-95 opacity-0 invisible pointer-events-none data-[open=true]:opacity-100 data-[open=true]:visible data-[open=true]:pointer-events-auto data-[open=true]:scale-100 composite-surface"
+              class="dropdown-panel absolute left-0 mt-2 w-56 bg-card rounded-md shadow-lg border border-ink/10 z-50 focus:outline-none transition-[opacity,transform] duration-200 transform-gpu origin-top scale-95 opacity-0 invisible pointer-events-none data-[open=true]:opacity-100 data-[open=true]:visible data-[open=true]:pointer-events-auto data-[open=true]:scale-100 composite-surface"
               aria-labelledby="desktop-resources-trigger"
               data-dropdown-panel
             >
               <div class="py-2">
                 <a
                   href="/faq"
-                  class="block px-4 py-2 text-sm text-ink hover:bg-gray-100"
+                  class="block px-4 py-2 text-sm text-ink hover:bg-ink/10"
                 >
                   <div class="font-medium">Frequently Asked Questions</div>
                   <div class="text-xs text-ink/60">
@@ -174,7 +174,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
                 </a>
                 <a
                   href="/blog"
-                  class="block px-4 py-2 text-sm text-ink hover:bg-gray-100"
+                  class="block px-4 py-2 text-sm text-ink hover:bg-ink/10"
                 >
                   <div class="font-medium">Blog</div>
                   <div class="text-xs text-ink/60">
@@ -183,7 +183,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
                 </a>
                 <a
                   href="/safety"
-                  class="block px-4 py-2 text-sm text-ink hover:bg-gray-100"
+                  class="block px-4 py-2 text-sm text-ink hover:bg-ink/10"
                 >
                   <div class="font-medium">Safety Tips</div>
                   <div class="text-xs text-ink/60">
@@ -199,7 +199,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
               <div class="relative group" data-dropdown data-open="false">
                 <button
                   id="desktop-locations-trigger"
-                  class="text-ink hover:text-primary px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
+                  class="text-white/80 hover:text-white px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded focus:ring-offset-charcoal"
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-controls="desktop-locations-menu"
@@ -224,14 +224,14 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
                 </button>
                 <div
                   id="desktop-locations-menu"
-                  class="dropdown-panel absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg border z-50 focus:outline-none transition-[opacity,transform] duration-200 transform-gpu origin-top scale-95 opacity-0 invisible pointer-events-none data-[open=true]:opacity-100 data-[open=true]:visible data-[open=true]:pointer-events-auto data-[open=true]:scale-100 composite-surface"
+              class="dropdown-panel absolute left-0 mt-2 w-64 bg-card rounded-md shadow-lg border border-ink/10 z-50 focus:outline-none transition-[opacity,transform] duration-200 transform-gpu origin-top scale-95 opacity-0 invisible pointer-events-none data-[open=true]:opacity-100 data-[open=true]:visible data-[open=true]:pointer-events-auto data-[open=true]:scale-100 composite-surface"
                   aria-labelledby="desktop-locations-trigger"
                   data-dropdown-panel
                 >
                   <div class="py-2">
                     <a
                       href="/locations"
-                      class="block px-4 py-2 text-sm text-ink hover:bg-gray-100 font-semibold"
+                  class="block px-4 py-2 text-sm text-ink hover:bg-ink/10 font-semibold"
                     >
                       All Service Areas
                     </a>
@@ -244,7 +244,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
                       launchHubs.map((hub) => (
                         <a
                           href={`/locations/${hub.slug}`}
-                          class="block px-4 py-2 text-sm text-ink hover:bg-gray-100"
+                      class="block px-4 py-2 text-sm text-ink hover:bg-ink/10"
                         >
                           <div class="font-medium">{hub.name}</div>
                           <div class="text-xs text-ink/60">{hub.market} Hub</div>
@@ -257,7 +257,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
             ) : (
               <a
                 href="/locations"
-                class="text-ink hover:text-primary px-3 py-2 text-sm font-medium"
+                class="text-white/80 hover:text-white px-3 py-2 text-sm font-medium"
               >
                 Locations
               </a>
@@ -266,7 +266,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
 
           <a
             href="/contact"
-            class="text-ink hover:text-primary px-3 py-2 text-sm font-medium"
+            class="text-white/80 hover:text-white px-3 py-2 text-sm font-medium"
           >
             Contact
           </a>
@@ -279,7 +279,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
       {/* Mobile call button - compact size */}
       <button
         type="button"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-md transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:hidden"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white shadow-md transition-transform duration-200 hover:scale-105 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal md:hidden"
         style="min-height: 40px; min-width: 40px;"
         data-call-modal-trigger
         aria-controls={callModalId}
@@ -294,7 +294,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
       {/* Desktop call button - original size */}
       <button
         type="button"
-        class="hidden md:inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+        class="hidden md:inline-flex h-11 w-11 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
         style="min-height: 44px; min-width: 44px;"
         data-call-modal-trigger
         aria-controls={callModalId}
@@ -309,7 +309,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
       <noscript>
         <a
           href={phoneHref}
-          class="ml-3 hidden md:inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+          class="ml-3 hidden md:inline-flex h-11 w-11 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal"
           style="min-height: 44px; min-width: 44px;"
           aria-label={`Call ${displayPhoneNumber}`}
         >
@@ -330,8 +330,8 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
 </div>
       {safeCallMarkets.length > 0 && (
         <noscript>
-          <div class="ml-4 text-xs sm:text-sm text-ink/80">
-            <p class="font-semibold text-ink">Call us directly:</p>
+          <div class="ml-4 text-xs sm:text-sm text-white/80">
+            <p class="font-semibold text-white">Call us directly:</p>
             <ul class="mt-1 space-y-1">
               {safeCallMarkets.map((market) => (
                 <li>
@@ -347,7 +347,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
 
       <details class="md:hidden group relative">
         <summary
-          class="mobile-menu-button text-ink hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent inline-flex items-center justify-center p-2 transition list-none appearance-none [&::-webkit-details-marker]:hidden [&::marker]:hidden"
+          class="mobile-menu-button text-white/80 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent inline-flex items-center justify-center p-2 transition list-none appearance-none [&::-webkit-details-marker]:hidden [&::marker]:hidden"
           aria-label="Toggle mobile navigation menu"
           aria-controls="mobile-nav-menu"
         >
@@ -361,12 +361,12 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
 
         <div
           id="mobile-nav-menu"
-          class="mobile-menu hidden group-open:block border-t border-gray-200 bg-white absolute right-0 mt-3 w-64 rounded-lg shadow-lg"
+          class="mobile-menu hidden group-open:block border-t border-ink/10 bg-card absolute right-0 mt-3 w-64 rounded-lg shadow-lg"
         >
-          <div class="px-4 py-4 space-y-1 bg-white">
+          <div class="px-4 py-4 space-y-1 bg-card">
             <a
               href="/services"
-              class="block px-3 py-2 text-base font-medium text-ink hover:text-primary hover:bg-gray-100 rounded-lg"
+              class="block px-3 py-2 text-base font-medium text-ink hover:text-ink hover:bg-ink/10 rounded-lg"
               >Services</a
             >
             <div class="pl-6 space-y-1">
@@ -374,7 +374,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
                 services.map((service) => (
                   <a
                     href={`/services/${service.slug}`}
-                    class="block px-3 py-2 text-sm text-ink/80 hover:text-primary hover:bg-gray-100 rounded-lg"
+                    class="block px-3 py-2 text-sm text-ink/80 hover:text-ink hover:bg-ink/10 rounded-lg"
                   >
                     {service.name}
                   </a>
@@ -383,22 +383,22 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
             </div>
             <a
               href="/faq"
-              class="block px-3 py-2 text-base font-medium text-ink hover:text-primary hover:bg-gray-100 rounded-lg"
+              class="block px-3 py-2 text-base font-medium text-ink hover:text-ink hover:bg-ink/10 rounded-lg"
               >FAQ</a
             >
             <a
               href="/blog"
-              class="block px-3 py-2 text-base font-medium text-ink hover:text-primary hover:bg-gray-100 rounded-lg"
+              class="block px-3 py-2 text-base font-medium text-ink hover:text-ink hover:bg-ink/10 rounded-lg"
               >Blog</a
             >
             <a
               href="/safety"
-              class="block px-3 py-2 text-base font-medium text-ink hover:text-primary hover:bg-gray-100 rounded-lg"
+              class="block px-3 py-2 text-base font-medium text-ink hover:text-ink hover:bg-ink/10 rounded-lg"
               >Safety Tips</a
             >
             <a
               href="/locations"
-              class="block px-3 py-2 text-base font-medium text-ink hover:text-primary hover:bg-gray-100 rounded-lg"
+              class="block px-3 py-2 text-base font-medium text-ink hover:text-ink hover:bg-ink/10 rounded-lg"
               >Locations</a
             >
             {launchHubs.length > 0 && (
@@ -406,7 +406,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
                 {launchHubs.map((hub) => (
                   <a
                     href={`/locations/${hub.slug}`}
-                    class="block px-3 py-2 text-sm text-ink/80 hover:text-primary hover:bg-gray-100 rounded-lg"
+                    class="block px-3 py-2 text-sm text-ink/80 hover:text-ink hover:bg-ink/10 rounded-lg"
                   >
                     {hub.name}
                     <span class="block text-xs text-ink/50">{hub.market} Hub</span>
@@ -416,7 +416,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
             )}
             <a
               href="/contact"
-              class="block px-3 py-2 text-base font-medium text-ink hover:text-primary hover:bg-gray-100 rounded-lg"
+              class="block px-3 py-2 text-base font-medium text-ink hover:text-ink hover:bg-ink/10 rounded-lg"
               >Contact</a
             >
           </div>
@@ -445,7 +445,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
         aria-modal="true"
         aria-labelledby="header-call-modal-title"
         aria-describedby="header-call-modal-description"
-        class="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl transition-all duration-200 data-[state=open]:scale-100 data-[state=open]:opacity-100 data-[state=closed]:scale-95 data-[state=closed]:opacity-0"
+        class="relative w-full max-w-md rounded-2xl bg-card p-6 shadow-2xl transition-all duration-200 data-[state=open]:scale-100 data-[state=open]:opacity-100 data-[state=closed]:scale-95 data-[state=closed]:opacity-0"
         data-call-modal-dialog
         data-state="closed"
       >
@@ -470,19 +470,19 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
             {safeCallMarkets.map((market) => (
               <a
                 href={market.phoneHref}
-                class="flex items-center justify-between rounded-xl border border-primary/10 px-4 py-3 text-left shadow-sm transition hover:border-primary hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                class="flex items-center justify-between rounded-xl border border-ink/10 px-4 py-3 text-left shadow-sm transition hover:border-ink/20 hover:bg-ink/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card"
               >
                 <div>
                   <span class="block font-semibold text-ink">{market.label}</span>
                   <span class="block text-sm text-ink/70">{market.phoneDisplay}</span>
                 </div>
-                <Icon name="mdi:phone" class="h-5 w-5 text-primary" aria-hidden="true" />
+                <Icon name="mdi:phone" class="h-5 w-5 text-ink" aria-hidden="true" />
               </a>
             ))}
           </div>
           <button
             type="button"
-            class="w-full text-sm font-medium text-ink/70 underline-offset-4 transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+            class="w-full text-sm font-medium text-ink/70 underline-offset-4 transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card"
             data-call-modal-close
           >
             Cancel

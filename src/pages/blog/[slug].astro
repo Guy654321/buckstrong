@@ -113,13 +113,13 @@ const ogImage = heroImageUrl
           data-geo-lng="-84.5120"
         />
       )}
-      <div class="absolute inset-0 bg-gradient-to-br from-primary/90 to-primary/75"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-charcoal/90 to-charcoal/75"></div>
     </div>
     
     <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-wrap gap-2 mb-6">
         {post.data.tags.map(tag => (
-          <span class="bg-accent text-ink px-3 py-1 rounded-full text-sm font-medium">
+          <span class="bg-ink/10 text-ink px-3 py-1 rounded-full text-sm font-medium border border-ink/20">
             {tag}
           </span>
         ))}
@@ -130,7 +130,7 @@ const ogImage = heroImageUrl
       </h1>
       
       <div class="flex items-center text-white/90 mb-8">
-        <div class="bg-white/20 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+        <div class="bg-card/20 w-12 h-12 rounded-full flex items-center justify-center mr-4">
           <Icon name="mdi:account" size="24" aria-hidden="true" />
         </div>
         <div>
@@ -214,13 +214,13 @@ const ogImage = heroImageUrl
                 <div class="p-6">
                   <div class="flex flex-wrap gap-2 mb-4">
                     {relatedPost.data.tags.slice(0, 2).map(tag => (
-                      <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium border border-accent/20">
+                      <span class="bg-ink/10 text-ink px-3 py-1 rounded-full text-sm font-medium border border-ink/20">
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <h3 class="text-xl font-bold text-ink mb-3 group-hover:text-primary transition-colors leading-tight">
-                    <a href={`/blog/${relatedPost.slug}`} class="hover:text-primary transition-colors">
+                  <h3 class="text-xl font-bold text-ink mb-3 transition-colors leading-tight">
+                    <a href={`/blog/${relatedPost.slug}`} class="hover:underline">
                       {relatedPost.data.title}
                     </a>
                   </h3>
@@ -254,8 +254,8 @@ const ogImage = heroImageUrl
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-muted rounded-2xl p-8">
         <div class="flex items-start space-x-6">
-          <div class="bg-accent/20 w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0">
-            <Icon name="mdi:office-building" size="40" class="text-accent" aria-hidden="true" />
+          <div class="bg-ink/10 w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0">
+            <Icon name="mdi:office-building" size="40" class="text-ink" aria-hidden="true" />
           </div>
           <div>
             <h3 class="text-2xl font-bold text-ink mb-2">Buck Strong Garage Doors Team</h3>
@@ -270,7 +270,7 @@ const ogImage = heroImageUrl
   </section>
   
   
-  <section class="py-16 bg-primary text-white">
+  <section class="py-16 bg-charcoal text-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold mb-6">Need Professional Help?</h2>
       <p class="text-xl text-white/90 mb-8">
@@ -279,7 +279,7 @@ const ogImage = heroImageUrl
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a
           href="/contact"
-          class="btn-outline-light text-lg px-8 py-4 bg-white/5 hover:bg-white/10 border-white/80"
+          class="btn-outline-light text-lg px-8 py-4"
         >
           Get Free Quote
         </a>

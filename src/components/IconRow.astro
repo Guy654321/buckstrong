@@ -25,13 +25,13 @@ const trustIcons = [
 ];
 ---
 
-<section class="py-12 bg-white border-b border-ink/5">
+<section class="py-12 bg-card border-b border-ink/5">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       {trustIcons.map(item => (
         <div class="text-center">
-          <div class="flex items-center justify-center text-primary mb-3">
-            <Icon name={item.icon} size="24" class="text-primary" aria-hidden="true" />
+          <div class="flex items-center justify-center text-ink mb-3">
+            <Icon name={item.icon} size="24" class="text-ink" aria-hidden="true" />
           </div>
           <p class="text-base font-semibold text-ink mb-2">
             {item.text}
