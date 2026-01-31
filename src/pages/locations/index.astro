@@ -154,7 +154,7 @@ const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMar
         data-geo-lat="39.1031"
         data-geo-lng="-84.5120"
       />
-      <div class="absolute inset-0 bg-primary/75"></div>
+      <div class="absolute inset-0 bg-charcoal/75"></div>
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="relative">
@@ -168,7 +168,7 @@ const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMar
         {heroCoverage.length > 0 && (
           <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
             {heroCoverage.map(({ market, hub, allLocations, zipCount, anchor, phoneDisplay, phoneHref }) => (
-              <div class="bg-white/10 border border-white/20 rounded-2xl p-6 h-full">
+              <div class="bg-card/10 border border-white/20 rounded-2xl p-6 h-full">
                 <h2 class="text-2xl font-semibold text-white mb-3">{market}</h2>
                 <p class="text-white/80 leading-relaxed mb-4">
                   {hub
@@ -178,7 +178,7 @@ const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMar
                 <p class="text-white text-lg font-semibold mb-4">
                   <a
                     href={phoneHref}
-                    class="inline-flex items-center gap-2 hover:text-accent transition-colors"
+                    class="inline-flex items-center gap-2 hover:text-ink transition-colors"
                     title={`Call ${hub?.name ?? market} at ${phoneDisplay}`}
                   >
                     Call Now: <span class="nap-phone">{phoneDisplay}</span>
@@ -188,14 +188,14 @@ const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMar
                 {hub && (
                   <a
                     href={`/locations/${hub.slug}`}
-                    class="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-white/60 text-sm font-semibold uppercase tracking-wide text-white hover:bg-white hover:text-primary transition-colors"
+                    class="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-white/60 text-sm font-semibold uppercase tracking-wide text-white hover:bg-white hover:text-charcoal transition-colors"
                   >
                     Explore {hub.name}
                   </a>
                 )}
                   <a
                     href={`#${anchor}`}
-                    class="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-white/40 text-sm font-semibold uppercase tracking-wide text-white/90 hover:bg-white hover:text-primary transition-colors"
+                    class="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-white/40 text-sm font-semibold uppercase tracking-wide text-white/90 hover:bg-white hover:text-charcoal transition-colors"
                   >
                     View neighborhoods
                   </a>
@@ -238,7 +238,7 @@ const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMar
             const totalLocations = allLocations.length;
 
             return (
-              <div class="bg-white rounded-lg p-6 hover:shadow-lg transform-gpu transition-transform duration-300 hover:-translate-y-1">
+              <div class="bg-card rounded-lg p-6 hover:shadow-lg transform-gpu transition-transform duration-300 hover:-translate-y-1">
                 <p class="text-xs uppercase tracking-wide text-ink/50 mb-2">{market}</p>
                 <h3 class="text-xl font-semibold text-ink mb-2">
                   {hub ? `${hub.name} Garage Door Team` : `${market} Garage Door Service`}
@@ -246,7 +246,7 @@ const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMar
                 <p class="text-ink/70 mb-3">
                   <a
                     href={phoneHref}
-                    class="hover:text-primary transition-colors"
+                    class="hover:text-ink transition-colors"
                   >
                     <span class="nap-phone">{phoneDisplay}</span>
                   </a>
@@ -258,11 +258,11 @@ const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMar
                 )}
                 <div class="flex flex-wrap items-center gap-6 text-ink/60 mb-4">
                   <div>
-                    <p class="text-3xl font-bold text-primary">{totalLocations}</p>
+                    <p class="text-3xl font-bold text-ink">{totalLocations}</p>
                     <p class="text-xs uppercase tracking-wide">Service areas</p>
                   </div>
                   <div>
-                    <p class="text-3xl font-bold text-primary">{zipCount}</p>
+                    <p class="text-3xl font-bold text-ink">{zipCount}</p>
                     <p class="text-xs uppercase tracking-wide">ZIP codes</p>
                   </div>
                 </div>
@@ -279,9 +279,9 @@ const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMar
                         <li>
                           <a
                             href={`/locations/${area.slug}`}
-                            class="inline-flex items-center gap-2 hover:text-primary transition-colors"
+                            class="inline-flex items-center gap-2 hover:text-ink transition-colors"
                           >
-                            <span class="inline-flex h-1.5 w-1.5 rounded-full bg-primary/40"></span>
+                            <span class="inline-flex h-1.5 w-1.5 rounded-full bg-ink/30"></span>
                             <span>{area.name}</span>
                           </a>
                         </li>
@@ -332,7 +332,7 @@ const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMar
                     {group.hub ? (
                       <a
                         href={`/locations/${group.hub.slug}`}
-                        class="inline-flex items-center gap-2 hover:text-primary transition-colors"
+                        class="inline-flex items-center gap-2 hover:text-ink transition-colors"
                       >
                         <span>{group.hub.name}</span>
                         <span class="text-xs uppercase tracking-wide text-ink/40">Hub</span>
@@ -354,9 +354,9 @@ const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMar
                   <li>
                     <a
                       href={`/locations/${location.slug}`}
-                      class="inline-flex items-center gap-2 hover:text-primary transition-colors"
+                      class="inline-flex items-center gap-2 hover:text-ink transition-colors"
                     >
-                      <span class="inline-flex h-1.5 w-1.5 rounded-full bg-primary/40"></span>
+                      <span class="inline-flex h-1.5 w-1.5 rounded-full bg-ink/30"></span>
                       <span>{location.name}</span>
                     </a>
                   </li>
@@ -364,7 +364,7 @@ const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMar
                 {group.areas.length === 0 &&
                   group.fallbackAreas.map(areaName => (
                     <li class="inline-flex items-center gap-2 text-ink/60">
-                      <span class="inline-flex h-1.5 w-1.5 rounded-full bg-primary/20"></span>
+                      <span class="inline-flex h-1.5 w-1.5 rounded-full bg-ink/15"></span>
                       <span>{areaName}</span>
                     </li>
                   ))}

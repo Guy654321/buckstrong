@@ -23,7 +23,7 @@ const initContactForm = () => {
   const statusClasses = {
     idle: 'text-ink/80',
     pending: 'text-amber-600',
-    success: 'text-emerald-600',
+    success: 'text-ink',
     error: 'text-rose-600'
   };
 

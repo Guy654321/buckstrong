@@ -30,7 +30,7 @@ const callLabel = hasCustomPhoneNumber ? 'Call Now:' : 'Call Now';
   {hasCallModalTrigger ? (
     <button
       type="button"
-      class="bg-accent hover:bg-accent/90 text-white px-4 py-3 text-sm rounded-full shadow-md flex items-center space-x-2 transition-colors min-h-[44px] min-w-[44px]"
+      class="bg-primary hover:bg-primary-dark text-white px-4 py-3 text-sm rounded-full shadow-md flex items-center space-x-2 transition-colors min-h-[44px] min-w-[44px]"
       data-call-modal-trigger
       aria-controls={callModalId}
       aria-expanded="false"
@@ -44,7 +44,7 @@ const callLabel = hasCustomPhoneNumber ? 'Call Now:' : 'Call Now';
   ) : (
     <a
       href={callLinkHref}
-      class="bg-accent hover:bg-accent/90 text-white px-4 py-3 text-sm rounded-full shadow-md flex items-center space-x-2 transition-colors min-h-[44px] min-w-[44px]"
+      class="bg-primary hover:bg-primary-dark text-white px-4 py-3 text-sm rounded-full shadow-md flex items-center space-x-2 transition-colors min-h-[44px] min-w-[44px]"
     >
       <Icon name="mdi:phone" size="20" aria-hidden="true" />
       <span class="font-semibold">{callLabel}</span>

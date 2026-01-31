@@ -410,20 +410,20 @@ if (locationAddress && locationMapUrl) {
     compact={true}
   />
 
-  <main class="bg-white">
+  <main class="bg-muted">
     <IconRow />
-    <section class="py-14 bg-white">
+    <section class="py-14 bg-card">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div class="rounded-2xl border border-ink/10 bg-card p-6 shadow-sm">
-            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Local NAP</p>
+            <p class="text-sm font-semibold uppercase tracking-[0.3em] text-ink/60 mb-4">Local NAP</p>
             <h2 class="text-2xl font-bold text-ink mb-4">{napDisplayName}</h2>
             <div class="space-y-3 text-base text-ink/80">
               <p class="flex items-center gap-3">
-                <svg class="h-5 w-5 text-accent" aria-hidden="true" focusable="false">
+                <svg class="h-5 w-5 text-ink" aria-hidden="true" focusable="false">
                   <use href="#icon-phone" />
                 </svg>
-                <a href={napPhoneHref} class="nap-phone font-semibold text-ink hover:text-primary">
+                <a href={napPhoneHref} class="nap-phone font-semibold text-ink hover:text-ink/80">
                   {napPhoneDisplay}
                 </a>
               </p>
@@ -445,7 +445,7 @@ if (locationAddress && locationMapUrl) {
               {locationMapUrl && (
                 <a
                   href={locationMapUrl}
-                  class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80"
+                  class="inline-flex items-center gap-2 text-sm font-semibold text-ink hover:text-ink/80"
                 >
                   View on Google Maps
                   <span aria-hidden="true">→</span>
@@ -461,7 +461,7 @@ if (locationAddress && locationMapUrl) {
                 <li>
                   <a
                     href={buildServiceHref(service.slug)}
-                    class="inline-flex items-center gap-2 text-primary hover:text-primary/80"
+                    class="inline-flex items-center gap-2 text-ink hover:text-ink/80"
                   >
                     {service.name}
                     <span aria-hidden="true">→</span>
@@ -481,7 +481,7 @@ if (locationAddress && locationMapUrl) {
             {zipAreas.length > 0 ? (
               <ul class="grid grid-cols-2 gap-2 text-sm text-ink/70 sm:grid-cols-3">
                 {zipAreas.map(zip => (
-                  <li class="rounded-lg bg-white px-3 py-2 text-center font-medium text-ink/80">
+                  <li class="rounded-lg bg-card px-3 py-2 text-center font-medium text-ink/80">
                     {zip}
                   </li>
                 ))}
@@ -507,7 +507,7 @@ if (locationAddress && locationMapUrl) {
           </div>
         </div>
         {coverageByCounty.length > 0 && (
-          <div class="mt-10 rounded-2xl border border-ink/10 bg-white p-6 shadow-sm">
+          <div class="mt-10 rounded-2xl border border-ink/10 bg-card p-6 shadow-sm">
             <h3 class="text-xl font-semibold text-ink mb-2">
               Ohio Service Coverage (50-mile radius from Cincinnati)
             </h3>
@@ -536,7 +536,7 @@ if (locationAddress && locationMapUrl) {
     <section class="py-20 bg-muted">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Local Services</p>
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-ink/60 mb-4">Local Services</p>
           <h2 class="text-3xl sm:text-4xl font-bold text-ink mb-6">
             Professional Garage Door Help in {locationDisplayName}
           </h2>
@@ -561,10 +561,10 @@ if (locationAddress && locationMapUrl) {
     </section>
 
 
-    <section class="py-20 bg-white">
+    <section class="py-20 bg-card">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Our Process</p>
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-ink/60 mb-4">Our Process</p>
           <h2 class="text-3xl font-bold text-ink mb-6">From First Call to Final Safety Check</h2>
           <p class="text-lg text-ink/70 leading-relaxed max-w-3xl mx-auto">
             The moment you contact Buck Strong Garage Doors, we begin mapping out your service visit. Our coordinated approach keeps {locationDisplayName} projects on schedule with no surprises.
@@ -574,7 +574,7 @@ if (locationAddress && locationMapUrl) {
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {PROCESS_STEPS.map(step => (
             <div class="text-center">
-              <div class="bg-accent text-ink w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg">
+              <div class="bg-ink/10 text-ink w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg">
                 {step.number}
               </div>
               <h3 class="text-xl font-semibold text-ink mb-4">{step.title}</h3>
@@ -717,7 +717,7 @@ if (locationAddress && locationMapUrl) {
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {primaryNearbyLocations.map(nearbyLocation => (
-            <div class="space-y-3 rounded-xl border border-ink/10 bg-white/90 p-4 shadow-sm transition-shadow hover:shadow-md focus-within:shadow-md">
+            <div class="space-y-3 rounded-xl border border-ink/10 bg-card/90 p-4 shadow-sm transition-shadow hover:shadow-md focus-within:shadow-md">
               <h3 class="text-lg font-semibold text-ink">{nearbyLocation.name}</h3>
               {nearbyLocation.zips && nearbyLocation.zips.length > 0 && (
                 <p class="text-sm text-ink/60">
@@ -729,9 +729,9 @@ if (locationAddress && locationMapUrl) {
               <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <a
                   href={buildTelephoneHref(nearbyLocation.phone)}
-                  class="inline-flex items-center gap-2 text-ink/80 hover:text-primary transition-colors font-medium"
+                  class="inline-flex items-center gap-2 text-ink/80 hover:text-ink transition-colors font-medium"
                 >
-                  <svg class="h-4 w-4 text-accent" aria-hidden="true" focusable="false">
+                  <svg class="h-4 w-4 text-ink" aria-hidden="true" focusable="false">
                     <use href="#icon-phone" />
                   </svg>
                   <span class="nap-phone">{nearbyLocation.phone}</span>
@@ -739,7 +739,7 @@ if (locationAddress && locationMapUrl) {
 
                 <a
                   href={`/locations/${nearbyLocation.slug}`}
-                  class="inline-flex items-center justify-center gap-2 rounded-lg border border-accent px-3 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white"
+                  class="inline-flex items-center justify-center gap-2 rounded-lg border border-charcoal px-3 py-2 text-sm font-semibold text-charcoal transition-colors hover:bg-charcoal hover:text-white"
                 >
                   <span>View Service Area</span>
                   <svg class="h-4 w-4" aria-hidden="true" focusable="false">
@@ -756,7 +756,7 @@ if (locationAddress && locationMapUrl) {
             <div class="mt-8 flex justify-center">
               <button
                 id={additionalNearbyToggleButtonId}
-                class="inline-flex items-center justify-center px-6 py-3 border border-accent bg-white text-accent font-semibold rounded-lg shadow-sm transition-colors hover:bg-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent"
+                class="inline-flex items-center justify-center px-6 py-3 border border-charcoal bg-card text-charcoal font-semibold rounded-lg shadow-sm transition-colors hover:bg-charcoal hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent"
                 type="button"
                 aria-controls={additionalNearbyContainerId}
                 aria-expanded="false"
@@ -776,7 +776,7 @@ if (locationAddress && locationMapUrl) {
               aria-hidden="true"
             >
               {additionalNearbyLocations.map(nearbyLocation => (
-                <div class="space-y-3 rounded-xl border border-ink/10 bg-white/90 p-4 shadow-sm transition-shadow hover:shadow-md focus-within:shadow-md">
+                <div class="space-y-3 rounded-xl border border-ink/10 bg-card/90 p-4 shadow-sm transition-shadow hover:shadow-md focus-within:shadow-md">
                   <h3 class="text-lg font-semibold text-ink">{nearbyLocation.name}</h3>
                   {nearbyLocation.zips && nearbyLocation.zips.length > 0 && (
                     <p class="text-sm text-ink/60">
@@ -788,9 +788,9 @@ if (locationAddress && locationMapUrl) {
                   <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <a
                       href={buildTelephoneHref(nearbyLocation.phone)}
-                      class="inline-flex items-center gap-2 text-ink/80 hover:text-primary transition-colors font-medium"
+                      class="inline-flex items-center gap-2 text-ink/80 hover:text-ink transition-colors font-medium"
                     >
-                      <svg class="h-4 w-4 text-accent" aria-hidden="true" focusable="false">
+                      <svg class="h-4 w-4 text-ink" aria-hidden="true" focusable="false">
                         <use href="#icon-phone" />
                       </svg>
                       <span class="nap-phone">{nearbyLocation.phone}</span>
@@ -798,7 +798,7 @@ if (locationAddress && locationMapUrl) {
 
                     <a
                       href={`/locations/${nearbyLocation.slug}`}
-                      class="inline-flex items-center justify-center gap-2 rounded-lg border border-accent px-3 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white"
+                      class="inline-flex items-center justify-center gap-2 rounded-lg border border-charcoal px-3 py-2 text-sm font-semibold text-charcoal transition-colors hover:bg-charcoal hover:text-white"
                     >
                       <span>View Service Area</span>
                       <svg class="h-4 w-4" aria-hidden="true" focusable="false">
@@ -815,7 +815,7 @@ if (locationAddress && locationMapUrl) {
               class="mt-10 text-center hidden"
               aria-hidden="true"
             >
-              <div class="bg-white rounded-xl shadow-sm ring-1 ring-black/5 p-8 max-w-3xl mx-auto">
+              <div class="bg-card rounded-xl shadow-sm ring-1 ring-black/5 p-8 max-w-3xl mx-auto">
                 <h3 class="text-2xl font-bold text-ink mb-4">Don't See Your Area?</h3>
                 <p class="text-ink/70 mb-6">
                   We serve many more {marketDisplayName} neighborhoods and surrounding areas. Contact us to see if we provide service in your location.
