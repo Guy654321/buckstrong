@@ -50,6 +50,19 @@ const locations = defineCollection({
       heroImage: z.string().optional(),
       zips: z.array(z.string()).optional(),
       surroundingAreas: z.array(z.string()).default([]),
+      coverageByCounty: z
+        .array(
+          z.object({
+            county: z.string(),
+            cities: z.array(
+              z.object({
+                name: z.string(),
+                zips: z.array(z.string()),
+              }),
+            ),
+          }),
+        )
+        .optional(),
     }),
 });
 

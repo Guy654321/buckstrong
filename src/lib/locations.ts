@@ -10,6 +10,14 @@ export type LocationAddress = {
   addressCountry?: string;
 };
 
+export type CountyCoverage = {
+  county: string;
+  cities: Array<{
+    name: string;
+    zips: string[];
+  }>;
+};
+
 export type Location = {
   name: string;
   slug: string;
@@ -28,6 +36,7 @@ export type Location = {
   metaDescription?: string;
   zips?: string[];
   surroundingAreas: string[];
+  coverageByCounty?: CountyCoverage[];
   isHub: boolean;
 };
 
@@ -67,6 +76,7 @@ export function mapLocationEntry(entry: LocationEntry): Location {
       metaDescription,
       zips,
       surroundingAreas,
+      coverageByCounty,
     },
   } = entry;
 
@@ -96,6 +106,7 @@ export function mapLocationEntry(entry: LocationEntry): Location {
     metaDescription,
     zips,
     surroundingAreas: surroundingAreas ?? [],
+    coverageByCounty,
     isHub: !parentHub || parentHub === slug,
   };
 }

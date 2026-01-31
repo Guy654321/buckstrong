@@ -21,6 +21,26 @@
   "metaTitle": "Garage Door Repair & Installation Cincinnati | Buck Strong",
   "metaDescription": "Ohio-based garage door specialists serving the Cincinnati metro with same-day repair, opener service, and new installations.",
   "zips": [
+    "45005",
+    "45011",
+    "45013",
+    "45014",
+    "45030",
+    "45036",
+    "45040",
+    "45042",
+    "45044",
+    "45050",
+    "45056",
+    "45061",
+    "45066",
+    "45067",
+    "45068",
+    "45069",
+    "45102",
+    "45103",
+    "45140",
+    "45150",
     "45202",
     "45203",
     "45204",
@@ -65,7 +85,299 @@
     "45249",
     "45251",
     "45252",
-    "45255"
+    "45255",
+    "45324",
+    "45385",
+    "45430"
+  ],
+  "coverageByCounty": [
+    {
+      "county": "Hamilton County",
+      "cities": [
+        {
+          "name": "Cincinnati (City)",
+          "zips": [
+            "45202",
+            "45203",
+            "45204",
+            "45205",
+            "45206",
+            "45207",
+            "45208",
+            "45209",
+            "45211",
+            "45212",
+            "45213",
+            "45214",
+            "45215",
+            "45216",
+            "45217",
+            "45218",
+            "45219",
+            "45220",
+            "45223",
+            "45224",
+            "45225",
+            "45226",
+            "45227",
+            "45229",
+            "45230",
+            "45231",
+            "45232",
+            "45233",
+            "45236",
+            "45237",
+            "45238",
+            "45239",
+            "45240",
+            "45241",
+            "45242",
+            "45243",
+            "45244",
+            "45245",
+            "45246",
+            "45247",
+            "45248",
+            "45249",
+            "45251",
+            "45252",
+            "45255"
+          ]
+        },
+        {
+          "name": "Blue Ash",
+          "zips": ["45236", "45242"]
+        },
+        {
+          "name": "Norwood",
+          "zips": ["45212"]
+        },
+        {
+          "name": "Sharonville",
+          "zips": ["45241"]
+        },
+        {
+          "name": "Reading",
+          "zips": ["45215"]
+        },
+        {
+          "name": "Forest Park",
+          "zips": ["45240"]
+        },
+        {
+          "name": "Springdale",
+          "zips": ["45246"]
+        },
+        {
+          "name": "Montgomery",
+          "zips": ["45242"]
+        },
+        {
+          "name": "Madeira",
+          "zips": ["45243"]
+        },
+        {
+          "name": "Loveland (part OH)",
+          "zips": ["45140"]
+        },
+        {
+          "name": "Milford (part OH)",
+          "zips": ["45150"]
+        },
+        {
+          "name": "Harrison (part OH)",
+          "zips": ["45030"]
+        },
+        {
+          "name": "Cheviot",
+          "zips": ["45211"]
+        },
+        {
+          "name": "Wyoming",
+          "zips": ["45215"]
+        },
+        {
+          "name": "Glendale",
+          "zips": ["45246"]
+        },
+        {
+          "name": "Deer Park",
+          "zips": ["45236"]
+        },
+        {
+          "name": "Mariemont",
+          "zips": ["45227"]
+        },
+        {
+          "name": "Silverton",
+          "zips": ["45236"]
+        },
+        {
+          "name": "St. Bernard",
+          "zips": ["45217"]
+        },
+        {
+          "name": "Mt. Healthy",
+          "zips": ["45231"]
+        },
+        {
+          "name": "Anderson Township",
+          "zips": ["45230", "45244", "45255"]
+        },
+        {
+          "name": "Colerain Township",
+          "zips": ["45239", "45251"]
+        },
+        {
+          "name": "Delhi Township",
+          "zips": ["45233", "45238"]
+        },
+        {
+          "name": "Green Township",
+          "zips": ["45211", "45248"]
+        },
+        {
+          "name": "Springfield Township",
+          "zips": ["45231", "45246"]
+        },
+        {
+          "name": "Sycamore Township",
+          "zips": ["45236", "45249"]
+        },
+        {
+          "name": "Symmes Township",
+          "zips": ["45140"]
+        },
+        {
+          "name": "Miami Township",
+          "zips": ["45150"]
+        },
+        {
+          "name": "Indian Hill",
+          "zips": ["45243"]
+        }
+      ]
+    },
+    {
+      "county": "Butler County",
+      "cities": [
+        {
+          "name": "Hamilton",
+          "zips": ["45011", "45013"]
+        },
+        {
+          "name": "Fairfield",
+          "zips": ["45014"]
+        },
+        {
+          "name": "Mason",
+          "zips": ["45040"]
+        },
+        {
+          "name": "West Chester",
+          "zips": ["45069"]
+        },
+        {
+          "name": "Middletown",
+          "zips": ["45042", "45044"]
+        },
+        {
+          "name": "Monroe",
+          "zips": ["45050"]
+        },
+        {
+          "name": "Trenton",
+          "zips": ["45067"]
+        },
+        {
+          "name": "Ross",
+          "zips": ["45061"]
+        },
+        {
+          "name": "Oxford",
+          "zips": ["45056"]
+        },
+        {
+          "name": "Liberty Township",
+          "zips": ["45044", "45069"]
+        }
+      ]
+    },
+    {
+      "county": "Warren County",
+      "cities": [
+        {
+          "name": "Lebanon",
+          "zips": ["45036"]
+        },
+        {
+          "name": "Springboro",
+          "zips": ["45066"]
+        },
+        {
+          "name": "Franklin",
+          "zips": ["45005"]
+        },
+        {
+          "name": "Waynesville",
+          "zips": ["45068"]
+        },
+        {
+          "name": "Clearcreek Township",
+          "zips": ["45066"]
+        },
+        {
+          "name": "Deerfield Township",
+          "zips": ["45040"]
+        }
+      ]
+    },
+    {
+      "county": "Clermont County",
+      "cities": [
+        {
+          "name": "Batavia",
+          "zips": ["45103"]
+        },
+        {
+          "name": "Milford (part)",
+          "zips": ["45150"]
+        },
+        {
+          "name": "Amelia",
+          "zips": ["45102"]
+        },
+        {
+          "name": "Loveland (part)",
+          "zips": ["45140"]
+        },
+        {
+          "name": "Eastgate",
+          "zips": ["45245"]
+        },
+        {
+          "name": "Union Township",
+          "zips": ["45244", "45245"]
+        }
+      ]
+    },
+    {
+      "county": "Greene County",
+      "cities": [
+        {
+          "name": "Beavercreek",
+          "zips": ["45430"]
+        },
+        {
+          "name": "Xenia",
+          "zips": ["45385"]
+        },
+        {
+          "name": "Fairborn",
+          "zips": ["45324"]
+        }
+      ]
+    }
   ],
   "surroundingAreas": [
     "Downtown Cincinnati",
@@ -74,9 +386,14 @@
     "Hyde Park",
     "Mount Lookout",
     "Blue Ash",
-    "West Chester",
     "Norwood",
-    "Fort Thomas",
-    "Newport"
+    "West Chester",
+    "Mason",
+    "Hamilton",
+    "Fairfield",
+    "Milford",
+    "Loveland",
+    "Springboro",
+    "Lebanon"
   ]
 }
