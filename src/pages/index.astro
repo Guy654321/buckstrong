@@ -237,31 +237,6 @@ const breadcrumbSchema = JSON.stringify({
   <main class="bg-white">
     <IconRow />
 
-    {hubLocations.length > 0 && (
-      <section class="py-16 bg-white" id="locations">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Service Hubs</p>
-          <h2 class="text-3xl sm:text-4xl font-bold text-ink mb-6">
-            Find Your Local Buck Strong Hub
-          </h2>
-          <p class="text-lg text-ink/70 max-w-3xl mx-auto mb-10">
-            Choose a live metro hub to explore localized garage door repair, installation, and opener service details.
-          </p>
-          <div class="flex flex-wrap justify-center gap-4">
-            {hubLocations.map((hub) => (
-              <a
-                href={`/locations/${hub.slug}`}
-                class="btn-outline"
-              >
-                {hub.name}, {hub.state}
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-    )}
-
-    
     <section class="py-20 bg-muted" id="services">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
