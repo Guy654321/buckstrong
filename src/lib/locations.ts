@@ -50,7 +50,18 @@ export const PRIMARY_MARKET_PRIORITY = [
   'Cincinnati Metro',
 ] as const;
 
-const ACTIVE_MARKETS = new Set<string>(['Cincinnati Metro']);
+const MARKET_NORMALIZATION: Record<string, string> = {
+  'cincinnati': 'Cincinnati Metro',
+  'cincinnati metro': 'Cincinnati Metro',
+  'cinncanti metro': 'Cincinnati Metro',
+  'cinncantii': 'Cincinnati Metro',
+};
+
+function normalizeMarketName(value: string): string {
+  const trimmed = value.trim();
+  const normalizedKey = trimmed.toLowerCase();
+  return MARKET_NORMALIZATION[normalizedKey] ?? trimmed;
+}
 
 function resolveMarketPriority(market: string): number {
   const index = PRIMARY_MARKET_PRIORITY.indexOf(market as (typeof PRIMARY_MARKET_PRIORITY)[number]);
@@ -85,7 +96,7 @@ export function mapLocationEntry(entry: LocationEntry): Location {
     slug: slug?.trim() || entry.id,
     state,
     phone,
-    market,
+    market: normalizeMarketName(market),
     parentHub: parentHub?.trim() || undefined,
     showAddress,
     serviceAreaBusiness: serviceAreaBusiness || !showAddress,
@@ -115,7 +126,6 @@ export async function getLocations(): Promise<Location[]> {
   const entries = await getCollection('locations');
   return entries
     .map(mapLocationEntry)
-    .filter((location) => ACTIVE_MARKETS.has(location.market))
     .sort((a, b) => {
       const marketCompare = a.market.localeCompare(b.market);
       if (marketCompare !== 0) {
