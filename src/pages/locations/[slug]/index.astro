@@ -263,9 +263,11 @@ const locationAddressLines = locationAddress
       `${locationAddress.addressLocality}, ${locationAddress.addressRegion} ${locationAddress.postalCode}`
     ]
   : [];
-const locationMapUrl = locationAddress
-  ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationAddressLines.join(', '))}`
-  : undefined;
+const locationMapUrl =
+  location.gbp ??
+  (locationAddress
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationAddressLines.join(', '))}`
+    : `https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lng}`);
 const napDisplayName = BUSINESS_INFO.name;
 const napPhoneDisplay = locationTelephoneDisplay;
 const napPhoneHref = buildTelephoneHref(napPhoneDisplay);
@@ -372,7 +374,7 @@ const locationBusinessSchema: Record<string, unknown> = {
   ]
 };
 
-if (locationAddress && locationMapUrl) {
+if (locationMapUrl) {
   locationBusinessSchema.hasMap = locationMapUrl;
 }
 
