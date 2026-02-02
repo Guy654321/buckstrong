@@ -1,0 +1,22 @@
+{
+  "name": "Norwood",
+  "slug": "cincinnati-norwood",
+  "state": "OH",
+  "phone": "(513) 440-5123",
+  "market": "Cincinnati Metro",
+  "parentHub": "cincinnati",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.1553,
+    "lng": -84.4533
+  },
+  "zips": [
+    "45212"
+  ],
+  "surroundingAreas": [
+    "Oakley",
+    "Evanston",
+    "Pleasant Ridge"
+  ]
+}

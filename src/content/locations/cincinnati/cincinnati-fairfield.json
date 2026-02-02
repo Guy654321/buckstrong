@@ -1,0 +1,22 @@
+{
+  "name": "Fairfield",
+  "slug": "cincinnati-fairfield",
+  "state": "OH",
+  "phone": "(513) 440-5123",
+  "market": "Cincinnati Metro",
+  "parentHub": "cincinnati",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.3456,
+    "lng": -84.5600
+  },
+  "zips": [
+    "45014"
+  ],
+  "surroundingAreas": [
+    "Hamilton",
+    "Forest Park",
+    "Springdale"
+  ]
+}

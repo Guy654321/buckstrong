@@ -1,0 +1,22 @@
+{
+  "name": "Downtown Cincinnati",
+  "slug": "cincinnati-downtown",
+  "state": "OH",
+  "phone": "(513) 440-5123",
+  "market": "Cincinnati Metro",
+  "parentHub": "cincinnati",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.1031,
+    "lng": -84.5120
+  },
+  "zips": [
+    "45202"
+  ],
+  "surroundingAreas": [
+    "The Banks",
+    "Central Business District",
+    "Over-the-Rhine"
+  ]
+}

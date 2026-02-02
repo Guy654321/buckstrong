@@ -1,0 +1,22 @@
+{
+  "name": "Mount Lookout",
+  "slug": "cincinnati-mount-lookout",
+  "state": "OH",
+  "phone": "(513) 440-5123",
+  "market": "Cincinnati Metro",
+  "parentHub": "cincinnati",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.1298,
+    "lng": -84.4149
+  },
+  "zips": [
+    "45226"
+  ],
+  "surroundingAreas": [
+    "Hyde Park",
+    "Columbia-Tusculum",
+    "Mount Adams"
+  ]
+}

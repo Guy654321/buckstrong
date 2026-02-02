@@ -1,0 +1,23 @@
+{
+  "name": "Hamilton",
+  "slug": "cincinnati-hamilton",
+  "state": "OH",
+  "phone": "(513) 440-5123",
+  "market": "Cincinnati Metro",
+  "parentHub": "cincinnati",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.3995,
+    "lng": -84.5613
+  },
+  "zips": [
+    "45011",
+    "45013"
+  ],
+  "surroundingAreas": [
+    "Fairfield",
+    "Ross",
+    "Trenton"
+  ]
+}

@@ -92,11 +92,12 @@ const hubCityName = location.isHub
   : location.name;
 const hubLocationDisplayName = `${hubCityName}, ${location.state}`;
 const locationMarketName = marketDisplayName || location.market;
-const locationHeroSubtitle =
-  'We provide fast, same-day garage door repair and installation with a focus on safety and quality. Whether it\'s a broken spring, a faulty opener, or a full door replacement, our trained technicians use reliable parts and careful adjustments to ensure smooth, dependable operation.';
+const locationHeroSubtitle = location.isHub
+  ? `Buck Strong Garage Doors provides same-day garage door repair, spring replacement, opener service, and installation across ${locationDisplayName} and nearby communities.`
+  : `Buck Strong Garage Doors provides same-day garage door repair, spring replacement, opener service, and installation in ${locationDisplayName}.`;
 const locationHeroTitle = location.isHub
   ? `Garage Door Repair & Installation in ${hubLocationDisplayName}`
-  : `Garage Door Repair & Installation in ${locationDisplayName} and surrounding areas`;
+  : `Garage Door Repair & Installation in ${locationDisplayName}`;
 type ServiceSlug = ServiceSummary['slug'];
 
 const locationServiceShortBuilders: Record<ServiceSlug, (context: { displayName: string; market: string }) => string> = {
