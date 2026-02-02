@@ -10,6 +10,12 @@ export const BUSINESS_INFO = {
   email: 'service@derbystronggaragedoors.com',
   url: buildAbsoluteUrl('/locations/cincinnati', SITE_ORIGIN),
   logo: buildAbsoluteUrl(LOGO_PATH, SITE_ORIGIN),
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '00:00',
+    closes: '23:59'
+  },
   address: {
     streetAddress: '2337 Victory Parkway, Suite 120',
     addressLocality: 'Cincinnati',
