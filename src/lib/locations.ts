@@ -48,9 +48,17 @@ export type LocationGroup = {
 
 export const PRIMARY_MARKET_PRIORITY = [
   'Cincinnati Metro',
+  'Louisville Metro',
+  'Northern Kentucky',
+  'Lexington',
 ] as const;
 
-const ACTIVE_MARKETS = new Set<string>(['Cincinnati Metro']);
+const ACTIVE_MARKETS = new Set<string>([
+  'Cincinnati Metro',
+  'Louisville Metro',
+  'Northern Kentucky',
+  'Lexington',
+]);
 
 function resolveMarketPriority(market: string): number {
   const index = PRIMARY_MARKET_PRIORITY.indexOf(market as (typeof PRIMARY_MARKET_PRIORITY)[number]);
