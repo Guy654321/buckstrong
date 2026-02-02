@@ -37,6 +37,7 @@ export type Location = {
   zips?: string[];
   surroundingAreas: string[];
   coverageByCounty?: CountyCoverage[];
+  featuredServiceAreas?: string[];
   isHub: boolean;
 };
 
@@ -77,6 +78,7 @@ export function mapLocationEntry(entry: LocationEntry): Location {
       zips,
       surroundingAreas,
       coverageByCounty,
+      featuredServiceAreas,
     },
   } = entry;
 
@@ -107,6 +109,7 @@ export function mapLocationEntry(entry: LocationEntry): Location {
     zips,
     surroundingAreas: surroundingAreas ?? [],
     coverageByCounty,
+    featuredServiceAreas,
     isHub: !parentHub || parentHub === slug,
   };
 }
