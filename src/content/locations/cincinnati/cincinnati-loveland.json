@@ -1,0 +1,22 @@
+{
+  "name": "Loveland",
+  "slug": "cincinnati-loveland",
+  "state": "OH",
+  "phone": "(513) 440-5123",
+  "market": "Cincinnati Metro",
+  "parentHub": "cincinnati",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.2681,
+    "lng": -84.2638
+  },
+  "zips": [
+    "45140"
+  ],
+  "surroundingAreas": [
+    "Symmes Township",
+    "Milford",
+    "Mason"
+  ]
+}

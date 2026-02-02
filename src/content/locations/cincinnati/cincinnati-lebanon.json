@@ -1,0 +1,22 @@
+{
+  "name": "Lebanon",
+  "slug": "cincinnati-lebanon",
+  "state": "OH",
+  "phone": "(513) 440-5123",
+  "market": "Cincinnati Metro",
+  "parentHub": "cincinnati",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.4353,
+    "lng": -84.2020
+  },
+  "zips": [
+    "45036"
+  ],
+  "surroundingAreas": [
+    "Mason",
+    "Deerfield Township",
+    "Waynesville"
+  ]
+}

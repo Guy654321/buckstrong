@@ -1,0 +1,22 @@
+{
+  "name": "Oakley",
+  "slug": "cincinnati-oakley",
+  "state": "OH",
+  "phone": "(513) 440-5123",
+  "market": "Cincinnati Metro",
+  "parentHub": "cincinnati",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.1551,
+    "lng": -84.4305
+  },
+  "zips": [
+    "45209"
+  ],
+  "surroundingAreas": [
+    "Hyde Park",
+    "Madisonville",
+    "Norwood"
+  ]
+}

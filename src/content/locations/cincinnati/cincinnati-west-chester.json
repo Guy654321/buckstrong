@@ -1,0 +1,22 @@
+{
+  "name": "West Chester",
+  "slug": "cincinnati-west-chester",
+  "state": "OH",
+  "phone": "(513) 440-5123",
+  "market": "Cincinnati Metro",
+  "parentHub": "cincinnati",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.3362,
+    "lng": -84.4102
+  },
+  "zips": [
+    "45069"
+  ],
+  "surroundingAreas": [
+    "Liberty Township",
+    "Sharonville",
+    "Mason"
+  ]
+}

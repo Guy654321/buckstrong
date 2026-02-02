@@ -1,0 +1,22 @@
+{
+  "name": "Over-the-Rhine",
+  "slug": "cincinnati-over-the-rhine",
+  "state": "OH",
+  "phone": "(513) 440-5123",
+  "market": "Cincinnati Metro",
+  "parentHub": "cincinnati",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.1133,
+    "lng": -84.5167
+  },
+  "zips": [
+    "45202"
+  ],
+  "surroundingAreas": [
+    "Downtown Cincinnati",
+    "Pendleton",
+    "Findlay Market"
+  ]
+}

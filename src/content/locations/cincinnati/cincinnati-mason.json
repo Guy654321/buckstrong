@@ -1,0 +1,22 @@
+{
+  "name": "Mason",
+  "slug": "cincinnati-mason",
+  "state": "OH",
+  "phone": "(513) 440-5123",
+  "market": "Cincinnati Metro",
+  "parentHub": "cincinnati",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 39.3601,
+    "lng": -84.3099
+  },
+  "zips": [
+    "45040"
+  ],
+  "surroundingAreas": [
+    "Deerfield Township",
+    "West Chester",
+    "Landen"
+  ]
+}
