@@ -18,8 +18,8 @@
     "lng": -84.5120
   },
   "gbpUrl": "https://maps.google.com/?cid=cincinnati-derby-strong",
-  "metaTitle": "Garage Door Repair & Installation Cincinnati | Buck Strong",
-  "metaDescription": "Ohio-based garage door specialists serving the Cincinnati metro with same-day repair, opener service, and new installations.",
+  "metaTitle": "Garage Door Repair & Installation in Cincinnati, OH | Buck Strong Garage Doors",
+  "metaDescription": "Same-day garage door repair, spring replacement, garage door opener repair, and installation in Cincinnati OH. Buck Strong Garage Doors serves the Cincinnati metro with trusted technicians.",
   "zips": [
     "45005",
     "45011",
@@ -395,5 +395,10 @@
     "Loveland",
     "Springboro",
     "Lebanon"
+  ],
+  "featuredServiceAreas": [
+    "cincinnati-blue-ash",
+    "cincinnati-downtown",
+    "cincinnati-fairfield"
   ]
 }

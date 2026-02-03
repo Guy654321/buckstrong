@@ -48,8 +48,19 @@ const relatedCandidates = location.isHub
     ];
 
 const nearbyLocations = relatedCandidates;
-const primaryNearbyLocations = nearbyLocations.slice(0, 3);
-const additionalNearbyLocations = nearbyLocations.slice(3);
+const featuredNearbySlugs =
+  location.featuredServiceAreas && location.featuredServiceAreas.length > 0
+    ? location.featuredServiceAreas
+    : parentHubLocation?.featuredServiceAreas ?? [];
+const featuredNearbyLocations = featuredNearbySlugs
+  .map(slug => nearbyLocations.find(loc => loc.slug === slug))
+  .filter((loc): loc is (typeof nearbyLocations)[number] => Boolean(loc));
+const remainingNearbyLocations = nearbyLocations.filter(
+  loc => !featuredNearbyLocations.some(featured => featured.slug === loc.slug),
+);
+const orderedNearbyLocations = [...featuredNearbyLocations, ...remainingNearbyLocations];
+const primaryNearbyLocations = orderedNearbyLocations.slice(0, 3);
+const additionalNearbyLocations = orderedNearbyLocations.slice(3);
 const hasAdditionalNearbyLocations = additionalNearbyLocations.length > 0;
 
 const trimStrings = (values: Array<string | undefined | null>) =>
@@ -510,6 +521,161 @@ if (locationMapUrl) {
         </div>
       </div>
     </section>
+    {nearbyLocations.length > 0 && (
+      <section class="py-16 bg-muted">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-ink mb-4">Nearby Service Areas</h2>
+            <div class="w-24 h-1 bg-accent mx-auto rounded-full mb-6"></div>
+            <p class="text-xl text-ink/70 max-w-2xl mx-auto">
+              Buck Strong Garage Doors provides same-day{' '}
+              <a
+                href={buildServiceHref('garage-door-repair')}
+                class="inline-link"
+                title={`Garage door repair services in ${locationDisplayName}`}
+              >
+                garage door repair
+              </a>
+              ,{' '}
+              <a
+                href={buildServiceHref('opener-repair')}
+                class="inline-link"
+                title={`Garage door opener repair in ${locationDisplayName}`}
+              >
+                opener repair
+              </a>
+              , and{' '}
+              <a
+                href={buildServiceHref('commercial-jobs')}
+                class="inline-link"
+                title={`Commercial garage door service in ${locationDisplayName}`}
+              >
+                commercial overhead door service
+              </a>
+              {' '}throughout the {marketDisplayName} area.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {primaryNearbyLocations.map(nearbyLocation => (
+              <div class="space-y-3 rounded-xl border border-ink/10 bg-white/90 p-4 shadow-sm transition-shadow hover:shadow-md focus-within:shadow-md">
+                <h3 class="text-lg font-semibold text-ink">{nearbyLocation.name}</h3>
+                {nearbyLocation.zips && nearbyLocation.zips.length > 0 && (
+                  <p class="text-sm text-ink/60">
+                    ZIP: {nearbyLocation.zips.slice(0, 2).join(', ')}
+                    {nearbyLocation.zips.length > 2 && ` +${nearbyLocation.zips.length - 2} more`}
+                  </p>
+                )}
+
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <a
+                    href={buildTelephoneHref(nearbyLocation.phone)}
+                    class="inline-flex items-center gap-2 text-ink/80 hover:text-primary transition-colors font-medium"
+                  >
+                    <svg class="h-4 w-4 text-accent" aria-hidden="true" focusable="false">
+                      <use href="#icon-phone" />
+                    </svg>
+                    <span class="nap-phone">{nearbyLocation.phone}</span>
+                  </a>
+
+                  <a
+                    href={`/locations/${nearbyLocation.slug}`}
+                    class="inline-flex items-center justify-center gap-2 rounded-lg border border-accent px-3 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white"
+                  >
+                    <span>View Service Area</span>
+                    <svg class="h-4 w-4" aria-hidden="true" focusable="false">
+                      <use href="#icon-arrow-right" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {hasAdditionalNearbyLocations && (
+            <Fragment>
+              <div class="mt-8 flex justify-center">
+                <button
+                  id={additionalNearbyToggleButtonId}
+                  class="inline-flex items-center justify-center px-6 py-3 border border-accent bg-white text-accent font-semibold rounded-lg shadow-sm transition-colors hover:bg-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent"
+                  type="button"
+                  aria-controls={additionalNearbyContainerId}
+                  aria-expanded="false"
+                  data-open-text="Hide Full Service Area List"
+                  data-closed-text="View Full Service Area List"
+                  data-nearby-toggle
+                  data-target-id={additionalNearbyContainerId}
+                  data-callout-id={additionalNearbyCalloutId}
+                >
+                  View Full Service Area List
+                </button>
+              </div>
+
+              <div
+                id={additionalNearbyContainerId}
+                class="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 hidden"
+                aria-hidden="true"
+              >
+                {additionalNearbyLocations.map(nearbyLocation => (
+                  <div class="space-y-3 rounded-xl border border-ink/10 bg-white/90 p-4 shadow-sm transition-shadow hover:shadow-md focus-within:shadow-md">
+                    <h3 class="text-lg font-semibold text-ink">{nearbyLocation.name}</h3>
+                    {nearbyLocation.zips && nearbyLocation.zips.length > 0 && (
+                      <p class="text-sm text-ink/60">
+                        ZIP: {nearbyLocation.zips.slice(0, 2).join(', ')}
+                        {nearbyLocation.zips.length > 2 && ` +${nearbyLocation.zips.length - 2} more`}
+                      </p>
+                    )}
+
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <a
+                        href={buildTelephoneHref(nearbyLocation.phone)}
+                        class="inline-flex items-center gap-2 text-ink/80 hover:text-primary transition-colors font-medium"
+                      >
+                        <svg class="h-4 w-4 text-accent" aria-hidden="true" focusable="false">
+                          <use href="#icon-phone" />
+                        </svg>
+                        <span class="nap-phone">{nearbyLocation.phone}</span>
+                      </a>
+
+                      <a
+                        href={`/locations/${nearbyLocation.slug}`}
+                        class="inline-flex items-center justify-center gap-2 rounded-lg border border-accent px-3 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white"
+                      >
+                        <span>View Service Area</span>
+                        <svg class="h-4 w-4" aria-hidden="true" focusable="false">
+                          <use href="#icon-arrow-right" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div
+                id={additionalNearbyCalloutId}
+                class="mt-10 text-center hidden"
+                aria-hidden="true"
+              >
+                <div class="bg-white rounded-xl shadow-sm ring-1 ring-black/5 p-8 max-w-3xl mx-auto">
+                  <h3 class="text-2xl font-bold text-ink mb-4">Don't See Your Area?</h3>
+                  <p class="text-ink/70 mb-6">
+                    We serve many more {marketDisplayName} neighborhoods and surrounding areas. Contact us to see if we provide service in your location.
+                  </p>
+                  <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/contact" class="btn-primary px-6 py-3">
+                      Contact Us
+                    </a>
+                    <a href={`mailto:${BUSINESS_INFO.email}`} class="inline-link">
+                      {BUSINESS_INFO.email}
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <script type="module" src="/scripts/nearby-toggle.js" is:inline></script>
+            </Fragment>
+          )}
+        </div>
+      </section>
+    )}
     <section class="py-20 bg-muted">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
@@ -651,168 +817,12 @@ if (locationMapUrl) {
       </div>
     </section>
 
-    <ContactForm
+  <ContactForm
       title={`Get Service in ${locationDisplayName}`}
       subtitle="Contact us today for fast, reliable garage door service"
       bgColor="white"
       formBgColor="muted"
     />
-
-  {nearbyLocations.length > 0 && (
-   <section class="py-16 bg-muted">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-10">
-          <h2 class="text-3xl font-bold text-ink mb-4">Nearby Service Areas</h2>
-          <div class="w-24 h-1 bg-accent mx-auto rounded-full mb-6"></div>
-          <p class="text-xl text-ink/70 max-w-2xl mx-auto">
-            Buck Strong Garage Doors provides same-day{' '}
-            <a
-              href={buildServiceHref('garage-door-repair')}
-              class="inline-link"
-              title={`Garage door repair services in ${locationDisplayName}`}
-            >
-              garage door repair
-            </a>
-            ,{' '}
-            <a
-              href={buildServiceHref('opener-repair')}
-              class="inline-link"
-              title={`Garage door opener repair in ${locationDisplayName}`}
-            >
-              opener repair
-            </a>
-            , and{' '}
-            <a
-              href={buildServiceHref('commercial-jobs')}
-              class="inline-link"
-              title={`Commercial garage door service in ${locationDisplayName}`}
-            >
-              commercial overhead door service
-            </a>
-            {' '}throughout the {marketDisplayName} area.
-          </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-          {primaryNearbyLocations.map(nearbyLocation => (
-            <div class="space-y-3 rounded-xl border border-ink/10 bg-white/90 p-4 shadow-sm transition-shadow hover:shadow-md focus-within:shadow-md">
-              <h3 class="text-lg font-semibold text-ink">{nearbyLocation.name}</h3>
-              {nearbyLocation.zips && nearbyLocation.zips.length > 0 && (
-                <p class="text-sm text-ink/60">
-                  ZIP: {nearbyLocation.zips.slice(0, 2).join(', ')}
-                  {nearbyLocation.zips.length > 2 && ` +${nearbyLocation.zips.length - 2} more`}
-                </p>
-              )}
-
-              <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <a
-                  href={buildTelephoneHref(nearbyLocation.phone)}
-                  class="inline-flex items-center gap-2 text-ink/80 hover:text-primary transition-colors font-medium"
-                >
-                  <svg class="h-4 w-4 text-accent" aria-hidden="true" focusable="false">
-                    <use href="#icon-phone" />
-                  </svg>
-                  <span class="nap-phone">{nearbyLocation.phone}</span>
-                </a>
-
-                <a
-                  href={`/locations/${nearbyLocation.slug}`}
-                  class="inline-flex items-center justify-center gap-2 rounded-lg border border-accent px-3 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white"
-                >
-                  <span>View Service Area</span>
-                  <svg class="h-4 w-4" aria-hidden="true" focusable="false">
-                    <use href="#icon-arrow-right" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {hasAdditionalNearbyLocations && (
-          <Fragment>
-            <div class="mt-8 flex justify-center">
-              <button
-                id={additionalNearbyToggleButtonId}
-                class="inline-flex items-center justify-center px-6 py-3 border border-accent bg-white text-accent font-semibold rounded-lg shadow-sm transition-colors hover:bg-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent"
-                type="button"
-                aria-controls={additionalNearbyContainerId}
-                aria-expanded="false"
-                data-open-text="Hide Full Service Area List"
-                data-closed-text="View Full Service Area List"
-                data-nearby-toggle
-                data-target-id={additionalNearbyContainerId}
-                data-callout-id={additionalNearbyCalloutId}
-              >
-                View Full Service Area List
-              </button>
-            </div>
-
-            <div
-              id={additionalNearbyContainerId}
-              class="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 hidden"
-              aria-hidden="true"
-            >
-              {additionalNearbyLocations.map(nearbyLocation => (
-                <div class="space-y-3 rounded-xl border border-ink/10 bg-white/90 p-4 shadow-sm transition-shadow hover:shadow-md focus-within:shadow-md">
-                  <h3 class="text-lg font-semibold text-ink">{nearbyLocation.name}</h3>
-                  {nearbyLocation.zips && nearbyLocation.zips.length > 0 && (
-                    <p class="text-sm text-ink/60">
-                      ZIP: {nearbyLocation.zips.slice(0, 2).join(', ')}
-                      {nearbyLocation.zips.length > 2 && ` +${nearbyLocation.zips.length - 2} more`}
-                    </p>
-                  )}
-
-                  <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <a
-                      href={buildTelephoneHref(nearbyLocation.phone)}
-                      class="inline-flex items-center gap-2 text-ink/80 hover:text-primary transition-colors font-medium"
-                    >
-                      <svg class="h-4 w-4 text-accent" aria-hidden="true" focusable="false">
-                        <use href="#icon-phone" />
-                      </svg>
-                      <span class="nap-phone">{nearbyLocation.phone}</span>
-                    </a>
-
-                    <a
-                      href={`/locations/${nearbyLocation.slug}`}
-                      class="inline-flex items-center justify-center gap-2 rounded-lg border border-accent px-3 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white"
-                    >
-                      <span>View Service Area</span>
-                      <svg class="h-4 w-4" aria-hidden="true" focusable="false">
-                        <use href="#icon-arrow-right" />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div
-              id={additionalNearbyCalloutId}
-              class="mt-10 text-center hidden"
-              aria-hidden="true"
-            >
-              <div class="bg-white rounded-xl shadow-sm ring-1 ring-black/5 p-8 max-w-3xl mx-auto">
-                <h3 class="text-2xl font-bold text-ink mb-4">Don't See Your Area?</h3>
-                <p class="text-ink/70 mb-6">
-                  We serve many more {marketDisplayName} neighborhoods and surrounding areas. Contact us to see if we provide service in your location.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a href="/contact" class="btn-primary px-6 py-3">
-                    Contact Us
-                  </a>
-                  <a href={`mailto:${BUSINESS_INFO.email}`} class="inline-link">
-                    {BUSINESS_INFO.email}
-                  </a>
-                </div>
-              </div>
-            </div>
-            <script type="module" src="/scripts/nearby-toggle.js" is:inline></script>
-          </Fragment>
-        )}
-      </div>
-    </section>
-  )}
 
   </main>
 
