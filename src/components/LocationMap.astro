@@ -1,0 +1,40 @@
+---
+import { DEFAULT_LOCATION_MAP_ZOOM, getLocationMapConfig } from '../data/locations';
+
+type Props = {
+  slug: string;
+  name: string;
+  city: string;
+};
+
+const { slug, name, city } = Astro.props as Props;
+const mapConfig = getLocationMapConfig(slug);
+const hasCoordinates = Boolean(mapConfig && Number.isFinite(mapConfig.lat) && Number.isFinite(mapConfig.lng));
+const zoom = mapConfig?.zoom ?? DEFAULT_LOCATION_MAP_ZOOM;
+const fallbackCity = city || name;
+const mapQuery = hasCoordinates ? `${mapConfig?.lat},${mapConfig?.lng}` : `${fallbackCity}, OH`;
+const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=${zoom}&output=embed`;
+const mapTitle = `${name} Service Area Map`;
+---
+
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto text-center mb-8">
+      <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-4">Service Area Map</p>
+      <h2 class="text-3xl font-bold text-ink mb-3">Find our {name} coverage</h2>
+      <p class="text-base text-ink/70 leading-relaxed">
+        This map highlights the primary service area for {name} garage door repair, installation, and opener support.
+      </p>
+    </div>
+
+    <div class="rounded-2xl overflow-hidden shadow-sm ring-1 ring-black/10">
+      <iframe
+        title={mapTitle}
+        src={mapSrc}
+        loading="lazy"
+        class="w-full h-[320px]"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </div>
+</section>

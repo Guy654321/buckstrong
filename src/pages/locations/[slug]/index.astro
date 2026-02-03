@@ -9,6 +9,7 @@ import ContactForm from '../../../components/ContactForm.astro';
 import Hero from '../../../components/Hero.astro';
 import IconRow from '../../../components/IconRow.astro';
 import HiddenSeoText from '../../../components/HiddenSeoText.astro';
+import LocationMap from '../../../components/LocationMap.astro';
 import { getLocations, getHubForLocation } from '../../../lib/locations';
 import { getServices, type ServiceSummary } from '../../../lib/services';
 import { buildLocationCanonicalPath } from '../../../lib/canonical';
@@ -560,6 +561,12 @@ if (locationMapUrl) {
       subtitle="Contact us today for fast, reliable garage door service"
       bgColor="white"
       formBgColor="muted"
+    />
+
+    <LocationMap
+      slug={location.slug}
+      name={locationDisplayName}
+      city={hubCityName}
     />
 
   {nearbyLocations.length > 0 && (
