@@ -12,9 +12,12 @@ type Props = {
 
 const { name, city, state, lat, lng, zoom } = Astro.props as Props;
 const hasCoordinates = Number.isFinite(lat) && Number.isFinite(lng);
-const mapZoom = zoom ?? DEFAULT_LOCATION_MAP_ZOOM;
 const fallbackQueryBase = name?.trim() || city?.trim() || state?.trim() || 'Ohio';
-const mapQuery = hasCoordinates ? `${lat},${lng}` : `${fallbackQueryBase}, OH`;
+const stateToken = state?.trim() || 'OH';
+const fallbackQuery = `${fallbackQueryBase}, ${stateToken}`;
+const fallbackZoom = hasCoordinates ? DEFAULT_LOCATION_MAP_ZOOM + 2 : DEFAULT_LOCATION_MAP_ZOOM;
+const mapZoom = Number.isFinite(zoom) ? zoom : fallbackZoom;
+const mapQuery = hasCoordinates ? `loc:${lat},${lng}` : fallbackQuery;
 const mapSrc = mapQuery
   ? `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=${mapZoom}&output=embed`
   : `https://www.google.com/maps?q=${encodeURIComponent('Ohio')}&z=${mapZoom}&output=embed`;
