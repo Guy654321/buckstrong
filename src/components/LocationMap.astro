@@ -1,20 +1,25 @@
 ---
-import { DEFAULT_LOCATION_MAP_ZOOM, getLocationMapConfig } from '../data/locations';
+import { DEFAULT_LOCATION_MAP_ZOOM } from '../data/locations';
 
 type Props = {
-  slug: string;
   name: string;
   city: string;
+  state: string;
+  lat?: number | null;
+  lng?: number | null;
+  zoom?: number | null;
 };
 
-const { slug, name, city } = Astro.props as Props;
-const mapConfig = getLocationMapConfig(slug);
-const hasCoordinates = Boolean(mapConfig && Number.isFinite(mapConfig.lat) && Number.isFinite(mapConfig.lng));
-const zoom = mapConfig?.zoom ?? DEFAULT_LOCATION_MAP_ZOOM;
-const fallbackCity = city || name;
-const mapQuery = hasCoordinates ? `${mapConfig?.lat},${mapConfig?.lng}` : `${fallbackCity}, OH`;
-const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=${zoom}&output=embed`;
+const { name, city, state, lat, lng, zoom } = Astro.props as Props;
+const hasCoordinates = Number.isFinite(lat) && Number.isFinite(lng);
+const mapZoom = zoom ?? DEFAULT_LOCATION_MAP_ZOOM;
+const fallbackQueryBase = name?.trim() || city?.trim() || state?.trim() || 'Ohio';
+const mapQuery = hasCoordinates ? `${lat},${lng}` : `${fallbackQueryBase}, OH`;
+const mapSrc = mapQuery
+  ? `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=${mapZoom}&output=embed`
+  : `https://www.google.com/maps?q=${encodeURIComponent('Ohio')}&z=${mapZoom}&output=embed`;
 const mapTitle = `${name} Service Area Map`;
+const isDev = import.meta.env.DEV;
 ---
 
 <section class="py-16 bg-white">
@@ -25,14 +30,19 @@ const mapTitle = `${name} Service Area Map`;
       <p class="text-base text-ink/70 leading-relaxed">
         This map highlights the primary service area for {name} garage door repair, installation, and opener support.
       </p>
+      {isDev && (
+        <p class="mt-3 text-xs text-ink/60">
+          Map debug: {name} {hasCoordinates ? `${lat},${lng}` : 'no coords'} zoom {mapZoom}
+        </p>
+      )}
     </div>
 
-    <div class="rounded-2xl overflow-hidden shadow-sm ring-1 ring-black/10">
+    <div class="mx-auto w-full max-w-[420px] overflow-hidden rounded-2xl border border-ink/10 shadow-sm">
       <iframe
         title={mapTitle}
         src={mapSrc}
         loading="lazy"
-        class="w-full h-[320px]"
+        class="h-[220px] w-full"
         referrerpolicy="no-referrer-when-downgrade"
       ></iframe>
     </div>

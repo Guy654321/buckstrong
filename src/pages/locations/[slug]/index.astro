@@ -15,6 +15,7 @@ import { getServices, type ServiceSummary } from '../../../lib/services';
 import { buildLocationCanonicalPath } from '../../../lib/canonical';
 import heroImage from '../../../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
 import { BUSINESS_INFO } from '../../../data/business';
+import { DEFAULT_LOCATION_MAP_ZOOM, getLocationMapConfig } from '../../../data/locations';
 import { buildAbsoluteUrl, getSiteOrigin } from '../../../utils/site-origin';
 
 export async function getStaticPaths() {
@@ -25,6 +26,7 @@ export async function getStaticPaths() {
   }));
 }
 
+// Location route file: src/pages/locations/[slug]/index.astro
 const { location } = Astro.props;
 
 const services = await getServices();
@@ -99,6 +101,11 @@ const locationHeroTitle = location.isHub
   ? `Garage Door Repair & Installation in ${hubLocationDisplayName}`
   : `Garage Door Repair & Installation in ${locationDisplayName}`;
 type ServiceSlug = ServiceSummary['slug'];
+
+const locationMapConfig = getLocationMapConfig(location.slug);
+const mapLat = locationMapConfig?.lat ?? location.lat;
+const mapLng = locationMapConfig?.lng ?? location.lng;
+const mapZoom = locationMapConfig?.zoom ?? DEFAULT_LOCATION_MAP_ZOOM;
 
 const locationServiceShortBuilders: Record<ServiceSlug, (context: { displayName: string; market: string }) => string> = {
   'garage-door-repair': ({ displayName, market }) =>
@@ -564,9 +571,12 @@ if (locationMapUrl) {
     />
 
     <LocationMap
-      slug={location.slug}
       name={locationDisplayName}
       city={hubCityName}
+      state={location.state}
+      lat={mapLat}
+      lng={mapLng}
+      zoom={mapZoom}
     />
 
   {nearbyLocations.length > 0 && (
