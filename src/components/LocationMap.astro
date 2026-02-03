@@ -37,12 +37,12 @@ const isDev = import.meta.env.DEV;
       )}
     </div>
 
-    <div class="mx-auto w-full max-w-[420px] overflow-hidden rounded-2xl border border-ink/10 shadow-sm">
+    <div class="mx-auto aspect-square w-full max-w-[420px] overflow-hidden rounded-2xl border border-ink/10 shadow-sm">
       <iframe
         title={mapTitle}
         src={mapSrc}
         loading="lazy"
-        class="h-[220px] w-full"
+        class="h-full w-full"
         referrerpolicy="no-referrer-when-downgrade"
       ></iframe>
     </div>
