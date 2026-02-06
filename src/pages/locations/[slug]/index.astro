@@ -218,7 +218,7 @@ const responseTimeSummary = location.isHub
   : `Calls from ${locationDisplayName} route through our ${parentHubLocation.name} hub for coordinated same-day scheduling.`;
 
 const locationHeroDescription = location.isHub
-  ? `Proudly serving ${locationDisplayName} and the surrounding ${marketDisplayName} area with fast, same-day garage door repair and installation. From broken springs and malfunctioning openers to full garage door replacements, our trained technicians handle every job using high-quality parts and precise adjustments to keep your garage door operating safely, smoothly, and reliably.`
+  ? `Proudly serving ${locationDisplayName} and the surrounding area with fast, same-day garage door repair and installation. From broken springs and malfunctioning openers to full garage door replacements, our trained technicians handle every job using high-quality parts and precise adjustments to keep your garage door operating safely, smoothly, and reliably.`
   : `Proudly serving ${locationDisplayName} with fast, same-day garage door repair and installation. From broken springs and malfunctioning openers to full garage door replacements, our trained technicians handle every job using high-quality parts and precise adjustments to keep your garage door operating safely, smoothly, and reliably for ${marketDisplayName} homeowners.`;
 
 const localizedMaintenanceNotes = [
@@ -416,6 +416,7 @@ if (locationMapUrl) {
     showPrimaryPhoneNumber={false}
     showPhoneNumber={false}
     ctaTriggersCallModal={false}
+    showLocationHeading={false}
   >
     <Fragment slot="subtitle">
       {locationHeroDescription}
