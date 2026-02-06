@@ -94,9 +94,6 @@ const hubCityName = location.isHub
   : location.name;
 const hubLocationDisplayName = `${hubCityName}, ${location.state}`;
 const locationMarketName = marketDisplayName || location.market;
-const locationHeroSubtitle = location.isHub
-  ? `Buck Strong Garage Doors provides same-day garage door repair, spring replacement, opener service, and installation across ${locationDisplayName} and nearby communities.`
-  : `Buck Strong Garage Doors provides same-day garage door repair, spring replacement, opener service, and installation in ${locationDisplayName}.`;
 const locationHeroTitle = location.isHub
   ? `Garage Door Repair & Installation in ${hubLocationDisplayName}`
   : `Garage Door Repair & Installation in ${locationDisplayName}`;
@@ -219,6 +216,10 @@ const zipCoverageSummary = zipAreas.length
 const responseTimeSummary = location.isHub
   ? `${locationDisplayName} is our hub for ${marketDisplayName}, so technicians are dispatched locally for same-day and after-hours calls.`
   : `Calls from ${locationDisplayName} route through our ${parentHubLocation.name} hub for coordinated same-day scheduling.`;
+
+const locationHeroDescription = location.isHub
+  ? `Proudly serving ${locationDisplayName} and the surrounding area with fast, same-day garage door repair and installation. From broken springs and malfunctioning openers to full garage door replacements, our trained technicians handle every job using high-quality parts and precise adjustments to keep your garage door operating safely, smoothly, and reliably.`
+  : `Proudly serving ${locationDisplayName} with fast, same-day garage door repair and installation. From broken springs and malfunctioning openers to full garage door replacements, our trained technicians handle every job using high-quality parts and precise adjustments to keep your garage door operating safely, smoothly, and reliably for ${marketDisplayName} homeowners.`;
 
 const localizedMaintenanceNotes = [
   `Technicians frequently service carriage-style, steel, and insulated garage doors across ${locationDisplayName}, noting hinge tension, roller type, and opener age so we can anticipate parts before we arrive.`,
@@ -407,18 +408,20 @@ if (locationMapUrl) {
 
   <Hero
     title={locationHeroTitle}
-    subtitle={locationHeroSubtitle}
     heroImage={heroImage}
     ctaText="Emergency? Call Now"
-    ctaLink="/contact"
+    ctaLink="#quote"
     phoneNumber={locationTelephoneDisplay}
     primaryAsPhone={true}
     showPrimaryPhoneNumber={false}
     showPhoneNumber={false}
     ctaTriggersCallModal={false}
     showLocationHeading={false}
-    compact={true}
-  />
+  >
+    <Fragment slot="subtitle">
+      {locationHeroDescription}
+    </Fragment>
+  </Hero>
 
   <main class="bg-white">
     <IconRow />
@@ -564,6 +567,7 @@ if (locationMapUrl) {
     </section>
 
     <ContactForm
+      id="quote"
       title={`Get Service in ${locationDisplayName}`}
       subtitle="Contact us today for fast, reliable garage door service"
       bgColor="white"
