@@ -7,7 +7,7 @@ export const BUSINESS_INFO = {
   name: 'Buck Strong Garage Doors',
   legalName: 'Buck Strong Garage Doors LLC',
   telephone: '(513) 440-5123',
-  email: 'service@derbystronggaragedoors.com',
+  email: 'hello@buckstronggaragedoors.com',
   url: buildAbsoluteUrl('/locations/cincinnati', SITE_ORIGIN),
   logo: buildAbsoluteUrl(LOGO_PATH, SITE_ORIGIN),
   address: {

@@ -22,7 +22,7 @@ const ISSUE_LABELS: Record<string, string> = {
   other: 'Other'
 };
 
-const BUSINESS_EMAIL = 'service@derbystronggaragedoors.com';
+const BUSINESS_EMAIL = 'hello@buckstronggaragedoors.com';
 
 const JSON_HEADERS = { 'Content-Type': 'application/json' } as const;
 
@@ -338,7 +338,7 @@ const createHtmlBody = (submission: Submission, textBody: string): string => {
 const deliverWithResend = async (submission: Submission, textBody: string, htmlBody: string): Promise<void> => {
   const apiKey = process.env.RESEND_API_KEY;
   const recipients = process.env.CONTACT_FORM_RECIPIENT ?? BUSINESS_EMAIL;
-  const fromAddress = process.env.CONTACT_FORM_FROM ?? 'Buck Strong Garage Doors <service@derbystronggaragedoors.com>';
+  const fromAddress = process.env.CONTACT_FORM_FROM ?? 'Buck Strong Garage Doors <hello@buckstronggaragedoors.com>';
 
   if (!apiKey || !recipients) {
     throw new Error('Resend integration is not configured.');
