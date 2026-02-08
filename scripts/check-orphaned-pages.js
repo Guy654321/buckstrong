@@ -4,7 +4,7 @@ import { readdir } from 'node:fs/promises';
 import { extname, join, relative } from 'node:path';
 
 function normalizeSiteOrigin(candidate) {
-  const fallback = process.env.PUBLIC_SITE_URL?.trim() || 'https://derbystronggaragedoors.com';
+  const fallback = process.env.PUBLIC_SITE_URL?.trim() || 'https://buckstronggaragedoors.com';
   if (!candidate) return fallback;
 
   const trimmed = candidate.trim().replace(/\/+$/, '');

@@ -27,8 +27,8 @@ const BUSINESS_EMAIL = 'hello@buckstronggaragedoors.com';
 const JSON_HEADERS = { 'Content-Type': 'application/json' } as const;
 
 const DEFAULT_ALLOWED_HOSTS = [
-  'derbystronggaragedoors.com',
-  'www.derbystronggaragedoors.com',
+  'buckstronggaragedoors.com',
+  'www.buckstronggaragedoors.com',
   'localhost',
   '127.0.0.1'
 ];

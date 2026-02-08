@@ -1,7 +1,7 @@
 import { buildAbsoluteUrl, getSiteOrigin } from '../utils/site-origin';
 
 const SITE_ORIGIN = getSiteOrigin();
-const LOGO_PATH = '/images/derby-city-logo.png';
+const LOGO_PATH = '/images/buck-strong-logo.png';
 
 export const BUSINESS_INFO = {
   name: 'Buck Strong Garage Doors',
