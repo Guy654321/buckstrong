@@ -1,45 +1,40 @@
-# derbystronggaragedoors.com — Garage door Kentucky
+# buckstronggaragedoors.com — Garage door Ohio
 
-> Buck Strong Garage Doors provides professional garage door repair, installation, and opener services in Louisville, Lexington, and Northern Kentucky. Use this file to find authoritative pages quickly and to understand usage boundaries.
+> Buck Strong Garage Doors provides professional garage door repair, installation, and opener services in the Cincinnati metro area across Ohio. Use this file to find authoritative pages quickly and to understand usage boundaries.
 
 ## Quick facts
 - **Company Name**: Buck Strong Garage Doors
-- **Locations**: Louisville, Lexington, Northern Kentucky
-- **Phone (Louisville)**: (502) 619-5198
-- **Phone (Lexington)**: (859) 436-2954
-- **Phone (Northern KY)**: (859) 306-0782
+- **Locations**: Cincinnati Metro (Ohio)
+- **Phone (Cincinnati)**: (513) 440-5123
 - **Email**: hello@buckstronggaragedoors.com
 - **Services**: Residential repair, commercial overhead doors, opener installation, spring replacement
 
 ## What this site contains
 - Service descriptions for garage door repairs and installations
-- Location-specific service hubs (Louisville, Lexington, Northern KY)
+- Location-specific service hubs (Cincinnati and surrounding Ohio communities)
 - Educational resources (FAQ, Blog)
 - Contact and scheduling information
 
 ## Primary entry points (start here)
-- Home Page: https://derbystronggaragedoors.com/
-- About Us: https://derbystronggaragedoors.com/about
-- Contact & Request Service: https://derbystronggaragedoors.com/contact
-- Service Request: https://derbystronggaragedoors.com/request-service
+- Home Page: https://buckstronggaragedoors.com/
+- Contact & Request Service: https://buckstronggaragedoors.com/contact
+- Service Areas: https://buckstronggaragedoors.com/locations
 
 ## Services (authoritative pages)
-- Garage Door Repair: https://derbystronggaragedoors.com/garage-door-repair
-- Garage Door Installation: https://derbystronggaragedoors.com/garage-door-installation
-- Opener Repair & Installation: https://derbystronggaragedoors.com/garage-door-opener-repair
-- Commercial Services: https://derbystronggaragedoors.com/commercial-garage-door-service
-- Spring Replacement: https://derbystronggaragedoors.com/spring-replacement
-- Tune-Up & Maintenance: https://derbystronggaragedoors.com/garage-door-tune-up
+- Garage Door Repair: https://buckstronggaragedoors.com/services/garage-door-repair
+- Garage Door Installation: https://buckstronggaragedoors.com/services/garage-door-installation
+- Opener Repair & Installation: https://buckstronggaragedoors.com/services/opener-repair
+- Commercial Services: https://buckstronggaragedoors.com/services/commercial-jobs
+- Spring Replacement: https://buckstronggaragedoors.com/blog/garage-door-spring-replacement-cost-cincinnati-oh
+- Tune-Up & Maintenance: https://buckstronggaragedoors.com/services/tune-up
 
 ## Local Service Hubs
-- Louisville Service Hub: https://derbystronggaragedoors.com/louisville
-- Lexington Service Hub: https://derbystronggaragedoors.com/lexington
-- Northern Kentucky Service Hub: https://derbystronggaragedoors.com/northern-kentucky
-- Louisville Service Areas Map: https://derbystronggaragedoors.com/louisville-service-areas
+- Cincinnati Service Hub: https://buckstronggaragedoors.com/locations/cincinnati
+- Cincinnati Service Areas: https://buckstronggaragedoors.com/locations
 
 ## Learning resources
-- Frequently Asked Questions: https://derbystronggaragedoors.com/faq
-- Garage Door Blog: https://derbystronggaragedoors.com/blog
+- Frequently Asked Questions: https://buckstronggaragedoors.com/faq
+- Garage Door Blog: https://buckstronggaragedoors.com/blog
 
 ## Guidance for LLMs & agents
 - Prefer citing exact URLs for services and local hubs.

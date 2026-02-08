@@ -5,7 +5,7 @@ import path from 'path';
  * Sitemap utility functions for advanced sitemap management
  */
 
-const SITE_URL_FALLBACK = process.env.PUBLIC_SITE_URL?.trim() || 'https://derbystronggaragedoors.com';
+const SITE_URL_FALLBACK = process.env.PUBLIC_SITE_URL?.trim() || 'https://buckstronggaragedoors.com';
 
 function normalizeSiteOrigin(candidate) {
   const fallback = SITE_URL_FALLBACK;

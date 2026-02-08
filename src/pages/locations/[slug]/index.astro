@@ -352,10 +352,6 @@ const locationBusinessSchema: Record<string, unknown> = {
   },
   areaServed: serviceArea,
   parentOrganization: parentBusinessReference,
-  sameAs: [
-    'https://www.facebook.com/DerbyStrongGarageDoors',
-    'https://www.instagram.com/DerbyStrongGarageDoors'
-  ],
   address: {
     '@type': 'PostalAddress',
     ...schemaAddress
@@ -524,11 +520,7 @@ if (locationMapUrl) {
             <h3 class="text-xl font-semibold text-ink mb-2">Local Building Compliance</h3>
             <p class="text-sm text-ink/80 leading-relaxed">
               Our team handles permits, HOA approvals, and code requirements unique to {locationDisplayName}. We build to
-              {location.state === 'KY'
-                ? 'Kentucky'
-                : location.state === 'OH'
-                  ? 'Ohio'
-                  : 'Indiana'} residential standards so inspections and approvals stay stress-free.
+              Ohio residential standards so inspections and approvals stay stress-free.
             </p>
           </div>
           <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-6">

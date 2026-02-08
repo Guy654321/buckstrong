@@ -1,10 +1,11 @@
 {
-  "name": "derby-city-garage-doors",
+  "name": "buck-strong-garage-doors",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "lint": "astro check",
     "build": "astro check && astro build && node scripts/minify-js.js && node scripts/minify-html.js && node scripts/enforce-vercel-runtime.mjs && node scripts/check-orphaned-pages.js",
     "preview": "astro preview",
     "astro": "astro",

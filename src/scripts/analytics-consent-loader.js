@@ -9,7 +9,7 @@
     return;
   }
 
-  const consentKey = scriptEl.dataset?.consentKey || 'derbystrong:analytics-opt-in';
+  const consentKey = scriptEl.dataset?.consentKey || 'buckstrong:analytics-opt-in';
 
   const hasPrivacySignals = () => {
     const nav = window.navigator || {};
@@ -99,7 +99,7 @@
     { once: true }
   );
 
-  window.derbyAnalytics = Object.assign(window.derbyAnalytics || {}, {
+  window.buckStrongAnalytics = Object.assign(window.buckStrongAnalytics || {}, {
     optIn: enableAnalytics
   });
 })();

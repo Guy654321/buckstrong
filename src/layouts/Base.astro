@@ -27,7 +27,7 @@ const {
   title = "Garage Door Repair Cincinnati, OH | Buck Strong Garage Doors",
   description = "Ohio-based garage door repair & installation in Cincinnati, OH. Springs, openers, cables—fully insured service for the Cincinnati metro.",
   canonical,
-  ogImage = "/images/derby-city-garage-doors-og.png",
+  ogImage = "/images/buck-strong-garage-doors-og.png",
   noindex = false,
   author = "Buck Strong Garage Doors",
   publishDate,
@@ -149,7 +149,7 @@ const speedInsightsEndpoint = speedInsightsBasePath
   : '/_vercel/speed-insights/vitals';
 const analyticsMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '';
 const analyticsConsentStorageKey =
-  import.meta.env.PUBLIC_ANALYTICS_CONSENT_KEY ?? 'derbystrong:analytics-opt-in';
+  import.meta.env.PUBLIC_ANALYTICS_CONSENT_KEY ?? 'buckstrong:analytics-opt-in';
 const shouldLoadAnalytics = import.meta.env.PROD && Boolean(analyticsMeasurementId);
 
 const resolvedModifiedDate = modifiedDate ?? new Date().toISOString();
@@ -208,9 +208,11 @@ const localBusinessSchema = JSON.stringify({
       closes: '23:59'
     }
   ],
-  sameAs: [
-    'https://www.facebook.com/DerbyStrongGarageDoors',
-    'https://www.instagram.com/DerbyStrongGarageDoors'
+  areaServed: [
+    {
+      '@type': 'State',
+      name: 'Ohio'
+    }
   ]
 });
 ---
@@ -263,8 +265,6 @@ const localBusinessSchema = JSON.stringify({
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content={imageAltText} />
     <meta name="twitter:url" content={canonicalHref} />
-    <meta name="twitter:site" content="@DerbyStrongGarageDoors" />
-    <meta name="twitter:creator" content="@DerbyStrongGarageDoors" />
     
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     
@@ -339,7 +339,7 @@ const localBusinessSchema = JSON.stringify({
         sectional, rolling steel, and high-lift doors to reduce emergency calls and extend equipment life.
       </p>
       <p>
-        Our Ohio-based team supports neighborhoods throughout Cincinnati along with nearby Northern Kentucky communities.
+        Our Ohio-based team supports neighborhoods throughout Cincinnati and nearby Ohio communities.
         Local technicians arrive with transparent pricing, contactless approvals, and digital receipts so customers can
         quickly document repairs for insurance or facility records. We also offer design consultations for insulated,
         carriage-style, and modern glass doors tailored to the region’s climate and architectural styles.

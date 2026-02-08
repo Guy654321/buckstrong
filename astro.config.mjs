@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel/serverless';
 import icon from 'astro-icon';
 
-const DEFAULT_SITE_ORIGIN = process.env.PUBLIC_SITE_URL?.trim() || 'https://derbystronggaragedoors.com';
+const DEFAULT_SITE_ORIGIN = process.env.PUBLIC_SITE_URL?.trim() || 'https://buckstronggaragedoors.com';
 
 function normalizeSiteOrigin(candidate, fallback = DEFAULT_SITE_ORIGIN) {
   if (!candidate) return fallback;
