@@ -18,9 +18,10 @@ const {
 } = Astro.props;
 
 const widthMap = {
-  sm: 192,
-  md: 288,
-  lg: 384
+
+  sm: 384,
+  md: 576,
+  lg: 768
 } as const;
 
 const baseWidth = widthMap[size];
