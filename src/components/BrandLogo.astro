@@ -1,7 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import brandLogo from '../assets/images/buck-strong-logo.png';
-
 export interface Props {
   size?: 'sm' | 'md' | 'lg';
   class?: string;
@@ -21,13 +18,14 @@ const {
 } = Astro.props;
 
 const widthMap = {
+
   sm: 384,
   md: 576,
   lg: 768
 } as const;
 
 const baseWidth = widthMap[size];
-const aspectRatio = brandLogo.height / brandLogo.width;
+const aspectRatio = 1;
 const baseHeight = Math.round(baseWidth * aspectRatio);
 
 const decoding = priority ? 'sync' : 'async';
@@ -35,24 +33,21 @@ const fetchPriority = priority ? 'high' : 'auto';
 
 const sizes =
   size === 'sm'
-    ? '(max-width: 640px) 32px, 40px'
+    ? '(max-width: 640px) 96px, 120px'
     : size === 'lg'
-      ? '(max-width: 768px) 48px, (max-width: 1280px) 64px, 80px'
-      : '(max-width: 640px) 36px, (max-width: 1024px) 48px, 56px';
+      ? '(max-width: 768px) 144px, (max-width: 1280px) 192px, 240px'
+      : '(max-width: 640px) 108px, (max-width: 1024px) 144px, 168px';
 ---
-<Image
-  src={brandLogo}
+<img
+  src="/images/ohio%20logo.png"
   alt={alt}
   width={baseWidth}
   height={baseHeight}
-  densities={[1, 1.5, 2]}
   class={`w-auto ${className}`.trim()}
   loading="eager"
   decoding={decoding}
   fetchpriority={fetchPriority}
   sizes={sizes}
-  quality={85}
-  format="webp"
   itemprop={itemprop}
   aria-hidden={ariaHidden ? 'true' : undefined}
 />
