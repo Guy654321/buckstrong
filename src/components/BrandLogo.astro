@@ -18,9 +18,9 @@ const {
 } = Astro.props;
 
 const widthMap = {
-  sm: 72,
-  md: 120,
-  lg: 160
+  sm: 216,
+  md: 360,
+  lg: 480
 } as const;
 
 const baseWidth = widthMap[size];
@@ -32,10 +32,10 @@ const fetchPriority = priority ? 'high' : 'auto';
 
 const sizes =
   size === 'sm'
-    ? '(max-width: 640px) 40px, 48px'
+    ? '(max-width: 640px) 120px, 144px'
     : size === 'lg'
-      ? '(max-width: 768px) 72px, (max-width: 1280px) 96px, 112px'
-      : '(max-width: 640px) 56px, (max-width: 1024px) 72px, 96px';
+      ? '(max-width: 768px) 216px, (max-width: 1280px) 288px, 336px'
+      : '(max-width: 640px) 168px, (max-width: 1024px) 216px, 288px';
 ---
 <img
   src="/images/ohio%20logo.png"
