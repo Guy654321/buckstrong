@@ -143,11 +143,11 @@ const normalizeSubtitleSegments = (value: SubtitleProp | undefined): SubtitleSeg
 const subtitleSegments = normalizeSubtitleSegments(subtitle);
 const hasSubtitle = subtitleSegments.length > 0;
 const heroSectionHeight = compact
-  ? 'min-h-[82vh] sm:min-h-[68vh] md:min-h-[58vh]'
-  : 'min-h-screen sm:min-h-[70vh] md:min-h-[60vh]';
+  ? 'min-h-[80vh] sm:min-h-[68vh] md:min-h-[58vh]'
+  : 'min-h-[88vh] sm:min-h-[72vh] md:min-h-[62vh]';
 const heroContentHeight = compact
-  ? 'min-h-[82vh] sm:min-h-[68vh] md:min-h-[58vh]'
-  : 'min-h-[85vh] sm:min-h-[70vh] md:min-h-[60vh]';
+  ? 'min-h-[80vh] sm:min-h-[68vh] md:min-h-[58vh]'
+  : 'min-h-[84vh] sm:min-h-[70vh] md:min-h-[60vh]';
 const heroContentAlignment = compact
   ? 'items-start pt-14 sm:pt-16 lg:pt-20 pb-10 sm:pb-12'
   : 'items-center py-12 sm:py-14 lg:py-20';
@@ -219,7 +219,7 @@ const heroContentAlignment = compact
   <div class={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex ${heroContentAlignment} ${heroContentHeight}`}>
     <div class="text-center max-w-5xl mx-auto flex flex-col gap-4 sm:gap-6 lg:gap-7">
 
-      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.5rem] font-extrabold leading-tight text-shadow-lg tracking-tight">
+      <h1 class="text-[2.75rem] sm:text-5xl md:text-5xl lg:text-[3.25rem] xl:text-[3.5rem] font-extrabold leading-[1.12] text-shadow-lg tracking-tight">
         {heroHeading}
       </h1>
 

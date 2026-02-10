@@ -38,7 +38,7 @@
   }
   
   .btn-accent {
-    @apply text-white px-7 py-3.5 font-semibold transition-colors duration-300 rounded-xl;
+    @apply text-white px-7 py-3.5 font-semibold transition-colors duration-300 rounded-full;
     background-color: #dc2626 !important;
     border: 2px solid #b91c1c;
     box-shadow: 0 10px 24px 0 rgba(185, 28, 28, 0.25);
@@ -67,7 +67,7 @@
   }
 
   .btn-outline-light {
-    @apply border-2 border-white bg-transparent text-white hover:bg-white/10 px-7 py-3.5 rounded-xl font-semibold transition-colors duration-300;
+    @apply border-2 border-white bg-transparent text-white hover:bg-white/10 px-7 py-3.5 rounded-full font-semibold transition-colors duration-300;
     min-height: 48px;
     min-width: 48px;
     display: inline-flex;
