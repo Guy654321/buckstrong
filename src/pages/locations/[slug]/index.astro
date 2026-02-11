@@ -92,11 +92,10 @@ const locationDisplayName = `${location.name}, ${location.state}`;
 const hubCityName = location.isHub
   ? location.address?.addressLocality?.trim() || location.name
   : location.name;
-const hubLocationDisplayName = `${hubCityName}, ${location.state}`;
 const locationMarketName = marketDisplayName || location.market;
-const locationHeroTitle = location.isHub
-  ? `Garage Door Repair & Installation in ${hubLocationDisplayName}`
-  : `Garage Door Repair & Installation in ${locationDisplayName}`;
+const heroCityName = location.isHub ? hubCityName : location.name;
+const heroCityPossessive = heroCityName.endsWith('s') ? `${heroCityName}’` : `${heroCityName}’s`;
+const locationHeroTitle = `${heroCityPossessive} Trusted Garage Door Repair & Installation Experts`;
 type ServiceSlug = ServiceSummary['slug'];
 
 const locationMapConfig = getLocationMapConfig(location.slug);
