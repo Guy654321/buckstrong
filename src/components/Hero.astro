@@ -212,7 +212,7 @@ const heroContentAlignment = compact
     </picture>
     <div
       class="absolute inset-0"
-      style="background-color: rgba(31, 41, 51, 0.45);"
+      style="background-color: rgba(15, 23, 42, 0.62);"
     ></div>
   </div>
 
@@ -235,7 +235,7 @@ const heroContentAlignment = compact
 
       {hasSubtitleSlot ? (
         <div class="flex flex-col gap-3 sm:gap-4 lg:gap-5 max-w-3xl mx-auto">
-          <div class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-3xl mx-auto text-shadow font-medium whitespace-pre-line">
+          <div class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-3xl mx-auto text-shadow font-description font-medium whitespace-pre-line">
             <slot name="subtitle" />
           </div>
         </div>
@@ -244,7 +244,7 @@ const heroContentAlignment = compact
           <div class="flex flex-col gap-3 sm:gap-4 lg:gap-5 max-w-3xl mx-auto">
             {subtitleSegments.map((segment) => (
               <p
-                class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-3xl mx-auto text-shadow font-medium whitespace-pre-line"
+                class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-3xl mx-auto text-shadow font-description font-medium whitespace-pre-line"
               >
                 {segment}
               </p>
