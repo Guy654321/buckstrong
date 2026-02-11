@@ -1,0 +1,188 @@
+---
+import { Picture } from 'astro:assets';
+import { Schema } from 'astro-seo-schema';
+import Base from '../../layouts/Base.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import Breadcrumbs from '../Breadcrumbs.astro';
+import { BUSINESS_INFO } from '../../data/business';
+import { COMMERCIAL_SERVICE_PAGES, type CommercialServicePage } from '../../data/commercial-service-pages';
+
+interface Props {
+  service: CommercialServicePage;
+}
+
+const { service } = Astro.props as Props;
+const thisPath = `/garage-door-commercial-${service.slug}-cincinnati-oh`;
+const relatedPages = COMMERCIAL_SERVICE_PAGES.filter((item) => service.relatedSlugs.includes(item.slug));
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Commercial Garage Door Service', href: '/services/commercial-jobs' },
+  { label: service.cardTitle }
+];
+---
+
+<Base
+  title={service.metaTitle}
+  description={service.metaDescription}
+  canonical={thisPath}
+  callNowPhoneNumber={BUSINESS_INFO.telephone}
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: `${service.serviceName} in Cincinnati, OH`,
+      description: service.metaDescription,
+      serviceType: service.serviceName,
+      areaServed: [
+        { '@type': 'City', name: 'Cincinnati' },
+        { '@type': 'City', name: 'West Chester' },
+        { '@type': 'City', name: 'Mason' },
+        { '@type': 'City', name: 'Blue Ash' },
+        { '@type': 'City', name: 'Loveland' },
+        { '@type': 'City', name: 'Hamilton' }
+      ],
+      provider: {
+        '@type': 'LocalBusiness',
+        name: BUSINESS_INFO.name,
+        legalName: BUSINESS_INFO.legalName,
+        telephone: BUSINESS_INFO.telephone,
+        email: BUSINESS_INFO.email,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: BUSINESS_INFO.address.streetAddress,
+          addressLocality: BUSINESS_INFO.address.addressLocality,
+          addressRegion: BUSINESS_INFO.address.addressRegion,
+          postalCode: BUSINESS_INFO.address.postalCode,
+          addressCountry: BUSINESS_INFO.address.addressCountry
+        }
+      }
+    }}
+  />
+
+  <section class="py-16 bg-muted">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-ink mb-6">{service.serviceName} in Cincinnati, OH</h1>
+          <p class="text-lg leading-relaxed text-ink/80 mb-4">{service.intro}</p>
+          {service.details.map((detail) => (
+            <p class="text-lg leading-relaxed text-ink/80 mb-4">{detail}</p>
+          ))}
+          <p class="text-lg leading-relaxed text-ink/80">
+            Buck Strong provides garage door repair Cincinnati companies trust, complete garage door service Cincinnati OH businesses depend on, and emergency garage door repair Cincinnati dispatch support when security or uptime is at risk.
+          </p>
+
+          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+            <a href={`tel:${BUSINESS_INFO.telephone.replace(/[^\d+]/g, '')}`} class="btn-accent px-6 py-3 text-center">Call Now: {BUSINESS_INFO.telephone}</a>
+            <a href="/contact" class="btn-primary px-6 py-3 text-center">Get a Quote</a>
+          </div>
+        </div>
+
+        <div class="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 bg-white/60">
+          <Picture
+            src={service.heroImage}
+            alt={service.heroAlt}
+            widths={[480, 768, 1024]}
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            quality={82}
+            loading="eager"
+            fetchpriority="high"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Signs You Need This Service</h2>
+      <ul class="list-disc list-inside space-y-3 text-lg text-ink/80 leading-relaxed">
+        {service.signs.map((sign) => <li>{sign}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-14 bg-muted">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Our Assessment and Process</h2>
+      <ol class="list-decimal list-inside space-y-3 text-lg text-ink/80 leading-relaxed">
+        {service.processSteps.map((step) => <li>{step}</li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Available Options</h2>
+      <ul class="list-disc list-inside space-y-3 text-lg text-ink/80 leading-relaxed mb-5">
+        {service.options.map((option) => <li>{option}</li>)}
+      </ul>
+      <p class="text-lg text-ink/80 leading-relaxed">{service.optionsSummary}</p>
+    </div>
+  </section>
+
+  <section class="py-14 bg-muted">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Why Choose Buck Strong Garage Doors</h2>
+      <p class="text-lg text-ink/80 leading-relaxed">{service.whyChoose}</p>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Service Areas</h2>
+      <p class="text-lg text-ink/80 leading-relaxed mb-4">{service.areaSummary}</p>
+      <ul class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-ink/80">
+        <li>Cincinnati</li>
+        <li>West Chester</li>
+        <li>Mason</li>
+        <li>Blue Ash</li>
+        <li>Loveland</li>
+        <li>Hamilton</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-14 bg-muted">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Related Garage Door Services</h2>
+      <p class="text-lg text-ink/80 leading-relaxed mb-5">
+        Explore related commercial service pages, visit our
+        <a class="text-primary underline" href="/services/commercial-jobs"> commercial service hub</a>,
+        and review
+        <a class="text-primary underline" href="/services/garage-door-repair"> garage door repair</a>
+        and
+        <a class="text-primary underline" href="/services/garage-door-installation"> installation options</a>
+        for complete support.
+      </p>
+      <ul class="list-disc list-inside space-y-2 text-lg">
+        {relatedPages.map((relatedPage) => (
+          <li>
+            <a class="text-primary underline" href={`/garage-door-commercial-${relatedPage.slug}-cincinnati-oh`}>
+              {relatedPage.cardTitle} in Cincinnati, OH
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-10 p-6 bg-card rounded-2xl shadow-sm ring-1 ring-black/5">
+        <h2 class="text-2xl font-bold text-ink mb-3">Need {service.cardTitle} Support Today?</h2>
+        <p class="text-ink/80 mb-4">Call now for priority scheduling or request a quote online. Our Cincinnati commercial team is ready to help.</p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href={`tel:${BUSINESS_INFO.telephone.replace(/[^\d+]/g, '')}`} class="btn-accent px-6 py-3 text-center">Call Now</a>
+          <a href="/contact" class="btn-primary px-6 py-3 text-center">Get a Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
