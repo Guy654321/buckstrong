@@ -1,0 +1,12 @@
+---
+import DoorOptionServicePage from '../components/service-pages/DoorOptionServicePage.astro';
+import { getDoorServiceBySlug } from '../data/door-service-pages';
+
+const service = getDoorServiceBySlug('carriage-house-garage-doors');
+
+if (!service) {
+  throw new Error('Door service page not found: carriage-house-garage-doors');
+}
+---
+
+<DoorOptionServicePage service={service} />

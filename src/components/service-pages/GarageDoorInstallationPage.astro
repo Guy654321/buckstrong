@@ -186,24 +186,28 @@ const doorTypes = [
   {
     title: 'Steel Garage Doors',
     description: 'Durable, low-maintenance construction with insulation upgrades for comfort and efficiency.',
+    href: '/garage-door-steel-garage-doors-cincinnati-oh',
     theme: 'steel'
   },
   {
     title: 'Wood Garage Doors',
     description: 'Handcrafted styles, custom stain matches, and premium craftsmanship for standout curb appeal.',
+    href: '/garage-door-wood-garage-doors-cincinnati-oh',
     theme: 'wood'
   },
   {
     title: 'Aluminum Garage Doors',
     description: 'Lightweight, rust-resistant frames with modern glass or solid panel configurations.',
+    href: '/garage-door-aluminum-garage-doors-cincinnati-oh',
     theme: 'aluminum'
   },
   {
     title: 'Elegant Garage Doors',
     description: 'Carriage house overlays, decorative hardware, and designer windows tailored to your architecture.',
+    href: '/garage-door-carriage-house-garage-doors-cincinnati-oh',
     theme: 'elegant'
   }
-] satisfies Array<{ title: string; description: string; theme: 'steel' | 'wood' | 'aluminum' | 'elegant' }>;
+] satisfies Array<{ title: string; description: string; href: string; theme: 'steel' | 'wood' | 'aluminum' | 'elegant' }>;
 
 const chooseUsHeading = activeLocation
   ? 'Why Choose Our Installation?'
@@ -400,6 +404,7 @@ const expertiseCopy = activeLocation
           >
             <h3 class="text-xl font-semibold text-ink">{door.title}</h3>
             <p class="mt-3 text-ink/70 leading-relaxed">{door.description}</p>
+            <a href={door.href} class="mt-5 inline-flex text-primary font-semibold underline">View Door Options</a>
           </div>
         ))}
       </div>
