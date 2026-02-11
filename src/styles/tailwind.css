@@ -18,7 +18,8 @@
     outline-offset: 2px;
   }
 
-  body.call-modal-open {
+  body.call-modal-open,
+  body.quote-modal-open {
     overflow: hidden;
   }
 
