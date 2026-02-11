@@ -6,12 +6,16 @@ import { getLocationHubs } from "../lib/locations";
 import { BUSINESS_INFO } from "../data/business";
 import navDropdownScriptUrl from "../scripts/nav-dropdown.js?url";
 import headerCallModalScriptUrl from "../scripts/header-call-modal.js?url";
+import quoteModalScriptUrl from "../scripts/quote-modal.js?url";
+import ContactForm from "./ContactForm.astro";
 import { CALL_MARKETS, sanitizePhoneNumberValue } from "../data/call-markets";
 
 const navDropdownModuleHref = navDropdownScriptUrl;
 const navModuleUrl = navDropdownScriptUrl;
 const headerCallModalModuleHref = headerCallModalScriptUrl;
 const headerCallModalModuleUrl = headerCallModalScriptUrl;
+const quoteModalModuleHref = quoteModalScriptUrl;
+const quoteModalModuleUrl = quoteModalScriptUrl;
 
 const services = await getServices();
 const locationHubs = await getLocationHubs();
@@ -35,6 +39,7 @@ const safeCallMarkets =
     },
   ];
 const callModalId = "header-call-modal";
+const quoteModalId = "quote-form-modal";
 const primaryCallMarket = safeCallMarkets[0];
 const primaryCallHref = primaryCallMarket?.phoneHref || phoneHref;
 const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
@@ -43,6 +48,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
 <Fragment slot="head">
   <link rel="modulepreload" href={navDropdownModuleHref} />
   <link rel="modulepreload" href={headerCallModalModuleHref} />
+  <link rel="modulepreload" href={quoteModalModuleHref} />
 </Fragment>
 
 <nav
@@ -498,3 +504,60 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
 )}
 <script is:inline type="module" src={navDropdownScriptUrl}></script>
 <script is:inline type="module" src={headerCallModalModuleUrl}></script>
+
+<div
+  id={quoteModalId}
+  class="fixed inset-0 z-[65] pointer-events-none invisible data-[state=open]:visible data-[state=open]:pointer-events-auto"
+  data-quote-modal
+  data-state="closed"
+  aria-hidden="true"
+>
+  <div
+    class="absolute inset-0 bg-ink/70 opacity-0 transition-opacity duration-200 data-[state=open]:opacity-100"
+    data-quote-modal-overlay
+    data-state="closed"
+    aria-hidden="true"
+  ></div>
+  <div class="absolute inset-0 flex items-start justify-center overflow-y-auto p-4 sm:p-6">
+    <section
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="quote-modal-title"
+      aria-describedby="quote-modal-description"
+      tabindex="-1"
+      class="relative my-8 w-full max-w-4xl rounded-2xl bg-white p-4 shadow-2xl transition-all duration-200 data-[state=open]:scale-100 data-[state=open]:opacity-100 data-[state=closed]:scale-95 data-[state=closed]:opacity-0 sm:p-6"
+      data-quote-modal-dialog
+      data-state="closed"
+    >
+      <button
+        type="button"
+        class="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full text-ink/70 transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        data-quote-modal-close
+        aria-label="Close quote form"
+      >
+        <span aria-hidden="true" class="text-xl leading-none">×</span>
+      </button>
+      <div class="sr-only">
+        <h2 id="quote-modal-title">Get a Quote</h2>
+        <p id="quote-modal-description">Fill out the quote form and our team will follow up quickly.</p>
+      </div>
+      <ContactForm
+        id="modal-quote-form"
+        formId="quote-modal-contact-form"
+        fieldIdPrefix="quote-modal"
+        title="Get Your Free Quote"
+        subtitle="Fill out the form below and we'll contact you shortly."
+        formBgColor="muted"
+        includeSchema={false}
+      />
+      <button
+        type="button"
+        class="mx-auto mt-2 block text-sm font-medium text-ink/70 underline-offset-4 transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+        data-quote-modal-close
+      >
+        Close
+      </button>
+    </section>
+  </div>
+</div>
+<script is:inline type="module" src={quoteModalModuleUrl}></script>
