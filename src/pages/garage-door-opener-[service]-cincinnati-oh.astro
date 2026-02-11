@@ -1,0 +1,223 @@
+---
+import { Schema } from 'astro-seo-schema';
+import type { ImageMetadata } from 'astro';
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { BUSINESS_INFO } from '../data/business';
+import { OPENER_SERVICE_PAGES } from '../data/opener-service-pages';
+import { REPAIRS } from '../data/repairs';
+import beltDriveImage from '../assets/images/repairs/opener-belt-drive.jpg';
+import chainDriveImage from '../assets/images/repairs/opener-chain-drive.jpg';
+import directDriveImage from '../assets/images/repairs/opener-direct-drive.jpg';
+import screwDriveImage from '../assets/images/repairs/opener-screw-drive.jpg';
+
+export function getStaticPaths() {
+  return OPENER_SERVICE_PAGES.map((service) => ({
+    params: { service: service.slug },
+    props: { service }
+  }));
+}
+
+const { service } = Astro.props;
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Garage Door Opener Repair', href: '/services/opener-repair' },
+  { label: service.cardTitle }
+];
+
+const thisPath = `/garage-door-opener-${service.slug}-cincinnati-oh`;
+const relatedRepairs = REPAIRS.filter((repair) => service.relatedSlugs.includes(repair.slug));
+const introKeywords =
+  'Our team provides garage door service Cincinnati OH homeowners can book quickly, including same-day troubleshooting for convenience and safety. When urgent issues interrupt access, ask about emergency garage door repair Cincinnati scheduling for fast local response.';
+const signsNarrative = `Across Cincinnati homes, opener symptoms often begin subtly before becoming a full breakdown. Warning signs include ${service.signs.join(' ')} Acting early helps protect your door sections, springs, and rail hardware while reducing the chance of a complete opener failure.`;
+const processNarrative = `Every appointment follows a proven, transparent workflow so your opener is repaired correctly the first time. Our service steps include ${service.processSteps.join(' ')} This process keeps repairs safe, measurable, and focused on long-term reliability.`;
+const optionsNarrative = `No two households use garage access the same way, so we tailor recommendations around daily cycles, noise preferences, and budget targets. We review options such as ${service.options.join(' ')} so you can choose the right path with confidence.`;
+
+const openerHeroBySlug: Record<string, { image: ImageMetadata; alt: string }> = {
+  'belt-drive-repair': {
+    image: beltDriveImage,
+    alt: 'Belt-drive garage door opener repair with technician servicing quiet drive rail in Cincinnati'
+  },
+  'chain-drive-repair': {
+    image: chainDriveImage,
+    alt: 'Chain-drive garage door opener repair and chain tension calibration in Cincinnati'
+  },
+  'jackshaft-opener-repair': {
+    image: directDriveImage,
+    alt: 'Wall-mount jackshaft opener repair with side motor diagnostics in Cincinnati'
+  },
+  'screw-drive-opener-repair': {
+    image: screwDriveImage,
+    alt: 'Screw-drive garage door opener repair with threaded rail inspection in Cincinnati'
+  }
+};
+
+const heroImage = openerHeroBySlug[service.slug] ?? {
+  image: beltDriveImage,
+  alt: `Buck Strong technician performing ${service.serviceName.toLowerCase()} in Cincinnati, OH`
+};
+---
+
+<Base
+  title={service.metaTitle}
+  description={service.metaDescription}
+  canonical={thisPath}
+  callNowPhoneNumber={BUSINESS_INFO.telephone}
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: `${service.serviceName} in Cincinnati, OH`,
+      description: service.metaDescription,
+      serviceType: service.serviceName,
+      areaServed: [
+        { '@type': 'City', name: 'Cincinnati' },
+        { '@type': 'City', name: 'West Chester' },
+        { '@type': 'City', name: 'Mason' },
+        { '@type': 'City', name: 'Blue Ash' },
+        { '@type': 'City', name: 'Loveland' },
+        { '@type': 'City', name: 'Hamilton' }
+      ],
+      provider: {
+        '@type': 'LocalBusiness',
+        name: BUSINESS_INFO.name,
+        legalName: BUSINESS_INFO.legalName,
+        telephone: BUSINESS_INFO.telephone,
+        email: BUSINESS_INFO.email,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: BUSINESS_INFO.address.streetAddress,
+          addressLocality: BUSINESS_INFO.address.addressLocality,
+          addressRegion: BUSINESS_INFO.address.addressRegion,
+          postalCode: BUSINESS_INFO.address.postalCode,
+          addressCountry: BUSINESS_INFO.address.addressCountry
+        }
+      }
+    }}
+  />
+
+  <section class="py-16 bg-muted">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-ink mb-6">{service.serviceName} in Cincinnati, OH</h1>
+          <p class="text-lg leading-relaxed text-ink/80 mb-4">{service.intro}</p>
+          <p class="text-lg leading-relaxed text-ink/80">{introKeywords}</p>
+
+          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+            <a href={`tel:${BUSINESS_INFO.telephone.replace(/[^\d+]/g, '')}`} class="btn-accent px-6 py-3 text-center">Call Now: {BUSINESS_INFO.telephone}</a>
+            <a href="/contact" class="btn-primary px-6 py-3 text-center">Get a Quote</a>
+          </div>
+        </div>
+
+        <div class="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 bg-white/50">
+          <Picture
+            src={heroImage.image}
+            alt={heroImage.alt}
+            widths={[480, 768, 1024]}
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            quality={82}
+            loading="eager"
+            fetchpriority="high"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Signs You Need This Service</h2>
+      <ul class="list-disc list-inside space-y-3 text-lg text-ink/80 leading-relaxed">
+        {service.signs.map((sign) => <li>{sign}</li>)}
+      </ul>
+      <p class="text-lg text-ink/80 leading-relaxed mt-5">{signsNarrative}</p>
+    </div>
+  </section>
+
+  <section class="py-14 bg-muted">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Our Assessment and Process</h2>
+      <ol class="list-decimal list-inside space-y-3 text-lg text-ink/80 leading-relaxed">
+        {service.processSteps.map((step) => <li>{step}</li>)}
+      </ol>
+      <p class="text-lg text-ink/80 leading-relaxed mt-5">{processNarrative}</p>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Available Options</h2>
+      <ul class="list-disc list-inside space-y-3 text-lg text-ink/80 leading-relaxed mb-5">
+        {service.options.map((option) => <li>{option}</li>)}
+      </ul>
+      <p class="text-lg text-ink/80 leading-relaxed mb-5">{service.optionsSummary}</p>
+      <p class="text-lg text-ink/80 leading-relaxed">{optionsNarrative}</p>
+    </div>
+  </section>
+
+  <section class="py-14 bg-muted">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Why Choose Buck Strong Garage Doors</h2>
+      <p class="text-lg text-ink/80 leading-relaxed">{service.whyChoose}</p>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Service Areas</h2>
+      <p class="text-lg text-ink/80 leading-relaxed mb-4">{service.areaSummary}</p>
+      <ul class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-ink/80">
+        <li>Cincinnati</li>
+        <li>West Chester</li>
+        <li>Mason</li>
+        <li>Blue Ash</li>
+        <li>Loveland</li>
+        <li>Hamilton</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-14 bg-muted">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Related Garage Door Services</h2>
+      <p class="text-lg text-ink/80 leading-relaxed mb-5">
+        Explore related pages to solve connected issues, and visit our core
+        <a class="text-primary underline" href="/services/opener-repair"> garage door opener repair page</a>,
+        primary
+        <a class="text-primary underline" href="/services/garage-door-repair"> garage door repair page</a>,
+        or the complete
+        <a class="text-primary underline" href="/services"> service directory</a>
+        for full support options.
+      </p>
+      <ul class="list-disc list-inside space-y-2 text-lg">
+        {relatedRepairs.map((repair) => (
+          <li>
+            <a class="text-primary underline" href={repair.href}>{repair.title}</a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-10 p-6 bg-card rounded-2xl shadow-sm ring-1 ring-black/5">
+        <h2 class="text-2xl font-bold text-ink mb-3">Need {service.cardTitle} in Cincinnati?</h2>
+        <p class="text-ink/80 mb-4">Call now for priority dispatch or request your estimate online. Our local team is ready with fast, professional service.</p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href={`tel:${BUSINESS_INFO.telephone.replace(/[^\d+]/g, '')}`} class="btn-accent px-6 py-3 text-center">Call Now</a>
+          <a href="/contact" class="btn-primary px-6 py-3 text-center">Get a Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
