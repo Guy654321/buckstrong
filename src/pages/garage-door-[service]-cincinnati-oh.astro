@@ -1,0 +1,175 @@
+---
+import { Schema } from 'astro-seo-schema';
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { BUSINESS_INFO } from '../data/business';
+import { REPAIR_SERVICE_PAGES } from '../data/repair-service-pages';
+import { REPAIRS } from '../data/repairs';
+
+export function getStaticPaths() {
+  return REPAIR_SERVICE_PAGES.map((service) => ({
+    params: { service: service.slug },
+    props: { service }
+  }));
+}
+
+const { service } = Astro.props;
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Garage Door Repair', href: '/services/garage-door-repair' },
+  { label: service.cardTitle }
+];
+
+const thisPath = `/garage-door-${service.slug}-cincinnati-oh`;
+const relatedRepairs = REPAIRS.filter((repair) => service.relatedSlugs.includes(repair.slug));
+const introKeywords =
+  'We provide garage door service Cincinnati OH homeowners can schedule quickly, with flexible appointments and clear written estimates. If your issue is urgent, ask about emergency garage door repair Cincinnati dispatch coverage for immediate response.';
+const signsNarrative = `In many Cincinnati homes, early warning signs are easy to overlook until the door stops working at the worst time. Common indicators include ${service.signs.join(' ')} These conditions usually progress quickly, so scheduling service early helps prevent secondary damage to tracks, panels, and opener components.`;
+const processNarrative = `Our Cincinnati technicians follow a structured workflow to deliver dependable results. We begin by identifying root causes and then complete each corrective step carefully: ${service.processSteps.join(' ')} This process keeps the repair safe, transparent, and focused on long-term performance instead of short-term patchwork.`;
+const optionsNarrative = `Every home has different usage patterns, budgets, and hardware needs. We review practical choices with you, including ${service.options.join(' ')} Our team explains durability and value tradeoffs so you can make an informed decision with confidence.`;
+---
+
+<Base
+  title={service.metaTitle}
+  description={service.metaDescription}
+  canonical={thisPath}
+  callNowPhoneNumber={BUSINESS_INFO.telephone}
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: `${service.serviceName} in Cincinnati, OH`,
+      description: service.metaDescription,
+      serviceType: service.serviceName,
+      areaServed: [
+        { '@type': 'City', name: 'Cincinnati' },
+        { '@type': 'City', name: 'West Chester' },
+        { '@type': 'City', name: 'Mason' },
+        { '@type': 'City', name: 'Blue Ash' },
+        { '@type': 'City', name: 'Loveland' },
+        { '@type': 'City', name: 'Hamilton' }
+      ],
+      provider: {
+        '@type': 'LocalBusiness',
+        name: BUSINESS_INFO.name,
+        legalName: BUSINESS_INFO.legalName,
+        telephone: BUSINESS_INFO.telephone,
+        email: BUSINESS_INFO.email,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: BUSINESS_INFO.address.streetAddress,
+          addressLocality: BUSINESS_INFO.address.addressLocality,
+          addressRegion: BUSINESS_INFO.address.addressRegion,
+          postalCode: BUSINESS_INFO.address.postalCode,
+          addressCountry: BUSINESS_INFO.address.addressCountry
+        }
+      }
+    }}
+  />
+
+  <section class="py-16 bg-muted">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl md:text-5xl font-bold text-ink mb-6">{service.serviceName} in Cincinnati, OH</h1>
+      <p class="text-lg leading-relaxed text-ink/80 mb-4">{service.intro}</p>
+      <p class="text-lg leading-relaxed text-ink/80">{introKeywords}</p>
+
+      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+        <a href={`tel:${BUSINESS_INFO.telephone.replace(/[^\d+]/g, '')}`} class="btn-accent px-6 py-3 text-center">Call Now: {BUSINESS_INFO.telephone}</a>
+        <a href="/contact" class="btn-primary px-6 py-3 text-center">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Signs You Need This Service</h2>
+      <ul class="list-disc list-inside space-y-3 text-lg text-ink/80 leading-relaxed">
+        {service.signs.map((sign) => <li>{sign}</li>)}
+      </ul>
+      <p class="text-lg text-ink/80 leading-relaxed mt-5">{signsNarrative}</p>
+    </div>
+  </section>
+
+  <section class="py-14 bg-muted">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Our Assessment and Process</h2>
+      <ol class="list-decimal list-inside space-y-3 text-lg text-ink/80 leading-relaxed">
+        {service.processSteps.map((step) => <li>{step}</li>)}
+      </ol>
+      <p class="text-lg text-ink/80 leading-relaxed mt-5">{processNarrative}</p>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Available Options</h2>
+      <ul class="list-disc list-inside space-y-3 text-lg text-ink/80 leading-relaxed mb-5">
+        {service.options.map((option) => <li>{option}</li>)}
+      </ul>
+      <p class="text-lg text-ink/80 leading-relaxed mb-5">{service.optionsSummary}</p>
+      <p class="text-lg text-ink/80 leading-relaxed">{optionsNarrative}</p>
+    </div>
+  </section>
+
+  <section class="py-14 bg-muted">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Why Choose Buck Strong Garage Doors</h2>
+      <p class="text-lg text-ink/80 leading-relaxed">{service.whyChoose}</p>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Service Areas</h2>
+      <p class="text-lg text-ink/80 leading-relaxed mb-4">{service.areaSummary}</p>
+      <ul class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-ink/80">
+        <li>Cincinnati</li>
+        <li>West Chester</li>
+        <li>Mason</li>
+        <li>Blue Ash</li>
+        <li>Loveland</li>
+        <li>Hamilton</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-14 bg-muted">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Related Garage Door Services</h2>
+      <p class="text-lg text-ink/80 leading-relaxed mb-5">
+        Explore related service pages for additional support, and visit our primary
+        <a class="text-primary underline" href="/services/garage-door-repair"> garage door repair page</a>
+        or full
+        <a class="text-primary underline" href="/services"> service directory</a>
+        for complete options.
+      </p>
+      <ul class="list-disc list-inside space-y-2 text-lg">
+        {relatedRepairs.map((repair) => (
+          <li>
+            <a class="text-primary underline" href={repair.href}>{repair.title}</a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-10 p-6 bg-card rounded-2xl shadow-sm ring-1 ring-black/5">
+        <h2 class="text-2xl font-bold text-ink mb-3">Ready to Schedule {service.cardTitle}?</h2>
+        <p class="text-ink/80 mb-4">Call now for priority dispatch or request a quote online. Our Cincinnati team is ready to help with fast, professional service.</p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href={`tel:${BUSINESS_INFO.telephone.replace(/[^\d+]/g, '')}`} class="btn-accent px-6 py-3 text-center">Call Now</a>
+          <a href="/contact" class="btn-primary px-6 py-3 text-center">Get a Quote</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer />
+</Base>
