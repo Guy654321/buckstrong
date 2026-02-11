@@ -128,6 +128,11 @@ const storefrontAlt = activeLocation
 const estimateAlt = activeLocation
   ? `Commercial door technicians reviewing a ${locationDisplayName ?? coverageAreaLabel} service plan`
   : 'Commercial door technicians reviewing a Cincinnati, Ohio service plan';
+const commercialCoverageLinks = {
+  warehouse: '/garage-door-commercial-warehouse-distribution-door-service-cincinnati-oh',
+  dock: '/garage-door-commercial-dock-industrial-door-equipment-service-cincinnati-oh',
+  retail: '/garage-door-commercial-retail-municipal-garage-door-service-cincinnati-oh'
+};
 const facilitiesHeading = activeLocation
   ? `Facilities We Support Across ${coverageAreaLabel}`
   : 'Facilities We Support Across Cincinnati, Ohio';
@@ -257,7 +262,10 @@ const specialistsIntro = activeLocation
     <div class="mt-12 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto rounded-[2.75rem] bg-gradient-to-br from-muted/90 via-muted/70 to-muted/60 p-6 sm:p-10 lg:p-12 shadow-[0_35px_120px_-60px_rgba(15,23,42,0.4)]">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          <div class="bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md">
+          <a
+            href={commercialCoverageLinks.warehouse}
+            class="group bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 block"
+          >
             <Image
               src={warehouseServiceImage}
               alt={warehouseAlt}
@@ -276,9 +284,13 @@ const specialistsIntro = activeLocation
               <p class="text-sm text-ink/70 leading-relaxed">
                 Reset sectional doors, balance counterweights, and tune photo-eyes to keep freight moving.
               </p>
+              <p class="mt-4 text-sm font-semibold text-primary group-hover:underline">Explore service details →</p>
             </div>
-          </div>
-          <div class="bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md">
+          </a>
+          <a
+            href={commercialCoverageLinks.dock}
+            class="group bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 block"
+          >
             <Image
               src={dockServiceImage}
               alt={dockAlt}
@@ -297,9 +309,13 @@ const specialistsIntro = activeLocation
               <p class="text-sm text-ink/70 leading-relaxed">
                 Service dock levelers, vehicle restraints, and rolling steel curtains with full safety documentation.
               </p>
+              <p class="mt-4 text-sm font-semibold text-primary group-hover:underline">Explore service details →</p>
             </div>
-          </div>
-          <div class="bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md">
+          </a>
+          <a
+            href={commercialCoverageLinks.retail}
+            class="group bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 block"
+          >
             <Image
               src={storefrontServiceImage}
               alt={storefrontAlt}
@@ -318,8 +334,9 @@ const specialistsIntro = activeLocation
               <p class="text-sm text-ink/70 leading-relaxed">
                 Quiet storefront shutters, fire stations, and fleet garages stay mission ready with proactive maintenance visits.
               </p>
+              <p class="mt-4 text-sm font-semibold text-primary group-hover:underline">Explore service details →</p>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>

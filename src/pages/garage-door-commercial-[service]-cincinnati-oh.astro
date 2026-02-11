@@ -1,0 +1,15 @@
+---
+import CommercialOptionServicePage from '../components/service-pages/CommercialOptionServicePage.astro';
+import { COMMERCIAL_SERVICE_PAGES } from '../data/commercial-service-pages';
+
+export function getStaticPaths() {
+  return COMMERCIAL_SERVICE_PAGES.map((service) => ({
+    params: { service: service.slug },
+    props: { service }
+  }));
+}
+
+const { service } = Astro.props;
+---
+
+<CommercialOptionServicePage service={service} />
