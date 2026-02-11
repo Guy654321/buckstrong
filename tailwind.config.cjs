@@ -25,6 +25,15 @@ module.exports = {
           'Arial',
           'sans-serif',
         ],
+        description: [
+          '"Avenir Next"',
+          'Avenir',
+          '"Segoe UI"',
+          'Roboto',
+          '"Helvetica Neue"',
+          'Arial',
+          'sans-serif',
+        ],
       },
       textShadow: {
         'sm': '0 1px 2px rgba(0, 0, 0, 0.5)',
