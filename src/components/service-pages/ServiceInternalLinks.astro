@@ -1,5 +1,6 @@
 ---
 import type { Location } from '../../lib/locations';
+import { buildLocalizedServicePath } from '../../lib/location-routing';
 
 interface Props {
   currentSlug: 'garage-door-repair' | 'garage-door-installation' | 'opener-repair' | 'commercial-jobs';
@@ -11,7 +12,7 @@ const { currentSlug, location, background = 'white' } = Astro.props as Props;
 
 const locationName = location ? `${location.name}, ${location.state}` : 'your area';
 const buildHref = (slug: string) =>
-  location ? `/locations/${location.slug}/services/${slug}` : `/services/${slug}`;
+  location ? buildLocalizedServicePath(location.slug, slug) : `/services/${slug}`;
 
 const serviceLinks = [
   {

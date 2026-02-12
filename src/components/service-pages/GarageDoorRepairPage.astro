@@ -17,6 +17,7 @@ import { BUSINESS_INFO } from '../../data/business';
 import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../../data/call-markets';
 import type { Location } from '../../lib/locations';
 import { buildLocationServiceCanonicalPath } from '../../lib/canonical';
+import { buildLocalizedServicePath, getLocationServiceCityName } from '../../lib/location-routing';
 import { getSiteOrigin } from '../../utils/site-origin';
 
 // Import all repair images as modules for optimization
@@ -50,11 +51,7 @@ interface Props {
 
 const { location } = Astro.props as Props;
 const activeLocation = location;
-const serviceCityName = activeLocation
-  ? activeLocation.isHub
-    ? activeLocation.address?.addressLocality?.trim() || activeLocation.name
-    : activeLocation.name
-  : undefined;
+const serviceCityName = getLocationServiceCityName(activeLocation);
 const breadcrumbs = activeLocation
   ? [
       { label: 'Home', href: '/' },
@@ -188,6 +185,13 @@ const faqs = [
       'We provide an upfront written estimate before any work begins and review repair options so there are no surprises on your final invoice.'
   }
 ] satisfies Array<{ question: string; answer: string }>;
+
+const localizedRepairs = REPAIRS.map((repair) => ({
+  ...repair,
+  href: activeLocation
+    ? buildLocalizedServicePath(activeLocation.slug, `garage-door-${repair.slug}`)
+    : repair.href,
+}));
 ---
 
 <Base
@@ -330,7 +334,7 @@ const faqs = [
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {REPAIRS.map(repair => (
+        {localizedRepairs.map(repair => (
           <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-lg transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1">
             <div class="aspect-square bg-gray-100 flex items-center justify-center">
               {repairImageMap[repair.slug] ? (

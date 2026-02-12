@@ -13,6 +13,7 @@ import LocationMap from '../../../components/LocationMap.astro';
 import { getLocations, getHubForLocation } from '../../../lib/locations';
 import { getServices, type ServiceSummary } from '../../../lib/services';
 import { buildLocationCanonicalPath } from '../../../lib/canonical';
+import { buildLocalizedServicePath } from '../../../lib/location-routing';
 import heroImage from '../../../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
 import { BUSINESS_INFO } from '../../../data/business';
 import { DEFAULT_LOCATION_MAP_ZOOM, getLocationMapConfig } from '../../../data/locations';
@@ -146,7 +147,7 @@ const serviceCardLocationContext = {
 };
 const repairLinkText = location.isHub ? `Garage Door Repair in ${hubCityName}` : undefined;
 const serviceLinksHeading = `${locationDisplayName} Service Links`;
-const serviceLinksPath = `/locations/${location.slug}/services/`;
+const serviceLinksPath = `${buildLocalizedServicePath(location.slug, '')}/`;
 
 const PROCESS_STEPS = [
   {
@@ -179,7 +180,7 @@ const PROCESS_STEPS = [
   }
 ];
 
-const buildServiceHref = (slug: string) => `/locations/${location.slug}/services/${slug}`;
+const buildServiceHref = (slug: string) => buildLocalizedServicePath(location.slug, slug);
 const defaultMetaTitle = `${locationDisplayName} Garage Door Services | Buck Strong Garage Doors`;
 const pageMetaTitle = location.metaTitle?.trim() || defaultMetaTitle;
 const defaultMetaDescription = `Professional garage door supplier offering repair, installation, opener service, and commercial overhead door work in ${locationDisplayName}. Same-day service across the ${marketDisplayName} communities. Trusted, insured technicians. Call ${locationTelephoneDisplay}`;

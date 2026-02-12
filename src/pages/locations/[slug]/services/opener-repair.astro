@@ -1,7 +1,6 @@
 ---
-import OpenerRepairPage from '../../../../components/service-pages/OpenerRepairPage.astro';
-import type { Location } from '../../../../lib/locations';
 import { getLocations } from '../../../../lib/locations';
+import { buildLocalizedServicePath } from '../../../../lib/location-routing';
 
 export async function getStaticPaths() {
   const locations = await getLocations();
@@ -11,7 +10,8 @@ export async function getStaticPaths() {
   }));
 }
 
-const { location } = Astro.props as { location: Location };
----
+const { slug } = Astro.params;
+const redirectPath = buildLocalizedServicePath(slug, 'opener-repair');
 
-<OpenerRepairPage location={location} />
+return Astro.redirect(redirectPath, 301);
+---

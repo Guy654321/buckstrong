@@ -1,0 +1,46 @@
+---
+import GarageDoorRepairPage from '../../components/service-pages/GarageDoorRepairPage.astro';
+import GarageDoorInstallationPage from '../../components/service-pages/GarageDoorInstallationPage.astro';
+import OpenerRepairPage from '../../components/service-pages/OpenerRepairPage.astro';
+import CommercialJobsPage from '../../components/service-pages/CommercialJobsPage.astro';
+import type { Location } from '../../lib/locations';
+import { getLocations } from '../../lib/locations';
+import { buildLocationCitySlug } from '../../lib/location-routing';
+
+type SupportedServiceSlug =
+  | 'garage-door-repair'
+  | 'garage-door-installation'
+  | 'opener-repair'
+  | 'commercial-jobs';
+
+export async function getStaticPaths() {
+  const locations = await getLocations();
+  const serviceSlugs: SupportedServiceSlug[] = [
+    'garage-door-repair',
+    'garage-door-installation',
+    'opener-repair',
+    'commercial-jobs',
+  ];
+
+  return locations.flatMap((location) =>
+    serviceSlugs.map((service) => ({
+      params: { city: buildLocationCitySlug(location.slug), service },
+      props: { location, service },
+    })),
+  );
+}
+
+export const prerender = true;
+
+const { location, service } = Astro.props as { location: Location; service: SupportedServiceSlug };
+const ServicePage =
+  service === 'garage-door-repair'
+    ? GarageDoorRepairPage
+    : service === 'garage-door-installation'
+    ? GarageDoorInstallationPage
+    : service === 'opener-repair'
+    ? OpenerRepairPage
+    : CommercialJobsPage;
+---
+
+<ServicePage location={location} />

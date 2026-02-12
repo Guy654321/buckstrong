@@ -1,9 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildHubServicePaths, buildSitemapPathCandidates } from '../src/utils/sitemap-paths.js';
+import { buildLocationServicePaths, buildSitemapPathCandidates } from '../src/utils/sitemap-paths.js';
 
-test('buildHubServicePaths creates all hub and service combinations', () => {
-  const hubs = [
+test('buildLocationServicePaths creates all location and service combinations', () => {
+  const locations = [
     { slug: 'louisville' },
     { slug: 'lexington' },
   ];
@@ -12,19 +12,19 @@ test('buildHubServicePaths creates all hub and service combinations', () => {
     { slug: 'commercial-jobs' },
   ];
 
-  const result = buildHubServicePaths(hubs, services);
+  const result = buildLocationServicePaths(locations, services);
 
   const expected = [
-    '/locations/louisville/services/garage-door-repair',
-    '/locations/louisville/services/commercial-jobs',
-    '/locations/lexington/services/garage-door-repair',
-    '/locations/lexington/services/commercial-jobs',
+    '/louisville-oh/garage-door-repair',
+    '/louisville-oh/commercial-jobs',
+    '/lexington-oh/garage-door-repair',
+    '/lexington-oh/commercial-jobs',
   ];
 
   assert.deepEqual(result.sort(), expected.sort());
 });
 
-test('buildSitemapPathCandidates includes hub service URLs without duplicating suburbs', () => {
+test('buildSitemapPathCandidates includes location service URLs for all locations', () => {
   const staticRoutes = ['/', '/locations'];
   const dynamicServiceSlugs = [];
   const services = [
@@ -55,8 +55,8 @@ test('buildSitemapPathCandidates includes hub service URLs without duplicating s
   assert(result.includes('/locations/louisville'));
   assert(result.includes('/locations/lexington'));
   assert(result.includes('/locations/nicholasville'));
-  assert(result.includes('/locations/louisville/services/garage-door-repair'));
-  assert(result.includes('/locations/lexington/services/commercial-jobs'));
-  assert(!result.includes('/locations/nicholasville/services/garage-door-repair'));
+  assert(result.includes('/louisville-oh/garage-door-repair'));
+  assert(result.includes('/lexington-oh/commercial-jobs'));
+  assert(result.includes('/nicholasville-oh/garage-door-repair'));
   assert(result.includes('/blog/seasonal-garage-maintenance'));
 });

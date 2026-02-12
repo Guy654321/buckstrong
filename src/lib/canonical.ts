@@ -1,3 +1,5 @@
+import { buildLocalizedServicePath } from './location-routing';
+
 export const LEGACY_MARKET_REDIRECTS: Record<string, string> = {};
 
 const CANONICAL_HUB_SLUGS = new Set(['cincinnati']);
@@ -25,12 +27,5 @@ export function buildLocationServiceCanonicalPath(
   serviceSlug: string | undefined | null,
 ): string {
   const canonicalLocationSlug = resolveCanonicalLocationSlug(locationSlug);
-  const normalizedServiceSlug = normalizeSlug(serviceSlug);
-  if (!canonicalLocationSlug) {
-    return normalizedServiceSlug ? `/${normalizedServiceSlug}` : '/';
-  }
-
-  return normalizedServiceSlug
-    ? `/locations/${canonicalLocationSlug}/services/${normalizedServiceSlug}`
-    : `/locations/${canonicalLocationSlug}`;
+  return buildLocalizedServicePath(canonicalLocationSlug, serviceSlug);
 }

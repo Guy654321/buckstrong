@@ -94,6 +94,10 @@ export default defineConfig({
           return false;
         }
 
+        if (/^\/locations\/[^/]+\/services\/[^/]+$/.test(normalizedPathname)) {
+          return false;
+        }
+
         try {
           const url = new URL(page?.url ?? '', siteOrigin);
           if (excludedPaths.has(url.pathname.replace(/\/+$/, '') || '/')) {
