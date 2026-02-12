@@ -52,3 +52,7 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## Notes
+
+- `astro-icon` can resolve icon packs (for example `@iconify-json/mdi`) from icon name strings like `mdi:*` and integration config such as `icon({ include: ['mdi'] })`. Static analyzers like Knip may report these packs as unused unless they are explicitly ignored.

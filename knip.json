@@ -16,6 +16,7 @@
     "tsconfig.json"
   ],
   "ignoreDependencies": [
-    "react"
+    "react",
+    "@iconify-json/mdi"
   ]
 }
