@@ -21,7 +21,6 @@
     "@astrojs/tailwind": "^5.1.1",
     "@astrojs/vercel": "^7.8.1",
     "@iconify-json/mdi": "^1.2.3",
-    "@vercel/speed-insights": "^1.0.12",
     "astro": "^4.15.12",
     "astro-icon": "^1.1.1",
     "astro-seo-schema": "^4.0.2",
