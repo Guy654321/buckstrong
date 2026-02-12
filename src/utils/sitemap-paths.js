@@ -34,7 +34,10 @@ export function buildLocationServicePaths(locations, services) {
   );
 
   return validLocations.flatMap((location) =>
-    validServices.map((service) => `/${location.slug.trim()}-oh/${service.slug.trim()}`),
+    validServices.map((service) => {
+      const citySlug = location.slug.trim().replace(/^cincinnati-/, '');
+      return `/${citySlug}-oh/${service.slug.trim()}`;
+    }),
   );
 }
 

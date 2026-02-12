@@ -5,23 +5,26 @@ import OpenerRepairPage from '../../components/service-pages/OpenerRepairPage.as
 import CommercialJobsPage from '../../components/service-pages/CommercialJobsPage.astro';
 import type { Location } from '../../lib/locations';
 import { getLocations } from '../../lib/locations';
+import { buildLocationCitySlug } from '../../lib/location-routing';
 
-const SERVICE_COMPONENTS = {
-  'garage-door-repair': GarageDoorRepairPage,
-  'garage-door-installation': GarageDoorInstallationPage,
-  'opener-repair': OpenerRepairPage,
-  'commercial-jobs': CommercialJobsPage,
-} as const;
-
-type SupportedServiceSlug = keyof typeof SERVICE_COMPONENTS;
+type SupportedServiceSlug =
+  | 'garage-door-repair'
+  | 'garage-door-installation'
+  | 'opener-repair'
+  | 'commercial-jobs';
 
 export async function getStaticPaths() {
   const locations = await getLocations();
-  const serviceSlugs = Object.keys(SERVICE_COMPONENTS) as SupportedServiceSlug[];
+  const serviceSlugs: SupportedServiceSlug[] = [
+    'garage-door-repair',
+    'garage-door-installation',
+    'opener-repair',
+    'commercial-jobs',
+  ];
 
   return locations.flatMap((location) =>
     serviceSlugs.map((service) => ({
-      params: { city: location.slug, service },
+      params: { city: buildLocationCitySlug(location.slug), service },
       props: { location, service },
     })),
   );
@@ -30,7 +33,14 @@ export async function getStaticPaths() {
 export const prerender = true;
 
 const { location, service } = Astro.props as { location: Location; service: SupportedServiceSlug };
-const ServicePage = SERVICE_COMPONENTS[service];
+const ServicePage =
+  service === 'garage-door-repair'
+    ? GarageDoorRepairPage
+    : service === 'garage-door-installation'
+    ? GarageDoorInstallationPage
+    : service === 'opener-repair'
+    ? OpenerRepairPage
+    : CommercialJobsPage;
 ---
 
 <ServicePage location={location} />

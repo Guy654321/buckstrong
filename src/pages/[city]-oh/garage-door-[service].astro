@@ -10,7 +10,11 @@ import { BUSINESS_INFO } from '../../data/business';
 import { REPAIR_SERVICE_PAGES } from '../../data/repair-service-pages';
 import { REPAIRS } from '../../data/repairs';
 import { getLocations, type Location } from '../../lib/locations';
-import { buildLocalizedServicePath, getLocationServiceCityName } from '../../lib/location-routing';
+import {
+  buildLocalizedServicePath,
+  getLocationServiceCityName,
+  buildLocationCitySlug,
+} from '../../lib/location-routing';
 import springReplacementImage from '../../assets/images/repairs/spring-replacement.jpg';
 import openerRepairImage from '../../assets/images/repairs/opener-repair.jpg';
 import cableRepairImage from '../../assets/images/repairs/cable-repair.jpg';
@@ -47,7 +51,7 @@ export async function getStaticPaths() {
 
   return locations.flatMap((location) =>
     REPAIR_SERVICE_PAGES.map((service) => ({
-      params: { city: location.slug, service: service.slug },
+      params: { city: buildLocationCitySlug(location.slug), service: service.slug },
       props: { location, service },
     })),
   );

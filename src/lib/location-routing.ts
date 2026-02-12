@@ -6,7 +6,12 @@ function normalizeSlug(value: string | undefined | null): string {
 
 export function buildLocationCitySegment(locationSlug: string | undefined | null): string {
   const normalized = normalizeSlug(locationSlug);
-  return normalized ? `${normalized}-oh` : '';
+  const citySlug = normalized.replace(/^cincinnati-/, '');
+  return citySlug ? `${citySlug}-oh` : '';
+}
+
+export function buildLocationCitySlug(locationSlug: string | undefined | null): string {
+  return normalizeSlug(locationSlug).replace(/^cincinnati-/, '');
 }
 
 export function buildLocalizedServicePath(
@@ -30,4 +35,3 @@ export function getLocationServiceCityName(location?: Location): string | undefi
 
   return location.isHub ? location.address?.addressLocality?.trim() || location.name : location.name;
 }
-
