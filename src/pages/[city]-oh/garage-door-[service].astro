@@ -1,0 +1,169 @@
+---
+import { Schema } from 'astro-seo-schema';
+import type { ImageMetadata } from 'astro';
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { BUSINESS_INFO } from '../../data/business';
+import { REPAIR_SERVICE_PAGES } from '../../data/repair-service-pages';
+import { REPAIRS } from '../../data/repairs';
+import { getLocations, type Location } from '../../lib/locations';
+import { buildLocalizedServicePath, getLocationServiceCityName } from '../../lib/location-routing';
+import springReplacementImage from '../../assets/images/repairs/spring-replacement.jpg';
+import openerRepairImage from '../../assets/images/repairs/opener-repair.jpg';
+import cableRepairImage from '../../assets/images/repairs/cable-repair.jpg';
+import trackAlignmentImage from '../../assets/images/repairs/track-alignment.jpg';
+import panelReplacementImage from '../../assets/images/repairs/panel-replacement.jpg';
+import rollersHingesImage from '../../assets/images/repairs/rollers-hinges.jpg';
+import sensorAlignmentImage from '../../assets/images/repairs/sensor-alignment.jpg';
+import weatherstrippingImage from '../../assets/images/repairs/weatherstripping.jpg';
+import maintenanceImage from '../../assets/images/repairs/maintenance.jpg';
+import balanceAdjustmentImage from '../../assets/images/repairs/balance-adjustment.jpg';
+
+const repairHeroBySlug: Record<string, { image: ImageMetadata; alt: string }> = {
+  'spring-replacement': { image: springReplacementImage, alt: 'Technician replacing a broken garage door spring' },
+  'opener-repair': { image: openerRepairImage, alt: 'Technician diagnosing a residential garage door opener system' },
+  'cable-repair': { image: cableRepairImage, alt: 'Garage door cable repair and drum alignment service in progress' },
+  'track-alignment': { image: trackAlignmentImage, alt: 'Technician aligning a garage door track for smooth travel' },
+  'panel-replacement': { image: panelReplacementImage, alt: 'Replacement garage door panel installation on a sectional door' },
+  'rollers-hinges': { image: rollersHingesImage, alt: 'New garage door rollers and hinges installed for quieter operation' },
+  'sensor-alignment': { image: sensorAlignmentImage, alt: 'Garage door safety sensors being aligned and tested' },
+  weatherstripping: { image: weatherstrippingImage, alt: 'New bottom seal and weatherstripping installed on a garage door' },
+  maintenance: { image: maintenanceImage, alt: 'Routine garage door maintenance with lubrication and safety checks' },
+  'balance-adjustment': { image: balanceAdjustmentImage, alt: 'Technician balancing a garage door spring system for safe movement' },
+};
+
+const localizeText = (value: string, city: string) =>
+  value
+    .replace(/Cincinnati,\s*OH/gi, `${city}, OH`)
+    .replace(/Cincinnati\s+OH/gi, `${city} OH`)
+    .replace(/Cincinnati/gi, city)
+    .replace(/the metro/gi, `${city} area`);
+
+export async function getStaticPaths() {
+  const locations = await getLocations();
+
+  return locations.flatMap((location) =>
+    REPAIR_SERVICE_PAGES.map((service) => ({
+      params: { city: location.slug, service: service.slug },
+      props: { location, service },
+    })),
+  );
+}
+
+const { location, service } = Astro.props as { location: Location; service: (typeof REPAIR_SERVICE_PAGES)[number] };
+const cityName = getLocationServiceCityName(location) ?? location.name;
+const cityState = `${cityName}, ${location.state}`;
+const canonicalPath = buildLocalizedServicePath(location.slug, `garage-door-${service.slug}`);
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Locations', href: '/locations' },
+  { label: `${location.name}, ${location.state}`, href: `/locations/${location.slug}` },
+  { label: service.serviceName },
+];
+
+const relatedRepairs = REPAIRS.filter((repair) => service.relatedSlugs.includes(repair.slug)).map((repair) => ({
+  ...repair,
+  href: buildLocalizedServicePath(location.slug, `garage-door-${repair.slug}`),
+}));
+
+const heroImage = repairHeroBySlug[service.slug] ?? {
+  image: maintenanceImage,
+  alt: `Buck Strong technician performing ${service.serviceName.toLowerCase()} in ${cityState}`,
+};
+
+const pageTitle = localizeText(service.metaTitle, cityName);
+const pageDescription = localizeText(service.metaDescription, cityName);
+---
+
+<Base
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonicalPath}
+  callNowPhoneNumber={location.phone?.trim() || BUSINESS_INFO.telephone}
+>
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: `${service.serviceName} in ${cityState}`,
+      description: pageDescription,
+      serviceType: service.serviceName,
+      areaServed: [{ '@type': 'City', name: cityName }],
+      provider: {
+        '@type': 'LocalBusiness',
+        name: BUSINESS_INFO.name,
+        legalName: BUSINESS_INFO.legalName,
+        telephone: location.phone?.trim() || BUSINESS_INFO.telephone,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: cityName,
+          addressRegion: location.state,
+          addressCountry: 'US',
+        },
+      },
+    }}
+  />
+
+  <section class="py-16 bg-muted">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid items-center gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-bold text-ink mb-6">{service.serviceName} in {cityState}</h1>
+        <p class="text-lg leading-relaxed text-ink/80 mb-4">{localizeText(service.intro, cityName)}</p>
+      </div>
+      <div class="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 bg-white/50">
+        <Picture src={heroImage.image} alt={heroImage.alt} widths={[480, 768, 1024]} sizes="(min-width: 1024px) 40vw, 100vw" quality={82} loading="eager" fetchpriority="high" class="h-full w-full object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Signs You Need This Service</h2>
+      <ul class="list-disc list-inside space-y-3 text-lg text-ink/80 leading-relaxed">
+        {service.signs.map((sign) => <li>{localizeText(sign, cityName)}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-14 bg-muted">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Our Assessment and Process</h2>
+      <ol class="list-decimal list-inside space-y-3 text-lg text-ink/80 leading-relaxed">
+        {service.processSteps.map((step) => <li>{localizeText(step, cityName)}</li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Available Options</h2>
+      <ul class="list-disc list-inside space-y-3 text-lg text-ink/80 leading-relaxed mb-5">
+        {service.options.map((option) => <li>{localizeText(option, cityName)}</li>)}
+      </ul>
+      <p class="text-lg text-ink/80 leading-relaxed mb-5">{localizeText(service.optionsSummary, cityName)}</p>
+      <p class="text-lg text-ink/80 leading-relaxed">{localizeText(service.areaSummary, cityName)}</p>
+    </div>
+  </section>
+
+  <section class="py-14 bg-muted">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Related Garage Door Services</h2>
+      <ul class="list-disc list-inside space-y-2 text-lg">
+        {relatedRepairs.map((repair) => (
+          <li>
+            <a class="text-primary underline" href={repair.href}>{repair.title}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Footer />
+</Base>

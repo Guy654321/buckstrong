@@ -21,18 +21,20 @@ function mapSlugEntries(entries, formatter) {
  * @param {Array<{ slug?: string | null | undefined }>} services
  * @returns {string[]}
  */
-export function buildHubServicePaths(hubs, services) {
-  if (!Array.isArray(hubs) || !Array.isArray(services)) {
+export function buildLocationServicePaths(locations, services) {
+  if (!Array.isArray(locations) || !Array.isArray(services)) {
     return [];
   }
 
-  const validHubs = hubs.filter((hub) => typeof hub?.slug === 'string' && hub.slug.trim().length > 0);
+  const validLocations = locations.filter(
+    (location) => typeof location?.slug === 'string' && location.slug.trim().length > 0,
+  );
   const validServices = services.filter(
     (service) => typeof service?.slug === 'string' && service.slug.trim().length > 0,
   );
 
-  return validHubs.flatMap((hub) =>
-    validServices.map((service) => `/locations/${hub.slug.trim()}/services/${service.slug.trim()}`),
+  return validLocations.flatMap((location) =>
+    validServices.map((service) => `/${location.slug.trim()}-oh/${service.slug.trim()}`),
   );
 }
 
@@ -67,15 +69,14 @@ export function buildSitemapPathCandidates({
   const locationPaths = mapSlugEntries(locations, (slug) => `/locations/${slug}`);
   const blogPaths = mapSlugEntries(blogPosts, (slug) => `/blog/${slug}`);
 
-  const hubEntries = Array.isArray(hubs) && hubs?.length ? hubs : locations.filter((loc) => loc?.isHub);
-  const hubServicePaths = buildHubServicePaths(hubEntries, services);
+  const locationServicePaths = buildLocationServicePaths(locations, services);
 
   return [
     ...safeStaticRoutes,
     ...servicePaths,
     ...dynamicServicePaths,
     ...locationPaths,
-    ...hubServicePaths,
+    ...locationServicePaths,
     ...blogPaths,
   ];
 }

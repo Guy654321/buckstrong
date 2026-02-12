@@ -1,7 +1,6 @@
 ---
-import CommercialJobsPage from '../../../../components/service-pages/CommercialJobsPage.astro';
-import type { Location } from '../../../../lib/locations';
 import { getLocations } from '../../../../lib/locations';
+import { buildLocalizedServicePath } from '../../../../lib/location-routing';
 
 export async function getStaticPaths() {
   const locations = await getLocations();
@@ -13,7 +12,8 @@ export async function getStaticPaths() {
 
 export const prerender = true;
 
-const { location } = Astro.props as { location: Location };
----
+const { slug } = Astro.params;
+const redirectPath = buildLocalizedServicePath(slug, 'commercial-jobs');
 
-<CommercialJobsPage location={location} />
+return Astro.redirect(redirectPath, 301);
+---
