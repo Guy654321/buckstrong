@@ -138,8 +138,6 @@ const ogImageUrl = buildAbsoluteUrl(ogImage, siteOrigin);
 const imageAltText = `${fullTitle} - Professional garage door services`;
 const businessAddress = BUSINESS_INFO.address;
 const isHomepage = Astro.url.pathname === '/';
-const faviconVersion = import.meta.env.PUBLIC_FAVICON_VERSION ?? '3';
-const faviconHref = `/favicon.ico?v=${faviconVersion}`;
 const speedInsightsBasePath = import.meta.env.PUBLIC_VERCEL_OBSERVABILITY_BASEPATH;
 const speedInsightsScriptSrc = speedInsightsBasePath
   ? `${speedInsightsBasePath}/speed-insights/script.js`
@@ -225,8 +223,10 @@ const localBusinessSchema = JSON.stringify({
     <meta name="format-detection" content="telephone=yes" />
     <meta name="theme-color" content="#334155" />
     
-    <link rel="icon" type="image/x-icon" href={faviconHref} />
-    <link rel="shortcut icon" href={faviconHref} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
