@@ -1,0 +1,21 @@
+{
+  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "entry": [
+    "astro.config.mjs",
+    "src/pages/**/*.astro",
+    "src/layouts/**/*.astro",
+    "src/content/config.ts",
+    "scripts/**/*.js",
+    "scripts/**/*.mjs"
+  ],
+  "project": [
+    "src/**/*.{astro,js,ts,mjs,md,mdx}",
+    "scripts/**/*.{js,mjs,ts}",
+    "astro.config.mjs",
+    "tailwind.config.cjs",
+    "tsconfig.json"
+  ],
+  "ignoreDependencies": [
+    "react"
+  ]
+}
