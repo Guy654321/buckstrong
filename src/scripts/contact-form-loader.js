@@ -1,4 +1,4 @@
-const FORM_SELECTOR = '#contact-form';
+const FORM_SELECTOR = 'form[data-contact-form]';
 const MODULE_DATASET_KEY = 'contactFormModule';
 const TURNSTILE_DATASET_KEY = 'turnstileSrc';
 const TURNSTILE_SCRIPT_ATTRIBUTE = 'data-turnstile-script';
@@ -6,30 +6,38 @@ const DECOY_COMPANY_SELECTOR = 'input[data-decoy-company]';
 const FORM_LOADED_AT_SELECTOR = 'input[data-form-loaded-at]';
 const FORM_READY_DELAY_MS = 750;
 
-const populateTrapFields = () => {
-  const form = document.querySelector(FORM_SELECTOR);
+const getForms = () =>
+  Array.from(document.querySelectorAll(FORM_SELECTOR)).filter(
+    (form) => form instanceof HTMLFormElement
+  );
 
-  if (!(form instanceof HTMLFormElement)) {
+const populateTrapFields = () => {
+  const forms = getForms();
+
+  if (forms.length === 0) {
     window.setTimeout(populateTrapFields, FORM_READY_DELAY_MS);
     return;
   }
 
   const timestamp = new Date().toISOString();
-  form.dataset.formLoadedAt = timestamp;
 
-  const honeypotInput = form.querySelector(DECOY_COMPANY_SELECTOR);
+  forms.forEach((form) => {
+    form.dataset.formLoadedAt = timestamp;
 
-  if (honeypotInput instanceof HTMLInputElement) {
-    honeypotInput.value = '';
-    honeypotInput.dataset.populated = 'true';
-  }
+    const honeypotInput = form.querySelector(DECOY_COMPANY_SELECTOR);
 
-  const timestampInput = form.querySelector(FORM_LOADED_AT_SELECTOR);
+    if (honeypotInput instanceof HTMLInputElement) {
+      honeypotInput.value = '';
+      honeypotInput.dataset.populated = 'true';
+    }
 
-  if (timestampInput instanceof HTMLInputElement) {
-    timestampInput.value = timestamp;
-    timestampInput.dataset.populated = 'true';
-  }
+    const timestampInput = form.querySelector(FORM_LOADED_AT_SELECTOR);
+
+    if (timestampInput instanceof HTMLInputElement) {
+      timestampInput.value = timestamp;
+      timestampInput.dataset.populated = 'true';
+    }
+  });
 };
 
 const scheduleTrapFields = () => {
@@ -45,16 +53,9 @@ const scheduleTrapFields = () => {
 };
 
 const getModuleUrl = () => {
-  const script = document.querySelector(
-    `script[data-contact-form-module]`
-  );
-  if (script instanceof HTMLScriptElement) {
-    const url = script.dataset?.[MODULE_DATASET_KEY];
-    if (url) return url;
-  }
+  const forms = getForms();
 
-  const form = document.querySelector(FORM_SELECTOR);
-  if (form instanceof HTMLElement) {
+  for (const form of forms) {
     const url = form.dataset?.[MODULE_DATASET_KEY];
     if (url) return url;
   }
@@ -70,11 +71,16 @@ let loaded = false;
 let turnstileScriptLoaded = false;
 
 const getTurnstileScriptSrc = () => {
-  const form = document.querySelector(FORM_SELECTOR);
-  if (!(form instanceof HTMLElement)) return '';
+  const forms = getForms();
 
-  const src = form.dataset?.[TURNSTILE_DATASET_KEY];
-  return typeof src === 'string' ? src.trim() : '';
+  for (const form of forms) {
+    const src = form.dataset?.[TURNSTILE_DATASET_KEY];
+    if (typeof src === 'string' && src.trim()) {
+      return src.trim();
+    }
+  }
+
+  return '';
 };
 
 const loadTurnstileScript = () => {
@@ -117,33 +123,41 @@ const loadInteractivity = () => {
 };
 
 const attach = () => {
-  const form = document.querySelector(FORM_SELECTOR);
-  if (!(form instanceof HTMLFormElement)) return;
+  const forms = getForms();
+  if (forms.length === 0) return;
 
-  ['focusin', 'input', 'submit'].forEach((eventName) => {
-    form.addEventListener(eventName, loadInteractivity, { once: true });
-  });
+  forms.forEach((form) => {
+    if (form.dataset.contactFormLoaderAttached === 'true') {
+      return;
+    }
 
-  ['pointerenter', 'touchstart'].forEach((eventName) => {
-    form.addEventListener(eventName, loadInteractivity, {
-      once: true,
-      passive: true
+    form.dataset.contactFormLoaderAttached = 'true';
+
+    ['focusin', 'input', 'submit'].forEach((eventName) => {
+      form.addEventListener(eventName, loadInteractivity, { once: true });
     });
+
+    ['pointerenter', 'touchstart'].forEach((eventName) => {
+      form.addEventListener(eventName, loadInteractivity, {
+        once: true,
+        passive: true
+      });
+    });
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            observer.disconnect();
+            loadInteractivity();
+          }
+        },
+        { rootMargin: '200px' }
+      );
+
+      observer.observe(form);
+    }
   });
-
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          observer.disconnect();
-          loadInteractivity();
-        }
-      },
-      { rootMargin: '200px' }
-    );
-
-    observer.observe(form);
-  }
 };
 
 const scheduleAttach = () => {

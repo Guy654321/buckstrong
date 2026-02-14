@@ -147,17 +147,13 @@ const getTurnstileSecretKey = (): string => {
 };
 
 const getTurnstileSiteKey = (): string => {
-  const primaryValue = process.env.turnstile_site_key;
-  if (typeof primaryValue === 'string' && primaryValue.trim().length > 0) {
-    return primaryValue.trim();
+  const value = process.env.turnstile_site_key;
+  if (typeof value !== 'string') {
+    return '';
   }
 
-  const fallbackValue = process.env.your_secret_key_here;
-  if (typeof fallbackValue === 'string' && fallbackValue.trim().length > 0) {
-    return fallbackValue.trim();
-  }
-
-  return '';
+  const trimmed = value.trim();
+  return trimmed.length > 0 ? trimmed : '';
 };
 
 const isTurnstileConfigured = (): boolean => {
