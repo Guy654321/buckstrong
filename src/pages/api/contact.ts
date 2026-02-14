@@ -137,7 +137,7 @@ const TURNSTILE_EXPECTED_ACTION = 'contact';
 const MAX_TURNSTILE_TOKEN_AGE_MS = 2 * 60 * 1000;
 
 const getTurnstileSecretKey = (): string => {
-  const value = process.env.TURNSTILE_SECRET_KEY;
+  const value = process.env.turnstile_secret_key;
   if (typeof value !== 'string') {
     return '';
   }
@@ -146,18 +146,22 @@ const getTurnstileSecretKey = (): string => {
   return trimmed.length > 0 ? trimmed : '';
 };
 
+const getTurnstileSiteKey = (): string => {
+  const primaryValue = process.env.turnstile_site_key;
+  if (typeof primaryValue === 'string' && primaryValue.trim().length > 0) {
+    return primaryValue.trim();
+  }
+
+  const fallbackValue = process.env.your_secret_key_here;
+  if (typeof fallbackValue === 'string' && fallbackValue.trim().length > 0) {
+    return fallbackValue.trim();
+  }
+
+  return '';
+};
+
 const isTurnstileConfigured = (): boolean => {
-  const hasPublicSiteKey = (() => {
-    const value = process.env.PUBLIC_TURNSTILE_SITE_KEY;
-
-    if (typeof value === 'string') {
-      return value.trim().length > 0;
-    }
-
-    return Boolean(value);
-  })();
-
-  return hasPublicSiteKey && getTurnstileSecretKey().length > 0;
+  return getTurnstileSiteKey().length > 0 && getTurnstileSecretKey().length > 0;
 };
 
 const TURNSTILE_SECRET_KEY = getTurnstileSecretKey();

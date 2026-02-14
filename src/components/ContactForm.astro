@@ -29,147 +29,15 @@ const {
 
 const getFieldId = (name: string) => `${fieldIdPrefix}-${name}`;
 
-const rawTurnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
-
-const getEnvString = (key: string): string | undefined => {
-  const env = import.meta.env;
-  const value = (env as Record<string, string | boolean | undefined>)[key];
-  return typeof value === 'string' ? value : undefined;
-};
-
-const getHostnameCandidates = () => {
-  const hostnames = new Set<string>();
-
-  const addHostname = (value?: string | null) => {
-    if (typeof value !== 'string') {
-      return;
-    }
-
-    const trimmed = value.trim();
-    if (!trimmed) {
-      return;
-    }
-
-    hostnames.add(trimmed.toLowerCase());
-
-    if (trimmed.startsWith('www.')) {
-      hostnames.add(trimmed.slice(4).toLowerCase());
-    } else {
-      hostnames.add(`www.${trimmed}`.toLowerCase());
-    }
-  };
-
-  try {
-    if (Astro.url?.hostname) {
-      addHostname(Astro.url.hostname);
-    }
-  } catch {}
-
-  try {
-    if (Astro.site) {
-      addHostname(new URL(Astro.site).hostname);
-    }
-  } catch {}
-
-  addHostname(getEnvString('PUBLIC_SITE_HOSTNAME') ?? null);
-
-  return Array.from(hostnames).filter(Boolean);
-};
-
-const getEnvironmentKeyCandidates = () => {
-  const envKeys = new Set<string>();
-  const append = (value?: string | null) => {
-    if (typeof value === 'string' && value.trim()) {
-      envKeys.add(value.trim().toLowerCase());
-    }
-  };
-
-  append(getEnvString('PUBLIC_DEPLOYMENT_ENV') ?? null);
-  append(getEnvString('PUBLIC_RUNTIME_ENV') ?? null);
-  append(import.meta.env.MODE ?? null);
-  append(import.meta.env.PROD ? 'production' : 'development');
-  append('preview');
-  append('prod');
-  append('dev');
-  append('default');
-
-  return Array.from(envKeys).filter(Boolean);
-};
-
-const selectSiteKeyFromMapping = (candidate: unknown): string => {
-  if (!candidate || typeof candidate !== 'object') {
-    return '';
-  }
-
-  const normalizedEntries = Object.entries(candidate as Record<string, unknown>)
-    .filter(([, value]) => typeof value === 'string' && value.trim().length > 0)
-    .reduce<Record<string, string>>((acc, [key, value]) => {
-      acc[key.trim().toLowerCase()] = (value as string).trim();
-      return acc;
-    }, {});
-
-  if (Object.keys(normalizedEntries).length === 0) {
-    return '';
-  }
-
-  const candidateKeys = [...getHostnameCandidates(), ...getEnvironmentKeyCandidates()];
-  for (const key of candidateKeys) {
-    const match = normalizedEntries[key];
-    if (match) {
-      return match;
-    }
-  }
-
-  return '';
-};
-
-const parseSiteKeyString = (value: string): string => {
-  const trimmed = value.trim();
-  if (!trimmed) {
-    return '';
-  }
-
-  try {
-    const parsed = JSON.parse(trimmed);
-    if (
-      typeof parsed === 'string' ||
-      typeof parsed === 'number' ||
-      typeof parsed === 'boolean' ||
-      typeof parsed === 'bigint'
-    ) {
-      return String(parsed);
-    }
-
-    const extracted = selectSiteKeyFromMapping(parsed);
-    if (extracted) {
-      return extracted;
-    }
-  } catch {
-    // Not JSON, treat as literal string
-  }
-
-  return trimmed;
-};
-
 const turnstileSiteKey = (() => {
-  const type = typeof rawTurnstileSiteKey;
-  if (type === 'string') {
-    return parseSiteKeyString(rawTurnstileSiteKey);
+  const fromPrimary = process.env.turnstile_site_key;
+  if (typeof fromPrimary === 'string' && fromPrimary.trim().length > 0) {
+    return fromPrimary.trim();
   }
 
-  if (type === 'number' || type === 'boolean' || type === 'bigint') {
-    return String(rawTurnstileSiteKey);
-  }
-
-  const extracted = selectSiteKeyFromMapping(rawTurnstileSiteKey);
-  if (extracted) {
-    return extracted;
-  }
-
-  if (rawTurnstileSiteKey) {
-    console.warn(
-      'Invalid Turnstile site key configuration detected. Widget will not render.'
-    );
+  const fromFallback = process.env.your_secret_key_here;
+  if (typeof fromFallback === 'string' && fromFallback.trim().length > 0) {
+    return fromFallback.trim();
   }
 
   return '';
