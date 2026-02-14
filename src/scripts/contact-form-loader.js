@@ -161,11 +161,16 @@ const attach = () => {
 };
 
 const scheduleAttach = () => {
+  attach();
+
   if ('requestIdleCallback' in window) {
     requestIdleCallback(attach, { timeout: 1500 });
   } else {
     window.setTimeout(attach, 120);
   }
+
+  loadTurnstileScript();
+  loadModule();
 };
 
 if (document.readyState === 'loading') {
