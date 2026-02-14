@@ -233,4 +233,8 @@ const turnstileScriptSrc = 'https://challenges.cloudflare.com/turnstile/v0/api.j
   />
 )}
 
+{isTurnstileEnabled && (
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+)}
+
 <script type="module" is:inline set:html={contactFormLoaderInline}></script>
