@@ -6,7 +6,7 @@ const LOGO_PATH = '/images/ohio%20logo.png';
 export const BUSINESS_INFO = {
   name: 'Buck Strong Garage Doors',
   legalName: 'Buck Strong Garage Doors LLC',
-  telephone: '567 677 7843',
+  telephone: '513 677 7843',
   email: 'hello@buckstronggaragedoors.com',
   url: buildAbsoluteUrl('/locations/cincinnati', SITE_ORIGIN),
   logo: buildAbsoluteUrl(LOGO_PATH, SITE_ORIGIN),
