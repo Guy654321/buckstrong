@@ -29,10 +29,23 @@ const {
 
 const getFieldId = (name: string) => `${fieldIdPrefix}-${name}`;
 
-const turnstileSiteKey =
-  typeof process.env.turnstile_site_key === 'string'
-    ? process.env.turnstile_site_key.trim()
-    : '';
+const readEnvValue = (...keys: string[]): string => {
+  for (const key of keys) {
+    const value = process.env[key];
+
+    if (typeof value === 'string' && value.trim().length > 0) {
+      return value.trim();
+    }
+  }
+
+  return '';
+};
+
+const turnstileSiteKey = readEnvValue(
+  'PUBLIC_TURNSTILE_SITE_KEY',
+  'TURNSTILE_SITE_KEY',
+  'turnstile_site_key'
+);
 
 const isTurnstileEnabled = Boolean(turnstileSiteKey);
 const turnstileScriptSrc = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
@@ -231,10 +244,6 @@ const turnstileScriptSrc = 'https://challenges.cloudflare.com/turnstile/v0/api.j
       }
     }}
   />
-)}
-
-{isTurnstileEnabled && (
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 )}
 
 <script type="module" is:inline set:html={contactFormLoaderInline}></script>

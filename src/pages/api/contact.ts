@@ -136,24 +136,28 @@ const isAllowedTurnstileHostname = (hostname: string): boolean => {
 const TURNSTILE_EXPECTED_ACTION = 'contact';
 const MAX_TURNSTILE_TOKEN_AGE_MS = 2 * 60 * 1000;
 
-const getTurnstileSecretKey = (): string => {
-  const value = process.env.turnstile_secret_key;
-  if (typeof value !== 'string') {
-    return '';
+const readEnvValue = (...keys: string[]): string => {
+  for (const key of keys) {
+    const value = process.env[key];
+
+    if (typeof value === 'string') {
+      const trimmed = value.trim();
+
+      if (trimmed.length > 0) {
+        return trimmed;
+      }
+    }
   }
 
-  const trimmed = value.trim();
-  return trimmed.length > 0 ? trimmed : '';
+  return '';
+};
+
+const getTurnstileSecretKey = (): string => {
+  return readEnvValue('TURNSTILE_SECRET_KEY', 'turnstile_secret_key');
 };
 
 const getTurnstileSiteKey = (): string => {
-  const value = process.env.turnstile_site_key;
-  if (typeof value !== 'string') {
-    return '';
-  }
-
-  const trimmed = value.trim();
-  return trimmed.length > 0 ? trimmed : '';
+  return readEnvValue('PUBLIC_TURNSTILE_SITE_KEY', 'TURNSTILE_SITE_KEY', 'turnstile_site_key');
 };
 
 const isTurnstileConfigured = (): boolean => {
