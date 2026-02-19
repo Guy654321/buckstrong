@@ -1,4 +1,4 @@
-const FALLBACK_ORIGIN = import.meta.env?.PUBLIC_SITE_URL?.trim() || 'https://buckstronggaragedoors.com';
+const FALLBACK_ORIGIN = import.meta.env?.PUBLIC_SITE_URL?.trim() || 'https://www.buckstronggaragedoors.com';
 
 function normalizeSiteOrigin(candidate?: string | null, fallback = FALLBACK_ORIGIN): string {
   if (!candidate) {
