@@ -99,6 +99,116 @@
   ],
   "redirects": [
     {
+      "source": "/garage-door-balance-adjustment-cincinnati-oh",
+      "destination": "/cincinnati-oh/garage-door-balance-adjustment",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-balance-adjustment-cincinnati-oh/",
+      "destination": "/cincinnati-oh/garage-door-balance-adjustment",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-cable-repair-cincinnati-oh",
+      "destination": "/cincinnati-oh/garage-door-cable-repair",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-cable-repair-cincinnati-oh/",
+      "destination": "/cincinnati-oh/garage-door-cable-repair",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-maintenance-cincinnati-oh",
+      "destination": "/cincinnati-oh/garage-door-maintenance",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-maintenance-cincinnati-oh/",
+      "destination": "/cincinnati-oh/garage-door-maintenance",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-opener-repair-cincinnati-oh",
+      "destination": "/cincinnati-oh/garage-door-opener-repair",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-opener-repair-cincinnati-oh/",
+      "destination": "/cincinnati-oh/garage-door-opener-repair",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-panel-replacement-cincinnati-oh",
+      "destination": "/cincinnati-oh/garage-door-panel-replacement",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-panel-replacement-cincinnati-oh/",
+      "destination": "/cincinnati-oh/garage-door-panel-replacement",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-rollers-hinges-cincinnati-oh",
+      "destination": "/cincinnati-oh/garage-door-rollers-hinges",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-rollers-hinges-cincinnati-oh/",
+      "destination": "/cincinnati-oh/garage-door-rollers-hinges",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-sensor-alignment-cincinnati-oh",
+      "destination": "/cincinnati-oh/garage-door-sensor-alignment",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-sensor-alignment-cincinnati-oh/",
+      "destination": "/cincinnati-oh/garage-door-sensor-alignment",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-spring-replacement-cincinnati-oh",
+      "destination": "/cincinnati-oh/garage-door-spring-replacement",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-spring-replacement-cincinnati-oh/",
+      "destination": "/cincinnati-oh/garage-door-spring-replacement",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-track-alignment-cincinnati-oh",
+      "destination": "/cincinnati-oh/garage-door-track-alignment",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-track-alignment-cincinnati-oh/",
+      "destination": "/cincinnati-oh/garage-door-track-alignment",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-weatherstripping-cincinnati-oh",
+      "destination": "/cincinnati-oh/garage-door-weatherstripping",
+      "permanent": true
+    },
+    {
+      "source": "/garage-door-weatherstripping-cincinnati-oh/",
+      "destination": "/cincinnati-oh/garage-door-weatherstripping",
+      "permanent": true
+    },
+    {
+      "source": "/locations/cincinnati/services/garage-door-installation",
+      "destination": "/cincinnati-oh/garage-door-installation",
+      "permanent": true
+    },
+    {
+      "source": "/locations/cincinnati/services/garage-door-installation/",
+      "destination": "/cincinnati-oh/garage-door-installation",
+      "permanent": true
+    },
+    {
       "source": "/lexington",
       "destination": "/louisville",
       "permanent": true
