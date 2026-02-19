@@ -43,6 +43,7 @@ const HUB_SLUGS = (() => {
 
 export default defineConfig({
   site: siteOrigin,
+  compressHTML: true,
   image: {
     formats: ['avif', 'webp', 'jpeg'],
     quality: {
@@ -151,10 +152,9 @@ export default defineConfig({
   output: 'hybrid',
   adapter: vercel(),
   build: {
-    // Inline all generated CSS to remove render-blocking stylesheets that were
-    // delaying Largest Contentful Paint on first navigation, while keeping
-    // Astro's other build optimizations intact.
-    inlineStylesheets: 'always'
+    // Keep stylesheets external so HTML documents stay leaner for crawlers
+    // and avoid low text-to-HTML ratio warnings on content pages.
+    inlineStylesheets: 'auto'
   },
   vite: {
     build: {

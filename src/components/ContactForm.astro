@@ -2,7 +2,6 @@
 import { Icon } from 'astro-icon/components';
 import { Schema } from 'astro-seo-schema';
 import contactFormModuleUrl from '../scripts/contact-form.js?url';
-import contactFormLoaderInline from '../scripts/contact-form-loader.js?raw';
 import { BUSINESS_INFO } from '../data/business';
 
 export interface Props {
@@ -24,7 +23,7 @@ const {
   subtitle = "Fill out the form below and we'll contact you within a few minutes",
   bgColor = 'white',
   formBgColor = 'white',
-  includeSchema = true
+  includeSchema = false
 } = Astro.props;
 
 const getFieldId = (name: string) => `${fieldIdPrefix}-${name}`;
@@ -245,5 +244,3 @@ const turnstileScriptSrc = 'https://challenges.cloudflare.com/turnstile/v0/api.j
     }}
   />
 )}
-
-<script type="module" is:inline set:html={contactFormLoaderInline}></script>

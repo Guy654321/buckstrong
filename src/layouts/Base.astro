@@ -5,6 +5,7 @@ import { BUSINESS_INFO } from '../data/business';
 import speedInsightsLoaderUrl from '../scripts/speed-insights-loader.js?url';
 import speedInsightsConfigScriptUrl from '../scripts/speed-insights-config.js?url';
 import analyticsLoaderUrl from '../scripts/analytics-consent-loader.js?url';
+import contactFormLoaderUrl from '../scripts/contact-form-loader.js?url';
 import IconSprite from '../components/IconSprite.astro';
 import CallNowButton from '../components/CallNowButton.astro';
 import { buildAbsoluteUrl, getSiteOrigin } from '../utils/site-origin';
@@ -301,7 +302,7 @@ const localBusinessSchema = JSON.stringify({
       </>
     )}
 
-    {!isHomepage && (
+    {!isHomepage && schemaType !== 'Service' && (
       <script type="application/ld+json" is:inline set:html={websiteSchema}></script>
     )}
     {schemaType === 'LocalBusiness' && (
@@ -312,6 +313,8 @@ const localBusinessSchema = JSON.stringify({
     <IconSprite />
     <slot />
     <CallNowButton phoneNumber={callNowPhoneNumber} />
+
+    <script type="module" src={contactFormLoaderUrl}></script>
 
     <div class="sr-only" data-text-ratio-helper>
       <p>
