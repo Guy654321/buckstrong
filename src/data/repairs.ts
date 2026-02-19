@@ -38,7 +38,7 @@ export const REPAIRS = [
     blurb: 'Replace fatigued torsion/extension springs and rebalance the door for safe lifting.',
     image: springReplacementImage,
     alt: 'Professional garage door technician installing new high-tension torsion spring system above residential garage door showing expert spring replacement service with proper safety equipment and tools for Cincinnati, Ohio homeowners',
-    href: '/garage-door-spring-replacement-cincinnati-oh'
+    href: '/cincinnati-oh/garage-door-spring-replacement'
   },
   {
     slug: 'opener-repair',
@@ -70,7 +70,7 @@ export const REPAIRS = [
     blurb: 'Swap damaged sections and restore structure, seal, and curb appeal.',
     image: panelReplacementImage,
     alt: 'Professional garage door technician removing and replacing damaged garage door panel sections, showing expert panel replacement service to restore structural integrity, weather sealing, and enhanced curb appeal for Cincinnati, Ohio residential properties',
-    href: '/garage-door-panel-replacement-cincinnati-oh'
+    href: '/cincinnati-oh/garage-door-panel-replacement'
   },
   {
     slug: 'rollers-hinges',
@@ -94,7 +94,7 @@ export const REPAIRS = [
     blurb: 'Replace bottom seals and perimeter rubber to stop drafts, pests, and water.',
     image: weatherstrippingImage,
     alt: 'Professional garage door technician installing new bottom weather seal and perimeter rubber weatherstripping, showing expert seal replacement service to prevent drafts, water infiltration, pest entry, and improve energy efficiency for Cincinnati, Ohio residential properties',
-    href: '/garage-door-weatherstripping-cincinnati-oh'
+    href: '/cincinnati-oh/garage-door-weatherstripping'
   },
   {
     slug: 'maintenance',
