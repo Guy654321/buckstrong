@@ -151,6 +151,14 @@ const breadcrumbSchema = JSON.stringify({
       image: heroImageAbsoluteUrl,
       telephone: BUSINESS_INFO.telephone,
       email: BUSINESS_INFO.email,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: BUSINESS_INFO.address.streetAddress,
+        addressLocality: BUSINESS_INFO.address.addressLocality,
+        addressRegion: BUSINESS_INFO.address.addressRegion,
+        postalCode: BUSINESS_INFO.address.postalCode,
+        addressCountry: BUSINESS_INFO.address.addressCountry
+      },
       priceRange: '$$ - $$$',
       paymentAccepted: ['Cash', 'Credit Card', 'Check'],
       currenciesAccepted: 'USD',
