@@ -339,6 +339,28 @@ const createHtmlBody = (submission: Submission, textBody: string): string => {
 </html>`;
 };
 
+interface EmailAddress {
+  email: string;
+  name?: string;
+}
+
+const parseAddress = (value: string): EmailAddress => {
+  const trimmed = value.trim();
+  const withNameMatch = trimmed.match(/^(.*?)<([^<>\s]+@[^<>\s]+)>$/);
+
+  if (withNameMatch) {
+    const name = withNameMatch[1]?.trim().replace(/^"|"$/g, '');
+    const email = withNameMatch[2]?.trim();
+
+    return {
+      email,
+      ...(name ? { name } : {})
+    };
+  }
+
+  return { email: trimmed };
+};
+
 const deliverWithResend = async (submission: Submission, textBody: string, htmlBody: string): Promise<void> => {
   const apiKey = process.env.RESEND_API_KEY;
   const recipients = process.env.CONTACT_FORM_RECIPIENT ?? BUSINESS_EMAIL;
@@ -383,6 +405,54 @@ const deliverWithResend = async (submission: Submission, textBody: string, htmlB
   if (!response.ok) {
     const errorBody = await response.text();
     throw new Error(`Resend request failed: ${response.status} ${response.statusText} - ${errorBody}`);
+  }
+};
+
+const deliverWithBrevo = async (submission: Submission, textBody: string, htmlBody: string): Promise<void> => {
+  const apiKey = readEnvValue('BREVO_API_KEY', 'SENDINBLUE_API_KEY');
+  const recipients = process.env.CONTACT_FORM_RECIPIENT ?? BUSINESS_EMAIL;
+  const fromAddress = process.env.CONTACT_FORM_FROM ?? 'Buck Strong Garage Doors <hello@buckstronggaragedoors.com>';
+
+  if (!apiKey || !recipients) {
+    throw new Error('Brevo integration is not configured.');
+  }
+
+  const to = recipients
+    .split(',')
+    .map((recipient) => recipient.trim())
+    .filter(Boolean)
+    .map((recipient) => parseAddress(recipient));
+
+  if (to.length === 0) {
+    throw new Error('At least one recipient email must be provided in CONTACT_FORM_RECIPIENT.');
+  }
+
+  const payload: Record<string, unknown> = {
+    sender: parseAddress(fromAddress),
+    to,
+    subject: submission.issueLabel
+      ? `New service request: ${submission.issueLabel} from ${submission.name}`
+      : `New contact form submission from ${submission.name}`,
+    textContent: textBody,
+    htmlContent: htmlBody
+  };
+
+  if (submission.email) {
+    payload.replyTo = { email: submission.email };
+  }
+
+  const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+    method: 'POST',
+    headers: {
+      'api-key': apiKey,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Brevo request failed: ${response.status} ${response.statusText} - ${errorBody}`);
   }
 };
 
@@ -685,13 +755,17 @@ export const POST: APIRoute = async ({ request }) => {
       deliveryTargets.push(() => deliverWithResend(submission, textBody, htmlBody));
     }
 
+    if (readEnvValue('BREVO_API_KEY', 'SENDINBLUE_API_KEY')) {
+      deliveryTargets.push(() => deliverWithBrevo(submission, textBody, htmlBody));
+    }
+
     if (process.env.CONTACT_FORM_WEBHOOK_URL) {
       deliveryTargets.push(() => deliverToWebhook(submission, textBody, htmlBody));
     }
 
     if (deliveryTargets.length === 0) {
       console.error(
-        'Contact form submission received but no delivery target is configured. Set RESEND_API_KEY/CONTACT_FORM_RECIPIENT or CONTACT_FORM_WEBHOOK_URL.'
+        'Contact form submission received but no delivery target is configured. Set BREVO_API_KEY (or SENDINBLUE_API_KEY), RESEND_API_KEY/CONTACT_FORM_RECIPIENT, or CONTACT_FORM_WEBHOOK_URL.'
       );
 
       return new Response(
