@@ -20,7 +20,7 @@ const STATIC_ROUTES = [
   '/locations',
   '/safety',
   '/services',
-  '/cincinnati-oh/garage-door-repair',
+  '/services/garage-door-repair',
   '/services/garage-door-installation',
   '/services/opener-repair',
   '/services/commercial-jobs'

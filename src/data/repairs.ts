@@ -46,7 +46,7 @@ export const REPAIRS = [
     blurb: 'Fix motors, gear kits, travel limits, remotes, keypads and photo-eyes—most same day.',
     image: openerRepairImage,
     alt: 'Professional garage door opener repair technician diagnosing and fixing motor issues, remote control programming, safety sensor alignment, and mechanical adjustments for reliable garage door operation in Cincinnati, Ohio homes',
-    href: '/cincinnati-oh/garage-door-opener-repair'
+    href: '/garage-door-opener-repair-cincinnati-oh'
   },
   {
     slug: 'cable-repair',
@@ -54,7 +54,7 @@ export const REPAIRS = [
     blurb: 'Replace frayed or off-spool lift cables and reset drums for even, smooth travel.',
     image: cableRepairImage,
     alt: 'Professional garage door technician replacing damaged lift cables showing frayed cable repair work near garage door drum and pulley system with proper safety equipment for reliable door operation in Cincinnati, Ohio homes',
-    href: '/cincinnati-oh/garage-door-cable-repair'
+    href: '/garage-door-cable-repair-cincinnati-oh'
   },
   {
     slug: 'track-alignment',
@@ -62,7 +62,7 @@ export const REPAIRS = [
     blurb: 'Straighten bent rails, realign hardware, and safely reset off-track doors.',
     image: trackAlignmentImage,
     alt: 'Professional garage door technician realigning bent vertical tracks and adjusting hardware with precision tools, showing expert track straightening and off-track door reset service for smooth garage door operation in Cincinnati, Ohio homes',
-    href: '/cincinnati-oh/garage-door-track-alignment'
+    href: '/garage-door-track-alignment-cincinnati-oh'
   },
   {
     slug: 'panel-replacement',
@@ -78,7 +78,7 @@ export const REPAIRS = [
     blurb: 'Upgrade worn hardware to quiet the door and reduce strain on the system.',
     image: rollersHingesImage,
     alt: 'Professional garage door technician installing new nylon rollers and hinges showing expert hardware replacement service with precision tools to reduce noise, improve smooth operation, and extend garage door system lifespan for Cincinnati, Ohio homeowners',
-    href: '/cincinnati-oh/garage-door-rollers-hinges'
+    href: '/garage-door-rollers-hinges-cincinnati-oh'
   },
   {
     slug: 'sensor-alignment',
@@ -86,7 +86,7 @@ export const REPAIRS = [
     blurb: 'Correct misalignment or wiring faults that cause random reversals.',
     image: sensorAlignmentImage,
     alt: 'Professional garage door technician adjusting and aligning photo-eye safety sensors at garage door base, showing expert sensor repair work including wiring inspection, beam alignment, and safety system calibration to prevent random reversals for Cincinnati, Ohio homeowners',
-    href: '/cincinnati-oh/garage-door-sensor-alignment'
+    href: '/garage-door-sensor-alignment-cincinnati-oh'
   },
   {
     slug: 'weatherstripping',
@@ -102,7 +102,7 @@ export const REPAIRS = [
     blurb: 'Full inspection, lubrication, balance and force checks to prevent breakdowns.',
     image: maintenanceImage,
     alt: 'Professional garage door technician performing comprehensive tune-up maintenance service including lubrication, hardware inspection, balance testing, and safety system calibration to prevent breakdowns and extend garage door lifespan for Cincinnati, Ohio homeowners',
-    href: '/cincinnati-oh/garage-door-maintenance'
+    href: '/garage-door-maintenance-cincinnati-oh'
   },
   {
     slug: 'balance-adjustment',
@@ -110,6 +110,6 @@ export const REPAIRS = [
     blurb: 'Set proper spring balance and opener forces for safe, reliable operation.',
     image: balanceAdjustmentImage,
     alt: 'Professional garage door technician performing precise balance and force adjustment testing with specialized equipment, showing expert calibration of spring tension and opener force settings to ensure safe, reliable garage door operation and prevent premature wear for Cincinnati, Ohio homeowners',
-    href: '/cincinnati-oh/garage-door-balance-adjustment'
+    href: '/garage-door-balance-adjustment-cincinnati-oh'
   }
 ] satisfies RepairItem[];
