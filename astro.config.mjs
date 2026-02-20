@@ -24,6 +24,18 @@ function normalizeSiteOrigin(candidate, fallback = DEFAULT_SITE_ORIGIN) {
 }
 
 const siteOrigin = normalizeSiteOrigin(process.env.PUBLIC_SITE_URL, DEFAULT_SITE_ORIGIN);
+const LEGACY_REDIRECT_PATHS = new Set([
+  '/garage-door-balance-adjustment-cincinnati-oh',
+  '/garage-door-cable-repair-cincinnati-oh',
+  '/garage-door-maintenance-cincinnati-oh',
+  '/garage-door-opener-repair-cincinnati-oh',
+  '/garage-door-panel-replacement-cincinnati-oh',
+  '/garage-door-rollers-hinges-cincinnati-oh',
+  '/garage-door-sensor-alignment-cincinnati-oh',
+  '/garage-door-spring-replacement-cincinnati-oh',
+  '/garage-door-track-alignment-cincinnati-oh',
+  '/garage-door-weatherstripping-cincinnati-oh'
+]);
 const LOCATIONS_DIR = path.resolve(process.cwd(), 'src', 'content', 'locations');
 const HUB_SLUGS = (() => {
   try {
@@ -92,6 +104,10 @@ export default defineConfig({
             : rawPathname || '/';
 
         if (excludedPaths.has(normalizedPathname)) {
+          return false;
+        }
+
+        if (LEGACY_REDIRECT_PATHS.has(normalizedPathname)) {
           return false;
         }
 
