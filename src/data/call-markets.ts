@@ -11,7 +11,7 @@ const LAUNCH_CALL_MARKETS: CallMarket[] = [
   {
     id: "cincinnati",
     label: "Cincinnati",
-    phoneDisplay: "513 677 7843",
+    phoneDisplay: "5137788005",
     phoneHref: "",
   },
 ];
