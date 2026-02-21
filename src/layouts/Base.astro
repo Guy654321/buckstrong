@@ -61,34 +61,25 @@ function resolveCanonical(target?: string) {
 }
 
 const canonicalHref = resolveCanonical(canonical);
-const MAX_TITLE_LENGTH = 70;
+const MAX_TITLE_LENGTH = 68;
+const MIN_DESCRIPTION_LENGTH = 140;
+const MAX_DESCRIPTION_LENGTH = 160;
 const BRAND_KEYWORD = 'Buck Strong';
 const BRAND_SHORT = 'Buck Strong Garage Doors';
 const LONG_SUFFIX = ' | Buck Strong Garage Doors';
-const REPAIR_PHRASE = 'Garage Door Repair';
-
-function shortenToCityRepair(baseTitle: string) {
-  const phraseIndex = baseTitle.indexOf(REPAIR_PHRASE);
-
-  if (phraseIndex === -1) {
-    return baseTitle.slice(0, MAX_TITLE_LENGTH).trimEnd();
+function shortenAtWordBoundary(baseTitle: string, maxLength: number) {
+  if (baseTitle.length <= maxLength) {
+    return baseTitle;
   }
 
-  const cityMatch = baseTitle.match(/in\s+(.+)/i);
-  if (cityMatch?.[1]) {
-    const location = cityMatch[1].trim();
-    const localizedCandidate = `${REPAIR_PHRASE} in ${location}`;
+  const clipped = baseTitle.slice(0, maxLength + 1);
+  const boundary = clipped.lastIndexOf(' ');
 
-    if (localizedCandidate.length <= MAX_TITLE_LENGTH) {
-      return localizedCandidate;
-    }
-
-    const availableLength = Math.max(0, MAX_TITLE_LENGTH - (REPAIR_PHRASE.length + 4));
-    return `${REPAIR_PHRASE} in ${location.slice(0, availableLength).trimEnd()}`;
+  if (boundary > 0) {
+    return clipped.slice(0, boundary).trimEnd();
   }
 
-  const endIndex = phraseIndex + REPAIR_PHRASE.length;
-  return baseTitle.slice(0, endIndex).trimEnd();
+  return baseTitle.slice(0, maxLength).trimEnd();
 }
 
 function enforceMaxLengthWithBrand(title: string) {
@@ -106,13 +97,15 @@ function enforceMaxLengthWithBrand(title: string) {
     return prioritizedCandidate;
   }
 
-  const shortenedPrimary = shortenToCityRepair(primarySegment);
-  const shortenedCandidate = `${shortenedPrimary} | ${brandSegment}`;
+  const shortBrandSegment = 'Buck Strong';
+  const shortenedPrimary = shortenAtWordBoundary(primarySegment, MAX_TITLE_LENGTH - (` | ${shortBrandSegment}`).length);
+  const shortenedCandidate = `${shortenedPrimary} | ${shortBrandSegment}`;
+
   if (shortenedCandidate.length <= MAX_TITLE_LENGTH) {
     return shortenedCandidate;
   }
 
-  return shortenedCandidate.slice(0, MAX_TITLE_LENGTH).trimEnd();
+  return shortenAtWordBoundary(prioritizedCandidate, MAX_TITLE_LENGTH);
 }
 
 function buildTitle(baseTitle: string) {
@@ -125,7 +118,7 @@ function buildTitle(baseTitle: string) {
     return longCandidate;
   }
 
-  const trimmedBase = shortenToCityRepair(baseTitle);
+  const trimmedBase = shortenAtWordBoundary(baseTitle, MAX_TITLE_LENGTH - LONG_SUFFIX.length);
   const trimmedWithBrand = `${trimmedBase} | ${BRAND_SHORT}`;
   if (trimmedWithBrand.length <= MAX_TITLE_LENGTH) {
     return trimmedWithBrand;
@@ -134,7 +127,45 @@ function buildTitle(baseTitle: string) {
   return trimmedWithBrand.slice(0, MAX_TITLE_LENGTH).trimEnd();
 }
 
+function truncateAtWordBoundary(text: string, maxLength: number) {
+  if (text.length <= maxLength) {
+    return text;
+  }
+
+  const clipped = text.slice(0, maxLength + 1);
+  const boundaryIndex = clipped.lastIndexOf(' ');
+
+  if (boundaryIndex > 0) {
+    return clipped.slice(0, boundaryIndex).trimEnd();
+  }
+
+  return text.slice(0, maxLength).trimEnd();
+}
+
+function normalizeDescription(rawDescription: string, normalizedTitle: string) {
+  const compactDescription = rawDescription.replace(/\s+/g, ' ').trim();
+
+  if (compactDescription.length > MAX_DESCRIPTION_LENGTH) {
+    return `${truncateAtWordBoundary(compactDescription, MAX_DESCRIPTION_LENGTH - 1)}…`;
+  }
+
+  if (compactDescription.length >= MIN_DESCRIPTION_LENGTH) {
+    return compactDescription;
+  }
+
+  const titlePrimarySegment = normalizedTitle.split('|')[0]?.trim() ?? 'Garage door service';
+  const extension = ` ${titlePrimarySegment} across Cincinnati, Ohio.`;
+  const combinedDescription = `${compactDescription}${extension}`;
+
+  if (combinedDescription.length <= MAX_DESCRIPTION_LENGTH) {
+    return combinedDescription;
+  }
+
+  return `${truncateAtWordBoundary(combinedDescription, MAX_DESCRIPTION_LENGTH - 1)}…`;
+}
+
 const fullTitle = buildTitle(title);
+const normalizedDescription = normalizeDescription(description, fullTitle);
 const ogImageUrl = buildAbsoluteUrl(ogImage, siteOrigin);
 const imageAltText = `${fullTitle} - Professional garage door services`;
 const businessAddress = BUSINESS_INFO.address;
@@ -233,7 +264,7 @@ const localBusinessSchema = JSON.stringify({
     <link rel="manifest" href="/site.webmanifest" />
 
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={normalizedDescription} />
     <meta name="author" content={author} />
     {publishDate && <meta name="article:published_time" content={publishDate} />}
 
@@ -246,7 +277,7 @@ const localBusinessSchema = JSON.stringify({
 
     <meta property="og:type" content={articleType} />
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={normalizedDescription} />
     <meta property="og:url" content={canonicalHref} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:secure_url" content={ogImageUrl} />
@@ -265,7 +296,7 @@ const localBusinessSchema = JSON.stringify({
     
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={normalizedDescription} />
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content={imageAltText} />
     <meta name="twitter:url" content={canonicalHref} />
