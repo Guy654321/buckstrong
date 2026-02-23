@@ -37,12 +37,19 @@ test('buildSitemapPathCandidates includes location service URLs for all location
     { slug: 'lexington', isHub: true },
     { slug: 'nicholasville', isHub: false },
   ];
+  const locationServiceSlugs = [
+    'garage-door-repair',
+    'opener-repair',
+    'commercial-jobs',
+    'garage-door-spring-replacement',
+  ];
   const blogPosts = [{ slug: 'seasonal-garage-maintenance' }];
 
   const result = buildSitemapPathCandidates({
     staticRoutes,
     dynamicServiceSlugs,
     services,
+    locationServiceSlugs,
     locations,
     blogPosts,
   });
@@ -58,5 +65,6 @@ test('buildSitemapPathCandidates includes location service URLs for all location
   assert(result.includes('/louisville-oh/garage-door-repair'));
   assert(result.includes('/lexington-oh/commercial-jobs'));
   assert(result.includes('/nicholasville-oh/garage-door-repair'));
+  assert(result.includes('/nicholasville-oh/garage-door-spring-replacement'));
   assert(result.includes('/blog/seasonal-garage-maintenance'));
 });

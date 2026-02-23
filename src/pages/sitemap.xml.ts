@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { getLocations } from '../lib/locations';
 import { getServices } from '../lib/services';
+import { REPAIR_SERVICE_PAGES } from '../data/repair-service-pages';
 import {
   getChangeFreq,
   getLastModified,
@@ -96,6 +97,10 @@ export const prerender = true;
 export const GET: APIRoute = async () => {
   const blogPosts = await getCollection('blog');
   const services = await getServices();
+  const locationServiceSlugs = [
+    ...services.map((service) => service.slug),
+    ...REPAIR_SERVICE_PAGES.map((service) => `garage-door-${service.slug}`),
+  ];
   const locations = await getLocations();
   const hubs = locations.filter(location => location.isHub);
 
@@ -103,6 +108,7 @@ export const GET: APIRoute = async () => {
     staticRoutes: STATIC_ROUTES,
     dynamicServiceSlugs: DYNAMIC_SERVICE_SLUGS,
     services,
+    locationServiceSlugs,
     locations,
     hubs,
     blogPosts,
