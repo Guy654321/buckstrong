@@ -17,6 +17,12 @@ function normalizeSiteOrigin(candidate, fallback = DEFAULT_SITE_ORIGIN) {
 
   try {
     const parsed = new URL(withProtocol);
+    parsed.protocol = 'https:';
+
+    if (parsed.hostname === 'buckstronggaragedoors.com') {
+      parsed.hostname = 'www.buckstronggaragedoors.com';
+    }
+
     return parsed.toString();
   } catch {
     return fallback;

@@ -10,6 +10,12 @@ function normalizeSiteOrigin(candidate?: string | null, fallback = FALLBACK_ORIG
 
   try {
     const parsed = new URL(withProtocol);
+    parsed.protocol = 'https:';
+
+    if (parsed.hostname === 'buckstronggaragedoors.com') {
+      parsed.hostname = 'www.buckstronggaragedoors.com';
+    }
+
     return parsed.toString();
   } catch {
     return fallback;

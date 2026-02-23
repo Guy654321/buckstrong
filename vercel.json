@@ -99,6 +99,17 @@
   ],
   "redirects": [
     {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "buckstronggaragedoors.com"
+        }
+      ],
+      "destination": "https://www.buckstronggaragedoors.com/$1",
+      "permanent": true
+    },
+    {
       "source": "/garage-door-balance-adjustment-cincinnati-oh",
       "destination": "/cincinnati-oh/garage-door-balance-adjustment",
       "permanent": true

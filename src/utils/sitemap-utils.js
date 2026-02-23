@@ -21,6 +21,12 @@ function normalizeSiteOrigin(candidate) {
       return fallback;
     }
 
+    parsed.protocol = 'https:';
+
+    if (parsed.hostname === 'buckstronggaragedoors.com') {
+      parsed.hostname = 'www.buckstronggaragedoors.com';
+    }
+
     return parsed.toString();
   } catch {
     return fallback;
