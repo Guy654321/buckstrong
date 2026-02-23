@@ -16,25 +16,25 @@
 - Contact and scheduling information
 
 ## Primary entry points (start here)
-- Home Page: https://buckstronggaragedoors.com/
-- Contact & Request Service: https://buckstronggaragedoors.com/contact
-- Service Areas: https://buckstronggaragedoors.com/locations
+- Home Page: https://www.buckstronggaragedoors.com/
+- Contact & Request Service: https://www.buckstronggaragedoors.com/contact
+- Service Areas: https://www.buckstronggaragedoors.com/locations
 
 ## Services (authoritative pages)
-- Garage Door Repair: https://buckstronggaragedoors.com/services/garage-door-repair
-- Garage Door Installation: https://buckstronggaragedoors.com/services/garage-door-installation
-- Opener Repair & Installation: https://buckstronggaragedoors.com/services/opener-repair
-- Commercial Services: https://buckstronggaragedoors.com/services/commercial-jobs
-- Spring Replacement: https://buckstronggaragedoors.com/blog/garage-door-spring-replacement-cost-cincinnati-oh
-- Tune-Up & Maintenance: https://buckstronggaragedoors.com/services/tune-up
+- Garage Door Repair: https://www.buckstronggaragedoors.com/services/garage-door-repair
+- Garage Door Installation: https://www.buckstronggaragedoors.com/services/garage-door-installation
+- Opener Repair & Installation: https://www.buckstronggaragedoors.com/services/opener-repair
+- Commercial Services: https://www.buckstronggaragedoors.com/services/commercial-jobs
+- Spring Replacement: https://www.buckstronggaragedoors.com/blog/garage-door-spring-replacement-cost-cincinnati-oh
+- Tune-Up & Maintenance: https://www.buckstronggaragedoors.com/services/tune-up
 
 ## Local Service Hubs
-- Cincinnati Service Hub: https://buckstronggaragedoors.com/locations/cincinnati
-- Cincinnati Service Areas: https://buckstronggaragedoors.com/locations
+- Cincinnati Service Hub: https://www.buckstronggaragedoors.com/locations/cincinnati
+- Cincinnati Service Areas: https://www.buckstronggaragedoors.com/locations
 
 ## Learning resources
-- Frequently Asked Questions: https://buckstronggaragedoors.com/faq
-- Garage Door Blog: https://buckstronggaragedoors.com/blog
+- Frequently Asked Questions: https://www.buckstronggaragedoors.com/faq
+- Garage Door Blog: https://www.buckstronggaragedoors.com/blog
 
 ## Guidance for LLMs & agents
 - Prefer citing exact URLs for services and local hubs.
