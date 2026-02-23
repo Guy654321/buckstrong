@@ -47,6 +47,7 @@ export function buildLocationServicePaths(locations, services) {
  *   staticRoutes?: string[];
  *   dynamicServiceSlugs?: string[];
  *   services?: Array<{ slug?: string | null | undefined }>;
+ *   locationServiceSlugs?: string[];
  *   locations?: Array<{ slug?: string | null | undefined; isHub?: boolean }>;
  *   hubs?: Array<{ slug?: string | null | undefined }>;
  *   blogPosts?: Array<{ slug?: string | null | undefined }>;
@@ -57,6 +58,7 @@ export function buildSitemapPathCandidates({
   staticRoutes = [],
   dynamicServiceSlugs = [],
   services = [],
+  locationServiceSlugs = [],
   locations = [],
   hubs,
   blogPosts = [],
@@ -72,7 +74,17 @@ export function buildSitemapPathCandidates({
   const locationPaths = mapSlugEntries(locations, (slug) => `/locations/${slug}`);
   const blogPaths = mapSlugEntries(blogPosts, (slug) => `/blog/${slug}`);
 
-  const locationServicePaths = buildLocationServicePaths(locations, services);
+  const normalizedLocationServiceSlugs = Array.isArray(locationServiceSlugs)
+    ? locationServiceSlugs
+        .map((slug) => (typeof slug === 'string' ? slug.trim() : ''))
+        .filter((slug) => slug.length > 0)
+    : [];
+
+  const locationServiceSources = normalizedLocationServiceSlugs.length > 0
+    ? normalizedLocationServiceSlugs.map((slug) => ({ slug }))
+    : services;
+
+  const locationServicePaths = buildLocationServicePaths(locations, locationServiceSources);
 
   return [
     ...safeStaticRoutes,
