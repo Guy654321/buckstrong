@@ -40,24 +40,7 @@ const {
 
 const siteOrigin = getSiteOrigin();
 
-function resolveRequestOrigin() {
-  const astroUrlOrigin = Astro.url?.origin?.trim();
-  if (astroUrlOrigin) {
-    return astroUrlOrigin;
-  }
-
-  try {
-    if (Astro.request?.url) {
-      return new URL(Astro.request.url).origin;
-    }
-  } catch {
-    return undefined;
-  }
-
-  return undefined;
-}
-
-const canonicalOrigin = resolveRequestOrigin() ?? siteOrigin;
+const canonicalOrigin = siteOrigin;
 
 function resolveCanonical(target?: string) {
   let requestPathname: string | undefined;
