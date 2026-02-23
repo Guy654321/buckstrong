@@ -40,12 +40,31 @@ const {
 
 const siteOrigin = getSiteOrigin();
 
+function resolveRequestOrigin() {
+  const astroUrlOrigin = Astro.url?.origin?.trim();
+  if (astroUrlOrigin) {
+    return astroUrlOrigin;
+  }
+
+  try {
+    if (Astro.request?.url) {
+      return new URL(Astro.request.url).origin;
+    }
+  } catch {
+    return undefined;
+  }
+
+  return undefined;
+}
+
+const canonicalOrigin = resolveRequestOrigin() ?? siteOrigin;
+
 function resolveCanonical(target?: string) {
   let requestPathname: string | undefined;
 
   try {
     if (Astro.request?.url) {
-      requestPathname = new URL(Astro.request.url, siteOrigin).pathname;
+      requestPathname = new URL(Astro.request.url, canonicalOrigin).pathname;
     }
   } catch {
     requestPathname = undefined;
@@ -57,7 +76,7 @@ function resolveCanonical(target?: string) {
     requestPathname ??
     '/';
 
-  return buildAbsoluteUrl(path, siteOrigin);
+  return buildAbsoluteUrl(path, canonicalOrigin);
 }
 
 const canonicalHref = resolveCanonical(canonical);
