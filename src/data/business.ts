@@ -3,12 +3,17 @@ import { buildAbsoluteUrl, getSiteOrigin } from '../utils/site-origin';
 const SITE_ORIGIN = getSiteOrigin();
 const LOGO_PATH = '/images/ohio%20logo.png';
 
+
+function normalizeBusinessBrand(value: string) {
+  return value.replace(/derby\s+strong/gi, 'Buck Strong');
+}
+
 export const BUSINESS_INFO = {
-  name: 'Buck Strong Garage Doors',
-  legalName: 'Buck Strong Garage Doors LLC',
+  name: normalizeBusinessBrand('Buck Strong Garage Doors'),
+  legalName: normalizeBusinessBrand('Buck Strong Garage Doors LLC'),
   telephone: '5137788005',
   email: 'hello@buckstronggaragedoors.com',
-  url: buildAbsoluteUrl('/locations/cincinnati', SITE_ORIGIN),
+  url: buildAbsoluteUrl('/', SITE_ORIGIN),
   logo: buildAbsoluteUrl(LOGO_PATH, SITE_ORIGIN),
   address: {
     streetAddress: '2337 Victory Parkway, Suite 120',

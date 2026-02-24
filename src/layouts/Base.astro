@@ -69,6 +69,10 @@ const MAX_DESCRIPTION_LENGTH = 160;
 const BRAND_KEYWORD = 'Buck Strong';
 const BRAND_SHORT = 'Buck Strong Garage Doors';
 const LONG_SUFFIX = ' | Buck Strong Garage Doors';
+
+function normalizeBrandMentions(value: string) {
+  return value.replace(/derby\s+strong/gi, BRAND_KEYWORD);
+}
 function shortenAtWordBoundary(baseTitle: string, maxLength: number) {
   if (baseTitle.length <= maxLength) {
     return baseTitle;
@@ -166,8 +170,12 @@ function normalizeDescription(rawDescription: string, normalizedTitle: string) {
   return `${truncateAtWordBoundary(combinedDescription, MAX_DESCRIPTION_LENGTH - 1)}…`;
 }
 
-const fullTitle = buildTitle(title);
-const normalizedDescription = normalizeDescription(description, fullTitle);
+const normalizedTitleInput = normalizeBrandMentions(title);
+const normalizedDescriptionInput = normalizeBrandMentions(description);
+const normalizedAuthor = normalizeBrandMentions(author);
+
+const fullTitle = buildTitle(normalizedTitleInput);
+const normalizedDescription = normalizeDescription(normalizedDescriptionInput, fullTitle);
 const ogImageUrl = buildAbsoluteUrl(ogImage, siteOrigin);
 const imageAltText = `${fullTitle} - Professional garage door services`;
 const businessAddress = BUSINESS_INFO.address;
@@ -256,18 +264,19 @@ const localBusinessSchema = JSON.stringify({
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="format-detection" content="telephone=yes" />
     <meta name="theme-color" content="#334155" />
+    <meta name="application-name" content="Buck Strong Garage Doors" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
     <link rel="alternate icon" href="/favicon.ico" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Buckstrong" />
+    <meta name="apple-mobile-web-app-title" content="Buck Strong Garage Doors" />
     <link rel="manifest" href="/site.webmanifest" />
 
     <title>{fullTitle}</title>
     <meta name="description" content={normalizedDescription} />
-    <meta name="author" content={author} />
+    <meta name="author" content={normalizedAuthor} />
     {publishDate && <meta name="article:published_time" content={publishDate} />}
 
     <meta name="article:modified_time" content={resolvedModifiedDate} />
