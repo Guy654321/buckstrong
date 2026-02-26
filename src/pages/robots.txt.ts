@@ -8,6 +8,7 @@ const ROBOTS_BODY = [
   'Allow: /',
   '',
   `Sitemap: ${new URL('/sitemap-index.xml', SITE_ORIGIN).toString()}`,
+  `Sitemap: ${new URL('/sitemap.xml', SITE_ORIGIN).toString()}`,
   ''
 ].join('\n');
 
