@@ -790,7 +790,7 @@ if (locationMapUrl) {
     <ul>
       {localizedServices.map(service => (
         <li>
-          <a href={buildServiceHref(service.slug)} title={service.name}>
+          <a href={buildServiceHref(service.slug)} title={service.name} tabindex="-1">
             {service.name}
           </a>
         </li>
