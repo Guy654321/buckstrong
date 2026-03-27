@@ -19,6 +19,7 @@ import estimateImage from '../../assets/images/commercial/estimate-consultation.
 import { BUSINESS_INFO } from '../../data/business';
 import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../../data/call-markets';
 import type { Location } from '../../lib/locations';
+import { getLocations } from '../../lib/locations';
 import { buildLocationServiceCanonicalPath } from '../../lib/canonical';
 import { getSiteOrigin } from '../../utils/site-origin';
 
@@ -151,6 +152,45 @@ const specialistsHeading = activeLocation
 const specialistsIntro = activeLocation
   ? `Emergency dispatch is available day or night for stuck bays, vehicle impacts, or security concerns. Quarterly preventive routes keep inspections on schedule across ${coverageAreaLabel}.`
   : 'Emergency dispatch is available day or night for stuck bays, vehicle impacts, or security concerns. Quarterly preventive routes keep inspections on schedule across every market we serve.';
+
+let marketCommercialLinks: Array<{ name: string; href: string }> = [];
+
+if (activeLocation) {
+  const allLocations = await getLocations();
+  const sameMarketLocations = allLocations.filter(
+    (candidate) => candidate.market === activeLocation.market
+  );
+  const hubLocation = sameMarketLocations.find(
+    (candidate) => candidate.isHub && candidate.slug !== activeLocation.slug
+  );
+  const nonHubLocations = sameMarketLocations
+    .filter((candidate) => !candidate.isHub)
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const ringIndex = nonHubLocations.findIndex((candidate) => candidate.slug === activeLocation.slug);
+  const neighboringLocations =
+    ringIndex >= 0
+      ? [-2, -1, 1, 2]
+          .map((offset) => {
+            const neighborIndex =
+              (ringIndex + offset + nonHubLocations.length) % nonHubLocations.length;
+            return nonHubLocations[neighborIndex];
+          })
+          .filter((candidate, index, arr) =>
+            Boolean(candidate) && arr.findIndex((item) => item.slug === candidate.slug) === index
+          )
+          .filter((candidate) => candidate.slug !== activeLocation.slug)
+      : [];
+
+  const prioritizedLocations = [
+    ...(hubLocation ? [hubLocation] : []),
+    ...neighboringLocations
+  ].slice(0, 5);
+
+  marketCommercialLinks = prioritizedLocations.map((candidate) => ({
+    name: `${candidate.name}, ${candidate.state}`,
+    href: buildLocationServiceCanonicalPath(candidate.slug, 'commercial-jobs')
+  }));
+}
 ---
 
 <Base
@@ -541,6 +581,18 @@ const specialistsIntro = activeLocation
       zipCoverageLabel
     ])}
   />
+
+  {marketCommercialLinks.length > 0 && (
+    <nav class="sr-only" aria-label="Nearby commercial service area links">
+      <ul>
+        {marketCommercialLinks.map((link) => (
+          <li>
+            <a href={link.href}>Commercial overhead door service in {link.name}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )}
 
   <Schema
     item={{
