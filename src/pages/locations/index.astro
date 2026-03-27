@@ -5,8 +5,10 @@ import Footer from '../../components/Footer.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { Image } from 'astro:assets';
 import { getLocationsByMarket, PRIMARY_MARKET_PRIORITY } from '../../lib/locations';
+import { buildLocalizedServicePath } from '../../lib/location-routing';
 import heroImage from '../../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
 import { BUSINESS_INFO } from '../../data/business';
+import { REPAIR_SERVICE_PAGES } from '../../data/repair-service-pages';
 import HiddenSeoText from '../../components/HiddenSeoText.astro';
 
 const locationGroups = await getLocationsByMarket();
@@ -128,6 +130,20 @@ const heroCoverage = [...metroCoverage].sort((a, b) => {
 });
 const heroMarketNames = heroCoverage.map(group => group.market);
 const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMarketNames) : '';
+const LOCATION_SERVICE_SLUGS = [
+  'garage-door-repair',
+  'garage-door-installation',
+  'opener-repair',
+  'commercial-jobs',
+  ...REPAIR_SERVICE_PAGES.map((service) => `garage-door-${service.slug}`),
+];
+const locationServiceDirectory = locations.map((location) => ({
+  location,
+  links: LOCATION_SERVICE_SLUGS.map((serviceSlug) => ({
+    serviceSlug,
+    href: buildLocalizedServicePath(location.slug, serviceSlug),
+  })),
+}));
 ---
 
 <Base
@@ -430,6 +446,23 @@ const heroMarketList = heroMarketNames.length > 0 ? listFormatter.format(heroMar
       'Digital approvals, contactless payments, and documented photo reports keep communication clear for all stakeholders'
     ]}
   />
+
+  <nav class="sr-only" aria-label="Localized service directory">
+    <ul>
+      {locationServiceDirectory.map(({ location, links }) => (
+        <li>
+          <span>{location.name}</span>
+          <ul>
+            {links.map(({ serviceSlug, href }) => (
+              <li>
+                <a href={href}>{location.name} {serviceSlug}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </nav>
 
   <Footer />
 </Base>
