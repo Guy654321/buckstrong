@@ -331,10 +331,42 @@ const localBusinessSchema = JSON.stringify({
     )}
 
     <script type="text/javascript" is:inline>
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      (function (c, l, a, r, i) {
+        var clarityLoaded = false;
+
+        c[a] = c[a] || function () {
+          (c[a].q = c[a].q || []).push(arguments);
+        };
+
+        function shouldSkipAnalytics() {
+          return (
+            navigator.doNotTrack === "1" ||
+            window.doNotTrack === "1" ||
+            navigator.msDoNotTrack === "1"
+          );
+        }
+
+        function loadClarity() {
+          if (clarityLoaded || shouldSkipAnalytics()) {
+            return;
+          }
+
+          clarityLoaded = true;
+
+          var t = l.createElement(r);
+          var y = l.getElementsByTagName(r)[0];
+          t.async = 1;
+          t.src = "https://www.clarity.ms/tag/" + i;
+          y.parentNode.insertBefore(t, y);
+
+          ["pointerdown", "keydown", "scroll", "touchstart"].forEach(function (eventName) {
+            c.removeEventListener(eventName, loadClarity, { passive: true });
+          });
+        }
+
+        ["pointerdown", "keydown", "scroll", "touchstart"].forEach(function (eventName) {
+          c.addEventListener(eventName, loadClarity, { once: true, passive: true });
+        });
       })(window, document, "clarity", "script", "vkf0wd7djj");
     </script>
 
