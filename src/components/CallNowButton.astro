@@ -26,12 +26,15 @@ const callLabel = hasCustomPhoneNumber ? 'Call Now:' : 'Call Now';
   data-floating-call
   data-visible="false"
   aria-hidden="true"
+  inert
 >
   {hasCallModalTrigger ? (
     <button
       type="button"
       class="bg-accent hover:bg-accent/90 text-white px-4 py-3 text-sm rounded-full shadow-md flex items-center space-x-2 transition-colors min-h-[44px] min-w-[44px]"
       data-call-modal-trigger
+      data-floating-call-action
+      tabindex="-1"
       aria-controls={callModalId}
       aria-expanded="false"
       aria-haspopup="dialog"
@@ -45,6 +48,8 @@ const callLabel = hasCustomPhoneNumber ? 'Call Now:' : 'Call Now';
     <a
       href={callLinkHref}
       class="bg-accent hover:bg-accent/90 text-white px-4 py-3 text-sm rounded-full shadow-md flex items-center space-x-2 transition-colors min-h-[44px] min-w-[44px]"
+      data-floating-call-action
+      tabindex="-1"
     >
       <Icon name="mdi:phone" size="20" aria-hidden="true" />
       <span class="font-semibold">{callLabel}</span>
@@ -69,6 +74,22 @@ const callLabel = hasCustomPhoneNumber ? 'Call Now:' : 'Call Now';
         callButtons.forEach((callButton: HTMLElement) => {
           callButton.dataset.visible = isVisible ? 'true' : 'false';
           callButton.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+          if (isVisible) {
+            callButton.removeAttribute('inert');
+          } else {
+            callButton.setAttribute('inert', '');
+          }
+
+          const interactiveElement = callButton.querySelector<HTMLElement>('[data-floating-call-action]');
+          if (!interactiveElement) {
+            return;
+          }
+
+          if (isVisible) {
+            interactiveElement.removeAttribute('tabindex');
+          } else {
+            interactiveElement.setAttribute('tabindex', '-1');
+          }
         });
       };
 

@@ -27,6 +27,7 @@ const {
 } = Astro.props;
 
 const getFieldId = (name: string) => `${fieldIdPrefix}-${name}`;
+const getHelperId = (name: string) => `${fieldIdPrefix}-${name}-required`;
 
 const readEnvValue = (...keys: string[]): string => {
   for (const key of keys) {
@@ -93,10 +94,10 @@ const turnstileScriptSrc = 'https://challenges.cloudflare.com/turnstile/v0/api.j
             id={getFieldId('name')} 
             name="name" 
             required 
-            aria-describedby="name-required"
+            aria-describedby={getHelperId('name')}
             class="w-full px-4 py-3 border border-ink/20 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
           />
-          <span id="name-required" class="sr-only">Required field</span>
+          <span id={getHelperId('name')} class="sr-only">Required field</span>
         </div>
         
         <div>
@@ -109,10 +110,10 @@ const turnstileScriptSrc = 'https://challenges.cloudflare.com/turnstile/v0/api.j
             id={getFieldId('phone')} 
             name="phone" 
             required 
-            aria-describedby="phone-required"
+            aria-describedby={getHelperId('phone')}
             class="w-full px-4 py-3 border border-ink/20 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
           />
-          <span id="phone-required" class="sr-only">Required field</span>
+          <span id={getHelperId('phone')} class="sr-only">Required field</span>
         </div>
       </div>
       
@@ -187,13 +188,13 @@ const turnstileScriptSrc = 'https://challenges.cloudflare.com/turnstile/v0/api.j
             type="checkbox" 
             name="consent" 
             required 
-            aria-describedby="consent-required"
+            aria-describedby={getHelperId('consent')}
             class="mt-1 mr-3 h-4 w-4 text-accent focus:ring-accent border-ink/20 rounded"
           />
           <span class="text-sm text-ink/80">
             I consent to being contacted by Buck Strong Garage Doors regarding my service request. *
           </span>
-          <span id="consent-required" class="sr-only">Required field</span>
+          <span id={getHelperId('consent')} class="sr-only">Required field</span>
         </label>
       </div>
 
