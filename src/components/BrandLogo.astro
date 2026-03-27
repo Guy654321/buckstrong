@@ -1,4 +1,7 @@
 ---
+import { getImage } from 'astro:assets';
+import logoSource from '../assets/images/buck-strong-logo.png';
+
 export interface Props {
   size?: 'sm' | 'md' | 'lg';
   class?: string;
@@ -17,37 +20,56 @@ const {
   ariaHidden = false
 } = Astro.props;
 
-const widthMap = {
-
-  sm: 384,
-  md: 576,
-  lg: 768
+const sizeConfig = {
+  sm: {
+    widths: [72, 96, 120],
+    sizes: '(max-width: 640px) 96px, 120px'
+  },
+  md: {
+    widths: [96, 120, 144, 168],
+    sizes: '(max-width: 640px) 108px, (max-width: 1024px) 144px, 168px'
+  },
+  lg: {
+    widths: [120, 144, 192, 240],
+    sizes: '(max-width: 768px) 144px, (max-width: 1280px) 192px, 240px'
+  }
 } as const;
 
-const baseWidth = widthMap[size];
-const aspectRatio = 1;
-const baseHeight = Math.round(baseWidth * aspectRatio);
+const { widths, sizes } = sizeConfig[size];
+const responsiveWidths = [...widths];
+const intrinsicWidth = responsiveWidths.at(-1) ?? 240;
+const intrinsicHeight = intrinsicWidth;
 
+const loading = priority ? 'eager' : 'lazy';
 const decoding = priority ? 'sync' : 'async';
 const fetchPriority = priority ? 'high' : 'auto';
 
-const sizes =
-  size === 'sm'
-    ? '(max-width: 640px) 96px, 120px'
-    : size === 'lg'
-      ? '(max-width: 768px) 144px, (max-width: 1280px) 192px, 240px'
-      : '(max-width: 640px) 108px, (max-width: 1024px) 144px, 168px';
+const [logoAvif, logoWebp, logoPng] = await Promise.all([
+  getImage({ src: logoSource, widths: responsiveWidths, format: 'avif', quality: 36 }),
+  getImage({ src: logoSource, widths: responsiveWidths, format: 'webp', quality: 55 }),
+  getImage({ src: logoSource, widths: responsiveWidths, format: 'png' })
+]);
+
+const logoAvifSrcSet = logoAvif.srcSet?.attribute ?? undefined;
+const logoWebpSrcSet = logoWebp.srcSet?.attribute ?? undefined;
+const logoPngSrcSet = logoPng.srcSet?.attribute ?? undefined;
+const logoFallbackSrc = logoPng.src ?? logoSource.src;
 ---
-<img
-  src="/images/ohio%20logo.png"
-  alt={alt}
-  width={baseWidth}
-  height={baseHeight}
-  class={`w-auto ${className}`.trim()}
-  loading="eager"
-  decoding={decoding}
-  fetchpriority={fetchPriority}
-  sizes={sizes}
-  itemprop={itemprop}
-  aria-hidden={ariaHidden ? 'true' : undefined}
-/>
+<picture>
+  {logoAvifSrcSet && <source srcset={logoAvifSrcSet} sizes={sizes} type="image/avif" />}
+  {logoWebpSrcSet && <source srcset={logoWebpSrcSet} sizes={sizes} type="image/webp" />}
+  <img
+    src={logoFallbackSrc}
+    srcset={logoPngSrcSet}
+    sizes={sizes}
+    alt={alt}
+    width={intrinsicWidth}
+    height={intrinsicHeight}
+    class={`w-auto ${className}`.trim()}
+    loading={loading}
+    decoding={decoding}
+    fetchpriority={fetchPriority}
+    itemprop={itemprop}
+    aria-hidden={ariaHidden ? 'true' : undefined}
+  />
+</picture>
