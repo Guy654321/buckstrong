@@ -2,8 +2,7 @@ import type { ImageMetadata } from 'astro';
 import steelHeroImage from '../assets/images/garage-door-installation.jpg';
 import woodHeroImage from '../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
 import aluminumHeroImage from '../assets/images/repairs/finished-installation.jpg';
-import carriageHeroImage from '../assets/images/b4fc9ccd-57d6-4cb3-9845-af07b269ab3f.png';
-
+import carriageHeroImage from '../assets/images/garage-door-installation.jpg';
 export type DoorServiceSlug =
   | 'steel-garage-doors'
   | 'wood-garage-doors'
