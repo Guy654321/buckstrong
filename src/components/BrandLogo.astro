@@ -1,7 +1,4 @@
 ---
-import { getImage } from 'astro:assets';
-import logoSource from '../assets/images/ohio-logo.png';
-
 export interface Props {
   size?: 'sm' | 'md' | 'lg';
   class?: string;
@@ -22,54 +19,35 @@ const {
 
 const sizeConfig = {
   sm: {
-    widths: [72, 96, 120],
-    sizes: '(max-width: 640px) 96px, 120px'
+    width: 120,
+    height: 120
   },
   md: {
-    widths: [96, 120, 144, 168],
-    sizes: '(max-width: 640px) 108px, (max-width: 1024px) 144px, 168px'
+    width: 168,
+    height: 168
   },
   lg: {
-    widths: [120, 144, 192, 240],
-    sizes: '(max-width: 768px) 144px, (max-width: 1280px) 192px, 240px'
+    width: 240,
+    height: 240
   }
 } as const;
 
-const { widths, sizes } = sizeConfig[size];
-const responsiveWidths = [...widths];
-const intrinsicWidth = responsiveWidths.at(-1) ?? 240;
-const intrinsicHeight = intrinsicWidth;
+const { width: intrinsicWidth, height: intrinsicHeight } = sizeConfig[size];
+const logoSrc = '/images/ohio%20logo.png';
 
 const loading = priority ? 'eager' : 'lazy';
 const decoding = priority ? 'sync' : 'async';
 const fetchPriority = priority ? 'high' : 'auto';
-
-const [logoAvif, logoWebp, logoPng] = await Promise.all([
-  getImage({ src: logoSource, widths: responsiveWidths, format: 'avif', quality: 36 }),
-  getImage({ src: logoSource, widths: responsiveWidths, format: 'webp', quality: 55 }),
-  getImage({ src: logoSource, widths: responsiveWidths, format: 'png' })
-]);
-
-const logoAvifSrcSet = logoAvif.srcSet?.attribute ?? undefined;
-const logoWebpSrcSet = logoWebp.srcSet?.attribute ?? undefined;
-const logoPngSrcSet = logoPng.srcSet?.attribute ?? undefined;
-const logoFallbackSrc = logoPng.src ?? logoSource.src;
 ---
-<picture>
-  {logoAvifSrcSet && <source srcset={logoAvifSrcSet} sizes={sizes} type="image/avif" />}
-  {logoWebpSrcSet && <source srcset={logoWebpSrcSet} sizes={sizes} type="image/webp" />}
-  <img
-    src={logoFallbackSrc}
-    srcset={logoPngSrcSet}
-    sizes={sizes}
-    alt={alt}
-    width={intrinsicWidth}
-    height={intrinsicHeight}
-    class={`w-auto ${className}`.trim()}
-    loading={loading}
-    decoding={decoding}
-    fetchpriority={fetchPriority}
-    itemprop={itemprop}
-    aria-hidden={ariaHidden ? 'true' : undefined}
-  />
-</picture>
+<img
+  src={logoSrc}
+  alt={alt}
+  width={intrinsicWidth}
+  height={intrinsicHeight}
+  class={`w-auto ${className}`.trim()}
+  loading={loading}
+  decoding={decoding}
+  fetchpriority={fetchPriority}
+  itemprop={itemprop}
+  aria-hidden={ariaHidden ? 'true' : undefined}
+/>
