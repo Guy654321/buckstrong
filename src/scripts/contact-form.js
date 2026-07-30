@@ -7,6 +7,18 @@ const CONTACT_FORM_SELECTOR = 'form[data-contact-form]';
 const DECOY_COMPANY_SELECTOR = 'input[data-decoy-company]';
 const FORM_LOADED_AT_SELECTOR = 'input[data-form-loaded-at]';
 
+const trackOpenAiLead = () => {
+  try {
+    if (typeof window.oaiq === 'function') {
+      window.oaiq('measure', 'lead_created', {
+        type: 'customer_action'
+      });
+    }
+  } catch (error) {
+    // Conversion measurement must never interrupt a successful lead submission.
+  }
+};
+
 const initContactForm = () => {
   const forms = Array.from(document.querySelectorAll(CONTACT_FORM_SELECTOR)).filter(
     (form) => form instanceof HTMLFormElement
@@ -100,6 +112,7 @@ const initContactForm = () => {
           form.reset();
           setStatus('success', result.message ?? 'Thanks! We will contact you shortly.');
           resetTurnstile();
+          trackOpenAiLead();
         } else {
           const message = result?.message ?? 'We were unable to send your request. Please try again later.';
           setStatus('error', message);
