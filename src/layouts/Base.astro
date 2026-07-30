@@ -188,9 +188,12 @@ const speedInsightsEndpoint = speedInsightsBasePath
   ? `${speedInsightsBasePath}/speed-insights/vitals`
   : '/_vercel/speed-insights/vitals';
 const analyticsMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? '';
+const openAiAdsPixelId =
+  import.meta.env.PUBLIC_OPENAI_ADS_PIXEL_ID ?? 'LnhRQn59kxqu38wrKPxWNj';
 const analyticsConsentStorageKey =
   import.meta.env.PUBLIC_ANALYTICS_CONSENT_KEY ?? 'buckstrong:analytics-opt-in';
-const shouldLoadAnalytics = import.meta.env.PROD && Boolean(analyticsMeasurementId);
+const shouldLoadAnalytics =
+  import.meta.env.PROD && Boolean(analyticsMeasurementId || openAiAdsPixelId);
 
 const resolvedModifiedDate = modifiedDate ?? new Date().toISOString();
 
@@ -325,6 +328,7 @@ const localBusinessSchema = JSON.stringify({
         src={analyticsLoaderUrl}
         defer
         data-measurement-id={analyticsMeasurementId}
+        data-openai-ads-pixel-id={openAiAdsPixelId}
         data-consent-key={analyticsConsentStorageKey}
         is:inline
       ></script>
