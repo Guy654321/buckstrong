@@ -5,7 +5,8 @@
 
   const scriptEl = document.currentScript;
   const measurementId = scriptEl?.dataset?.measurementId;
-  if (!measurementId) {
+  const openAiAdsPixelId = scriptEl?.dataset?.openaiAdsPixelId;
+  if (!measurementId && !openAiAdsPixelId) {
     return;
   }
 
@@ -43,12 +44,15 @@
     }
   };
 
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function gtag() {
-    window.dataLayer.push(arguments);
-  };
-
-  const loadScript = () => {
+  const loadGoogleAnalytics = () => {
+    if (!measurementId || window.__gtagLoaderInvoked) {
+      return;
+    }
+    window.__gtagLoaderInvoked = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag() {
+      window.dataLayer.push(arguments);
+    };
     if (document.getElementById('gtag-js')) {
       return;
     }
@@ -57,16 +61,49 @@
     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
     script.async = true;
     document.head.appendChild(script);
+    window.gtag('js', new Date());
+    window.gtag('config', measurementId);
+  };
+
+  const loadOpenAiAdsPixel = () => {
+    if (!openAiAdsPixelId || window.__openAiAdsLoaderInvoked) {
+      return;
+    }
+    window.__openAiAdsLoaderInvoked = true;
+
+    if (!window.oaiq) {
+      const queue = function oaiq() {
+        queue.q.push(arguments);
+      };
+      queue.q = [];
+      window.oaiq = queue;
+    }
+
+    if (!document.getElementById('openai-ads-pixel-js')) {
+      const script = document.createElement('script');
+      script.id = 'openai-ads-pixel-js';
+      script.src = 'https://bzrcdn.openai.com/sdk/oaiq.min.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+
+    window.oaiq('consent', true);
+    window.oaiq('init', { pixelId: openAiAdsPixelId });
+    window.oaiq('measure', 'page_viewed', {
+      type: 'contents',
+      contents: [
+        {
+          id: window.location.pathname || '/',
+          name: document.title || 'Buck Strong Garage Doors',
+          content_type: 'page'
+        }
+      ]
+    });
   };
 
   const activateAnalytics = () => {
-    if (window.__gtagLoaderInvoked) {
-      return;
-    }
-    window.__gtagLoaderInvoked = true;
-    loadScript();
-    window.gtag('js', new Date());
-    window.gtag('config', measurementId);
+    loadGoogleAnalytics();
+    loadOpenAiAdsPixel();
   };
 
   const enableAnalytics = () => {
