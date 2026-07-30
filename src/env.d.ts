@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
   readonly PUBLIC_GA_MEASUREMENT_ID?: string;
+  readonly PUBLIC_OPENAI_ADS_PIXEL_ID?: string;
   readonly PUBLIC_ANALYTICS_CONSENT_KEY?: string;
   readonly PUBLIC_VERCEL_OBSERVABILITY_BASEPATH?: string;
 }
