@@ -49,7 +49,7 @@ const PROCESS_STEPS = [
         text: 'request service online',
         title: 'Request garage door service online'
       },
-      '. We offer same-day and after-hours appointments for urgent spring breaks or doors stuck open.'
+      '. Share your address and door issue so we can confirm the next available appointment.'
     ]
   },
   {
@@ -61,9 +61,9 @@ const PROCESS_STEPS = [
   },
   {
     number: '3',
-    title: 'Same-day completion',
+    title: 'Repair and safety check',
     copy: [
-  'We complete the approved work, balance and test the door, perform a full safety check, and send a digital summary with maintenance reminders.'
+      'After you approve the work, we repair or install the needed components, balance and test the door, complete a safety check, and explain any follow-up care.'
     ]
   }
 ];
@@ -100,7 +100,7 @@ const breadcrumbSchema = JSON.stringify({
 
 <Base
   title="Ohio Garage Door Repair & Installation | Buck Strong Garage Doors"
-  description="Buck Strong Garage Doors serves the Cincinnati metro and selected Greater Cleveland communities with repair, opener service, and installation. Find your service area and book a visit."
+  description="Garage door repair, opener service, and installation across the Cincinnati and Cleveland metro areas. Call Buck Strong to confirm availability at your address."
   schemaType="Service"
 >
   <Fragment slot="head">
@@ -145,7 +145,7 @@ const breadcrumbSchema = JSON.stringify({
       legalName: BUSINESS_INFO.legalName,
       alternateName: 'Buck Strong Garage Door Services',
       description:
-        'Ohio-based garage door repair, opener fixes, and commercial overhead door service currently serving the Cincinnati metro with highly trained technicians and stocked trucks.',
+        'Ohio-based garage door repair, opener service, installation, and commercial overhead door support for the Cincinnati and Cleveland metro areas.',
       url: BUSINESS_INFO.url,
       logo: BUSINESS_INFO.logo,
       image: heroImageAbsoluteUrl,
@@ -238,10 +238,14 @@ const breadcrumbSchema = JSON.stringify({
         href="/locations/cincinnati"
         class="inline-block align-middle font-semibold text-white/90 underline decoration-2 decoration-white/50 underline-offset-2 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80 transition-colors duration-200"
       >
-        Cincinnati metro area
-      </a>{' '}
-      with fast, same-day garage door repair and installation. From broken springs and malfunctioning openers to full garage door replacements, our trained technicians handle every job using high-quality parts and precise adjustments to keep your garage door operating safely, smoothly, and reliably.
-      {' '}We also serve selected <a href="/locations/cleveland" class="inline-block align-middle font-semibold text-white/90 underline decoration-2 decoration-white/50 underline-offset-2 hover:text-white">Greater Cleveland communities</a>; call to confirm availability at your address.
+        Cincinnati
+      </a>{' '}and{' '}
+      <a
+        href="/locations/cleveland"
+        class="inline-block align-middle font-semibold text-white/90 underline decoration-2 decoration-white/50 underline-offset-2 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80 transition-colors duration-200"
+      >
+        Cleveland
+      </a>{' '}metro areas with garage door repair, opener service, and new door installation. From broken springs and faulty openers to complete door replacements, we inspect the system, explain the options, and confirm service availability for your address before scheduling.
     </Fragment>
   </Hero>
 
@@ -256,7 +260,7 @@ const breadcrumbSchema = JSON.stringify({
             Ohio Garage Door Services You Can Count On
           </h2>
           <p class="text-lg sm:text-xl text-ink/70 leading-relaxed max-w-3xl mx-auto">
-            Start with the three core services homeowners and facility managers call us for most&mdash;fast repairs, opener expertise, and professional new door installs across the Cincinnati metro.
+            Explore the garage door repairs, opener service, and new door installations available across the Cincinnati and Greater Cleveland areas.
           </p>
         </div>
 
@@ -285,7 +289,7 @@ const breadcrumbSchema = JSON.stringify({
           <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/90 mb-4">Our Process</p>
           <h2 class="text-3xl font-bold text-ink mb-6">From First Call to Final Safety Check</h2>
           <p class="text-lg text-ink/70 leading-relaxed max-w-3xl mx-auto">
-            The moment you contact Buck Strong Garage Doors, we begin mapping out the service experience. Our coordinated approach ensures same-day completion with no surprises.
+            Tell us your address and what the door is doing. We will explain the appointment options, inspect the system on site, and review the work before it begins.
           </p>
         </div>
         
@@ -327,14 +331,14 @@ const breadcrumbSchema = JSON.stringify({
   <HiddenSeoText
     title="In-depth Ohio garage door service details"
     paragraphs={[
-      'Buck Strong Garage Doors is Ohio-based and currently serves the Cincinnati metro with same-day appointments for broken springs, stuck doors, failed openers, and hardware damage. Each crew arrives with stocked trucks to finish most repairs in one visit.',
+      'Buck Strong Garage Doors serves Cincinnati and Greater Cleveland with garage door repair, opener troubleshooting, and new door installation. We inspect broken springs, stuck doors, failed openers, and hardware damage, then explain the service options and scheduling availability for each address.',
       'Our technicians complete balance checks, track alignment, photo eye calibration, and weather-seal inspections on every job to ensure safe performance after we leave. Customers receive digital estimates, approvals, and receipts for easy recordkeeping.',
       'Beyond repairs, we manage design consultations and installations for insulated steel, carriage-style, and modern glass doors that suit Ohio architecture. Commercial overhead door maintenance and dock door tune-ups are scheduled around facility downtime to reduce disruptions.'
       ]}
       bullets={[
-        'Primary service hub: Cincinnati metro',
+        'Primary service hubs: Cincinnati and Cleveland',
         'Core offerings: garage door repair, opener troubleshooting, new door installation, and commercial overhead door maintenance',
-        'Convenient scheduling with after-hours availability and contactless approvals'
+        '24/7 phone booking, address-based appointment confirmation, and clear service options'
     ]}
   />
 

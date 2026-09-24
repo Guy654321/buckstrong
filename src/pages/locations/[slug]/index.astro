@@ -486,19 +486,6 @@ const locationSchema = isClevelandMarket && !location.isHub
 
   <main class="bg-white">
     <IconRow market={isClevelandMarket ? 'cleveland' : 'cincinnati'} />
-    {isClevelandMarket && location.localHeading && (
-      <section class="py-16 bg-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 class="text-3xl font-bold text-ink mb-6">{location.localHeading}</h2>
-          <div class="space-y-4 text-lg text-ink/80 leading-relaxed">
-            <p>{location.localIntro}</p>
-            <p>{location.localIssues}</p>
-            <p>{location.localAdvice}</p>
-          </div>
-          {!location.isHub && <p class="mt-6 text-base text-ink/80">See the <a class="inline-link" href={`/locations/${parentHubLocation.slug}`}>{parentHubLocation.name} service area</a> for the full market coverage.</p>}
-        </div>
-      </section>
-    )}
     <section class="py-20 bg-muted">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
@@ -507,7 +494,7 @@ const locationSchema = isClevelandMarket && !location.isHub
             Professional Garage Door Help in {locationDisplayName}
           </h2>
           <p class="text-lg sm:text-xl text-ink/70 leading-relaxed max-w-3xl mx-auto">
-            {isClevelandMarket ? `Explore repair, opener service, and installation options for ${location.name} and the ${marketDisplayName} area.` : `Start with the three core services ${location.name} homeowners call us for most—fast repairs, opener expertise, and professional installs across the ${marketDisplayName} area.`}
+            {isClevelandMarket ? location.localIntro : `Start with the three core services ${location.name} homeowners call us for most—fast repairs, opener expertise, and professional installs across the ${marketDisplayName} area.`}
           </p>
         </div>
 
@@ -569,11 +556,10 @@ const locationSchema = isClevelandMarket && !location.isHub
         <div class="max-w-3xl mx-auto text-center">
           <h2 class="text-3xl font-bold text-ink mb-4">Our {locationDisplayName} Service Commitment</h2>
           <p class="text-lg text-ink/70 leading-relaxed">
-            From emergency repairs to opener upgrades and commercial projects, we bring reliable garage door support to
-            {marketDisplayName} properties.
+            {isClevelandMarket ? location.localIssues : `From emergency repairs to opener upgrades and commercial projects, we bring reliable garage door support to ${marketDisplayName} properties.`}
           </p>
           <p class="text-lg text-ink/70 leading-relaxed mt-4">
-            {isClevelandMarket ? `Tell us about access and scheduling needs at your ${locationDisplayName} address so we can plan the visit.` : `Our scheduling team tracks community events, school calendars, and peak commuter times in ${locationDisplayName} so service happens when it fits your routine.`}
+            {isClevelandMarket ? location.localAdvice : `Our scheduling team tracks community events, school calendars, and peak commuter times in ${locationDisplayName} so service happens when it fits your routine.`}
           </p>
         </div>
 
