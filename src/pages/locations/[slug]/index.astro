@@ -88,7 +88,7 @@ const marketPossessive = marketPossessiveSource.endsWith('s')
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: 'Locations', href: '/locations' },
-  ...(!location.isHub ? [{ label: parentHubLocation.name, href: `/locations/${parentHubLocation.slug}` }] : []),
+  ...(!location.isHub ? [{ label: isClevelandMarket ? `${parentHubLocation.name}, ${parentHubLocation.state}` : parentHubLocation.name, href: `/locations/${parentHubLocation.slug}` }] : []),
   { label: location.areaType === 'Place' ? `${location.name}, Cleveland, ${location.state}` : `${location.name}, ${location.state}` }
 ];
 
@@ -107,7 +107,12 @@ const hubCityName = location.name;
 const locationMarketName = marketDisplayName || location.market;
 const heroCityName = location.isHub ? hubCityName : location.name;
 const heroCityPossessive = heroCityName.endsWith('s') ? `${heroCityName}’` : `${heroCityName}’s`;
-const locationHeroTitle = location.heroTitle?.trim() || `${heroCityPossessive} Trusted Garage Door Repair & Installation Experts`;
+const rawHeroTitle = location.heroTitle?.trim() || `${heroCityPossessive} Trusted Garage Door Repair & Installation Experts`;
+const locationHeroTitle = isClevelandMarket && !location.isHub
+  ? location.heroTitle?.trim()
+    ? rawHeroTitle.includes(locationDisplayName) ? rawHeroTitle : rawHeroTitle.replace(location.name, locationDisplayName)
+    : `Garage Door Repair & Installation in ${locationDisplayName}`
+  : rawHeroTitle;
 type ServiceSlug = ServiceSummary['slug'];
 
 const locationMapConfig = getLocationMapConfig(location.slug);
