@@ -49,10 +49,20 @@ export function buildLocationServicePaths(locations, services) {
     'garage-door-maintenance',
     'garage-door-balance-adjustment',
   ]);
+  const clevelandSuburbServices = new Set([
+    'garage-door-repair',
+    'opener-repair',
+    'garage-door-installation',
+    'commercial-jobs',
+  ]);
 
-  return validLocations.filter((location) => !location.slug.startsWith('cleveland-')).flatMap((location) =>
+  return validLocations.flatMap((location) =>
     validServices
-      .filter((service) => location.slug !== 'cleveland' || clevelandPublishedServices.has(service.slug.trim()))
+      .filter((service) => location.slug === 'cleveland'
+        ? clevelandPublishedServices.has(service.slug.trim())
+        : location.slug.startsWith('cleveland-')
+          ? clevelandSuburbServices.has(service.slug.trim())
+          : true)
       .map((service) => {
       const citySlug = location.slug.trim().replace(/^(cincinnati|cleveland)-/, '');
       return `/${citySlug}-oh/${service.slug.trim()}`;

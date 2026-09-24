@@ -15,7 +15,7 @@ import { REPAIRS } from '../../data/repairs';
 import heroImage from '../../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
 import { BUSINESS_INFO } from '../../data/business';
 import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../../data/call-markets';
-import type { Location } from '../../lib/locations';
+import { getHubForLocation, type Location } from '../../lib/locations';
 import { buildLocationServiceCanonicalPath } from '../../lib/canonical';
 import { buildLocalizedServicePath, getLocationServiceCityName } from '../../lib/location-routing';
 import { getSiteOrigin } from '../../utils/site-origin';
@@ -59,6 +59,7 @@ const breadcrumbs = activeLocation
   ? [
       { label: 'Home', href: '/' },
       { label: 'Locations', href: '/locations' },
+      ...(isClevelandMarket && !activeLocation.isHub ? [{ label: 'Cleveland, OH', href: '/locations/cleveland' }] : []),
       { label: `${activeLocation.name}, ${activeLocation.state}`, href: `/locations/${activeLocation.slug}` },
       { label: 'Garage Door Repair' }
     ]
@@ -137,6 +138,9 @@ const heroCallMarkets = !activeLocation ? callMarkets : [];
 const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
 const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
 const businessEntityId = `${getSiteOrigin()}#business`;
+const providerAddress = isClevelandMarket && activeLocation
+  ? (await getHubForLocation(activeLocation))?.address
+  : BUSINESS_INFO.address;
 const callModalId = 'header-call-modal';
 const areaServed = activeLocation ? coverageAreaLabel : ['Cincinnati, Ohio', 'Cleveland, Ohio'];
 const schemaServiceName = activeLocation ? `Garage Door Repair in ${locationDisplayName}` : 'Garage Door Repair';
@@ -207,6 +211,7 @@ const localizedRepairs = REPAIRS.map((repair) => ({
   description={pageDescription}
   canonical={canonicalPath}
   callNowPhoneNumber={displayPhoneNumber}
+  market={activeLocation?.market === 'Cleveland Metro' ? 'Cleveland Metro' : undefined}
 >
   <Nav />
   <Breadcrumbs items={breadcrumbs} />
@@ -224,10 +229,7 @@ const localizedRepairs = REPAIRS.map((repair) => ({
         '@id': isClevelandMarket ? `${getSiteOrigin()}/locations/cleveland#local-business` : businessEntityId,
         telephone: displayPhoneNumber,
         email: BUSINESS_INFO.email,
-        address: {
-          '@type': 'PostalAddress',
-          ...(isClevelandMarket ? activeLocation?.address : BUSINESS_INFO.address)
-        },
+        ...(providerAddress ? { address: { '@type': 'PostalAddress', ...providerAddress } } : {}),
         ...(isClevelandMarket ? { openingHoursSpecification: [{
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -532,12 +534,10 @@ const localizedRepairs = REPAIRS.map((repair) => ({
       </div>
 
       <div class="grid gap-6 md:grid-cols-2">
-        {filterStrings([
-          localizedNeighborhoodLine,
-          localizedZipLine,
-          localizedDispatchNote,
-          localizedAccessNote,
-        ]).map((line) => (
+        {filterStrings(isClevelandMarket && activeLocation && !activeLocation.isHub
+          ? [activeLocation.localIntro, activeLocation.localIssues, activeLocation.localAdvice, localizedZipLine]
+          : [localizedNeighborhoodLine, localizedZipLine, localizedDispatchNote, localizedAccessNote]
+        ).map((line) => (
           <div class="bg-card border border-ink/5 rounded-2xl p-6 shadow-sm">
             <p class="text-ink/80 leading-relaxed">{line}</p>
           </div>

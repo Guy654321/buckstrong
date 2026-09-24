@@ -1,5 +1,12 @@
 import type { Location } from './locations';
 
+const CLEVELAND_SUBURB_SERVICES = new Set([
+  'garage-door-repair',
+  'garage-door-installation',
+  'opener-repair',
+  'commercial-jobs',
+]);
+
 function normalizeSlug(value: string | undefined | null): string {
   return typeof value === 'string' ? value.trim() : '';
 }
@@ -19,11 +26,13 @@ export function buildLocalizedServicePath(
   serviceSlug: string | undefined | null,
 ): string {
   const normalizedLocation = normalizeSlug(locationSlug);
-  // Cleveland suburb pages connect to the market's service hubs. Generating a
-  // second copy of every service for each suburb would create doorway pages.
-  const serviceLocation = normalizedLocation.startsWith('cleveland-') ? 'cleveland' : normalizedLocation;
-  const citySegment = buildLocationCitySegment(serviceLocation);
   const normalizedServiceSlug = normalizeSlug(serviceSlug);
+  // Core services have location pages. Specialized repair details remain on
+  // the Cleveland market pages unless a local detail route is published.
+  const serviceLocation = normalizedLocation.startsWith('cleveland-') && !CLEVELAND_SUBURB_SERVICES.has(normalizedServiceSlug)
+    ? 'cleveland'
+    : normalizedLocation;
+  const citySegment = buildLocationCitySegment(serviceLocation);
 
   if (!citySegment) {
     return normalizedServiceSlug ? `/${normalizedServiceSlug}` : '/';

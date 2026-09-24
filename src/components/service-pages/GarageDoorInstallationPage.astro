@@ -17,7 +17,7 @@ import completeSystemImage from '../../assets/images/repairs/finished-installati
 import finishedResultsImage from '../../assets/images/garage-door-installation.jpg';
 import { BUSINESS_INFO } from '../../data/business';
 import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../../data/call-markets';
-import type { Location } from '../../lib/locations';
+import { getHubForLocation, type Location } from '../../lib/locations';
 import { buildLocationServiceCanonicalPath } from '../../lib/canonical';
 import { getSiteOrigin } from '../../utils/site-origin';
 
@@ -58,6 +58,7 @@ const breadcrumbs = activeLocation
   ? [
       { label: 'Home', href: '/' },
       { label: 'Locations', href: '/locations' },
+      ...(isClevelandMarket && !activeLocation.isHub ? [{ label: 'Cleveland, OH', href: '/locations/cleveland' }] : []),
       { label: `${activeLocation.name}, ${activeLocation.state}`, href: `/locations/${activeLocation.slug}` },
       { label: 'Garage Door Installation' }
     ]
@@ -115,6 +116,9 @@ const heroCallMarkets = !activeLocation ? callMarkets : [];
 const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
 const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
 const businessEntityId = `${getSiteOrigin()}#business`;
+const providerAddress = isClevelandMarket && activeLocation
+  ? (await getHubForLocation(activeLocation))?.address
+  : BUSINESS_INFO.address;
 const callModalId = 'header-call-modal';
 const areaServed = activeLocation
   ? coverageAreaLabel
@@ -242,6 +246,7 @@ const expertiseCopy = activeLocation
   description={pageDescription}
   canonical={canonicalPath}
   callNowPhoneNumber={displayPhoneNumber}
+  market={activeLocation?.market === 'Cleveland Metro' ? 'Cleveland Metro' : undefined}
 >
   <Nav />
   <Breadcrumbs items={breadcrumbs} />
@@ -259,10 +264,7 @@ const expertiseCopy = activeLocation
         '@id': isClevelandMarket ? `${getSiteOrigin()}/locations/cleveland#local-business` : businessEntityId,
         telephone: displayPhoneNumber,
         email: BUSINESS_INFO.email,
-        address: {
-          '@type': 'PostalAddress',
-          ...(isClevelandMarket ? activeLocation?.address : BUSINESS_INFO.address)
-        },
+        ...(providerAddress ? { address: { '@type': 'PostalAddress', ...providerAddress } } : {}),
         ...(isClevelandMarket ? { openingHoursSpecification: [{
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -379,6 +381,9 @@ const expertiseCopy = activeLocation
       <div class="mx-auto max-w-3xl text-center">
         <h2 class="text-3xl font-bold text-ink sm:text-4xl">{processIntroHeading}</h2>
         <p class="mt-6 text-lg text-ink/75 leading-relaxed">{processIntroCopy}</p>
+        {isClevelandMarket && activeLocation && !activeLocation.isHub && activeLocation.localAdvice && (
+          <p class="mt-4 text-lg text-ink/75 leading-relaxed">{activeLocation.localAdvice}</p>
+        )}
         <p class="mt-4 text-lg text-ink/75 leading-relaxed">{processBodyCopy}</p>
       </div>
     </div>

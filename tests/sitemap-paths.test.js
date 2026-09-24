@@ -69,7 +69,7 @@ test('buildSitemapPathCandidates includes location service URLs for all location
   assert(result.includes('/blog/seasonal-garage-maintenance'));
 });
 
-test('Cleveland suburbs receive location URLs without duplicate service pages', () => {
+test('Cleveland suburbs receive their own core service URLs', () => {
   const locations = [
     { slug: 'cincinnati-mason', isHub: false },
     { slug: 'cleveland', isHub: true },
@@ -81,7 +81,27 @@ test('Cleveland suburbs receive location URLs without duplicate service pages', 
   assert(paths.includes('/locations/cleveland-westlake'));
   assert(paths.includes('/cleveland-oh/garage-door-repair'));
   assert(paths.includes('/mason-oh/garage-door-repair'));
-  assert(!paths.includes('/westlake-oh/garage-door-repair'));
+  assert(paths.includes('/westlake-oh/garage-door-repair'));
+});
+
+test('Cleveland suburb sitemaps include core services but only published market repair details', () => {
+  const paths = buildLocationServicePaths(
+    [{ slug: 'cleveland-cleveland-heights', isHub: false }],
+    [
+      { slug: 'garage-door-repair' },
+      { slug: 'garage-door-installation' },
+      { slug: 'opener-repair' },
+      { slug: 'commercial-jobs' },
+      { slug: 'garage-door-spring-replacement' },
+    ],
+  );
+
+  assert.deepEqual(paths.sort(), [
+    '/cleveland-heights-oh/garage-door-repair',
+    '/cleveland-heights-oh/garage-door-installation',
+    '/cleveland-heights-oh/opener-repair',
+    '/cleveland-heights-oh/commercial-jobs',
+  ].sort());
 });
 
 test('Cleveland sitemap includes published market and repair detail pages', () => {

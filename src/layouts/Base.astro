@@ -23,6 +23,7 @@ export interface Props {
   articleType?: 'article' | 'website';
   schemaType?: 'LocalBusiness' | 'Service' | 'Article' | 'FAQPage';
   callNowPhoneNumber?: string;
+  market?: 'Cleveland Metro' | 'Cincinnati Metro';
 }
 
 const {
@@ -36,7 +37,8 @@ const {
   modifiedDate,
   articleType = 'website',
   schemaType = 'LocalBusiness',
-  callNowPhoneNumber
+  callNowPhoneNumber,
+  market
 } = Astro.props;
 
 const siteOrigin = getSiteOrigin();
@@ -176,7 +178,7 @@ const normalizedDescriptionInput = normalizeBrandMentions(description);
 const normalizedAuthor = normalizeBrandMentions(author);
 
 const fullTitle = buildTitle(normalizedTitleInput);
-const isClevelandPage = Astro.url.pathname.startsWith('/locations/cleveland') || Astro.url.pathname.startsWith('/cleveland-oh/') || Astro.url.pathname.replace(/\/$/, '').endsWith('-cleveland-oh');
+const isClevelandPage = market === 'Cleveland Metro' || Astro.url.pathname.startsWith('/locations/cleveland') || Astro.url.pathname.startsWith('/cleveland-oh/') || Astro.url.pathname.replace(/\/$/, '').endsWith('-cleveland-oh');
 const isGeneralServicePage = Astro.url.pathname.startsWith('/services/');
 const normalizedDescription = normalizeDescription(normalizedDescriptionInput, fullTitle, isClevelandPage);
 const ogImageUrl = buildAbsoluteUrl(ogImage, siteOrigin);

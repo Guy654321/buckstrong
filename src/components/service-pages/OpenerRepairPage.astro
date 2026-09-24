@@ -18,7 +18,7 @@ import directDriveImage from '../../assets/images/repairs/opener-direct-drive.jp
 import screwDriveImage from '../../assets/images/repairs/opener-screw-drive.jpg';
 import { BUSINESS_INFO } from '../../data/business';
 import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../../data/call-markets';
-import type { Location } from '../../lib/locations';
+import { getHubForLocation, type Location } from '../../lib/locations';
 import { buildLocationServiceCanonicalPath } from '../../lib/canonical';
 import { getSiteOrigin } from '../../utils/site-origin';
 
@@ -54,6 +54,7 @@ const breadcrumbs = activeLocation
   ? [
       { label: 'Home', href: '/' },
       { label: 'Locations', href: '/locations' },
+      ...(isClevelandMarket && !activeLocation.isHub ? [{ label: 'Cleveland, OH', href: '/locations/cleveland' }] : []),
       { label: `${activeLocation.name}, ${activeLocation.state}`, href: `/locations/${activeLocation.slug}` },
       { label: 'Garage Door Opener Repair' }
     ]
@@ -107,6 +108,9 @@ const heroCallMarkets = !activeLocation ? callMarkets : [];
 const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
 const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
 const businessEntityId = `${getSiteOrigin()}#business`;
+const providerAddress = isClevelandMarket && activeLocation
+  ? (await getHubForLocation(activeLocation))?.address
+  : BUSINESS_INFO.address;
 const callModalId = 'header-call-modal';
 const areaServed = activeLocation ? coverageAreaLabel : ['Cincinnati, Ohio', 'Cleveland, Ohio'];
 const schemaServiceName = activeLocation ? `Garage Door Opener Repair in ${locationDisplayName}` : 'Garage Door Opener Repair';
@@ -136,6 +140,7 @@ const contactSubtitle = activeLocation
   description={pageDescription}
   canonical={canonicalPath}
   callNowPhoneNumber={displayPhoneNumber}
+  market={activeLocation?.market === 'Cleveland Metro' ? 'Cleveland Metro' : undefined}
   schemaType="Service"
 >
   <Nav />
@@ -154,10 +159,7 @@ const contactSubtitle = activeLocation
         '@id': isClevelandMarket ? `${getSiteOrigin()}/locations/cleveland#local-business` : businessEntityId,
         telephone: displayPhoneNumber,
         email: BUSINESS_INFO.email,
-        address: {
-          '@type': 'PostalAddress',
-          ...(isClevelandMarket ? activeLocation?.address : BUSINESS_INFO.address)
-        },
+        ...(providerAddress ? { address: { '@type': 'PostalAddress', ...providerAddress } } : {}),
         ...(isClevelandMarket ? { openingHoursSpecification: [{
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -421,6 +423,9 @@ const contactSubtitle = activeLocation
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div>
           <h2 class="text-3xl font-bold text-ink mb-6">Why Choose Our Opener Repair?</h2>
+          {isClevelandMarket && activeLocation && !activeLocation.isHub && activeLocation.localIssues && (
+            <p class="text-ink/80 leading-relaxed mb-6">{activeLocation.localIssues}</p>
+          )}
           <ul class="space-y-4">
             <li class="flex items-start">
               <Icon name="mdi:check-circle" size="24" class="text-accent mr-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
