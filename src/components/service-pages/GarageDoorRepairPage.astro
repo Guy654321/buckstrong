@@ -164,7 +164,9 @@ const inspectionCopy = activeLocation
   ? 'Our local technicians arrive prepared for emergencies with diagnostic tools and safety equipment. We perform a comprehensive inspection to identify all issues, not just the obvious problem, ensuring we address root causes.'
   : 'Our Ohio technicians arrive prepared for emergencies with diagnostic tools and safety equipment. We perform a comprehensive inspection to identify all issues, not just the obvious problem, ensuring we address root causes.';
 const faqIntro = activeLocation
-  ? `Quick answers to common questions from ${coverageAreaLabel} homeowners`
+  ? isClevelandMarket
+    ? `Answers to common garage door repair questions for homeowners in ${locationDisplayName}.`
+    : `Quick answers to common questions from ${coverageAreaLabel} homeowners`
   : 'Quick answers for homeowners in Cincinnati and Cleveland';
 const contactTitle = activeLocation
   ? `Need Garage Door Repair in ${locationDisplayName}?`
@@ -528,7 +530,9 @@ const localizedRepairs = REPAIRS.map((repair) => ({
         </h2>
         <p class="text-lg text-ink/70 leading-relaxed">
           {activeLocation
-            ? `Here are the details we keep on file for ${coverageAreaLabel} so every visit is faster and more relevant to the properties we service most.`
+            ? isClevelandMarket
+              ? `Garage doors and home layouts vary across ${coverageAreaLabel}. These notes highlight what to check when planning a repair.`
+              : `Here are the details we keep on file for ${coverageAreaLabel} so every visit is faster and more relevant to the properties we service most.`
             : 'We record property access details and past repairs to make follow-up visits easier.'}
         </p>
       </div>
