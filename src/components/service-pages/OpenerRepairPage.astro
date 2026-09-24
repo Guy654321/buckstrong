@@ -66,7 +66,7 @@ const locationDisplayName = activeLocation ? `${activeLocation.name}, ${activeLo
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
   ? isClevelandMarket ? `${locationDisplayName} and nearby communities` : `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
-  : 'Cincinnati, Ohio';
+  : 'Cincinnati and Cleveland, Ohio';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
   items.filter((item): item is string => Boolean(item));
@@ -86,19 +86,19 @@ const zipCoverageLabel =
 
 const pageTitle = activeLocation
   ? `Garage Door Opener Repair in ${locationDisplayName} | Buck Strong Garage Doors`
-  : 'Garage Door Opener Repair in Cincinnati, Ohio | Buck Strong Garage Doors';
+  : 'Garage Door Opener Repair | Cincinnati & Cleveland | Buck Strong';
 const pageDescription = activeLocation
   ? isClevelandMarket ? `Garage door opener repair for ${coverageAreaLabel}. We troubleshoot motors, remotes, sensors, and travel settings. Call to confirm scheduling.` : `Certified opener repair specialists serving ${coverageAreaLabel}. Motors, remotes, sensors, and smart upgrades with same-day appointments.`
-  : 'Certified opener repair specialists serving the Cincinnati metro. Motors, remotes, sensors, and smart upgrades with same-day appointments.';
+  : 'Garage door opener repair in Cincinnati and Cleveland. We check motors, remotes, sensors, travel settings, and door balance before recommending a fix.';
 const heroHeading = activeLocation
   ? `Garage Door Opener Repair in ${locationDisplayName}`
-  : 'Garage Door Opener Repair in Cincinnati, Ohio';
+  : 'Garage Door Opener Repair';
 const heroSubheading = activeLocation
   ? isClevelandMarket ? `If your opener stalls, reverses, or stops responding, the problem may be in the door or the controls. For homeowners in ${coverageAreaLabel}, we check balance, sensors, remotes, travel settings, and the motor before recommending a repair or replacement.` : `Local technicians troubleshoot motors, keypads, sensors, and smart controls across ${coverageAreaLabel} with fully stocked trucks and same-day appointments.`
-  : 'Local technicians troubleshoot motors, keypads, sensors, and smart controls across the Cincinnati metro with fully stocked trucks and same-day appointments.';
+  : 'An opener that stalls, reverses, or stops responding may have a motor, control, sensor, or door balance problem. We troubleshoot the complete system for homeowners in Greater Cincinnati and Greater Cleveland.';
 const heroAlt = activeLocation
   ? `Garage door opener repair technician supporting homeowners in ${coverageAreaLabel}`
-  : 'Garage door opener repair technician supporting homeowners across Cincinnati, Ohio';
+  : 'Technician inspecting a residential garage door opener';
 const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
 const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
 const callMarkets = CALL_MARKETS;
@@ -108,18 +108,18 @@ const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
 const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
 const businessEntityId = `${getSiteOrigin()}#business`;
 const callModalId = 'header-call-modal';
-const areaServed = activeLocation ? coverageAreaLabel : 'Cincinnati, Ohio';
+const areaServed = activeLocation ? coverageAreaLabel : ['Cincinnati, Ohio', 'Cleveland, Ohio'];
 const schemaServiceName = activeLocation ? `Garage Door Opener Repair in ${locationDisplayName}` : 'Garage Door Opener Repair';
 const schemaDescription = activeLocation
   ? `Professional garage door opener repair services across ${coverageAreaLabel} including motors, remotes, sensors, programming, and smart opener installations.`
-  : 'Professional garage door opener repair services across the Cincinnati metro including motors, remotes, sensors, programming, and smart opener installations.';
+  : 'Garage door opener repair across Greater Cincinnati and Greater Cleveland, including motors, remotes, sensors, programming, and smart controls.';
 const canonicalPath = activeLocation
   ? buildLocationServiceCanonicalPath(activeLocation.slug, 'opener-repair')
   : '/services/opener-repair';
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const whyChooseCoverage = activeLocation
   ? isClevelandMarket ? `Opener troubleshooting across ${coverageAreaLabel}` : `Same-day service for most repairs across ${coverageAreaLabel}`
-  : 'Same-day service for most repairs across the Cincinnati metro';
+  : 'Opener troubleshooting in both service markets';
 const faqIntro = activeLocation
   ? `Helpful answers about repairing and upgrading garage door openers for ${coverageAreaLabel} homeowners`
   : 'Helpful answers about repairing and upgrading garage door openers';
@@ -249,7 +249,7 @@ const contactSubtitle = activeLocation
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={beltDriveImage}
-              alt={`Quiet belt-drive garage door opener with DC motor in ${locationDisplayName ?? 'Cincinnati, Ohio'}`}
+              alt={`Quiet belt-drive garage door opener with DC motor${locationDisplayName ? ` in ${locationDisplayName}` : ''}`}
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -291,7 +291,7 @@ const contactSubtitle = activeLocation
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={chainDriveImage}
-              alt={`Chain-drive garage door opener with durable metal trolley in ${locationDisplayName ?? 'Cincinnati, Ohio'}`}
+              alt={`Chain-drive garage door opener with durable metal trolley${locationDisplayName ? ` in ${locationDisplayName}` : ''}`}
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -333,7 +333,7 @@ const contactSubtitle = activeLocation
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={directDriveImage}
-              alt={`Direct-drive jackshaft opener mounted beside garage door in ${locationDisplayName ?? 'Cincinnati, Ohio'}`}
+              alt={`Direct-drive jackshaft opener mounted beside garage door${locationDisplayName ? ` in ${locationDisplayName}` : ''}`}
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -375,7 +375,7 @@ const contactSubtitle = activeLocation
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={screwDriveImage}
-              alt={`Screw-drive garage door opener with threaded steel rod in ${locationDisplayName ?? 'Cincinnati, Ohio'}`}
+              alt={`Screw-drive garage door opener with threaded steel rod${locationDisplayName ? ` in ${locationDisplayName}` : ''}`}
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -515,11 +515,11 @@ const contactSubtitle = activeLocation
     paragraphs={filterStrings([
       activeLocation
         ? `Technicians serving ${coverageAreaLabel} repair belt-drive, chain-drive, and jackshaft openers along with keypads, safety sensors, and wall consoles. We stock gears, rail assemblies, logic boards, and travel modules so most fixes stay on one visit.`
-        : 'Technicians across the Cincinnati metro repair belt-drive, chain-drive, and jackshaft openers along with keypads, safety sensors, and wall consoles. We stock gears, rail assemblies, logic boards, and travel modules so most fixes stay on one visit.',
+        : 'Technicians serving Cincinnati and Cleveland troubleshoot belt-drive, chain-drive, and jackshaft openers along with keypads, safety sensors, and wall consoles.',
       'Every opener visit includes force and travel calibration, photo eye alignment, and backup battery tests to keep doors operating safely. We also set up smart controls, Wi-Fi connectivity, and myQ-style integrations when requested.',
       activeLocation
         ? `Same-day appointments are available throughout ${coverageAreaLabel} for doors stuck open, reversing unexpectedly, or failing to respond to remotes.`
-        : 'Same-day appointments are available across the Cincinnati metro for doors stuck open, reversing unexpectedly, or failing to respond to remotes.',
+        : 'Call with your address and opener issue to check appointment availability in Cincinnati or Cleveland.',
       surroundingAreasLabel
     ])}
     bullets={filterStrings([

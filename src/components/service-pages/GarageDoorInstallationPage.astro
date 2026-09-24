@@ -72,7 +72,7 @@ const locationDisplayName = activeLocation && serviceCityName
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
   ? isClevelandMarket ? `${locationDisplayName} and nearby communities` : `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
-  : 'Cincinnati, Ohio neighborhoods';
+  : 'Cincinnati and Cleveland, Ohio';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
   items.filter((item): item is string => Boolean(item));
@@ -95,19 +95,19 @@ const pageTitle = activeLocation && serviceCityName
   ? isClevelandMarket
     ? `Garage Door Installation in ${serviceCityName}, ${activeLocation.state} | Buck Strong Garage Doors`
     : `Garage Door Installation ${serviceCityName} | Buck Strong Garage Doors`
-  : 'Cincinnati Garage Door Installation | Buck Strong Garage Doors';
+  : 'Garage Door Installation | Cincinnati & Cleveland | Buck Strong';
 const pageDescription = activeLocation && serviceCityName
   ? isClevelandMarket ? `Garage door installation in ${serviceCityName}, ${activeLocation.state}. Compare steel, insulated, and carriage-style options. Call ${displayPhoneNumber} to plan a quote.` : `Professional garage door installation in ${serviceCityName}, ${activeLocation.state}. 5.0-star local team. Choose from modern, steel, or carriage doors. Call ${displayPhoneNumber} for a free quote!`
-  : 'Expert garage door installation teams serving Cincinnati, Ohio with custom sizing, premium hardware, and comprehensive safety testing.';
+  : 'Garage door installation in Greater Cincinnati and Greater Cleveland. Compare styles and insulation, confirm measurements, and get a clear installation plan.';
 const heroHeading = activeLocation
   ? `Garage Door Installation in ${locationDisplayName}`
-  : 'Garage Door Installation for Cincinnati, Ohio';
+  : 'Garage Door Installation';
 const heroSubheading = activeLocation
   ? isClevelandMarket ? `A new garage door should fit the opening, operate safely, and suit the home. For homeowners in ${coverageAreaLabel}, we review door styles, insulation, hardware, and opener compatibility, then confirm measurements before installation.` : `Precision crews install custom doors across ${coverageAreaLabel}. Choose carriage house, contemporary glass, or insulated steel options that fit your climate.`
-  : 'Precision crews install custom doors for Jefferson, Fayette, Boone, Kenton, and Campbell County homeowners. Choose carriage house, contemporary glass, or insulated steel options that fit your climate.';
+  : 'Buck Strong installs garage doors for homeowners across Greater Cincinnati and Greater Cleveland. We help you choose a door that fits your home, confirm the measurements, and install and test the complete system.';
 const heroAlt = activeLocation
   ? `New garage door installation completed for homeowners in ${coverageAreaLabel}`
-  : 'New garage door installation completed for homeowners in Cincinnati, Ohio neighborhoods';
+  : 'New garage door installed on a residential home';
 const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
 const callMarkets = CALL_MARKETS;
 const defaultCallMarket = DEFAULT_CALL_MARKET;
@@ -118,21 +118,21 @@ const businessEntityId = `${getSiteOrigin()}#business`;
 const callModalId = 'header-call-modal';
 const areaServed = activeLocation
   ? coverageAreaLabel
-  : 'Cincinnati, Ohio';
+  : ['Cincinnati, Ohio', 'Cleveland, Ohio'];
 const schemaServiceName = activeLocation ? `Garage Door Installation in ${locationDisplayName}` : 'Garage Door Installation';
 const schemaDescription = activeLocation
   ? `Professional garage door installation services across ${coverageAreaLabel} featuring custom measurements, premium hardware, insulation upgrades, and safety testing.`
-  : 'Professional garage door installation services across Cincinnati, Ohio featuring custom measurements, premium hardware, insulation upgrades, and safety testing.';
+  : 'Garage door installation across Greater Cincinnati and Greater Cleveland, including measurements, door selection, hardware, and safety testing.';
 const canonicalPath = activeLocation
   ? buildLocationServiceCanonicalPath(activeLocation.slug, 'garage-door-installation')
   : '/services/garage-door-installation';
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const installationIntroCopy = activeLocation
   ? `From first measurement to final walkthrough, we manage every detail so your new garage door looks great and runs smoothly for ${coverageAreaLabel}.`
-  : 'From first measurement to final walkthrough, we manage every detail so your new garage door looks great and runs smoothly for Cincinnati, Ohio homeowners.';
+  : 'From the first measurement to the final walkthrough, we handle door selection, installation, and safety testing for homeowners in both service markets.';
 const faqIntro = activeLocation
   ? `Answers to common installation questions from homeowners in ${coverageAreaLabel}.`
-  : 'Answers to common installation questions from homeowners across Cincinnati, Ohio.';
+  : 'Answers to common garage door installation questions.';
 const contactTitle = activeLocation
   ? `Request an Installation Quote in ${locationDisplayName}`
   : 'Request an Installation Quote';
@@ -145,9 +145,9 @@ const galleryCards = [
     title: 'Expert Installation Process',
     description: activeLocation
       ? `On-site consultations, precise measurements, and safety-first crews deliver a seamless installation for homeowners across ${coverageAreaLabel}.`
-      : 'On-site consultations, precise measurements, and safety-first crews deliver a seamless installation for Cincinnati, Ohio homeowners.',
+      : 'On-site consultations, precise measurements, and safety checks help make installation straightforward for homeowners in both markets.',
     image: expertProcessImage,
-    alt: `Completed garage door installation on a suburban home in ${locationDisplayName ?? 'Cincinnati, Ohio'}`
+    alt: `Completed garage door installation on a suburban home${locationDisplayName ? ` in ${locationDisplayName}` : ''}`
   },
   {
     title: 'Complete System Installation',
@@ -155,21 +155,21 @@ const galleryCards = [
       ? `We install openers, balance springs, and upgrade hardware so every component works together for dependable performance in ${coverageAreaLabel}.`
       : 'We install openers, balance springs, and upgrade hardware so every component works together for dependable performance.',
     image: completeSystemImage,
-    alt: `Technicians completing a full garage door system install in ${locationDisplayName ?? 'Cincinnati, Ohio'}`
+    alt: `Technicians completing a full garage door system installation${locationDisplayName ? ` in ${locationDisplayName}` : ''}`
   },
   {
     title: 'Beautiful Finished Results',
     description: activeLocation
       ? `Premium materials, curated styles, and meticulous finishing touches give ${coverageAreaLabel} homes instant curb appeal.`
-      : 'Premium materials, curated styles, and meticulous finishing touches give homes across Cincinnati, Ohio instant curb appeal.',
+      : 'Choose durable materials and a style that complements your home, with careful fitting and finishing on installation day.',
     image: finishedResultsImage,
-    alt: `Elegant garage door upgrade on a brick home in ${locationDisplayName ?? 'Cincinnati, Ohio'}`
+    alt: `Garage door upgrade on a brick home${locationDisplayName ? ` in ${locationDisplayName}` : ''}`
   }
   ] satisfies Array<{ title: string; description: string; image: ImageMetadata; alt: string }>;
 
 const processIntroHeading = activeLocation
   ? `Our ${locationDisplayName} Installation Process`
-  : 'Our Cincinnati Installation Process';
+  : 'Our Installation Process';
 
 const processIntroCopy = activeLocation
   ? `Choosing a new garage door is a big investment in your ${locationDisplayName} home. Our installers start with a simple design consultation. We confirm measurements, review accessories, and explain options so you feel confident before we begin.`
@@ -181,7 +181,7 @@ const processBodyCopy = activeLocation
 
 const doorTypesHeading = activeLocation
   ? `Garage Door Types We Install in ${locationDisplayName}`
-  : 'Garage Door Types We Install in Cincinnati, Ohio';
+  : 'Garage Door Types We Install';
 
 const doorTypes = [
   {
@@ -230,11 +230,11 @@ const whatsIncludedItems = [
 
 const expertiseHeading = activeLocation
   ? `Local Expertise ${coverageAreaLabel} Can Trust`
-  : 'Cincinnati Expertise You Can Trust';
+  : 'Installation Support in Both Markets';
 
 const expertiseCopy = activeLocation
   ? `Buck Strong Garage Doors has served ${coverageAreaLabel} homeowners for more than a decade. Our responsive teams handle scheduling, permitting, and on-site coordination so your project stays on time and on budget. Whether you need insulated carriage house doors or a sleek modern upgrade, we make sure you love the results.`
-  : 'Buck Strong Garage Doors has served homeowners across Cincinnati, Ohio for more than a decade. Our responsive teams handle scheduling, permitting, and on-site coordination so your project stays on time and on budget. Whether you need insulated carriage house doors or a sleek modern upgrade, we make sure you love the results.';
+  : 'Buck Strong helps homeowners in Cincinnati and Cleveland choose and install garage doors that fit their homes. We review the opening, door style, insulation, hardware, and opener compatibility before installation, then test the finished system with you.';
 ---
 
 <Base
@@ -305,11 +305,6 @@ const expertiseCopy = activeLocation
       <p class="text-sm font-semibold uppercase tracking-[0.3em] text-white/80 mb-4">Professional Installation</p>
       <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">{heroHeading}</h1>
       <p class="text-xl text-white/95 mb-8 max-w-3xl mx-auto leading-relaxed">{heroSubheading}</p>
-      {!activeLocation && (
-        <p class="text-base text-white/85 mb-8 max-w-3xl mx-auto leading-relaxed">
-          We specialize in garage door installation in Cincinnati, Ohio, delivering the same dependable craftsmanship across the metro.
-        </p>
-      )}
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         {hasGenericCallCTA && heroDefaultCallMarket ? (
           <button
@@ -481,11 +476,11 @@ const expertiseCopy = activeLocation
     paragraphs={filterStrings([
       activeLocation
         ? `Homeowners in ${coverageAreaLabel} can choose insulated steel, carriage-house, or modern glass garage doors that match local weather and architecture. We confirm measurements, track clearances, and opener compatibility before ordering.`
-        : 'Homeowners across Cincinnati can choose insulated steel, carriage-house, or modern glass garage doors that match local weather and architecture. We confirm measurements, track clearances, and opener compatibility before ordering.',
+        : 'Homeowners in Cincinnati and Cleveland can compare insulated steel, carriage-house, and modern glass doors. We confirm measurements, track clearance, and opener compatibility before ordering.',
       'Installations include spring and hardware balancing, weather-seal upgrades, and haul-away of removed materials. We manage HOA approvals, permits, and access details to keep projects on schedule.',
       activeLocation
         ? `After installation, we share maintenance tips suited to ${coverageAreaLabel} humidity and temperature swings. Short routines keep the door quiet and efficient.`
-        : 'After installation, we share maintenance tips suited to Cincinnati humidity and temperature swings. Short routines keep the door quiet and efficient.',
+        : 'After installation, we show you how to operate and care for the new door and opener. Basic maintenance helps keep the system running smoothly.',
       surroundingAreasLabel
     ])}
     bullets={filterStrings([

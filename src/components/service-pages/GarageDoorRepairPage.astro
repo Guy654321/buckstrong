@@ -73,7 +73,7 @@ const locationDisplayName = activeLocation && serviceCityName
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
   ? isClevelandMarket ? `${locationDisplayName} and nearby communities` : `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
-  : 'Cincinnati, Ohio';
+  : 'Cincinnati and Cleveland, Ohio';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
   items.filter((item): item is string => Boolean(item));
@@ -104,7 +104,7 @@ const localizedZipLine = zipCodes.length > 0
 
 const localizedDispatchNote = activeLocation
   ? `${locationDisplayName} homeowners are routed through our ${activeLocation.parentHub?.trim() || activeLocation.market} dispatch team for faster scheduling and stocked parts.`
-  : 'Cincinnati homeowners are routed through our dispatch team for faster scheduling and stocked parts.';
+  : 'Tell us your city and address so we can route your request to the right local team.';
 
 const localizedAccessNote = activeLocation
   ? `We keep site notes for ${locationDisplayName} properties—gate codes, parking details, and HOA or property manager contacts—so follow-up repairs stay smooth.`
@@ -115,21 +115,21 @@ const pageTitle = activeLocation && serviceCityName
   ? isClevelandMarket
     ? `Garage Door Repair in ${serviceCityName}, ${activeLocation.state} | Buck Strong Garage Doors`
     : `Garage Door Repair ${serviceCityName} ${activeLocation.state} | Buck Strong Garage Doors`
-  : 'Garage Door Repair in Cincinnati, Ohio | Buck Strong Garage Doors';
+  : 'Garage Door Repair | Cincinnati & Cleveland | Buck Strong';
 const pageDescription = activeLocation && serviceCityName
   ? isClevelandMarket ? `Garage door repair in ${serviceCityName}, ${activeLocation.state} for springs, cables, tracks, and openers. Call ${displayPhoneNumber} to confirm availability.` : `Trusted garage door supplier offering same-day repair in ${serviceCityName}, ${activeLocation.state}. 5.0-star service for broken springs, openers, and cables. 24/7 emergency help. Call ${displayPhoneNumber}!`
-  : 'Trusted garage door supplier serving the Cincinnati metro with same-day service for springs, rollers, cables, tracks, and safety inspections.';
+  : 'Garage door repair in Greater Cincinnati and Greater Cleveland. We inspect springs, cables, rollers, tracks, and openers, then explain your repair options.';
 const heroHeading = activeLocation
   ? `Garage Door Repair in ${locationDisplayName}`
-  : 'Garage Door Repair in Cincinnati, Ohio';
+  : 'Garage Door Repair';
 const heroSubheading = activeLocation
   ? isClevelandMarket
     ? `A stuck or uneven garage door can involve more than the opener. For homeowners in ${coverageAreaLabel}, we inspect springs, cables, rollers, tracks, and safety features, then explain the repair options before work begins.`
     : `Professional garage door repair services for homeowners in ${coverageAreaLabel}. Springs, rollers, cables, tracks, and emergency fixes handled by trusted local crews.`
-  : 'Professional garage door repair services throughout the Cincinnati metro. Springs, rollers, cables, tracks, and emergency fixes handled by trusted local crews.';
+  : 'Buck Strong repairs garage doors across Greater Cincinnati and Greater Cleveland. Whether a spring has broken or a door is off track, we inspect the full system, explain the options, and help you schedule the right repair.';
 const heroAlt = activeLocation
   ? `Garage door repair technician assisting homeowners in ${coverageAreaLabel}`
-  : 'Garage door repair technician assisting homeowners across Cincinnati, Ohio';
+  : 'Garage door technician inspecting a residential door';
 const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
 const callMarkets = CALL_MARKETS;
 const defaultCallMarket = DEFAULT_CALL_MARKET;
@@ -138,30 +138,30 @@ const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
 const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
 const businessEntityId = `${getSiteOrigin()}#business`;
 const callModalId = 'header-call-modal';
-const areaServed = activeLocation ? coverageAreaLabel : 'Cincinnati, Ohio';
+const areaServed = activeLocation ? coverageAreaLabel : ['Cincinnati, Ohio', 'Cleveland, Ohio'];
 const schemaServiceName = activeLocation ? `Garage Door Repair in ${locationDisplayName}` : 'Garage Door Repair';
 const schemaDescription = activeLocation
   ? `Professional garage door repair services across ${coverageAreaLabel} including springs, rollers, cables, tracks, panels, and emergency repairs.`
-  : 'Professional garage door repair services across the Cincinnati metro including springs, rollers, cables, tracks, panels, and emergency repairs.';
+  : 'Garage door repair for homeowners across Greater Cincinnati and Greater Cleveland, including springs, cables, tracks, panels, and openers.';
 const canonicalPath = activeLocation
   ? buildLocationServiceCanonicalPath(activeLocation.slug, 'garage-door-repair')
   : '/services/garage-door-repair';
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const dailyServicesIntro = activeLocation
   ? isClevelandMarket ? `For homes across ${coverageAreaLabel}, a noisy or uneven door can involve several parts. We check rollers, tracks, cables, spring balance, and the opener before recommending the appropriate repair.` : `From historic neighborhoods to new builds across ${coverageAreaLabel}, we resolve noisy rollers, bent tracks, and uneven doors every day. We arrive in stocked trucks so we can replace broken torsion springs, snapped cables, worn hinges, and weatherstripping in one visit.`
-  : 'From Cincinnati, Ohio neighborhoods to cross-river communities, we resolve noisy rollers, bent tracks, and uneven doors every day. We arrive in stocked trucks so we can replace broken torsion springs, snapped cables, worn hinges, and weatherstripping in one visit.';
+  : 'Noisy rollers, bent tracks, and uneven doors can have several causes. Our team serves homeowners in both Cincinnati and Cleveland and checks the working parts before recommending a repair.';
 const emergencyServiceIntro = activeLocation
   ? isClevelandMarket ? `If a door is stuck open or a cable has slipped in ${coverageAreaLabel}, stop using it and call to check the next available visit. We can also discuss opener repairs and upgrades.` : `Need emergency help tonight? Call for same-day garage door repair anywhere in ${coverageAreaLabel}. We also support opener repair and smart-home upgrades across nearby communities.`
-  : 'Need emergency help tonight? Call for same-day garage door repair anywhere in Cincinnati, Ohio. We also support opener repair and smart-home upgrades across surrounding suburbs and cross-river communities.';
+  : 'If your door is stuck open, closed, or moving unevenly, call with your address and a description of the problem. We will confirm the next available appointment in your area.';
 const whyChooseCoverage = activeLocation
   ? isClevelandMarket ? `Service requests across ${coverageAreaLabel}` : `Same-day emergency repairs throughout ${coverageAreaLabel}`
-  : 'Same-day emergency repairs throughout Cincinnati, Ohio';
+  : 'Emergency repair requests in both service markets';
 const inspectionCopy = activeLocation
   ? 'Our local technicians arrive prepared for emergencies with diagnostic tools and safety equipment. We perform a comprehensive inspection to identify all issues, not just the obvious problem, ensuring we address root causes.'
   : 'Our Ohio technicians arrive prepared for emergencies with diagnostic tools and safety equipment. We perform a comprehensive inspection to identify all issues, not just the obvious problem, ensuring we address root causes.';
 const faqIntro = activeLocation
   ? `Quick answers to common questions from ${coverageAreaLabel} homeowners`
-  : 'Quick answers to common questions from Cincinnati, Ohio homeowners';
+  : 'Quick answers for homeowners in Cincinnati and Cleveland';
 const contactTitle = activeLocation
   ? `Need Garage Door Repair in ${locationDisplayName}?`
   : 'Need Garage Door Repair?';
@@ -174,7 +174,7 @@ const faqs = [
     question: isClevelandMarket ? 'How soon can I book emergency garage door repair?' : 'Do you offer same-day emergency garage door repair?',
     answer: activeLocation
       ? isClevelandMarket ? `Call us with your address and the door problem. We will confirm the next available appointment for ${coverageAreaLabel} and explain what to do while you wait.` : `Yes. Our experienced technicians serving ${coverageAreaLabel} are available for same-day and after-hours service, and most emergency repairs are completed during the initial visit.`
-      : 'Yes. Our Cincinnati technicians are available for same-day and after-hours service, and most emergency repairs are completed during the initial visit.'
+      : 'Call with your address and the door problem. We will confirm availability for your area and help you plan the next step.'
   },
   {
     question: 'What types of parts do you carry on your service trucks?',
@@ -195,7 +195,7 @@ const faqs = [
 
 const localizedRepairs = REPAIRS.map((repair) => ({
   ...repair,
-  alt: isClevelandMarket ? repair.alt.replaceAll('Cincinnati, Ohio', 'Cleveland, Ohio') : repair.alt,
+  alt: activeLocation ? isClevelandMarket ? repair.alt.replaceAll('Cincinnati, Ohio', 'Cleveland, Ohio') : repair.alt : repair.alt.replaceAll('Cincinnati, Ohio', 'Ohio'),
   href: activeLocation
     ? buildLocalizedServicePath(activeLocation.slug, `garage-door-${repair.slug}`)
     : repair.href,
@@ -525,7 +525,7 @@ const localizedRepairs = REPAIRS.map((repair) => ({
         <p class="text-lg text-ink/70 leading-relaxed">
           {activeLocation
             ? `Here are the details we keep on file for ${coverageAreaLabel} so every visit is faster and more relevant to the properties we service most.`
-            : 'Here are the details we keep on file for Cincinnati homeowners so every visit is faster and more relevant to the properties we service most.'}
+            : 'We record property access details and past repairs to make follow-up visits easier.'}
         </p>
       </div>
 
@@ -591,7 +591,7 @@ const localizedRepairs = REPAIRS.map((repair) => ({
       'Every appointment includes balance testing, photo eye calibration, fastener checks, and weather-seal inspections. We record access preferences, HOA requirements, and past repairs so future visits stay fast.',
       activeLocation
         ? `Emergency scheduling is available across ${coverageAreaLabel}. If your door is stuck open or closed, we secure the opening, complete safety checks, and leave written notes for your records.`
-        : 'Emergency scheduling is available across the Cincinnati metro. If your door is stuck open or closed, we secure the opening, complete safety checks, and leave written notes for your records.',
+        : 'If your door is stuck open or closed, call for availability in Cincinnati or Cleveland. We inspect the system, explain the repair, and test safe operation before leaving.',
       surroundingAreasLabel
     ])}
     bullets={filterStrings([
