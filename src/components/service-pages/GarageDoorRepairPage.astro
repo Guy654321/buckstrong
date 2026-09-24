@@ -212,7 +212,7 @@ const localizedRepairs = REPAIRS.map((repair) => ({
   title={pageTitle}
   description={pageDescription}
   canonical={canonicalPath}
-  callNowPhoneNumber={displayPhoneNumber}
+  callNowPhoneNumber={activeLocation ? displayPhoneNumber : undefined}
   market={activeLocation?.market === 'Cleveland Metro' ? 'Cleveland Metro' : undefined}
 >
   <Nav />

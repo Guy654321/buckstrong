@@ -55,15 +55,16 @@ const detailPath = (slug: string) => {
   if (group === 'commercial') return `/garage-door-commercial-${slug}-cleveland-oh`;
   return `/garage-door-${slug}-cleveland-oh`;
 };
-const canonical = location && group === 'repair'
-  ? buildLocalizedServicePath(location.slug, `garage-door-${service.slug}`)
+const localDetailSlug = group === 'opener' ? `opener-${service.slug}` : group === 'commercial' ? `commercial-${service.slug}` : service.slug;
+const canonical = location
+  ? buildLocalizedServicePath(location.slug, `garage-door-${localDetailSlug}`)
   : detailPath(service.slug);
 const marketIntro = CLEVELAND_SERVICE_INTROS[service.slug];
 if (!marketIntro) throw new Error(`Missing Cleveland service introduction: ${service.slug}`);
-const intro = location && group === 'repair' ? marketIntro.replaceAll('Cleveland', cityName) : marketIntro;
+const intro = location ? marketIntro.replaceAll('Cleveland', cityName) : marketIntro;
 const phone = location?.phone ?? cleveland.phone;
 const phoneHref = `tel:${phone.replace(/[^\d+]/g, '')}`;
-const shortRepairTitles: Record<string, string> = {
+const shortLocalTitles: Record<string, string> = {
   'spring-replacement': 'Garage Door Spring Replacement',
   'opener-repair': 'Garage Door Opener Repair',
   'cable-repair': 'Garage Door Cable Repair',
@@ -74,17 +75,28 @@ const shortRepairTitles: Record<string, string> = {
   weatherstripping: 'Garage Door Weatherstripping',
   maintenance: 'Garage Door Maintenance',
   'balance-adjustment': 'Garage Door Balance Adjustment',
+  'belt-drive-repair': 'Belt-Drive Opener Repair',
+  'chain-drive-repair': 'Chain-Drive Opener Repair',
+  'jackshaft-opener-repair': 'Wall-Mount Opener Repair',
+  'screw-drive-opener-repair': 'Screw-Drive Opener Repair',
+  'steel-garage-doors': 'Steel Garage Door Installation',
+  'wood-garage-doors': 'Wood Garage Door Installation',
+  'aluminum-garage-doors': 'Aluminum Garage Door Installation',
+  'carriage-house-garage-doors': 'Carriage House Door Installation',
+  'warehouse-distribution-door-service': 'Warehouse Door Service',
+  'dock-industrial-door-equipment-service': 'Dock Equipment Service',
+  'retail-municipal-garage-door-service': 'Retail & Municipal Door Service',
 };
-const title = location && group === 'repair'
-  ? `${cityState}: ${shortRepairTitles[service.slug] ?? service.serviceName} | Buck Strong`
+const title = location
+  ? `${cityState}: ${shortLocalTitles[service.slug] ?? service.serviceName} | Buck Strong`
   : group === 'repair' && service.slug === 'opener-repair'
     ? 'Garage Door Opener Diagnostics in Cleveland, OH | Buck Strong'
     : `${service.serviceName} in ${cityState} | Buck Strong`;
 const description = location
   ? `${service.serviceName} in ${cityState}. ${intro} Call ${phone} to check availability.`
   : `${intro} Call Buck Strong at ${phone} for Cleveland-area service and availability.`;
-const overviewPath = location && group === 'repair'
-  ? buildLocalizedServicePath(location.slug, 'garage-door-repair')
+const overviewPath = location
+  ? buildLocalizedServicePath(location.slug, group === 'repair' ? 'garage-door-repair' : group === 'opener' ? 'opener-repair' : group === 'door' ? 'garage-door-installation' : 'commercial-jobs')
   : hubPaths[group];
 const breadcrumbs = [
   { label: 'Home', href: '/' },
@@ -109,9 +121,16 @@ const relatedTitles: Record<string, string> = {
 };
 const relatedLinks = service.relatedSlugs
   .filter((slug) => group !== 'opener' || slug !== 'opener-repair')
-  .map((slug) => ({ label: relatedTitles[slug] ?? slug.replaceAll('-', ' '), href: location && group === 'repair'
-    ? buildLocalizedServicePath(location.slug, `garage-door-${slug}`)
+  .map((slug) => ({ label: relatedTitles[slug] ?? slug.replaceAll('-', ' '), href: location
+    ? buildLocalizedServicePath(location.slug, `garage-door-${group === 'commercial' ? 'commercial-' : ''}${slug}`)
     : group === 'opener' ? `/cleveland-oh/garage-door-${slug}` : detailPath(slug) }));
+const localNotes = location
+  ? group === 'door'
+    ? [location.localAdvice, `We measure the opening, check track clearance, and review insulation and hardware before ordering a new door for a ${cityName} home.`]
+    : group === 'commercial'
+      ? [`For a ${cityName} facility, tell us the door type, opening size, operating schedule, and access requirements. That helps us plan the visit around the site.`, `We confirm coverage and appointment availability for each address in the Cleveland service area before scheduling.`]
+      : [location.localIntro, location.localIssues]
+  : [];
 ---
 
 <Base title={title} description={description} canonical={canonical} callNowPhoneNumber={phone} market="Cleveland Metro">
@@ -189,18 +208,18 @@ const relatedLinks = service.relatedSlugs
     </div>
   </section>
 
-  {location && group === 'repair' && (location.localIntro || location.localIssues) && (
+  {location && localNotes.some(Boolean) && (
     <section class="py-14 bg-muted">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold text-ink mb-6">Service Considerations in {cityState}</h2>
-        {[location.localIntro, location.localIssues]
+        {localNotes
           .filter((note): note is string => Boolean(note))
           .map((note) => <p class="text-lg text-ink/80 leading-relaxed mb-5">{note}</p>)}
       </div>
     </section>
   )}
 
-  <section class:list={['py-14', location && group === 'repair' ? 'bg-white' : 'bg-muted']}>
+  <section class:list={['py-14', location ? 'bg-white' : 'bg-muted']}>
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-ink mb-6">Related Garage Door Services</h2>
       <p class="text-lg text-ink/80 leading-relaxed mb-5">See the <a class="text-primary underline" href={overviewPath}>{hubLabels[group].toLowerCase()} overview</a> or compare a related service:</p>

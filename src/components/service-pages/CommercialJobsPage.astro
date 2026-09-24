@@ -21,6 +21,7 @@ import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../../data/call-markets';
 import type { Location } from '../../lib/locations';
 import { getHubForLocation, getLocations } from '../../lib/locations';
 import { buildLocationServiceCanonicalPath } from '../../lib/canonical';
+import { buildLocalizedServicePath } from '../../lib/location-routing';
 import { getSiteOrigin } from '../../utils/site-origin';
 
 const faqs = [
@@ -49,6 +50,15 @@ interface Props {
 const { location } = Astro.props as Props;
 const activeLocation = location;
 const isClevelandMarket = activeLocation?.market === 'Cleveland Metro';
+const commercialDetailPath = (slug: string) => isClevelandMarket && activeLocation && !activeLocation.isHub
+  ? buildLocalizedServicePath(activeLocation.slug, `garage-door-commercial-${slug}`)
+  : `/garage-door-commercial-${slug}-${isClevelandMarket ? 'cleveland' : 'cincinnati'}-oh`;
+const commercialDetailLinks = (slug: string) => activeLocation
+  ? [{ label: 'Explore service details', href: commercialDetailPath(slug) }]
+  : [
+      { label: 'Cincinnati details', href: `/garage-door-commercial-${slug}-cincinnati-oh` },
+      { label: 'Cleveland details', href: `/garage-door-commercial-${slug}-cleveland-oh` },
+    ];
 const imageGeoLat = isClevelandMarket && activeLocation ? activeLocation.lat : BUSINESS_INFO.geo.latitude;
 const imageGeoLng = isClevelandMarket && activeLocation ? activeLocation.lng : BUSINESS_INFO.geo.longitude;
 const breadcrumbs = activeLocation
@@ -136,11 +146,6 @@ const storefrontAlt = activeLocation
 const estimateAlt = activeLocation
   ? `Commercial door technicians reviewing a ${locationDisplayName ?? coverageAreaLabel} service plan`
   : 'Commercial door technicians reviewing a service plan';
-const commercialCoverageLinks = {
-  warehouse: isClevelandMarket ? '/garage-door-commercial-warehouse-distribution-door-service-cleveland-oh' : '/garage-door-commercial-warehouse-distribution-door-service-cincinnati-oh',
-  dock: isClevelandMarket ? '/garage-door-commercial-dock-industrial-door-equipment-service-cleveland-oh' : '/garage-door-commercial-dock-industrial-door-equipment-service-cincinnati-oh',
-  retail: isClevelandMarket ? '/garage-door-commercial-retail-municipal-garage-door-service-cleveland-oh' : '/garage-door-commercial-retail-municipal-garage-door-service-cincinnati-oh'
-};
 const facilitiesHeading = activeLocation
   ? `Facilities We Support Across ${coverageAreaLabel}`
   : 'Facilities We Support';
@@ -204,7 +209,7 @@ if (activeLocation) {
   title={pageTitle}
   description={pageDescription}
   canonical={canonicalPath}
-  callNowPhoneNumber={displayPhoneNumber}
+  callNowPhoneNumber={activeLocation ? displayPhoneNumber : undefined}
   market={activeLocation?.market === 'Cleveland Metro' ? 'Cleveland Metro' : undefined}
 >
   <Nav />
@@ -310,10 +315,7 @@ if (activeLocation) {
     <div class="mt-12 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto rounded-[2.75rem] bg-gradient-to-br from-muted/90 via-muted/70 to-muted/60 p-6 sm:p-10 lg:p-12 shadow-[0_35px_120px_-60px_rgba(15,23,42,0.4)]">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          <a
-            href={commercialCoverageLinks.warehouse}
-            class="group bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 block"
-          >
+          <div class="group bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 block">
             <Image
               src={warehouseServiceImage}
               alt={warehouseAlt}
@@ -332,13 +334,12 @@ if (activeLocation) {
               <p class="text-sm text-ink/70 leading-relaxed">
                 Reset sectional doors, balance counterweights, and tune photo-eyes to keep freight moving.
               </p>
-              <p class="mt-4 text-sm font-semibold text-primary group-hover:underline">Explore service details →</p>
+              <div class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
+                {commercialDetailLinks('warehouse-distribution-door-service').map((link) => <a class="text-primary underline" href={link.href}>{link.label}</a>)}
+              </div>
             </div>
-          </a>
-          <a
-            href={commercialCoverageLinks.dock}
-            class="group bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 block"
-          >
+          </div>
+          <div class="group bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 block">
             <Image
               src={dockServiceImage}
               alt={dockAlt}
@@ -357,13 +358,12 @@ if (activeLocation) {
               <p class="text-sm text-ink/70 leading-relaxed">
                 Service dock levelers, vehicle restraints, and rolling steel curtains with full safety documentation.
               </p>
-              <p class="mt-4 text-sm font-semibold text-primary group-hover:underline">Explore service details →</p>
+              <div class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
+                {commercialDetailLinks('dock-industrial-door-equipment-service').map((link) => <a class="text-primary underline" href={link.href}>{link.label}</a>)}
+              </div>
             </div>
-          </a>
-          <a
-            href={commercialCoverageLinks.retail}
-            class="group bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 block"
-          >
+          </div>
+          <div class="group bg-white rounded-2xl shadow-sm ring-1 ring-ink/5 overflow-hidden transition-shadow duration-200 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 block">
             <Image
               src={storefrontServiceImage}
               alt={storefrontAlt}
@@ -382,9 +382,11 @@ if (activeLocation) {
               <p class="text-sm text-ink/70 leading-relaxed">
                 Quiet storefront shutters, fire stations, and fleet garages stay mission ready with proactive maintenance visits.
               </p>
-              <p class="mt-4 text-sm font-semibold text-primary group-hover:underline">Explore service details →</p>
+              <div class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
+                {commercialDetailLinks('retail-municipal-garage-door-service').map((link) => <a class="text-primary underline" href={link.href}>{link.label}</a>)}
+              </div>
             </div>
-          </a>
+          </div>
         </div>
       </div>
     </div>

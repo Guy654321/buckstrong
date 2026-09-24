@@ -103,12 +103,15 @@ export const GET: APIRoute = async () => {
   const locationServiceSlugs = [
     ...services.map((service) => service.slug),
     ...REPAIR_SERVICE_PAGES.map((service) => `garage-door-${service.slug}`),
+    ...OPENER_SERVICE_PAGES.map((service) => `garage-door-opener-${service.slug}`),
+    ...DOOR_SERVICE_PAGES.map((service) => `garage-door-${service.slug}`),
+    ...COMMERCIAL_SERVICE_PAGES.map((service) => `garage-door-commercial-${service.slug}`),
   ];
   const locations = await getLocations();
   const hubs = locations.filter(location => location.isHub);
   const newlyPublishedPaths = new Set(buildLocationServicePaths(
     locations.filter(location => location.slug.startsWith('cleveland-')),
-    services,
+    locationServiceSlugs.map((slug) => ({ slug })),
   ));
 
   const pathCandidates = buildSitemapPathCandidates({

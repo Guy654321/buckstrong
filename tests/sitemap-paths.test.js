@@ -84,7 +84,7 @@ test('Cleveland suburbs receive their own core service URLs', () => {
   assert(paths.includes('/westlake-oh/garage-door-repair'));
 });
 
-test('Cleveland suburb sitemaps include core services and published local repair details', () => {
+test('Cleveland suburb sitemaps include all four published detail groups', () => {
   const paths = buildLocationServicePaths(
     [{ slug: 'cleveland-cleveland-heights', isHub: false }],
     [
@@ -94,6 +94,9 @@ test('Cleveland suburb sitemaps include core services and published local repair
       { slug: 'commercial-jobs' },
       { slug: 'garage-door-spring-replacement' },
       { slug: 'garage-door-cable-repair' },
+      { slug: 'garage-door-opener-belt-drive-repair' },
+      { slug: 'garage-door-steel-garage-doors' },
+      { slug: 'garage-door-commercial-warehouse-distribution-door-service' },
       { slug: 'garage-door-unpublished-repair' },
     ],
   );
@@ -105,6 +108,27 @@ test('Cleveland suburb sitemaps include core services and published local repair
     '/cleveland-heights-oh/commercial-jobs',
     '/cleveland-heights-oh/garage-door-spring-replacement',
     '/cleveland-heights-oh/garage-door-cable-repair',
+    '/cleveland-heights-oh/garage-door-opener-belt-drive-repair',
+    '/cleveland-heights-oh/garage-door-steel-garage-doors',
+    '/cleveland-heights-oh/garage-door-commercial-warehouse-distribution-door-service',
+  ].sort());
+});
+
+test('Cincinnati sitemap does not inherit Cleveland-only suburb detail routes', () => {
+  const paths = buildLocationServicePaths(
+    [{ slug: 'cincinnati-mason', isHub: false }],
+    [
+      { slug: 'garage-door-repair' },
+      { slug: 'garage-door-spring-replacement' },
+      { slug: 'garage-door-opener-belt-drive-repair' },
+      { slug: 'garage-door-steel-garage-doors' },
+      { slug: 'garage-door-commercial-warehouse-distribution-door-service' },
+    ],
+  );
+
+  assert.deepEqual(paths.sort(), [
+    '/mason-oh/garage-door-repair',
+    '/mason-oh/garage-door-spring-replacement',
   ].sort());
 });
 

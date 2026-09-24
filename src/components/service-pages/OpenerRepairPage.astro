@@ -20,6 +20,7 @@ import { BUSINESS_INFO } from '../../data/business';
 import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../../data/call-markets';
 import { getHubForLocation, type Location } from '../../lib/locations';
 import { buildLocationServiceCanonicalPath } from '../../lib/canonical';
+import { buildLocalizedServicePath } from '../../lib/location-routing';
 import { getSiteOrigin } from '../../utils/site-origin';
 
 const faqs = [
@@ -48,6 +49,15 @@ interface Props {
 const { location } = Astro.props as Props;
 const activeLocation = location;
 const isClevelandMarket = activeLocation?.market === 'Cleveland Metro';
+const openerDetailPath = (slug: string) => isClevelandMarket && activeLocation && !activeLocation.isHub
+  ? buildLocalizedServicePath(activeLocation.slug, `garage-door-opener-${slug}`)
+  : `/garage-door-opener-${slug}-${isClevelandMarket ? 'cleveland' : 'cincinnati'}-oh`;
+const openerDetailLinks = (slug: string) => activeLocation
+  ? [{ label: 'View repair details', href: openerDetailPath(slug) }]
+  : [
+      { label: 'Cincinnati details', href: `/garage-door-opener-${slug}-cincinnati-oh` },
+      { label: 'Cleveland details', href: `/garage-door-opener-${slug}-cleveland-oh` },
+    ];
 const imageGeoLat = isClevelandMarket && activeLocation ? activeLocation.lat : BUSINESS_INFO.geo.latitude;
 const imageGeoLng = isClevelandMarket && activeLocation ? activeLocation.lng : BUSINESS_INFO.geo.longitude;
 const breadcrumbs = activeLocation
@@ -125,7 +135,9 @@ const whyChooseCoverage = activeLocation
   ? isClevelandMarket ? `Opener troubleshooting across ${coverageAreaLabel}` : `Same-day service for most repairs across ${coverageAreaLabel}`
   : 'Opener troubleshooting in both service markets';
 const faqIntro = activeLocation
-  ? `Helpful answers about repairing and upgrading garage door openers for ${coverageAreaLabel} homeowners`
+  ? isClevelandMarket
+    ? `Helpful answers about repairing and upgrading garage door openers for homeowners in ${locationDisplayName}`
+    : `Helpful answers about repairing and upgrading garage door openers for ${coverageAreaLabel} homeowners`
   : 'Helpful answers about repairing and upgrading garage door openers';
 const contactTitle = activeLocation
   ? `Need Opener Repair in ${locationDisplayName}?`
@@ -139,7 +151,7 @@ const contactSubtitle = activeLocation
   title={pageTitle}
   description={pageDescription}
   canonical={canonicalPath}
-  callNowPhoneNumber={displayPhoneNumber}
+  callNowPhoneNumber={activeLocation ? displayPhoneNumber : undefined}
   market={activeLocation?.market === 'Cleveland Metro' ? 'Cleveland Metro' : undefined}
   schemaType="Service"
 >
@@ -247,7 +259,7 @@ const contactSubtitle = activeLocation
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <a href={isClevelandMarket ? "/garage-door-opener-belt-drive-repair-cleveland-oh" : "/garage-door-opener-belt-drive-repair-cincinnati-oh"} class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
+        <div class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={beltDriveImage}
@@ -286,10 +298,13 @@ const contactSubtitle = activeLocation
                 <span class="font-medium text-ink text-xs">Attached garages</span>
               </div>
             </div>
+            <div class="mt-4 flex flex-wrap gap-x-3 gap-y-2 text-xs font-semibold">
+              {openerDetailLinks('belt-drive-repair').map((link) => <a class="text-primary underline" href={link.href}>{link.label}</a>)}
+            </div>
           </div>
-        </a>
+        </div>
 
-        <a href={isClevelandMarket ? "/garage-door-opener-chain-drive-repair-cleveland-oh" : "/garage-door-opener-chain-drive-repair-cincinnati-oh"} class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
+        <div class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={chainDriveImage}
@@ -328,10 +343,13 @@ const contactSubtitle = activeLocation
                 <span class="font-medium text-ink text-xs">Everyday use</span>
               </div>
             </div>
+            <div class="mt-4 flex flex-wrap gap-x-3 gap-y-2 text-xs font-semibold">
+              {openerDetailLinks('chain-drive-repair').map((link) => <a class="text-primary underline" href={link.href}>{link.label}</a>)}
+            </div>
           </div>
-        </a>
+        </div>
 
-        <a href={isClevelandMarket ? "/garage-door-opener-jackshaft-opener-repair-cleveland-oh" : "/garage-door-opener-jackshaft-opener-repair-cincinnati-oh"} class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
+        <div class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={directDriveImage}
@@ -370,10 +388,13 @@ const contactSubtitle = activeLocation
                 <span class="font-medium text-ink text-xs">Low ceilings, car lifts</span>
               </div>
             </div>
+            <div class="mt-4 flex flex-wrap gap-x-3 gap-y-2 text-xs font-semibold">
+              {openerDetailLinks('jackshaft-opener-repair').map((link) => <a class="text-primary underline" href={link.href}>{link.label}</a>)}
+            </div>
           </div>
-        </a>
+        </div>
 
-        <a href={isClevelandMarket ? "/garage-door-opener-screw-drive-opener-repair-cleveland-oh" : "/garage-door-opener-screw-drive-opener-repair-cincinnati-oh"} class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
+        <div class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={screwDriveImage}
@@ -412,8 +433,11 @@ const contactSubtitle = activeLocation
                 <span class="font-medium text-ink text-xs">Heavy doors, warm climates</span>
               </div>
             </div>
+            <div class="mt-4 flex flex-wrap gap-x-3 gap-y-2 text-xs font-semibold">
+              {openerDetailLinks('screw-drive-opener-repair').map((link) => <a class="text-primary underline" href={link.href}>{link.label}</a>)}
+            </div>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   </section>

@@ -19,6 +19,7 @@ import { BUSINESS_INFO } from '../../data/business';
 import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../../data/call-markets';
 import { getHubForLocation, type Location } from '../../lib/locations';
 import { buildLocationServiceCanonicalPath } from '../../lib/canonical';
+import { buildLocalizedServicePath } from '../../lib/location-routing';
 import { getSiteOrigin } from '../../utils/site-origin';
 
 const faqs = [
@@ -51,6 +52,15 @@ interface Props {
 const { location } = Astro.props as Props;
 const activeLocation = location;
 const isClevelandMarket = activeLocation?.market === 'Cleveland Metro';
+const doorDetailPath = (slug: string) => isClevelandMarket && activeLocation && !activeLocation.isHub
+  ? buildLocalizedServicePath(activeLocation.slug, `garage-door-${slug}`)
+  : `/garage-door-${slug}-${isClevelandMarket ? 'cleveland' : 'cincinnati'}-oh`;
+const doorDetailLinks = (slug: string) => activeLocation
+  ? [{ label: 'View Door Options', href: doorDetailPath(slug) }]
+  : [
+      { label: 'Cincinnati options', href: `/garage-door-${slug}-cincinnati-oh` },
+      { label: 'Cleveland options', href: `/garage-door-${slug}-cleveland-oh` },
+    ];
 const imageGeoLat = isClevelandMarket && activeLocation ? activeLocation.lat : BUSINESS_INFO.geo.latitude;
 const imageGeoLng = isClevelandMarket && activeLocation ? activeLocation.lng : BUSINESS_INFO.geo.longitude;
 const serviceCityName = activeLocation?.name;
@@ -190,29 +200,29 @@ const doorTypesHeading = activeLocation
 const doorTypes = [
   {
     title: 'Steel Garage Doors',
+    slug: 'steel-garage-doors',
     description: 'Durable, low-maintenance construction with insulation upgrades for comfort and efficiency.',
-    href: isClevelandMarket ? '/garage-door-steel-garage-doors-cleveland-oh' : '/garage-door-steel-garage-doors-cincinnati-oh',
     theme: 'steel'
   },
   {
     title: 'Wood Garage Doors',
+    slug: 'wood-garage-doors',
     description: 'Handcrafted styles, custom stain matches, and premium craftsmanship for standout curb appeal.',
-    href: isClevelandMarket ? '/garage-door-wood-garage-doors-cleveland-oh' : '/garage-door-wood-garage-doors-cincinnati-oh',
     theme: 'wood'
   },
   {
     title: 'Aluminum Garage Doors',
+    slug: 'aluminum-garage-doors',
     description: 'Lightweight, rust-resistant frames with modern glass or solid panel configurations.',
-    href: isClevelandMarket ? '/garage-door-aluminum-garage-doors-cleveland-oh' : '/garage-door-aluminum-garage-doors-cincinnati-oh',
     theme: 'aluminum'
   },
   {
     title: 'Elegant Garage Doors',
+    slug: 'carriage-house-garage-doors',
     description: 'Carriage house overlays, decorative hardware, and designer windows tailored to your architecture.',
-    href: isClevelandMarket ? '/garage-door-carriage-house-garage-doors-cleveland-oh' : '/garage-door-carriage-house-garage-doors-cincinnati-oh',
     theme: 'elegant'
   }
-] satisfies Array<{ title: string; description: string; href: string; theme: 'steel' | 'wood' | 'aluminum' | 'elegant' }>;
+] satisfies Array<{ title: string; slug: string; description: string; theme: 'steel' | 'wood' | 'aluminum' | 'elegant' }>;
 
 const chooseUsHeading = activeLocation
   ? 'Why Choose Our Installation?'
@@ -233,11 +243,13 @@ const whatsIncludedItems = [
 ];
 
 const expertiseHeading = activeLocation
-  ? `Local Expertise ${coverageAreaLabel} Can Trust`
+  ? isClevelandMarket ? `Installation Planning for ${locationDisplayName}` : `Local Expertise ${coverageAreaLabel} Can Trust`
   : 'Installation Support in Both Markets';
 
 const expertiseCopy = activeLocation
-  ? `Buck Strong Garage Doors has served ${coverageAreaLabel} homeowners for more than a decade. Our responsive teams handle scheduling, permitting, and on-site coordination so your project stays on time and on budget. Whether you need insulated carriage house doors or a sleek modern upgrade, we make sure you love the results.`
+  ? isClevelandMarket
+    ? `Buck Strong helps ${locationDisplayName} homeowners compare door materials, insulation, hardware, and opener compatibility. We measure the opening, explain the installation plan, and test the finished door with you.`
+    : `Buck Strong Garage Doors has served ${coverageAreaLabel} homeowners for more than a decade. Our responsive teams handle scheduling, permitting, and on-site coordination so your project stays on time and on budget. Whether you need insulated carriage house doors or a sleek modern upgrade, we make sure you love the results.`
   : 'Buck Strong helps homeowners in Cincinnati and Cleveland choose and install garage doors that fit their homes. We review the opening, door style, insulation, hardware, and opener compatibility before installation, then test the finished system with you.';
 ---
 
@@ -245,7 +257,7 @@ const expertiseCopy = activeLocation
   title={pageTitle}
   description={pageDescription}
   canonical={canonicalPath}
-  callNowPhoneNumber={displayPhoneNumber}
+  callNowPhoneNumber={activeLocation ? displayPhoneNumber : undefined}
   market={activeLocation?.market === 'Cleveland Metro' ? 'Cleveland Metro' : undefined}
 >
   <Nav />
@@ -408,7 +420,9 @@ const expertiseCopy = activeLocation
           >
             <h3 class="text-xl font-semibold text-ink">{door.title}</h3>
             <p class="mt-3 text-ink/70 leading-relaxed">{door.description}</p>
-            <a href={door.href} class="mt-5 inline-flex text-primary font-semibold underline">View Door Options</a>
+            <div class="mt-5 flex flex-wrap gap-x-4 gap-y-2">
+              {doorDetailLinks(door.slug).map((link) => <a href={link.href} class="inline-flex text-primary font-semibold underline">{link.label}</a>)}
+            </div>
           </div>
         ))}
       </div>

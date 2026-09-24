@@ -16,6 +16,18 @@ const repairSlugs = [
   'panel-replacement', 'rollers-hinges', 'sensor-alignment', 'weatherstripping',
   'maintenance', 'balance-adjustment',
 ];
+const suburbDetailGroups = [
+  { overview: 'garage-door-repair', slugs: repairSlugs, prefix: '' },
+  { overview: 'opener-repair', slugs: ['belt-drive-repair', 'chain-drive-repair', 'jackshaft-opener-repair', 'screw-drive-opener-repair'], prefix: 'opener-' },
+  { overview: 'garage-door-installation', slugs: ['steel-garage-doors', 'wood-garage-doors', 'aluminum-garage-doors', 'carriage-house-garage-doors'], prefix: '' },
+  { overview: 'commercial-jobs', slugs: ['warehouse-distribution-door-service', 'dock-industrial-door-equipment-service', 'retail-municipal-garage-door-service'], prefix: 'commercial-' },
+];
+const generalServiceRoutes = [
+  { route: '/services/garage-door-repair', group: suburbDetailGroups[0] },
+  { route: '/services/opener-repair', group: suburbDetailGroups[1] },
+  { route: '/services/garage-door-installation', group: suburbDetailGroups[2] },
+  { route: '/services/commercial-jobs', group: suburbDetailGroups[3] },
+];
 
 const htmlFor = (route) => {
   const file = path.join(root, route.slice(1), 'index.html');
@@ -39,6 +51,18 @@ for (const { route, count } of overviews) {
 
 if (destinations.size !== 21) failures.push(`Expected 21 distinct detail destinations, found ${destinations.size}`);
 
+for (const { route, group } of generalServiceRoutes) {
+  const html = htmlFor(route);
+  for (const slug of group.slugs) {
+    const marketRoute = group.overview === 'garage-door-repair'
+      ? (market) => `/${market}-oh/garage-door-${slug}`
+      : (market) => `/garage-door-${group.prefix}${slug}-${market}-oh`;
+    for (const market of ['cincinnati', 'cleveland']) {
+      if (!html.includes(`href="${marketRoute(market)}"`)) failures.push(`${route}: missing ${market} ${slug} detail link`);
+    }
+  }
+}
+
 for (const route of destinations) {
   const html = htmlFor(route);
   if (!html) continue;
@@ -61,10 +85,11 @@ const localTitles = new Map();
 for (const file of suburbFiles) {
   const location = JSON.parse(fs.readFileSync(path.join('src/content/locations/cleveland', file), 'utf8'));
   const citySlug = location.slug.replace(/^cleveland-/, '');
-  const overviewRoute = `/${citySlug}-oh/garage-door-repair`;
-  const overview = htmlFor(overviewRoute);
-  for (const slug of repairSlugs) {
-    const route = `/${citySlug}-oh/garage-door-${slug}`;
+  for (const group of suburbDetailGroups) {
+    const overviewRoute = `/${citySlug}-oh/${group.overview}`;
+    const overview = htmlFor(overviewRoute);
+    for (const slug of group.slugs) {
+    const route = `/${citySlug}-oh/garage-door-${group.prefix}${slug}`;
     if (!overview.includes(`href="${route}"`)) failures.push(`${overviewRoute}: missing ${slug} detail link`);
     const html = htmlFor(route);
     if (!html) continue;
@@ -73,18 +98,22 @@ for (const file of suburbFiles) {
     else localTitles.set(title, route);
     if (!html.includes(`<link rel="canonical" href="${origin}${route}"`)) failures.push(`${route}: canonical mismatch`);
     if (!html.includes(`in ${location.name}, OH</h1>`)) failures.push(`${route}: local H1 missing`);
-    if (!html.includes(`href="${overviewRoute}"`)) failures.push(`${route}: local repair overview link missing`);
+    if (!html.includes(`href="${overviewRoute}"`)) failures.push(`${route}: local overview link missing`);
     if (!html.includes(`href="/locations/${location.slug}"`)) failures.push(`${route}: local breadcrumb link missing`);
     if (!html.includes('action="/api/contact"') || !html.includes('data-contact-form')) failures.push(`${route}: quote form missing`);
     const head = html.slice(0, html.indexOf('<body'));
     if (!head.includes('24500 Center Ridge Rd') || head.includes('2337 Victory Parkway')) failures.push(`${route}: market address metadata is incorrect`);
     const content = html.slice(html.indexOf('<main>'), html.indexOf('</main>'));
-    if (!content.includes(location.localIntro) || content.includes('Cincinnati')) failures.push(`${route}: local content missing or contains Cincinnati copy`);
+    const localEvidence = group.overview === 'garage-door-installation' ? location.localAdvice
+      : group.overview === 'commercial-jobs' ? `For a ${location.name} facility`
+      : location.localIntro;
+    if (!content.includes(localEvidence) || content.includes('Cincinnati')) failures.push(`${route}: local content missing or contains Cincinnati copy`);
     const sectionBackgrounds = [...content.matchAll(/<section[^>]*class="([^"]+)"/g)]
       .map((match) => match[1].match(/\bbg-(?:muted|white)\b/)?.[0]);
     const expectedBackgrounds = ['bg-muted', 'bg-white', 'bg-muted', 'bg-white', 'bg-muted', 'bg-white', 'bg-muted'];
     if (sectionBackgrounds.slice(0, expectedBackgrounds.length).join(',') !== expectedBackgrounds.join(',')) {
       failures.push(`${route}: section backgrounds do not alternate`);
+    }
     }
   }
 }
@@ -93,5 +122,5 @@ if (failures.length) {
   console.error('[cleveland-detail-check] ' + failures.join('\n[cleveland-detail-check] '));
   process.exitCode = 1;
 } else {
-  console.log(`[cleveland-detail-check] ${destinations.size} market and ${suburbFiles.length * repairSlugs.length} suburb repair details resolve with local metadata and forms.`);
+  console.log(`[cleveland-detail-check] ${destinations.size} market and ${suburbFiles.length * suburbDetailGroups.reduce((sum, group) => sum + group.slugs.length, 0)} suburb service details resolve with local metadata and forms.`);
 }
