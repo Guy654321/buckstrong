@@ -171,7 +171,7 @@ const contactSubtitle = activeLocation
 
 const faqs = [
   {
-    question: isClevelandMarket ? 'How soon can I book emergency garage door repair?' : 'Do you offer same-day emergency garage door repair?',
+    question: activeLocation ? isClevelandMarket ? 'How soon can I book emergency garage door repair?' : 'Do you offer same-day emergency garage door repair?' : 'How soon can I schedule garage door repair?',
     answer: activeLocation
       ? isClevelandMarket ? `Call us with your address and the door problem. We will confirm the next available appointment for ${coverageAreaLabel} and explain what to do while you wait.` : `Yes. Our experienced technicians serving ${coverageAreaLabel} are available for same-day and after-hours service, and most emergency repairs are completed during the initial visit.`
       : 'Call with your address and the door problem. We will confirm availability for your area and help you plan the next step.'
@@ -378,12 +378,14 @@ const localizedRepairs = REPAIRS.map((repair) => ({
               <p class="text-ink/70 mb-4 leading-relaxed">
                 {repair.blurb}
               </p>
-              <a
-                href={repair.href}
-                class="inline-flex items-center text-primary font-semibold hover:underline"
-              >
-                View Repair Details
-              </a>
+              {activeLocation ? (
+                <a href={repair.href} class="inline-flex items-center text-primary font-semibold hover:underline">View Repair Details</a>
+              ) : (
+                <div class="flex flex-wrap gap-x-4 gap-y-2">
+                  <a href={repair.href} class="inline-flex items-center text-primary font-semibold hover:underline">Cincinnati details</a>
+                  <a href={buildLocalizedServicePath('cleveland', `garage-door-${repair.slug}`)} class="inline-flex items-center text-primary font-semibold hover:underline">Cleveland details</a>
+                </div>
+              )}
             </div>
           </div>
         ))}
@@ -395,7 +397,7 @@ const localizedRepairs = REPAIRS.map((repair) => ({
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Common Garage Door Problems We Repair</h2>
-        <p class="text-xl text-ink/70">{isClevelandMarket ? 'We inspect the door and explain safe repair options before work begins.' : 'Our technicians resolve these issues with fully stocked trucks for quick, same-day fixes'}</p>
+        <p class="text-xl text-ink/70">{activeLocation ? isClevelandMarket ? 'We inspect the door and explain safe repair options before work begins.' : 'Our technicians resolve these issues with fully stocked trucks for quick, same-day fixes' : 'We inspect the full system and explain the repair options before work begins.'}</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
