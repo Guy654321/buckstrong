@@ -1,0 +1,30 @@
+{
+  "name": "Streetsboro",
+  "slug": "cleveland-streetsboro",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.239608,
+    "lng": -81.345862
+  },
+  "zips": [
+    "44241"
+  ],
+  "surroundingAreas": [
+    "Aurora",
+    "Hudson",
+    "Twinsburg",
+    "Bainbridge Township"
+  ],
+  "metaTitle": "Garage Door Repair in Streetsboro, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Streetsboro, OH. Help with outer southeast route and opener diagnosis. Call 216-930-2980.",
+  "localHeading": "Streetsboro door and opener service planning",
+  "localIntro": "Streetsboro connects Aurora with the Hudson side of the territory and is an outer-edge residential city. The booking team confirms availability by street address before a repair or installation visit is promised.",
+  "localIssues": "A door that reverses or stops partway may have a sensor fault, a track obstruction, or poor spring balance. We check those causes rather than replacing opener parts by guesswork.",
+  "localAdvice": "If replacement is needed, accurate measurements and the opener’s capacity guide the choice of panels and hardware. Tell us whether the door is stuck open when you call.",
+  "heroTitle": "Garage Door Repair and Installation in Streetsboro"
+}

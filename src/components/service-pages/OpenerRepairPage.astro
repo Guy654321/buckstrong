@@ -47,6 +47,9 @@ interface Props {
 
 const { location } = Astro.props as Props;
 const activeLocation = location;
+const isClevelandMarket = activeLocation?.market === 'Cleveland Metro';
+const imageGeoLat = isClevelandMarket && activeLocation ? activeLocation.lat : BUSINESS_INFO.geo.latitude;
+const imageGeoLng = isClevelandMarket && activeLocation ? activeLocation.lng : BUSINESS_INFO.geo.longitude;
 const breadcrumbs = activeLocation
   ? [
       { label: 'Home', href: '/' },
@@ -62,7 +65,7 @@ const breadcrumbs = activeLocation
 const locationDisplayName = activeLocation ? `${activeLocation.name}, ${activeLocation.state}` : undefined;
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
-  ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
+  ? isClevelandMarket ? `${locationDisplayName} and nearby communities` : `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
   : 'Cincinnati, Ohio';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
@@ -85,13 +88,13 @@ const pageTitle = activeLocation
   ? `Garage Door Opener Repair in ${locationDisplayName} | Buck Strong Garage Doors`
   : 'Garage Door Opener Repair in Cincinnati, Ohio | Buck Strong Garage Doors';
 const pageDescription = activeLocation
-  ? `Certified opener repair specialists serving ${coverageAreaLabel}. Motors, remotes, sensors, and smart upgrades with same-day appointments.`
+  ? isClevelandMarket ? `Garage door opener repair for ${coverageAreaLabel}. We troubleshoot motors, remotes, sensors, and travel settings. Call to confirm scheduling.` : `Certified opener repair specialists serving ${coverageAreaLabel}. Motors, remotes, sensors, and smart upgrades with same-day appointments.`
   : 'Certified opener repair specialists serving the Cincinnati metro. Motors, remotes, sensors, and smart upgrades with same-day appointments.';
 const heroHeading = activeLocation
   ? `Garage Door Opener Repair in ${locationDisplayName}`
   : 'Garage Door Opener Repair in Cincinnati, Ohio';
 const heroSubheading = activeLocation
-  ? `Local technicians troubleshoot motors, keypads, sensors, and smart controls across ${coverageAreaLabel} with fully stocked trucks and same-day appointments.`
+  ? isClevelandMarket ? `If your opener stalls, reverses, or stops responding, the problem may be in the door or the controls. For homeowners in ${coverageAreaLabel}, we check balance, sensors, remotes, travel settings, and the motor before recommending a repair or replacement.` : `Local technicians troubleshoot motors, keypads, sensors, and smart controls across ${coverageAreaLabel} with fully stocked trucks and same-day appointments.`
   : 'Local technicians troubleshoot motors, keypads, sensors, and smart controls across the Cincinnati metro with fully stocked trucks and same-day appointments.';
 const heroAlt = activeLocation
   ? `Garage door opener repair technician supporting homeowners in ${coverageAreaLabel}`
@@ -115,7 +118,7 @@ const canonicalPath = activeLocation
   : '/services/opener-repair';
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const whyChooseCoverage = activeLocation
-  ? `Same-day service for most repairs across ${coverageAreaLabel}`
+  ? isClevelandMarket ? `Opener troubleshooting across ${coverageAreaLabel}` : `Same-day service for most repairs across ${coverageAreaLabel}`
   : 'Same-day service for most repairs across the Cincinnati metro';
 const faqIntro = activeLocation
   ? `Helpful answers about repairing and upgrading garage door openers for ${coverageAreaLabel} homeowners`
@@ -148,17 +151,19 @@ const contactSubtitle = activeLocation
         '@type': 'LocalBusiness',
         name: BUSINESS_INFO.name,
         legalName: BUSINESS_INFO.legalName,
-        '@id': businessEntityId,
+        '@id': isClevelandMarket ? `${getSiteOrigin()}/locations/cleveland#local-business` : businessEntityId,
         telephone: displayPhoneNumber,
         email: BUSINESS_INFO.email,
         address: {
           '@type': 'PostalAddress',
-          streetAddress: BUSINESS_INFO.address.streetAddress,
-          addressLocality: BUSINESS_INFO.address.addressLocality,
-          addressRegion: BUSINESS_INFO.address.addressRegion,
-          postalCode: BUSINESS_INFO.address.postalCode,
-          addressCountry: BUSINESS_INFO.address.addressCountry
-        }
+          ...(isClevelandMarket ? activeLocation?.address : BUSINESS_INFO.address)
+        },
+        ...(isClevelandMarket ? { openingHoursSpecification: [{
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '00:00',
+          closes: '23:59'
+        }] } : {})
       },
       areaServed,
       serviceType: 'Garage Door Opener Repair',
@@ -171,6 +176,7 @@ const contactSubtitle = activeLocation
     }}
   />
 
+  <main>
   <section class="relative py-20 lg:py-32 text-white overflow-visible lg:overflow-hidden">
     <div class="absolute inset-0">
       <Image
@@ -184,8 +190,8 @@ const contactSubtitle = activeLocation
         decoding="sync"
         quality={80}
         sizes="100vw"
-        data-geo-lat="39.1031"
-        data-geo-lng="-84.5120"
+        data-geo-lat={imageGeoLat}
+        data-geo-lng={imageGeoLng}
       />
       <div class="absolute inset-0 bg-primary/75"></div>
     </div>
@@ -239,11 +245,11 @@ const contactSubtitle = activeLocation
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <a href="/garage-door-opener-belt-drive-repair-cincinnati-oh" class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
+        <a href={isClevelandMarket ? "/cleveland-oh/opener-repair" : "/garage-door-opener-belt-drive-repair-cincinnati-oh"} class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={beltDriveImage}
-              alt="Quiet belt-drive garage door opener with DC motor in Cincinnati, Ohio"
+              alt={`Quiet belt-drive garage door opener with DC motor in ${locationDisplayName ?? 'Cincinnati, Ohio'}`}
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -251,8 +257,8 @@ const contactSubtitle = activeLocation
               fetchpriority="low"
               decoding="async"
               quality={70}
-              data-geo-lat="39.1031"
-              data-geo-lng="-84.5120"
+              data-geo-lat={imageGeoLat}
+              data-geo-lng={imageGeoLng}
             />
           </div>
 
@@ -267,11 +273,11 @@ const contactSubtitle = activeLocation
             <div class="space-y-1 text-xs">
               <div class="flex justify-between">
                 <span class="text-ink/60">Noise:</span>
-                <span class="font-medium text-green-600">Low</span>
+                <span class={`font-medium ${isClevelandMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Maintenance:</span>
-                <span class="font-medium text-green-600">Low</span>
+                <span class={`font-medium ${isClevelandMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Best for:</span>
@@ -281,11 +287,11 @@ const contactSubtitle = activeLocation
           </div>
         </a>
 
-        <a href="/garage-door-opener-chain-drive-repair-cincinnati-oh" class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
+        <a href={isClevelandMarket ? "/cleveland-oh/opener-repair" : "/garage-door-opener-chain-drive-repair-cincinnati-oh"} class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={chainDriveImage}
-              alt="Chain-drive garage door opener with durable metal trolley in Cincinnati, Ohio"
+              alt={`Chain-drive garage door opener with durable metal trolley in ${locationDisplayName ?? 'Cincinnati, Ohio'}`}
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -293,8 +299,8 @@ const contactSubtitle = activeLocation
               fetchpriority="low"
               decoding="async"
               quality={70}
-              data-geo-lat="39.1031"
-              data-geo-lng="-84.5120"
+              data-geo-lat={imageGeoLat}
+              data-geo-lng={imageGeoLng}
             />
           </div>
 
@@ -309,11 +315,11 @@ const contactSubtitle = activeLocation
             <div class="space-y-1 text-xs">
               <div class="flex justify-between">
                 <span class="text-ink/60">Noise:</span>
-                <span class="font-medium text-yellow-600">Medium</span>
+                <span class={`font-medium ${isClevelandMarket ? 'text-yellow-800' : 'text-yellow-600'}`}>Medium</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Maintenance:</span>
-                <span class="font-medium text-yellow-600">Medium</span>
+                <span class={`font-medium ${isClevelandMarket ? 'text-yellow-800' : 'text-yellow-600'}`}>Medium</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Best for:</span>
@@ -323,11 +329,11 @@ const contactSubtitle = activeLocation
           </div>
         </a>
 
-        <a href="/garage-door-opener-jackshaft-opener-repair-cincinnati-oh" class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
+        <a href={isClevelandMarket ? "/cleveland-oh/opener-repair" : "/garage-door-opener-jackshaft-opener-repair-cincinnati-oh"} class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={directDriveImage}
-              alt="Direct-drive jackshaft opener mounted beside garage door in Cincinnati, Ohio"
+              alt={`Direct-drive jackshaft opener mounted beside garage door in ${locationDisplayName ?? 'Cincinnati, Ohio'}`}
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -335,8 +341,8 @@ const contactSubtitle = activeLocation
               fetchpriority="low"
               decoding="async"
               quality={70}
-              data-geo-lat="39.1031"
-              data-geo-lng="-84.5120"
+              data-geo-lat={imageGeoLat}
+              data-geo-lng={imageGeoLng}
             />
           </div>
 
@@ -351,11 +357,11 @@ const contactSubtitle = activeLocation
             <div class="space-y-1 text-xs">
               <div class="flex justify-between">
                 <span class="text-ink/60">Noise:</span>
-                <span class="font-medium text-green-600">Low</span>
+                <span class={`font-medium ${isClevelandMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Maintenance:</span>
-                <span class="font-medium text-green-600">Low</span>
+                <span class={`font-medium ${isClevelandMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Best for:</span>
@@ -365,11 +371,11 @@ const contactSubtitle = activeLocation
           </div>
         </a>
 
-        <a href="/garage-door-opener-screw-drive-opener-repair-cincinnati-oh" class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
+        <a href={isClevelandMarket ? "/cleveland-oh/opener-repair" : "/garage-door-opener-screw-drive-opener-repair-cincinnati-oh"} class="bg-card rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden hover:shadow-md transform-gpu transition-transform duration-300 group hover:-translate-y-1 focus-within:-translate-y-1 block">
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={screwDriveImage}
-              alt="Screw-drive garage door opener with threaded steel rod in Cincinnati, Ohio"
+              alt={`Screw-drive garage door opener with threaded steel rod in ${locationDisplayName ?? 'Cincinnati, Ohio'}`}
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -377,8 +383,8 @@ const contactSubtitle = activeLocation
               fetchpriority="low"
               decoding="async"
               quality={70}
-              data-geo-lat="39.1031"
-              data-geo-lng="-84.5120"
+              data-geo-lat={imageGeoLat}
+              data-geo-lng={imageGeoLng}
             />
           </div>
 
@@ -393,11 +399,11 @@ const contactSubtitle = activeLocation
             <div class="space-y-1 text-xs">
               <div class="flex justify-between">
                 <span class="text-ink/60">Noise:</span>
-                <span class="font-medium text-orange-600">Medium-High</span>
+                <span class={`font-medium ${isClevelandMarket ? 'text-orange-800' : 'text-orange-600'}`}>Medium-High</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Maintenance:</span>
-                <span class="font-medium text-green-600">Low</span>
+                <span class={`font-medium ${isClevelandMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Best for:</span>
@@ -497,11 +503,13 @@ const contactSubtitle = activeLocation
   />
 
   <ContactForm
+    includeSchema={!isClevelandMarket}
     title={contactTitle}
     subtitle={contactSubtitle}
     bgColor="white"
   />
 
+  {!isClevelandMarket && (
   <HiddenSeoText
     title={`Garage door opener expertise${locationDisplayName ? ` for ${locationDisplayName}` : ''}`}
     paragraphs={filterStrings([
@@ -521,6 +529,7 @@ const contactSubtitle = activeLocation
       zipCoverageLabel
     ])}
   />
+  )}
 
   <Schema
     item={{
@@ -536,6 +545,7 @@ const contactSubtitle = activeLocation
     }}
   />
 
+  </main>
   <Footer />
   <CallNowButton phoneNumber={displayPhoneNumber} />
 </Base>

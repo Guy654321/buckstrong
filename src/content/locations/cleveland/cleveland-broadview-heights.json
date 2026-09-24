@@ -1,0 +1,30 @@
+{
+  "name": "Broadview Heights",
+  "slug": "cleveland-broadview-heights",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.318156,
+    "lng": -81.679262
+  },
+  "zips": [
+    "44147"
+  ],
+  "surroundingAreas": [
+    "Brecksville",
+    "North Royalton",
+    "Seven Hills",
+    "Independence"
+  ],
+  "metaTitle": "Garage Door Repair in Broadview Heights, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Broadview Heights, OH. Help with floor gaps and door leveling. Call 216-930-2980.",
+  "localHeading": "A measured approach in Broadview Heights",
+  "localIntro": "Broadview Heights sits between Brecksville and North Royalton in the southern corridor. We can help with a garage door that has become hard to lift, leaves a draft at the floor, or no longer runs quietly.",
+  "localIssues": "A new bottom seal cannot correct a door that is out of level. We inspect cables, springs, and track alignment before deciding whether the gap is a seal issue or a larger mechanical problem.",
+  "localAdvice": "If replacement is the better choice, we can compare insulated door construction, panel design, and opener compatibility after measuring the garage. Ask about scheduling for your exact address.",
+  "heroTitle": "Garage Door Repair and Installation in Broadview Heights"
+}

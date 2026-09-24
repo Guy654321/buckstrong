@@ -1,0 +1,31 @@
+{
+  "name": "Cleveland Heights",
+  "slug": "cleveland-cleveland-heights",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.511075,
+    "lng": -81.561766
+  },
+  "zips": [
+    "44118",
+    "44121"
+  ],
+  "surroundingAreas": [
+    "University Heights",
+    "South Euclid",
+    "Shaker Heights",
+    "Lyndhurst"
+  ],
+  "metaTitle": "Garage Door Repair in Cleveland Heights, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Cleveland Heights, OH. Help with older garages and limited clearance. Call 216-930-2980.",
+  "localHeading": "Working with Cleveland Heights garage openings",
+  "localIntro": "Cleveland Heights has a large stock of established homes and garages, including openings where clearance or access may be limited. We inspect the existing door and its hardware before assuming a modern replacement will fit unchanged.",
+  "localIssues": "A noisy or uneven door may need roller, cable, or spring work rather than a new opener. We test travel by hand and check the safety system after repairs.",
+  "localAdvice": "When replacing a door, headroom, side room, and track condition deserve attention early. Tell us about any rear-drive access or unusually narrow opening when you book.",
+  "heroTitle": "Garage Door Repair and Installation in Cleveland Heights"
+}

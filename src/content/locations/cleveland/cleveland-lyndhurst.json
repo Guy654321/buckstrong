@@ -1,0 +1,30 @@
+{
+  "name": "Lyndhurst",
+  "slug": "cleveland-lyndhurst",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.516931,
+    "lng": -81.494818
+  },
+  "zips": [
+    "44124"
+  ],
+  "surroundingAreas": [
+    "South Euclid",
+    "Mayfield Heights",
+    "University Heights",
+    "Highland Heights"
+  ],
+  "metaTitle": "Garage Door Repair in Lyndhurst, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Lyndhurst, OH. Help with spring balance and whole-system diagnosis. Call 216-930-2980.",
+  "localHeading": "Lyndhurst garage door troubleshooting",
+  "localIntro": "Lyndhurst lies along the east-side Mayfield Road corridor, with residential garages close to neighboring South Euclid and Pepper Pike. We can inspect a door that has become loud, uneven, or difficult to open manually.",
+  "localIssues": "The opener may still run while the door’s spring system is losing balance. We check cables, rollers, and tracks as well as the motor so the diagnosis covers the whole system.",
+  "localAdvice": "For a planned installation, we measure the opening and review how panel weight and hardware will work with an existing or new opener. Share access details when scheduling.",
+  "heroTitle": "Garage Door Repair and Installation in Lyndhurst"
+}

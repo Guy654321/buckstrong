@@ -50,11 +50,10 @@ interface Props {
 
 const { location } = Astro.props as Props;
 const activeLocation = location;
-const serviceCityName = activeLocation
-  ? activeLocation.isHub
-    ? activeLocation.address?.addressLocality?.trim() || activeLocation.name
-    : activeLocation.name
-  : undefined;
+const isClevelandMarket = activeLocation?.market === 'Cleveland Metro';
+const imageGeoLat = isClevelandMarket && activeLocation ? activeLocation.lat : BUSINESS_INFO.geo.latitude;
+const imageGeoLng = isClevelandMarket && activeLocation ? activeLocation.lng : BUSINESS_INFO.geo.longitude;
+const serviceCityName = activeLocation?.name;
 const breadcrumbs = activeLocation
   ? [
       { label: 'Home', href: '/' },
@@ -72,7 +71,7 @@ const locationDisplayName = activeLocation && serviceCityName
   : undefined;
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
-  ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
+  ? isClevelandMarket ? `${locationDisplayName} and nearby communities` : `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
   : 'Cincinnati, Ohio neighborhoods';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
@@ -93,16 +92,18 @@ const zipCoverageLabel =
 
 const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
 const pageTitle = activeLocation && serviceCityName
-  ? `Garage Door Installation ${serviceCityName} | Buck Strong Garage Doors`
+  ? isClevelandMarket
+    ? `Garage Door Installation in ${serviceCityName}, ${activeLocation.state} | Buck Strong Garage Doors`
+    : `Garage Door Installation ${serviceCityName} | Buck Strong Garage Doors`
   : 'Cincinnati Garage Door Installation | Buck Strong Garage Doors';
 const pageDescription = activeLocation && serviceCityName
-  ? `Professional garage door installation in ${serviceCityName}, ${activeLocation.state}. 5.0-star local team. Choose from modern, steel, or carriage doors. Call ${displayPhoneNumber} for a free quote!`
+  ? isClevelandMarket ? `Garage door installation in ${serviceCityName}, ${activeLocation.state}. Compare steel, insulated, and carriage-style options. Call ${displayPhoneNumber} to plan a quote.` : `Professional garage door installation in ${serviceCityName}, ${activeLocation.state}. 5.0-star local team. Choose from modern, steel, or carriage doors. Call ${displayPhoneNumber} for a free quote!`
   : 'Expert garage door installation teams serving Cincinnati, Ohio with custom sizing, premium hardware, and comprehensive safety testing.';
 const heroHeading = activeLocation
   ? `Garage Door Installation in ${locationDisplayName}`
   : 'Garage Door Installation for Cincinnati, Ohio';
 const heroSubheading = activeLocation
-  ? `Precision crews install custom doors across ${coverageAreaLabel}. Choose carriage house, contemporary glass, or insulated steel options that fit your climate.`
+  ? isClevelandMarket ? `A new garage door should fit the opening, operate safely, and suit the home. For homeowners in ${coverageAreaLabel}, we review door styles, insulation, hardware, and opener compatibility, then confirm measurements before installation.` : `Precision crews install custom doors across ${coverageAreaLabel}. Choose carriage house, contemporary glass, or insulated steel options that fit your climate.`
   : 'Precision crews install custom doors for Jefferson, Fayette, Boone, Kenton, and Campbell County homeowners. Choose carriage house, contemporary glass, or insulated steel options that fit your climate.';
 const heroAlt = activeLocation
   ? `New garage door installation completed for homeowners in ${coverageAreaLabel}`
@@ -136,7 +137,7 @@ const contactTitle = activeLocation
   ? `Request an Installation Quote in ${locationDisplayName}`
   : 'Request an Installation Quote';
 const contactSubtitle = activeLocation
-  ? `Get precise measurements, style recommendations, and a guaranteed installation date for your ${coverageAreaLabel} home.`
+  ? isClevelandMarket ? `Tell us about the opening and style you want for your ${coverageAreaLabel} home. We will confirm the next steps and availability.` : `Get precise measurements, style recommendations, and a guaranteed installation date for your ${coverageAreaLabel} home.`
   : 'Get precise measurements, style recommendations, and a guaranteed installation date for your home.';
 
 const galleryCards = [
@@ -146,7 +147,7 @@ const galleryCards = [
       ? `On-site consultations, precise measurements, and safety-first crews deliver a seamless installation for homeowners across ${coverageAreaLabel}.`
       : 'On-site consultations, precise measurements, and safety-first crews deliver a seamless installation for Cincinnati, Ohio homeowners.',
     image: expertProcessImage,
-    alt: 'Completed garage door installation on a suburban home in Cincinnati, Ohio'
+    alt: `Completed garage door installation on a suburban home in ${locationDisplayName ?? 'Cincinnati, Ohio'}`
   },
   {
     title: 'Complete System Installation',
@@ -154,7 +155,7 @@ const galleryCards = [
       ? `We install openers, balance springs, and upgrade hardware so every component works together for dependable performance in ${coverageAreaLabel}.`
       : 'We install openers, balance springs, and upgrade hardware so every component works together for dependable performance.',
     image: completeSystemImage,
-    alt: 'Technicians completing a full garage door system install in Cincinnati, Ohio'
+    alt: `Technicians completing a full garage door system install in ${locationDisplayName ?? 'Cincinnati, Ohio'}`
   },
   {
     title: 'Beautiful Finished Results',
@@ -162,7 +163,7 @@ const galleryCards = [
       ? `Premium materials, curated styles, and meticulous finishing touches give ${coverageAreaLabel} homes instant curb appeal.`
       : 'Premium materials, curated styles, and meticulous finishing touches give homes across Cincinnati, Ohio instant curb appeal.',
     image: finishedResultsImage,
-    alt: 'Elegant garage door upgrade on a brick home in Cincinnati, Ohio'
+    alt: `Elegant garage door upgrade on a brick home in ${locationDisplayName ?? 'Cincinnati, Ohio'}`
   }
   ] satisfies Array<{ title: string; description: string; image: ImageMetadata; alt: string }>;
 
@@ -186,25 +187,25 @@ const doorTypes = [
   {
     title: 'Steel Garage Doors',
     description: 'Durable, low-maintenance construction with insulation upgrades for comfort and efficiency.',
-    href: '/garage-door-steel-garage-doors-cincinnati-oh',
+    href: isClevelandMarket ? '/cleveland-oh/garage-door-installation' : '/garage-door-steel-garage-doors-cincinnati-oh',
     theme: 'steel'
   },
   {
     title: 'Wood Garage Doors',
     description: 'Handcrafted styles, custom stain matches, and premium craftsmanship for standout curb appeal.',
-    href: '/garage-door-wood-garage-doors-cincinnati-oh',
+    href: isClevelandMarket ? '/cleveland-oh/garage-door-installation' : '/garage-door-wood-garage-doors-cincinnati-oh',
     theme: 'wood'
   },
   {
     title: 'Aluminum Garage Doors',
     description: 'Lightweight, rust-resistant frames with modern glass or solid panel configurations.',
-    href: '/garage-door-aluminum-garage-doors-cincinnati-oh',
+    href: isClevelandMarket ? '/cleveland-oh/garage-door-installation' : '/garage-door-aluminum-garage-doors-cincinnati-oh',
     theme: 'aluminum'
   },
   {
     title: 'Elegant Garage Doors',
     description: 'Carriage house overlays, decorative hardware, and designer windows tailored to your architecture.',
-    href: '/garage-door-carriage-house-garage-doors-cincinnati-oh',
+    href: isClevelandMarket ? '/cleveland-oh/garage-door-installation' : '/garage-door-carriage-house-garage-doors-cincinnati-oh',
     theme: 'elegant'
   }
 ] satisfies Array<{ title: string; description: string; href: string; theme: 'steel' | 'wood' | 'aluminum' | 'elegant' }>;
@@ -255,17 +256,19 @@ const expertiseCopy = activeLocation
         '@type': 'LocalBusiness',
         name: BUSINESS_INFO.name,
         legalName: BUSINESS_INFO.legalName,
-        '@id': businessEntityId,
+        '@id': isClevelandMarket ? `${getSiteOrigin()}/locations/cleveland#local-business` : businessEntityId,
         telephone: displayPhoneNumber,
         email: BUSINESS_INFO.email,
         address: {
           '@type': 'PostalAddress',
-          streetAddress: BUSINESS_INFO.address.streetAddress,
-          addressLocality: BUSINESS_INFO.address.addressLocality,
-          addressRegion: BUSINESS_INFO.address.addressRegion,
-          postalCode: BUSINESS_INFO.address.postalCode,
-          addressCountry: BUSINESS_INFO.address.addressCountry
-        }
+          ...(isClevelandMarket ? activeLocation?.address : BUSINESS_INFO.address)
+        },
+        ...(isClevelandMarket ? { openingHoursSpecification: [{
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '00:00',
+          closes: '23:59'
+        }] } : {})
       },
       areaServed,
       serviceType: 'Garage Door Installation',
@@ -278,6 +281,7 @@ const expertiseCopy = activeLocation
     }}
   />
 
+  <main>
   <section class="relative py-20 lg:py-32 text-white overflow-visible lg:overflow-hidden">
     <div class="absolute inset-0">
       <Image
@@ -291,8 +295,8 @@ const expertiseCopy = activeLocation
         decoding="sync"
         quality={65}
         sizes="100vw"
-        data-geo-lat="39.1031"
-        data-geo-lng="-84.5120"
+        data-geo-lat={imageGeoLat}
+        data-geo-lng={imageGeoLng}
       />
       <div class="absolute inset-0 bg-primary/75"></div>
     </div>
@@ -361,8 +365,8 @@ const expertiseCopy = activeLocation
                 decoding="async"
                 quality={82}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                data-geo-lat="39.1031"
-                data-geo-lng="-84.5120"
+                data-geo-lat={imageGeoLat}
+                data-geo-lng={imageGeoLng}
               />
             </div>
             <div class="p-6">
@@ -469,8 +473,9 @@ const expertiseCopy = activeLocation
 
   <ServiceInternalLinks currentSlug="garage-door-installation" location={activeLocation} />
 
-  <ContactForm title={contactTitle} subtitle={contactSubtitle} bgColor="muted" />
+  <ContactForm includeSchema={!isClevelandMarket} title={contactTitle} subtitle={contactSubtitle} bgColor="muted" />
 
+  {!isClevelandMarket && (
   <HiddenSeoText
     title={`Garage door installation details${locationDisplayName ? ` for ${locationDisplayName}` : ''}`}
     paragraphs={filterStrings([
@@ -490,6 +495,7 @@ const expertiseCopy = activeLocation
       zipCoverageLabel
     ])}
   />
+  )}
 
   <Schema
     item={{
@@ -505,5 +511,6 @@ const expertiseCopy = activeLocation
     }}
   />
 
+  </main>
   <Footer />
 </Base>

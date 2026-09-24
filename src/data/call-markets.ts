@@ -14,6 +14,12 @@ const LAUNCH_CALL_MARKETS: CallMarket[] = [
     phoneDisplay: "5137788005",
     phoneHref: "",
   },
+  {
+    id: "cleveland",
+    label: "Cleveland",
+    phoneDisplay: "216-930-2980",
+    phoneHref: "",
+  },
 ];
 
 export const CALL_MARKETS: CallMarket[] = LAUNCH_CALL_MARKETS.map((market) => ({

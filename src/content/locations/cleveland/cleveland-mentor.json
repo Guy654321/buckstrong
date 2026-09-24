@@ -1,0 +1,30 @@
+{
+  "name": "Mentor",
+  "slug": "cleveland-mentor",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.690159,
+    "lng": -81.33588
+  },
+  "zips": [
+    "44060"
+  ],
+  "surroundingAreas": [
+    "Painesville",
+    "Willoughby",
+    "Eastlake",
+    "Kirtland"
+  ],
+  "metaTitle": "Garage Door Repair in Mentor, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Mentor, OH. Help with large eastern suburb and system diagnosis. Call 216-930-2980.",
+  "localHeading": "Garage door help for Mentor’s residential market",
+  "localIntro": "Mentor is one of the larger eastern suburbs in this selected Cleveland territory. We confirm availability by address, then diagnose the actual door and opener before discussing repair or replacement.",
+  "localIssues": "If a door shakes or reverses, the cause could be sensor alignment, worn rollers, or poor balance. We test those components together and check the safety reversal after work.",
+  "localAdvice": "For a planned upgrade, we can compare door construction, insulation, and opener controls with the opening and household use. Tell us whether the garage is attached or detached when you call.",
+  "heroTitle": "Garage Door Repair and Installation in Mentor"
+}

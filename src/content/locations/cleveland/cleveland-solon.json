@@ -1,0 +1,31 @@
+{
+  "name": "Solon",
+  "slug": "cleveland-solon",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.3898,
+    "lng": -81.441
+  },
+  "zips": [
+    "44139"
+  ],
+  "surroundingAreas": [
+    "Chagrin Falls",
+    "Bainbridge Township",
+    "Twinsburg",
+    "Orange",
+    "Macedonia"
+  ],
+  "metaTitle": "Garage Door Service in Solon, OH | Buck Strong",
+  "metaDescription": "Solon garage door repair and opener service near the US-422 corridor. Get clear repair or replacement options. Call Buck Strong at 216-930-2980.",
+  "localHeading": "Troubleshooting a door before replacing it",
+  "localIntro": "Solon is a southeastern Cuyahoga community on the Cleveland side of the US-422 corridor. We can troubleshoot failed sensors, intermittent openers, and doors that run unevenly without assuming every issue needs a full replacement.",
+  "localIssues": "Safety sensors and travel limits should be tested after opener work, especially when a door reverses without an obvious obstruction.",
+  "localAdvice": "If several parts are worn, we will explain the cost and lifespan tradeoffs of repair versus replacement.",
+  "heroTitle": "Solon Garage Door Repair and Opener Service"
+}

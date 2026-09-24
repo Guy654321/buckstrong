@@ -33,11 +33,20 @@ export function buildLocationServicePaths(locations, services) {
     (service) => typeof service?.slug === 'string' && service.slug.trim().length > 0,
   );
 
-  return validLocations.flatMap((location) =>
-    validServices.map((service) => {
-      const citySlug = location.slug.trim().replace(/^cincinnati-/, '');
+  const clevelandPublishedServices = new Set([
+    'garage-door-repair',
+    'opener-repair',
+    'garage-door-installation',
+    'commercial-jobs',
+  ]);
+
+  return validLocations.filter((location) => !location.slug.startsWith('cleveland-')).flatMap((location) =>
+    validServices
+      .filter((service) => location.slug !== 'cleveland' || clevelandPublishedServices.has(service.slug.trim()))
+      .map((service) => {
+      const citySlug = location.slug.trim().replace(/^(cincinnati|cleveland)-/, '');
       return `/${citySlug}-oh/${service.slug.trim()}`;
-    }),
+      }),
   );
 }
 

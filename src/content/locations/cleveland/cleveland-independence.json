@@ -1,0 +1,30 @@
+{
+  "name": "Independence",
+  "slug": "cleveland-independence",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.380013,
+    "lng": -81.63329
+  },
+  "zips": [
+    "44131"
+  ],
+  "surroundingAreas": [
+    "Seven Hills",
+    "Garfield Heights",
+    "Maple Heights",
+    "Brecksville"
+  ],
+  "metaTitle": "Garage Door Repair in Independence, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Independence, OH. Help with I-77 residential and commercial openings. Call 216-930-2980.",
+  "localHeading": "Door service for Independence homes and businesses",
+  "localIntro": "Independence has both residential streets and commercial properties along the I-77 corridor. We ask whether the call involves a home garage or an overhead business opening so the visit matches the door and access requirements.",
+  "localIssues": "At home, an opener that strains can be reacting to a heavy door. In a business setting, a sticking overhead door may affect access and security, so describe the opening’s current position when you call.",
+  "localAdvice": "For a planned replacement, we measure the opening and discuss usage, insulation, and safety features. Business customers can also share delivery or operating windows before scheduling.",
+  "heroTitle": "Garage Door Repair and Installation in Independence"
+}

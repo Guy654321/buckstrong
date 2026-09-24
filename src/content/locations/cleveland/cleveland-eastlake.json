@@ -1,0 +1,30 @@
+{
+  "name": "Eastlake",
+  "slug": "cleveland-eastlake",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.656635,
+    "lng": -81.429114
+  },
+  "zips": [
+    "44095"
+  ],
+  "surroundingAreas": [
+    "Willoughby",
+    "Willowick",
+    "Wickliffe",
+    "Willoughby Hills"
+  ],
+  "metaTitle": "Garage Door Repair in Eastlake, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Eastlake, OH. Help with residential and business door mix. Call 216-930-2980.",
+  "localHeading": "Eastlake residential and overhead-door support",
+  "localIntro": "Eastlake has residential garages and business properties along the Lake County lakeshore corridor. We ask which type of opening is involved so the visit can be planned around the right hardware and access needs.",
+  "localIssues": "For a home door, we inspect spring balance, cables, and the opener safety system. For a business door, operating hours and how the opening is secured become part of the service plan.",
+  "localAdvice": "If a replacement is being considered, we measure the existing opening and explain what the door’s daily use requires. Share the address and door type when you call.",
+  "heroTitle": "Garage Door Repair and Installation in Eastlake"
+}

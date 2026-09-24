@@ -1,0 +1,31 @@
+{
+  "name": "Chagrin Falls",
+  "slug": "cleveland-chagrin-falls",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.4362,
+    "lng": -81.3865
+  },
+  "zips": [
+    "44022"
+  ],
+  "surroundingAreas": [
+    "Bainbridge Township",
+    "Solon",
+    "Beachwood",
+    "Russell Township",
+    "Orange"
+  ],
+  "metaTitle": "Garage Door Service in Chagrin Falls, OH | Buck Strong",
+  "metaDescription": "Chagrin Falls garage door repair and installation planning for worn doors, hardware, and openers. Call Buck Strong at 216-930-2980.",
+  "localHeading": "Repairing an older door or planning an upgrade",
+  "localIntro": "Chagrin Falls is the eastern village in this Cleveland service area. For a garage door that no longer fits the opening cleanly, we can check panel condition, hardware, and weather seals before suggesting an upgrade.",
+  "localIssues": "Replacement choices should fit the opening and the home, with attention to the track and opener already in place.",
+  "localAdvice": "We also diagnose spring and cable faults that can make a door feel unsafe to operate.",
+  "heroTitle": "Chagrin Falls Garage Door Service"
+}

@@ -6,20 +6,28 @@ function normalizeSlug(value: string | undefined | null): string {
 
 export function buildLocationCitySegment(locationSlug: string | undefined | null): string {
   const normalized = normalizeSlug(locationSlug);
-  const citySlug = normalized.replace(/^cincinnati-/, '');
+  const citySlug = normalized.replace(/^(cincinnati|cleveland)-/, '');
   return citySlug ? `${citySlug}-oh` : '';
 }
 
 export function buildLocationCitySlug(locationSlug: string | undefined | null): string {
-  return normalizeSlug(locationSlug).replace(/^cincinnati-/, '');
+  return normalizeSlug(locationSlug).replace(/^(cincinnati|cleveland)-/, '');
 }
 
 export function buildLocalizedServicePath(
   locationSlug: string | undefined | null,
   serviceSlug: string | undefined | null,
 ): string {
-  const citySegment = buildLocationCitySegment(locationSlug);
+  const normalizedLocation = normalizeSlug(locationSlug);
+  // Cleveland suburb pages connect to the market's service hubs. Generating a
+  // second copy of every service for each suburb would create doorway pages.
+  const serviceLocation = normalizedLocation.startsWith('cleveland-') ? 'cleveland' : normalizedLocation;
+  const citySegment = buildLocationCitySegment(serviceLocation);
   const normalizedServiceSlug = normalizeSlug(serviceSlug);
+
+  if (serviceLocation === 'cleveland' && normalizedServiceSlug.startsWith('garage-door-') && !['garage-door-repair', 'garage-door-installation'].includes(normalizedServiceSlug)) {
+    return '/cleveland-oh/garage-door-repair';
+  }
 
   if (!citySegment) {
     return normalizedServiceSlug ? `/${normalizedServiceSlug}` : '/';
@@ -33,5 +41,5 @@ export function getLocationServiceCityName(location?: Location): string | undefi
     return undefined;
   }
 
-  return location.isHub ? location.address?.addressLocality?.trim() || location.name : location.name;
+  return location.name;
 }

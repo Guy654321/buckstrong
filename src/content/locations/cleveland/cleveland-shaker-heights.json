@@ -1,0 +1,31 @@
+{
+  "name": "Shaker Heights",
+  "slug": "cleveland-shaker-heights",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.47609,
+    "lng": -81.549197
+  },
+  "zips": [
+    "44120",
+    "44122"
+  ],
+  "surroundingAreas": [
+    "University Heights",
+    "Lee-Harvard",
+    "Beachwood",
+    "Cleveland Heights"
+  ],
+  "metaTitle": "Garage Door Repair in Shaker Heights, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Shaker Heights, OH. Help with older doors and measured upgrades. Call 216-930-2980.",
+  "localHeading": "Garage door care for Shaker Heights homes",
+  "localIntro": "Shaker Heights has an established residential housing stock where the garage door should suit both the opening and the home. We can diagnose an older door before recommending a visible replacement or opener upgrade.",
+  "localIssues": "On a door that shakes or makes a grinding sound, we examine hinges, rollers, track clearance, and spring balance. Quiet operation depends on those parts as well as the opener.",
+  "localAdvice": "For a new door, we can discuss material, window placement, and finish after measuring the garage. Any exterior changes should also be checked against applicable local review or permit requirements.",
+  "heroTitle": "Garage Door Repair and Installation in Shaker Heights"
+}

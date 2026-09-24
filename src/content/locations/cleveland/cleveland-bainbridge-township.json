@@ -1,0 +1,31 @@
+{
+  "name": "Bainbridge Township",
+  "slug": "cleveland-bainbridge-township",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.375,
+    "lng": -81.33
+  },
+  "zips": [
+    "44023"
+  ],
+  "surroundingAreas": [
+    "Chagrin Falls",
+    "Solon",
+    "Twinsburg",
+    "Aurora",
+    "Russell Township"
+  ],
+  "metaTitle": "Garage Door Service in Bainbridge Township, OH | Buck Strong",
+  "metaDescription": "Bainbridge Township garage door service in Geauga County. Confirm your 44023 address and discuss repair or installation at 216-930-2980.",
+  "localHeading": "Confirming the address and the right garage door work",
+  "localIntro": "Bainbridge Township is in Geauga County, east of the Cuyahoga line. Its 44023 postal area is often labeled Chagrin Falls, so we confirm the service address when booking rather than assuming the mailing city identifies the municipality.",
+  "localIssues": "Longer driveways and varied garage openings make clear measurements and access notes especially helpful when planning an installation.",
+  "localAdvice": "For a door that will not close, we check sensors, tracks, and spring balance before recommending parts.",
+  "heroTitle": "Garage Door Service in Bainbridge Township"
+}

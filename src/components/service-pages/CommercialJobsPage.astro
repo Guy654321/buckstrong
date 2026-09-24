@@ -48,6 +48,9 @@ interface Props {
 
 const { location } = Astro.props as Props;
 const activeLocation = location;
+const isClevelandMarket = activeLocation?.market === 'Cleveland Metro';
+const imageGeoLat = isClevelandMarket && activeLocation ? activeLocation.lat : BUSINESS_INFO.geo.latitude;
+const imageGeoLng = isClevelandMarket && activeLocation ? activeLocation.lng : BUSINESS_INFO.geo.longitude;
 const breadcrumbs = activeLocation
   ? [
       { label: 'Home', href: '/' },
@@ -63,7 +66,7 @@ const breadcrumbs = activeLocation
 const locationDisplayName = activeLocation ? `${activeLocation.name}, ${activeLocation.state}` : undefined;
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
-  ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
+  ? isClevelandMarket ? `${locationDisplayName} and nearby communities` : `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
   : 'Cincinnati, Ohio';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
@@ -86,13 +89,13 @@ const pageTitle = activeLocation
   ? `Commercial Overhead Door Service in ${locationDisplayName} | Buck Strong Garage Doors`
   : 'Commercial Overhead Door Service in Cincinnati, Ohio | Buck Strong Garage Doors';
 const pageDescription = activeLocation
-  ? `Commercial garage door repair, loading dock safety service, and warehouse maintenance for facilities in ${coverageAreaLabel}. Safety-certified technicians on call.`
+  ? isClevelandMarket ? `Commercial overhead door repair and maintenance inquiries for facilities in ${coverageAreaLabel}. Call to discuss equipment and availability.` : `Commercial garage door repair, loading dock safety service, and warehouse maintenance for facilities in ${coverageAreaLabel}. Safety-certified technicians on call.`
   : 'Commercial garage door repair, loading dock safety service, and warehouse maintenance for Cincinnati metro facilities. Safety-certified technicians on call.';
 const heroHeading = activeLocation
   ? `Commercial Door Support for ${locationDisplayName}`
   : 'Commercial Door Support for Cincinnati, Ohio';
 const heroSubheading = activeLocation
-  ? `Rapid-response repairs and preventive maintenance for warehouses, logistics centers, and municipal fleets. Crews cover ${coverageAreaLabel} with clear arrival updates.`
+  ? isClevelandMarket ? `Buck Strong helps facilities in ${coverageAreaLabel} assess overhead doors and dock equipment that are damaged, unreliable, or due for maintenance. Tell us about the opening, access requirements, and operating hours so we can discuss the right service plan.` : `Rapid-response repairs and preventive maintenance for warehouses, logistics centers, and municipal fleets. Crews cover ${coverageAreaLabel} with clear arrival updates.`
   : 'Rapid-response repairs and preventive maintenance for warehouses, logistics centers, and municipal fleets. Crews work across the Cincinnati metro with clear arrival updates.';
 const heroAlt = activeLocation
   ? `Commercial garage door technicians servicing facilities across ${coverageAreaLabel}`
@@ -119,10 +122,10 @@ const canonicalPath = activeLocation
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const warehouseAlt = activeLocation
   ? `Technician inspecting warehouse garage door system in ${coverageAreaLabel}`
-  : 'Technician inspecting warehouse garage door system in Cincinnati, Ohio';
+  : `Technician inspecting warehouse garage door system in ${locationDisplayName ?? 'Cincinnati, Ohio'}`;
 const dockAlt = activeLocation
   ? `Dock leveler maintenance performed for ${coverageAreaLabel} logistics hub`
-  : 'Dock leveler maintenance performed for a Cincinnati, Ohio logistics hub';
+  : `Dock leveler maintenance performed for a ${locationDisplayName ?? 'Cincinnati, Ohio'} logistics hub`;
 const storefrontAlt = activeLocation
   ? `Commercial service truck outside a ${locationDisplayName ?? 'Cincinnati'} storefront garage bay`
   : 'Commercial service truck outside a Cincinnati, Ohio storefront garage bay';
@@ -130,9 +133,9 @@ const estimateAlt = activeLocation
   ? `Commercial door technicians reviewing a ${locationDisplayName ?? coverageAreaLabel} service plan`
   : 'Commercial door technicians reviewing a Cincinnati, Ohio service plan';
 const commercialCoverageLinks = {
-  warehouse: '/garage-door-commercial-warehouse-distribution-door-service-cincinnati-oh',
-  dock: '/garage-door-commercial-dock-industrial-door-equipment-service-cincinnati-oh',
-  retail: '/garage-door-commercial-retail-municipal-garage-door-service-cincinnati-oh'
+  warehouse: isClevelandMarket ? '/cleveland-oh/commercial-jobs' : '/garage-door-commercial-warehouse-distribution-door-service-cincinnati-oh',
+  dock: isClevelandMarket ? '/cleveland-oh/commercial-jobs' : '/garage-door-commercial-dock-industrial-door-equipment-service-cincinnati-oh',
+  retail: isClevelandMarket ? '/cleveland-oh/commercial-jobs' : '/garage-door-commercial-retail-municipal-garage-door-service-cincinnati-oh'
 };
 const facilitiesHeading = activeLocation
   ? `Facilities We Support Across ${coverageAreaLabel}`
@@ -150,7 +153,7 @@ const specialistsHeading = activeLocation
   ? `Commercial Specialists On Call in ${locationDisplayName}`
   : 'Cincinnati Commercial Specialists On Call';
 const specialistsIntro = activeLocation
-  ? `Emergency dispatch is available day or night for stuck bays, vehicle impacts, or security concerns. Quarterly preventive routes keep inspections on schedule across ${coverageAreaLabel}.`
+  ? isClevelandMarket ? `For a stuck bay or damaged overhead door in ${coverageAreaLabel}, call with the equipment type and access requirements so we can confirm the next available service window.` : `Emergency dispatch is available day or night for stuck bays, vehicle impacts, or security concerns. Quarterly preventive routes keep inspections on schedule across ${coverageAreaLabel}.`
   : 'Emergency dispatch is available day or night for stuck bays, vehicle impacts, or security concerns. Quarterly preventive routes keep inspections on schedule across every market we serve.';
 
 let marketCommercialLinks: Array<{ name: string; href: string }> = [];
@@ -212,17 +215,19 @@ if (activeLocation) {
         '@type': 'LocalBusiness',
         name: BUSINESS_INFO.name,
         legalName: BUSINESS_INFO.legalName,
-        '@id': businessEntityId,
+        '@id': isClevelandMarket ? `${getSiteOrigin()}/locations/cleveland#local-business` : businessEntityId,
         telephone: displayPhoneNumber,
         email: BUSINESS_INFO.email,
         address: {
           '@type': 'PostalAddress',
-          streetAddress: BUSINESS_INFO.address.streetAddress,
-          addressLocality: BUSINESS_INFO.address.addressLocality,
-          addressRegion: BUSINESS_INFO.address.addressRegion,
-          postalCode: BUSINESS_INFO.address.postalCode,
-          addressCountry: BUSINESS_INFO.address.addressCountry
-        }
+          ...(isClevelandMarket ? activeLocation?.address : BUSINESS_INFO.address)
+        },
+        ...(isClevelandMarket ? { openingHoursSpecification: [{
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '00:00',
+          closes: '23:59'
+        }] } : {})
       },
       areaServed,
       serviceType: 'Commercial Garage Door Service',
@@ -235,6 +240,7 @@ if (activeLocation) {
     }}
   />
 
+  <main>
   <section class="relative py-20 lg:py-32 text-white overflow-visible lg:overflow-hidden">
     <div class="absolute inset-0">
       <Image
@@ -248,8 +254,8 @@ if (activeLocation) {
         decoding="sync"
         sizes="100vw"
         quality={80}
-        data-geo-lat="39.1031"
-        data-geo-lng="-84.5120"
+        data-geo-lat={imageGeoLat}
+        data-geo-lng={imageGeoLng}
       />
       <div class="absolute inset-0 bg-primary/75"></div>
     </div>
@@ -315,11 +321,11 @@ if (activeLocation) {
               loading="lazy"
               decoding="async"
               quality={80}
-              data-geo-lat="39.1031"
-              data-geo-lng="-84.5120"
+              data-geo-lat={imageGeoLat}
+              data-geo-lng={imageGeoLng}
             />
             <div class="p-6">
-              <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary/70 mb-3">Core Coverage</p>
+              <p class={`text-xs font-semibold uppercase tracking-[0.35em] mb-3 ${isClevelandMarket ? 'text-primary' : 'text-primary/70'}`}>Core Coverage</p>
               <h3 class="text-xl font-semibold text-ink mb-2">Warehouses & Distribution</h3>
               <p class="text-sm text-ink/70 leading-relaxed">
                 Reset sectional doors, balance counterweights, and tune photo-eyes to keep freight moving.
@@ -340,11 +346,11 @@ if (activeLocation) {
               loading="lazy"
               decoding="async"
               quality={80}
-              data-geo-lat="39.1031"
-              data-geo-lng="-84.5120"
+              data-geo-lat={imageGeoLat}
+              data-geo-lng={imageGeoLng}
             />
             <div class="p-6">
-              <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary/70 mb-3">Core Coverage</p>
+              <p class={`text-xs font-semibold uppercase tracking-[0.35em] mb-3 ${isClevelandMarket ? 'text-primary' : 'text-primary/70'}`}>Core Coverage</p>
               <h3 class="text-xl font-semibold text-ink mb-2">Dock & Industrial Equipment</h3>
               <p class="text-sm text-ink/70 leading-relaxed">
                 Service dock levelers, vehicle restraints, and rolling steel curtains with full safety documentation.
@@ -365,11 +371,11 @@ if (activeLocation) {
               loading="lazy"
               decoding="async"
               quality={80}
-              data-geo-lat="39.1031"
-              data-geo-lng="-84.5120"
+              data-geo-lat={imageGeoLat}
+              data-geo-lng={imageGeoLng}
             />
             <div class="p-6">
-              <p class="text-xs font-semibold uppercase tracking-[0.35em] text-primary/70 mb-3">Core Coverage</p>
+              <p class={`text-xs font-semibold uppercase tracking-[0.35em] mb-3 ${isClevelandMarket ? 'text-primary' : 'text-primary/70'}`}>Core Coverage</p>
               <h3 class="text-xl font-semibold text-ink mb-2">Retail & Municipal Sites</h3>
               <p class="text-sm text-ink/70 leading-relaxed">
                 Quiet storefront shutters, fire stations, and fleet garages stay mission ready with proactive maintenance visits.
@@ -485,8 +491,8 @@ if (activeLocation) {
               width={400}
               height={300}
               quality={80}
-              data-geo-lat="39.1031"
-              data-geo-lng="-84.5120"
+              data-geo-lat={imageGeoLat}
+              data-geo-lng={imageGeoLng}
             />
             <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
           </div>
@@ -529,6 +535,7 @@ if (activeLocation) {
   </section>
 
   <ContactForm
+    includeSchema={!isClevelandMarket}
     id="commercial-contact"
     title="Schedule Commercial Service"
     subtitle={commercialFormSubtitle}
@@ -562,6 +569,7 @@ if (activeLocation) {
     </div>
   </section>
 
+  {!isClevelandMarket && (
   <HiddenSeoText
     title={`Commercial garage door support${locationDisplayName ? ` for ${locationDisplayName}` : ''}`}
     paragraphs={filterStrings([
@@ -581,6 +589,7 @@ if (activeLocation) {
       zipCoverageLabel
     ])}
   />
+  )}
 
   {marketCommercialLinks.length > 0 && (
     <nav class="sr-only" aria-label="Nearby commercial service area links">
@@ -608,5 +617,6 @@ if (activeLocation) {
     }}
   />
 
+  </main>
   <Footer />
 </Base>

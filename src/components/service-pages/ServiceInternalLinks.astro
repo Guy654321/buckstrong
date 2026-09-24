@@ -18,7 +18,9 @@ const serviceLinks = [
   {
     slug: 'garage-door-repair',
     title: 'Garage Door Repair',
-    description: `Same-day repair for springs, cables, rollers, and tracks across ${locationName}.`
+    description: location?.market === 'Cleveland Metro'
+      ? `Repair options for springs, cables, rollers, and tracks across ${locationName}.`
+      : `Same-day repair for springs, cables, rollers, and tracks across ${locationName}.`
   },
   {
     slug: 'garage-door-installation',
@@ -45,6 +47,7 @@ const serviceLinks = [
       <p class="text-ink/70 max-w-3xl mx-auto">
         Explore other ways our team supports homeowners and businesses in {locationName}. Every service links you with the same local experts.
       </p>
+      {!location && <p class="mt-3 text-sm text-ink/70">Looking for this service near Cleveland? <a class="inline-link" href={buildLocalizedServicePath('cleveland', currentSlug)}>See Cleveland service details</a>.</p>}
     </div>
 
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

@@ -19,7 +19,7 @@ const quoteModalModuleUrl = quoteModalScriptUrl;
 
 const services = await getServices();
 const locationHubs = await getLocationHubs();
-const launchHubSlugs = new Set(["cincinnati"]);
+const launchHubSlugs = new Set(["cincinnati", "cleveland"]);
 const launchHubs = locationHubs.filter((hub) => launchHubSlugs.has(hub.slug));
 const displayPhoneNumber = BUSINESS_INFO.telephone;
 const sanitizedPhoneNumber = displayPhoneNumber.replace(/[^0-9+]/g, "");
@@ -40,9 +40,6 @@ const safeCallMarkets =
   ];
 const callModalId = "header-call-modal";
 const quoteModalId = "quote-form-modal";
-const primaryCallMarket = safeCallMarkets[0];
-const primaryCallHref = primaryCallMarket?.phoneHref || phoneHref;
-const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
 ---
 
 <Fragment slot="head">
@@ -78,7 +75,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
         </a>
       </div>
 
-      <div class="hidden md:flex md:flex-1 md:justify-center">
+      <div class="hidden lg:flex lg:flex-1 lg:justify-center">
         <div class="flex items-center space-x-8">
           <div class="relative group" data-dropdown data-open="false">
             <button
@@ -283,19 +280,19 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
         </div>
       </div>
 
-<div class="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2 md:ml-0">
+<div class="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2 lg:ml-0">
   {safeCallMarkets.length > 0 ? (
     <>
       {/* Mobile call button - compact size */}
       <button
         type="button"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-md transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:hidden"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-md transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent lg:hidden"
         style="min-height: 40px; min-width: 40px;"
         data-call-modal-trigger
         aria-controls={callModalId}
         aria-expanded="false"
         aria-haspopup="dialog"
-        aria-label={`Call ${primaryCallLabel}`}
+        aria-label="Choose a location to call"
       >
         <Icon name="mdi:phone" class="h-4 w-4" aria-hidden="true" />
         <span class="sr-only">Open call options</span>
@@ -304,7 +301,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
       {/* Desktop call button - original size */}
       <button
         type="button"
-        class="hidden md:inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+        class="hidden lg:inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
         style="min-height: 44px; min-width: 44px;"
         data-call-modal-trigger
         aria-controls={callModalId}
@@ -319,7 +316,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
       <noscript>
         <a
           href={phoneHref}
-          class="ml-3 hidden md:inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+          class="ml-3 hidden lg:inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
           style="min-height: 44px; min-width: 44px;"
           aria-label={`Call ${displayPhoneNumber}`}
         >
@@ -333,8 +330,8 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
       href={phoneHref}
       class="btn-primary text-xs sm:text-sm px-3 sm:px-4 py-2 whitespace-nowrap"
     >
-      <span class="inline md:hidden">Call Now</span>
-      <span class="hidden md:inline">Call Now</span>
+      <span class="inline lg:hidden">Call Now</span>
+      <span class="hidden lg:inline">Call Now</span>
     </a>
   )}
 </div>
@@ -355,7 +352,7 @@ const primaryCallLabel = primaryCallMarket?.phoneDisplay || displayPhoneNumber;
         </noscript>
       )}
 
-      <details class="md:hidden group relative">
+      <details class="lg:hidden group relative">
         <summary
           class="mobile-menu-button text-ink hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent inline-flex items-center justify-center p-2 transition list-none appearance-none [&::-webkit-details-marker]:hidden [&::marker]:hidden"
           aria-label="Toggle mobile navigation menu"

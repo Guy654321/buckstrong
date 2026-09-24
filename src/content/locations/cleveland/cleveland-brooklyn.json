@@ -1,0 +1,30 @@
+{
+  "name": "Brooklyn",
+  "slug": "cleveland-brooklyn",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.43474,
+    "lng": -81.74918
+  },
+  "zips": [
+    "44144"
+  ],
+  "surroundingAreas": [
+    "Old Brooklyn",
+    "West Park",
+    "Parma Heights",
+    "Parma"
+  ],
+  "metaTitle": "Garage Door Repair in Brooklyn, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Brooklyn, OH. Help with tight access and uneven seals. Call 216-930-2980.",
+  "localHeading": "Garage door help close to Cleveland’s south side",
+  "localIntro": "Brooklyn is a compact city between Cleveland and Parma, with residential garages close to the surrounding urban street network. We can inspect a door that is sticking, off level, or putting unexpected strain on its opener.",
+  "localIssues": "Where space around the garage is tight, let us know about parking and rear access. That helps when bringing replacement sections or checking the outside of an older door.",
+  "localAdvice": "A weather seal only works well when the door closes evenly. We check the door’s travel and panel fit before recommending a seal or a larger repair.",
+  "heroTitle": "Garage Door Repair and Installation in Brooklyn"
+}

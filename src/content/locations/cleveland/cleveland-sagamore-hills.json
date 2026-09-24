@@ -1,0 +1,31 @@
+{
+  "name": "Sagamore Hills",
+  "slug": "cleveland-sagamore-hills",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.317032,
+    "lng": -81.559756
+  },
+  "zips": [
+    "44067"
+  ],
+  "surroundingAreas": [
+    "Northfield Center",
+    "Macedonia",
+    "Brecksville",
+    "Independence"
+  ],
+  "metaTitle": "Garage Door Repair in Sagamore Hills, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Sagamore Hills, OH. Help with Northfield postal overlap and door balance. Call 216-930-2980.",
+  "localHeading": "Door service in Sagamore Hills Township",
+  "localIntro": "Sagamore Hills is a residential Summit County township north of the Hudson corridor. Its Northfield postal area is shared with other communities, so we confirm the street address before booking.",
+  "localIssues": "On a door that jerks or tilts, cables and spring balance deserve attention before another opener cycle. We secure and inspect the door before recommending parts.",
+  "localAdvice": "For an installation, we measure headroom and track clearance and discuss how insulation and panel weight affect the opener. Access details help make the visit useful.",
+  "heroTitle": "Garage Door Repair and Installation in Sagamore Hills",
+  "areaType": "AdministrativeArea"
+}

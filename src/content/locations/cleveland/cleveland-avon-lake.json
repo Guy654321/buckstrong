@@ -1,0 +1,31 @@
+{
+  "name": "Avon Lake",
+  "slug": "cleveland-avon-lake",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.5053,
+    "lng": -82.0282
+  },
+  "zips": [
+    "44012"
+  ],
+  "surroundingAreas": [
+    "Avon",
+    "Bay Village",
+    "North Ridgeville",
+    "Sheffield Lake",
+    "North Olmsted"
+  ],
+  "metaTitle": "Garage Door Service in Avon Lake, OH | Buck Strong",
+  "metaDescription": "Avon Lake garage door repair, opener service, and insulated door options for the western lakeshore. Call Buck Strong at 216-930-2980.",
+  "localHeading": "Keeping an Avon Lake garage door sealed and safe",
+  "localIntro": "Avon Lake extends the western lakeshore corridor beyond Cuyahoga County. We help homeowners sort out noisy travel, worn seals, and opener trouble with a safety inspection before recommending parts.",
+  "localIssues": "Lakefront exposure makes a good perimeter seal useful, but it still needs the door to sit level and close properly.",
+  "localAdvice": "If you are replacing a door, we can review insulated options and hardware that fit the opening without overpromising energy savings.",
+  "heroTitle": "Avon Lake Garage Door Repair and Installation"
+}

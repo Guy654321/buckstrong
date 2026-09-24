@@ -1,0 +1,30 @@
+{
+  "name": "South Euclid",
+  "slug": "cleveland-south-euclid",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.523957,
+    "lng": -81.524485
+  },
+  "zips": [
+    "44121"
+  ],
+  "surroundingAreas": [
+    "Lyndhurst",
+    "University Heights",
+    "Cleveland Heights",
+    "Richmond Heights"
+  ],
+  "metaTitle": "Garage Door Repair in South Euclid, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in South Euclid, OH. Help with closing failures and repair choices. Call 216-930-2980.",
+  "localHeading": "Garage door service for South Euclid homes",
+  "localIntro": "South Euclid is a sizeable east-side residential market between Cleveland Heights and the Mayfield corridor. We diagnose problems at the actual door rather than treating every failure to close as an opener fault.",
+  "localIssues": "Misaligned sensors, track friction, and a door out of balance can produce similar symptoms. We inspect each before recommending parts and retest the reversal system when the work is done.",
+  "localAdvice": "If your door is worn but still repairable, we can explain that option alongside replacement choices. Insulation and weather-seal fit can be part of the comparison.",
+  "heroTitle": "Garage Door Repair and Installation in South Euclid"
+}

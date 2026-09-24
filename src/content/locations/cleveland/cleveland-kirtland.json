@@ -1,0 +1,30 @@
+{
+  "name": "Kirtland",
+  "slug": "cleveland-kirtland",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.596423,
+    "lng": -81.339383
+  },
+  "zips": [
+    "44094"
+  ],
+  "surroundingAreas": [
+    "Chester Township",
+    "Willoughby Hills",
+    "Willoughby",
+    "Eastlake"
+  ],
+  "metaTitle": "Garage Door Repair in Kirtland, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Kirtland, OH. Help with setback garages and precise dimensions. Call 216-930-2980.",
+  "localHeading": "Measured garage door service in Kirtland",
+  "localIntro": "Kirtland sits south of Willoughby and Mentor, with a distinct residential service area. We use the street address and access notes to plan a visit, especially when the garage is set back from the road.",
+  "localIssues": "A door that will not stay level can indicate cable or spring trouble. Avoid forcing the opener; we can inspect the lift system and explain what repair is safe.",
+  "localAdvice": "For a new door, we measure width, headroom, and track clearance before comparing materials and insulation. That helps match the replacement to the existing garage.",
+  "heroTitle": "Garage Door Repair and Installation in Kirtland"
+}

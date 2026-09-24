@@ -2,6 +2,7 @@
 // Load consolidated Tailwind CSS from a single generated stylesheet
 import tailwindStylesHref from '../styles/tailwind.css?url';
 import { BUSINESS_INFO } from '../data/business';
+import clevelandHub from '../content/locations/cleveland.json';
 import speedInsightsLoaderUrl from '../scripts/speed-insights-loader.js?url';
 import speedInsightsConfigScriptUrl from '../scripts/speed-insights-config.js?url';
 import analyticsLoaderUrl from '../scripts/analytics-consent-loader.js?url';
@@ -148,14 +149,14 @@ function truncateAtWordBoundary(text: string, maxLength: number) {
   return text.slice(0, maxLength).trimEnd();
 }
 
-function normalizeDescription(rawDescription: string, normalizedTitle: string) {
+function normalizeDescription(rawDescription: string, normalizedTitle: string, keepConcise = false) {
   const compactDescription = rawDescription.replace(/\s+/g, ' ').trim();
 
   if (compactDescription.length > MAX_DESCRIPTION_LENGTH) {
     return `${truncateAtWordBoundary(compactDescription, MAX_DESCRIPTION_LENGTH - 1)}…`;
   }
 
-  if (compactDescription.length >= MIN_DESCRIPTION_LENGTH) {
+  if (keepConcise || compactDescription.length >= MIN_DESCRIPTION_LENGTH) {
     return compactDescription;
   }
 
@@ -175,11 +176,12 @@ const normalizedDescriptionInput = normalizeBrandMentions(description);
 const normalizedAuthor = normalizeBrandMentions(author);
 
 const fullTitle = buildTitle(normalizedTitleInput);
-const normalizedDescription = normalizeDescription(normalizedDescriptionInput, fullTitle);
+const isClevelandPage = Astro.url.pathname.startsWith('/locations/cleveland') || Astro.url.pathname.startsWith('/cleveland-oh/');
+const normalizedDescription = normalizeDescription(normalizedDescriptionInput, fullTitle, isClevelandPage);
 const ogImageUrl = buildAbsoluteUrl(ogImage, siteOrigin);
 const imageAltText = `${fullTitle} - Professional garage door services`;
-const businessAddress = BUSINESS_INFO.address;
 const isHomepage = Astro.url.pathname === '/';
+const businessAddress = isClevelandPage ? clevelandHub.address : BUSINESS_INFO.address;
 const speedInsightsBasePath = import.meta.env.PUBLIC_VERCEL_OBSERVABILITY_BASEPATH;
 const speedInsightsScriptSrc = speedInsightsBasePath
   ? `${speedInsightsBasePath}/speed-insights/script.js`
@@ -203,7 +205,7 @@ const websiteSchema = JSON.stringify({
   '@id': `${siteOrigin}#website`,
   url: siteOrigin,
   name: BUSINESS_INFO.name,
-  description: 'Professional garage door repair and installation services in Cincinnati, OH',
+  description: 'Garage door repair and installation services in the Cincinnati and Cleveland markets, Ohio',
   publisher: {
     '@type': 'Organization',
     name: BUSINESS_INFO.name,
@@ -391,7 +393,7 @@ const localBusinessSchema = JSON.stringify({
     {!isHomepage && schemaType !== 'Service' && (
       <script type="application/ld+json" is:inline set:html={websiteSchema}></script>
     )}
-    {schemaType === 'LocalBusiness' && (
+    {schemaType === 'LocalBusiness' && !isClevelandPage && (
       <script type="application/ld+json" is:inline set:html={localBusinessSchema}></script>
     )}
   </head>
@@ -402,7 +404,7 @@ const localBusinessSchema = JSON.stringify({
 
     <script type="module" src={contactFormLoaderUrl}></script>
 
-    <div class="sr-only" data-text-ratio-helper>
+    {!isClevelandPage && <div class="sr-only" data-text-ratio-helper>
       <p>
         Buck Strong Garage Doors provides dependable residential and commercial overhead door services across the Cincinnati metro.
         Our insured technicians handle garage door repair, opener troubleshooting, spring replacement, cable resets, and
@@ -426,7 +428,7 @@ const localBusinessSchema = JSON.stringify({
         smart opener upgrade, commercial dock repair, or a new door installation, our team is ready to protect homes and
         businesses with prompt, courteous support backed by manufacturer-aligned practices and thorough testing.
       </p>
-    </div>
+    </div>}
 
   </body>
 </html>

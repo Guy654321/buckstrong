@@ -34,6 +34,12 @@ export type Location = {
   heroImage?: string;
   metaTitle?: string;
   metaDescription?: string;
+  heroTitle?: string;
+  localHeading?: string;
+  localIntro?: string;
+  localIssues?: string;
+  localAdvice?: string;
+  areaType?: 'City' | 'AdministrativeArea' | 'Place';
   zips?: string[];
   surroundingAreas: string[];
   coverageByCounty?: CountyCoverage[];
@@ -48,6 +54,7 @@ export type LocationGroup = {
 
 export const PRIMARY_MARKET_PRIORITY = [
   'Cincinnati Metro',
+  'Cleveland Metro',
 ] as const;
 
 const ACTIVE_STATES = new Set<string>(['OH']);
@@ -74,6 +81,12 @@ export function mapLocationEntry(entry: LocationEntry): Location {
       heroImage,
       metaTitle,
       metaDescription,
+      heroTitle,
+      localHeading,
+      localIntro,
+      localIssues,
+      localAdvice,
+      areaType,
       zips,
       surroundingAreas,
       coverageByCounty,
@@ -104,6 +117,12 @@ export function mapLocationEntry(entry: LocationEntry): Location {
     heroImage,
     metaTitle,
     metaDescription,
+    heroTitle,
+    localHeading,
+    localIntro,
+    localIssues,
+    localAdvice,
+    areaType,
     zips,
     surroundingAreas: surroundingAreas ?? [],
     coverageByCounty,

@@ -1,0 +1,31 @@
+{
+  "name": "Russell Township",
+  "slug": "cleveland-russell-township",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.469618,
+    "lng": -81.341761
+  },
+  "zips": [
+    "44072"
+  ],
+  "surroundingAreas": [
+    "Chagrin Falls",
+    "Chester Township",
+    "Pepper Pike",
+    "Bainbridge Township"
+  ],
+  "metaTitle": "Garage Door Repair in Russell Township, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Russell Township, OH. Help with Novelty postal name and lift-system safety. Call 216-930-2980.",
+  "localHeading": "Service for Russell Township garage openings",
+  "localIntro": "Russell Township is a separate Geauga County residential area served through the Novelty postal name. We use the full address to distinguish it from nearby Chagrin Falls and Bainbridge when scheduling.",
+  "localIssues": "If a door is crooked or difficult to lift, running the opener again can worsen a cable or spring fault. We inspect the lift system and make the safety check part of the repair.",
+  "localAdvice": "For an upgrade, door dimensions and driveway access matter before choosing a style. We can review panel construction and opener compatibility after seeing the existing garage.",
+  "heroTitle": "Garage Door Repair and Installation in Russell Township",
+  "areaType": "AdministrativeArea"
+}

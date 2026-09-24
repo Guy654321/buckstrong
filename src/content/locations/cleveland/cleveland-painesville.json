@@ -1,0 +1,30 @@
+{
+  "name": "Painesville",
+  "slug": "cleveland-painesville",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.721635,
+    "lng": -81.258357
+  },
+  "zips": [
+    "44077"
+  ],
+  "surroundingAreas": [
+    "Mentor",
+    "Kirtland",
+    "Willoughby",
+    "Eastlake"
+  ],
+  "metaTitle": "Garage Door Repair in Painesville, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Painesville, OH. Help with outer east route and address-based scheduling. Call 216-930-2980.",
+  "localHeading": "Painesville service at the eastern edge",
+  "localIntro": "Painesville is an outer Lake County city in the Cleveland market. Appointment availability is confirmed by street address, and the first question is whether the door is stuck, unsafe, or simply due for an upgrade.",
+  "localIssues": "A door that scrapes or stops short can involve track friction, rollers, springs, or opener settings. We test the door by hand before replacing controls.",
+  "localAdvice": "When replacement is appropriate, measurements and existing hardware determine the options. We can explain what can be retained and what should be updated for reliable operation.",
+  "heroTitle": "Garage Door Repair and Installation in Painesville"
+}

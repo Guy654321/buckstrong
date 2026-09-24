@@ -4,7 +4,7 @@ import { buildLocationCanonicalPath } from '../../lib/canonical';
 
 export async function getStaticPaths() {
   const hubs = await getLocationHubs();
-  return hubs.map((hub) => ({
+  return hubs.filter((hub) => hub.slug !== 'cleveland').map((hub) => ({
     params: { city: hub.slug }
   }));
 }

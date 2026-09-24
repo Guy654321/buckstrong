@@ -3,6 +3,11 @@
     return;
   }
 
+  // Vercel serves this endpoint on deployments, not on local static previews.
+  if (['localhost', '127.0.0.1', '::1'].includes(window.location.hostname)) {
+    return;
+  }
+
   const bootstrap = () => {
     const config = window.__SPEED_INSIGHTS_CONFIG__;
     if (!config) {

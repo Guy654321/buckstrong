@@ -1,0 +1,31 @@
+{
+  "name": "Columbia Township",
+  "slug": "cleveland-columbia-township",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.326125,
+    "lng": -81.916891
+  },
+  "zips": [
+    "44028"
+  ],
+  "surroundingAreas": [
+    "Olmsted Falls",
+    "Olmsted Township",
+    "Berea",
+    "Strongsville"
+  ],
+  "metaTitle": "Garage Door Repair in Columbia Township, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Columbia Township, OH. Help with Columbia Station address and garage clearance. Call 216-930-2980.",
+  "localHeading": "Service planning for Columbia Township garages",
+  "localIntro": "Columbia Township is a residential Lorain County township between North Ridgeville and Olmsted Falls. Its Columbia Station mailing name is useful for delivery, but we use the full street address to confirm the service location.",
+  "localIssues": "Driveway access and the size of the garage opening can change what equipment is needed for an installation. For repairs, we test door balance before treating a slow opener as the main problem.",
+  "localAdvice": "If a cable has slipped or a spring has broken, leave the door closed and call. For a planned upgrade, we can measure clearance and explain which door construction fits.",
+  "heroTitle": "Garage Door Repair and Installation in Columbia Township",
+  "areaType": "AdministrativeArea"
+}

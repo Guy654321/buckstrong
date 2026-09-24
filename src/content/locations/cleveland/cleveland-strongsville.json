@@ -1,0 +1,32 @@
+{
+  "name": "Strongsville",
+  "slug": "cleveland-strongsville",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.3145,
+    "lng": -81.8365
+  },
+  "zips": [
+    "44136",
+    "44149"
+  ],
+  "surroundingAreas": [
+    "North Royalton",
+    "Brecksville",
+    "North Ridgeville",
+    "Middleburg Heights",
+    "Berea"
+  ],
+  "metaTitle": "Garage Door Service in Strongsville, OH | Buck Strong",
+  "metaDescription": "Strongsville garage door repair and replacement with safety checks for springs, cables, tracks, and openers. Call Buck Strong at 216-930-2980.",
+  "localHeading": "A safe repair plan for Strongsville doors",
+  "localIntro": "Strongsville anchors the southwest side of this Cleveland territory. A stuck door can disrupt the daily driveway routine, so we look at spring tension, cables, tracks, and the opener as one system.",
+  "localIssues": "If a door is crooked or a cable has slipped, stop operating it to avoid further damage.",
+  "localAdvice": "Homeowners planning a replacement can compare insulated panels and quieter opener choices before committing to a full install.",
+  "heroTitle": "Strongsville Garage Door Repair and Replacement"
+}

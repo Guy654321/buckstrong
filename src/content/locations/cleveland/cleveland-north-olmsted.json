@@ -1,0 +1,30 @@
+{
+  "name": "North Olmsted",
+  "slug": "cleveland-north-olmsted",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.414929,
+    "lng": -81.919131
+  },
+  "zips": [
+    "44070"
+  ],
+  "surroundingAreas": [
+    "Olmsted Township",
+    "Westlake",
+    "Olmsted Falls",
+    "Fairview Park"
+  ],
+  "metaTitle": "Garage Door Repair in North Olmsted, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in North Olmsted, OH. Help with heavy doors and opener reversals. Call 216-930-2980.",
+  "localHeading": "North Olmsted door and opener support",
+  "localIntro": "North Olmsted is a substantial west-side residential market, with homes spread along and beyond the Lorain Road corridor. We can inspect a door that has become heavy, noisy, or unreliable before the opener is asked to do more work.",
+  "localIssues": "Repeated reversals do not always mean the motor has failed. We test the photo eyes, travel settings, and door movement by hand to separate an opener problem from friction or spring wear.",
+  "localAdvice": "If your family uses the garage as the main entrance, ask about opener controls and backup options during a planned replacement. We will explain what fits the existing door and what needs to be changed together.",
+  "heroTitle": "Garage Door Repair and Installation in North Olmsted"
+}

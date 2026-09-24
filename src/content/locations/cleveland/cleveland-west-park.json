@@ -1,0 +1,32 @@
+{
+  "name": "West Park",
+  "slug": "cleveland-west-park",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.451,
+    "lng": -81.813
+  },
+  "zips": [
+    "44111",
+    "44135"
+  ],
+  "surroundingAreas": [
+    "Fairview Park",
+    "Rocky River",
+    "Lakewood",
+    "Brook Park"
+  ],
+  "metaTitle": "West Park, Cleveland, OH Garage Door Repair | Buck Strong",
+  "metaDescription": "Garage door repair in West Park, Cleveland, OH. We check door balance, rollers, and opener behavior before suggesting repair or replacement. Call 216-930-2980.",
+  "localHeading": "Garage service within Cleveland’s West Park area",
+  "localIntro": "West Park is a recognized residential part of Cleveland’s far west side, not a separate suburb. We use the street address to place the request within the Cleveland market and to learn whether access is from a front drive or a rear lane.",
+  "localIssues": "Older doors can become noisy as rollers and hinges wear. We check track condition and spring balance before suggesting a new opener or replacement panels.",
+  "localAdvice": "If a replacement is needed, we measure the existing opening and discuss insulation, windows, and hardware that fit. Homeowners can compare that with a repair that keeps a sound door in service.",
+  "heroTitle": "Garage Door Repair and Installation in West Park",
+  "areaType": "Place"
+}

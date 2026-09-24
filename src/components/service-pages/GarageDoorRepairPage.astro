@@ -51,6 +51,9 @@ interface Props {
 
 const { location } = Astro.props as Props;
 const activeLocation = location;
+const isClevelandMarket = activeLocation?.market === 'Cleveland Metro';
+const imageGeoLat = isClevelandMarket && activeLocation ? activeLocation.lat : BUSINESS_INFO.geo.latitude;
+const imageGeoLng = isClevelandMarket && activeLocation ? activeLocation.lng : BUSINESS_INFO.geo.longitude;
 const serviceCityName = getLocationServiceCityName(activeLocation);
 const breadcrumbs = activeLocation
   ? [
@@ -69,7 +72,7 @@ const locationDisplayName = activeLocation && serviceCityName
   : undefined;
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
-  ? `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
+  ? isClevelandMarket ? `${locationDisplayName} and nearby communities` : `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
   : 'Cincinnati, Ohio';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
@@ -90,7 +93,7 @@ const zipCoverageLabel =
 
 const localizedSurroundingList = surroundingAreas.length > 0 ? surroundingAreas.slice(0, 6) : [];
 const localizedNeighborhoodLine = localizedSurroundingList.length > 0
-  ? `Recent calls came from ${localizedSurroundingList.join(', ')}${surroundingAreas.length > localizedSurroundingList.length
+  ? isClevelandMarket ? `Selected service areas include ${localizedSurroundingList.join(', ')}.` : `Recent calls came from ${localizedSurroundingList.join(', ')}${surroundingAreas.length > localizedSurroundingList.length
       ? `, plus ${surroundingAreas.length - localizedSurroundingList.length} nearby neighborhoods we visit weekly.`
       : '.'}`
   : undefined;
@@ -109,16 +112,20 @@ const localizedAccessNote = activeLocation
 
 const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
 const pageTitle = activeLocation && serviceCityName
-  ? `Garage Door Repair ${serviceCityName} ${activeLocation.state} | Buck Strong Garage Doors`
+  ? isClevelandMarket
+    ? `Garage Door Repair in ${serviceCityName}, ${activeLocation.state} | Buck Strong Garage Doors`
+    : `Garage Door Repair ${serviceCityName} ${activeLocation.state} | Buck Strong Garage Doors`
   : 'Garage Door Repair in Cincinnati, Ohio | Buck Strong Garage Doors';
 const pageDescription = activeLocation && serviceCityName
-  ? `Trusted garage door supplier offering same-day repair in ${serviceCityName}, ${activeLocation.state}. 5.0-star service for broken springs, openers, and cables. 24/7 emergency help. Call ${displayPhoneNumber}!`
+  ? isClevelandMarket ? `Garage door repair in ${serviceCityName}, ${activeLocation.state} for springs, cables, tracks, and openers. Call ${displayPhoneNumber} to confirm availability.` : `Trusted garage door supplier offering same-day repair in ${serviceCityName}, ${activeLocation.state}. 5.0-star service for broken springs, openers, and cables. 24/7 emergency help. Call ${displayPhoneNumber}!`
   : 'Trusted garage door supplier serving the Cincinnati metro with same-day service for springs, rollers, cables, tracks, and safety inspections.';
 const heroHeading = activeLocation
   ? `Garage Door Repair in ${locationDisplayName}`
   : 'Garage Door Repair in Cincinnati, Ohio';
 const heroSubheading = activeLocation
-  ? `Professional garage door repair services for homeowners in ${coverageAreaLabel}. Springs, rollers, cables, tracks, and emergency fixes handled by trusted local crews.`
+  ? isClevelandMarket
+    ? `A stuck or uneven garage door can involve more than the opener. For homeowners in ${coverageAreaLabel}, we inspect springs, cables, rollers, tracks, and safety features, then explain the repair options before work begins.`
+    : `Professional garage door repair services for homeowners in ${coverageAreaLabel}. Springs, rollers, cables, tracks, and emergency fixes handled by trusted local crews.`
   : 'Professional garage door repair services throughout the Cincinnati metro. Springs, rollers, cables, tracks, and emergency fixes handled by trusted local crews.';
 const heroAlt = activeLocation
   ? `Garage door repair technician assisting homeowners in ${coverageAreaLabel}`
@@ -141,13 +148,13 @@ const canonicalPath = activeLocation
   : '/services/garage-door-repair';
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const dailyServicesIntro = activeLocation
-  ? `From historic neighborhoods to new builds across ${coverageAreaLabel}, we resolve noisy rollers, bent tracks, and uneven doors every day. We arrive in stocked trucks so we can replace broken torsion springs, snapped cables, worn hinges, and weatherstripping in one visit.`
+  ? isClevelandMarket ? `For homes across ${coverageAreaLabel}, a noisy or uneven door can involve several parts. We check rollers, tracks, cables, spring balance, and the opener before recommending the appropriate repair.` : `From historic neighborhoods to new builds across ${coverageAreaLabel}, we resolve noisy rollers, bent tracks, and uneven doors every day. We arrive in stocked trucks so we can replace broken torsion springs, snapped cables, worn hinges, and weatherstripping in one visit.`
   : 'From Cincinnati, Ohio neighborhoods to cross-river communities, we resolve noisy rollers, bent tracks, and uneven doors every day. We arrive in stocked trucks so we can replace broken torsion springs, snapped cables, worn hinges, and weatherstripping in one visit.';
 const emergencyServiceIntro = activeLocation
-  ? `Need emergency help tonight? Call for same-day garage door repair anywhere in ${coverageAreaLabel}. We also support opener repair and smart-home upgrades across nearby communities.`
+  ? isClevelandMarket ? `If a door is stuck open or a cable has slipped in ${coverageAreaLabel}, stop using it and call to check the next available visit. We can also discuss opener repairs and upgrades.` : `Need emergency help tonight? Call for same-day garage door repair anywhere in ${coverageAreaLabel}. We also support opener repair and smart-home upgrades across nearby communities.`
   : 'Need emergency help tonight? Call for same-day garage door repair anywhere in Cincinnati, Ohio. We also support opener repair and smart-home upgrades across surrounding suburbs and cross-river communities.';
 const whyChooseCoverage = activeLocation
-  ? `Same-day emergency repairs throughout ${coverageAreaLabel}`
+  ? isClevelandMarket ? `Service requests across ${coverageAreaLabel}` : `Same-day emergency repairs throughout ${coverageAreaLabel}`
   : 'Same-day emergency repairs throughout Cincinnati, Ohio';
 const inspectionCopy = activeLocation
   ? 'Our local technicians arrive prepared for emergencies with diagnostic tools and safety equipment. We perform a comprehensive inspection to identify all issues, not just the obvious problem, ensuring we address root causes.'
@@ -164,9 +171,9 @@ const contactSubtitle = activeLocation
 
 const faqs = [
   {
-    question: 'Do you offer same-day emergency garage door repair?',
+    question: isClevelandMarket ? 'How soon can I book emergency garage door repair?' : 'Do you offer same-day emergency garage door repair?',
     answer: activeLocation
-      ? `Yes. Our experienced technicians serving ${coverageAreaLabel} are available for same-day and after-hours service, and most emergency repairs are completed during the initial visit.`
+      ? isClevelandMarket ? `Call us with your address and the door problem. We will confirm the next available appointment for ${coverageAreaLabel} and explain what to do while you wait.` : `Yes. Our experienced technicians serving ${coverageAreaLabel} are available for same-day and after-hours service, and most emergency repairs are completed during the initial visit.`
       : 'Yes. Our Cincinnati technicians are available for same-day and after-hours service, and most emergency repairs are completed during the initial visit.'
   },
   {
@@ -188,6 +195,7 @@ const faqs = [
 
 const localizedRepairs = REPAIRS.map((repair) => ({
   ...repair,
+  alt: isClevelandMarket ? repair.alt.replaceAll('Cincinnati, Ohio', 'Cleveland, Ohio') : repair.alt,
   href: activeLocation
     ? buildLocalizedServicePath(activeLocation.slug, `garage-door-${repair.slug}`)
     : repair.href,
@@ -213,17 +221,19 @@ const localizedRepairs = REPAIRS.map((repair) => ({
         '@type': 'LocalBusiness',
         name: BUSINESS_INFO.name,
         legalName: BUSINESS_INFO.legalName,
-        '@id': businessEntityId,
+        '@id': isClevelandMarket ? `${getSiteOrigin()}/locations/cleveland#local-business` : businessEntityId,
         telephone: displayPhoneNumber,
         email: BUSINESS_INFO.email,
         address: {
           '@type': 'PostalAddress',
-          streetAddress: BUSINESS_INFO.address.streetAddress,
-          addressLocality: BUSINESS_INFO.address.addressLocality,
-          addressRegion: BUSINESS_INFO.address.addressRegion,
-          postalCode: BUSINESS_INFO.address.postalCode,
-          addressCountry: BUSINESS_INFO.address.addressCountry
-        }
+          ...(isClevelandMarket ? activeLocation?.address : BUSINESS_INFO.address)
+        },
+        ...(isClevelandMarket ? { openingHoursSpecification: [{
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '00:00',
+          closes: '23:59'
+        }] } : {})
       },
       areaServed,
       serviceType: 'Garage Door Repair',
@@ -266,6 +276,7 @@ const localizedRepairs = REPAIRS.map((repair) => ({
     }}
   />
 
+  <main>
   <section class="relative py-20 lg:py-32 text-white overflow-visible lg:overflow-hidden">
     <div class="absolute inset-0">
       <Image
@@ -273,14 +284,15 @@ const localizedRepairs = REPAIRS.map((repair) => ({
         alt={heroAlt}
         width="1200"
         height="675"
+        widths={isClevelandMarket ? [480, 768, 1200] : undefined}
         class="w-full h-full object-cover"
         fetchpriority="high"
         loading="eager"
         decoding="sync"
         quality={80}
         sizes="100vw"
-        data-geo-lat="39.1031"
-        data-geo-lng="-84.5120"
+        data-geo-lat={imageGeoLat}
+        data-geo-lng={imageGeoLng}
       />
       <div class="absolute inset-0 bg-primary/75"></div>
     </div>
@@ -349,8 +361,8 @@ const localizedRepairs = REPAIRS.map((repair) => ({
                   decoding="async"
                   quality={90}
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  data-geo-lat="39.1031"
-                  data-geo-lng="-84.5120"
+                  data-geo-lat={imageGeoLat}
+                  data-geo-lng={imageGeoLng}
                 />
               ) : (
                 <div class="w-full h-full bg-muted flex items-center justify-center text-ink/60">
@@ -383,7 +395,7 @@ const localizedRepairs = REPAIRS.map((repair) => ({
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Common Garage Door Problems We Repair</h2>
-        <p class="text-xl text-ink/70">Our technicians resolve these issues with fully stocked trucks for quick, same-day fixes</p>
+        <p class="text-xl text-ink/70">{isClevelandMarket ? 'We inspect the door and explain safe repair options before work begins.' : 'Our technicians resolve these issues with fully stocked trucks for quick, same-day fixes'}</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -420,7 +432,7 @@ const localizedRepairs = REPAIRS.map((repair) => ({
   <section class="py-14 bg-muted">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-10 max-w-3xl mx-auto space-y-2">
-        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-primary/70">Repair process</p>
+        <p class={`text-sm font-semibold uppercase tracking-[0.28em] ${isClevelandMarket ? 'text-primary' : 'text-primary/70'}`}>Repair process</p>
         <p class="text-lg text-ink/70 leading-relaxed">
           We've refined our garage door repair process to minimize disruption to your day while ensuring every repair meets the highest safety standards. Our systematic approach combines thorough diagnosis with efficient execution and comprehensive testing.
         </p>
@@ -506,7 +518,7 @@ const localizedRepairs = REPAIRS.map((repair) => ({
   <section class="py-16 bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-10 text-center">
-        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/70 mb-3">Local insight</p>
+        <p class={`text-sm font-semibold uppercase tracking-[0.3em] mb-3 ${isClevelandMarket ? 'text-primary' : 'text-primary/70'}`}>Local insight</p>
         <h2 class="text-3xl font-bold text-ink mb-4">
           {activeLocation ? `${locationDisplayName} Service Notes` : 'Local Garage Door Repair Notes'}
         </h2>
@@ -563,11 +575,13 @@ const localizedRepairs = REPAIRS.map((repair) => ({
   />
 
   <ContactForm
+    includeSchema={!isClevelandMarket}
     title={contactTitle}
     subtitle={contactSubtitle}
     bgColor="muted"
   />
 
+  {!isClevelandMarket && (
   <HiddenSeoText
     title={`Detailed garage door repair support${locationDisplayName ? ` for ${locationDisplayName}` : ''}`}
     paragraphs={filterStrings([
@@ -587,6 +601,7 @@ const localizedRepairs = REPAIRS.map((repair) => ({
       zipCoverageLabel
     ])}
   />
+  )}
 
   <Schema
     item={{
@@ -602,6 +617,7 @@ const localizedRepairs = REPAIRS.map((repair) => ({
     }}
   />
 
+  </main>
   <Footer />
   <CallNowButton phoneNumber={displayPhoneNumber} />
 </Base>

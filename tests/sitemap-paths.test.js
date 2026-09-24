@@ -68,3 +68,39 @@ test('buildSitemapPathCandidates includes location service URLs for all location
   assert(result.includes('/nicholasville-oh/garage-door-spring-replacement'));
   assert(result.includes('/blog/seasonal-garage-maintenance'));
 });
+
+test('Cleveland suburbs receive location URLs without duplicate service pages', () => {
+  const locations = [
+    { slug: 'cincinnati-mason', isHub: false },
+    { slug: 'cleveland', isHub: true },
+    { slug: 'cleveland-westlake', isHub: false },
+  ];
+  const services = [{ slug: 'garage-door-repair' }];
+  const paths = buildSitemapPathCandidates({ locations, services });
+
+  assert(paths.includes('/locations/cleveland-westlake'));
+  assert(paths.includes('/cleveland-oh/garage-door-repair'));
+  assert(paths.includes('/mason-oh/garage-door-repair'));
+  assert(!paths.includes('/westlake-oh/garage-door-repair'));
+});
+
+test('Cleveland sitemap includes only published market service pages', () => {
+  const paths = buildLocationServicePaths(
+    [{ slug: 'cleveland', isHub: true }],
+    [
+      { slug: 'garage-door-repair' },
+      { slug: 'opener-repair' },
+      { slug: 'garage-door-installation' },
+      { slug: 'commercial-jobs' },
+      { slug: 'garage-door-spring-replacement' },
+    ],
+  );
+
+  assert.deepEqual(paths.sort(), [
+    '/cleveland-oh/garage-door-repair',
+    '/cleveland-oh/opener-repair',
+    '/cleveland-oh/garage-door-installation',
+    '/cleveland-oh/commercial-jobs',
+  ].sort());
+  assert(!paths.includes('/cleveland-oh/garage-door-spring-replacement'));
+});

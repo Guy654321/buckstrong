@@ -1,6 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components';
 
+interface Props { market?: 'cleveland' | 'cincinnati'; }
+const { market = 'cincinnati' } = Astro.props;
+
 const trustIcons = [
   {
     icon: "mdi:shield-check",
@@ -23,12 +26,19 @@ const trustIcons = [
     description: "Highly rated by Cincinnati customers"
   }
 ];
+const displayIcons = market === 'cleveland'
+  ? trustIcons.map((item, index) => index === 1
+      ? { ...item, text: 'Schedule Service', description: 'Call to confirm the next available visit' }
+      : index === 3
+      ? { ...item, text: 'Clear Estimates', description: 'Review the work and options before booking' }
+      : item)
+  : trustIcons;
 ---
 
 <section class="py-14 bg-white border-b border-ink/5">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-      {trustIcons.map(item => (
+      {displayIcons.map(item => (
         <div class="text-center">
           <div class="flex items-center justify-center text-ink/70 mb-4">
             <Icon name={item.icon} size="24" class="text-ink/70" aria-hidden="true" />

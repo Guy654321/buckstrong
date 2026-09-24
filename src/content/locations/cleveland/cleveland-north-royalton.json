@@ -1,0 +1,30 @@
+{
+  "name": "North Royalton",
+  "slug": "cleveland-north-royalton",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.315918,
+    "lng": -81.748063
+  },
+  "zips": [
+    "44133"
+  ],
+  "surroundingAreas": [
+    "Broadview Heights",
+    "Strongsville",
+    "Parma Heights",
+    "Parma"
+  ],
+  "metaTitle": "Garage Door Repair in North Royalton, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in North Royalton, OH. Help with repair versus replacement planning. Call 216-930-2980.",
+  "localHeading": "North Royalton garage door repair and upgrades",
+  "localIntro": "North Royalton is a large residential community south of Cleveland. Homeowners often want a clear comparison between a repair that keeps a dependable door working and a replacement that changes its look or insulation.",
+  "localIssues": "A heavy door can shorten opener life even when the motor still runs. We check the spring system and travel by hand before recommending new controls or a new opener.",
+  "localAdvice": "For a new door, we review the opening, track space, and hardware as one project. That helps avoid ordering panels that do not fit the existing garage.",
+  "heroTitle": "Garage Door Repair and Installation in North Royalton"
+}

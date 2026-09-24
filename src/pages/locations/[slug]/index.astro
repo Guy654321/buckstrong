@@ -34,6 +34,7 @@ const services = await getServices();
 const allLocations = await getLocations();
 
 const parentHubLocation = (await getHubForLocation(location)) ?? location;
+const isClevelandMarket = parentHubLocation.slug === 'cleveland';
 const marketLocations = allLocations.filter(loc => loc.market === parentHubLocation.market);
 const familyParentSlug = parentHubLocation.slug;
 const siblingLocations = marketLocations.filter(loc => {
@@ -44,7 +45,16 @@ const siblingLocations = marketLocations.filter(loc => {
   return loc.parentHub?.trim() === familyParentSlug;
 });
 
-const relatedCandidates = location.isHub
+const relatedCandidates = isClevelandMarket && !location.isHub
+  ? [
+      parentHubLocation,
+      ...siblingLocations.filter(loc => location.surroundingAreas.includes(loc.name))
+    ]
+  : isClevelandMarket && location.isHub
+  ? [...siblingLocations].sort((a, b) =>
+      location.surroundingAreas.indexOf(a.name) - location.surroundingAreas.indexOf(b.name)
+    )
+  : location.isHub
   ? siblingLocations
   : [
       ...(parentHubLocation && parentHubLocation.slug !== location.slug ? [parentHubLocation] : []),
@@ -78,7 +88,8 @@ const marketPossessive = marketPossessiveSource.endsWith('s')
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: 'Locations', href: '/locations' },
-  { label: `${location.name}, ${location.state}` }
+  ...(!location.isHub ? [{ label: parentHubLocation.name, href: `/locations/${parentHubLocation.slug}` }] : []),
+  { label: location.areaType === 'Place' ? `${location.name}, Cleveland, ${location.state}` : `${location.name}, ${location.state}` }
 ];
 
 const siteOrigin = getSiteOrigin();
@@ -89,14 +100,14 @@ const businessEntityId = `${siteOrigin}#business`;
 const locationTelephoneDisplay = location.phone?.trim() || BUSINESS_INFO.telephone;
 const buildTelephoneHref = (phone: string) => `tel:${phone.replace(/[^0-9+]/g, '') || phone}`;
 const regionCode = `US-${location.state}`;
-const locationDisplayName = `${location.name}, ${location.state}`;
-const hubCityName = location.isHub
-  ? location.address?.addressLocality?.trim() || location.name
-  : location.name;
+const locationDisplayName = location.areaType === 'Place'
+  ? `${location.name}, Cleveland, ${location.state}`
+  : `${location.name}, ${location.state}`;
+const hubCityName = location.name;
 const locationMarketName = marketDisplayName || location.market;
 const heroCityName = location.isHub ? hubCityName : location.name;
 const heroCityPossessive = heroCityName.endsWith('s') ? `${heroCityName}’` : `${heroCityName}’s`;
-const locationHeroTitle = `${heroCityPossessive} Trusted Garage Door Repair & Installation Experts`;
+const locationHeroTitle = location.heroTitle?.trim() || `${heroCityPossessive} Trusted Garage Door Repair & Installation Experts`;
 type ServiceSlug = ServiceSummary['slug'];
 
 const locationMapConfig = getLocationMapConfig(location.slug);
@@ -117,7 +128,15 @@ const locationServiceShortBuilders: Record<ServiceSlug, (context: { displayName:
 
 const localizedServices = services.map(service => {
   const builder = locationServiceShortBuilders[service.slug as ServiceSlug];
-  const localizedShort = builder
+  const clevelandServiceShort: Record<string, string> = {
+    'garage-door-repair': `Spring, cable, roller, track, and panel repair for ${locationDisplayName}. We inspect the door's balance and safety systems before recommending work.`,
+    'garage-door-installation': `New garage doors for ${locationDisplayName} homes, with careful measurements and options for insulation, windows, and hardware.`,
+    'opener-repair': `Opener troubleshooting in ${locationDisplayName}, including sensors, remotes, travel settings, and motor issues.`,
+    'commercial-jobs': `Overhead door and loading-bay support for ${locationDisplayName} businesses. Tell us about access and operating hours when requesting service.`
+  };
+  const localizedShort = isClevelandMarket && clevelandServiceShort[service.slug]
+    ? clevelandServiceShort[service.slug]
+    : builder
     ? builder({ displayName: locationDisplayName, market: locationMarketName })
     : service.short;
 
@@ -143,9 +162,14 @@ const serviceCardLocationContext = {
   name: location.name,
   state: location.state,
   market: locationMarketName,
-  phone: locationTelephoneDisplay
+  phone: locationTelephoneDisplay,
+  address: isClevelandMarket ? parentHubLocation.address : undefined,
+  lat: isClevelandMarket ? location.lat : undefined,
+  lng: isClevelandMarket ? location.lng : undefined
 };
-const repairLinkText = location.isHub ? `Garage Door Repair in ${hubCityName}` : undefined;
+const repairLinkText = location.isHub
+  ? `Garage Door Repair in ${hubCityName}${isClevelandMarket ? `, ${location.state}` : ''}`
+  : undefined;
 const serviceLinksHeading = `${locationDisplayName} Service Links`;
 const serviceLinksPath = `${buildLocalizedServicePath(location.slug, '')}/`;
 
@@ -154,14 +178,14 @@ const PROCESS_STEPS = [
     number: '1',
     title: 'Schedule your visit',
     copy: [
-      'Call our local team or ',
+      isClevelandMarket ? 'Call our booking team or ' : 'Call our local team or ',
       {
         type: 'link' as const,
         href: '/contact',
         text: 'request service online',
         title: `Request garage door service in ${locationDisplayName}`
       },
-      `. We offer same-day and after-hours appointments across ${marketDisplayName}.`
+      isClevelandMarket ? `. Ask about appointment availability across ${marketDisplayName}.` : `. We offer same-day and after-hours appointments across ${marketDisplayName}.`
     ]
   },
   {
@@ -173,9 +197,9 @@ const PROCESS_STEPS = [
   },
   {
     number: '3',
-    title: 'Same-day completion',
+    title: isClevelandMarket ? 'Repair and safety check' : 'Same-day completion',
     copy: [
-      `We complete the approved work, balance and test the door, perform a full safety check, and send a digital summary with maintenance reminders for ${marketDisplayName} weather.`
+      isClevelandMarket ? `After you approve the work, we test door travel, balance, and safety features and explain any maintenance needs for your ${locationDisplayName} garage.` : `We complete the approved work, balance and test the door, perform a full safety check, and send a digital summary with maintenance reminders for ${marketDisplayName} weather.`
     ]
   }
 ];
@@ -214,10 +238,14 @@ const zipCoverageSummary = zipAreas.length
   : `Service coverage flexes across ${marketDisplayName} addresses, including new construction and established properties.`;
 
 const responseTimeSummary = location.isHub
-  ? `${locationDisplayName} is our hub for ${marketDisplayName}, so technicians are dispatched locally for same-day and after-hours calls.`
-  : `Calls from ${locationDisplayName} route through our ${parentHubLocation.name} hub for coordinated same-day scheduling.`;
+  ? isClevelandMarket ? `The ${locationDisplayName} page coordinates requests for the selected ${marketDisplayName} territory.` : `${locationDisplayName} is our hub for ${marketDisplayName}, so technicians are dispatched locally for same-day and after-hours calls.`
+  : isClevelandMarket ? `Calls from ${locationDisplayName} are handled through our ${parentHubLocation.name} market booking line.` : `Calls from ${locationDisplayName} route through our ${parentHubLocation.name} hub for coordinated same-day scheduling.`;
 
-const locationHeroDescription = location.isHub
+const locationHeroDescription = isClevelandMarket
+  ? location.isHub
+    ? `Buck Strong helps homeowners across Cleveland, OH with garage door repairs, opener problems, and new door installation. We inspect the full door system, explain the options, and confirm service availability for your address before scheduling.`
+    : `Buck Strong provides garage door repair, opener troubleshooting, and new door installation for homeowners in ${locationDisplayName}. We inspect the door and its safety features, explain the available options, and confirm service availability for your address before scheduling.`
+  : location.isHub
   ? `Proudly serving ${locationDisplayName} and the surrounding area with fast, same-day garage door repair and installation. From broken springs and malfunctioning openers to full garage door replacements, our trained technicians handle every job using high-quality parts and precise adjustments to keep your garage door operating safely, smoothly, and reliably.`
   : `Proudly serving ${locationDisplayName} with fast, same-day garage door repair and installation. From broken springs and malfunctioning openers to full garage door replacements, our trained technicians handle every job using high-quality parts and precise adjustments to keep your garage door operating safely, smoothly, and reliably for ${marketDisplayName} homeowners.`;
 
@@ -251,7 +279,7 @@ const locationPostalCode = zipCodes.length > 0
   ? zipCodes[0]
   : BUSINESS_INFO.address.postalCode;
 
-const canDisplayAddress = Boolean(location.showAddress && !location.serviceAreaBusiness);
+const canDisplayAddress = Boolean(location.showAddress && location.address?.streetAddress);
 
 const normalizedAddress = canDisplayAddress && location.address
   ? {
@@ -310,24 +338,30 @@ const serviceArea = zipAreas.length
     ];
 
 const parentBusinessReference = {
-  '@type': 'Organization',
-  '@id': businessEntityId,
+  '@type': isClevelandMarket ? 'LocalBusiness' : 'Organization',
+  '@id': isClevelandMarket ? `${siteOrigin}/locations/cleveland#local-business` : businessEntityId,
   name: BUSINESS_INFO.name,
-  url: BUSINESS_INFO.url,
+  url: isClevelandMarket ? `${siteOrigin}/locations/cleveland` : BUSINESS_INFO.url,
   logo: BUSINESS_INFO.logo,
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: BUSINESS_INFO.telephone,
+    telephone: isClevelandMarket ? locationTelephoneDisplay : BUSINESS_INFO.telephone,
     contactType: 'customer service',
-    areaServed: 'US'
+    areaServed: isClevelandMarket ? 'Greater Cleveland' : 'US'
   },
-  address: {
+  ...(!isClevelandMarket || parentHubLocation.address?.streetAddress ? { address: {
     '@type': 'PostalAddress',
-    ...BUSINESS_INFO.address
-  }
+    ...(isClevelandMarket ? parentHubLocation.address : BUSINESS_INFO.address)
+  } } : {}),
+  ...(isClevelandMarket ? { openingHoursSpecification: [{
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '00:00',
+    closes: '23:59'
+  }] } : {})
 };
 
-const schemaAddress = locationAddress ?? BUSINESS_INFO.address;
+const schemaAddress = locationAddress ?? (isClevelandMarket ? null : BUSINESS_INFO.address);
 
 const locationBusinessSchema: Record<string, unknown> = {
   '@context': 'https://schema.org',
@@ -340,23 +374,29 @@ const locationBusinessSchema: Record<string, unknown> = {
   telephone: locationTelephoneDisplay,
   email: BUSINESS_INFO.email,
   priceRange: '$$ - $$$',
-  aggregateRating: {
+  ...(!isClevelandMarket ? { aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: BUSINESS_INFO.aggregateRating.ratingValue,
     reviewCount: BUSINESS_INFO.aggregateRating.reviewCount
-  },
-  geo: {
+  } } : {}),
+  ...(!isClevelandMarket ? { geo: {
     '@type': 'GeoCoordinates',
     latitude: location.lat,
     longitude: location.lng
-  },
+  } } : {}),
   areaServed: serviceArea,
-  parentOrganization: parentBusinessReference,
-  address: {
-    '@type': 'PostalAddress',
-    ...schemaAddress
-  },
-  openingHoursSpecification: [
+  parentOrganization: isClevelandMarket ? {
+    '@type': 'Organization',
+    '@id': businessEntityId,
+    name: BUSINESS_INFO.name
+  } : parentBusinessReference,
+  ...(schemaAddress ? { address: { '@type': 'PostalAddress', ...schemaAddress } } : {}),
+  ...(isClevelandMarket ? { openingHoursSpecification: [{
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '00:00',
+    closes: '23:59'
+  }] } : { openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
@@ -375,12 +415,32 @@ const locationBusinessSchema: Record<string, unknown> = {
       opens: '09:00',
       closes: '13:00'
     }
-  ]
+  ] })
 };
 
-if (locationMapUrl) {
+if (locationMapUrl && !isClevelandMarket) {
   locationBusinessSchema.hasMap = locationMapUrl;
 }
+
+const locationSchema = isClevelandMarket && !location.isHub
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      '@id': `${locationUrl}#service`,
+      name: `Garage door repair and installation in ${locationDisplayName}`,
+      description: pageMetaDescription,
+      url: locationUrl,
+      serviceType: 'Garage door repair and installation',
+      areaServed: {
+        '@type': location.areaType ?? (location.name.includes('Township') ? 'AdministrativeArea' : 'City'),
+        name: location.name,
+        addressRegion: location.state,
+        addressCountry: 'US',
+        ...(location.areaType === 'Place' ? { containedInPlace: { '@type': 'City', name: 'Cleveland', addressRegion: 'OH' } } : {})
+      },
+      provider: parentBusinessReference
+    }
+  : locationBusinessSchema;
 
 ---
 
@@ -399,12 +459,17 @@ if (locationMapUrl) {
   <Breadcrumbs items={breadcrumbs} />
 
 
-  <Schema item={locationBusinessSchema as any} />
+  <Schema item={locationSchema as any} />
 
 
   <Hero
     title={locationHeroTitle}
     heroImage={heroImage}
+    fullTitleInH1={isClevelandMarket}
+    locationLabel={isClevelandMarket ? (location.isHub ? 'Serving Greater Cleveland' : locationDisplayName) : undefined}
+    imageAlt={isClevelandMarket && location.isHub ? 'Professional garage door technician repairing a garage door in Cleveland, OH' : undefined}
+    geoLat={isClevelandMarket ? location.lat : undefined}
+    geoLng={isClevelandMarket ? location.lng : undefined}
     ctaText="Emergency? Call Now"
     ctaLink="#quote"
     phoneNumber={locationTelephoneDisplay}
@@ -420,17 +485,29 @@ if (locationMapUrl) {
   </Hero>
 
   <main class="bg-white">
-    <IconRow />
+    <IconRow market={isClevelandMarket ? 'cleveland' : 'cincinnati'} />
+    {isClevelandMarket && location.localHeading && (
+      <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-bold text-ink mb-6">{location.localHeading}</h2>
+          <div class="space-y-4 text-lg text-ink/80 leading-relaxed">
+            <p>{location.localIntro}</p>
+            <p>{location.localIssues}</p>
+            <p>{location.localAdvice}</p>
+          </div>
+          {!location.isHub && <p class="mt-6 text-base text-ink/80">See the <a class="inline-link" href={`/locations/${parentHubLocation.slug}`}>{parentHubLocation.name} service area</a> for the full market coverage.</p>}
+        </div>
+      </section>
+    )}
     <section class="py-20 bg-muted">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/90 mb-4">Local Services</p>
+          <p class={`text-sm font-semibold uppercase tracking-[0.3em] mb-4 ${isClevelandMarket ? 'text-primary' : 'text-primary/70'}`}>Local Services</p>
           <h2 class="text-3xl sm:text-4xl font-bold text-ink mb-6">
             Professional Garage Door Help in {locationDisplayName}
           </h2>
           <p class="text-lg sm:text-xl text-ink/70 leading-relaxed max-w-3xl mx-auto">
-            Start with the three core services {location.name} homeowners call us for most&mdash;fast repairs, opener expertise,
-            and professional installs across the {marketDisplayName} area.
+            {isClevelandMarket ? `Explore repair, opener service, and installation options for ${location.name} and the ${marketDisplayName} area.` : `Start with the three core services ${location.name} homeowners call us for most—fast repairs, opener expertise, and professional installs across the ${marketDisplayName} area.`}
           </p>
         </div>
 
@@ -452,7 +529,7 @@ if (locationMapUrl) {
     <section class="py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-primary/90 mb-4">Our Process</p>
+          <p class={`text-sm font-semibold uppercase tracking-[0.3em] mb-4 ${isClevelandMarket ? 'text-primary' : 'text-primary/70'}`}>Our Process</p>
           <h2 class="text-3xl font-bold text-ink mb-6">From First Call to Final Safety Check</h2>
           <p class="text-lg text-ink/70 leading-relaxed max-w-3xl mx-auto">
             The moment you contact Buck Strong Garage Doors, we begin mapping out your service visit. Our coordinated approach keeps {locationDisplayName} projects on schedule with no surprises.
@@ -496,8 +573,7 @@ if (locationMapUrl) {
             {marketDisplayName} properties.
           </p>
           <p class="text-lg text-ink/70 leading-relaxed mt-4">
-            Our scheduling team tracks community events, school calendars, and peak commuter times in {locationDisplayName} so
-            service happens when it fits your routine.
+            {isClevelandMarket ? `Tell us about access and scheduling needs at your ${locationDisplayName} address so we can plan the visit.` : `Our scheduling team tracks community events, school calendars, and peak commuter times in ${locationDisplayName} so service happens when it fits your routine.`}
           </p>
         </div>
 
@@ -505,36 +581,39 @@ if (locationMapUrl) {
           <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-6">
             <h3 class="text-xl font-semibold text-ink mb-2">Fast Emergency Response</h3>
             <p class="text-sm text-ink/80 leading-relaxed">
-              Garage door issues in {marketDisplayName} get same-day attention. Our technicians arrive within two hours with
-              fully stocked trucks to tackle broken springs, stuck doors, and opener failures on the first visit.
+              {isClevelandMarket ? `If a door is stuck open or a spring has broken in ${locationDisplayName}, call to check the next available service window. Avoid operating a door with a damaged spring or cable.` : `Garage door issues in ${marketDisplayName} get same-day attention. Our technicians arrive within two hours with fully stocked trucks to tackle broken springs, stuck doors, and opener failures on the first visit.`}
             </p>
           </div>
           <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-6">
             <h3 class="text-xl font-semibold text-ink mb-2">Quality Parts &amp; Installation</h3>
             <p class="text-sm text-ink/80 leading-relaxed">
-              We only install premium torsion springs, galvanized cables, sealed rollers, and weather-resistant hardware.
-              Every job wraps with a full safety check so your door operates smoothly and keeps your family secure.
+              {isClevelandMarket
+                ? `We explain suitable spring, cable, roller, and seal options for the door we find. After approved work, we check travel and safety features with you.`
+                : `We only install premium torsion springs, galvanized cables, sealed rollers, and weather-resistant hardware. Every job wraps with a full safety check so your door operates smoothly and keeps your family secure.`}
             </p>
           </div>
           <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-6">
             <h3 class="text-xl font-semibold text-ink mb-2">Local Building Compliance</h3>
             <p class="text-sm text-ink/80 leading-relaxed">
-              Our team handles permits, HOA approvals, and code requirements unique to {locationDisplayName}. We build to
-              Ohio residential standards so inspections and approvals stay stress-free.
+              {isClevelandMarket
+                ? `For a new door in ${locationDisplayName}, we discuss the opening, safety requirements, and any permit or association rules you may need to confirm before installation.`
+                : `Our team handles permits, HOA approvals, and code requirements unique to ${locationDisplayName}. We build to Ohio residential standards so inspections and approvals stay stress-free.`}
             </p>
           </div>
           <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-6">
             <h3 class="text-xl font-semibold text-ink mb-2">Weather-Ready Solutions</h3>
             <p class="text-sm text-ink/80 leading-relaxed">
-              {marketPossessive} rapid temperature swings call for durable materials. We add insulation, upgraded seals, and
-              hardware that stand up to ice, humidity, and wind so your door performs year-round.
+              {isClevelandMarket
+                ? `Lake Erie seasons can make a poor seal or poorly fitted panel more noticeable. We can review insulation and hardware choices after checking the garage opening.`
+                : `${marketPossessive} rapid temperature swings call for durable materials. We add insulation, upgraded seals, and hardware that stand up to ice, humidity, and wind so your door performs year-round.`}
             </p>
           </div>
           <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-6">
             <h3 class="text-xl font-semibold text-ink mb-2">Coordinated Scheduling &amp; Access</h3>
             <p class="text-sm text-ink/80 leading-relaxed">
-              We plan around school schedules, community events, and gated access needs. Property managers and HOA boards get
-              clear updates so your project stays on track without extra paperwork.
+              {isClevelandMarket
+                ? `Tell us about gate codes, parking, driveway access, or business hours when you book. Those details help us plan an appropriate visit.`
+                : `We plan around school schedules, community events, and gated access needs. Property managers and HOA boards get clear updates so your project stays on track without extra paperwork.`}
             </p>
             <ul class="mt-3 space-y-1 text-sm text-ink/70 list-disc pl-5">
               <li>Flexible appointment windows for busy households</li>
@@ -545,8 +624,9 @@ if (locationMapUrl) {
           <div class="bg-card rounded-2xl shadow-sm ring-1 ring-black/5 p-6">
             <h3 class="text-xl font-semibold text-ink mb-2">Proactive Maintenance Guidance</h3>
             <p class="text-sm text-ink/80 leading-relaxed">
-              After every visit you receive photos, service notes, and an easy checklist tailored to {locationDisplayName}
-              weather. You will know exactly how to care for your door between professional tune-ups.
+              {isClevelandMarket
+                ? `We can explain what to watch for between visits, including changes in door balance, roller noise, and weather-seal fit.`
+                : `After every visit you receive photos, service notes, and an easy checklist tailored to ${locationDisplayName} weather. You will know exactly how to care for your door between professional tune-ups.`}
             </p>
             <ul class="mt-3 space-y-1 text-sm text-ink/70 list-disc pl-5">
               <li>Safety inspections review springs, cables, and rollers</li>
@@ -559,6 +639,7 @@ if (locationMapUrl) {
     </section>
 
     <ContactForm
+      includeSchema={!isClevelandMarket}
       id="quote"
       title={`Get Service in ${locationDisplayName}`}
       subtitle="Contact us today for fast, reliable garage door service"
@@ -582,7 +663,7 @@ if (locationMapUrl) {
           <h2 class="text-3xl font-bold text-ink mb-4">Nearby Service Areas</h2>
           <div class="w-24 h-1 bg-accent mx-auto rounded-full mb-6"></div>
           <p class="text-xl text-ink/70 max-w-2xl mx-auto">
-            Buck Strong Garage Doors provides same-day{' '}
+            Buck Strong Garage Doors provides{' '}
             <a
               href={buildServiceHref('garage-door-repair')}
               class="inline-link"
@@ -606,7 +687,7 @@ if (locationMapUrl) {
             >
               commercial overhead door service
             </a>
-            {' '}throughout the {marketDisplayName} area.
+            {' '}throughout the {marketDisplayName} area{isClevelandMarket ? ', subject to address and appointment availability' : ' with same-day scheduling'}.
           </p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -733,7 +814,7 @@ if (locationMapUrl) {
 
   </main>
 
-  <HiddenSeoText
+  {!isClevelandMarket && (<Fragment><HiddenSeoText
     title={`Garage door service coverage for ${locationDisplayName}`}
     paragraphs={[
       `Buck Strong Garage Doors supports homeowners and facility managers throughout ${marketDisplayName} with ${
@@ -803,6 +884,8 @@ if (locationMapUrl) {
     paragraphs={localizedFaqParagraphs}
     bullets={localizedFaqBullets}
   />
+
+  </Fragment>)}
 
   <Footer />
 </Base>

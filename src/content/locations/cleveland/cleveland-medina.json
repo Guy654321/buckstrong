@@ -1,0 +1,30 @@
+{
+  "name": "Medina",
+  "slug": "cleveland-medina",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.134636,
+    "lng": -81.869513
+  },
+  "zips": [
+    "44256"
+  ],
+  "surroundingAreas": [
+    "Brunswick",
+    "Strongsville",
+    "Columbia Township",
+    "North Royalton"
+  ],
+  "metaTitle": "Garage Door Repair in Medina, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Medina, OH. Help with southern route and repair versus replacement. Call 216-930-2980.",
+  "localHeading": "Garage door help on the Medina edge",
+  "localIntro": "Medina is a substantial residential city south of Brunswick and near the outer edge of this Cleveland selection. We confirm service availability by address and discuss the condition of the existing door before planning the visit.",
+  "localIssues": "A door that becomes difficult to lift may need spring or cable work even when the opener still runs. We check the mechanical system before recommending a new motor.",
+  "localAdvice": "For a planned replacement, we measure the opening and review insulation, panel design, and hardware with the garage’s clearances. We can explain when repair remains the better value.",
+  "heroTitle": "Garage Door Repair and Installation in Medina"
+}

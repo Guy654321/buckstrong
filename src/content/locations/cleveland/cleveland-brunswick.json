@@ -1,0 +1,30 @@
+{
+  "name": "Brunswick",
+  "slug": "cleveland-brunswick",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.245799,
+    "lng": -81.816582
+  },
+  "zips": [
+    "44212"
+  ],
+  "surroundingAreas": [
+    "Strongsville",
+    "North Royalton",
+    "Columbia Township",
+    "Medina"
+  ],
+  "metaTitle": "Garage Door Repair in Brunswick, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Brunswick, OH. Help with southwest residential market and opener load. Call 216-930-2980.",
+  "localHeading": "Brunswick garage door repair and upgrades",
+  "localIntro": "Brunswick is a large Medina County residential city south of Strongsville. We can help homeowners compare a repair on a sound door with a replacement that changes appearance or insulation.",
+  "localIssues": "An opener that runs loudly may be compensating for a heavy door. We inspect springs, rollers, and cables first, then test the opener and its safety features.",
+  "localAdvice": "For a planned new door, we measure the opening and discuss hardware and panel weight alongside style. Call with your Brunswick address to confirm a service window.",
+  "heroTitle": "Garage Door Repair and Installation in Brunswick"
+}

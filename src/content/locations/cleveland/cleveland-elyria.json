@@ -1,0 +1,30 @@
+{
+  "name": "Elyria",
+  "slug": "cleveland-elyria",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.372778,
+    "lng": -82.108009
+  },
+  "zips": [
+    "44035"
+  ],
+  "surroundingAreas": [
+    "North Ridgeville",
+    "Lorain",
+    "Avon",
+    "Amherst"
+  ],
+  "metaTitle": "Garage Door Repair in Elyria, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Elyria, OH. Help with large residential market and repair choices. Call 216-930-2980.",
+  "localHeading": "Repair or replace an Elyria garage door",
+  "localIntro": "Elyria is a major Lorain County residential market west of Cleveland. Because homes and garages vary widely, we ask what the door is doing and measure the opening before suggesting an installation.",
+  "localIssues": "A door that stops halfway may have an opener setting problem, but spring balance or track friction can cause the same behavior. We check the mechanical door and the safety system together.",
+  "localAdvice": "If the panels or hardware are worn beyond a sensible repair, we can explain replacement options and what an existing opener can support. Call with your Elyria address to confirm a visit.",
+  "heroTitle": "Garage Door Repair and Installation in Elyria"
+}

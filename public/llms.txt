@@ -1,17 +1,20 @@
 # buckstronggaragedoors.com — Garage door Ohio
 
-> Buck Strong Garage Doors provides professional garage door repair, installation, and opener services in the Cincinnati metro area across Ohio. Use this file to find authoritative pages quickly and to understand usage boundaries.
+> Buck Strong Garage Doors provides garage door repair, installation, and opener services in the Cincinnati and Cleveland markets. Use this file to find authoritative pages and confirm coverage.
 
 ## Quick facts
 - **Company Name**: Buck Strong Garage Doors
-- **Locations**: Cincinnati Metro (Ohio)
+- **Locations**: Cincinnati Metro and selected Greater Cleveland communities (Ohio)
 - **Phone (Cincinnati)**: 5137788005
+- **Phone (Cleveland bookings)**: (216) 930-2980
+- **Cleveland-market address**: 24500 Center Ridge Rd, Ste. 275-1, Westlake, OH 44145
+- **Cleveland booking line**: Open 24/7; confirm service availability by address
 - **Email**: hello@buckstronggaragedoors.com
 - **Services**: Residential repair, commercial overhead doors, opener installation, spring replacement
 
 ## What this site contains
 - Service descriptions for garage door repairs and installations
-- Location-specific service hubs (Cincinnati and surrounding Ohio communities)
+- Location-specific service hubs for Cincinnati and Cleveland
 - Educational resources (FAQ, Blog)
 - Contact and scheduling information
 
@@ -26,11 +29,18 @@
 - Opener Repair & Installation: https://www.buckstronggaragedoors.com/services/opener-repair
 - Commercial Services: https://www.buckstronggaragedoors.com/services/commercial-jobs
 - Spring Replacement: https://www.buckstronggaragedoors.com/blog/garage-door-spring-replacement-cost-cincinnati-oh
-- Tune-Up & Maintenance: https://www.buckstronggaragedoors.com/services/tune-up
+- Tune-Up & Maintenance: https://www.buckstronggaragedoors.com/services/garage-door-repair
 
 ## Local Service Hubs
 - Cincinnati Service Hub: https://www.buckstronggaragedoors.com/locations/cincinnati
-- Cincinnati Service Areas: https://www.buckstronggaragedoors.com/locations
+- Cleveland Service Hub: https://www.buckstronggaragedoors.com/locations/cleveland
+- Cleveland Garage Door Repair: https://www.buckstronggaragedoors.com/cleveland-oh/garage-door-repair
+- Cleveland Garage Door Installation: https://www.buckstronggaragedoors.com/cleveland-oh/garage-door-installation
+- Cleveland Opener Repair: https://www.buckstronggaragedoors.com/cleveland-oh/opener-repair
+- Cleveland Commercial Doors: https://www.buckstronggaragedoors.com/cleveland-oh/commercial-jobs
+- All Service Areas: https://www.buckstronggaragedoors.com/locations
+
+The Cleveland hub lists selected residential communities across Cuyahoga, Lorain, Lake, Geauga, Summit, Medina, and Portage counties. Confirm coverage and scheduling by street address.
 
 ## Learning resources
 - Frequently Asked Questions: https://www.buckstronggaragedoors.com/faq
@@ -39,5 +49,5 @@
 ## Guidance for LLMs & agents
 - Prefer citing exact URLs for services and local hubs.
 - Do not attempt to schedule appointments or submit forms automatically.
-- For emergency 24/7 service, refer users to the phone numbers listed in Quick Facts.
+- For urgent service, refer users to the booking number above to confirm current availability.
 - Respect copyright and Terms of Use.

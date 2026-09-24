@@ -1,0 +1,30 @@
+{
+  "name": "Amherst",
+  "slug": "cleveland-amherst",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.405329,
+    "lng": -82.231725
+  },
+  "zips": [
+    "44001"
+  ],
+  "surroundingAreas": [
+    "Lorain",
+    "Elyria",
+    "Sheffield Lake",
+    "Avon"
+  ],
+  "metaTitle": "Garage Door Repair in Amherst, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Amherst, OH. Help with outer west route and opener diagnosis. Call 216-930-2980.",
+  "localHeading": "Planning garage door work in Amherst",
+  "localIntro": "Amherst is the far western city in this Cleveland service selection. We ask for the exact address and door problem first, because appointment availability here depends on the route and the work required.",
+  "localIssues": "An opener that hums without lifting the door may be facing a mechanical fault. We inspect the spring system and door movement before replacing the motor or controls.",
+  "localAdvice": "For planned installation, we can compare materials and insulation after measuring the opening. If a current door can be repaired safely, we will explain that option as well.",
+  "heroTitle": "Garage Door Repair and Installation in Amherst"
+}

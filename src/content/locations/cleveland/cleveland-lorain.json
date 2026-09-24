@@ -1,0 +1,31 @@
+{
+  "name": "Lorain",
+  "slug": "cleveland-lorain",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.438805,
+    "lng": -82.179722
+  },
+  "zips": [
+    "44052",
+    "44053"
+  ],
+  "surroundingAreas": [
+    "Amherst",
+    "Sheffield Lake",
+    "Elyria",
+    "Avon"
+  ],
+  "metaTitle": "Garage Door Repair in Lorain, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Lorain, OH. Help with outer west lakeshore and address-based booking. Call 216-930-2980.",
+  "localHeading": "Garage door service at the western edge of the market",
+  "localIntro": "Lorain is a large lakeshore city and an outer edge of the selected Cleveland territory. We confirm availability by street address before booking, then plan the visit around the specific door and access needs.",
+  "localIssues": "Exposure near the lake can draw attention to seals and hardware, but a door that drags or sits crooked needs a mechanical inspection first. We check springs, cables, rollers, and track travel.",
+  "localAdvice": "For an older garage, we can measure headroom and opening width before reviewing new-door styles. A repair may still be the right answer when the panels and frame are sound.",
+  "heroTitle": "Garage Door Repair and Installation in Lorain"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Orange",
+  "slug": "cleveland-orange",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.442616,
+    "lng": -81.471718
+  },
+  "zips": [
+    "44022"
+  ],
+  "surroundingAreas": [
+    "Beachwood",
+    "Pepper Pike",
+    "Solon",
+    "Chagrin Falls"
+  ],
+  "metaTitle": "Garage Door Repair in Orange, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Orange, OH. Help with shared postal area and door alignment. Call 216-930-2980.",
+  "localHeading": "Garage door service in Orange Village",
+  "localIntro": "Orange is a separate village on the eastern Chagrin corridor; its 44022 mailing area is shared with nearby communities. We use the full street address to distinguish Orange from Chagrin Falls when arranging service.",
+  "localIssues": "If a door is sagging or difficult to lift, we inspect the springs and cables before ordering a new panel or opener. Balance and alignment matter for a safe result.",
+  "localAdvice": "For a planned upgrade, measurements, finish choices, and hardware should be considered together. We can explain what the existing opening allows before any door is ordered.",
+  "heroTitle": "Garage Door Repair and Installation in Orange"
+}

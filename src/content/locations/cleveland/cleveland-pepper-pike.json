@@ -1,0 +1,30 @@
+{
+  "name": "Pepper Pike",
+  "slug": "cleveland-pepper-pike",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.479386,
+    "lng": -81.460207
+  },
+  "zips": [
+    "44124"
+  ],
+  "surroundingAreas": [
+    "Orange",
+    "Mayfield Heights",
+    "Beachwood",
+    "Lyndhurst"
+  ],
+  "metaTitle": "Garage Door Repair in Pepper Pike, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Pepper Pike, OH. Help with longer drives and precise measurements. Call 216-930-2980.",
+  "localHeading": "Careful door planning in Pepper Pike",
+  "localIntro": "Pepper Pike is a lower-density east-side residential city where a driveway and garage may be set back from the street. Clear access details and accurate dimensions help us plan both repairs and new installations.",
+  "localIssues": "A heavy or slow door can be a spring issue even if the opener still activates. We test the door by hand and check the safety features before recommending equipment.",
+  "localAdvice": "For a replacement, we can compare construction, windows, and finish with the home’s opening. We will also review track clearance and whether the current opener suits the new door.",
+  "heroTitle": "Garage Door Repair and Installation in Pepper Pike"
+}

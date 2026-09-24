@@ -1,0 +1,30 @@
+{
+  "name": "Brook Park",
+  "slug": "cleveland-brook-park",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.404309,
+    "lng": -81.820342
+  },
+  "zips": [
+    "44142"
+  ],
+  "surroundingAreas": [
+    "Middleburg Heights",
+    "Fairview Park",
+    "Berea",
+    "West Park"
+  ],
+  "metaTitle": "Garage Door Repair in Brook Park, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Brook Park, OH. Help with door balance near the airport corridor. Call 216-930-2980.",
+  "localHeading": "Brook Park garage door troubleshooting",
+  "localIntro": "Brook Park’s homes sit close to the airport-side I-480 corridor, yet the work starts with the individual garage opening rather than a regional assumption. We help homeowners diagnose doors that shake, bind, or fail to seal at the bottom.",
+  "localIssues": "A door that is hard to lift by hand may put extra strain on a working opener. We check cables, springs, and roller travel before recommending motor replacement.",
+  "localAdvice": "For a planned installation, tell us about driveway access and any storage near the tracks. We can measure clearances and discuss a door and opener combination that fits the available space.",
+  "heroTitle": "Garage Door Repair and Installation in Brook Park"
+}

@@ -5,9 +5,10 @@ import { getServices } from '../lib/services';
 import { getLocationsByMarket, getLocationHubs } from '../lib/locations';
 
 const services = await getServices();
+const isClevelandPage = Astro.url.pathname.startsWith('/locations/cleveland') || Astro.url.pathname.startsWith('/cleveland-oh/');
 const locationGroups = await getLocationsByMarket();
 const hubLocations = await getLocationHubs();
-const launchHubSlugs = new Set(['cincinnati']);
+const launchHubSlugs = new Set(['cincinnati', 'cleveland']);
 const launchHubs = hubLocations.filter(location => launchHubSlugs.has(location.slug));
 const launchLocationGroups = locationGroups.filter(group => {
   return group.hub && launchHubSlugs.has(group.hub.slug);
@@ -16,10 +17,26 @@ const launchLocationGroups = locationGroups.filter(group => {
 const isDefined = <T,>(value: T | null | undefined): value is T =>
   value !== null && value !== undefined;
 
-const footerLocationGroups = launchLocationGroups.map(group => ({
-  market: group.market,
-  locations: [group.hub, ...group.areas].filter(isDefined),
-}));
+const featuredClevelandSlugs = [
+  'cleveland', 'cleveland-westlake', 'cleveland-bay-village',
+  'cleveland-rocky-river', 'cleveland-avon', 'cleveland-avon-lake',
+  'cleveland-strongsville', 'cleveland-brecksville', 'cleveland-solon',
+  'cleveland-hudson', 'cleveland-lakewood', 'cleveland-parma',
+  'cleveland-cleveland-heights', 'cleveland-mentor', 'cleveland-brunswick',
+  'cleveland-willoughby'
+];
+const footerLocationGroups = launchLocationGroups.map(group => {
+  const allLocations = [group.hub, ...group.areas].filter(isDefined);
+  const isClevelandGroup = group.hub?.slug === 'cleveland';
+  const locations = isClevelandGroup
+    ? featuredClevelandSlugs.map(slug => allLocations.find(location => location.slug === slug)).filter(isDefined)
+    : allLocations;
+  return {
+    market: group.market,
+    locations,
+    allAreasHref: isClevelandGroup ? '/locations/cleveland' : null,
+  };
+});
 const sanitizeTelephone = (value: string) => value.replace(/[^0-9+]/g, '');
 
 const footerHubs = launchHubs.map(location => {
@@ -47,23 +64,23 @@ const footerHubs = launchHubs.map(location => {
 
     <div class="grid gap-10 lg:grid-cols-12">
 
-      <div class="lg:col-span-4" itemscope itemtype="https://schema.org/LocalBusiness">
+      <div class="lg:col-span-4" itemscope itemtype={isClevelandPage ? 'https://schema.org/Organization' : 'https://schema.org/LocalBusiness'}>
         <meta itemprop="name" content={BUSINESS_INFO.name} />
         <meta itemprop="image" content="/images/ohio%20logo.png" />
-        <meta itemprop="telephone" content={BUSINESS_INFO.telephone} />
+        <meta itemprop="telephone" content={isClevelandPage ? '(216) 930-2980' : BUSINESS_INFO.telephone} />
         <meta itemprop="email" content={BUSINESS_INFO.email} />
         <meta itemprop="url" content={BUSINESS_INFO.url} />
-        <div class="sr-only" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+        {!isClevelandPage && <div class="sr-only" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
           <span itemprop="streetAddress">{BUSINESS_INFO.address.streetAddress}</span>
           <span itemprop="addressLocality">{BUSINESS_INFO.address.addressLocality}</span>
           <span itemprop="addressRegion">{BUSINESS_INFO.address.addressRegion}</span>
           <span itemprop="postalCode">{BUSINESS_INFO.address.postalCode}</span>
           <span itemprop="addressCountry">{BUSINESS_INFO.address.addressCountry}</span>
-        </div>
+        </div>}
         <div class="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/10 backdrop-blur">
           <div class="space-y-2 text-white/80">
             <p class="text-sm font-semibold uppercase tracking-[0.25em] text-white">Buck Strong Garage Doors</p>
-            <p class="text-sm leading-relaxed">Ohio-based garage door repair serving the Cincinnati metro</p>
+            <p class="text-sm leading-relaxed">Ohio-based garage door service for the Cincinnati and Cleveland markets</p>
             <a
               href={`mailto:${BUSINESS_INFO.email}`}
               class="inline-flex items-center gap-2 text-sm font-medium text-white transition-colors duration-200 hover:text-white/80"
@@ -71,7 +88,7 @@ const footerHubs = launchHubs.map(location => {
               <span aria-hidden="true">📧</span>
               <span>{BUSINESS_INFO.email}</span>
             </a>
-            <p class="text-xs uppercase tracking-wide text-white/90">Emergency service available 24/7</p>
+            <p class="text-xs uppercase tracking-wide text-white/90">{isClevelandPage ? 'Open 24/7 for calls and urgent requests' : 'Emergency service available 24/7'}</p>
           </div>
 
           <p class="mt-6 text-xs font-semibold uppercase tracking-[0.3em] text-white/90">Our Locations</p>
@@ -79,13 +96,14 @@ const footerHubs = launchHubs.map(location => {
             {footerHubs.map(location => (
               <div class="flex flex-col gap-4 py-5 first:pt-0 last:pb-0" itemscope itemtype="https://schema.org/LocalBusiness">
                 <meta itemprop="name" content={`${location.name} - ${BUSINESS_INFO.name}`} />
+                {location.slug === 'cleveland' && <meta itemprop="openingHours" content="Mo-Su 00:00-23:59" />}
                 <div class="flex items-start gap-3">
                   <span class="rounded-full bg-accent/20 p-2 flex-shrink-0">
                     <Icon name="mdi:map-marker" size="20" class="text-white" aria-hidden="true" />
                   </span>
                   <div class="flex-1 space-y-2">
                     <p class="text-base font-semibold tracking-tight text-white">
-                      {location.name} Office
+                      {location.name}{location.hasAddress ? location.slug === 'cleveland' ? ' Address' : ' Office' : ' Service Area'}
                     </p>
 
                     {location.hasAddress && location.address ? (
@@ -117,13 +135,13 @@ const footerHubs = launchHubs.map(location => {
                     ) : (
                       <div class="text-sm text-white/70 space-y-2">
                         <p>{location.serviceMessage}</p>
-                        <div class="sr-only" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        {location.slug !== 'cleveland' && <div class="sr-only" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
                           <span itemprop="streetAddress">{BUSINESS_INFO.address.streetAddress}</span>
                           <span itemprop="addressLocality">{BUSINESS_INFO.address.addressLocality}</span>
                           <span itemprop="addressRegion">{BUSINESS_INFO.address.addressRegion}</span>
                           <span itemprop="postalCode">{BUSINESS_INFO.address.postalCode}</span>
                           <span itemprop="addressCountry">{BUSINESS_INFO.address.addressCountry}</span>
-                        </div>
+                        </div>}
                       </div>
                     )}
 
@@ -230,6 +248,9 @@ const footerHubs = launchHubs.map(location => {
                         </a>
                       </li>
                     ))}
+                    {group.allAreasHref && (
+                      <li><a href={group.allAreasHref} class="font-semibold text-white/80 transition-colors duration-200 hover:text-white">View all Cleveland areas</a></li>
+                    )}
                   </ul>
                 </div>
               ))}

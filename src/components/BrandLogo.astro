@@ -33,14 +33,12 @@ const sizeConfig = {
 } as const;
 
 const { width: intrinsicWidth, height: intrinsicHeight } = sizeConfig[size];
-const logoSrc = '/images/ohio%20logo.png';
-
 const loading = priority ? 'eager' : 'lazy';
 const decoding = priority ? 'sync' : 'async';
 const fetchPriority = priority ? 'high' : 'auto';
 ---
 <img
-  src={logoSrc}
+  src="/images/ohio-logo-nav.webp"
   alt={alt}
   width={intrinsicWidth}
   height={intrinsicHeight}

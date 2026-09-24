@@ -22,7 +22,7 @@ export async function getStaticPaths() {
     'commercial-jobs',
   ];
 
-  return locations.flatMap((location) =>
+  return locations.filter((location) => location.market !== 'Cleveland Metro' || location.isHub).flatMap((location) =>
     serviceSlugs.map((service) => ({
       params: { city: buildLocationCitySlug(location.slug), service },
       props: { location, service },

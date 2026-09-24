@@ -1,0 +1,31 @@
+{
+  "name": "Northfield Center",
+  "slug": "cleveland-northfield-center",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.287476,
+    "lng": -81.532542
+  },
+  "zips": [
+    "44067"
+  ],
+  "surroundingAreas": [
+    "Sagamore Hills",
+    "Macedonia",
+    "Twinsburg",
+    "Brecksville"
+  ],
+  "metaTitle": "Garage Door Repair in Northfield Center, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Northfield Center, OH. Help with shared ZIP and opener safety. Call 216-930-2980.",
+  "localHeading": "Northfield Center garage door planning",
+  "localIntro": "Northfield Center is a separate Summit County township between Sagamore Hills and Macedonia. We confirm the address rather than treating every 44067 request as the same location.",
+  "localIssues": "A garage door that will not close may have a sensor problem or a mechanical obstruction. We test the door by hand and check the safety reversal after any opener work.",
+  "localAdvice": "For replacement, we measure the garage, review panel options, and verify the track and opener arrangement. Tell us about driveway access or a door that is stuck open when scheduling.",
+  "heroTitle": "Garage Door Repair and Installation in Northfield Center",
+  "areaType": "AdministrativeArea"
+}

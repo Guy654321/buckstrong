@@ -1,0 +1,30 @@
+{
+  "name": "Sheffield Lake",
+  "slug": "cleveland-sheffield-lake",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.488347,
+    "lng": -82.097859
+  },
+  "zips": [
+    "44054"
+  ],
+  "surroundingAreas": [
+    "Avon Lake",
+    "Avon",
+    "Lorain",
+    "North Ridgeville"
+  ],
+  "metaTitle": "Garage Door Repair in Sheffield Lake, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Sheffield Lake, OH. Help with lakeshore weather seals and door fit. Call 216-930-2980.",
+  "localHeading": "Garage door help along Sheffield Lake’s residential streets",
+  "localIntro": "Sheffield Lake is a lakeshore residential city between Avon Lake and Lorain. We confirm the address and garage access before sending a technician to inspect a door that has become noisy, uneven, or unreliable.",
+  "localIssues": "A weathered bottom seal can admit water, but it may be hiding a door that no longer closes level. We check balance, panel fit, and the track before suggesting a seal alone.",
+  "localAdvice": "For a replacement, we can compare insulated panels and corrosion-resistant hardware with the dimensions of the opening. Scheduling is confirmed by street address on this western route.",
+  "heroTitle": "Garage Door Repair and Installation in Sheffield Lake"
+}

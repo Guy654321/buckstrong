@@ -1,0 +1,30 @@
+{
+  "name": "Willoughby Hills",
+  "slug": "cleveland-willoughby-hills",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.584171,
+    "lng": -81.432976
+  },
+  "zips": [
+    "44094"
+  ],
+  "surroundingAreas": [
+    "Wickliffe",
+    "Highland Heights",
+    "Willowick",
+    "Richmond Heights"
+  ],
+  "metaTitle": "Garage Door Repair in Willoughby Hills, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Willoughby Hills, OH. Help with setback garages and spring balance. Call 216-930-2980.",
+  "localHeading": "Door service across Willoughby Hills properties",
+  "localIntro": "Willoughby Hills is a separate residential city south of Willoughby, with garages that may sit farther back from the street. We ask about access and the current door position before arranging a visit.",
+  "localIssues": "A heavy door may still move with the opener while putting unnecessary strain on it. We check springs, cables, and roller travel before changing the motor.",
+  "localAdvice": "For replacement, we measure the garage and consider panel weight, weather sealing, and opener capacity together. A precise visit is more useful than ordering a door from a postal address alone.",
+  "heroTitle": "Garage Door Repair and Installation in Willoughby Hills"
+}

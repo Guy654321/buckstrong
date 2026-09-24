@@ -1,0 +1,30 @@
+{
+  "name": "Seven Hills",
+  "slug": "cleveland-seven-hills",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.379669,
+    "lng": -81.675853
+  },
+  "zips": [
+    "44131"
+  ],
+  "surroundingAreas": [
+    "Independence",
+    "Parma",
+    "Old Brooklyn",
+    "Broadview Heights"
+  ],
+  "metaTitle": "Garage Door Repair in Seven Hills, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Seven Hills, OH. Help with cables and frequent-use doors. Call 216-930-2980.",
+  "localHeading": "Seven Hills garage door service planning",
+  "localIntro": "Seven Hills is a residential southern suburb between Parma and Independence. A garage door used several times a day needs springs, rollers, cables, and the opener to work as a system, not as unrelated parts.",
+  "localIssues": "If a door begins jerking or pulling to one side, stop using it until the lift system can be inspected. Running the opener against a cable problem can make the damage worse.",
+  "localAdvice": "For replacement, we can compare quieter hardware and insulated panels with the dimensions of your opening. We will also check whether the existing opener can handle the selected door.",
+  "heroTitle": "Garage Door Repair and Installation in Seven Hills"
+}

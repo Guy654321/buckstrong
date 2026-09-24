@@ -49,7 +49,7 @@ const localizeText = (value: string, city: string) =>
 export async function getStaticPaths() {
   const locations = await getLocations();
 
-  return locations.flatMap((location) =>
+  return locations.filter((location) => location.market !== 'Cleveland Metro').flatMap((location) =>
     REPAIR_SERVICE_PAGES.map((service) => ({
       params: { city: buildLocationCitySlug(location.slug), service: service.slug },
       props: { location, service },

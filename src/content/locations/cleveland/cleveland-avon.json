@@ -1,0 +1,31 @@
+{
+  "name": "Avon",
+  "slug": "cleveland-avon",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.4517,
+    "lng": -82.0354
+  },
+  "zips": [
+    "44011"
+  ],
+  "surroundingAreas": [
+    "Avon Lake",
+    "North Ridgeville",
+    "Westlake",
+    "Sheffield Lake",
+    "North Olmsted"
+  ],
+  "metaTitle": "Garage Door Service in Avon, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Avon, Ohio. Get a careful inspection and clear options for springs, openers, and new doors. Call 216-930-2980.",
+  "localHeading": "Measuring and repairing garage doors in Avon",
+  "localIntro": "Avon is a western Cleveland service destination in Lorain County. Whether the job is a failed spring or a planned door upgrade, a proper site measurement helps us match the door, track, and opener to the opening.",
+  "localIssues": "A door that feels unusually heavy by hand may have a spring problem; keep it closed and request an inspection rather than forcing the opener.",
+  "localAdvice": "When selecting a new door, compare insulation, window placement, and maintenance needs alongside appearance.",
+  "heroTitle": "Garage Door Repairs and New Doors in Avon"
+}
