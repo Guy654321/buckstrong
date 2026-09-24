@@ -25,10 +25,6 @@ export function buildLocalizedServicePath(
   const citySegment = buildLocationCitySegment(serviceLocation);
   const normalizedServiceSlug = normalizeSlug(serviceSlug);
 
-  if (serviceLocation === 'cleveland' && normalizedServiceSlug.startsWith('garage-door-') && !['garage-door-repair', 'garage-door-installation'].includes(normalizedServiceSlug)) {
-    return '/cleveland-oh/garage-door-repair';
-  }
-
   if (!citySegment) {
     return normalizedServiceSlug ? `/${normalizedServiceSlug}` : '/';
   }

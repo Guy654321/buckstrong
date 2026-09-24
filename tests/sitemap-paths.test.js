@@ -84,7 +84,7 @@ test('Cleveland suburbs receive location URLs without duplicate service pages', 
   assert(!paths.includes('/westlake-oh/garage-door-repair'));
 });
 
-test('Cleveland sitemap includes only published market service pages', () => {
+test('Cleveland sitemap includes published market and repair detail pages', () => {
   const paths = buildLocationServicePaths(
     [{ slug: 'cleveland', isHub: true }],
     [
@@ -101,6 +101,6 @@ test('Cleveland sitemap includes only published market service pages', () => {
     '/cleveland-oh/opener-repair',
     '/cleveland-oh/garage-door-installation',
     '/cleveland-oh/commercial-jobs',
+    '/cleveland-oh/garage-door-spring-replacement',
   ].sort());
-  assert(!paths.includes('/cleveland-oh/garage-door-spring-replacement'));
 });

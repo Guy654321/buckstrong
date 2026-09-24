@@ -176,7 +176,7 @@ const normalizedDescriptionInput = normalizeBrandMentions(description);
 const normalizedAuthor = normalizeBrandMentions(author);
 
 const fullTitle = buildTitle(normalizedTitleInput);
-const isClevelandPage = Astro.url.pathname.startsWith('/locations/cleveland') || Astro.url.pathname.startsWith('/cleveland-oh/');
+const isClevelandPage = Astro.url.pathname.startsWith('/locations/cleveland') || Astro.url.pathname.startsWith('/cleveland-oh/') || Astro.url.pathname.replace(/\/$/, '').endsWith('-cleveland-oh');
 const normalizedDescription = normalizeDescription(normalizedDescriptionInput, fullTitle, isClevelandPage);
 const ogImageUrl = buildAbsoluteUrl(ogImage, siteOrigin);
 const imageAltText = `${fullTitle} - Professional garage door services`;

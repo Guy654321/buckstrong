@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "lint": "astro check",
-    "build": "astro check && astro build && node scripts/minify-js.js && node scripts/minify-html.js && node scripts/enforce-vercel-runtime.mjs && node scripts/check-orphaned-pages.js",
+    "build": "astro check && astro build && node scripts/minify-js.js && node scripts/minify-html.js && node scripts/enforce-vercel-runtime.mjs && node scripts/check-orphaned-pages.js && node scripts/check-cleveland-detail-links.js",
     "preview": "astro preview",
     "astro": "astro",
     "validate-sitemap": "node scripts/validate-sitemap.js",

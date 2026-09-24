@@ -3,6 +3,9 @@ import { getCollection } from 'astro:content';
 import { getLocations } from '../lib/locations';
 import { getServices } from '../lib/services';
 import { REPAIR_SERVICE_PAGES } from '../data/repair-service-pages';
+import { DOOR_SERVICE_PAGES } from '../data/door-service-pages';
+import { OPENER_SERVICE_PAGES } from '../data/opener-service-pages';
+import { COMMERCIAL_SERVICE_PAGES } from '../data/commercial-service-pages';
 import {
   getChangeFreq,
   getLastModified,
@@ -113,6 +116,12 @@ export const GET: APIRoute = async () => {
     hubs,
     blogPosts,
   });
+
+  pathCandidates.push(
+    ...DOOR_SERVICE_PAGES.map((service) => `/garage-door-${service.slug}-cleveland-oh`),
+    ...OPENER_SERVICE_PAGES.map((service) => `/garage-door-opener-${service.slug}-cleveland-oh`),
+    ...COMMERCIAL_SERVICE_PAGES.map((service) => `/garage-door-commercial-${service.slug}-cleveland-oh`),
+  );
 
   const uniquePaths = Array.from(new Set(pathCandidates.map(normalizePathForSitemap)));
 

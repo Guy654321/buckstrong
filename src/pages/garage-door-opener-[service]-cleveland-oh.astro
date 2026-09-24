@@ -1,0 +1,31 @@
+---
+import ClevelandServiceDetailPage from '../components/service-pages/ClevelandServiceDetailPage.astro';
+import { OPENER_SERVICE_PAGES } from '../data/opener-service-pages';
+import beltDriveImage from '../assets/images/repairs/opener-belt-drive.jpg';
+import chainDriveImage from '../assets/images/repairs/opener-chain-drive.jpg';
+import directDriveImage from '../assets/images/repairs/opener-direct-drive.jpg';
+import screwDriveImage from '../assets/images/repairs/opener-screw-drive.jpg';
+
+export function getStaticPaths() {
+  const images = {
+    'belt-drive-repair': beltDriveImage,
+    'chain-drive-repair': chainDriveImage,
+    'jackshaft-opener-repair': directDriveImage,
+    'screw-drive-opener-repair': screwDriveImage,
+  };
+  return OPENER_SERVICE_PAGES.map((service) => ({
+    params: { service: service.slug },
+    props: {
+      service: {
+        ...service,
+        heroImage: images[service.slug],
+        heroAlt: `${service.serviceName} equipment and inspection`,
+      },
+    },
+  }));
+}
+
+const { service } = Astro.props;
+---
+
+<ClevelandServiceDetailPage group="opener" service={service} />
