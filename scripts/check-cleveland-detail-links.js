@@ -11,6 +11,11 @@ const overviews = [
 ];
 const failures = [];
 const destinations = new Set();
+const repairSlugs = [
+  'spring-replacement', 'opener-repair', 'cable-repair', 'track-alignment',
+  'panel-replacement', 'rollers-hinges', 'sensor-alignment', 'weatherstripping',
+  'maintenance', 'balance-adjustment',
+];
 
 const htmlFor = (route) => {
   const file = path.join(root, route.slice(1), 'index.html');
@@ -50,9 +55,43 @@ for (const route of destinations) {
   }
 }
 
+const suburbFiles = fs.readdirSync('src/content/locations/cleveland')
+  .filter((file) => file.endsWith('.json'));
+const localTitles = new Map();
+for (const file of suburbFiles) {
+  const location = JSON.parse(fs.readFileSync(path.join('src/content/locations/cleveland', file), 'utf8'));
+  const citySlug = location.slug.replace(/^cleveland-/, '');
+  const overviewRoute = `/${citySlug}-oh/garage-door-repair`;
+  const overview = htmlFor(overviewRoute);
+  for (const slug of repairSlugs) {
+    const route = `/${citySlug}-oh/garage-door-${slug}`;
+    if (!overview.includes(`href="${route}"`)) failures.push(`${overviewRoute}: missing ${slug} detail link`);
+    const html = htmlFor(route);
+    if (!html) continue;
+    const title = html.match(/<title>([^<]*)<\/title>/)?.[1];
+    if (!title || localTitles.has(title)) failures.push(`${route}: missing or duplicate title${localTitles.has(title) ? ` (also ${localTitles.get(title)})` : ''}`);
+    else localTitles.set(title, route);
+    if (!html.includes(`<link rel="canonical" href="${origin}${route}"`)) failures.push(`${route}: canonical mismatch`);
+    if (!html.includes(`in ${location.name}, OH</h1>`)) failures.push(`${route}: local H1 missing`);
+    if (!html.includes(`href="${overviewRoute}"`)) failures.push(`${route}: local repair overview link missing`);
+    if (!html.includes(`href="/locations/${location.slug}"`)) failures.push(`${route}: local breadcrumb link missing`);
+    if (!html.includes('action="/api/contact"') || !html.includes('data-contact-form')) failures.push(`${route}: quote form missing`);
+    const head = html.slice(0, html.indexOf('<body'));
+    if (!head.includes('24500 Center Ridge Rd') || head.includes('2337 Victory Parkway')) failures.push(`${route}: market address metadata is incorrect`);
+    const content = html.slice(html.indexOf('<main>'), html.indexOf('</main>'));
+    if (!content.includes(location.localIntro) || content.includes('Cincinnati')) failures.push(`${route}: local content missing or contains Cincinnati copy`);
+    const sectionBackgrounds = [...content.matchAll(/<section[^>]*class="([^"]+)"/g)]
+      .map((match) => match[1].match(/\bbg-(?:muted|white)\b/)?.[0]);
+    const expectedBackgrounds = ['bg-muted', 'bg-white', 'bg-muted', 'bg-white', 'bg-muted', 'bg-white', 'bg-muted'];
+    if (sectionBackgrounds.slice(0, expectedBackgrounds.length).join(',') !== expectedBackgrounds.join(',')) {
+      failures.push(`${route}: section backgrounds do not alternate`);
+    }
+  }
+}
+
 if (failures.length) {
   console.error('[cleveland-detail-check] ' + failures.join('\n[cleveland-detail-check] '));
   process.exitCode = 1;
 } else {
-  console.log(`[cleveland-detail-check] ${destinations.size} detail links resolve to Cleveland pages with local metadata and forms.`);
+  console.log(`[cleveland-detail-check] ${destinations.size} market and ${suburbFiles.length * repairSlugs.length} suburb repair details resolve with local metadata and forms.`);
 }

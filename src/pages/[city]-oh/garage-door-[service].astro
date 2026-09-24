@@ -6,6 +6,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ClevelandServiceDetailPage from '../../components/service-pages/ClevelandServiceDetailPage.astro';
 import { BUSINESS_INFO } from '../../data/business';
 import { REPAIR_SERVICE_PAGES } from '../../data/repair-service-pages';
 import { REPAIRS } from '../../data/repairs';
@@ -49,7 +50,7 @@ const localizeText = (value: string, city: string) =>
 export async function getStaticPaths() {
   const locations = await getLocations();
 
-  return locations.filter((location) => location.market !== 'Cleveland Metro').flatMap((location) =>
+  return locations.flatMap((location) =>
     REPAIR_SERVICE_PAGES.map((service) => ({
       params: { city: buildLocationCitySlug(location.slug), service: service.slug },
       props: { location, service },
@@ -58,6 +59,7 @@ export async function getStaticPaths() {
 }
 
 const { location, service } = Astro.props as { location: Location; service: (typeof REPAIR_SERVICE_PAGES)[number] };
+const isClevelandMarket = location.market === 'Cleveland Metro';
 const cityName = getLocationServiceCityName(location) ?? location.name;
 const cityState = `${cityName}, ${location.state}`;
 const canonicalPath = buildLocalizedServicePath(location.slug, `garage-door-${service.slug}`);
@@ -83,6 +85,13 @@ const pageTitle = localizeText(service.metaTitle, cityName);
 const pageDescription = localizeText(service.metaDescription, cityName);
 ---
 
+{isClevelandMarket ? (
+  <ClevelandServiceDetailPage
+    group="repair"
+    service={{ ...service, heroImage: heroImage.image, heroAlt: heroImage.alt }}
+    location={location}
+  />
+) : (
 <Base
   title={pageTitle}
   description={pageDescription}
@@ -171,3 +180,4 @@ const pageDescription = localizeText(service.metaDescription, cityName);
 
   <Footer />
 </Base>
+)}

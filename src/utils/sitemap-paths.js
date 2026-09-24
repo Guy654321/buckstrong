@@ -54,6 +54,16 @@ export function buildLocationServicePaths(locations, services) {
     'opener-repair',
     'garage-door-installation',
     'commercial-jobs',
+    'garage-door-spring-replacement',
+    'garage-door-opener-repair',
+    'garage-door-cable-repair',
+    'garage-door-track-alignment',
+    'garage-door-panel-replacement',
+    'garage-door-rollers-hinges',
+    'garage-door-sensor-alignment',
+    'garage-door-weatherstripping',
+    'garage-door-maintenance',
+    'garage-door-balance-adjustment',
   ]);
 
   return validLocations.flatMap((location) =>

@@ -5,6 +5,16 @@ const CLEVELAND_SUBURB_SERVICES = new Set([
   'garage-door-installation',
   'opener-repair',
   'commercial-jobs',
+  'garage-door-spring-replacement',
+  'garage-door-opener-repair',
+  'garage-door-cable-repair',
+  'garage-door-track-alignment',
+  'garage-door-panel-replacement',
+  'garage-door-rollers-hinges',
+  'garage-door-sensor-alignment',
+  'garage-door-weatherstripping',
+  'garage-door-maintenance',
+  'garage-door-balance-adjustment',
 ]);
 
 function normalizeSlug(value: string | undefined | null): string {
@@ -27,8 +37,8 @@ export function buildLocalizedServicePath(
 ): string {
   const normalizedLocation = normalizeSlug(locationSlug);
   const normalizedServiceSlug = normalizeSlug(serviceSlug);
-  // Core services have location pages. Specialized repair details remain on
-  // the Cleveland market pages unless a local detail route is published.
+  // Published core services and repair details have Cleveland suburb pages.
+  // Other specialized details remain on the Cleveland market pages.
   const serviceLocation = normalizedLocation.startsWith('cleveland-') && !CLEVELAND_SUBURB_SERVICES.has(normalizedServiceSlug)
     ? 'cleveland'
     : normalizedLocation;

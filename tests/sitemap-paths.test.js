@@ -84,7 +84,7 @@ test('Cleveland suburbs receive their own core service URLs', () => {
   assert(paths.includes('/westlake-oh/garage-door-repair'));
 });
 
-test('Cleveland suburb sitemaps include core services but only published market repair details', () => {
+test('Cleveland suburb sitemaps include core services and published local repair details', () => {
   const paths = buildLocationServicePaths(
     [{ slug: 'cleveland-cleveland-heights', isHub: false }],
     [
@@ -93,6 +93,8 @@ test('Cleveland suburb sitemaps include core services but only published market 
       { slug: 'opener-repair' },
       { slug: 'commercial-jobs' },
       { slug: 'garage-door-spring-replacement' },
+      { slug: 'garage-door-cable-repair' },
+      { slug: 'garage-door-unpublished-repair' },
     ],
   );
 
@@ -101,6 +103,8 @@ test('Cleveland suburb sitemaps include core services but only published market 
     '/cleveland-heights-oh/garage-door-installation',
     '/cleveland-heights-oh/opener-repair',
     '/cleveland-heights-oh/commercial-jobs',
+    '/cleveland-heights-oh/garage-door-spring-replacement',
+    '/cleveland-heights-oh/garage-door-cable-repair',
   ].sort());
 });
 
