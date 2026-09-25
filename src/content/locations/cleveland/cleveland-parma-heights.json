@@ -1,0 +1,30 @@
+{
+  "name": "Parma Heights",
+  "slug": "cleveland-parma-heights",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.383386,
+    "lng": -81.761273
+  },
+  "zips": [
+    "44130"
+  ],
+  "surroundingAreas": [
+    "Parma",
+    "Middleburg Heights",
+    "Brook Park",
+    "Brooklyn"
+  ],
+  "metaTitle": "Garage Door Repair in Parma Heights, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Parma Heights, OH. Help with stopping short and safety sensors. Call 216-930-2980.",
+  "localHeading": "Parma Heights opener and door checks",
+  "localIntro": "Parma Heights is a separate city within the south-side residential corridor. If the garage door stops short or begins to scrape, we look at the door’s movement before guessing which replacement part to order.",
+  "localIssues": "Photo-eye alignment is a common item to check when a door refuses to close, but spring balance and track condition matter too. We test the safety system after any opener work.",
+  "localAdvice": "For homeowners weighing an upgrade, we can compare the condition of the panels and hardware with the cost of a complete door. Accurate measurements keep that choice grounded in the existing opening.",
+  "heroTitle": "Garage Door Repair and Installation in Parma Heights"
+}

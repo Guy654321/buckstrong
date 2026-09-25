@@ -1,0 +1,31 @@
+{
+  "name": "Euclid",
+  "slug": "cleveland-euclid",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.592154,
+    "lng": -81.519678
+  },
+  "zips": [
+    "44123",
+    "44132"
+  ],
+  "surroundingAreas": [
+    "North Collinwood",
+    "Richmond Heights",
+    "Wickliffe",
+    "Highland Heights"
+  ],
+  "metaTitle": "Garage Door Repair in Euclid, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Euclid, OH. Help with lakeshore seals and door balance. Call 216-930-2980.",
+  "localHeading": "Door service along Euclid’s lakeshore neighborhoods",
+  "localIntro": "Euclid is a large residential city east of Cleveland, extending toward Lake County. Garages vary by house and street, so we confirm the ZIP and access route before diagnosing a door that has stopped working.",
+  "localIssues": "Lakefront exposure can make worn perimeter seals more noticeable, but a seal alone will not fix a door that closes unevenly. We inspect balance and panel fit first.",
+  "localAdvice": "If replacement is appropriate, we can review durable door materials, insulation, and opener compatibility. Tell us whether the garage is attached or separate when booking.",
+  "heroTitle": "Garage Door Repair and Installation in Euclid"
+}

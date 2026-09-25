@@ -1,0 +1,30 @@
+{
+  "name": "University Heights",
+  "slug": "cleveland-university-heights",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.494785,
+    "lng": -81.534898
+  },
+  "zips": [
+    "44118"
+  ],
+  "surroundingAreas": [
+    "Shaker Heights",
+    "Cleveland Heights",
+    "South Euclid",
+    "Beachwood"
+  ],
+  "metaTitle": "Garage Door Repair in University Heights, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in University Heights, OH. Help with compact garages and opener reversals. Call 216-930-2980.",
+  "localHeading": "University Heights door and opener help",
+  "localIntro": "University Heights is a distinct east-side city with compact residential streets. We can help when an opener reverses unexpectedly, a door scrapes near the floor, or an older installation no longer feels dependable.",
+  "localIssues": "We check the door’s manual balance and the photo eyes before replacing opener parts. A smooth-moving door and a working safety reversal are both needed for reliable everyday use.",
+  "localAdvice": "For an upgrade, we can compare a quieter opener with a door replacement and explain which parts can remain. Measurements are especially useful when garage space is tight.",
+  "heroTitle": "Garage Door Repair and Installation in University Heights"
+}

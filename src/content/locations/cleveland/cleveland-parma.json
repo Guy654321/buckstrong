@@ -1,0 +1,31 @@
+{
+  "name": "Parma",
+  "slug": "cleveland-parma",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.383569,
+    "lng": -81.728641
+  },
+  "zips": [
+    "44129",
+    "44134"
+  ],
+  "surroundingAreas": [
+    "Parma Heights",
+    "Seven Hills",
+    "Brooklyn",
+    "Old Brooklyn"
+  ],
+  "metaTitle": "Garage Door Repair in Parma, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Parma, OH. Help with older openings and full-system inspection. Call 216-930-2980.",
+  "localHeading": "Repair decisions for Parma garages",
+  "localIntro": "Parma’s large residential area includes garages of different ages and sizes, from narrow older openings to wider replacements. We inspect the door in place before deciding whether a panel, spring, opener, or full system needs attention.",
+  "localIssues": "A noisy door can have several causes at once. Roller wear, loose hinges, and a door out of balance may all add load to the opener, so replacing the motor alone may not solve it.",
+  "localAdvice": "When planning a new door, we measure the opening and available headroom, then discuss insulation and window placement. Share your Parma ZIP and address to confirm the scheduling area.",
+  "heroTitle": "Garage Door Repair and Installation in Parma"
+}

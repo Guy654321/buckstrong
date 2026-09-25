@@ -68,3 +68,87 @@ test('buildSitemapPathCandidates includes location service URLs for all location
   assert(result.includes('/nicholasville-oh/garage-door-spring-replacement'));
   assert(result.includes('/blog/seasonal-garage-maintenance'));
 });
+
+test('Cleveland suburbs receive their own core service URLs', () => {
+  const locations = [
+    { slug: 'cincinnati-mason', isHub: false },
+    { slug: 'cleveland', isHub: true },
+    { slug: 'cleveland-westlake', isHub: false },
+  ];
+  const services = [{ slug: 'garage-door-repair' }];
+  const paths = buildSitemapPathCandidates({ locations, services });
+
+  assert(paths.includes('/locations/cleveland-westlake'));
+  assert(paths.includes('/cleveland-oh/garage-door-repair'));
+  assert(paths.includes('/mason-oh/garage-door-repair'));
+  assert(paths.includes('/westlake-oh/garage-door-repair'));
+});
+
+test('Cleveland suburb sitemaps include all four published detail groups', () => {
+  const paths = buildLocationServicePaths(
+    [{ slug: 'cleveland-cleveland-heights', isHub: false }],
+    [
+      { slug: 'garage-door-repair' },
+      { slug: 'garage-door-installation' },
+      { slug: 'opener-repair' },
+      { slug: 'commercial-jobs' },
+      { slug: 'garage-door-spring-replacement' },
+      { slug: 'garage-door-cable-repair' },
+      { slug: 'garage-door-opener-belt-drive-repair' },
+      { slug: 'garage-door-steel-garage-doors' },
+      { slug: 'garage-door-commercial-warehouse-distribution-door-service' },
+      { slug: 'garage-door-unpublished-repair' },
+    ],
+  );
+
+  assert.deepEqual(paths.sort(), [
+    '/cleveland-heights-oh/garage-door-repair',
+    '/cleveland-heights-oh/garage-door-installation',
+    '/cleveland-heights-oh/opener-repair',
+    '/cleveland-heights-oh/commercial-jobs',
+    '/cleveland-heights-oh/garage-door-spring-replacement',
+    '/cleveland-heights-oh/garage-door-cable-repair',
+    '/cleveland-heights-oh/garage-door-opener-belt-drive-repair',
+    '/cleveland-heights-oh/garage-door-steel-garage-doors',
+    '/cleveland-heights-oh/garage-door-commercial-warehouse-distribution-door-service',
+  ].sort());
+});
+
+test('Cincinnati sitemap does not inherit Cleveland-only suburb detail routes', () => {
+  const paths = buildLocationServicePaths(
+    [{ slug: 'cincinnati-mason', isHub: false }],
+    [
+      { slug: 'garage-door-repair' },
+      { slug: 'garage-door-spring-replacement' },
+      { slug: 'garage-door-opener-belt-drive-repair' },
+      { slug: 'garage-door-steel-garage-doors' },
+      { slug: 'garage-door-commercial-warehouse-distribution-door-service' },
+    ],
+  );
+
+  assert.deepEqual(paths.sort(), [
+    '/mason-oh/garage-door-repair',
+    '/mason-oh/garage-door-spring-replacement',
+  ].sort());
+});
+
+test('Cleveland sitemap includes published market and repair detail pages', () => {
+  const paths = buildLocationServicePaths(
+    [{ slug: 'cleveland', isHub: true }],
+    [
+      { slug: 'garage-door-repair' },
+      { slug: 'opener-repair' },
+      { slug: 'garage-door-installation' },
+      { slug: 'commercial-jobs' },
+      { slug: 'garage-door-spring-replacement' },
+    ],
+  );
+
+  assert.deepEqual(paths.sort(), [
+    '/cleveland-oh/garage-door-repair',
+    '/cleveland-oh/opener-repair',
+    '/cleveland-oh/garage-door-installation',
+    '/cleveland-oh/commercial-jobs',
+    '/cleveland-oh/garage-door-spring-replacement',
+  ].sort());
+});

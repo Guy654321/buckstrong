@@ -1,0 +1,31 @@
+{
+  "name": "Olmsted Township",
+  "slug": "cleveland-olmsted-township",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.376991,
+    "lng": -81.930867
+  },
+  "zips": [
+    "44138"
+  ],
+  "surroundingAreas": [
+    "Olmsted Falls",
+    "North Olmsted",
+    "Columbia Township",
+    "Berea"
+  ],
+  "metaTitle": "Garage Door Repair in Olmsted Township, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Olmsted Township, OH. Help with township address and driveway access. Call 216-930-2980.",
+  "localHeading": "Planning a visit in Olmsted Township",
+  "localIntro": "Olmsted Township covers a separate residential area west of Berea and south of North Olmsted. Its 44138 postal code overlaps nearby places, so our booking team uses the full address rather than the mailing name to confirm coverage.",
+  "localIssues": "On a garage with a long driveway or limited turnaround, access notes help us plan the visit. We also ask whether the door can be opened manually before deciding which parts may be needed.",
+  "localAdvice": "If a spring has broken, leave the door closed and call. For a planned upgrade, we can compare insulation and hardware with the clearance available in the existing garage.",
+  "heroTitle": "Garage Door Repair and Installation in Olmsted Township",
+  "areaType": "AdministrativeArea"
+}

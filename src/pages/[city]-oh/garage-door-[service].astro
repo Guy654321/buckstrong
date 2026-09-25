@@ -6,8 +6,12 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ClevelandServiceDetailPage, { type ClevelandDetailGroup } from '../../components/service-pages/ClevelandServiceDetailPage.astro';
 import { BUSINESS_INFO } from '../../data/business';
 import { REPAIR_SERVICE_PAGES } from '../../data/repair-service-pages';
+import { OPENER_SERVICE_PAGES } from '../../data/opener-service-pages';
+import { DOOR_SERVICE_PAGES } from '../../data/door-service-pages';
+import { COMMERCIAL_SERVICE_PAGES } from '../../data/commercial-service-pages';
 import { REPAIRS } from '../../data/repairs';
 import { getLocations, type Location } from '../../lib/locations';
 import {
@@ -25,6 +29,10 @@ import sensorAlignmentImage from '../../assets/images/repairs/sensor-alignment.j
 import weatherstrippingImage from '../../assets/images/repairs/weatherstripping.jpg';
 import maintenanceImage from '../../assets/images/repairs/maintenance.jpg';
 import balanceAdjustmentImage from '../../assets/images/repairs/balance-adjustment.jpg';
+import beltDriveImage from '../../assets/images/repairs/opener-belt-drive.jpg';
+import chainDriveImage from '../../assets/images/repairs/opener-chain-drive.jpg';
+import directDriveImage from '../../assets/images/repairs/opener-direct-drive.jpg';
+import screwDriveImage from '../../assets/images/repairs/opener-screw-drive.jpg';
 
 const repairHeroBySlug: Record<string, { image: ImageMetadata; alt: string }> = {
   'spring-replacement': { image: springReplacementImage, alt: 'Technician replacing a broken garage door spring' },
@@ -38,6 +46,18 @@ const repairHeroBySlug: Record<string, { image: ImageMetadata; alt: string }> = 
   maintenance: { image: maintenanceImage, alt: 'Routine garage door maintenance with lubrication and safety checks' },
   'balance-adjustment': { image: balanceAdjustmentImage, alt: 'Technician balancing a garage door spring system for safe movement' },
 };
+const openerHeroBySlug: Record<string, ImageMetadata> = {
+  'belt-drive-repair': beltDriveImage,
+  'chain-drive-repair': chainDriveImage,
+  'jackshaft-opener-repair': directDriveImage,
+  'screw-drive-opener-repair': screwDriveImage,
+};
+
+type DetailService = (typeof REPAIR_SERVICE_PAGES)[number]
+  | (typeof OPENER_SERVICE_PAGES)[number]
+  | (typeof DOOR_SERVICE_PAGES)[number]
+  | (typeof COMMERCIAL_SERVICE_PAGES)[number];
+type DetailEntry = { group: ClevelandDetailGroup; service: DetailService; routeSlug: string };
 
 const localizeText = (value: string, city: string) =>
   value
@@ -48,19 +68,28 @@ const localizeText = (value: string, city: string) =>
 
 export async function getStaticPaths() {
   const locations = await getLocations();
+  const repairDetails: DetailEntry[] = REPAIR_SERVICE_PAGES.map((service) => ({ group: 'repair', service, routeSlug: service.slug }));
+  const clevelandDetails: DetailEntry[] = [
+    ...repairDetails,
+    ...OPENER_SERVICE_PAGES.map((service) => ({ group: 'opener' as const, service, routeSlug: `opener-${service.slug}` })),
+    ...DOOR_SERVICE_PAGES.map((service) => ({ group: 'door' as const, service, routeSlug: service.slug })),
+    ...COMMERCIAL_SERVICE_PAGES.map((service) => ({ group: 'commercial' as const, service, routeSlug: `commercial-${service.slug}` })),
+  ];
 
   return locations.flatMap((location) =>
-    REPAIR_SERVICE_PAGES.map((service) => ({
-      params: { city: buildLocationCitySlug(location.slug), service: service.slug },
-      props: { location, service },
+    (location.market === 'Cleveland Metro' && !location.isHub ? clevelandDetails : repairDetails).map(({ group, service, routeSlug }) => ({
+      params: { city: buildLocationCitySlug(location.slug), service: routeSlug },
+      props: { location, service, detailGroup: group },
     })),
   );
 }
 
-const { location, service } = Astro.props as { location: Location; service: (typeof REPAIR_SERVICE_PAGES)[number] };
+const { location, service, detailGroup } = Astro.props as { location: Location; service: DetailService; detailGroup: ClevelandDetailGroup };
+const isClevelandMarket = location.market === 'Cleveland Metro';
 const cityName = getLocationServiceCityName(location) ?? location.name;
 const cityState = `${cityName}, ${location.state}`;
-const canonicalPath = buildLocalizedServicePath(location.slug, `garage-door-${service.slug}`);
+const detailSlug = detailGroup === 'opener' ? `opener-${service.slug}` : detailGroup === 'commercial' ? `commercial-${service.slug}` : service.slug;
+const canonicalPath = buildLocalizedServicePath(location.slug, `garage-door-${detailSlug}`);
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
@@ -69,7 +98,7 @@ const breadcrumbs = [
   { label: service.serviceName },
 ];
 
-const relatedRepairs = REPAIRS.filter((repair) => service.relatedSlugs.includes(repair.slug)).map((repair) => ({
+const relatedRepairs = REPAIRS.filter((repair) => (service.relatedSlugs as readonly string[]).includes(repair.slug)).map((repair) => ({
   ...repair,
   href: buildLocalizedServicePath(location.slug, `garage-door-${repair.slug}`),
 }));
@@ -78,11 +107,20 @@ const heroImage = repairHeroBySlug[service.slug] ?? {
   image: maintenanceImage,
   alt: `Buck Strong technician performing ${service.serviceName.toLowerCase()} in ${cityState}`,
 };
+const clevelandHeroImage = 'heroImage' in service ? service.heroImage : openerHeroBySlug[service.slug] ?? heroImage.image;
+const clevelandHeroAlt = 'heroAlt' in service ? service.heroAlt : detailGroup === 'opener' ? `${service.serviceName} equipment and inspection` : heroImage.alt;
 
 const pageTitle = localizeText(service.metaTitle, cityName);
 const pageDescription = localizeText(service.metaDescription, cityName);
 ---
 
+{isClevelandMarket ? (
+  <ClevelandServiceDetailPage
+    group={detailGroup}
+    service={{ ...service, heroImage: clevelandHeroImage, heroAlt: clevelandHeroAlt }}
+    location={location}
+  />
+) : (
 <Base
   title={pageTitle}
   description={pageDescription}
@@ -171,3 +209,4 @@ const pageDescription = localizeText(service.metaDescription, cityName);
 
   <Footer />
 </Base>
+)}

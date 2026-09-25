@@ -1,0 +1,30 @@
+{
+  "name": "Richmond Heights",
+  "slug": "cleveland-richmond-heights",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.560646,
+    "lng": -81.5077
+  },
+  "zips": [
+    "44143"
+  ],
+  "surroundingAreas": [
+    "Highland Heights",
+    "Euclid",
+    "South Euclid",
+    "North Collinwood"
+  ],
+  "metaTitle": "Garage Door Repair in Richmond Heights, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Richmond Heights, OH. Help with east-side residential doors and track alignment. Call 216-930-2980.",
+  "localHeading": "Garage door care in Richmond Heights",
+  "localIntro": "Richmond Heights is a separate east-side residential city between Euclid and Highland Heights. We confirm the street address and inspect the door itself before treating a noisy opener as the only problem.",
+  "localIssues": "If a door has begun to tilt or bind, cable tension, rollers, and track alignment deserve attention before another cycle. We test manual travel and the safety reversal after approved work.",
+  "localAdvice": "For an upgrade, we measure the opening and consider panel weight, weather sealing, and opener compatibility together. That helps homeowners compare a sound repair with a complete replacement.",
+  "heroTitle": "Garage Door Repair and Installation in Richmond Heights"
+}

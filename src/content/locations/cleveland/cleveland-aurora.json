@@ -1,0 +1,30 @@
+{
+  "name": "Aurora",
+  "slug": "cleveland-aurora",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.306796,
+    "lng": -81.336465
+  },
+  "zips": [
+    "44202"
+  ],
+  "surroundingAreas": [
+    "Streetsboro",
+    "Bainbridge Township",
+    "Twinsburg",
+    "Hudson"
+  ],
+  "metaTitle": "Garage Door Repair in Aurora, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Aurora, OH. Help with southeastern outer edge and repair choices. Call 216-930-2980.",
+  "localHeading": "Garage door service on the Aurora edge",
+  "localIntro": "Aurora is a residential Portage County city beyond Solon and Twinsburg, at the southeastern edge of this Cleveland territory. We confirm the street address and appointment route before promising a visit.",
+  "localIssues": "A door that stops or pulls to one side may have track, roller, cable, or spring trouble. We inspect the mechanical system before replacing the opener.",
+  "localAdvice": "If a replacement is planned, we measure the opening and compare materials, insulation, and controls. Homeowners can then weigh a durable repair against a complete installation.",
+  "heroTitle": "Garage Door Repair and Installation in Aurora"
+}

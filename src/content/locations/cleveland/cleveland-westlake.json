@@ -1,0 +1,31 @@
+{
+  "name": "Westlake",
+  "slug": "cleveland-westlake",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.4553,
+    "lng": -81.9179
+  },
+  "zips": [
+    "44145"
+  ],
+  "surroundingAreas": [
+    "Bay Village",
+    "Rocky River",
+    "Avon",
+    "North Olmsted",
+    "Fairview Park"
+  ],
+  "metaTitle": "Garage Door Service in Westlake, OH | Buck Strong",
+  "metaDescription": "Westlake garage door repair, opener help, and new door planning along the west Cleveland corridor. Call Buck Strong at 216-930-2980 to discuss your door.",
+  "localHeading": "A practical repair plan for Westlake garages",
+  "localIntro": "Westlake sits between the inner west suburbs and the Avon corridor, making it a practical stop on a western Cleveland service route. When a door starts dragging or an opener reverses unexpectedly, we check the whole system before recommending a repair.",
+  "localIssues": "If your garage faces frequent use, ask us to check spring balance and roller wear together. A heavy door can strain even a working opener.",
+  "localAdvice": "Westlake homeowners can compare a repair with an insulated replacement when panels or weather seals no longer fit well.",
+  "heroTitle": "Garage Door Repair and Installation in Westlake"
+}

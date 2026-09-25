@@ -1,0 +1,31 @@
+{
+  "name": "Chester Township",
+  "slug": "cleveland-chester-township",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.535863,
+    "lng": -81.340912
+  },
+  "zips": [
+    "44026"
+  ],
+  "surroundingAreas": [
+    "Kirtland",
+    "Russell Township",
+    "Willoughby Hills",
+    "Mayfield Heights"
+  ],
+  "metaTitle": "Garage Door Repair in Chester Township, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Chester Township, OH. Help with Chesterland postal area and access planning. Call 216-930-2980.",
+  "localHeading": "Garage door work in Chester Township",
+  "localIntro": "Chester Township is a Geauga County residential township commonly associated with the Chesterland mailing name. We confirm the street address, not just the postal label, when arranging a visit east of the Cuyahoga line.",
+  "localIssues": "Garages with longer approaches or varied openings benefit from clear access notes. A heavy door or uneven travel should be checked at the springs, cables, and tracks before the opener is replaced.",
+  "localAdvice": "For a planned installation, we measure the opening and discuss materials, insulation, and track space. If a door can be repaired safely, we will explain the practical alternative.",
+  "heroTitle": "Garage Door Repair and Installation in Chester Township",
+  "areaType": "AdministrativeArea"
+}

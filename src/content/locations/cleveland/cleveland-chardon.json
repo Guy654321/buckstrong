@@ -1,0 +1,30 @@
+{
+  "name": "Chardon",
+  "slug": "cleveland-chardon",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.579289,
+    "lng": -81.20906
+  },
+  "zips": [
+    "44024"
+  ],
+  "surroundingAreas": [
+    "Kirtland",
+    "Chester Township",
+    "Mentor",
+    "Painesville"
+  ],
+  "metaTitle": "Garage Door Repair in Chardon, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Chardon, OH. Help with outer east route and door condition. Call 216-930-2980.",
+  "localHeading": "Garage door service around Chardon",
+  "localIntro": "Chardon is an eastern outer-edge city in the Cleveland selection, so booking depends on the exact address and available route. We help homeowners assess whether a damaged door can be repaired or should be replaced.",
+  "localIssues": "A door that has become noisy or uneven may need roller, hinge, spring, or track work. We inspect those parts before recommending a new opener or panels.",
+  "localAdvice": "For a new door, we measure the opening and discuss insulation, windows, and hardware with the site conditions in mind. Call before relying on a promised arrival window.",
+  "heroTitle": "Garage Door Repair and Installation in Chardon"
+}

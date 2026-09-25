@@ -1,0 +1,31 @@
+{
+  "name": "Lee-Harvard",
+  "slug": "cleveland-lee-harvard",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.45,
+    "lng": -81.561
+  },
+  "zips": [
+    "44128"
+  ],
+  "surroundingAreas": [
+    "Shaker Heights",
+    "Maple Heights",
+    "Beachwood",
+    "Garfield Heights"
+  ],
+  "metaTitle": "Lee-Harvard, Cleveland, OH Garage Door Repair | Buck Strong",
+  "metaDescription": "Garage door repair in Lee-Harvard, Cleveland, OH. We can assess uneven travel, springs, tracks, and opener safety features. Call 216-930-2980.",
+  "localHeading": "A practical door check in Lee-Harvard",
+  "localIntro": "Lee-Harvard is a recognized residential neighborhood on Cleveland’s southeast side. A garage door that has begun to pull unevenly or reverse without an obstruction deserves a system check rather than repeated attempts to run it.",
+  "localIssues": "We separate sensor or travel-setting faults from cable, roller, or spring problems by testing the door itself. If the door is crooked, leave it in place until it can be inspected safely.",
+  "localAdvice": "When a replacement is planned, we measure the opening and review panel weight, weather sealing, and opener capacity. Booking uses the Cleveland market line and your exact street address.",
+  "heroTitle": "Garage Door Repair and Installation in Lee-Harvard",
+  "areaType": "Place"
+}

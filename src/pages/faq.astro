@@ -21,19 +21,19 @@ const breadcrumbs = [
 const resourceLinks = [
   {
     title: 'Schedule Service',
-    description: 'Request same-day repair or installation support from our Cincinnati metro technicians.',
+    description: 'Ask about garage door repair or installation in the Cincinnati or Cleveland market.',
     href: '/contact',
     icon: 'mdi:calendar-clock'
   },
   {
     title: 'Explore Garage Door Services',
-    description: 'Compare repair, installation, and opener packages tailored to homes across the Cincinnati metro.',
+    description: 'Compare repair, installation, and opener services for your home or business.',
     href: '/services',
     icon: 'mdi:tools'
   },
   {
     title: 'Find Your Neighborhood',
-    description: 'View detailed coverage for Cincinnati-area communities.',
+    description: 'View service areas around Cincinnati and Cleveland.',
     href: '/locations',
     icon: 'mdi:map-marker-radius'
   },
@@ -57,7 +57,6 @@ const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displ
 const callMarkets = CALL_MARKETS;
 const defaultCallMarket = DEFAULT_CALL_MARKET;
 const callModalId = 'header-call-modal';
-const callLinkHref = defaultCallMarket?.phoneHref ?? telephoneHref;
 
 // Categorized FAQs for better organization
 const generalFaqs = [
@@ -67,14 +66,14 @@ const generalFaqs = [
       "Yes. We diagnose the issue, share a written estimate before work starts, and explain every line item so there are no surprises."
   },
   {
-    question: "What are typical costs for garage door services in Cincinnati?",
+    question: "What do garage door services typically cost?",
     answer:
-      "Pricing depends on your door size, the parts required, and labor complexity. We inspect the system, review options, and provide a written estimate so Cincinnati-area homeowners can choose with confidence."
+      "Pricing depends on the door, the parts needed, and the work involved. We inspect the system and explain the options before providing an estimate. Call your Cincinnati or Cleveland team for help with a specific project."
   },
   {
-    question: "How quickly can you repair my garage door in Cincinnati?",
+    question: "How soon can you repair my garage door?",
     answer:
-      "We staff trained technicians in the Cincinnati hub. That lets us offer same-day garage door repair across the metro. Emergencies go to the first open slot."
+      "Call with your address and a description of the problem. We will confirm coverage and the next available appointment in your market. If the door is stuck open or unsafe, tell us when you call."
   },
   {
     question: "Do you provide warranties on garage door repairs?",
@@ -85,9 +84,9 @@ const generalFaqs = [
 
 const serviceFaqs = [
   {
-    question: "What garage door brands do you service in Cincinnati?",
+    question: "What garage door brands do you service?",
     answer:
-      "We service major brands such as Clopay, Wayne Dalton, Amarr, Overhead Door, Raynor, LiftMaster, Genie, and Chamberlain. Our technicians train on both residential and commercial systems across the Cincinnati metro."
+      "We work on many common door and opener brands, including Clopay, Wayne Dalton, Amarr, LiftMaster, Genie, and Chamberlain. Tell us the brand and model when you contact us so we can discuss the right service options."
   },
   {
     question: "Can you repair garage door springs safely?",
@@ -100,14 +99,14 @@ const serviceFaqs = [
       "Yes. We install and service smart openers with WiFi, phone apps, and smart home connections, including LiftMaster MyQ and Genie Aladdin Connect."
   },
   {
-    question: "Which garage door services do you offer in Cincinnati?",
+    question: "Which garage door services do you offer?",
     answer:
-      "We handle tune-ups, balancing, broken spring repair, opener upgrades, panel replacement, weather sealing, and full installations. Services are available for homes and businesses across the Cincinnati metro."
+      "We handle tune-ups, spring and cable repairs, opener problems, panel replacement, weather sealing, and new door installation. Commercial service is also available. Call with your address to confirm coverage and scheduling in Cincinnati or Cleveland."
   },
   {
     question: "Do you service commercial overhead and roll-up doors?",
     answer:
-      "Yes. Our commercial team maintains sectional overhead doors, rolling steel doors, dock levelers, and security grilles for Cincinnati-area businesses."
+      "Yes. We can discuss service for sectional overhead doors, rolling steel doors, and other commercial openings. Tell us about the equipment and location so we can confirm the right service options."
   }
 ];
 
@@ -120,7 +119,7 @@ const emergencyFaqs = [
   {
     question: "Do you provide emergency garage door repair?",
     answer:
-      "Yes. We offer 24/7 emergency repair across the Cincinnati metro. Call anytime if the door is stuck open, will not close, or creates a security risk."
+      "Our Cincinnati and Cleveland lines are open 24/7 for urgent requests. If the door is stuck open, will not close, or creates a safety concern, call your local number and we will confirm the next available visit."
   }
 ];
 
@@ -149,14 +148,14 @@ const maintenanceFaqs = [
 
 const locationFaqs = [
   {
-    question: "Which Cincinnati neighborhoods do you serve?",
+    question: "Which Cincinnati areas do you serve?",
     answer:
-      "We cover the Cincinnati metro, including Downtown, Over-the-Rhine, Hyde Park, Oakley, Mount Lookout, Blue Ash, West Chester, and Norwood. We also serve nearby Ohio communities throughout the metro area."
+      "Our Cincinnati service area includes the city and nearby communities such as Hyde Park, Oakley, Blue Ash, West Chester, and Mason. See the Cincinnati location hub for the full list, and call to confirm service at your address."
   },
   {
-    question: "Do you service nearby Ohio suburbs?",
+    question: "Which Cleveland areas do you serve?",
     answer:
-      "Yes. We regularly serve nearby Ohio suburbs such as Mason, Blue Ash, Loveland, and West Chester, along with other Cincinnati-area neighborhoods."
+      "Our Cleveland area includes the city and selected suburbs such as Westlake, Rocky River, Avon, Strongsville, Brecksville, and Solon. See the Cleveland location hub for the full list, and call to confirm service at your address."
   },
   {
     question: "Are you insured for work in Ohio?",
@@ -179,7 +178,7 @@ const troubleshootingFaqs = [
   {
     question: "Do you service commercial garage doors?",
     answer:
-      "Yes. We service residential and commercial garage doors across the Cincinnati metro. Our commercial work covers roll-up doors, sectional doors, dock doors, and overhead systems for warehouses, dealerships, and logistics hubs."
+      "Yes. We help with commercial overhead and roll-up doors in both markets. Tell us the door type, property address, and issue so we can confirm coverage and the appropriate next step."
   },
   {
     question: "How do I know if my garage door needs professional service?",
@@ -266,8 +265,8 @@ const faqSections = [
 ---
 
 <Base
-  title="Buck Strong Garage Doors FAQ | Cincinnati Service Answers"
-  description="⭐ Get answers to common garage door questions across the Cincinnati metro. Learn about repair costs, warranties, service times, and more from our expert technicians. FREE consultations!"
+  title="Garage Door FAQ | Cincinnati & Cleveland | Buck Strong"
+  description="Answers to garage door repair, installation, opener, pricing, and scheduling questions for Cincinnati and Cleveland homeowners. Find your local service area."
   schemaType="FAQPage"
 >
   <Nav />
@@ -279,7 +278,7 @@ const faqSections = [
     <div class="absolute inset-0">
       <Image 
         src={heroImage}
-        alt="Buck Strong Garage Doors FAQ knowledge center serving Cincinnati, Ohio with expert technicians ready to answer garage door repair and maintenance questions"
+        alt="Garage door and home exterior representing Buck Strong Garage Doors service questions"
         width="1200"
         height="675"
         class="w-full h-full object-cover" 
@@ -288,8 +287,6 @@ const faqSections = [
         decoding="sync"
         quality={72}
         sizes="100vw"
-        data-geo-lat="39.1031"
-        data-geo-lng="-84.5120"
       />
       <div class="absolute inset-0 bg-primary/75"></div>
     </div>
@@ -299,7 +296,7 @@ const faqSections = [
           Frequently Asked Questions
         </h1>
         <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed">
-          Expert answers to your garage door questions. Cincinnati metro technicians share quick tips you can use today.
+          Clear answers about repairs, installation, openers, and scheduling for homeowners in Cincinnati and Cleveland.
         </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             {callMarkets.length > 0 && defaultCallMarket ? (
@@ -337,7 +334,7 @@ const faqSections = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Find Your Answer</h2>
-        <p class="text-xl text-ink/70">Browse by category or search for specific topics</p>
+        <p class="text-xl text-ink/70">Browse by category to find the topic you need.</p>
       </div>
       
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -405,10 +402,14 @@ const faqSections = [
         <div class="rounded-2xl bg-muted p-6 shadow-sm ring-1 ring-black/5 space-y-3">
           <h3 class="text-2xl font-semibold text-ink">Need it fast?</h3>
           <p class="text-base text-ink/75 leading-relaxed">
-            Call our on-call team or send a quick note. We respond with next steps and a firm arrival window.
+            Call your local team or send a quick note. We will review the issue and confirm the next available appointment.
           </p>
           <div class="flex flex-col sm:flex-row gap-3">
-            <a href={callLinkHref} class="btn-accent w-full sm:w-auto justify-center text-base">Call dispatch</a>
+            {callMarkets.length > 0 && defaultCallMarket ? (
+              <button type="button" class="btn-accent w-full sm:w-auto justify-center text-base" data-call-modal-trigger aria-controls={callModalId} aria-expanded="false" aria-haspopup="dialog" aria-label="Choose a service area phone number">Call your local team</button>
+            ) : (
+              <a href={telephoneHref} class="btn-accent w-full sm:w-auto justify-center text-base">Call your local team</a>
+            )}
             <a href="/contact" class="btn-outline w-full sm:w-auto justify-center text-base">Send details</a>
           </div>
         </div>
@@ -455,36 +456,36 @@ const faqSections = [
   <section class="py-16 bg-card">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-ink mb-4">Why Cincinnati Homeowners Choose Buck Strong Garage Doors</h2>
-        <p class="text-xl text-ink/70">Trusted expertise across the Cincinnati metro</p>
+        <h2 class="text-3xl font-bold text-ink mb-4">Service in Cincinnati and Cleveland</h2>
+        <p class="text-xl text-ink/70">Find the right local team and confirm service for your address.</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div class="bg-muted rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
-          <h3 class="text-2xl font-semibold text-ink mb-4">Cincinnati Metro</h3>
+          <h3 class="text-2xl font-semibold text-ink mb-4">Cincinnati, OH</h3>
           <ul class="list-disc list-inside text-ink/80 space-y-2">
-            <li>Local, background-checked technicians serving Hamilton County and nearby suburbs</li>
-            <li>Same-day repairs for Over-the-Rhine, Hyde Park, Oakley, and beyond</li>
-            <li>Commercial overhead door expertise for downtown offices, dealerships, and warehouse facilities</li>
-            <li>Preventive maintenance plans that keep high-traffic doors safe all year long</li>
+            <li>Garage door repair, opener service, and installation in the Cincinnati metro</li>
+            <li>Coverage includes the city and selected nearby communities</li>
+            <li>Call <a class="inline-link" href="tel:5137788005">(513) 778-8005</a> to discuss your address and the next available visit</li>
+            <li><a class="inline-link" href="/locations/cincinnati">Explore Cincinnati service areas</a></li>
           </ul>
         </div>
         <div class="bg-muted rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
-          <h3 class="text-2xl font-semibold text-ink mb-4">Greater Cincinnati Suburbs</h3>
+          <h3 class="text-2xl font-semibold text-ink mb-4">Cleveland, OH</h3>
           <ul class="list-disc list-inside text-ink/80 space-y-2">
-            <li>Rapid response for suburban neighborhoods like Mason, Loveland, and Blue Ash</li>
-            <li>Flexible scheduling for commuters along the I-71/I-75 corridor</li>
-            <li>Smart opener upgrades and MyQ integrations for modern homes and townhomes</li>
-            <li>Comprehensive safety testing with every repair or installation</li>
+            <li>Garage door repair, opener service, installation, and commercial work in Greater Cleveland</li>
+            <li>Coverage includes the city and selected west, south, and east side suburbs</li>
+            <li>Call <a class="inline-link" href="tel:2169302980">(216) 930-2980</a> to confirm coverage and scheduling</li>
+            <li><a class="inline-link" href="/locations/cleveland">Explore Cleveland service areas</a></li>
           </ul>
         </div>
         <div class="bg-muted rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
-          <h3 class="text-2xl font-semibold text-ink mb-4">Suburban Cincinnati</h3>
+          <h3 class="text-2xl font-semibold text-ink mb-4">What to Have Ready</h3>
           <ul class="list-disc list-inside text-ink/80 space-y-2">
-            <li>Dedicated crews covering Blue Ash, West Chester, and Mason with evening availability</li>
-            <li>Flexible scheduling for families throughout the Cincinnati suburbs</li>
-            <li>Heavy-duty hardware designed for Ohio River Valley temperature swings and humidity</li>
-            <li>24/7 emergency dispatch plus 100% satisfaction guarantee on all work performed</li>
+            <li>Your street address and preferred contact number</li>
+            <li>A short description of what the door is doing</li>
+            <li>The door or opener brand, if you know it</li>
+            <li>Any immediate safety or access concern</li>
           </ul>
         </div>
       </div>
@@ -496,14 +497,14 @@ const faqSections = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Trusted Garage Door Brands & Quality Parts</h2>
-        <p class="text-xl text-ink/70">We stock premium components engineered for Cincinnati's weather swings and built to last</p>
+        <p class="text-xl text-ink/70">We recommend parts that fit the door, the opening, and the conditions at your property.</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         <div class="bg-card rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
           <h3 class="text-2xl font-bold text-ink mb-4">Professional Brands We Install & Service</h3>
           <p class="text-lg text-ink/70 mb-4">
-            We match your home or facility with durable parts designed for Ohio River humidity and Cincinnati winters. Our team carries torsion springs rated for thousands of cycles, corrosion-resistant cables, and quiet nylon rollers.
+            We inspect the door before recommending springs, cables, rollers, or opener components. The right choice depends on door weight, usage, and the condition of the existing system.
           </p>
           <p class="text-lg text-ink/70 mb-4">
             Whether you prefer LiftMaster, Chamberlain, Genie, Craftsman, Raynor, CHI Overhead Door, or other premium brands, we install and program them all. We also integrate smart keypads, battery backups, and LED lighting upgrades.
@@ -540,7 +541,7 @@ const faqSections = [
       <div class="bg-muted rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
         <h3 class="text-2xl font-semibold text-ink mb-6">Common Residential Door Sizes</h3>
         <p class="text-ink/70 mb-6">
-          Whether you're wondering "how much is a garage door" or need pricing for a double garage door replacement, we stock the dimensions homeowners across the Cincinnati metro request most often.
+          If you need a replacement door, measure the opening and tell us about the space around it. We will confirm the dimensions and discuss available options before ordering.
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-ink/80">
           <div>
@@ -586,21 +587,21 @@ const faqSections = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Ohio Garage Door Company You Can Trust</h2>
-        <p class="text-xl text-ink/70">Buck Strong Garage Doors: Trusted service for the Cincinnati metro</p>
+        <p class="text-xl text-ink/70">Straightforward answers and service options for both Ohio markets.</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div class="bg-card rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
-          <h3 class="text-2xl font-semibold text-ink mb-4">Why Homeowners Across Cincinnati Trust Us</h3>
+          <h3 class="text-2xl font-semibold text-ink mb-4">What to Expect From Our Team</h3>
           <p class="text-ink/70 mb-6">
-            Buck Strong Garage Doors is an Ohio-based garage door company. We provide dependable repairs and installations for Cincinnati metro homes.
+            Buck Strong Garage Doors helps homeowners in Cincinnati and Cleveland with repair and installation decisions. Start by telling us where the door is and what is happening.
           </p>
           <ul class="space-y-3 text-ink/80">
-            <li>✔️ Same-day dispatch from the Cincinnati hub</li>
-            <li>✔️ Insured technicians with ongoing safety and manufacturer training</li>
-            <li>✔️ Transparent, itemized estimates before we begin any repair or installation</li>
-            <li>✔️ Locally owned team that understands neighborhood-specific building requirements</li>
-            <li>✔️ 24/7 emergency support when you need the best garage door company near you</li>
+            <li>✔️ A review of the door, opener, and safety concerns</li>
+            <li>✔️ An explanation of repair or replacement options</li>
+            <li>✔️ An estimate before approved work begins</li>
+            <li>✔️ Local coverage and appointment availability confirmed by address</li>
+            <li>✔️ Phone lines open 24/7 for urgent requests</li>
           </ul>
         </div>
 
@@ -612,7 +613,7 @@ const faqSections = [
           <ul class="space-y-3 text-ink/80">
             <li>✔️ Expert garage door replacements and new construction installs</li>
             <li>✔️ Professional garage door installers with decades of combined experience</li>
-            <li>✔️ Quality door and opener selections curated for Cincinnati homes and businesses</li>
+            <li>✔️ Door and opener options suited to the property and opening</li>
             <li>✔️ Reliable maintenance plans that extend the life of your system</li>
             <li>✔️ Comprehensive warranties on every part and labor hour we provide</li>
           </ul>
@@ -698,14 +699,14 @@ const faqSections = [
               <Icon name="mdi:clock" size="20" class="text-primary" aria-hidden="true" />
             </div>
             <h3 class="font-semibold text-ink mb-1">Available 24/7</h3>
-            <p class="text-sm text-ink/70">Emergency service anytime</p>
+            <p class="text-sm text-ink/70">Call anytime about an urgent issue</p>
           </div>
           <div class="text-center">
             <div class="bg-accent/10 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
               <Icon name="mdi:map-marker" size="20" class="text-accent" aria-hidden="true" />
             </div>
-            <h3 class="font-semibold text-ink mb-1">Cincinnati Service Area</h3>
-            <p class="text-sm text-ink/70">Cincinnati metro</p>
+            <h3 class="font-semibold text-ink mb-1">Ohio Service Areas</h3>
+            <p class="text-sm text-ink/70">Cincinnati and Cleveland</p>
           </div>
           <div class="text-center">
             <div class="bg-green-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -722,13 +723,13 @@ const faqSections = [
   <HiddenSeoText
     title="Garage door FAQ coverage details"
     paragraphs={[
-      'This FAQ library collects the most common garage door repair, installation, and opener questions from homeowners and facility managers across the Cincinnati metro.',
-      'Each answer references Cincinnati-area conditions such as weather, permitting, and safety practices our technicians handle daily.',
+      'This FAQ library collects common garage door repair, installation, and opener questions from homeowners and facility managers in the Cincinnati and Cleveland markets.',
+      'Service availability and appointment times are confirmed by address in each market.',
       'Topics cover pricing transparency, warranty expectations, emergency response, neighborhood coverage, and preventative maintenance steps to keep overhead doors running smoothly.'
     ]}
     bullets={[
-      'Service hub: Cincinnati metro, including nearby Ohio communities',
-      'Coverage examples: neighborhoods like Over-the-Rhine, Hyde Park, Oakley, Blue Ash, West Chester, and Loveland',
+      'Service hubs: Cincinnati, OH and Cleveland, OH, with selected surrounding communities',
+      'Coverage examples: Hyde Park and Blue Ash near Cincinnati; Westlake and Strongsville near Cleveland',
       'Specialties: broken spring repair, opener troubleshooting, panel replacement, commercial overhead door support, and smart control upgrades'
     ]}
   />

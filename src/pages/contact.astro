@@ -9,6 +9,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ContactForm from '../components/ContactForm.astro';
 import heroImage from '../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
 import { BUSINESS_INFO } from '../data/business';
+import clevelandHub from '../content/locations/cleveland.json';
 import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../data/call-markets';
 import { getSiteOrigin } from '../utils/site-origin';
 
@@ -21,9 +22,33 @@ const callMarkets = CALL_MARKETS;
 const defaultCallMarket = DEFAULT_CALL_MARKET;
 const callModalId = 'header-call-modal';
 const callLinkHref = defaultCallMarket?.phoneHref ?? telephoneHref;
+const clevelandCallMarket = CALL_MARKETS.find((market) => market.id === 'cleveland');
+const clevelandAddress = `${clevelandHub.address.streetAddress}, ${clevelandHub.address.addressLocality}, ${clevelandHub.address.addressRegion} ${clevelandHub.address.postalCode}`;
 const locationAddress = `${BUSINESS_INFO.address.streetAddress}, ${BUSINESS_INFO.address.addressLocality}, ${BUSINESS_INFO.address.addressRegion} ${BUSINESS_INFO.address.postalCode}`;
 const mapApiKey = 'AIzaSyBCrB1WJEkydzguNjR71uUVxg7O-mCpAVQ';
-const mapEmbedSrc = `https://www.google.com/maps/embed/v1/place?key=${mapApiKey}&q=${encodeURIComponent(locationAddress)}`;
+const contactLocations = [
+  {
+    name: 'Cincinnati, OH',
+    addressLabel: 'Cincinnati office',
+    address: locationAddress,
+    phone: displayPhoneNumber,
+    phoneHref: telephoneHref,
+    serviceAreaHref: '/locations/cincinnati',
+    mapTitle: 'Map of our Cincinnati office'
+  },
+  ...(clevelandCallMarket ? [{
+    name: 'Cleveland, OH',
+    addressLabel: 'Cleveland market address',
+    address: clevelandAddress,
+    phone: clevelandCallMarket.phoneDisplay,
+    phoneHref: clevelandCallMarket.phoneHref,
+    serviceAreaHref: '/locations/cleveland',
+    mapTitle: 'Map of our Cleveland market address in Westlake'
+  }] : [])
+].map(location => ({
+  ...location,
+  mapEmbedSrc: `https://www.google.com/maps/embed/v1/place?key=${mapApiKey}&q=${encodeURIComponent(location.address)}`
+}));
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
@@ -33,7 +58,7 @@ const breadcrumbs = [
 const supportResources = [
   {
     title: 'View Service Areas',
-    description: 'Confirm we serve your neighborhood across the Cincinnati metro.',
+    description: 'Confirm coverage in the Cincinnati or Cleveland market.',
     href: '/locations',
     icon: 'mdi:map-marker-radius'
   },
@@ -65,8 +90,8 @@ const supportResources = [
 ---
 
 <Base
-  title="Contact Us | Buck Strong Garage Doors Cincinnati Service Areas"
-  description={`Contact Buck Strong Garage Doors for fast, reliable garage door repair and installation across the Cincinnati metro. Same-day service available. Call ${displayPhoneNumber} or request a free quote online.`}
+  title="Contact Buck Strong Garage Doors | Cincinnati & Cleveland"
+  description="Contact Buck Strong Garage Doors for service in Cincinnati or Cleveland. Call your local team or request a garage door repair or installation quote."
 >
   <Nav />
   <Breadcrumbs items={breadcrumbs} />
@@ -76,7 +101,7 @@ const supportResources = [
     <div class="absolute inset-0 overflow-hidden">
       <Image
         src={heroImage}
-        alt="Contact Buck Strong Garage Doors offices serving Cincinnati, Ohio with professional customer service teams ready to help with garage door repairs and installations"
+        alt="Garage door and home exterior for Buck Strong Garage Doors contact page"
         width="1200"
         height="675"
         class="w-full h-full object-cover"
@@ -86,8 +111,6 @@ const supportResources = [
         quality={60}
         format="webp"
         sizes="100vw"
-        data-geo-lat="39.1031"
-        data-geo-lng="-84.5120"
       />
       <div class="absolute inset-0 bg-primary/75"></div>
     </div>
@@ -98,7 +121,7 @@ const supportResources = [
           Contact Us
         </h1>
         <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed">
-          Ready to get your garage door fixed? Contact us today for fast, reliable service throughout the Cincinnati metro. Same-day appointments available in every market.
+          Need garage door help in Ohio? Choose the Cincinnati or Cleveland team, tell us where the door is, and we’ll confirm scheduling options.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center">
           {callMarkets.length > 0 && defaultCallMarket ? (
@@ -136,14 +159,55 @@ const supportResources = [
       </div>
     </div>
   </section>
-  
+
+  <section class="py-16 bg-white" id="our-locations">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-10">
+        <h2 class="text-3xl font-bold text-ink mb-4">Contact Our Cincinnati and Cleveland Teams</h2>
+        <p class="text-lg text-ink/70 leading-relaxed">
+          Choose the market nearest your property. Both lines are open 24/7; call with your address to confirm coverage and appointment availability.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {contactLocations.map(location => (
+          <article class="bg-muted rounded-2xl p-6 sm:p-8 shadow-sm ring-1 ring-black/5 min-w-0 flex flex-col">
+            <h3 class="text-2xl font-bold text-ink mb-6">{location.name}</h3>
+            <div class="space-y-5 mb-6 flex-1">
+              <div>
+                <p class="text-sm text-ink/60">{location.addressLabel}</p>
+                <p class="font-semibold text-ink">{location.address}</p>
+              </div>
+              <div>
+                <p class="text-sm text-ink/60">Call 24/7</p>
+                <a href={location.phoneHref} class="font-semibold text-primary underline decoration-2 underline-offset-4">{location.phone}</a>
+              </div>
+              <a href={location.serviceAreaHref} class="inline-link font-semibold">View {location.name} service areas</a>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm ring-1 ring-black/5 overflow-hidden h-[280px] sm:h-[320px]">
+              <iframe
+                title={location.mapTitle}
+                width="100%"
+                height="100%"
+                style="border:0;"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                src={location.mapEmbedSrc}
+              ></iframe>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <section class="py-16 bg-muted">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-3xl font-bold text-ink mb-6">Get Professional Garage Door Help Today</h2>
         <p class="text-lg text-ink/80 leading-relaxed mb-6">
-          Ready to solve your garage door problems? Our Ohio-based team in Cincinnati makes it easy to get expert help when you need it. Whether you're dealing with an emergency repair, planning a new installation, or need routine maintenance, we're here to provide honest recommendations, upfront pricing, and professional service you can trust.
+          Need help with a garage door repair, a new installation, or routine maintenance? Our Cincinnati and Cleveland teams can review the issue, explain your options, and confirm service availability at your address.
         </p>
         <p class="text-lg text-ink/80 leading-relaxed mb-12">
           We welcome questions about garage door safety, repair costs, service scheduling, product recommendations, and warranty coverage. Our knowledgeable staff provides accurate information to help you make informed decisions about your garage door needs, and we're committed to responding promptly to every inquiry.
@@ -207,7 +271,7 @@ const supportResources = [
           </div>
           <h4 class="font-semibold text-ink mb-2">Immediate Response</h4>
           <p class="text-sm text-ink/70">
-            Expect a call back within 15 minutes during business hours, or immediate response for emergency situations. We'll discuss your garage door issue and schedule a convenient service time.
+            Tell us what the door is doing and where the property is. We will review the request, confirm coverage, and discuss the next available service window.
           </p>
         </div>
         <div class="bg-white/90 backdrop-blur rounded-2xl p-6 shadow-lg shadow-primary/5 ring-1 ring-black/5 text-center">
@@ -216,7 +280,7 @@ const supportResources = [
           </div>
           <h4 class="font-semibold text-ink mb-2">Flexible Scheduling</h4>
           <p class="text-sm text-ink/70">
-            We offer same-day appointments for urgent repairs and convenient scheduling for installations. Our technicians arrive on time with fully stocked trucks and proper safety equipment.
+            We will discuss appointment options for urgent repairs and planned installations. Share any access details when you book so the technician can prepare for the visit.
           </p>
         </div>
         <div class="bg-white/90 backdrop-blur rounded-2xl p-6 shadow-lg shadow-primary/5 ring-1 ring-black/5 text-center">
@@ -257,64 +321,11 @@ const supportResources = [
 
 
   <section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-      <div class="space-y-6">
-        <div>
-          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary/70 mb-3">Visit Our Cincinnati Office</p>
-          <h3 class="text-3xl font-bold text-ink mb-4">See Where Our Team Works From</h3>
-          <p class="text-lg text-ink/70 leading-relaxed">
-            Stop by or plan your service with confidence. Use the map to get quick directions to our Cincinnati office and see
-            the surrounding neighborhoods we regularly serve across the Cincinnati metro.
-          </p>
-        </div>
-        <div class="bg-muted rounded-2xl p-6 shadow-sm ring-1 ring-black/5 space-y-4">
-          <div>
-            <p class="text-sm text-ink/60">Address</p>
-            <p class="font-semibold text-ink">{locationAddress}</p>
-          </div>
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div>
-              <p class="text-sm text-ink/60">Phone</p>
-              <a href={telephoneHref} class="font-semibold text-primary underline decoration-2 underline-offset-4">
-                {displayPhoneNumber}
-              </a>
-            </div>
-            <div>
-              <p class="text-sm text-ink/60">Email</p>
-              <a href={emailHref} class="font-semibold text-primary underline decoration-2 underline-offset-4 break-words">
-                {BUSINESS_INFO.email}
-              </a>
-            </div>
-          </div>
-          <div>
-            <p class="text-sm text-ink/60">Service Areas</p>
-            <p class="font-semibold text-ink">Cincinnati metro</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl shadow-lg ring-1 ring-black/5 overflow-hidden h-[320px] md:h-[400px] max-w-[520px] w-full mx-auto lg:mx-0 lg:ml-auto">
-        <iframe
-          title="Map of our Cincinnati office"
-          width="100%"
-          height="100%"
-          style="border:0; min-height:300px;"
-          loading="lazy"
-          allowfullscreen
-          referrerpolicy="no-referrer-when-downgrade"
-          src={mapEmbedSrc}
-        ></iframe>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="py-16 bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Get Answers Before You Reach Out</h2>
         <p class="text-xl text-ink/70">
-          Explore popular guides and service hubs that help homeowners across our Cincinnati service areas plan their next step.
+          Explore guides and service hubs for homeowners in the Cincinnati and Cleveland markets.
         </p>
       </div>
 
@@ -344,7 +355,7 @@ const supportResources = [
     </div>
   </section>
 
-  <ContactForm bgColor="muted" />
+  <ContactForm bgColor="muted" includeSchema={false} />
 
   <Footer />
 </Base>
@@ -382,6 +393,21 @@ const supportResources = [
   }}
 />
 
+{clevelandCallMarket && <Schema item={{
+  '@context': 'https://schema.org',
+  '@type': 'ContactPoint',
+  telephone: clevelandCallMarket.phoneDisplay,
+  contactType: 'customer service',
+  email: BUSINESS_INFO.email,
+  areaServed: { '@type': 'City', name: 'Cleveland', addressRegion: 'OH' },
+  hoursAvailable: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '00:00',
+    closes: '23:59'
+  }
+}} />}
+
 
 <Schema
   item={{
@@ -390,19 +416,20 @@ const supportResources = [
     name: 'Buck Strong Garage Doors',
     url: siteOrigin,
     logo: BUSINESS_INFO.logo,
-    contactPoint: {
+    contactPoint: CALL_MARKETS.map(market => ({
       '@type': 'ContactPoint',
-      telephone: BUSINESS_INFO.telephone,
+      telephone: market.phoneDisplay,
       contactType: 'customer service',
-      email: BUSINESS_INFO.email
-    },
-    address: {
+      email: BUSINESS_INFO.email,
+      areaServed: { '@type': 'City', name: market.label, addressRegion: 'OH' }
+    })),
+    address: [BUSINESS_INFO.address, clevelandHub.address].map(address => ({
       '@type': 'PostalAddress',
-      streetAddress: BUSINESS_INFO.address.streetAddress,
-      addressLocality: BUSINESS_INFO.address.addressLocality,
-      addressRegion: BUSINESS_INFO.address.addressRegion,
-      postalCode: BUSINESS_INFO.address.postalCode,
-      addressCountry: BUSINESS_INFO.address.addressCountry
-    }
+      streetAddress: address.streetAddress,
+      addressLocality: address.addressLocality,
+      addressRegion: address.addressRegion,
+      postalCode: address.postalCode,
+      addressCountry: address.addressCountry
+    }))
   }}
 />

@@ -1,0 +1,15 @@
+---
+import ClevelandServiceDetailPage from '../components/service-pages/ClevelandServiceDetailPage.astro';
+import { DOOR_SERVICE_PAGES } from '../data/door-service-pages';
+
+export function getStaticPaths() {
+  return DOOR_SERVICE_PAGES.map((service) => ({
+    params: { service: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+---
+
+<ClevelandServiceDetailPage group="door" service={service} />

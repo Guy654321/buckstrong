@@ -3,13 +3,16 @@ import { getCollection } from 'astro:content';
 import { getLocations } from '../lib/locations';
 import { getServices } from '../lib/services';
 import { REPAIR_SERVICE_PAGES } from '../data/repair-service-pages';
+import { DOOR_SERVICE_PAGES } from '../data/door-service-pages';
+import { OPENER_SERVICE_PAGES } from '../data/opener-service-pages';
+import { COMMERCIAL_SERVICE_PAGES } from '../data/commercial-service-pages';
 import {
   getChangeFreq,
   getLastModified,
   getPriority,
   shouldExcludePage
 } from '../utils/sitemap-utils.js';
-import { buildSitemapPathCandidates } from '../utils/sitemap-paths.js';
+import { buildLocationServicePaths, buildSitemapPathCandidates } from '../utils/sitemap-paths.js';
 import { getSiteOrigin } from '../utils/site-origin';
 
 const SITE_ORIGIN = getSiteOrigin();
@@ -49,7 +52,7 @@ function normalizePathForSitemap(pathname: string) {
 
   return normalized || '/';
 }
-function createEntry(pathname: string) {
+function createEntry(pathname: string, newlyPublishedPaths: Set<string>) {
   const normalizedPath = normalizePathForSitemap(pathname);
 
   if (shouldExcludePage(normalizedPath)) {
@@ -60,7 +63,7 @@ function createEntry(pathname: string) {
 
   return {
     loc: url.toString(),
-    lastmod: getLastModified(normalizedPath).toISOString(),
+    lastmod: (newlyPublishedPaths.has(normalizedPath) ? new Date('2026-09-24') : getLastModified(normalizedPath)).toISOString(),
     changefreq: getChangeFreq(normalizedPath),
     priority: getPriority(normalizedPath)
   };
@@ -100,9 +103,16 @@ export const GET: APIRoute = async () => {
   const locationServiceSlugs = [
     ...services.map((service) => service.slug),
     ...REPAIR_SERVICE_PAGES.map((service) => `garage-door-${service.slug}`),
+    ...OPENER_SERVICE_PAGES.map((service) => `garage-door-opener-${service.slug}`),
+    ...DOOR_SERVICE_PAGES.map((service) => `garage-door-${service.slug}`),
+    ...COMMERCIAL_SERVICE_PAGES.map((service) => `garage-door-commercial-${service.slug}`),
   ];
   const locations = await getLocations();
   const hubs = locations.filter(location => location.isHub);
+  const newlyPublishedPaths = new Set(buildLocationServicePaths(
+    locations.filter(location => location.slug.startsWith('cleveland-')),
+    locationServiceSlugs.map((slug) => ({ slug })),
+  ));
 
   const pathCandidates = buildSitemapPathCandidates({
     staticRoutes: STATIC_ROUTES,
@@ -114,9 +124,15 @@ export const GET: APIRoute = async () => {
     blogPosts,
   });
 
+  pathCandidates.push(
+    ...DOOR_SERVICE_PAGES.map((service) => `/garage-door-${service.slug}-cleveland-oh`),
+    ...OPENER_SERVICE_PAGES.map((service) => `/garage-door-opener-${service.slug}-cleveland-oh`),
+    ...COMMERCIAL_SERVICE_PAGES.map((service) => `/garage-door-commercial-${service.slug}-cleveland-oh`),
+  );
+
   const uniquePaths = Array.from(new Set(pathCandidates.map(normalizePathForSitemap)));
 
-  const entries = uniquePaths.map(createEntry);
+  const entries = uniquePaths.map(path => createEntry(path, newlyPublishedPaths));
 
   const xml = buildXml(entries);
 

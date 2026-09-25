@@ -1,0 +1,30 @@
+{
+  "name": "Maple Heights",
+  "slug": "cleveland-maple-heights",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.409047,
+    "lng": -81.562861
+  },
+  "zips": [
+    "44137"
+  ],
+  "surroundingAreas": [
+    "Garfield Heights",
+    "Lee-Harvard",
+    "Independence",
+    "Shaker Heights"
+  ],
+  "metaTitle": "Garage Door Repair in Maple Heights, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Maple Heights, OH. Help with crooked doors and safe repair options. Call 216-930-2980.",
+  "localHeading": "A clear repair plan for Maple Heights doors",
+  "localIntro": "Maple Heights is a separate southeast inner-ring city with residential garages of many ages. We start by finding out what changed: the door’s weight, its sound, its stopping point, or the way the opener responds.",
+  "localIssues": "A cable that has come loose or a spring that has failed can leave a door crooked. Do not force it closed with the opener; we can inspect the lift system and explain safe repair options.",
+  "localAdvice": "If the door can be repaired, we will outline the work. If replacement makes more sense, measurements and the condition of the tracks guide the next choice.",
+  "heroTitle": "Garage Door Repair and Installation in Maple Heights"
+}

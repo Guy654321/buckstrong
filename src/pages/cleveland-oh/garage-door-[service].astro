@@ -1,0 +1,20 @@
+---
+import ClevelandServiceDetailPage from '../../components/service-pages/ClevelandServiceDetailPage.astro';
+import { REPAIR_SERVICE_PAGES } from '../../data/repair-service-pages';
+import { REPAIRS } from '../../data/repairs';
+
+export function getStaticPaths() {
+  return REPAIR_SERVICE_PAGES.map((service) => {
+    const repair = REPAIRS.find((item) => item.slug === service.slug);
+    if (!repair) throw new Error(`Missing repair image: ${service.slug}`);
+    return {
+      params: { service: service.slug },
+      props: { service: { ...service, heroImage: repair.image, heroAlt: repair.alt } },
+    };
+  });
+}
+
+const { service } = Astro.props;
+---
+
+<ClevelandServiceDetailPage group="repair" service={service} />

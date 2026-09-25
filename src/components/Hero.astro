@@ -29,9 +29,12 @@ export interface Props {
   heroImage: ImageMetadata;
   locationLabel?: string;
   imageAlt?: string;
+  geoLat?: number;
+  geoLng?: number;
   hubLinks?: { name: string; slug: string }[];
   showPhoneNumber?: boolean;
   showLocationHeading?: boolean;
+  fullTitleInH1?: boolean;
   showPrimaryCta?: boolean;
   primaryAsPhone?: boolean;
   showPrimaryPhoneNumber?: boolean;
@@ -49,9 +52,12 @@ const {
   heroImage,
   locationLabel,
   imageAlt,
+  geoLat,
+  geoLng,
   hubLinks = [],
   showPhoneNumber = true,
   showLocationHeading = true,
+  fullTitleInH1 = false,
   showPrimaryCta = true,
   primaryAsPhone = false,
   showPrimaryPhoneNumber = true,
@@ -87,7 +93,7 @@ const heroImageHeight = Math.round(heroImageWidth * heroImageAspectRatio);
 const [rawTitle, ...titleRest] = title.split(' in ');
 const inlineLocation = titleRest.length > 0 ? titleRest.join(' in ') : undefined;
 const highlightLocation = locationLabel ?? inlineLocation ?? 'Cincinnati, Ohio';
-const heroHeading = showLocationHeading ? rawTitle || title : title;
+const heroHeading = fullTitleInH1 ? title : showLocationHeading ? rawTitle || title : title;
 const highlightHubLinks = hubLinks.filter((link) => link?.name && link?.slug);
 const hasHighlightHubLinks = highlightHubLinks.length > 0;
 const hasSecondaryHeading =
@@ -165,7 +171,7 @@ const heroContentAlignment = compact
         fetchpriority="high"
       />
     )}
-    {heroImageWebpSrcSet && (
+    {!heroImageAvifSrcSet && heroImageWebpSrcSet && (
       <link
         rel="preload"
         as="image"
@@ -175,14 +181,16 @@ const heroContentAlignment = compact
         fetchpriority="high"
       />
     )}
-    <link
-      rel="preload"
-      as="image"
-      href={heroImageFallbackSrc}
-      imagesrcset={heroImageJpegSrcSet}
-      imagesizes={heroImageSizes}
-      fetchpriority="high"
-    />
+    {!heroImageAvifSrcSet && !heroImageWebpSrcSet && (
+      <link
+        rel="preload"
+        as="image"
+        href={heroImageFallbackSrc}
+        imagesrcset={heroImageJpegSrcSet}
+        imagesizes={heroImageSizes}
+        fetchpriority="high"
+      />
+    )}
   </Fragment>
 )}
 
@@ -206,8 +214,8 @@ const heroContentAlignment = compact
         loading={imageLoading}
         decoding={imageDecoding}
         fetchpriority={imageFetchPriority}
-        data-geo-lat="39.1031"
-        data-geo-lng="-84.5120"
+        data-geo-lat={geoLat ?? BUSINESS_INFO.geo.latitude}
+        data-geo-lng={geoLng ?? BUSINESS_INFO.geo.longitude}
       />
     </picture>
     <div

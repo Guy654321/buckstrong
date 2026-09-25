@@ -308,11 +308,24 @@ function validateRobotsTxt() {
   const robotsContent = fs.readFileSync(robotsPath, 'utf8');
 
 
-  if (/sitemap-index\.xml/i.test(robotsContent)) {
-    status.success('robots.txt references sitemap correctly');
- 
+  const sitemapReference = robotsContent.match(/^Sitemap:\s*(\S+)/im)?.[1];
+  let referencedFile = null;
+
+  if (sitemapReference) {
+    try {
+      const filename = path.basename(new URL(sitemapReference).pathname);
+      if (filename === 'sitemap.xml' || filename === 'sitemap-index.xml') {
+        referencedFile = resolveOutputFile(filename);
+      }
+    } catch {
+      referencedFile = null;
+    }
+  }
+
+  if (referencedFile) {
+    status.success('robots.txt references an existing sitemap');
   } else {
-    status.warn('robots.txt should reference sitemap-index.xml');
+    status.warn('robots.txt does not reference an existing sitemap');
   }
 }
 

@@ -1,0 +1,32 @@
+{
+  "name": "Old Brooklyn",
+  "slug": "cleveland-old-brooklyn",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.433,
+    "lng": -81.7
+  },
+  "zips": [
+    "44109",
+    "44144"
+  ],
+  "surroundingAreas": [
+    "Brooklyn",
+    "Parma",
+    "Seven Hills",
+    "Parma Heights"
+  ],
+  "metaTitle": "Old Brooklyn, Cleveland, OH Garage Door Repair | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Old Brooklyn, Cleveland, OH. We inspect older openings, worn hardware, and opener issues before suggesting work. Call 216-930-2980.",
+  "localHeading": "Old Brooklyn garage door service",
+  "localIntro": "Old Brooklyn is a Cleveland neighborhood south of the city center with a mix of residential garages and driveway layouts. We confirm the address and opening before planning a repair or a replacement.",
+  "localIssues": "A door that leaves a gap at the bottom may need more than weatherstripping. We inspect whether it closes level, whether the track is true, and how the springs are carrying the weight.",
+  "localAdvice": "For an older garage, measurements and available headroom are worth checking early. We can then compare a repair with a door and opener combination suited to the opening.",
+  "heroTitle": "Garage Door Repair and Installation in Old Brooklyn",
+  "areaType": "Place"
+}

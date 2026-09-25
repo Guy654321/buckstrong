@@ -1,0 +1,236 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Picture } from 'astro:assets';
+import { Schema } from 'astro-seo-schema';
+import Base from '../../layouts/Base.astro';
+import Nav from '../Nav.astro';
+import Footer from '../Footer.astro';
+import Breadcrumbs from '../Breadcrumbs.astro';
+import ContactForm from '../ContactForm.astro';
+import { BUSINESS_INFO } from '../../data/business';
+import cleveland from '../../content/locations/cleveland.json';
+import { CLEVELAND_SERVICE_INTROS } from '../../data/cleveland-service-details';
+import type { Location } from '../../lib/locations';
+import { buildLocalizedServicePath } from '../../lib/location-routing';
+import { getSiteOrigin } from '../../utils/site-origin';
+
+export type ClevelandDetailGroup = 'repair' | 'opener' | 'door' | 'commercial';
+export type ClevelandDetailService = {
+  slug: string;
+  serviceName: string;
+  cardTitle: string;
+  signs: string[];
+  processSteps: string[];
+  options: string[];
+  optionsSummary: string;
+  relatedSlugs: readonly string[];
+  heroImage: ImageMetadata;
+  heroAlt: string;
+};
+
+interface Props {
+  group: ClevelandDetailGroup;
+  service: ClevelandDetailService;
+  location?: Location;
+}
+
+const { group, service, location } = Astro.props as Props;
+const cityName = location?.name ?? 'Cleveland';
+const cityState = `${cityName}, OH`;
+const hubPaths = {
+  repair: '/cleveland-oh/garage-door-repair',
+  opener: '/cleveland-oh/opener-repair',
+  door: '/cleveland-oh/garage-door-installation',
+  commercial: '/cleveland-oh/commercial-jobs',
+};
+const hubLabels = {
+  repair: 'Garage Door Repair',
+  opener: 'Opener Repair',
+  door: 'Garage Door Installation',
+  commercial: 'Commercial Garage Door Service',
+};
+const detailPath = (slug: string) => {
+  if (group === 'repair') return `/cleveland-oh/garage-door-${slug}`;
+  if (group === 'opener') return `/garage-door-opener-${slug}-cleveland-oh`;
+  if (group === 'commercial') return `/garage-door-commercial-${slug}-cleveland-oh`;
+  return `/garage-door-${slug}-cleveland-oh`;
+};
+const localDetailSlug = group === 'opener' ? `opener-${service.slug}` : group === 'commercial' ? `commercial-${service.slug}` : service.slug;
+const canonical = location
+  ? buildLocalizedServicePath(location.slug, `garage-door-${localDetailSlug}`)
+  : detailPath(service.slug);
+const marketIntro = CLEVELAND_SERVICE_INTROS[service.slug];
+if (!marketIntro) throw new Error(`Missing Cleveland service introduction: ${service.slug}`);
+const intro = location ? marketIntro.replaceAll('Cleveland', cityName) : marketIntro;
+const phone = location?.phone ?? cleveland.phone;
+const phoneHref = `tel:${phone.replace(/[^\d+]/g, '')}`;
+const shortLocalTitles: Record<string, string> = {
+  'spring-replacement': 'Garage Door Spring Replacement',
+  'opener-repair': 'Garage Door Opener Repair',
+  'cable-repair': 'Garage Door Cable Repair',
+  'track-alignment': 'Garage Door Track Repair',
+  'panel-replacement': 'Garage Door Panel Replacement',
+  'rollers-hinges': 'Garage Door Roller & Hinge Repair',
+  'sensor-alignment': 'Garage Door Sensor Repair',
+  weatherstripping: 'Garage Door Weatherstripping',
+  maintenance: 'Garage Door Maintenance',
+  'balance-adjustment': 'Garage Door Balance Adjustment',
+  'belt-drive-repair': 'Belt-Drive Opener Repair',
+  'chain-drive-repair': 'Chain-Drive Opener Repair',
+  'jackshaft-opener-repair': 'Wall-Mount Opener Repair',
+  'screw-drive-opener-repair': 'Screw-Drive Opener Repair',
+  'steel-garage-doors': 'Steel Garage Door Installation',
+  'wood-garage-doors': 'Wood Garage Door Installation',
+  'aluminum-garage-doors': 'Aluminum Garage Door Installation',
+  'carriage-house-garage-doors': 'Carriage House Door Installation',
+  'warehouse-distribution-door-service': 'Warehouse Door Service',
+  'dock-industrial-door-equipment-service': 'Dock Equipment Service',
+  'retail-municipal-garage-door-service': 'Retail & Municipal Door Service',
+};
+const title = location
+  ? `${cityState}: ${shortLocalTitles[service.slug] ?? service.serviceName} | Buck Strong`
+  : group === 'repair' && service.slug === 'opener-repair'
+    ? 'Garage Door Opener Diagnostics in Cleveland, OH | Buck Strong'
+    : `${service.serviceName} in ${cityState} | Buck Strong`;
+const description = location
+  ? `${service.serviceName} in ${cityState}. ${intro} Call ${phone} to check availability.`
+  : `${intro} Call Buck Strong at ${phone} for Cleveland-area service and availability.`;
+const overviewPath = location
+  ? buildLocalizedServicePath(location.slug, group === 'repair' ? 'garage-door-repair' : group === 'opener' ? 'opener-repair' : group === 'door' ? 'garage-door-installation' : 'commercial-jobs')
+  : hubPaths[group];
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Locations', href: '/locations' },
+  { label: 'Cleveland, OH', href: '/locations/cleveland' },
+  ...(location ? [{ label: cityState, href: `/locations/${location.slug}` }] : []),
+  { label: hubLabels[group], href: overviewPath },
+  { label: service.cardTitle },
+];
+const relatedTitles: Record<string, string> = {
+  'spring-replacement': 'Spring Replacement', 'opener-repair': 'Opener Repair',
+  'cable-repair': 'Cable Repair', 'track-alignment': 'Track Alignment',
+  'panel-replacement': 'Panel Replacement', 'rollers-hinges': 'Roller & Hinge Repair',
+  'sensor-alignment': 'Sensor Alignment', weatherstripping: 'Weatherstripping',
+  maintenance: 'Maintenance', 'balance-adjustment': 'Balance Adjustment',
+  'steel-garage-doors': 'Steel Garage Doors', 'wood-garage-doors': 'Wood Garage Doors',
+  'aluminum-garage-doors': 'Aluminum Garage Doors',
+  'carriage-house-garage-doors': 'Carriage House Garage Doors',
+  'warehouse-distribution-door-service': 'Warehouse & Distribution Doors',
+  'dock-industrial-door-equipment-service': 'Dock & Industrial Equipment',
+  'retail-municipal-garage-door-service': 'Retail & Municipal Doors',
+};
+const relatedLinks = service.relatedSlugs
+  .filter((slug) => group !== 'opener' || slug !== 'opener-repair')
+  .map((slug) => ({ label: relatedTitles[slug] ?? slug.replaceAll('-', ' '), href: location
+    ? buildLocalizedServicePath(location.slug, `garage-door-${group === 'commercial' ? 'commercial-' : ''}${slug}`)
+    : group === 'opener' ? `/cleveland-oh/garage-door-${slug}` : detailPath(slug) }));
+const localNotes = location
+  ? group === 'door'
+    ? [location.localAdvice, `We measure the opening, check track clearance, and review insulation and hardware before ordering a new door for a ${cityName} home.`]
+    : group === 'commercial'
+      ? [`For a ${cityName} facility, tell us the door type, opening size, operating schedule, and access requirements. That helps us plan the visit around the site.`, `We confirm coverage and appointment availability for each address in the Cleveland service area before scheduling.`]
+      : [location.localIntro, location.localIssues]
+  : [];
+---
+
+<Base title={title} description={description} canonical={canonical} callNowPhoneNumber={phone} market="Cleveland Metro">
+  <Nav />
+  <Breadcrumbs items={breadcrumbs} />
+
+  <Schema item={{
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `${service.serviceName} in ${cityState}`,
+    description,
+    serviceType: service.serviceName,
+    areaServed: location
+      ? [{ '@type': location.areaType ?? 'City', name: cityName }, { '@type': 'AdministrativeArea', name: 'Greater Cleveland' }]
+      : [{ '@type': 'City', name: 'Cleveland' }, { '@type': 'City', name: 'Westlake' }, { '@type': 'AdministrativeArea', name: 'Greater Cleveland' }],
+    provider: {
+      '@type': 'LocalBusiness',
+      name: BUSINESS_INFO.name,
+      legalName: BUSINESS_INFO.legalName,
+      '@id': `${getSiteOrigin()}/locations/cleveland#local-business`,
+      telephone: phone,
+      address: { '@type': 'PostalAddress', ...cleveland.address },
+      openingHoursSpecification: [{
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        opens: '00:00',
+        closes: '23:59',
+      }],
+    },
+  }} />
+
+  <main>
+  <section class="py-16 bg-muted">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid items-center gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-bold text-ink mb-6">{service.serviceName} in {cityState}</h1>
+        <p class="text-lg leading-relaxed text-ink/80 mb-4">{intro}</p>
+        <p class="text-lg leading-relaxed text-ink/80 mb-6">We serve {cityName} from our Westlake market. Call with your address so we can confirm coverage and appointment availability.</p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href={phoneHref} class="btn-accent px-6 py-3 text-center">Call Now: {phone}</a>
+          <a href="#service-quote" class="btn-primary px-6 py-3 text-center">Get a Quote</a>
+        </div>
+      </div>
+      <div class="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 bg-white/50">
+        <Picture src={service.heroImage} alt={service.heroAlt.replaceAll('Cincinnati', cityName).replaceAll('Cleveland', cityName)} widths={[480, 768, 1024]} sizes="(min-width: 1024px) 40vw, 100vw" quality={82} loading="eager" fetchpriority="high" class="h-full w-full object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Signs You Need This Service</h2>
+      <ul class="list-disc list-inside space-y-3 text-lg text-ink/80 leading-relaxed">
+        {service.signs.map((sign) => <li>{sign}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-14 bg-muted">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Our Assessment and Process</h2>
+      <ol class="list-decimal list-inside space-y-3 text-lg text-ink/80 leading-relaxed">
+        {service.processSteps.map((step) => <li>{step}</li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Available Options</h2>
+      <ul class="list-disc list-inside space-y-3 text-lg text-ink/80 leading-relaxed mb-5">
+        {service.options.map((option) => <li>{option}</li>)}
+      </ul>
+      <p class="text-lg text-ink/80 leading-relaxed">{service.optionsSummary.replace('Cincinnati humidity and freeze-thaw swings', 'changing humidity and temperature swings')}</p>
+    </div>
+  </section>
+
+  {location && localNotes.some(Boolean) && (
+    <section class="py-14 bg-muted">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-ink mb-6">Service Considerations in {cityState}</h2>
+        {localNotes
+          .filter((note): note is string => Boolean(note))
+          .map((note) => <p class="text-lg text-ink/80 leading-relaxed mb-5">{note}</p>)}
+      </div>
+    </section>
+  )}
+
+  <section class:list={['py-14', location ? 'bg-white' : 'bg-muted']}>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-ink mb-6">Related Garage Door Services</h2>
+      <p class="text-lg text-ink/80 leading-relaxed mb-5">See the <a class="text-primary underline" href={overviewPath}>{hubLabels[group].toLowerCase()} overview</a> or compare a related service:</p>
+      <ul class="list-disc list-inside space-y-2 text-lg">
+        {relatedLinks.map((link) => <li><a class="text-primary underline" href={link.href}>{link.label}</a></li>)}
+      </ul>
+      <p class="text-lg text-ink/80 leading-relaxed mt-6">Buck Strong Garage Doors · {cleveland.address.streetAddress}, {cleveland.address.addressLocality}, {cleveland.address.addressRegion} {cleveland.address.postalCode}. Open 24/7 for calls at <a class="text-primary underline" href={phoneHref}>{phone}</a>.</p>
+    </div>
+  </section>
+
+  <ContactForm id="service-quote" includeSchema={false} title={`Request ${service.cardTitle} Service`} subtitle={location ? `Tell us about your door and address. We will confirm ${cityName} coverage and scheduling options.` : 'Tell us about your door and address. We will confirm Cleveland-area coverage and scheduling options.'} bgColor={location ? 'muted' : 'white'} />
+  </main>
+  <Footer />
+</Base>

@@ -1,0 +1,32 @@
+{
+  "name": "North Collinwood",
+  "slug": "cleveland-north-collinwood",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.58,
+    "lng": -81.553
+  },
+  "zips": [
+    "44110",
+    "44119"
+  ],
+  "surroundingAreas": [
+    "Euclid",
+    "Richmond Heights",
+    "South Euclid",
+    "Wickliffe"
+  ],
+  "metaTitle": "North Collinwood, Cleveland, OH Garage Door Repair | Buck Strong",
+  "metaDescription": "Garage door repair in North Collinwood, Cleveland, OH. Ask about worn hardware, opener trouble, or weather-seal fit near the lakeshore. Call 216-930-2980.",
+  "localHeading": "Garage doors in North Collinwood",
+  "localIntro": "North Collinwood is a Cleveland lakeshore-side neighborhood, distinct from the city of Euclid to its east. We confirm the street address and garage access before discussing a repair, opener issue, or new door.",
+  "localIssues": "Wind and rain may reveal a worn seal, but panel fit and level closing have to be checked too. We look at the lift hardware and safety reversal rather than treating a draft as an isolated part.",
+  "localAdvice": "If the door has damaged sections, we can measure for repair or replacement and explain what fits the existing opening. The Cleveland hub remains the booking point for this neighborhood.",
+  "heroTitle": "Garage Door Repair and Installation in North Collinwood",
+  "areaType": "Place"
+}

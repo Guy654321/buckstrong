@@ -74,6 +74,10 @@ function normalizeRoutePath(pathname = '/') {
 export function getLastModified(pathname) {
   const normalizedPath = normalizeRoutePath(pathname);
 
+  if (normalizedPath.startsWith('/locations/cleveland') || normalizedPath.startsWith('/cleveland-oh/') || normalizedPath.endsWith('-cleveland-oh')) {
+    return new Date('2026-09-24');
+  }
+
   // Use more realistic dates based on actual content update patterns
   const baseDate = new Date('2024-09-15'); // Base date for most static content
 

@@ -1,0 +1,30 @@
+{
+  "name": "Macedonia",
+  "slug": "cleveland-macedonia",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.314919,
+    "lng": -81.501633
+  },
+  "zips": [
+    "44056"
+  ],
+  "surroundingAreas": [
+    "Northfield Center",
+    "Sagamore Hills",
+    "Twinsburg",
+    "Solon"
+  ],
+  "metaTitle": "Garage Door Repair in Macedonia, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Macedonia, OH. Help with southeastern route and sensor checks. Call 216-930-2980.",
+  "localHeading": "Macedonia garage door troubleshooting",
+  "localIntro": "Macedonia connects the Twinsburg side of the market with Northfield and Sagamore Hills. We inspect doors that fail to close, move unevenly, or put extra load on an opener before choosing a repair path.",
+  "localIssues": "A photo-eye issue can stop a door, but so can track friction or a spring losing balance. We test both the safety controls and the door’s manual movement.",
+  "localAdvice": "If a full replacement is being considered, we check opening dimensions and opener capacity together. That makes the new door easier to match to the existing garage.",
+  "heroTitle": "Garage Door Repair and Installation in Macedonia"
+}

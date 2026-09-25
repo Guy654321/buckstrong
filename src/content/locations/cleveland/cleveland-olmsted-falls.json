@@ -1,0 +1,30 @@
+{
+  "name": "Olmsted Falls",
+  "slug": "cleveland-olmsted-falls",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.365749,
+    "lng": -81.903792
+  },
+  "zips": [
+    "44138"
+  ],
+  "surroundingAreas": [
+    "Olmsted Township",
+    "Berea",
+    "Columbia Township",
+    "North Olmsted"
+  ],
+  "metaTitle": "Garage Door Repair in Olmsted Falls, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Olmsted Falls, OH. Help with crooked doors and accurate measurements. Call 216-930-2980.",
+  "localHeading": "Service for Olmsted Falls garage openings",
+  "localIntro": "Olmsted Falls is its own residential city beside Olmsted Township, and a service address can be easy to confuse with the shared postal area. We confirm the street address before scheduling and bring the door’s condition into the repair-versus-replacement discussion.",
+  "localIssues": "When a door has a crooked bottom edge, the problem may be a cable or spring rather than the weather seal. Avoid running it until a technician can inspect the lift system safely.",
+  "localAdvice": "For an installation, we measure the opening, headroom, and track clearance before recommending a door style. That is especially helpful when changing from an older door to an insulated model.",
+  "heroTitle": "Garage Door Repair and Installation in Olmsted Falls"
+}

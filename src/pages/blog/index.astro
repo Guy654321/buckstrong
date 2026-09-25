@@ -19,13 +19,13 @@ const breadcrumbs = [
 const resourceLinks = [
   {
     title: 'Maintenance Basics',
-    description: 'Quick checklists for lubricating hardware, testing balance, and keeping rollers on track.',
+    description: 'A Cincinnati-focused checklist for basic upkeep and warning signs to watch for.',
     href: '/blog/garage-door-maintenance-checklist-cincinnati-ohio',
     icon: 'mdi:clipboard-check-outline'
   },
   {
     title: 'Emergency Fixes',
-    description: 'Step-by-step advice for stuck doors, broken springs, and off-track systems when time matters.',
+    description: 'A Cincinnati-focused guide to staying safe when a door is stuck or damaged.',
     href: '/blog/emergency-garage-door-repair-cincinnati-oh',
     icon: 'mdi:alert-decagram-outline'
   },
@@ -36,8 +36,8 @@ const resourceLinks = [
     icon: 'mdi:home-lightning-bolt'
   },
   {
-    title: 'Safety Essentials',
-    description: 'Protect your family with seasonal tune-up reminders and sensor testing best practices.',
+    title: 'Spring Replacement Costs',
+    description: 'A Cincinnati-focused look at spring replacement factors and questions to ask.',
     href: '/blog/garage-door-spring-replacement-cost-cincinnati-oh',
     icon: 'mdi:shield-check'
   }
@@ -48,7 +48,6 @@ const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displ
 const callMarkets = CALL_MARKETS;
 const defaultCallMarket = DEFAULT_CALL_MARKET;
 const callModalId = 'header-call-modal';
-const callLinkHref = defaultCallMarket?.phoneHref ?? telephoneHref;
 
 const heroCallStandaloneClasses =
   'btn-accent text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-3 sm:py-4 w-full sm:w-auto gap-2';
@@ -74,7 +73,7 @@ try {
 
 <Base
   title="Buck Strong Garage Doors Blog | Tips & Repair Guides"
-  description="Expert garage door tips, maintenance guides, and repair advice for the Cincinnati metro from Buck Strong Garage Doors. Learn how to keep your garage door running safely and efficiently."
+  description="Garage door maintenance, safety, repair, and installation guides for Cincinnati and Cleveland homeowners. Read practical tips and local articles."
 >
   <Nav />
   <Breadcrumbs items={breadcrumbs} />
@@ -84,7 +83,7 @@ try {
     <div class="absolute inset-0">
       <Image
         src={heroImage}
-        alt="Professional garage door technician working on maintenance and repairs in Cincinnati, Ohio" 
+        alt="Garage door and home exterior representing Buck Strong repair and maintenance guides"
         class="w-full h-full object-cover" 
         width="1600" 
         height="900" 
@@ -93,8 +92,6 @@ try {
         decoding="sync"
         sizes="100vw"
         quality={80}
-        data-geo-lat="39.1031"
-        data-geo-lng="-84.5120"
       />
       <div class="absolute inset-0 bg-gradient-to-br from-primary/85 to-primary/70"></div>
     </div>
@@ -104,7 +101,7 @@ try {
         Expert Garage Door Insights
       </h1>
       <p class="text-xl md:text-2xl text-white/95 mb-8 max-w-4xl mx-auto leading-relaxed">
-        Professional tips, maintenance guides, and repair advice from trusted garage door experts serving Cincinnati homeowners
+        Practical maintenance, safety, and repair guides for homeowners in the Cincinnati and Cleveland markets.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         {callMarkets.length > 0 && defaultCallMarket ? (
@@ -143,7 +140,7 @@ try {
         A reliable garage door protects your vehicles, storage, and main entrance, yet it is often the largest moving system in the home. The Buck Strong Garage Doors blog turns everyday repair calls into step-by-step resources so you can tackle maintenance with confidence.
       </p>
       <p class="text-lg text-ink/80 leading-relaxed">
-        Each article is written by the technicians who complete repairs throughout the Cincinnati metro. Whether you need to silence a noisy opener, choose a new insulated panel, or prep for upcoming weather, you will find practical guidance rooted in real service experience.
+        Whether you need to understand a noisy opener, compare insulated doors, or prepare for seasonal weather, these guides explain what to check and when to call a professional. Some articles focus on specific Cincinnati neighborhoods; general safety guidance applies across both markets.
       </p>
     </div>
   </section>
@@ -157,7 +154,7 @@ try {
           Looking for a quick fix? Start with our troubleshooting posts that explain common noises, remote control issues, and misaligned safety sensors. Planning a larger upgrade? Use our opener and door comparison guides to review insulation values, horsepower requirements, and smart-home features before you invest. Every article references the tools needed, the average time commitment, and which steps are best left to a professional.
         </p>
         <p>
-          Homeowners and facility managers across the Cincinnati metro use the blog to understand why a technician recommended a particular repair. We include photos, diagrams, and checklists pulled directly from the field so you can see what we see. After reading, you will know how to maintain the door between professional tune-ups and how to spot early warning signs that warrant a service call.
+          Homeowners and facility managers can use these articles to understand common repairs and maintenance choices. For advice about a specific door, call your Cincinnati or Cleveland team with the property address and a description of the issue.
         </p>
         <p>
           When you subscribe to our email updates, you will receive seasonal maintenance reminders and notices when new safety regulations or product recalls affect garage door equipment. It is the easiest way to stay informed without sifting through outdated advice on generic home-improvement forums.

@@ -1,0 +1,30 @@
+{
+  "name": "Fairview Park",
+  "slug": "cleveland-fairview-park",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.441995,
+    "lng": -81.852952
+  },
+  "zips": [
+    "44126"
+  ],
+  "surroundingAreas": [
+    "West Park",
+    "Rocky River",
+    "Brook Park",
+    "Westlake"
+  ],
+  "metaTitle": "Garage Door Repair in Fairview Park, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Fairview Park, OH. Help with uneven closing and replacement planning. Call 216-930-2980.",
+  "localHeading": "Garage door choices for Fairview Park homes",
+  "localIntro": "Fairview Park connects the inner west side to the I-480 suburban corridor. Homeowners may be deciding between repairing a reliable older door and updating its appearance; we check the condition of the door before suggesting either path.",
+  "localIssues": "A door that closes unevenly can leave a gap at the floor even after a new seal is installed. We inspect the spring balance, track alignment, and panel fit so the fix addresses the cause.",
+  "localAdvice": "For planned work, we can compare replacement materials, window layouts, and opener compatibility. Share the size and location of your garage so the visit is scheduled with the right measurements in mind.",
+  "heroTitle": "Garage Door Repair and Installation in Fairview Park"
+}

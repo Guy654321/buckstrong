@@ -1,0 +1,31 @@
+{
+  "name": "Bay Village",
+  "slug": "cleveland-bay-village",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.485,
+    "lng": -81.922
+  },
+  "zips": [
+    "44140"
+  ],
+  "surroundingAreas": [
+    "Westlake",
+    "Rocky River",
+    "Avon Lake",
+    "Fairview Park",
+    "North Olmsted"
+  ],
+  "metaTitle": "Garage Door Service in Bay Village, OH | Buck Strong",
+  "metaDescription": "Garage door repair and weather-seal checks for Bay Village homeowners. Compare safe repair and replacement options with Buck Strong. Call 216-930-2980.",
+  "localHeading": "Doors and weather seals along the westshore",
+  "localIntro": "Bay Village is part of the Lake Erie westshore corridor. A door that lets in wind or water deserves a closer look at the bottom seal, side seals, and panel fit before the next rough weather arrives.",
+  "localIssues": "We can inspect whether the door closes evenly against the floor and whether the opener safety system still reverses correctly.",
+  "localAdvice": "For an older door, we can explain when replacing a worn seal is enough and when damaged panels make a new door more sensible.",
+  "heroTitle": "Bay Village Garage Door Repair and Opener Help"
+}

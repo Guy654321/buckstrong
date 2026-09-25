@@ -4,7 +4,7 @@ import { buildLocalizedServicePath } from '../../../../lib/location-routing';
 
 export async function getStaticPaths() {
   const locations = await getLocations();
-  return locations.map((location) => ({
+  return locations.filter((location) => location.market !== 'Cleveland Metro').map((location) => ({
     params: { slug: location.slug },
     props: { location }
   }));

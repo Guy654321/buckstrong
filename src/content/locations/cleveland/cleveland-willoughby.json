@@ -1,0 +1,30 @@
+{
+  "name": "Willoughby",
+  "slug": "cleveland-willoughby",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.645285,
+    "lng": -81.414353
+  },
+  "zips": [
+    "44094"
+  ],
+  "surroundingAreas": [
+    "Eastlake",
+    "Willowick",
+    "Wickliffe",
+    "Willoughby Hills"
+  ],
+  "metaTitle": "Garage Door Repair in Willoughby, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Willoughby, OH. Help with opener controls and panel travel. Call 216-930-2980.",
+  "localHeading": "Willoughby garage door repair and planning",
+  "localIntro": "Willoughby is a substantial Lake County residential city east of Cleveland. We can investigate a door that stops short, a remote that no longer works, or panels that have begun to bind in the tracks.",
+  "localIssues": "The problem may sit in the opener controls or in the door itself. We test manual movement, spring balance, sensors, and travel settings before recommending a repair.",
+  "localAdvice": "If a new door is needed, we can review insulation, windows, and hardware with the available headroom. That makes the installation choice fit the garage rather than only a catalog image.",
+  "heroTitle": "Garage Door Repair and Installation in Willoughby"
+}

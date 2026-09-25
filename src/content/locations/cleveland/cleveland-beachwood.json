@@ -1,0 +1,31 @@
+{
+  "name": "Beachwood",
+  "slug": "cleveland-beachwood",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.4645,
+    "lng": -81.5087
+  },
+  "zips": [
+    "44122"
+  ],
+  "surroundingAreas": [
+    "Solon",
+    "Chagrin Falls",
+    "Shaker Heights",
+    "Orange",
+    "University Heights"
+  ],
+  "metaTitle": "Garage Door Service in Beachwood, OH | Buck Strong",
+  "metaDescription": "Beachwood garage door repair and commercial overhead door inquiries. Discuss access, equipment, and scheduling with Buck Strong at 216-930-2980.",
+  "localHeading": "Residential and commercial door needs in Beachwood",
+  "localIntro": "Beachwood is an inner east Cleveland suburb with both residential garages and commercial door needs. We can inspect a home door that binds or reverses, or help a property team plan overhead-door maintenance.",
+  "localIssues": "For residential repairs, we test the door by hand before replacing opener parts so a spring problem is not missed.",
+  "localAdvice": "For commercial access, clear scheduling and documented safety checks help reduce disruption.",
+  "heroTitle": "Beachwood Garage Door and Overhead Door Service"
+}

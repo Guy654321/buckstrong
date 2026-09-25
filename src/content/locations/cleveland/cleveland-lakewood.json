@@ -1,0 +1,30 @@
+{
+  "name": "Lakewood",
+  "slug": "cleveland-lakewood",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.483258,
+    "lng": -81.801143
+  },
+  "zips": [
+    "44107"
+  ],
+  "surroundingAreas": [
+    "Rocky River",
+    "West Park",
+    "Fairview Park",
+    "Brooklyn"
+  ],
+  "metaTitle": "Garage Door Repair in Lakewood, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Lakewood, OH. Help with older doors and alley access. Call 216-930-2980.",
+  "localHeading": "Working with Lakewood’s older garage doors",
+  "localIntro": "Lakewood sits immediately west of Cleveland, with established residential blocks and many garages reached from rear drives or alleys. A repair visit should start with the door’s actual travel and balance, especially when an opener has been compensating for worn hardware.",
+  "localIssues": "For a door that rattles against the track, we look at rollers, hinges, and loose fasteners before recommending a new motor. Limited space behind a garage is also worth discussing before ordering replacement sections.",
+  "localAdvice": "If you are replacing a door, we can measure the opening and review quieter hardware or insulated panels without assuming the existing track can be reused. Tell us about alley access when you book.",
+  "heroTitle": "Garage Door Repair and Installation in Lakewood"
+}

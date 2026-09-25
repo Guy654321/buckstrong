@@ -1,0 +1,32 @@
+{
+  "name": "Brecksville",
+  "slug": "cleveland-brecksville",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.3198,
+    "lng": -81.6268
+  },
+  "zips": [
+    "44141",
+    "44147"
+  ],
+  "surroundingAreas": [
+    "Broadview Heights",
+    "Strongsville",
+    "Solon",
+    "Sagamore Hills",
+    "Independence"
+  ],
+  "metaTitle": "Garage Door Service in Brecksville, OH | Buck Strong",
+  "metaDescription": "Brecksville garage door repair, opener troubleshooting, and new door options along the I-77 corridor. Call Buck Strong at 216-930-2980.",
+  "localHeading": "Diagnosing worn doors along the southern corridor",
+  "localIntro": "Brecksville sits on the southern side of Cuyahoga County near the I-77 corridor. We can help with doors that have become hard to lift, no longer seal evenly, or make a grinding sound during travel.",
+  "localIssues": "A routine balance and safety inspection can reveal whether the spring system or opener needs attention first.",
+  "localAdvice": "For a new door, accurate measurements and track clearance matter as much as the exterior style.",
+  "heroTitle": "Garage Door Service in Brecksville"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "North Ridgeville",
+  "slug": "cleveland-north-ridgeville",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.3895,
+    "lng": -82.019
+  },
+  "zips": [
+    "44039"
+  ],
+  "surroundingAreas": [
+    "Avon",
+    "Strongsville",
+    "Westlake",
+    "Olmsted Township",
+    "Elyria"
+  ],
+  "metaTitle": "Garage Door Service in North Ridgeville, OH | Buck Strong",
+  "metaDescription": "North Ridgeville garage door service for binding doors, broken springs, and new installations. Call Buck Strong at 216-930-2980 to discuss availability.",
+  "localHeading": "When a North Ridgeville door binds or feels heavy",
+  "localIntro": "North Ridgeville gives the western route a residential connection south of Avon. We can diagnose doors that bind near the floor, shake on the tracks, or place extra load on the opener.",
+  "localIssues": "When a repair involves a broken spring or cable, leave the door in place until a technician can secure and inspect it.",
+  "localAdvice": "We can also plan a door replacement around the dimensions and finish that suit your home.",
+  "heroTitle": "North Ridgeville Garage Door Service"
+}

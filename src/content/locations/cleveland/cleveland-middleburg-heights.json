@@ -1,0 +1,30 @@
+{
+  "name": "Middleburg Heights",
+  "slug": "cleveland-middleburg-heights",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.369937,
+    "lng": -81.813537
+  },
+  "zips": [
+    "44130"
+  ],
+  "surroundingAreas": [
+    "Brook Park",
+    "Berea",
+    "Parma Heights",
+    "Strongsville"
+  ],
+  "metaTitle": "Garage Door Repair in Middleburg Heights, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Middleburg Heights, OH. Help with home and business overhead doors. Call 216-930-2980.",
+  "localHeading": "Residential and commercial doors in Middleburg Heights",
+  "localIntro": "Middleburg Heights combines residential garages with business properties near the I-71 and I-480 routes. A homeowner’s sectional door and a commercial overhead door need different parts and access planning, so we establish the door type when you call.",
+  "localIssues": "For a home door that reverses, we test the sensors and the door’s manual travel. For a business opening, we also ask about operating hours and how the opening is secured while work is arranged.",
+  "localAdvice": "If you are replacing a door, measurements and usage matter more than appearance alone. We can explain insulation, hardware, and opener options for the actual opening.",
+  "heroTitle": "Garage Door Repair and Installation in Middleburg Heights"
+}

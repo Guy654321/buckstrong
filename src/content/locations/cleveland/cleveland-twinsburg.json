@@ -1,0 +1,31 @@
+{
+  "name": "Twinsburg",
+  "slug": "cleveland-twinsburg",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.3126,
+    "lng": -81.44
+  },
+  "zips": [
+    "44087"
+  ],
+  "surroundingAreas": [
+    "Hudson",
+    "Solon",
+    "Bainbridge Township",
+    "Macedonia",
+    "Northfield Center"
+  ],
+  "metaTitle": "Garage Door Service in Twinsburg, OH | Buck Strong",
+  "metaDescription": "Twinsburg garage door repair and opener help, with inspection of the full door system before recommending work. Call Buck Strong at 216-930-2980.",
+  "localHeading": "Inspecting the complete door and opener system",
+  "localIntro": "Twinsburg connects Solon and Hudson on the southeast side of the Cleveland territory. We can inspect opener issues, damaged rollers, and doors that no longer travel level through the tracks.",
+  "localIssues": "A service visit should include a reverse test and a check of the cables and spring system, even when the initial complaint is an opener.",
+  "localAdvice": "If the door is past a practical repair, we can compare replacement materials and lead times.",
+  "heroTitle": "Twinsburg Garage Door Repair and Opener Help"
+}

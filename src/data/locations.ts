@@ -12,6 +12,11 @@ export const LOCATION_MAPS: Record<string, LocationMapConfig> = {
     lng: -84.512,
     zoom: 12,
   },
+  cleveland: {
+    lat: 41.4993,
+    lng: -81.6944,
+    zoom: 10,
+  },
 };
 
 export function getLocationMapConfig(slug: string): LocationMapConfig | undefined {

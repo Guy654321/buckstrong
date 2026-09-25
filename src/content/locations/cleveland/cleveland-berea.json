@@ -1,0 +1,30 @@
+{
+  "name": "Berea",
+  "slug": "cleveland-berea",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.370548,
+    "lng": -81.861757
+  },
+  "zips": [
+    "44017"
+  ],
+  "surroundingAreas": [
+    "Olmsted Falls",
+    "Middleburg Heights",
+    "Brook Park",
+    "Olmsted Township"
+  ],
+  "metaTitle": "Garage Door Repair in Berea, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Berea, OH. Help with rollers, hinges, and opener matching. Call 216-930-2980.",
+  "localHeading": "Keeping Berea garage doors moving safely",
+  "localIntro": "Berea sits between several west-side suburbs but has its own residential streets and service needs. Whether a door is sticking halfway or an opener has stopped responding, we check the mechanical door before focusing on the controls.",
+  "localIssues": "A worn roller or hinge can make a door sound like the opener is failing. We inspect the track and spring balance, then explain which repair would restore smooth travel.",
+  "localAdvice": "If you want a new door, we can review panel weight and opener capacity together. That prevents a replacement door from being paired with equipment that is already at the end of its useful life.",
+  "heroTitle": "Garage Door Repair and Installation in Berea"
+}

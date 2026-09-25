@@ -1,0 +1,30 @@
+{
+  "name": "Mayfield Heights",
+  "slug": "cleveland-mayfield-heights",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.517312,
+    "lng": -81.453889
+  },
+  "zips": [
+    "44124"
+  ],
+  "surroundingAreas": [
+    "Lyndhurst",
+    "Highland Heights",
+    "Pepper Pike",
+    "South Euclid"
+  ],
+  "metaTitle": "Garage Door Repair in Mayfield Heights, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Mayfield Heights, OH. Help with residential and commercial door types. Call 216-930-2980.",
+  "localHeading": "Mayfield Heights home and business door support",
+  "localIntro": "Mayfield Heights has both neighborhood garages and business openings. When you call, we ask what type of door you have and whether it is stuck open, stuck closed, or simply running poorly.",
+  "localIssues": "For residential work, we test door balance and safety reversal before changing opener settings. Commercial doors may require access coordination and a different set of hardware or controls.",
+  "localAdvice": "If replacement is on the table, we measure the opening and discuss how often the door operates. That gives a better basis for choosing panels, springs, and opener capacity.",
+  "heroTitle": "Garage Door Repair and Installation in Mayfield Heights"
+}

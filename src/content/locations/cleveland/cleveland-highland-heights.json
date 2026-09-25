@@ -1,0 +1,30 @@
+{
+  "name": "Highland Heights",
+  "slug": "cleveland-highland-heights",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.551783,
+    "lng": -81.469127
+  },
+  "zips": [
+    "44143"
+  ],
+  "surroundingAreas": [
+    "Richmond Heights",
+    "Mayfield Heights",
+    "Lyndhurst",
+    "Willoughby Hills"
+  ],
+  "metaTitle": "Garage Door Repair in Highland Heights, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Highland Heights, OH. Help with dragging doors and panel fit. Call 216-930-2980.",
+  "localHeading": "Practical service for Highland Heights garages",
+  "localIntro": "Highland Heights is a residential east-side city near the Mayfield and Willoughby Hills corridors. We help homeowners sort out whether a door needs adjustment, a failed part replaced, or a complete upgrade.",
+  "localIssues": "A door that drags at one side can damage the opener if it keeps running. We check cable tension, roller travel, and track alignment before considering a motor change.",
+  "localAdvice": "For a new door, we compare panel construction and weather sealing after measuring the garage. Proper fit matters as much as the selected exterior style.",
+  "heroTitle": "Garage Door Repair and Installation in Highland Heights"
+}

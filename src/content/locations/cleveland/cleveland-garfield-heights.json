@@ -1,0 +1,30 @@
+{
+  "name": "Garfield Heights",
+  "slug": "cleveland-garfield-heights",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.418631,
+    "lng": -81.605081
+  },
+  "zips": [
+    "44125"
+  ],
+  "surroundingAreas": [
+    "Maple Heights",
+    "Independence",
+    "Lee-Harvard",
+    "Seven Hills"
+  ],
+  "metaTitle": "Garage Door Repair in Garfield Heights, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Garfield Heights, OH. Help with rattling tracks and opener strain. Call 216-930-2980.",
+  "localHeading": "Repairing garage doors in Garfield Heights",
+  "localIntro": "Garfield Heights has established residential streets in the southeast inner ring. A door that rattles, sticks, or stops partway through its travel deserves an inspection before repeated opener use causes more wear.",
+  "localIssues": "We check roller movement and track condition along with cables and spring balance. An opener fault may be only part of the problem if the door is hard to move by hand.",
+  "localAdvice": "If the existing panels are damaged or the opening no longer seals well, we can measure for a replacement and explain which hardware should be updated at the same time.",
+  "heroTitle": "Garage Door Repair and Installation in Garfield Heights"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Willowick",
+  "slug": "cleveland-willowick",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.634299,
+    "lng": -81.467905
+  },
+  "zips": [
+    "44095"
+  ],
+  "surroundingAreas": [
+    "Wickliffe",
+    "Eastlake",
+    "Willoughby",
+    "Willoughby Hills"
+  ],
+  "metaTitle": "Garage Door Repair in Willowick, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Willowick, OH. Help with lakeshore fit and quieter hardware. Call 216-930-2980.",
+  "localHeading": "Garage door service for Willowick homes",
+  "localIntro": "Willowick is a separate lakeshore residential city beside Eastlake. When a door begins to rattle or resist closing, we inspect its travel and seals rather than assuming the opener is failing.",
+  "localIssues": "Moisture and wind can make a poorly fitted bottom seal noticeable. We check whether the door closes evenly and whether the panels and tracks are still aligned.",
+  "localAdvice": "For an upgrade, we can review insulated doors and quieter hardware after measuring the garage. The booking team will confirm availability for your Willowick street address.",
+  "heroTitle": "Garage Door Repair and Installation in Willowick"
+}

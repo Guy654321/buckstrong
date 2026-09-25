@@ -1,0 +1,30 @@
+{
+  "name": "Wickliffe",
+  "slug": "cleveland-wickliffe",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.606322,
+    "lng": -81.468028
+  },
+  "zips": [
+    "44092"
+  ],
+  "surroundingAreas": [
+    "Willowick",
+    "Willoughby Hills",
+    "Euclid",
+    "Richmond Heights"
+  ],
+  "metaTitle": "Garage Door Repair in Wickliffe, OH | Buck Strong",
+  "metaDescription": "Garage door repair and installation in Wickliffe, OH. Help with inner Lake County door alignment. Call 216-930-2980.",
+  "localHeading": "Wickliffe garage door and opener checks",
+  "localIntro": "Wickliffe is an inner Lake County city on the route east from Euclid. We can inspect a garage door that binds, shakes, or leaves a gap at the floor before deciding which part needs work.",
+  "localIssues": "A door that moves unevenly may have roller, track, or cable wear. We check the lift system by hand and test the opener safety reversal after making adjustments.",
+  "localAdvice": "When replacement is the better choice, we measure the opening and consider panel weight, insulation, and the opener already installed. Tell us about garage access when you book.",
+  "heroTitle": "Garage Door Repair and Installation in Wickliffe"
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Hudson",
+  "slug": "cleveland-hudson",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.2401,
+    "lng": -81.4407
+  },
+  "zips": [
+    "44236"
+  ],
+  "surroundingAreas": [
+    "Twinsburg",
+    "Solon",
+    "Aurora",
+    "Northfield Center",
+    "Macedonia",
+    "Streetsboro"
+  ],
+  "metaTitle": "Garage Door Service in Hudson, OH | Buck Strong",
+  "metaDescription": "Hudson garage door repair and installation at the southeastern edge of Buck Strong’s Cleveland territory. Call 216-930-2980 to check availability.",
+  "localHeading": "Careful service at the southeastern edge",
+  "localIntro": "Hudson sits near the southern edge of the selected Cleveland territory, rather than serving as a launch point for a wider Akron service area. We can review whether a repair will restore a door safely or whether the worn sections justify replacement.",
+  "localIssues": "When a door hesitates or jerks, using the opener repeatedly can add strain to the motor and hardware.",
+  "localAdvice": "For planned installations, we measure the opening and discuss insulation, windows, and opener compatibility.",
+  "heroTitle": "Hudson Garage Door Repair and Installation"
+}

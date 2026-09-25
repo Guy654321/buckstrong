@@ -1,0 +1,31 @@
+{
+  "name": "Rocky River",
+  "slug": "cleveland-rocky-river",
+  "state": "OH",
+  "phone": "(216) 930-2980",
+  "market": "Cleveland Metro",
+  "parentHub": "cleveland",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.4768,
+    "lng": -81.8393
+  },
+  "zips": [
+    "44116"
+  ],
+  "surroundingAreas": [
+    "Bay Village",
+    "Lakewood",
+    "Westlake",
+    "West Park",
+    "Fairview Park"
+  ],
+  "metaTitle": "Garage Door Service in Rocky River, OH | Buck Strong",
+  "metaDescription": "Rocky River garage door service for noisy tracks, worn rollers, openers, and replacement planning. Call Buck Strong at 216-930-2980.",
+  "localHeading": "Finding the cause of a noisy or uneven door",
+  "localIntro": "Rocky River connects Cleveland to the western lakefront suburbs. For a garage door that rattles, sticks, or stops short, we start with the track, rollers, and spring balance instead of assuming the opener is the cause.",
+  "localIssues": "Where driveway clearance is tight, careful measurements matter before ordering replacement sections or a new door.",
+  "localAdvice": "We can review quiet opener options when garage noise carries into nearby living spaces.",
+  "heroTitle": "Rocky River Garage Door Service"
+}
