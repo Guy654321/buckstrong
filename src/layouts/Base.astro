@@ -180,6 +180,7 @@ const normalizedAuthor = normalizeBrandMentions(author);
 const fullTitle = buildTitle(normalizedTitleInput);
 const isClevelandPage = market === 'Cleveland Metro' || Astro.url.pathname.startsWith('/locations/cleveland') || Astro.url.pathname.startsWith('/cleveland-oh/') || Astro.url.pathname.replace(/\/$/, '').endsWith('-cleveland-oh');
 const isGeneralServicePage = Astro.url.pathname.startsWith('/services/');
+const isSharedMarketPage = ['/faq', '/contact'].includes(Astro.url.pathname.replace(/\/$/, ''));
 const normalizedDescription = normalizeDescription(normalizedDescriptionInput, fullTitle, isClevelandPage);
 const ogImageUrl = buildAbsoluteUrl(ogImage, siteOrigin);
 const imageAltText = `${fullTitle} - Professional garage door services`;
@@ -407,7 +408,7 @@ const localBusinessSchema = JSON.stringify({
 
     <script type="module" src={contactFormLoaderUrl}></script>
 
-    {!isClevelandPage && !isGeneralServicePage && <div class="sr-only" data-text-ratio-helper>
+    {!isClevelandPage && !isGeneralServicePage && !isSharedMarketPage && <div class="sr-only" data-text-ratio-helper>
       <p>
         Buck Strong Garage Doors provides dependable residential and commercial overhead door services across the Cincinnati metro.
         Our insured technicians handle garage door repair, opener troubleshooting, spring replacement, cable resets, and

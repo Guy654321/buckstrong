@@ -79,7 +79,7 @@ const supportResources = [
     <div class="absolute inset-0 overflow-hidden">
       <Image
         src={heroImage}
-        alt="Contact Buck Strong Garage Doors offices serving Cincinnati, Ohio with professional customer service teams ready to help with garage door repairs and installations"
+        alt="Garage door and home exterior for Buck Strong Garage Doors contact page"
         width="1200"
         height="675"
         class="w-full h-full object-cover"
@@ -89,8 +89,6 @@ const supportResources = [
         quality={60}
         format="webp"
         sizes="100vw"
-        data-geo-lat="39.1031"
-        data-geo-lng="-84.5120"
       />
       <div class="absolute inset-0 bg-primary/75"></div>
     </div>
@@ -141,7 +139,7 @@ const supportResources = [
   </section>
 
   {clevelandCallMarket && (
-    <section class="py-10 bg-muted">
+    <section class="py-10 bg-white">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-2xl font-bold text-ink mb-3">Cleveland Market Bookings</h2>
         <p class="text-ink/80 mb-4">For Cleveland and the selected surrounding communities, call <a class="inline-link" href={clevelandCallMarket.phoneHref}>{clevelandCallMarket.phoneDisplay}</a> or explore the <a class="inline-link" href="/locations/cleveland">Cleveland service area</a>.</p>
@@ -156,7 +154,7 @@ const supportResources = [
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-3xl font-bold text-ink mb-6">Get Professional Garage Door Help Today</h2>
         <p class="text-lg text-ink/80 leading-relaxed mb-6">
-          Ready to solve your garage door problems? Our Ohio-based team in Cincinnati makes it easy to get expert help when you need it. Whether you're dealing with an emergency repair, planning a new installation, or need routine maintenance, we're here to provide honest recommendations, upfront pricing, and professional service you can trust.
+          Need help with a garage door repair, a new installation, or routine maintenance? Our Cincinnati and Cleveland teams can review the issue, explain your options, and confirm service availability at your address.
         </p>
         <p class="text-lg text-ink/80 leading-relaxed mb-12">
           We welcome questions about garage door safety, repair costs, service scheduling, product recommendations, and warranty coverage. Our knowledgeable staff provides accurate information to help you make informed decisions about your garage door needs, and we're committed to responding promptly to every inquiry.
@@ -220,7 +218,7 @@ const supportResources = [
           </div>
           <h4 class="font-semibold text-ink mb-2">Immediate Response</h4>
           <p class="text-sm text-ink/70">
-            Expect a call back within 15 minutes during business hours, or immediate response for emergency situations. We'll discuss your garage door issue and schedule a convenient service time.
+            Tell us what the door is doing and where the property is. We will review the request, confirm coverage, and discuss the next available service window.
           </p>
         </div>
         <div class="bg-white/90 backdrop-blur rounded-2xl p-6 shadow-lg shadow-primary/5 ring-1 ring-black/5 text-center">
@@ -229,7 +227,7 @@ const supportResources = [
           </div>
           <h4 class="font-semibold text-ink mb-2">Flexible Scheduling</h4>
           <p class="text-sm text-ink/70">
-            We offer same-day appointments for urgent repairs and convenient scheduling for installations. Our technicians arrive on time with fully stocked trucks and proper safety equipment.
+            We will discuss appointment options for urgent repairs and planned installations. Share any access details when you book so the technician can prepare for the visit.
           </p>
         </div>
         <div class="bg-white/90 backdrop-blur rounded-2xl p-6 shadow-lg shadow-primary/5 ring-1 ring-black/5 text-center">
@@ -322,12 +320,12 @@ const supportResources = [
   </section>
 
 
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-muted">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Get Answers Before You Reach Out</h2>
         <p class="text-xl text-ink/70">
-          Explore popular guides and service hubs that help homeowners across our Cincinnati service areas plan their next step.
+          Explore guides and service hubs for homeowners in the Cincinnati and Cleveland markets.
         </p>
       </div>
 
@@ -357,7 +355,7 @@ const supportResources = [
     </div>
   </section>
 
-  <ContactForm bgColor="muted" includeSchema={false} />
+  <ContactForm bgColor="white" includeSchema={false} />
 
   <Footer />
 </Base>
