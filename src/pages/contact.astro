@@ -26,7 +26,29 @@ const clevelandCallMarket = CALL_MARKETS.find((market) => market.id === 'clevela
 const clevelandAddress = `${clevelandHub.address.streetAddress}, ${clevelandHub.address.addressLocality}, ${clevelandHub.address.addressRegion} ${clevelandHub.address.postalCode}`;
 const locationAddress = `${BUSINESS_INFO.address.streetAddress}, ${BUSINESS_INFO.address.addressLocality}, ${BUSINESS_INFO.address.addressRegion} ${BUSINESS_INFO.address.postalCode}`;
 const mapApiKey = 'AIzaSyBCrB1WJEkydzguNjR71uUVxg7O-mCpAVQ';
-const mapEmbedSrc = `https://www.google.com/maps/embed/v1/place?key=${mapApiKey}&q=${encodeURIComponent(locationAddress)}`;
+const contactLocations = [
+  {
+    name: 'Cincinnati, OH',
+    addressLabel: 'Cincinnati office',
+    address: locationAddress,
+    phone: displayPhoneNumber,
+    phoneHref: telephoneHref,
+    serviceAreaHref: '/locations/cincinnati',
+    mapTitle: 'Map of our Cincinnati office'
+  },
+  ...(clevelandCallMarket ? [{
+    name: 'Cleveland, OH',
+    addressLabel: 'Cleveland market address',
+    address: clevelandAddress,
+    phone: clevelandCallMarket.phoneDisplay,
+    phoneHref: clevelandCallMarket.phoneHref,
+    serviceAreaHref: '/locations/cleveland',
+    mapTitle: 'Map of our Cleveland market address in Westlake'
+  }] : [])
+].map(location => ({
+  ...location,
+  mapEmbedSrc: `https://www.google.com/maps/embed/v1/place?key=${mapApiKey}&q=${encodeURIComponent(location.address)}`
+}));
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
@@ -138,16 +160,47 @@ const supportResources = [
     </div>
   </section>
 
-  {clevelandCallMarket && (
-    <section class="py-10 bg-white">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-2xl font-bold text-ink mb-3">Cleveland Market Bookings</h2>
-        <p class="text-ink/80 mb-4">For Cleveland and the selected surrounding communities, call <a class="inline-link" href={clevelandCallMarket.phoneHref}>{clevelandCallMarket.phoneDisplay}</a> or explore the <a class="inline-link" href="/locations/cleveland">Cleveland service area</a>.</p>
-        <p class="text-sm text-ink/70">Hours: Open 24/7. Call to confirm appointment availability. Cleveland-market address: {clevelandAddress}.</p>
+  <section class="py-16 bg-white" id="our-locations">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-10">
+        <h2 class="text-3xl font-bold text-ink mb-4">Contact Our Cincinnati and Cleveland Teams</h2>
+        <p class="text-lg text-ink/70 leading-relaxed">
+          Choose the market nearest your property. Both lines are open 24/7; call with your address to confirm coverage and appointment availability.
+        </p>
       </div>
-    </section>
-  )}
-  
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {contactLocations.map(location => (
+          <article class="bg-muted rounded-2xl p-6 sm:p-8 shadow-sm ring-1 ring-black/5 min-w-0 flex flex-col">
+            <h3 class="text-2xl font-bold text-ink mb-6">{location.name}</h3>
+            <div class="space-y-5 mb-6 flex-1">
+              <div>
+                <p class="text-sm text-ink/60">{location.addressLabel}</p>
+                <p class="font-semibold text-ink">{location.address}</p>
+              </div>
+              <div>
+                <p class="text-sm text-ink/60">Call 24/7</p>
+                <a href={location.phoneHref} class="font-semibold text-primary underline decoration-2 underline-offset-4">{location.phone}</a>
+              </div>
+              <a href={location.serviceAreaHref} class="inline-link font-semibold">View {location.name} service areas</a>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm ring-1 ring-black/5 overflow-hidden h-[280px] sm:h-[320px]">
+              <iframe
+                title={location.mapTitle}
+                width="100%"
+                height="100%"
+                style="border:0;"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                src={location.mapEmbedSrc}
+              ></iframe>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <section class="py-16 bg-muted">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -268,59 +321,6 @@ const supportResources = [
 
 
   <section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-      <div class="space-y-6">
-        <div>
-          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary/70 mb-3">Visit Our Cincinnati Office</p>
-          <h3 class="text-3xl font-bold text-ink mb-4">See Where Our Team Works From</h3>
-          <p class="text-lg text-ink/70 leading-relaxed">
-            Stop by or plan your service with confidence. Use the map to get quick directions to our Cincinnati office and see
-            the surrounding neighborhoods we regularly serve across the Cincinnati metro.
-          </p>
-        </div>
-        <div class="bg-muted rounded-2xl p-6 shadow-sm ring-1 ring-black/5 space-y-4">
-          <div>
-            <p class="text-sm text-ink/60">Address</p>
-            <p class="font-semibold text-ink">{locationAddress}</p>
-          </div>
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div>
-              <p class="text-sm text-ink/60">Phone</p>
-              <a href={telephoneHref} class="font-semibold text-primary underline decoration-2 underline-offset-4">
-                {displayPhoneNumber}
-              </a>
-            </div>
-            <div>
-              <p class="text-sm text-ink/60">Email</p>
-              <a href={emailHref} class="font-semibold text-primary underline decoration-2 underline-offset-4 break-words">
-                {BUSINESS_INFO.email}
-              </a>
-            </div>
-          </div>
-          <div>
-            <p class="text-sm text-ink/60">Service Areas</p>
-            <p class="font-semibold text-ink">Cincinnati metro</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl shadow-lg ring-1 ring-black/5 overflow-hidden h-[320px] md:h-[400px] max-w-[520px] w-full mx-auto lg:mx-0 lg:ml-auto">
-        <iframe
-          title="Map of our Cincinnati office"
-          width="100%"
-          height="100%"
-          style="border:0; min-height:300px;"
-          loading="lazy"
-          allowfullscreen
-          referrerpolicy="no-referrer-when-downgrade"
-          src={mapEmbedSrc}
-        ></iframe>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="py-16 bg-muted">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Get Answers Before You Reach Out</h2>
@@ -355,7 +355,7 @@ const supportResources = [
     </div>
   </section>
 
-  <ContactForm bgColor="white" includeSchema={false} />
+  <ContactForm bgColor="muted" includeSchema={false} />
 
   <Footer />
 </Base>
@@ -423,13 +423,13 @@ const supportResources = [
       email: BUSINESS_INFO.email,
       areaServed: { '@type': 'City', name: market.label, addressRegion: 'OH' }
     })),
-    address: {
+    address: [BUSINESS_INFO.address, clevelandHub.address].map(address => ({
       '@type': 'PostalAddress',
-      streetAddress: BUSINESS_INFO.address.streetAddress,
-      addressLocality: BUSINESS_INFO.address.addressLocality,
-      addressRegion: BUSINESS_INFO.address.addressRegion,
-      postalCode: BUSINESS_INFO.address.postalCode,
-      addressCountry: BUSINESS_INFO.address.addressCountry
-    }
+      streetAddress: address.streetAddress,
+      addressLocality: address.addressLocality,
+      addressRegion: address.addressRegion,
+      postalCode: address.postalCode,
+      addressCountry: address.addressCountry
+    }))
   }}
 />
