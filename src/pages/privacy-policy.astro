@@ -5,13 +5,14 @@ import Footer from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CallNowButton from '../components/CallNowButton.astro';
 import { BUSINESS_INFO } from '../data/business';
+import { CALL_MARKETS } from '../data/call-markets';
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: 'Privacy Policy' }
 ];
 
-const lastUpdated = 'November 2024';
+const lastUpdated = 'September 2026';
 
 const policySections = [
   {
@@ -50,7 +51,7 @@ const policySections = [
 ---
 
 <Base
-  title="Garage Door Service Privacy Policy | Buck Strong Cincinnati"
+  title="Privacy Policy | Buck Strong Garage Doors"
   description="Learn how Buck Strong Garage Doors collects, uses, and protects your information across service requests and website visits."
   canonical="/privacy-policy"
   noindex={false}
@@ -64,7 +65,7 @@ const policySections = [
         <p class="text-sm font-semibold uppercase tracking-[0.25em] text-accent mb-3">Privacy Policy</p>
         <h1 class="text-3xl sm:text-4xl font-bold text-ink mb-4">Your privacy matters to Buck Strong Garage Doors</h1>
         <p class="text-base text-ink/80 leading-relaxed">
-          We collect only the information needed to schedule garage door service, communicate with you, and keep our website secure. This page explains what we collect, how we use it, and the choices available to you when working with our Cincinnati metro team.
+          We collect information needed to respond to service requests, communicate with you, and keep our website secure. This policy applies to customers in both the Cincinnati and Cleveland markets.
         </p>
         <p class="text-sm text-ink/60 mt-6">Last updated: {lastUpdated}</p>
       </section>
@@ -90,7 +91,7 @@ const policySections = [
           </p>
           <div class="space-y-2 text-white/90">
             <p><span class="font-semibold">Email:</span> <a class="underline underline-offset-4" href={`mailto:${BUSINESS_INFO.email}`}>{BUSINESS_INFO.email}</a></p>
-            <p><span class="font-semibold">Phone:</span> <a class="underline underline-offset-4" href={`tel:${BUSINESS_INFO.telephone.replace(/[^0-9+]/g, '')}`}>{BUSINESS_INFO.telephone}</a></p>
+            {CALL_MARKETS.map(market => <p><span class="font-semibold">{market.label} phone:</span> <a class="underline underline-offset-4" href={market.phoneHref}>{market.phoneDisplay}</a></p>)}
             <p><span class="font-semibold">Mailing Address:</span> {BUSINESS_INFO.address.streetAddress}, {BUSINESS_INFO.address.addressLocality}, {BUSINESS_INFO.address.addressRegion} {BUSINESS_INFO.address.postalCode}</p>
           </div>
         </div>

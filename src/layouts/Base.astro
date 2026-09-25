@@ -180,8 +180,8 @@ const normalizedAuthor = normalizeBrandMentions(author);
 const fullTitle = buildTitle(normalizedTitleInput);
 const isClevelandPage = market === 'Cleveland Metro' || Astro.url.pathname.startsWith('/locations/cleveland') || Astro.url.pathname.startsWith('/cleveland-oh/') || Astro.url.pathname.replace(/\/$/, '').endsWith('-cleveland-oh');
 const isGeneralServicePage = Astro.url.pathname.startsWith('/services/');
-const isSharedMarketPage = ['/faq', '/contact'].includes(Astro.url.pathname.replace(/\/$/, ''));
-const normalizedDescription = normalizeDescription(normalizedDescriptionInput, fullTitle, isClevelandPage);
+const isSharedMarketPage = isGeneralServicePage || ['/', '/faq', '/contact', '/services', '/safety', '/blog', '/locations', '/privacy-policy', '/404'].includes(Astro.url.pathname.replace(/\/$/, '') || '/');
+const normalizedDescription = normalizeDescription(normalizedDescriptionInput, fullTitle, isClevelandPage || isSharedMarketPage);
 const ogImageUrl = buildAbsoluteUrl(ogImage, siteOrigin);
 const imageAltText = `${fullTitle} - Professional garage door services`;
 const isHomepage = Astro.url.pathname === '/';
@@ -308,11 +308,11 @@ const localBusinessSchema = JSON.stringify({
     <meta property="og:locale" content="en_US" />
     {publishDate && <meta property="article:published_time" content={publishDate} />}
     <meta property="article:modified_time" content={resolvedModifiedDate} />
-    <meta property="business:contact_data:street_address" content={businessAddress.streetAddress} />
-    <meta property="business:contact_data:locality" content={businessAddress.addressLocality} />
-    <meta property="business:contact_data:region" content={businessAddress.addressRegion} />
-    <meta property="business:contact_data:postal_code" content={businessAddress.postalCode} />
-    <meta property="business:contact_data:country_name" content="United States" />
+    {!isSharedMarketPage && <meta property="business:contact_data:street_address" content={businessAddress.streetAddress} />}
+    {!isSharedMarketPage && <meta property="business:contact_data:locality" content={businessAddress.addressLocality} />}
+    {!isSharedMarketPage && <meta property="business:contact_data:region" content={businessAddress.addressRegion} />}
+    {!isSharedMarketPage && <meta property="business:contact_data:postal_code" content={businessAddress.postalCode} />}
+    {!isSharedMarketPage && <meta property="business:contact_data:country_name" content="United States" />}
     
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
@@ -397,7 +397,7 @@ const localBusinessSchema = JSON.stringify({
     {!isHomepage && schemaType !== 'Service' && (
       <script type="application/ld+json" is:inline set:html={websiteSchema}></script>
     )}
-    {schemaType === 'LocalBusiness' && !isClevelandPage && (
+    {schemaType === 'LocalBusiness' && !isClevelandPage && !isSharedMarketPage && (
       <script type="application/ld+json" is:inline set:html={localBusinessSchema}></script>
     )}
   </head>

@@ -59,8 +59,8 @@ const commercialDetailLinks = (slug: string) => activeLocation
       { label: 'Cincinnati details', href: `/garage-door-commercial-${slug}-cincinnati-oh` },
       { label: 'Cleveland details', href: `/garage-door-commercial-${slug}-cleveland-oh` },
     ];
-const imageGeoLat = isClevelandMarket && activeLocation ? activeLocation.lat : BUSINESS_INFO.geo.latitude;
-const imageGeoLng = isClevelandMarket && activeLocation ? activeLocation.lng : BUSINESS_INFO.geo.longitude;
+const imageGeoLat = activeLocation ? isClevelandMarket ? activeLocation.lat : BUSINESS_INFO.geo.latitude : undefined;
+const imageGeoLng = activeLocation ? isClevelandMarket ? activeLocation.lng : BUSINESS_INFO.geo.longitude : undefined;
 const breadcrumbs = activeLocation
   ? [
       { label: 'Home', href: '/' },
@@ -222,13 +222,22 @@ if (activeLocation) {
       name: schemaServiceName,
       description: schemaDescription,
       provider: {
-        '@type': 'LocalBusiness',
+        '@type': activeLocation ? 'LocalBusiness' : 'Organization',
         name: BUSINESS_INFO.name,
         legalName: BUSINESS_INFO.legalName,
         '@id': isClevelandMarket ? `${getSiteOrigin()}/locations/cleveland#local-business` : businessEntityId,
-        telephone: displayPhoneNumber,
         email: BUSINESS_INFO.email,
-        ...(providerAddress ? { address: { '@type': 'PostalAddress', ...providerAddress } } : {}),
+        ...(activeLocation ? {
+          telephone: displayPhoneNumber,
+          ...(providerAddress ? { address: { '@type': 'PostalAddress', ...providerAddress } } : {})
+        } : {
+          contactPoint: callMarkets.map(market => ({
+            '@type': 'ContactPoint',
+            telephone: market.phoneDisplay,
+            contactType: 'customer service',
+            areaServed: { '@type': 'City', name: market.label, addressRegion: 'OH' }
+          }))
+        }),
         ...(isClevelandMarket ? { openingHoursSpecification: [{
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],

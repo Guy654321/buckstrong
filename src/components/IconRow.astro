@@ -1,8 +1,8 @@
 ---
 import { Icon } from 'astro-icon/components';
 
-interface Props { market?: 'cleveland' | 'cincinnati'; }
-const { market = 'cincinnati' } = Astro.props;
+interface Props { market?: 'cleveland' | 'cincinnati' | 'general'; }
+const { market = 'general' } = Astro.props;
 
 const trustIcons = [
   {
@@ -29,6 +29,12 @@ const trustIcons = [
 const displayIcons = market === 'cleveland'
   ? trustIcons.map((item, index) => index === 1
       ? { ...item, text: 'Open 24/7', description: 'Call anytime to confirm the next available visit' }
+      : index === 3
+      ? { ...item, text: 'Clear Estimates', description: 'Review the work and options before booking' }
+      : item)
+  : market === 'general'
+  ? trustIcons.map((item, index) => index === 1
+      ? { ...item, text: 'Open 24/7', description: 'Call anytime about an urgent door issue' }
       : index === 3
       ? { ...item, text: 'Clear Estimates', description: 'Review the work and options before booking' }
       : item)

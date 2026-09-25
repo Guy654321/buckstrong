@@ -18,19 +18,19 @@ const breadcrumbs = [
 const resourceLinks = [
   {
     title: 'Request an Inspection',
-    description: 'Book a professional tune-up with the Cincinnati team to keep your door operating safely year-round.',
+    description: 'Ask your Cincinnati or Cleveland team about an inspection and tune-up.',
     href: '/contact',
     icon: 'mdi:calendar-clock'
   },
   {
     title: 'Review Garage Door Services',
-    description: 'See how we repair springs, replace panels, and modernize openers across the Cincinnati metro.',
+    description: 'Review spring repairs, panel replacement, opener service, and installation options.',
     href: '/services',
     icon: 'mdi:tools'
   },
   {
     title: 'Explore Service Areas',
-    description: 'Verify coverage for your neighborhood and discover nearby Cincinnati communities.',
+    description: 'Verify coverage in the Cincinnati or Cleveland market.',
     href: '/locations',
     icon: 'mdi:map-marker-radius'
   },
@@ -59,12 +59,17 @@ const locationSafetyHighlights = [
     marketId: 'cincinnati',
     title: 'Cincinnati Metro',
     description:
-      'From Downtown and Over-the-Rhine to Hyde Park and West Chester, our Cincinnati technicians reinforce every opener and safety sensor to handle high-traffic garages.'
+      'For Cincinnati homes, ask about spring balance, opener safety features, and worn hardware when scheduling a visit.'
+  },
+  {
+    marketId: 'cleveland',
+    title: 'Greater Cleveland',
+    description:
+      'For Cleveland and selected nearby communities, call with your address and describe any door or opener safety concern so we can confirm service options.'
   }
 ];
 const defaultCallMarket = DEFAULT_CALL_MARKET;
 const callModalId = 'header-call-modal';
-const callLinkHref = defaultCallMarket?.phoneHref ?? telephoneHref;
 const safetyCtaId = 'safety-call-cta';
 
 const ctaCallButtonClasses =
@@ -109,8 +114,8 @@ const safetyTips = [
 ---
 
 <Base 
-  title="Garage Door Safety Tips in Cincinnati, OH | Buck Strong"
-  description="Essential garage door safety tips to protect your family. Learn about spring safety, maintenance, and when to call professionals. Safety first with Buck Strong Garage Doors."
+  title="Garage Door Safety Tips | Cincinnati & Cleveland | Buck Strong"
+  description="Garage door safety tips for Cincinnati and Cleveland homeowners. Learn when to stop using a damaged door, check safety features, and call for service."
 >
   <Nav />
   <Breadcrumbs items={breadcrumbs} />
@@ -120,7 +125,7 @@ const safetyTips = [
     <div class="absolute inset-0">
       <Image 
         src={heroImage}
-        alt="Professional garage door safety information and guidelines for Cincinnati, Ohio homeowners" 
+        alt="Garage door and home exterior representing garage door safety guidance"
         width="1200"
         height="675"
         class="w-full h-full object-cover" 
@@ -129,8 +134,6 @@ const safetyTips = [
         decoding="sync"
         sizes="100vw"
         quality={72}
-        data-geo-lat="39.1031"
-        data-geo-lng="-84.5120"
       />
       <div class="absolute inset-0 bg-primary/75"></div>
     </div>
@@ -141,7 +144,7 @@ const safetyTips = [
           Garage Door Safety Tips
         </h1>
         <p class="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-          Your safety is our top priority across the Cincinnati metro. Learn essential garage door safety tips to protect your family and property.
+          Learn how to spot garage door safety problems and when to call for professional help in Cincinnati or Cleveland.
         </p>
         <div class="relative flex flex-col sm:flex-row gap-4 justify-center max-w-3xl mx-auto">
           {callMarkets.length > 0 && defaultCallMarket ? (
@@ -212,7 +215,7 @@ const safetyTips = [
                 <li>Remote control doesn't work consistently</li>
               </ul>
               <div class="bg-red-200 rounded-lg p-4 mt-6">
-                <p class="font-bold text-red-800">Emergency Service Available 24/7</p>
+                <p class="font-bold text-red-800">Call 24/7 About an Urgent Issue</p>
                 <p class="text-red-700">
                   Call us immediately — tap below to reach the right local team for your neighborhood.
                 </p>
@@ -297,16 +300,16 @@ const safetyTips = [
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Local Safety Support in Every Service Hub</h2>
         <p class="text-xl text-ink/70">
-          Meet the dedicated team safeguarding garages throughout the Cincinnati metro with localized inspections and rapid-response repairs.
+          Find the phone number for your market and discuss the safety concern before using a damaged door.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {locationSafetyHighlights.map(region => {
           const market = marketMap[region.marketId];
 
           return (
-            <div class="bg-muted rounded-xl p-6 h-full flex flex-col shadow-sm ring-1 ring-black/5">
+            <div class="bg-white rounded-xl p-6 h-full flex flex-col shadow-sm ring-1 ring-black/5">
               <h3 class="text-xl font-semibold text-ink mb-3">{region.title}</h3>
               <p class="text-ink/70 leading-relaxed flex-1">{region.description}</p>
               {market ? (
@@ -330,7 +333,7 @@ const safetyTips = [
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Stay Proactive With Trusted Resources</h2>
         <p class="text-xl text-ink/70">
-          Connect with the guides homeowners across the Cincinnati metro use to prevent emergencies and plan repairs.
+          Use these guides to plan safer operation and decide when a professional inspection is needed.
         </p>
       </div>
 

@@ -3,14 +3,16 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { BUSINESS_INFO } from '../data/business';
+import { CALL_MARKETS, DEFAULT_CALL_MARKET } from '../data/call-markets';
 
 const displayPhoneNumber = BUSINESS_INFO.telephone;
 const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
+const hasMarketChooser = CALL_MARKETS.length > 1 && Boolean(DEFAULT_CALL_MARKET);
 ---
 
 <Base
-  title="Garage Door Service in Cincinnati, OH | Page Not Found"
-  description="The page you're looking for doesn't exist. Find garage door repair, opener service, and commercial door support in Cincinnati, OH at Buck Strong Garage Doors."
+  title="Page Not Found | Buck Strong Garage Doors"
+  description="This page could not be found. Explore garage door services and locations in the Cincinnati and Cleveland markets."
   noindex={true}
 >
   <Nav />
@@ -65,11 +67,13 @@ const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displ
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold mb-6">Need Emergency Service?</h2>
       <p class="text-xl text-white/90 mb-8">
-        Don't let a broken garage door ruin your day. We're here to help 24/7 in Cincinnati, OH.
+        Need help with a garage door in Cincinnati or Cleveland? Call your local team to discuss the next available visit.
       </p>
-      <a href={telephoneHref} class="btn-accent text-lg px-8 py-4">
-        Call Now: <span class="nap-phone">{displayPhoneNumber}</span>
-      </a>
+      {hasMarketChooser ? (
+        <button type="button" class="btn-accent text-lg px-8 py-4" data-call-modal-trigger aria-controls="header-call-modal" aria-expanded="false" aria-haspopup="dialog" aria-label="Choose a service area phone number">Call Now</button>
+      ) : (
+        <a href={telephoneHref} class="btn-accent text-lg px-8 py-4">Call Now: <span class="nap-phone">{displayPhoneNumber}</span></a>
+      )}
     </div>
   </section>
   
