@@ -54,12 +54,12 @@ const quoteModalId = "quote-form-modal";
   data-nav-module={navModuleUrl}
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center h-20 gap-2 sm:h-24 sm:gap-3 md:h-28 md:gap-6">
+    <div class="flex items-center h-20 gap-2 sm:h-24 sm:gap-3 md:h-28 md:gap-6 min-[840px]:gap-2 xl:gap-6">
       <div class="min-w-0 flex-1">
         <a href="/" class="flex min-w-0 items-center gap-2 sm:gap-3">
           <BrandLogo
             size="sm"
-            class="h-16 sm:h-20 md:h-24 w-auto flex-shrink-0 self-center drop-shadow-sm scale-[1.35] sm:scale-[1.5] md:scale-[1.65] origin-center translate-y-0.5 [image-rendering:auto]"
+            class="h-16 sm:h-20 md:h-24 min-[840px]:h-20 xl:h-24 w-auto flex-shrink-0 self-center drop-shadow-sm scale-[1.35] sm:scale-[1.5] md:scale-[1.65] min-[840px]:scale-[1.5] xl:scale-[1.65] origin-center translate-y-0.5 [image-rendering:auto]"
             priority
             alt="Buck Strong Garage Doors - Professional Garage Door Services logo"
           />
@@ -68,19 +68,19 @@ const quoteModalId = "quote-form-modal";
             <span class="block text-sm font-semibold leading-tight">Garage Doors</span>
           </span>
           <span
-            class="hidden sm:block min-w-0 whitespace-nowrap text-lg font-bold leading-none text-primary md:text-xl lg:text-2xl"
+            class="hidden sm:block min-w-0 whitespace-nowrap text-lg font-bold leading-none text-primary md:text-xl min-[840px]:text-lg xl:text-2xl"
           >
             Buck Strong Garage Doors
           </span>
         </a>
       </div>
 
-      <div class="hidden lg:flex lg:flex-1 lg:justify-center">
-        <div class="flex items-center space-x-8">
+      <div class="hidden min-[840px]:flex min-[840px]:flex-1 min-[840px]:justify-center">
+        <div class="flex items-center space-x-1 xl:space-x-8">
           <div class="relative group" data-dropdown data-open="false">
             <button
               id="desktop-services-trigger"
-              class="text-ink hover:text-primary px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
+              class="text-ink hover:text-primary px-2 xl:px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
               aria-expanded="false"
               aria-haspopup="true"
               aria-controls="desktop-services-menu"
@@ -140,7 +140,7 @@ const quoteModalId = "quote-form-modal";
           <div class="relative group" data-dropdown data-open="false">
             <button
               id="desktop-resources-trigger"
-              class="text-ink hover:text-primary px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
+              class="text-ink hover:text-primary px-2 xl:px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
               aria-expanded="false"
               aria-haspopup="true"
               aria-controls="desktop-resources-menu"
@@ -206,7 +206,7 @@ const quoteModalId = "quote-form-modal";
               <div class="relative group" data-dropdown data-open="false">
                 <button
                   id="desktop-locations-trigger"
-                  class="text-ink hover:text-primary px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
+                  class="text-ink hover:text-primary px-2 xl:px-3 py-2 text-sm font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-controls="desktop-locations-menu"
@@ -264,7 +264,7 @@ const quoteModalId = "quote-form-modal";
             ) : (
               <a
                 href="/locations"
-                class="text-ink hover:text-primary px-3 py-2 text-sm font-medium"
+                class="text-ink hover:text-primary px-2 xl:px-3 py-2 text-sm font-medium"
               >
                 Locations
               </a>
@@ -273,20 +273,20 @@ const quoteModalId = "quote-form-modal";
 
           <a
             href="/contact"
-            class="text-ink hover:text-primary px-3 py-2 text-sm font-medium"
+            class="text-ink hover:text-primary px-2 xl:px-3 py-2 text-sm font-medium"
           >
             Contact
           </a>
         </div>
       </div>
 
-<div class="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2 lg:ml-0">
+<div class="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2 min-[840px]:ml-0">
   {safeCallMarkets.length > 0 ? (
     <>
       {/* Mobile call button - compact size */}
       <button
         type="button"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-md transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent lg:hidden"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-md transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent min-[840px]:hidden"
         style="min-height: 40px; min-width: 40px;"
         data-call-modal-trigger
         aria-controls={callModalId}
@@ -301,7 +301,7 @@ const quoteModalId = "quote-form-modal";
       {/* Desktop call button - original size */}
       <button
         type="button"
-        class="hidden lg:inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+        class="hidden min-[840px]:inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
         style="min-height: 44px; min-width: 44px;"
         data-call-modal-trigger
         aria-controls={callModalId}
@@ -316,7 +316,7 @@ const quoteModalId = "quote-form-modal";
       <noscript>
         <a
           href={phoneHref}
-          class="ml-3 hidden lg:inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+          class="ml-3 hidden min-[840px]:inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#dc2626] text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-[#b91c1c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
           style="min-height: 44px; min-width: 44px;"
           aria-label={`Call ${displayPhoneNumber}`}
         >
@@ -330,8 +330,7 @@ const quoteModalId = "quote-form-modal";
       href={phoneHref}
       class="btn-primary text-xs sm:text-sm px-3 sm:px-4 py-2 whitespace-nowrap"
     >
-      <span class="inline lg:hidden">Call Now</span>
-      <span class="hidden lg:inline">Call Now</span>
+      <span>Call Now</span>
     </a>
   )}
 </div>
@@ -352,7 +351,7 @@ const quoteModalId = "quote-form-modal";
         </noscript>
       )}
 
-      <details class="lg:hidden group relative">
+      <details class="min-[840px]:hidden group relative">
         <summary
           class="mobile-menu-button text-ink hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent inline-flex items-center justify-center p-2 transition list-none appearance-none [&::-webkit-details-marker]:hidden [&::marker]:hidden"
           aria-label="Toggle mobile navigation menu"
