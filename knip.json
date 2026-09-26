@@ -9,7 +9,9 @@
     "scripts/**/*.mjs"
   ],
   "project": [
-    "src/**/*.{astro,js,ts,mjs,md,mdx}",
+    "src/**/*.{astro,js,ts,mdx}",
+    "src/content/**/*.json",
+    "src/data/**/*.{ts,js,json}",
     "scripts/**/*.{js,mjs,ts}",
     "astro.config.mjs",
     "tailwind.config.cjs",
