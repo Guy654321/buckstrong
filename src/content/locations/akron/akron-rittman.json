@@ -1,0 +1,32 @@
+{
+  "name": "Rittman",
+  "slug": "akron-rittman",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 40.973373,
+    "lng": -81.784583
+  },
+  "areaType": "City",
+  "zips": [
+    "44270"
+  ],
+  "surroundingAreas": [
+    "Wadsworth",
+    "Doylestown",
+    "Norton",
+    "Barberton"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Rittman, OH",
+  "metaTitle": "Rittman, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Rittman, OH. Practical repair options for the southwestern edge. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Practical repair options for the southwestern edge",
+  "localIntro": "For a Rittman property with more than one garage door, identify the opening that needs attention and whether the others work normally. Comparing the symptoms helps us prepare to inspect the affected door and its controls.",
+  "localIssues": "A damaged cable may be the visible result of another problem in the lifting system. We inspect spring balance, drums, and hardware before returning the door to use.",
+  "localAdvice": "For several doors on one property, identify the affected opening and whether the others operate normally. That makes a repair request more useful than a general description of a noisy garage.",
+  "localCommercialIntro": "A Rittman facility needs one equipment assessment regardless of the county portion of its address. Identify the affected bay, its operator, and the vehicle or delivery schedule that the work must accommodate."
+}

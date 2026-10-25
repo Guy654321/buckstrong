@@ -95,11 +95,19 @@ const altContext: AltContext = {
   displayName: locationDisplayName,
   market: locationContext?.market
 };
-const serviceAlt = serviceAltBuilders[service.slug](altContext);
-const serviceProviderPhone = locationContext?.phone?.trim() || BUSINESS_INFO.telephone;
+const akronServiceAlt: Record<ServiceSlug, string> = {
+  'garage-door-repair': 'Residential garage doors with carriage-style panels',
+  'garage-door-installation': 'Home exterior with garage doors',
+  'opener-repair': 'Ceiling-mounted garage door opener and rail',
+  'commercial-jobs': 'Commercial overhead garage door'
+};
+const serviceAlt = locationContext?.market?.replace(/\s+Metro$/, '') === 'Akron'
+  ? akronServiceAlt[service.slug]
+  : serviceAltBuilders[service.slug](altContext);
+const serviceProviderPhone = locationContext ? locationContext.phone?.trim() : BUSINESS_INFO.telephone;
 const serviceProviderAddress = locationContext?.address ?? BUSINESS_INFO.address;
-const serviceAreasServed = locationDisplayName ? [locationDisplayName] : ['Cincinnati, Ohio', 'Cleveland, Ohio'];
-const serviceDescription = !locationContext || locationContext.market === 'Cleveland Metro'
+const serviceAreasServed = locationDisplayName ? [locationDisplayName] : ['Cincinnati, Ohio', 'Cleveland, Ohio', 'Akron, Ohio'];
+const serviceDescription = !locationContext || ['Cleveland Metro', 'Akron Metro'].includes(locationContext.market ?? '')
   ? sharedServiceDescriptions[service.slug]
   : service.short;
 const primaryCtaText = primaryLinkText ?? `Learn About ${service.name}`;
@@ -144,7 +152,7 @@ const primaryCtaText = primaryLinkText ?? `Learn About ${service.name}`;
     
     <div class="hidden" itemprop="provider" itemscope itemtype={locationContext ? 'https://schema.org/LocalBusiness' : 'https://schema.org/Organization'}>
       <span itemprop="name">{BUSINESS_INFO.name}</span>
-      {locationContext ? <span itemprop="telephone" class="nap-phone">{serviceProviderPhone}</span> : CALL_MARKETS.map(market => <span itemprop="telephone">{market.phoneDisplay}</span>)}
+      {locationContext ? (serviceProviderPhone && <span itemprop="telephone" class="nap-phone">{serviceProviderPhone}</span>) : CALL_MARKETS.map(market => <span itemprop="telephone">{market.phoneDisplay}</span>)}
       {serviceAreasServed.map(area => <span itemprop="areaServed">{area}</span>)}
       {locationContext && <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
         <span itemprop="streetAddress">{serviceProviderAddress.streetAddress}</span>

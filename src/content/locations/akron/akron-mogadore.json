@@ -1,0 +1,32 @@
+{
+  "name": "Mogadore",
+  "slug": "akron-mogadore",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.05246,
+    "lng": -81.407317
+  },
+  "areaType": "City",
+  "zips": [
+    "44260"
+  ],
+  "surroundingAreas": [
+    "Ellet",
+    "Lakemore",
+    "Springfield Township",
+    "Tallmadge"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Mogadore, OH",
+  "metaTitle": "Mogadore, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Mogadore, OH. Service for a village across the county line. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Service for a village across the county line",
+  "localIntro": "For a Mogadore home on either side of the Summit–Portage county line, we review the installed door and opener together. Tell us about impact damage, a hanging cable, or a change in travel, and leave a visibly damaged door stationary.",
+  "localIssues": "A door that scrapes or shudders can have loose supports or worn moving parts. Inspection includes the track attachments and panel connections, not only the rollers.",
+  "localAdvice": "If the door has shifted after an impact, leave it stationary. Share the affected bay and any access restrictions so the repair can be planned safely.",
+  "localCommercialIntro": "Mogadore spans Summit and Portage counties, but a facility needs only one service request. Provide the actual site address, the affected overhead opening, and the operating constraints that the assessment must consider."
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Doylestown",
+  "slug": "akron-doylestown",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 40.970003,
+    "lng": -81.695695
+  },
+  "areaType": "City",
+  "zips": [
+    "44230"
+  ],
+  "surroundingAreas": [
+    "Wadsworth",
+    "Norton",
+    "Rittman",
+    "Barberton"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Doylestown, OH",
+  "metaTitle": "Doylestown, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Doylestown, OH. A distinct village route southwest of Akron. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "A distinct village route southwest of Akron",
+  "localIntro": "Doylestown homeowners southwest of Akron can request help with a stuck door, worn hardware, or an unreliable opener. Include whether the garage is attached or detached and whether there is another way inside if the main door will not open.",
+  "localIssues": "A heavy door that drops or will not stay in place needs a balance assessment. Spring adjustment is a repair task for a trained technician, not a routine homeowner setting.",
+  "localAdvice": "If the garage is detached, tell us whether it has power and another entrance. Those access details help plan opener diagnostics or a stuck-door repair.",
+  "localCommercialIntro": "For a Doylestown business or managed garage, confirm who will provide access and approve the estimate. Share whether an alternate opening is available and whether the damaged door creates an immediate security problem."
+}

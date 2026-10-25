@@ -1,0 +1,32 @@
+{
+  "name": "Springfield Township",
+  "slug": "akron-springfield-township",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.006513,
+    "lng": -81.438547
+  },
+  "areaType": "AdministrativeArea",
+  "zips": [
+    "44312"
+  ],
+  "surroundingAreas": [
+    "Lakemore",
+    "Ellet",
+    "Mogadore",
+    "Uniontown"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Springfield Township, OH",
+  "metaTitle": "Springfield Township, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Springfield Township, OH. Repairs on Akron's southeastern side. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Repairs on Akron's southeastern side",
+  "localIntro": "For Springfield Township homeowners in Summit County, include the street address and ZIP along with the door problem. A complete system check considers springs, cables, rollers, tracks, and safety controls before recommending repairs.",
+  "localIssues": "A closing door that reverses may have sensor trouble or mechanical resistance. We check both before changing travel settings or recommending a new operator.",
+  "localAdvice": "Tell us whether the wall button behaves differently from the remote. Keep the safety sensors connected and avoid trying to bypass them to close the door.",
+  "localCommercialIntro": "For a commercial property in Springfield Township, specify Summit County to distinguish it from other Ohio Springfields. Include door size if known, operator type, and a safe contact person for on-site access."
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Canal Fulton",
+  "slug": "akron-canal-fulton",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 40.892302,
+    "lng": -81.58793
+  },
+  "areaType": "City",
+  "zips": [
+    "44614"
+  ],
+  "surroundingAreas": [
+    "New Franklin",
+    "Jackson Township",
+    "Barberton",
+    "Coventry Township"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Canal Fulton, OH",
+  "metaTitle": "Canal Fulton, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Canal Fulton, OH. A measured service area on the southwestern corridor. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "A measured service area on the southwestern corridor",
+  "localIntro": "Canal Fulton homeowners can request garage door repairs, opener service, and replacement estimates through our Akron team. We assess the opening and the installed equipment before explaining the work needed to restore dependable operation.",
+  "localIssues": "Weather seals need even contact along the opening. We inspect the retainer, panel alignment, and floor contact before deciding whether a seal replacement will address the gap.",
+  "localAdvice": "Tell us whether the issue is drafts, water, visible light, or difficulty moving the door. Each symptom helps distinguish a fit problem from a moving-part repair.",
+  "localCommercialIntro": "For a Canal Fulton commercial opening, describe whether the door can be secured and how the site can be accessed safely. Details about the bay, its controls, and delivery hours help us plan the equipment assessment."
+}

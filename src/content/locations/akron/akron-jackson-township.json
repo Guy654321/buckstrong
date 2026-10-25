@@ -1,0 +1,34 @@
+{
+  "name": "Jackson Township",
+  "slug": "akron-jackson-township",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 40.863347,
+    "lng": -81.479621
+  },
+  "areaType": "AdministrativeArea",
+  "zips": [
+    "44718",
+    "44720",
+    "44646"
+  ],
+  "surroundingAreas": [
+    "North Canton",
+    "Green",
+    "Canal Fulton",
+    "Uniontown"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Jackson Township, OH",
+  "metaTitle": "Jackson Township, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Jackson Township, OH. Equipment choices for a large residential township. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Equipment choices for a large residential township",
+  "localIntro": "We assess garage door requests in Jackson Township, Stark County, through our Akron team. For a repair or upgrade, identify the affected opening and tell us whether the door can still be secured while the visit is arranged.",
+  "localIssues": "Multiple-car garages can have different operators and spring systems on adjacent openings. We assess the affected door individually before recommending matching or replacement equipment.",
+  "localAdvice": "If you are planning new doors for several bays, provide the number of openings and any style requirements. Final sizing and hardware selection follow an on-site check.",
+  "localCommercialIntro": "Specify Stark County for a Jackson Township commercial request, since the township name is used elsewhere in Ohio. Give the actual facility address, affected bay, and any loading or vehicle-access restrictions."
+}

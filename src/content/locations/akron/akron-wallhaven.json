@@ -1,0 +1,32 @@
+{
+  "name": "Wallhaven",
+  "slug": "akron-wallhaven",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.109585,
+    "lng": -81.569264
+  },
+  "areaType": "Place",
+  "zips": [
+    "44313"
+  ],
+  "surroundingAreas": [
+    "Northwest Akron",
+    "Fairlawn",
+    "Kenmore",
+    "Copley Township"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Wallhaven, Akron, OH",
+  "metaTitle": "Wallhaven, Akron, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Wallhaven, Akron, OH. Local garage service near the western corridor. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Local garage service near the western corridor",
+  "localIntro": "For a Wallhaven home on Akron’s western side, we review the existing door and opener before recommending new equipment. Describe the symptom and include a model label if it can be reached safely; a short video can help explain an intermittent fault.",
+  "localIssues": "A door that reverses before touching the floor can have sensor, travel, or mechanical trouble. We inspect the door and controls together rather than bypassing its safety features.",
+  "localAdvice": "Describe the symptom and send a model label if it can be reached safely. For an intermittent issue, a short video from outside the door’s path can help explain what happens.",
+  "localCommercialIntro": "Wallhaven is a recognized Akron neighborhood on the western side of the city. For a business or managed garage here, confirm the site contact, access permissions, and the opening that needs work before arranging an equipment assessment."
+}

@@ -18,8 +18,13 @@ const quoteModalModuleHref = quoteModalScriptUrl;
 const quoteModalModuleUrl = quoteModalScriptUrl;
 
 const services = await getServices();
+const serviceMenuDescriptions: Record<string, string> = {
+  'garage-door-repair': 'Repairs for broken springs, worn rollers, frayed cables, and misaligned tracks.',
+  'garage-door-installation': 'New garage doors with suitable hardware, insulation options, and safety testing.',
+  'commercial-jobs': 'Maintenance and repairs for commercial overhead, roll-up, and dock doors.'
+};
 const locationHubs = await getLocationHubs();
-const launchHubSlugs = new Set(["cincinnati", "cleveland"]);
+const launchHubSlugs = new Set(["cincinnati", "cleveland", "akron"]);
 const launchHubs = locationHubs.filter((hub) => launchHubSlugs.has(hub.slug));
 const displayPhoneNumber = BUSINESS_INFO.telephone;
 const sanitizedPhoneNumber = displayPhoneNumber.replace(/[^0-9+]/g, "");
@@ -129,7 +134,7 @@ const quoteModalId = "quote-form-modal";
                       class="block px-4 py-2 text-sm text-ink hover:bg-gray-100"
                     >
                       <div class="font-medium">{service.name}</div>
-                      <div class="text-xs text-ink/60">{service.short}</div>
+                      <div class="text-xs text-ink/60">{serviceMenuDescriptions[service.slug] ?? service.short}</div>
                     </a>
                   ))
                 }

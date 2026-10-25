@@ -1,0 +1,32 @@
+{
+  "name": "Wadsworth",
+  "slug": "akron-wadsworth",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.027436,
+    "lng": -81.732205
+  },
+  "areaType": "City",
+  "zips": [
+    "44281"
+  ],
+  "surroundingAreas": [
+    "Doylestown",
+    "Rittman",
+    "Norton",
+    "Copley Township"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Wadsworth, OH",
+  "metaTitle": "Wadsworth, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Wadsworth, OH. Garage door support for southeastern Medina County. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Garage door support for southeastern Medina County",
+  "localIntro": "Wadsworth homeowners can request garage door repairs and new-door estimates from our Akron team. When comparing replacement options, consider how the garage connects to the home, how often the door is used, and the style you want to keep.",
+  "localIssues": "For a door that gets louder over time, we review hinge wear, roller fit, and opener support. A new drive unit may not solve vibration that starts in the moving door.",
+  "localAdvice": "When comparing replacement doors, consider how the garage connects to the house and how often it is used. We can explain material, window, and hardware choices after measuring the opening.",
+  "localCommercialIntro": "For a Wadsworth commercial property, identify the affected bay and the person authorized to approve work. Include the door size, operator details, delivery schedule, and any restrictions on access while the equipment is inspected."
+}

@@ -8,7 +8,10 @@ const services = await getServices();
 const isClevelandPage = Astro.url.pathname.startsWith('/locations/cleveland') || Astro.url.pathname.startsWith('/cleveland-oh/');
 const locationGroups = await getLocationsByMarket();
 const hubLocations = await getLocationHubs();
-const launchHubSlugs = new Set(['cincinnati', 'cleveland']);
+const launchHubSlugs = new Set(['cincinnati', 'cleveland', 'akron']);
+const akronGroup = locationGroups.find(group => group.hub?.slug === 'akron');
+const isAkronPage = [akronGroup?.hub, ...(akronGroup?.areas ?? [])].some(location => location && (Astro.url.pathname.startsWith(`/locations/${location.slug}`) || Astro.url.pathname.startsWith(`/${location.slug.replace(/^akron-/, '')}-oh/`)));
+const isLocalMarketPage = isClevelandPage || isAkronPage;
 const launchHubs = hubLocations.filter(location => launchHubSlugs.has(location.slug));
 const launchLocationGroups = locationGroups.filter(group => {
   return group.hub && launchHubSlugs.has(group.hub.slug);
@@ -28,13 +31,14 @@ const featuredClevelandSlugs = [
 const footerLocationGroups = launchLocationGroups.map(group => {
   const allLocations = [group.hub, ...group.areas].filter(isDefined);
   const isClevelandGroup = group.hub?.slug === 'cleveland';
+  const isAkronGroup = group.hub?.slug === 'akron';
   const locations = isClevelandGroup
     ? featuredClevelandSlugs.map(slug => allLocations.find(location => location.slug === slug)).filter(isDefined)
-    : allLocations;
+    : isAkronGroup ? allLocations.slice(0, 9) : allLocations;
   return {
     market: group.market,
     locations,
-    allAreasHref: isClevelandGroup ? '/locations/cleveland' : null,
+    allAreasHref: isClevelandGroup || isAkronGroup ? `/locations/${group.hub?.slug}` : null,
   };
 });
 const sanitizeTelephone = (value: string) => value.replace(/[^0-9+]/g, '');
@@ -62,15 +66,15 @@ const footerHubs = launchHubs.map(location => {
       </p>
     </header>
 
-    <div class="grid gap-10 lg:grid-cols-12">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-12">
 
-      <div class="lg:col-span-4" itemscope itemtype={isClevelandPage ? 'https://schema.org/Organization' : 'https://schema.org/LocalBusiness'}>
+      <div class="min-w-0 lg:col-span-4" itemscope itemtype={isLocalMarketPage ? 'https://schema.org/Organization' : 'https://schema.org/LocalBusiness'}>
         <meta itemprop="name" content={BUSINESS_INFO.name} />
         <meta itemprop="image" content="/images/ohio%20logo.png" />
-        <meta itemprop="telephone" content={isClevelandPage ? '(216) 930-2980' : BUSINESS_INFO.telephone} />
+        {!isAkronPage && <meta itemprop="telephone" content={isClevelandPage ? '(216) 930-2980' : BUSINESS_INFO.telephone} />}
         <meta itemprop="email" content={BUSINESS_INFO.email} />
         <meta itemprop="url" content={BUSINESS_INFO.url} />
-        {!isClevelandPage && <div class="sr-only" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+        {!isLocalMarketPage && <div class="sr-only" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
           <span itemprop="streetAddress">{BUSINESS_INFO.address.streetAddress}</span>
           <span itemprop="addressLocality">{BUSINESS_INFO.address.addressLocality}</span>
           <span itemprop="addressRegion">{BUSINESS_INFO.address.addressRegion}</span>
@@ -80,15 +84,16 @@ const footerHubs = launchHubs.map(location => {
         <div class="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/10 backdrop-blur">
           <div class="space-y-2 text-white/80">
             <p class="text-sm font-semibold uppercase tracking-[0.25em] text-white">Buck Strong Garage Doors</p>
-            <p class="text-sm leading-relaxed">Ohio-based garage door service for the Cincinnati and Cleveland markets</p>
+            <p class="text-sm leading-relaxed">Ohio-based garage door service for our local service markets</p>
             <a
               href={`mailto:${BUSINESS_INFO.email}`}
               class="inline-flex items-center gap-2 text-sm font-medium text-white transition-colors duration-200 hover:text-white/80"
+              style="max-width: 100%;"
             >
               <span aria-hidden="true">📧</span>
-              <span>{BUSINESS_INFO.email}</span>
+              <span class="min-w-0 break-words">{BUSINESS_INFO.email.split('@')[0]}@<wbr />{BUSINESS_INFO.email.split('@')[1]}</span>
             </a>
-            <p class="text-xs uppercase tracking-wide text-white/90">{isClevelandPage ? 'Open 24/7 for calls and urgent requests' : 'Emergency service available 24/7'}</p>
+            <p class="text-xs uppercase tracking-wide text-white/90">{isAkronPage ? 'Contact our Akron team' : isClevelandPage ? 'Open 24/7 for calls and urgent requests' : '24/7 Cincinnati and Cleveland booking lines'}</p>
           </div>
 
           <p class="mt-6 text-xs font-semibold uppercase tracking-[0.3em] text-white/90">Our Locations</p>
@@ -103,7 +108,7 @@ const footerHubs = launchHubs.map(location => {
                   </span>
                   <div class="flex-1 space-y-2">
                     <p class="text-base font-semibold tracking-tight text-white">
-                      {location.name}{location.hasAddress ? location.slug === 'cleveland' ? ' Address' : ' Office' : ' Service Area'}
+                      {location.name}{location.hasAddress ? location.slug === 'cleveland' || location.slug === 'akron' ? ' Address' : ' Office' : ' Service Area'}
                     </p>
 
                     {location.hasAddress && location.address ? (
@@ -147,13 +152,13 @@ const footerHubs = launchHubs.map(location => {
 
                     <div class="flex flex-col gap-1 text-sm text-white/70">
                       <a
-                        href={location.phoneHref}
+                        href={location.phone ? location.phoneHref : "/contact?market=akron#contact-form"}
                         class="text-base font-medium text-white transition-colors duration-200 hover:text-white/80"
-                        itemprop="telephone"
+                        itemprop={location.phone ? "telephone" : undefined}
                       >
-                        {location.phone}
+                        {location.phone || "Request Akron service"}
                       </a>
-                      <span class="text-xs uppercase tracking-wide text-white/80">Direct line</span>
+                      <span class="text-xs uppercase tracking-wide text-white/80">{location.phone ? "Direct line" : "Online requests"}</span>
                       {location.slug === 'cleveland' && <span class="text-xs uppercase tracking-wide text-white/80">Hours: Open 24/7</span>}
                     </div>
                   </div>

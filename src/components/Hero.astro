@@ -65,7 +65,7 @@ const {
 } = Astro.props;
 
 const sanitizedPhoneNumber = phoneNumber.replace(/[^0-9+]/g, '');
-const phoneHref = `tel:${sanitizedPhoneNumber || phoneNumber}`;
+const phoneHref = phoneNumber ? `tel:${sanitizedPhoneNumber || phoneNumber}` : ctaLink;
 const callMarkets = CALL_MARKETS;
 const defaultCallMarket = DEFAULT_CALL_MARKET;
 const hasCallModalTrigger = !showPhoneNumber && callMarkets.length > 0 && defaultCallMarket !== null;
@@ -112,7 +112,7 @@ const heroImageAvifSrcSet = heroImageAvif.srcSet?.attribute ?? undefined;
 const heroImageWebpSrcSet = heroImageWebp.srcSet?.attribute ?? undefined;
 const heroImageJpegSrcSet = heroImageJpeg.srcSet?.attribute ?? undefined;
 const heroImageFallbackSrc = heroImageJpeg.src ?? heroImage.src;
-const showSecondaryCallAction = !primaryAsPhone;
+const showSecondaryCallAction = !primaryAsPhone && Boolean(phoneNumber);
 const sanitizeStringSubtitle = (value: string | string[]) => {
   if (Array.isArray(value)) {
     return value.filter((segment): segment is string => Boolean(segment && segment.trim()));

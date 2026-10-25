@@ -37,8 +37,10 @@ export type Location = {
   heroTitle?: string;
   localHeading?: string;
   localIntro?: string;
+  localCommercialIntro?: string;
   localIssues?: string;
   localAdvice?: string;
+  containedInPlace?: string;
   areaType?: 'City' | 'AdministrativeArea' | 'Place';
   zips?: string[];
   surroundingAreas: string[];
@@ -55,6 +57,7 @@ export type LocationGroup = {
 export const PRIMARY_MARKET_PRIORITY = [
   'Cincinnati Metro',
   'Cleveland Metro',
+  'Akron Metro',
 ] as const;
 
 const ACTIVE_STATES = new Set<string>(['OH']);
@@ -84,8 +87,10 @@ export function mapLocationEntry(entry: LocationEntry): Location {
       heroTitle,
       localHeading,
       localIntro,
+      localCommercialIntro,
       localIssues,
       localAdvice,
+      containedInPlace,
       areaType,
       zips,
       surroundingAreas,
@@ -120,8 +125,10 @@ export function mapLocationEntry(entry: LocationEntry): Location {
     heroTitle,
     localHeading,
     localIntro,
+    localCommercialIntro,
     localIssues,
     localAdvice,
+    containedInPlace,
     areaType,
     zips,
     surroundingAreas: surroundingAreas ?? [],
@@ -132,8 +139,9 @@ export function mapLocationEntry(entry: LocationEntry): Location {
 
 export async function getLocations(): Promise<Location[]> {
   const entries = await getCollection('locations');
-  return entries
-    .map(mapLocationEntry)
+  const mapped = entries.map(mapLocationEntry);
+  return mapped
+    .map(location => ({ ...location, phone: location.phone || mapped.find(hub => hub.slug === location.parentHub)?.phone || '' }))
     .filter((location) => ACTIVE_STATES.has(location.state))
     .sort((a, b) => {
       const marketCompare = a.market.localeCompare(b.market);
@@ -175,12 +183,7 @@ export async function loadLocationBySlug(slug: string): Promise<Location | undef
     return undefined;
   }
 
-  const [entry] = await getCollection(
-    'locations',
-    (candidate) => candidate.data.slug?.trim() === slug || candidate.id === slug,
-  );
-
-  return entry ? mapLocationEntry(entry) : undefined;
+  return (await getLocations()).find(location => location.slug === slug);
 }
 
 export async function getHubForLocation(location: Location): Promise<Location | undefined> {

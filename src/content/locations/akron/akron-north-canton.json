@@ -1,0 +1,32 @@
+{
+  "name": "North Canton",
+  "slug": "akron-north-canton",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 40.874146,
+    "lng": -81.397134
+  },
+  "areaType": "City",
+  "zips": [
+    "44720"
+  ],
+  "surroundingAreas": [
+    "Jackson Township",
+    "Uniontown",
+    "Hartville",
+    "Green"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in North Canton, OH",
+  "metaTitle": "North Canton, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in North Canton, OH. Residential doors along the northern Stark corridor. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Residential doors along the northern Stark corridor",
+  "localIntro": "North Canton homeowners can request help with a noisy door, damaged lifting hardware, or an opener that no longer responds consistently. We inspect the door’s movement and safety devices before discussing repair or replacement options.",
+  "localIssues": "For an attached garage, an opener upgrade should account for door balance and mounting vibration as well as drive type. We explain the condition of the existing equipment before comparing replacements.",
+  "localAdvice": "Have the opener's model label available if you can reach it safely. Compatible remotes, keypads, and safety devices depend on the equipment, not simply its brand name.",
+  "localCommercialIntro": "A North Canton facility should provide its actual site address rather than a general Canton-area label. Include the opening's use, the operator model where available, and any business-hour access requirements."
+}

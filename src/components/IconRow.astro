@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 
-interface Props { market?: 'cleveland' | 'cincinnati' | 'general'; }
+interface Props { market?: 'cleveland' | 'cincinnati' | 'general' | 'akron'; }
 const { market = 'general' } = Astro.props;
 
 const trustIcons = [
@@ -26,15 +26,15 @@ const trustIcons = [
     description: "Highly rated by Cincinnati customers"
   }
 ];
-const displayIcons = market === 'cleveland'
+const displayIcons = market === 'cleveland' || market === 'akron'
   ? trustIcons.map((item, index) => index === 1
-      ? { ...item, text: 'Open 24/7', description: 'Call anytime to confirm the next available visit' }
+      ? { ...item, text: market === 'akron' ? 'Local Service' : 'Open 24/7', description: market === 'akron' ? 'Call our Akron team to discuss your door' : 'Call anytime to confirm the next available visit' }
       : index === 3
       ? { ...item, text: 'Clear Estimates', description: 'Review the work and options before booking' }
       : item)
   : market === 'general'
   ? trustIcons.map((item, index) => index === 1
-      ? { ...item, text: 'Open 24/7', description: 'Call anytime about an urgent door issue' }
+      ? { ...item, text: 'Open 24/7', description: 'Cincinnati and Cleveland booking lines' }
       : index === 3
       ? { ...item, text: 'Clear Estimates', description: 'Review the work and options before booking' }
       : item)

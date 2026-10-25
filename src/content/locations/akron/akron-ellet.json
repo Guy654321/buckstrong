@@ -1,0 +1,32 @@
+{
+  "name": "Ellet",
+  "slug": "akron-ellet",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.049921,
+    "lng": -81.437566
+  },
+  "areaType": "Place",
+  "zips": [
+    "44312"
+  ],
+  "surroundingAreas": [
+    "Mogadore",
+    "Lakemore",
+    "Goodyear Heights",
+    "Springfield Township"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Ellet, Akron, OH",
+  "metaTitle": "Ellet, Akron, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Ellet, Akron, OH. Repair planning in southeast Akron. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Repair planning in southeast Akron",
+  "localIntro": "For homeowners in Ellet on Akron’s southeastern side, we inspect a troublesome garage door as a complete system. The repair recommendation considers door weight, lifting hardware, track movement, and the opener’s safety controls.",
+  "localIssues": "If a door has been struck or a lower section is bent, keep it stopped. We check the panel connections, track, and lifting hardware before deciding how to secure and repair it.",
+  "localAdvice": "Include whether the garage has a second entrance and whether a vehicle is inside. Those details matter when a damaged door cannot be moved safely.",
+  "localCommercialIntro": "Ellet is a recognized Akron neighborhood on the city’s southeastern side. For a business or managed garage here, confirm the site contact, access permissions, and the opening that needs work before arranging an equipment assessment."
+}

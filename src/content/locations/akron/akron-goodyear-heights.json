@@ -1,0 +1,32 @@
+{
+  "name": "Goodyear Heights",
+  "slug": "akron-goodyear-heights",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.078112,
+    "lng": -81.467614
+  },
+  "areaType": "Place",
+  "zips": [
+    "44305"
+  ],
+  "surroundingAreas": [
+    "Ellet",
+    "Tallmadge",
+    "Firestone Park",
+    "Mogadore"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Goodyear Heights, Akron, OH",
+  "metaTitle": "Goodyear Heights, Akron, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Goodyear Heights, Akron, OH. Caring for an existing garage system. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Caring for an existing garage system",
+  "localIntro": "For a Goodyear Heights home east of central Akron, we base repair options on the door’s condition and the parts it uses. A worn roller, damaged section, and failing opener can produce similar complaints but need different repairs.",
+  "localIssues": "A grinding sound may come from the opener drive or from hardware moving along the track. We inspect both systems and explain which parts need attention.",
+  "localAdvice": "For a replacement section, keep any manufacturer information you have. Matching panel dimensions and connection points matters as much as the exterior pattern.",
+  "localCommercialIntro": "Goodyear Heights is an Akron residential neighborhood east of the city center. For a business or managed garage here, confirm the site contact, access permissions, and the opening that needs work before arranging an equipment assessment."
+}

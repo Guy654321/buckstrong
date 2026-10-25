@@ -1,0 +1,32 @@
+{
+  "name": "Ravenna",
+  "slug": "akron-ravenna",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.161567,
+    "lng": -81.242058
+  },
+  "areaType": "City",
+  "zips": [
+    "44266"
+  ],
+  "surroundingAreas": [
+    "Rootstown Township",
+    "Brimfield Township",
+    "Kent",
+    "Suffield Township"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Ravenna, OH",
+  "metaTitle": "Ravenna, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Ravenna, OH. Repair decisions for homes and business bays. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Repair decisions for homes and business bays",
+  "localIntro": "For a Ravenna home east of Kent, repair options depend on the door’s condition and compatible parts. Share any available model information and describe what changed before the door stopped working normally.",
+  "localIssues": "A commercial operator and a residential opener need different equipment checks. Describe the opening's use, door size, and operating schedule when requesting service.",
+  "localAdvice": "For a home repair, keep any available model labels or previous part information. They can help assess compatibility without assuming the door's age from its appearance.",
+  "localCommercialIntro": "For a Ravenna business, include the city or township where known and the exact opening that needs work. Door dimensions, operator controls, and required access arrangements help define the equipment assessment."
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Stow",
+  "slug": "akron-stow",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.176261,
+    "lng": -81.436523
+  },
+  "areaType": "City",
+  "zips": [
+    "44224"
+  ],
+  "surroundingAreas": [
+    "Silver Lake",
+    "Munroe Falls",
+    "Tallmadge",
+    "Kent"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Stow, OH",
+  "metaTitle": "Stow, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Stow, OH. Planning a repair around daily garage use. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Planning a repair around daily garage use",
+  "localIntro": "For a Stow home northeast of Akron, daily garage use can make an intermittent fault particularly disruptive. Tell us where the door stops, whether the opener still runs, and whether a wall control or remote produces a different result.",
+  "localIssues": "For a garage used several times a day, intermittent stopping deserves attention even if the remote eventually works. Door balance, sensor wiring, and drive wear all need a check.",
+  "localAdvice": "When requesting a replacement quote, mention whether the garage is attached and whether there is living space above it. That helps frame the discussion about insulation and opener noise.",
+  "localCommercialIntro": "A Stow facility with several overhead doors should identify the affected bay and the equipment on it. Share the operating schedule and whether another opening can handle access while the door is inspected."
+}

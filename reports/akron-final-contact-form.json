@@ -1,0 +1,10 @@
+{
+  "mainLandmark": 1,
+  "reset": true,
+  "source": "http://127.0.0.1:4323/contact",
+  "status": "Thanks! Your request has been sent. We will be in touch shortly.",
+  "submitEnabled": true,
+  "receiverConfirmed": true,
+  "receivedIssue": "opener-problems",
+  "receivedSource": "http://127.0.0.1:4323/contact"
+}

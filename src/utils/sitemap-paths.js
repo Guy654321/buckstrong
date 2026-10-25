@@ -86,7 +86,9 @@ export function buildLocationServicePaths(locations, services) {
 
   return validLocations.flatMap((location) =>
     validServices
-      .filter((service) => location.slug === 'cleveland'
+      .filter((service) => location.slug === 'akron' || location.slug.startsWith('akron-')
+        ? clevelandSuburbServices.has(service.slug.trim())
+        : location.slug === 'cleveland'
         ? clevelandPublishedServices.has(service.slug.trim())
         : location.slug.startsWith('cleveland-')
           ? clevelandSuburbServices.has(service.slug.trim())
@@ -94,7 +96,7 @@ export function buildLocationServicePaths(locations, services) {
             ? cincinnatiPublishedServices.has(service.slug.trim())
             : true)
       .map((service) => {
-      const citySlug = location.slug.trim().replace(/^(cincinnati|cleveland)-/, '');
+      const citySlug = location.slug.trim().replace(/^(cincinnati|cleveland|akron)-/, '');
       return `/${citySlug}-oh/${service.slug.trim()}`;
       }),
   );

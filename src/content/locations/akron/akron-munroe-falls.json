@@ -1,0 +1,32 @@
+{
+  "name": "Munroe Falls",
+  "slug": "akron-munroe-falls",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.139576,
+    "lng": -81.436058
+  },
+  "areaType": "City",
+  "zips": [
+    "44262"
+  ],
+  "surroundingAreas": [
+    "Silver Lake",
+    "Tallmadge",
+    "Stow",
+    "Goodyear Heights"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Munroe Falls, OH",
+  "metaTitle": "Munroe Falls, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Munroe Falls, OH. Keeping the door and operator in balance. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Keeping the door and operator in balance",
+  "localIntro": "For a Munroe Falls door that hesitates or reverses, we review the mechanical door and its controls before recommending an opener replacement. Include the model label and whether the wall button behaves differently from the remote.",
+  "localIssues": "An opener that strains may be lifting a door with weak springs or binding hardware. Replacing only the motor can leave the original problem unresolved.",
+  "localAdvice": "Record the opener model and the symptoms when booking. If the door feels unusually heavy, do not use the emergency release while it is raised.",
+  "localCommercialIntro": "For a Munroe Falls business, note whether the opening handles deliveries, staff parking, or vehicle storage. The way the door is used helps determine the inspection priorities and a practical service window."
+}

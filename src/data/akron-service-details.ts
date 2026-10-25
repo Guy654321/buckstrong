@@ -1,0 +1,25 @@
+// Equipment guidance shared by Akron's local detail pages; each page also
+// includes the researched locality's own access, housing, and repair notes.
+export const AKRON_SERVICE_INTROS: Record<string, string> = {
+  'spring-replacement': 'When a spring breaks, stop operating the door and keep the opening clear. We inspect the remaining spring, cables, drums, and door weight before selecting replacement parts and testing balance.',
+  'opener-repair': 'A motor that runs without moving the door does not automatically need replacement. We separate opener faults from door resistance, then test controls, safety devices, and travel settings to identify the repair.',
+  'cable-repair': 'Loose or damaged lift cables can leave a door supported unevenly. The inspection starts with securing the opening, then checking cable routing, drums, fixtures, and spring balance before restoring movement.',
+  'track-alignment': 'A binding or displaced door needs more than a quick push back into place. We inspect the track supports, roller engagement, panel connections, and balance to find what caused the door to shift.',
+  'panel-replacement': 'A damaged section may be repairable when a compatible replacement is available. We compare the panel dimensions, hinge layout, and condition of the rest of the door before explaining the options.',
+  'rollers-hinges': 'Rattling, scraping, and vibration can start at several moving connections. We check roller fit, hinge wear, fasteners, and track contact so replacement hardware addresses the cause of rough travel.',
+  'sensor-alignment': 'Safety sensors should remain connected even when the door will not close. We check alignment, wiring, power, and obstructions, then verify the reversal system with the door operating normally.',
+  weatherstripping: 'A visible gap can come from a worn seal or a door that does not meet the opening evenly. We inspect the retainer, panel position, and contact surfaces before choosing bottom or perimeter weatherstripping.',
+  maintenance: 'Maintenance is a chance to catch wear while the door still works. The visit checks balance, cables, rollers, fasteners, opener operation, and safety devices, with recommendations based on the condition found.',
+  'balance-adjustment': 'An opener should guide a balanced door rather than carry its full weight. We inspect the spring arrangement, cable movement, and door travel before adjusting tension and checking safe operation.',
+  'belt-drive-repair': 'Slipping, hesitation, or a new vibration can indicate belt, rail, or door-load problems. We inspect those parts together and test the controls before recommending a repair or a replacement opener.',
+  'chain-drive-repair': 'A loud chain-drive unit may have wear beyond a loose chain. We assess sprockets, drive tension, mounting support, and the connected door so an adjustment does not conceal another fault.',
+  'jackshaft-opener-repair': 'A wall-mounted operator depends on the correct shaft and lift configuration. We check mounting, door balance, cable-tension monitoring, and safety controls before planning repairs or a new unit.',
+  'screw-drive-opener-repair': 'Binding along a threaded rail can have several causes. We inspect the carriage, rail, motor, and door load, then explain whether compatible repair parts remain practical for the existing equipment.',
+  'steel-garage-doors': 'Steel doors offer choices in panel construction, finish, windows, and insulation. We begin with the opening and track clearances, then compare suitable door and hardware combinations for the property.',
+  'wood-garage-doors': 'Wood doors need a plan for weight, finish care, and lifting hardware. We review the opening, spring sizing, support, and exterior design before ordering a system that suits the home.',
+  'aluminum-garage-doors': 'Aluminum and glazed door designs vary in strength, privacy, and insulation. We compare those choices with the measured opening and intended garage use rather than selecting a frame from appearance alone.',
+  'carriage-house-garage-doors': 'Carriage-house styling can be combined with modern overhead operation. We review material, window placement, decorative hardware, and panel layout alongside the opening measurements and lifting system.',
+  'warehouse-distribution-door-service': 'A loading-bay problem needs a plan for equipment access and site safety. Tell us the door size, operator type, and operating schedule so we can assess repairs around the facility’s needs.',
+  'dock-industrial-door-equipment-service': 'The overhead door, operator, and dock equipment must be assessed as a working system. We review visible damage, controls, movement, and bay usage before recommending the scope of service.',
+  'retail-municipal-garage-door-service': 'Retail and municipal openings may serve staff access, vehicle storage, or deliveries. We inspect the installed equipment and safety controls, then discuss a service plan with the person responsible for the site.',
+};

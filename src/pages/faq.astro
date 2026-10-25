@@ -7,7 +7,6 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import FAQInteractive from '../components/FAQInteractive.astro';
-import CallNowButton from '../components/CallNowButton.astro';
 import HiddenSeoText from '../components/HiddenSeoText.astro';
 import heroImage from '../assets/images/dillon-kydd-XGvwt544g8k-unsplash.jpg';
 import { BUSINESS_INFO } from '../data/business';
@@ -21,7 +20,7 @@ const breadcrumbs = [
 const resourceLinks = [
   {
     title: 'Schedule Service',
-    description: 'Ask about garage door repair or installation in the Cincinnati or Cleveland market.',
+    description: 'Ask about garage door repair or installation in the Cincinnati, Cleveland, or Akron market.',
     href: '/contact',
     icon: 'mdi:calendar-clock'
   },
@@ -33,7 +32,7 @@ const resourceLinks = [
   },
   {
     title: 'Find Your Neighborhood',
-    description: 'View service areas around Cincinnati and Cleveland.',
+    description: 'View service areas around Cincinnati, Cleveland, and Akron.',
     href: '/locations',
     icon: 'mdi:map-marker-radius'
   },
@@ -68,7 +67,7 @@ const generalFaqs = [
   {
     question: "What do garage door services typically cost?",
     answer:
-      "Pricing depends on the door, the parts needed, and the work involved. We inspect the system and explain the options before providing an estimate. Call your Cincinnati or Cleveland team for help with a specific project."
+      "Pricing depends on the door, the parts needed, and the work involved. We inspect the system and explain the options before providing an estimate. Contact your local team for help with a specific project."
   },
   {
     question: "How soon can you repair my garage door?",
@@ -101,7 +100,7 @@ const serviceFaqs = [
   {
     question: "Which garage door services do you offer?",
     answer:
-      "We handle tune-ups, spring and cable repairs, opener problems, panel replacement, weather sealing, and new door installation. Commercial service is also available. Call with your address to confirm coverage and scheduling in Cincinnati or Cleveland."
+      "We handle tune-ups, spring and cable repairs, opener problems, panel replacement, weather sealing, and new door installation. Commercial service is also available. Contact us with your address to confirm coverage and scheduling in Cincinnati, Cleveland, or Akron."
   },
   {
     question: "Do you service commercial overhead and roll-up doors?",
@@ -119,7 +118,7 @@ const emergencyFaqs = [
   {
     question: "Do you provide emergency garage door repair?",
     answer:
-      "Our Cincinnati and Cleveland lines are open 24/7 for urgent requests. If the door is stuck open, will not close, or creates a safety concern, call your local number and we will confirm the next available visit."
+      "Our Cincinnati and Cleveland lines are open 24/7 for urgent requests. Akron customers can call (234) 231-6525 or request service online. If the door is stuck open, will not close, or creates a safety concern, describe the issue so we can confirm the next available visit."
   }
 ];
 
@@ -158,6 +157,11 @@ const locationFaqs = [
       "Our Cleveland area includes the city and selected suburbs such as Westlake, Rocky River, Avon, Strongsville, Brecksville, and Solon. See the Cleveland location hub for the full list, and call to confirm service at your address."
   },
   {
+    question: "Which Akron areas do you serve?",
+    answer:
+      "Our Akron service area includes the city, Cuyahoga Falls, Stow, Fairlawn, Tallmadge, Green, Kent, Wadsworth, and selected nearby communities. View the Akron hub for the complete list, then call (234) 231-6525 or request service online with your address to confirm coverage and scheduling."
+  },
+  {
     question: "Are you insured for work in Ohio?",
     answer:
       "Yes. We maintain full liability and workers compensation coverage for Ohio. All technicians are background-checked, trained, and follow strict safety standards."
@@ -178,7 +182,7 @@ const troubleshootingFaqs = [
   {
     question: "Do you service commercial garage doors?",
     answer:
-      "Yes. We help with commercial overhead and roll-up doors in both markets. Tell us the door type, property address, and issue so we can confirm coverage and the appropriate next step."
+      "Yes. We help with commercial overhead and roll-up doors across our service markets. Tell us the door type, property address, and issue so we can confirm coverage and the appropriate next step."
   },
   {
     question: "How do I know if my garage door needs professional service?",
@@ -265,8 +269,8 @@ const faqSections = [
 ---
 
 <Base
-  title="Garage Door FAQ | Cincinnati & Cleveland | Buck Strong"
-  description="Answers to garage door repair, installation, opener, pricing, and scheduling questions for Cincinnati and Cleveland homeowners. Find your local service area."
+  title="Garage Door FAQ in Ohio | Buck Strong"
+  description="Answers to garage door repair, installation, opener, pricing, and scheduling questions for Cincinnati, Cleveland, and Akron homeowners. Find your local service area."
   schemaType="FAQPage"
 >
   <Nav />
@@ -296,7 +300,7 @@ const faqSections = [
           Frequently Asked Questions
         </h1>
         <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed">
-          Clear answers about repairs, installation, openers, and scheduling for homeowners in Cincinnati and Cleveland.
+          Clear answers about repairs, installation, openers, and scheduling for homeowners in Cincinnati, Cleveland, and Akron.
         </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             {callMarkets.length > 0 && defaultCallMarket ? (
@@ -456,7 +460,7 @@ const faqSections = [
   <section class="py-16 bg-card">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-ink mb-4">Service in Cincinnati and Cleveland</h2>
+        <h2 class="text-3xl font-bold text-ink mb-4">Service in Cincinnati, Cleveland, and Akron</h2>
         <p class="text-xl text-ink/70">Find the right local team and confirm service for your address.</p>
       </div>
 
@@ -480,12 +484,12 @@ const faqSections = [
           </ul>
         </div>
         <div class="bg-muted rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
-          <h3 class="text-2xl font-semibold text-ink mb-4">What to Have Ready</h3>
+          <h3 class="text-2xl font-semibold text-ink mb-4">Akron, OH</h3>
           <ul class="list-disc list-inside text-ink/80 space-y-2">
-            <li>Your street address and preferred contact number</li>
-            <li>A short description of what the door is doing</li>
-            <li>The door or opener brand, if you know it</li>
-            <li>Any immediate safety or access concern</li>
+            <li>Garage door repair, opener service, installation, and commercial support in the Akron area</li>
+            <li>Coverage includes selected Summit, Portage, Medina, Wayne, and Stark County communities</li>
+            <li>Call <a class="inline-link" href="tel:2342316525">(234) 231-6525</a> or <a class="inline-link" href="/contact?market=akron#contact-form">request Akron service online</a> with your address and door issue</li>
+            <li><a class="inline-link" href="/locations/akron">Explore Akron service areas</a></li>
           </ul>
         </div>
       </div>
@@ -587,21 +591,21 @@ const faqSections = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-ink mb-4">Ohio Garage Door Company You Can Trust</h2>
-        <p class="text-xl text-ink/70">Straightforward answers and service options for both Ohio markets.</p>
+        <p class="text-xl text-ink/70">Straightforward answers and service options for our Ohio service areas.</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div class="bg-card rounded-2xl p-8 shadow-sm ring-1 ring-black/5">
           <h3 class="text-2xl font-semibold text-ink mb-4">What to Expect From Our Team</h3>
           <p class="text-ink/70 mb-6">
-            Buck Strong Garage Doors helps homeowners in Cincinnati and Cleveland with repair and installation decisions. Start by telling us where the door is and what is happening.
+            Buck Strong Garage Doors helps homeowners in Cincinnati, Cleveland, and Akron with repair and installation decisions. Start by telling us where the door is and what is happening.
           </p>
           <ul class="space-y-3 text-ink/80">
             <li>✔️ A review of the door, opener, and safety concerns</li>
             <li>✔️ An explanation of repair or replacement options</li>
             <li>✔️ An estimate before approved work begins</li>
             <li>✔️ Local coverage and appointment availability confirmed by address</li>
-            <li>✔️ Phone lines open 24/7 for urgent requests</li>
+            <li>✔️ Cincinnati and Cleveland booking lines open 24/7</li>
           </ul>
         </div>
 
@@ -699,14 +703,14 @@ const faqSections = [
               <Icon name="mdi:clock" size="20" class="text-primary" aria-hidden="true" />
             </div>
             <h3 class="font-semibold text-ink mb-1">Available 24/7</h3>
-            <p class="text-sm text-ink/70">Call anytime about an urgent issue</p>
+            <p class="text-sm text-ink/70">Cincinnati and Cleveland booking lines</p>
           </div>
           <div class="text-center">
             <div class="bg-accent/10 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
               <Icon name="mdi:map-marker" size="20" class="text-accent" aria-hidden="true" />
             </div>
             <h3 class="font-semibold text-ink mb-1">Ohio Service Areas</h3>
-            <p class="text-sm text-ink/70">Cincinnati and Cleveland</p>
+            <p class="text-sm text-ink/70">Cincinnati, Cleveland, and Akron</p>
           </div>
           <div class="text-center">
             <div class="bg-green-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -723,19 +727,18 @@ const faqSections = [
   <HiddenSeoText
     title="Garage door FAQ coverage details"
     paragraphs={[
-      'This FAQ library collects common garage door repair, installation, and opener questions from homeowners and facility managers in the Cincinnati and Cleveland markets.',
+      'This FAQ library collects common garage door repair, installation, and opener questions from homeowners and facility managers in the Cincinnati, Cleveland, and Akron markets.',
       'Service availability and appointment times are confirmed by address in each market.',
       'Topics cover pricing transparency, warranty expectations, emergency response, neighborhood coverage, and preventative maintenance steps to keep overhead doors running smoothly.'
     ]}
     bullets={[
-      'Service hubs: Cincinnati, OH and Cleveland, OH, with selected surrounding communities',
-      'Coverage examples: Hyde Park and Blue Ash near Cincinnati; Westlake and Strongsville near Cleveland',
+      'Service hubs: Cincinnati, OH; Cleveland, OH; and Akron, OH, with selected surrounding communities',
+      'Coverage examples: Hyde Park and Blue Ash near Cincinnati; Westlake and Strongsville near Cleveland; Cuyahoga Falls and Stow near Akron',
       'Specialties: broken spring repair, opener troubleshooting, panel replacement, commercial overhead door support, and smart control upgrades'
     ]}
   />
 
   <Footer />
-  <CallNowButton />
 </Base>
 
 

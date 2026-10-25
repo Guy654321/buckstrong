@@ -1,0 +1,140 @@
+{
+  "Ellet": [
+    {
+      "place_id": 428769715,
+      "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 154150296,
+      "lat": "41.0499213",
+      "lon": "-81.4375662",
+      "class": "place",
+      "type": "quarter",
+      "place_rank": 20,
+      "importance": 0.13339958571755547,
+      "addresstype": "quarter",
+      "name": "Ellet",
+      "display_name": "Ellet, North Springfield, Akron, Summit County, Ohio, 44312, United States",
+      "boundingbox": [
+        "41.0399213",
+        "41.0599213",
+        "-81.4475662",
+        "-81.4275662"
+      ]
+    }
+  ],
+  "Goodyear Heights": [
+    {
+      "place_id": 428206154,
+      "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 154025991,
+      "lat": "41.0781117",
+      "lon": "-81.4676137",
+      "class": "place",
+      "type": "quarter",
+      "place_rank": 20,
+      "importance": 0.13339958571755547,
+      "addresstype": "quarter",
+      "name": "Goodyear Heights",
+      "display_name": "Goodyear Heights, Akron, Summit County, Ohio, 44305, United States",
+      "boundingbox": [
+        "41.0681117",
+        "41.0881117",
+        "-81.4776137",
+        "-81.4576137"
+      ]
+    }
+  ],
+  "Firestone Park": [
+    {
+      "place_id": 429145177,
+      "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 154354393,
+      "lat": "41.0426111",
+      "lon": "-81.5195673",
+      "class": "place",
+      "type": "quarter",
+      "place_rank": 20,
+      "importance": 0.13339958571755547,
+      "addresstype": "quarter",
+      "name": "Firestone Park",
+      "display_name": "Firestone Park, Akron, Summit County, Ohio, 44301, United States",
+      "boundingbox": [
+        "41.0326111",
+        "41.0526111",
+        "-81.5295673",
+        "-81.5095673"
+      ]
+    }
+  ],
+  "Kenmore": [
+    {
+      "place_id": 429145174,
+      "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 154195910,
+      "lat": "41.0440145",
+      "lon": "-81.5578979",
+      "class": "place",
+      "type": "quarter",
+      "place_rank": 20,
+      "importance": 0.13339958571755547,
+      "addresstype": "quarter",
+      "name": "Kenmore",
+      "display_name": "Kenmore, Akron, Summit County, Ohio, 44314, United States",
+      "boundingbox": [
+        "41.0340145",
+        "41.0540145",
+        "-81.5678979",
+        "-81.5478979"
+      ]
+    }
+  ],
+  "Northwest Akron": [
+    {
+      "place_id": 428769744,
+      "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 2836309874,
+      "lat": "41.1246666",
+      "lon": "-81.5807235",
+      "class": "place",
+      "type": "quarter",
+      "place_rank": 20,
+      "importance": 0.13339958571755547,
+      "addresstype": "quarter",
+      "name": "Northwest Akron",
+      "display_name": "Northwest Akron, Akron, Summit County, Ohio, 44313, United States",
+      "boundingbox": [
+        "41.1146666",
+        "41.1346666",
+        "-81.5907235",
+        "-81.5707235"
+      ]
+    }
+  ],
+  "Wallhaven": [
+    {
+      "place_id": 428979611,
+      "licence": "Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 2833497966,
+      "lat": "41.1095846",
+      "lon": "-81.5692638",
+      "class": "place",
+      "type": "quarter",
+      "place_rank": 20,
+      "importance": 0.13339958571755547,
+      "addresstype": "quarter",
+      "name": "Wallhaven",
+      "display_name": "Wallhaven, Akron, Summit County, Ohio, 44313, United States",
+      "boundingbox": [
+        "41.0995846",
+        "41.1195846",
+        "-81.5792638",
+        "-81.5592638"
+      ]
+    }
+  ]
+}

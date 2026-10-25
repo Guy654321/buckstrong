@@ -52,7 +52,7 @@ function normalizePathForSitemap(pathname: string) {
 
   return normalized || '/';
 }
-function createEntry(pathname: string, newlyPublishedPaths: Set<string>) {
+function createEntry(pathname: string, newlyPublishedPaths: Set<string>, akronPublishedPaths: Set<string>) {
   const normalizedPath = normalizePathForSitemap(pathname);
 
   if (shouldExcludePage(normalizedPath)) {
@@ -63,7 +63,7 @@ function createEntry(pathname: string, newlyPublishedPaths: Set<string>) {
 
   return {
     loc: url.toString(),
-    lastmod: (newlyPublishedPaths.has(normalizedPath) ? new Date('2026-09-24') : getLastModified(normalizedPath)).toISOString(),
+    lastmod: (akronPublishedPaths.has(normalizedPath) ? new Date('2026-10-23') : newlyPublishedPaths.has(normalizedPath) ? new Date('2026-09-24') : getLastModified(normalizedPath)).toISOString(),
     changefreq: getChangeFreq(normalizedPath),
     priority: getPriority(normalizedPath)
   };
@@ -114,6 +114,12 @@ export const GET: APIRoute = async () => {
     locationServiceSlugs.map((slug) => ({ slug })),
   ));
 
+  const akronLocations = locations.filter(location => location.market === 'Akron Metro');
+  const akronPublishedPaths = new Set([
+    ...akronLocations.map(location => `/locations/${location.slug}`),
+    ...buildLocationServicePaths(akronLocations, locationServiceSlugs.map(slug => ({ slug }))),
+  ]);
+
   const pathCandidates = buildSitemapPathCandidates({
     staticRoutes: STATIC_ROUTES,
     dynamicServiceSlugs: DYNAMIC_SERVICE_SLUGS,
@@ -132,7 +138,7 @@ export const GET: APIRoute = async () => {
 
   const uniquePaths = Array.from(new Set(pathCandidates.map(normalizePathForSitemap)));
 
-  const entries = uniquePaths.map(path => createEntry(path, newlyPublishedPaths));
+  const entries = uniquePaths.map(path => createEntry(path, newlyPublishedPaths, akronPublishedPaths));
 
   const xml = buildXml(entries);
 

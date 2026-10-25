@@ -51,24 +51,27 @@ interface Props {
 
 const { location } = Astro.props as Props;
 const activeLocation = location;
-const isClevelandMarket = activeLocation?.market === 'Cleveland Metro';
-const doorDetailPath = (slug: string) => isClevelandMarket && activeLocation && !activeLocation.isHub
+const marketHub = activeLocation ? await getHubForLocation(activeLocation) : undefined;
+const isAkronMarket = marketHub?.slug === 'akron';
+const isLocalMarket = activeLocation?.market === 'Cleveland Metro' || isAkronMarket;
+const doorDetailPath = (slug: string) => isLocalMarket && activeLocation && (!activeLocation.isHub || isAkronMarket)
   ? buildLocalizedServicePath(activeLocation.slug, `garage-door-${slug}`)
-  : `/garage-door-${slug}-${isClevelandMarket ? 'cleveland' : 'cincinnati'}-oh`;
+  : `/garage-door-${slug}-${isLocalMarket ? 'cleveland' : 'cincinnati'}-oh`;
 const doorDetailLinks = (slug: string) => activeLocation
   ? [{ label: 'View Door Options', href: doorDetailPath(slug) }]
   : [
       { label: 'Cincinnati options', href: `/garage-door-${slug}-cincinnati-oh` },
       { label: 'Cleveland options', href: `/garage-door-${slug}-cleveland-oh` },
+      { label: 'Akron options', href: buildLocalizedServicePath('akron', `garage-door-${slug}`) },
     ];
-const imageGeoLat = activeLocation ? isClevelandMarket ? activeLocation.lat : BUSINESS_INFO.geo.latitude : undefined;
-const imageGeoLng = activeLocation ? isClevelandMarket ? activeLocation.lng : BUSINESS_INFO.geo.longitude : undefined;
+const imageGeoLat = activeLocation ? isLocalMarket ? activeLocation.lat : BUSINESS_INFO.geo.latitude : undefined;
+const imageGeoLng = activeLocation ? isLocalMarket ? activeLocation.lng : BUSINESS_INFO.geo.longitude : undefined;
 const serviceCityName = activeLocation?.name;
 const breadcrumbs = activeLocation
   ? [
       { label: 'Home', href: '/' },
       { label: 'Locations', href: '/locations' },
-      ...(isClevelandMarket && !activeLocation.isHub ? [{ label: 'Cleveland, OH', href: '/locations/cleveland' }] : []),
+      ...(isLocalMarket && !activeLocation.isHub ? [{ label: `${marketHub?.name}, OH`, href: `/locations/${marketHub?.slug}` }] : []),
       { label: `${activeLocation.name}, ${activeLocation.state}`, href: `/locations/${activeLocation.slug}` },
       { label: 'Garage Door Installation' }
     ]
@@ -82,8 +85,8 @@ const locationDisplayName = activeLocation && serviceCityName
   : undefined;
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
-  ? isClevelandMarket ? `${locationDisplayName} and nearby communities` : `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
-  : 'Cincinnati and Cleveland, Ohio';
+  ? isLocalMarket ? `${locationDisplayName} and nearby communities` : `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
+  : 'Cincinnati, Cleveland, and Akron, Ohio';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
   items.filter((item): item is string => Boolean(item));
@@ -101,49 +104,52 @@ const zipCoverageLabel =
     ? `Primary ZIP codes covered: ${zipCodes.join(', ')}.`
     : undefined;
 
-const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
+const displayPhoneNumber = activeLocation ? activeLocation.phone.trim() : BUSINESS_INFO.telephone;
 const pageTitle = activeLocation && serviceCityName
-  ? isClevelandMarket
+  ? isLocalMarket
     ? `Garage Door Installation in ${serviceCityName}, ${activeLocation.state} | Buck Strong Garage Doors`
     : `Garage Door Installation ${serviceCityName} | Buck Strong Garage Doors`
-  : 'Garage Door Installation | Cincinnati & Cleveland | Buck Strong';
-const pageDescription = activeLocation && serviceCityName
-  ? isClevelandMarket ? `Garage door installation in ${serviceCityName}, ${activeLocation.state}. Compare steel, insulated, and carriage-style options. Call ${displayPhoneNumber} to plan a quote.` : `Professional garage door installation in ${serviceCityName}, ${activeLocation.state}. 5.0-star local team. Choose from modern, steel, or carriage doors. Call ${displayPhoneNumber} for a free quote!`
-  : 'Garage door installation in Greater Cincinnati and Greater Cleveland. Compare styles and insulation, confirm measurements, and get a clear installation plan.';
+  : 'Garage Door Installation in Ohio | Buck Strong';
+const originalPageDescription = activeLocation && serviceCityName
+  ? isLocalMarket ? `Garage door installation in ${serviceCityName}, ${activeLocation.state}. Compare steel, insulated, and carriage-style options. Call ${displayPhoneNumber} to plan a quote.` : `Professional garage door installation in ${serviceCityName}, ${activeLocation.state}. 5.0-star local team. Choose from modern, steel, or carriage doors. Call ${displayPhoneNumber} for a free quote!`
+  : 'Garage door installation in Greater Cincinnati, Greater Cleveland, and Akron. Compare styles and insulation, confirm measurements, and get a clear installation plan.';
+const pageDescription = isAkronMarket ? `Garage door installation in ${locationDisplayName}. ${activeLocation?.phone ? `Call ${activeLocation.phone}` : 'Request service online'} for an assessment and scheduling.` : originalPageDescription;
 const heroHeading = activeLocation
   ? `Garage Door Installation in ${locationDisplayName}`
   : 'Garage Door Installation';
 const heroSubheading = activeLocation
-  ? isClevelandMarket ? `A new garage door should fit the opening, operate safely, and suit the home. For homeowners in ${coverageAreaLabel}, we review door styles, insulation, hardware, and opener compatibility, then confirm measurements before installation.` : `Precision crews install custom doors across ${coverageAreaLabel}. Choose carriage house, contemporary glass, or insulated steel options that fit your climate.`
-  : 'Buck Strong installs garage doors for homeowners across Greater Cincinnati and Greater Cleveland. We help you choose a door that fits your home, confirm the measurements, and install and test the complete system.';
-const heroAlt = activeLocation
+  ? isLocalMarket ? `A new garage door should fit the opening, operate safely, and suit the home. For homeowners in ${coverageAreaLabel}, we review door styles, insulation, hardware, and opener compatibility, then confirm measurements before installation.` : `Precision crews install custom doors across ${coverageAreaLabel}. Choose carriage house, contemporary glass, or insulated steel options that fit your climate.`
+  : 'Buck Strong installs garage doors for homeowners across Greater Cincinnati, Greater Cleveland, and Akron. We help you choose a door that fits your home, confirm the measurements, and install and test the complete system.';
+const heroAlt = isAkronMarket
+  ? 'Home exterior with residential garage doors'
+  : activeLocation
   ? `New garage door installation completed for homeowners in ${coverageAreaLabel}`
   : 'New garage door installed on a residential home';
-const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
+const telephoneHref = displayPhoneNumber ? `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}` : '/contact?market=akron#contact-form';
 const callMarkets = CALL_MARKETS;
 const defaultCallMarket = DEFAULT_CALL_MARKET;
 const heroCallMarkets = !activeLocation ? callMarkets : [];
 const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
 const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
 const businessEntityId = `${getSiteOrigin()}#business`;
-const providerAddress = isClevelandMarket && activeLocation
-  ? (await getHubForLocation(activeLocation))?.address
+const providerAddress = isLocalMarket && activeLocation
+  ? marketHub?.address
   : BUSINESS_INFO.address;
 const callModalId = 'header-call-modal';
 const areaServed = activeLocation
   ? coverageAreaLabel
-  : ['Cincinnati, Ohio', 'Cleveland, Ohio'];
+  : ['Cincinnati, Ohio', 'Cleveland, Ohio', 'Akron, Ohio'];
 const schemaServiceName = activeLocation ? `Garage Door Installation in ${locationDisplayName}` : 'Garage Door Installation';
 const schemaDescription = activeLocation
   ? `Professional garage door installation services across ${coverageAreaLabel} featuring custom measurements, premium hardware, insulation upgrades, and safety testing.`
-  : 'Garage door installation across Greater Cincinnati and Greater Cleveland, including measurements, door selection, hardware, and safety testing.';
+  : 'Garage door installation across Greater Cincinnati, Greater Cleveland, and Akron, including measurements, door selection, hardware, and safety testing.';
 const canonicalPath = activeLocation
   ? buildLocationServiceCanonicalPath(activeLocation.slug, 'garage-door-installation')
   : '/services/garage-door-installation';
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const installationIntroCopy = activeLocation
   ? `From first measurement to final walkthrough, we manage every detail so your new garage door looks great and runs smoothly for ${coverageAreaLabel}.`
-  : 'From the first measurement to the final walkthrough, we handle door selection, installation, and safety testing for homeowners in both service markets.';
+  : 'From the first measurement to the final walkthrough, we handle door selection, installation, and safety testing for homeowners in our service markets.';
 const faqIntro = activeLocation
   ? `Answers to common installation questions from homeowners in ${coverageAreaLabel}.`
   : 'Answers to common garage door installation questions.';
@@ -151,7 +157,7 @@ const contactTitle = activeLocation
   ? `Request an Installation Quote in ${locationDisplayName}`
   : 'Request an Installation Quote';
 const contactSubtitle = activeLocation
-  ? isClevelandMarket ? `Tell us about the opening and style you want for your ${coverageAreaLabel} home. We will confirm the next steps and availability.` : `Get precise measurements, style recommendations, and a guaranteed installation date for your ${coverageAreaLabel} home.`
+  ? isLocalMarket ? `Tell us about the opening and style you want for your ${coverageAreaLabel} home. We will confirm the next steps and availability.` : `Get precise measurements, style recommendations, and a guaranteed installation date for your ${coverageAreaLabel} home.`
   : 'Get precise measurements, style recommendations, and a guaranteed installation date for your home.';
 
 const galleryCards = [
@@ -159,9 +165,9 @@ const galleryCards = [
     title: 'Expert Installation Process',
     description: activeLocation
       ? `On-site consultations, precise measurements, and safety-first crews deliver a seamless installation for homeowners across ${coverageAreaLabel}.`
-      : 'On-site consultations, precise measurements, and safety checks help make installation straightforward for homeowners in both markets.',
+      : 'On-site consultations, precise measurements, and safety checks help make installation straightforward for homeowners across our service markets.',
     image: expertProcessImage,
-    alt: `Completed garage door installation on a suburban home${locationDisplayName ? ` in ${locationDisplayName}` : ''}`
+    alt: isAkronMarket ? 'Residential garage door installation example' : `Completed garage door installation on a suburban home${locationDisplayName ? ` in ${locationDisplayName}` : ''}`
   },
   {
     title: 'Complete System Installation',
@@ -169,7 +175,7 @@ const galleryCards = [
       ? `We install openers, balance springs, and upgrade hardware so every component works together for dependable performance in ${coverageAreaLabel}.`
       : 'We install openers, balance springs, and upgrade hardware so every component works together for dependable performance.',
     image: completeSystemImage,
-    alt: `Technicians completing a full garage door system installation${locationDisplayName ? ` in ${locationDisplayName}` : ''}`
+    alt: isAkronMarket ? 'Garage door, opener, and track installation example' : `Technicians completing a full garage door system installation${locationDisplayName ? ` in ${locationDisplayName}` : ''}`
   },
   {
     title: 'Beautiful Finished Results',
@@ -177,7 +183,7 @@ const galleryCards = [
       ? `Premium materials, curated styles, and meticulous finishing touches give ${coverageAreaLabel} homes instant curb appeal.`
       : 'Choose durable materials and a style that complements your home, with careful fitting and finishing on installation day.',
     image: finishedResultsImage,
-    alt: `Garage door upgrade on a brick home${locationDisplayName ? ` in ${locationDisplayName}` : ''}`
+    alt: isAkronMarket ? 'Garage doors on a brick home' : `Garage door upgrade on a brick home${locationDisplayName ? ` in ${locationDisplayName}` : ''}`
   }
   ] satisfies Array<{ title: string; description: string; image: ImageMetadata; alt: string }>;
 
@@ -243,14 +249,14 @@ const whatsIncludedItems = [
 ];
 
 const expertiseHeading = activeLocation
-  ? isClevelandMarket ? `Installation Planning for ${locationDisplayName}` : `Local Expertise ${coverageAreaLabel} Can Trust`
+  ? isLocalMarket ? `Installation Planning for ${locationDisplayName}` : `Local Expertise ${coverageAreaLabel} Can Trust`
   : 'Installation Support in Both Markets';
 
 const expertiseCopy = activeLocation
-  ? isClevelandMarket
+  ? isLocalMarket
     ? `Buck Strong helps ${locationDisplayName} homeowners compare door materials, insulation, hardware, and opener compatibility. We measure the opening, explain the installation plan, and test the finished door with you.`
     : `Buck Strong Garage Doors has served ${coverageAreaLabel} homeowners for more than a decade. Our responsive teams handle scheduling, permitting, and on-site coordination so your project stays on time and on budget. Whether you need insulated carriage house doors or a sleek modern upgrade, we make sure you love the results.`
-  : 'Buck Strong helps homeowners in Cincinnati and Cleveland choose and install garage doors that fit their homes. We review the opening, door style, insulation, hardware, and opener compatibility before installation, then test the finished system with you.';
+  : 'Buck Strong helps homeowners in Cincinnati, Cleveland, and Akron choose and install garage doors that fit their homes. We review the opening, door style, insulation, hardware, and opener compatibility before installation, then test the finished system with you.';
 ---
 
 <Base
@@ -258,7 +264,7 @@ const expertiseCopy = activeLocation
   description={pageDescription}
   canonical={canonicalPath}
   callNowPhoneNumber={activeLocation ? displayPhoneNumber : undefined}
-  market={activeLocation?.market === 'Cleveland Metro' ? 'Cleveland Metro' : undefined}
+  market={activeLocation?.market}
 >
   <Nav />
   <Breadcrumbs items={breadcrumbs} />
@@ -273,20 +279,20 @@ const expertiseCopy = activeLocation
         '@type': activeLocation ? 'LocalBusiness' : 'Organization',
         name: BUSINESS_INFO.name,
         legalName: BUSINESS_INFO.legalName,
-        '@id': isClevelandMarket ? `${getSiteOrigin()}/locations/cleveland#local-business` : businessEntityId,
+        '@id': isLocalMarket ? `${getSiteOrigin()}/locations/${marketHub?.slug}#local-business` : businessEntityId,
         email: BUSINESS_INFO.email,
         ...(activeLocation ? {
-          telephone: displayPhoneNumber,
+          telephone: displayPhoneNumber || undefined,
           ...(providerAddress ? { address: { '@type': 'PostalAddress', ...providerAddress } } : {})
         } : {
           contactPoint: callMarkets.map(market => ({
             '@type': 'ContactPoint',
             telephone: market.phoneDisplay,
             contactType: 'customer service',
-            areaServed: { '@type': 'City', name: market.label, addressRegion: 'OH' }
+            areaServed: { '@type': 'City', name: market.label, ...(market.id === 'akron' ? { address: { '@type': 'PostalAddress', addressRegion: 'OH', addressCountry: 'US' } } : { addressRegion: 'OH' }) }
           }))
         }),
-        ...(isClevelandMarket ? { openingHoursSpecification: [{
+        ...(isLocalMarket && !isAkronMarket ? { openingHoursSpecification: [{
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
           opens: '00:00',
@@ -349,7 +355,7 @@ const expertiseCopy = activeLocation
             class="btn-accent text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2 sm:order-first"
           >
             <Icon name="mdi:phone" size="20" class="inline" aria-hidden="true" />
-            <span>Call Now: <span class="nap-phone">{displayPhoneNumber}</span></span>
+            <span>{displayPhoneNumber ? <>Call Now: <span class="nap-phone">{displayPhoneNumber}</span></> : "Request Service"}</span>
           </a>
         )}
         <a
@@ -402,7 +408,8 @@ const expertiseCopy = activeLocation
       <div class="mx-auto max-w-3xl text-center">
         <h2 class="text-3xl font-bold text-ink sm:text-4xl">{processIntroHeading}</h2>
         <p class="mt-6 text-lg text-ink/75 leading-relaxed">{processIntroCopy}</p>
-        {isClevelandMarket && activeLocation && !activeLocation.isHub && activeLocation.localAdvice && (
+        {isAkronMarket && activeLocation?.localIntro && <p class="mt-4 text-lg text-ink/75 leading-relaxed">{activeLocation.localIntro}</p>}
+        {isLocalMarket && activeLocation && (!activeLocation.isHub || isAkronMarket) && activeLocation.localAdvice && (
           <p class="mt-4 text-lg text-ink/75 leading-relaxed">{activeLocation.localAdvice}</p>
         )}
         <p class="mt-4 text-lg text-ink/75 leading-relaxed">{processBodyCopy}</p>
@@ -496,15 +503,15 @@ const expertiseCopy = activeLocation
 
   <ServiceInternalLinks currentSlug="garage-door-installation" location={activeLocation} />
 
-  <ContactForm includeSchema={!isClevelandMarket} title={contactTitle} subtitle={contactSubtitle} bgColor="muted" />
+  <ContactForm includeSchema={!isLocalMarket} title={contactTitle} subtitle={contactSubtitle} bgColor="muted" />
 
-  {!isClevelandMarket && (
+  {!isLocalMarket && (
   <HiddenSeoText
     title={`Garage door installation details${locationDisplayName ? ` for ${locationDisplayName}` : ''}`}
     paragraphs={filterStrings([
       activeLocation
         ? `Homeowners in ${coverageAreaLabel} can choose insulated steel, carriage-house, or modern glass garage doors that match local weather and architecture. We confirm measurements, track clearances, and opener compatibility before ordering.`
-        : 'Homeowners in Cincinnati and Cleveland can compare insulated steel, carriage-house, and modern glass doors. We confirm measurements, track clearance, and opener compatibility before ordering.',
+        : 'Homeowners in Cincinnati, Cleveland, and Akron can compare insulated steel, carriage-house, and modern glass doors. We confirm measurements, track clearance, and opener compatibility before ordering.',
       'Installations include spring and hardware balancing, weather-seal upgrades, and haul-away of removed materials. We manage HOA approvals, permits, and access details to keep projects on schedule.',
       activeLocation
         ? `After installation, we share maintenance tips suited to ${coverageAreaLabel} humidity and temperature swings. Short routines keep the door quiet and efficient.`

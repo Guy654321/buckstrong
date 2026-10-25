@@ -48,23 +48,26 @@ interface Props {
 
 const { location } = Astro.props as Props;
 const activeLocation = location;
-const isClevelandMarket = activeLocation?.market === 'Cleveland Metro';
-const openerDetailPath = (slug: string) => isClevelandMarket && activeLocation && !activeLocation.isHub
+const marketHub = activeLocation ? await getHubForLocation(activeLocation) : undefined;
+const isAkronMarket = marketHub?.slug === 'akron';
+const isLocalMarket = activeLocation?.market === 'Cleveland Metro' || isAkronMarket;
+const openerDetailPath = (slug: string) => isLocalMarket && activeLocation && (!activeLocation.isHub || isAkronMarket)
   ? buildLocalizedServicePath(activeLocation.slug, `garage-door-opener-${slug}`)
-  : `/garage-door-opener-${slug}-${isClevelandMarket ? 'cleveland' : 'cincinnati'}-oh`;
+  : `/garage-door-opener-${slug}-${isLocalMarket ? 'cleveland' : 'cincinnati'}-oh`;
 const openerDetailLinks = (slug: string) => activeLocation
   ? [{ label: 'View repair details', href: openerDetailPath(slug) }]
   : [
       { label: 'Cincinnati details', href: `/garage-door-opener-${slug}-cincinnati-oh` },
       { label: 'Cleveland details', href: `/garage-door-opener-${slug}-cleveland-oh` },
+      { label: 'Akron details', href: buildLocalizedServicePath('akron', `garage-door-opener-${slug}`) },
     ];
-const imageGeoLat = activeLocation ? isClevelandMarket ? activeLocation.lat : BUSINESS_INFO.geo.latitude : undefined;
-const imageGeoLng = activeLocation ? isClevelandMarket ? activeLocation.lng : BUSINESS_INFO.geo.longitude : undefined;
+const imageGeoLat = activeLocation ? isLocalMarket ? activeLocation.lat : BUSINESS_INFO.geo.latitude : undefined;
+const imageGeoLng = activeLocation ? isLocalMarket ? activeLocation.lng : BUSINESS_INFO.geo.longitude : undefined;
 const breadcrumbs = activeLocation
   ? [
       { label: 'Home', href: '/' },
       { label: 'Locations', href: '/locations' },
-      ...(isClevelandMarket && !activeLocation.isHub ? [{ label: 'Cleveland, OH', href: '/locations/cleveland' }] : []),
+      ...(isLocalMarket && !activeLocation.isHub ? [{ label: `${marketHub?.name}, OH`, href: `/locations/${marketHub?.slug}` }] : []),
       { label: `${activeLocation.name}, ${activeLocation.state}`, href: `/locations/${activeLocation.slug}` },
       { label: 'Garage Door Opener Repair' }
     ]
@@ -76,8 +79,8 @@ const breadcrumbs = activeLocation
 const locationDisplayName = activeLocation ? `${activeLocation.name}, ${activeLocation.state}` : undefined;
 const marketDisplayName = activeLocation?.market;
 const coverageAreaLabel = activeLocation
-  ? isClevelandMarket ? `${locationDisplayName} and nearby communities` : `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
-  : 'Cincinnati and Cleveland, Ohio';
+  ? isLocalMarket ? `${locationDisplayName} and nearby communities` : `${locationDisplayName} and nearby ${marketDisplayName ?? 'communities'}`
+  : 'Cincinnati, Cleveland, and Akron, Ohio';
 
 const filterStrings = (items: Array<string | undefined>): string[] =>
   items.filter((item): item is string => Boolean(item));
@@ -97,45 +100,48 @@ const zipCoverageLabel =
 
 const pageTitle = activeLocation
   ? `Garage Door Opener Repair in ${locationDisplayName} | Buck Strong Garage Doors`
-  : 'Garage Door Opener Repair | Cincinnati & Cleveland | Buck Strong';
-const pageDescription = activeLocation
-  ? isClevelandMarket ? `Garage door opener repair for ${coverageAreaLabel}. We troubleshoot motors, remotes, sensors, and travel settings. Call to confirm scheduling.` : `Certified opener repair specialists serving ${coverageAreaLabel}. Motors, remotes, sensors, and smart upgrades with same-day appointments.`
-  : 'Garage door opener repair in Cincinnati and Cleveland. We check motors, remotes, sensors, travel settings, and door balance before recommending a fix.';
+  : 'Garage Door Opener Repair in Ohio | Buck Strong';
+const originalPageDescription = activeLocation
+  ? isLocalMarket ? `Garage door opener repair for ${coverageAreaLabel}. We troubleshoot motors, remotes, sensors, and travel settings. Call to confirm scheduling.` : `Certified opener repair specialists serving ${coverageAreaLabel}. Motors, remotes, sensors, and smart upgrades with same-day appointments.`
+  : 'Garage door opener repair in Cincinnati, Cleveland, and Akron. We check motors, remotes, sensors, travel settings, and door balance before recommending a fix.';
+const pageDescription = isAkronMarket ? `Garage door opener repair in ${locationDisplayName}. ${activeLocation?.phone ? `Call ${activeLocation.phone}` : 'Request service online'} for an assessment and scheduling.` : originalPageDescription;
 const heroHeading = activeLocation
   ? `Garage Door Opener Repair in ${locationDisplayName}`
   : 'Garage Door Opener Repair';
 const heroSubheading = activeLocation
-  ? isClevelandMarket ? `If your opener stalls, reverses, or stops responding, the problem may be in the door or the controls. For homeowners in ${coverageAreaLabel}, we check balance, sensors, remotes, travel settings, and the motor before recommending a repair or replacement.` : `Local technicians troubleshoot motors, keypads, sensors, and smart controls across ${coverageAreaLabel} with fully stocked trucks and same-day appointments.`
-  : 'An opener that stalls, reverses, or stops responding may have a motor, control, sensor, or door balance problem. We troubleshoot the complete system for homeowners in Greater Cincinnati and Greater Cleveland.';
-const heroAlt = activeLocation
+  ? isLocalMarket ? `If your opener stalls, reverses, or stops responding, the problem may be in the door or the controls. For homeowners in ${coverageAreaLabel}, we check balance, sensors, remotes, travel settings, and the motor before recommending a repair or replacement.` : `Local technicians troubleshoot motors, keypads, sensors, and smart controls across ${coverageAreaLabel} with fully stocked trucks and same-day appointments.`
+  : 'An opener that stalls, reverses, or stops responding may have a motor, control, sensor, or door balance problem. We troubleshoot the complete system for homeowners in Greater Cincinnati, Greater Cleveland, and Akron.';
+const heroAlt = isAkronMarket
+  ? 'Home exterior with residential garage doors'
+  : activeLocation
   ? `Garage door opener repair technician supporting homeowners in ${coverageAreaLabel}`
   : 'Technician inspecting a residential garage door opener';
-const displayPhoneNumber = activeLocation?.phone?.trim() || BUSINESS_INFO.telephone;
-const telephoneHref = `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}`;
+const displayPhoneNumber = activeLocation ? activeLocation.phone.trim() : BUSINESS_INFO.telephone;
+const telephoneHref = displayPhoneNumber ? `tel:${displayPhoneNumber.replace(/[^0-9+]/g, '') || displayPhoneNumber}` : '/contact?market=akron#contact-form';
 const callMarkets = CALL_MARKETS;
 const defaultCallMarket = DEFAULT_CALL_MARKET;
 const heroCallMarkets = !activeLocation ? callMarkets : [];
 const heroDefaultCallMarket = !activeLocation ? defaultCallMarket : null;
 const hasGenericCallCTA = heroCallMarkets.length > 0 && heroDefaultCallMarket !== null;
 const businessEntityId = `${getSiteOrigin()}#business`;
-const providerAddress = isClevelandMarket && activeLocation
-  ? (await getHubForLocation(activeLocation))?.address
+const providerAddress = isLocalMarket && activeLocation
+  ? marketHub?.address
   : BUSINESS_INFO.address;
 const callModalId = 'header-call-modal';
-const areaServed = activeLocation ? coverageAreaLabel : ['Cincinnati, Ohio', 'Cleveland, Ohio'];
+const areaServed = activeLocation ? coverageAreaLabel : ['Cincinnati, Ohio', 'Cleveland, Ohio', 'Akron, Ohio'];
 const schemaServiceName = activeLocation ? `Garage Door Opener Repair in ${locationDisplayName}` : 'Garage Door Opener Repair';
 const schemaDescription = activeLocation
   ? `Professional garage door opener repair services across ${coverageAreaLabel} including motors, remotes, sensors, programming, and smart opener installations.`
-  : 'Garage door opener repair across Greater Cincinnati and Greater Cleveland, including motors, remotes, sensors, programming, and smart controls.';
+  : 'Garage door opener repair across Greater Cincinnati, Greater Cleveland, and Akron, including motors, remotes, sensors, programming, and smart controls.';
 const canonicalPath = activeLocation
   ? buildLocationServiceCanonicalPath(activeLocation.slug, 'opener-repair')
   : '/services/opener-repair';
 const pageUrl = `${getSiteOrigin()}${canonicalPath}`;
 const whyChooseCoverage = activeLocation
-  ? isClevelandMarket ? `Opener troubleshooting across ${coverageAreaLabel}` : `Same-day service for most repairs across ${coverageAreaLabel}`
-  : 'Opener troubleshooting in both service markets';
+  ? isLocalMarket ? `Opener troubleshooting across ${coverageAreaLabel}` : `Same-day service for most repairs across ${coverageAreaLabel}`
+  : 'Opener troubleshooting in our service markets';
 const faqIntro = activeLocation
-  ? isClevelandMarket
+  ? isLocalMarket
     ? `Helpful answers about repairing and upgrading garage door openers for homeowners in ${locationDisplayName}`
     : `Helpful answers about repairing and upgrading garage door openers for ${coverageAreaLabel} homeowners`
   : 'Helpful answers about repairing and upgrading garage door openers';
@@ -152,7 +158,7 @@ const contactSubtitle = activeLocation
   description={pageDescription}
   canonical={canonicalPath}
   callNowPhoneNumber={activeLocation ? displayPhoneNumber : undefined}
-  market={activeLocation?.market === 'Cleveland Metro' ? 'Cleveland Metro' : undefined}
+  market={activeLocation?.market}
   schemaType="Service"
 >
   <Nav />
@@ -168,20 +174,20 @@ const contactSubtitle = activeLocation
         '@type': activeLocation ? 'LocalBusiness' : 'Organization',
         name: BUSINESS_INFO.name,
         legalName: BUSINESS_INFO.legalName,
-        '@id': isClevelandMarket ? `${getSiteOrigin()}/locations/cleveland#local-business` : businessEntityId,
+        '@id': isLocalMarket ? `${getSiteOrigin()}/locations/${marketHub?.slug}#local-business` : businessEntityId,
         email: BUSINESS_INFO.email,
         ...(activeLocation ? {
-          telephone: displayPhoneNumber,
+          telephone: displayPhoneNumber || undefined,
           ...(providerAddress ? { address: { '@type': 'PostalAddress', ...providerAddress } } : {})
         } : {
           contactPoint: callMarkets.map(market => ({
             '@type': 'ContactPoint',
             telephone: market.phoneDisplay,
             contactType: 'customer service',
-            areaServed: { '@type': 'City', name: market.label, addressRegion: 'OH' }
+            areaServed: { '@type': 'City', name: market.label, ...(market.id === 'akron' ? { address: { '@type': 'PostalAddress', addressRegion: 'OH', addressCountry: 'US' } } : { addressRegion: 'OH' }) }
           }))
         }),
-        ...(isClevelandMarket ? { openingHoursSpecification: [{
+        ...(isLocalMarket && !isAkronMarket ? { openingHoursSpecification: [{
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
           opens: '00:00',
@@ -247,7 +253,7 @@ const contactSubtitle = activeLocation
             class="btn-accent text-lg px-8 py-4 inline-flex items-center justify-center font-semibold w-full sm:w-auto gap-2 sm:order-first"
           >
             <Icon name="mdi:phone" size="20" class="inline" aria-hidden="true" />
-            <span>Call Now: <span class="nap-phone">{displayPhoneNumber}</span></span>
+            <span>{displayPhoneNumber ? <>Call Now: <span class="nap-phone">{displayPhoneNumber}</span></> : "Request Service"}</span>
           </a>
         )}
         <a
@@ -272,7 +278,7 @@ const contactSubtitle = activeLocation
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={beltDriveImage}
-              alt={`Quiet belt-drive garage door opener with DC motor${locationDisplayName ? ` in ${locationDisplayName}` : ''}`}
+              alt={`Quiet belt-drive garage door opener with DC motor${locationDisplayName && !isAkronMarket ? ` in ${locationDisplayName}` : ''}`}
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -296,11 +302,11 @@ const contactSubtitle = activeLocation
             <div class="space-y-1 text-xs">
               <div class="flex justify-between">
                 <span class="text-ink/60">Noise:</span>
-                <span class={`font-medium ${isClevelandMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
+                <span class={`font-medium ${isLocalMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Maintenance:</span>
-                <span class={`font-medium ${isClevelandMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
+                <span class={`font-medium ${isLocalMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Best for:</span>
@@ -317,7 +323,7 @@ const contactSubtitle = activeLocation
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={chainDriveImage}
-              alt={`Chain-drive garage door opener with durable metal trolley${locationDisplayName ? ` in ${locationDisplayName}` : ''}`}
+              alt={`Chain-drive garage door opener with durable metal trolley${locationDisplayName && !isAkronMarket ? ` in ${locationDisplayName}` : ''}`}
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -341,11 +347,11 @@ const contactSubtitle = activeLocation
             <div class="space-y-1 text-xs">
               <div class="flex justify-between">
                 <span class="text-ink/60">Noise:</span>
-                <span class={`font-medium ${isClevelandMarket ? 'text-yellow-800' : 'text-yellow-600'}`}>Medium</span>
+                <span class={`font-medium ${isLocalMarket ? 'text-yellow-800' : 'text-yellow-600'}`}>Medium</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Maintenance:</span>
-                <span class={`font-medium ${isClevelandMarket ? 'text-yellow-800' : 'text-yellow-600'}`}>Medium</span>
+                <span class={`font-medium ${isLocalMarket ? 'text-yellow-800' : 'text-yellow-600'}`}>Medium</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Best for:</span>
@@ -362,7 +368,7 @@ const contactSubtitle = activeLocation
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={directDriveImage}
-              alt={`Direct-drive jackshaft opener mounted beside garage door${locationDisplayName ? ` in ${locationDisplayName}` : ''}`}
+              alt={`Direct-drive jackshaft opener mounted beside garage door${locationDisplayName && !isAkronMarket ? ` in ${locationDisplayName}` : ''}`}
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -386,11 +392,11 @@ const contactSubtitle = activeLocation
             <div class="space-y-1 text-xs">
               <div class="flex justify-between">
                 <span class="text-ink/60">Noise:</span>
-                <span class={`font-medium ${isClevelandMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
+                <span class={`font-medium ${isLocalMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Maintenance:</span>
-                <span class={`font-medium ${isClevelandMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
+                <span class={`font-medium ${isLocalMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Best for:</span>
@@ -407,7 +413,7 @@ const contactSubtitle = activeLocation
           <div class="aspect-square bg-gray-100 flex items-center justify-center h-32">
             <Image
               src={screwDriveImage}
-              alt={`Screw-drive garage door opener with threaded steel rod${locationDisplayName ? ` in ${locationDisplayName}` : ''}`}
+              alt={`Screw-drive garage door opener with threaded steel rod${locationDisplayName && !isAkronMarket ? ` in ${locationDisplayName}` : ''}`}
               width="200"
               height="200"
               class="w-full h-full object-cover object-center"
@@ -431,11 +437,11 @@ const contactSubtitle = activeLocation
             <div class="space-y-1 text-xs">
               <div class="flex justify-between">
                 <span class="text-ink/60">Noise:</span>
-                <span class={`font-medium ${isClevelandMarket ? 'text-orange-800' : 'text-orange-600'}`}>Medium-High</span>
+                <span class={`font-medium ${isLocalMarket ? 'text-orange-800' : 'text-orange-600'}`}>Medium-High</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Maintenance:</span>
-                <span class={`font-medium ${isClevelandMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
+                <span class={`font-medium ${isLocalMarket ? 'text-green-800' : 'text-green-600'}`}>Low</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-ink/60">Best for:</span>
@@ -456,7 +462,8 @@ const contactSubtitle = activeLocation
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div>
           <h2 class="text-3xl font-bold text-ink mb-6">Why Choose Our Opener Repair?</h2>
-          {isClevelandMarket && activeLocation && !activeLocation.isHub && activeLocation.localIssues && (
+        {isAkronMarket && activeLocation?.localIntro && <p class="text-ink/80 leading-relaxed mb-6">{activeLocation.localIntro}</p>}
+          {isLocalMarket && activeLocation && (!activeLocation.isHub || isAkronMarket) && activeLocation.localIssues && (
             <p class="text-ink/80 leading-relaxed mb-6">{activeLocation.localIssues}</p>
           )}
           <ul class="space-y-4">
@@ -541,23 +548,23 @@ const contactSubtitle = activeLocation
   />
 
   <ContactForm
-    includeSchema={!isClevelandMarket}
+    includeSchema={!isLocalMarket}
     title={contactTitle}
     subtitle={contactSubtitle}
     bgColor="white"
   />
 
-  {!isClevelandMarket && (
+  {!isLocalMarket && (
   <HiddenSeoText
     title={`Garage door opener expertise${locationDisplayName ? ` for ${locationDisplayName}` : ''}`}
     paragraphs={filterStrings([
       activeLocation
         ? `Technicians serving ${coverageAreaLabel} repair belt-drive, chain-drive, and jackshaft openers along with keypads, safety sensors, and wall consoles. We stock gears, rail assemblies, logic boards, and travel modules so most fixes stay on one visit.`
-        : 'Technicians serving Cincinnati and Cleveland troubleshoot belt-drive, chain-drive, and jackshaft openers along with keypads, safety sensors, and wall consoles.',
+        : 'Technicians serving Cincinnati, Cleveland, and Akron troubleshoot belt-drive, chain-drive, and jackshaft openers along with keypads, safety sensors, and wall consoles.',
       'Every opener visit includes force and travel calibration, photo eye alignment, and backup battery tests to keep doors operating safely. We also set up smart controls, Wi-Fi connectivity, and myQ-style integrations when requested.',
       activeLocation
         ? `Same-day appointments are available throughout ${coverageAreaLabel} for doors stuck open, reversing unexpectedly, or failing to respond to remotes.`
-        : 'Call with your address and opener issue to check appointment availability in Cincinnati or Cleveland.',
+        : 'Call with your address and opener issue to check appointment availability in Cincinnati, Cleveland, or Akron.',
       surroundingAreasLabel
     ])}
     bullets={filterStrings([
@@ -585,5 +592,5 @@ const contactSubtitle = activeLocation
 
   </main>
   <Footer />
-  <CallNowButton phoneNumber={displayPhoneNumber} />
+  {activeLocation && displayPhoneNumber && !isAkronMarket && <CallNowButton phoneNumber={displayPhoneNumber} />}
 </Base>

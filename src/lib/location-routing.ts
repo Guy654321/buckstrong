@@ -34,12 +34,12 @@ function normalizeSlug(value: string | undefined | null): string {
 
 export function buildLocationCitySegment(locationSlug: string | undefined | null): string {
   const normalized = normalizeSlug(locationSlug);
-  const citySlug = normalized.replace(/^(cincinnati|cleveland)-/, '');
+  const citySlug = normalized.replace(/^(cincinnati|cleveland|akron)-/, '');
   return citySlug ? `${citySlug}-oh` : '';
 }
 
 export function buildLocationCitySlug(locationSlug: string | undefined | null): string {
-  return normalizeSlug(locationSlug).replace(/^(cincinnati|cleveland)-/, '');
+  return normalizeSlug(locationSlug).replace(/^(cincinnati|cleveland|akron)-/, '');
 }
 
 export function buildLocalizedServicePath(

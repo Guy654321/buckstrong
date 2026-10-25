@@ -1,0 +1,32 @@
+{
+  "name": "Barberton",
+  "slug": "akron-barberton",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.006903,
+    "lng": -81.60439
+  },
+  "areaType": "City",
+  "zips": [
+    "44203"
+  ],
+  "surroundingAreas": [
+    "Norton",
+    "New Franklin",
+    "Kenmore",
+    "Coventry Township"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Barberton, OH",
+  "metaTitle": "Barberton, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Barberton, OH. Looking beyond the first visible fault. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Looking beyond the first visible fault",
+  "localIntro": "For a Barberton home, a garage door repair starts with the equipment already in place. We check the door sections, lifting hardware, and safety devices together, then explain which repairs are practical and when a replacement deserves consideration.",
+  "localIssues": "A broken spring can leave the opener working while the door barely moves. Repeatedly pressing the remote can add strain; stop using the system until it has been assessed.",
+  "localAdvice": "For a section repair, note the manufacturer and approximate door age if available. We explain when compatible parts are practical and when a complete door comparison is more useful.",
+  "localCommercialIntro": "A Barberton shop or managed garage should report whether the door can be secured and whether normal access is blocked. Photos of the equipment and the full opening help explain the problem without moving damaged hardware."
+}

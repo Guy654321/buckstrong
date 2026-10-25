@@ -1,0 +1,585 @@
+[
+  {
+    "name": "Cuyahoga Falls",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44221",
+      "44223"
+    ],
+    "kind": "city",
+    "lat": 41.182881,
+    "lng": -81.553008,
+    "censusGeoid": "16000US3919778",
+    "population2024acs": 50909,
+    "ownerOccupiedPct": 64.4,
+    "singleUnitPct": 70.4,
+    "slug": "akron-cuyahoga-falls"
+  },
+  {
+    "name": "Stow",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44224"
+    ],
+    "kind": "city",
+    "lat": 41.176261,
+    "lng": -81.436523,
+    "censusGeoid": "16000US3974944",
+    "population2024acs": 34240,
+    "ownerOccupiedPct": 72.0,
+    "singleUnitPct": 75.7,
+    "slug": "akron-stow"
+  },
+  {
+    "name": "Tallmadge",
+    "county": [
+      "Summit",
+      "Portage"
+    ],
+    "zips": [
+      "44278"
+    ],
+    "kind": "city",
+    "lat": 41.106119,
+    "lng": -81.424834,
+    "censusGeoid": "16000US3976106",
+    "population2024acs": 18335,
+    "ownerOccupiedPct": 82.7,
+    "singleUnitPct": 82.9,
+    "slug": "akron-tallmadge"
+  },
+  {
+    "name": "Munroe Falls",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44262"
+    ],
+    "kind": "city",
+    "lat": 41.139576,
+    "lng": -81.436058,
+    "censusGeoid": "16000US3953312",
+    "population2024acs": 5000,
+    "ownerOccupiedPct": 79.2,
+    "singleUnitPct": 78.1,
+    "slug": "akron-munroe-falls"
+  },
+  {
+    "name": "Silver Lake",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44224"
+    ],
+    "kind": "village",
+    "lat": 41.156278,
+    "lng": -81.455664,
+    "censusGeoid": "16000US3972494",
+    "population2024acs": 2515,
+    "ownerOccupiedPct": 94.1,
+    "singleUnitPct": 99.6,
+    "slug": "akron-silver-lake"
+  },
+  {
+    "name": "Fairlawn",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44333"
+    ],
+    "kind": "city",
+    "lat": 41.131014,
+    "lng": -81.622307,
+    "censusGeoid": "16000US3926166",
+    "population2024acs": 7711,
+    "ownerOccupiedPct": 76.7,
+    "singleUnitPct": 70.1,
+    "slug": "akron-fairlawn"
+  },
+  {
+    "name": "Bath Township",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44333"
+    ],
+    "kind": "township",
+    "lat": 41.178988,
+    "lng": -81.649155,
+    "censusGeoid": "06000US3915304248",
+    "population2024acs": 9993,
+    "ownerOccupiedPct": 96.4,
+    "singleUnitPct": 98.0,
+    "slug": "akron-bath-township"
+  },
+  {
+    "name": "Copley Township",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44321"
+    ],
+    "kind": "township",
+    "lat": 41.085038,
+    "lng": -81.632306,
+    "censusGeoid": "06000US3915318658",
+    "population2024acs": 18349,
+    "ownerOccupiedPct": 74.1,
+    "singleUnitPct": 73.7,
+    "slug": "akron-copley-township"
+  },
+  {
+    "name": "Barberton",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44203"
+    ],
+    "kind": "city",
+    "lat": 41.006903,
+    "lng": -81.60439,
+    "censusGeoid": "16000US3903828",
+    "population2024acs": 24844,
+    "ownerOccupiedPct": 62.3,
+    "singleUnitPct": 76.7,
+    "slug": "akron-barberton"
+  },
+  {
+    "name": "Norton",
+    "county": [
+      "Summit",
+      "Wayne"
+    ],
+    "zips": [
+      "44203"
+    ],
+    "kind": "city",
+    "lat": 41.028931,
+    "lng": -81.645535,
+    "censusGeoid": "16000US3957260",
+    "population2024acs": 11524,
+    "ownerOccupiedPct": 87.4,
+    "singleUnitPct": 93.4,
+    "slug": "akron-norton"
+  },
+  {
+    "name": "Green",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44312",
+      "44319",
+      "44685"
+    ],
+    "kind": "city",
+    "lat": 40.953816,
+    "lng": -81.472042,
+    "censusGeoid": "16000US3931860",
+    "population2024acs": 27393,
+    "ownerOccupiedPct": 75.1,
+    "singleUnitPct": 79.2,
+    "slug": "akron-green"
+  },
+  {
+    "name": "New Franklin",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44319",
+      "44216"
+    ],
+    "kind": "city",
+    "lat": 40.954288,
+    "lng": -81.584869,
+    "censusGeoid": "16000US3954562",
+    "population2024acs": 13843,
+    "ownerOccupiedPct": 88.3,
+    "singleUnitPct": 93.0,
+    "slug": "akron-new-franklin"
+  },
+  {
+    "name": "Coventry Township",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44319"
+    ],
+    "kind": "township",
+    "lat": 41.004636,
+    "lng": -81.534511,
+    "censusGeoid": "06000US3915319036",
+    "population2024acs": 10194,
+    "ownerOccupiedPct": 67.1,
+    "singleUnitPct": 77.7,
+    "slug": "akron-coventry-township"
+  },
+  {
+    "name": "Springfield Township",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44312"
+    ],
+    "kind": "township",
+    "lat": 41.006513,
+    "lng": -81.438547,
+    "censusGeoid": "06000US3915374130",
+    "population2024acs": 14122,
+    "ownerOccupiedPct": 85.3,
+    "singleUnitPct": 87.8,
+    "slug": "akron-springfield-township"
+  },
+  {
+    "name": "Mogadore",
+    "county": [
+      "Summit",
+      "Portage"
+    ],
+    "zips": [
+      "44260"
+    ],
+    "kind": "village",
+    "lat": 41.05246,
+    "lng": -81.407317,
+    "censusGeoid": "16000US3951058",
+    "population2024acs": 3806,
+    "ownerOccupiedPct": 87.8,
+    "singleUnitPct": 91.7,
+    "slug": "akron-mogadore"
+  },
+  {
+    "name": "Lakemore",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44250",
+      "44312"
+    ],
+    "kind": "village",
+    "lat": 41.022654,
+    "lng": -81.423439,
+    "censusGeoid": "16000US3941454",
+    "population2024acs": 2914,
+    "ownerOccupiedPct": 84.3,
+    "singleUnitPct": 90.8,
+    "slug": "akron-lakemore"
+  },
+  {
+    "name": "Kent",
+    "county": [
+      "Portage"
+    ],
+    "zips": [
+      "44240"
+    ],
+    "kind": "city",
+    "lat": 41.147561,
+    "lng": -81.361965,
+    "censusGeoid": "16000US3939872",
+    "population2024acs": 27116,
+    "ownerOccupiedPct": 40.8,
+    "singleUnitPct": 45.6,
+    "slug": "akron-kent"
+  },
+  {
+    "name": "Brimfield Township",
+    "county": [
+      "Portage"
+    ],
+    "zips": [
+      "44240",
+      "44260"
+    ],
+    "kind": "township",
+    "lat": 41.094856,
+    "lng": -81.342265,
+    "censusGeoid": "06000US3913308840",
+    "population2024acs": 11413,
+    "ownerOccupiedPct": 70.0,
+    "singleUnitPct": 83.0,
+    "slug": "akron-brimfield-township"
+  },
+  {
+    "name": "Ravenna",
+    "county": [
+      "Portage"
+    ],
+    "zips": [
+      "44266"
+    ],
+    "kind": "city",
+    "lat": 41.161567,
+    "lng": -81.242058,
+    "censusGeoid": "16000US3965592",
+    "population2024acs": 11274,
+    "ownerOccupiedPct": 47.4,
+    "singleUnitPct": 64.6,
+    "slug": "akron-ravenna"
+  },
+  {
+    "name": "Rootstown Township",
+    "county": [
+      "Portage"
+    ],
+    "zips": [
+      "44272"
+    ],
+    "kind": "township",
+    "lat": 41.093634,
+    "lng": -81.250437,
+    "censusGeoid": "06000US3913368392",
+    "population2024acs": 8658,
+    "ownerOccupiedPct": 81.0,
+    "singleUnitPct": 86.6,
+    "slug": "akron-rootstown-township"
+  },
+  {
+    "name": "Suffield Township",
+    "county": [
+      "Portage"
+    ],
+    "zips": [
+      "44260"
+    ],
+    "kind": "township",
+    "lat": 41.025518,
+    "lng": -81.341883,
+    "censusGeoid": "06000US3913375189",
+    "population2024acs": 6005,
+    "ownerOccupiedPct": 82.1,
+    "singleUnitPct": 93.7,
+    "slug": "akron-suffield-township"
+  },
+  {
+    "name": "Wadsworth",
+    "county": [
+      "Medina"
+    ],
+    "zips": [
+      "44281"
+    ],
+    "kind": "city",
+    "lat": 41.027436,
+    "lng": -81.732205,
+    "censusGeoid": "16000US3980304",
+    "population2024acs": 24492,
+    "ownerOccupiedPct": 67.9,
+    "singleUnitPct": 75.5,
+    "slug": "akron-wadsworth"
+  },
+  {
+    "name": "Doylestown",
+    "county": [
+      "Wayne"
+    ],
+    "zips": [
+      "44230"
+    ],
+    "kind": "village",
+    "lat": 40.970003,
+    "lng": -81.695695,
+    "censusGeoid": "16000US3922568",
+    "population2024acs": 3048,
+    "ownerOccupiedPct": 76.4,
+    "singleUnitPct": 78.5,
+    "slug": "akron-doylestown"
+  },
+  {
+    "name": "Rittman",
+    "county": [
+      "Wayne",
+      "Medina"
+    ],
+    "zips": [
+      "44270"
+    ],
+    "kind": "city",
+    "lat": 40.973373,
+    "lng": -81.784583,
+    "censusGeoid": "16000US3967356",
+    "population2024acs": 6044,
+    "ownerOccupiedPct": 71.7,
+    "singleUnitPct": 81.2,
+    "slug": "akron-rittman"
+  },
+  {
+    "name": "Hartville",
+    "county": [
+      "Stark"
+    ],
+    "zips": [
+      "44632"
+    ],
+    "kind": "village",
+    "lat": 40.961452,
+    "lng": -81.335123,
+    "censusGeoid": "16000US3934328",
+    "population2024acs": 3377,
+    "ownerOccupiedPct": 64.2,
+    "singleUnitPct": 71.1,
+    "slug": "akron-hartville"
+  },
+  {
+    "name": "Uniontown",
+    "county": [
+      "Stark"
+    ],
+    "zips": [
+      "44685"
+    ],
+    "kind": "CDP",
+    "lat": 40.959366,
+    "lng": -81.403701,
+    "censusGeoid": "16000US3978736",
+    "population2024acs": 7920,
+    "ownerOccupiedPct": 81.9,
+    "singleUnitPct": 86.5,
+    "slug": "akron-uniontown"
+  },
+  {
+    "name": "North Canton",
+    "county": [
+      "Stark"
+    ],
+    "zips": [
+      "44720"
+    ],
+    "kind": "city",
+    "lat": 40.874146,
+    "lng": -81.397134,
+    "censusGeoid": "16000US3956294",
+    "population2024acs": 17727,
+    "ownerOccupiedPct": 69.3,
+    "singleUnitPct": 67.7,
+    "slug": "akron-north-canton"
+  },
+  {
+    "name": "Canal Fulton",
+    "county": [
+      "Stark"
+    ],
+    "zips": [
+      "44614"
+    ],
+    "kind": "city",
+    "lat": 40.892302,
+    "lng": -81.58793,
+    "censusGeoid": "16000US3911304",
+    "population2024acs": 5337,
+    "ownerOccupiedPct": 62.7,
+    "singleUnitPct": 72.3,
+    "slug": "akron-canal-fulton"
+  },
+  {
+    "name": "Jackson Township",
+    "county": [
+      "Stark"
+    ],
+    "zips": [
+      "44718",
+      "44720",
+      "44646"
+    ],
+    "kind": "township",
+    "lat": 40.863347,
+    "lng": -81.479621,
+    "censusGeoid": "06000US3915138094",
+    "population2024acs": 43306,
+    "ownerOccupiedPct": 72.7,
+    "singleUnitPct": 76.1,
+    "slug": "akron-jackson-township"
+  },
+  {
+    "name": "Ellet",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44312"
+    ],
+    "kind": "neighborhood",
+    "lat": 41.0499213,
+    "lng": -81.4375662,
+    "slug": "akron-ellet"
+  },
+  {
+    "name": "Goodyear Heights",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44305"
+    ],
+    "kind": "neighborhood",
+    "lat": 41.0781117,
+    "lng": -81.4676137,
+    "slug": "akron-goodyear-heights"
+  },
+  {
+    "name": "Firestone Park",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44301"
+    ],
+    "kind": "neighborhood",
+    "lat": 41.0426111,
+    "lng": -81.5195673,
+    "slug": "akron-firestone-park"
+  },
+  {
+    "name": "Kenmore",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44314"
+    ],
+    "kind": "neighborhood",
+    "lat": 41.0440145,
+    "lng": -81.5578979,
+    "slug": "akron-kenmore"
+  },
+  {
+    "name": "Northwest Akron",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44313"
+    ],
+    "kind": "neighborhood",
+    "lat": 41.1246666,
+    "lng": -81.5807235,
+    "slug": "akron-northwest-akron"
+  },
+  {
+    "name": "Wallhaven",
+    "county": [
+      "Summit"
+    ],
+    "zips": [
+      "44313"
+    ],
+    "kind": "neighborhood",
+    "lat": 41.1095846,
+    "lng": -81.5692638,
+    "slug": "akron-wallhaven"
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "name": "Rootstown Township",
+  "slug": "akron-rootstown-township",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.093634,
+    "lng": -81.250437
+  },
+  "areaType": "AdministrativeArea",
+  "zips": [
+    "44272"
+  ],
+  "surroundingAreas": [
+    "Ravenna",
+    "Brimfield Township",
+    "Suffield Township",
+    "Kent"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Rootstown Township, OH",
+  "metaTitle": "Rootstown Township, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Rootstown Township, OH. Planning work for the eastern service corridor. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Planning work for the eastern service corridor",
+  "localIntro": "Rootstown Township homeowners southeast of Kent can request garage door repairs, maintenance, and new-door estimates. Include changes in sound or movement, and note whether the problem happens every time or only intermittently.",
+  "localIssues": "A door used less often can still develop binding hardware or unreliable controls. An inspection should test safe movement and reversal rather than relying on the last time it worked.",
+  "localAdvice": "If you are requesting maintenance, mention any change in sound or travel. A video taken from a safe distance can help explain an intermittent symptom.",
+  "localCommercialIntro": "A Rootstown Township facility should describe both the symptom and how the opening is used. Let us know if the door is needed for routine deliveries, vehicle storage, or occasional equipment access."
+}

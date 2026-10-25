@@ -1,0 +1,32 @@
+{
+  "name": "Northwest Akron",
+  "slug": "akron-northwest-akron",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.124667,
+    "lng": -81.580724
+  },
+  "areaType": "Place",
+  "zips": [
+    "44313"
+  ],
+  "surroundingAreas": [
+    "Wallhaven",
+    "Fairlawn",
+    "Cuyahoga Falls",
+    "Copley Township"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Northwest Akron, OH",
+  "metaTitle": "Northwest Akron, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Northwest Akron, OH. Measuring for a quieter, better-fitting system. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Measuring for a quieter, better-fitting system",
+  "localIntro": "For a Northwest Akron home, a new garage door starts with a measured opening and a clear understanding of how the garage is used. We review available headroom, insulation preferences, exterior style, and opener compatibility together.",
+  "localIssues": "An opener upgrade may reduce motor noise, but loose supports or worn rollers can continue to transmit vibration. We assess those sources before recommending equipment.",
+  "localAdvice": "For a new door, share design preferences and any association requirements. Insulation, windows, spring sizing, and track clearance are reviewed after the opening is measured.",
+  "localCommercialIntro": "Northwest Akron is a city-recognized residential neighborhood, distinct from neighboring Fairlawn and Bath Township. For a business or managed garage here, confirm the site contact, access permissions, and the opening that needs work before arranging an equipment assessment."
+}

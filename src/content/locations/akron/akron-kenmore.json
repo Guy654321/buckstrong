@@ -1,0 +1,32 @@
+{
+  "name": "Kenmore",
+  "slug": "akron-kenmore",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.044015,
+    "lng": -81.557898
+  },
+  "areaType": "Place",
+  "zips": [
+    "44314"
+  ],
+  "surroundingAreas": [
+    "Firestone Park",
+    "Coventry Township",
+    "Barberton",
+    "Wallhaven"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Kenmore, Akron, OH",
+  "metaTitle": "Kenmore, Akron, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Kenmore, Akron, OH. Repair choices on Akron’s southwestern side. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Repair choices on Akron’s southwestern side",
+  "localIntro": "For a Kenmore home on Akron’s southwestern side, tell us which garage opening needs work and how it can be accessed. We can review a stuck door, damaged hardware, or an opener problem without assuming every garage uses the same equipment.",
+  "localIssues": "Worn bottom seals and damaged lower sections need different repairs. We inspect the contact with the floor and the condition of the moving door before recommending materials.",
+  "localAdvice": "If a remote has been lost, include the opener model in your request. Reprogramming access and checking door safety can be discussed together.",
+  "localCommercialIntro": "Kenmore is an Akron neighborhood on the southwestern side of the city. For a business or managed garage here, confirm the site contact, access permissions, and the opening that needs work before arranging an equipment assessment."
+}

@@ -1,3 +1,5 @@
+import akronHub from '../content/locations/akron.json';
+
 export interface CallMarket {
   id: string;
   label: string;
@@ -20,6 +22,12 @@ const LAUNCH_CALL_MARKETS: CallMarket[] = [
     phoneDisplay: "216-930-2980",
     phoneHref: "",
   },
+  ...(akronHub.phone.trim() ? [{
+    id: "akron",
+    label: "Akron",
+    phoneDisplay: akronHub.phone,
+    phoneHref: "",
+  }] : []),
 ];
 
 export const CALL_MARKETS: CallMarket[] = LAUNCH_CALL_MARKETS.map((market) => ({

@@ -1,0 +1,32 @@
+{
+  "name": "Bath Township",
+  "slug": "akron-bath-township",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.178988,
+    "lng": -81.649155
+  },
+  "areaType": "AdministrativeArea",
+  "zips": [
+    "44333"
+  ],
+  "surroundingAreas": [
+    "Fairlawn",
+    "Northwest Akron",
+    "Copley Township",
+    "Cuyahoga Falls"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Bath Township, OH",
+  "metaTitle": "Bath Township, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Bath Township, OH. Service planning for township properties. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Service planning for township properties",
+  "localIntro": "In Bath Township, northwest of Akron, include any driveway or gate instructions when requesting service. Clear access to the garage helps us prepare for a stuck door, opener problem, or a visit to measure for a replacement.",
+  "localIssues": "Larger or heavier doors need springs and operators selected for their actual weight and configuration. We evaluate the whole lifting system before proposing replacement parts.",
+  "localAdvice": "Tell us which bay is affected if the property has more than one door. Photos and model labels can help distinguish equipment that looks similar from the driveway.",
+  "localCommercialIntro": "A Bath Township facility may have an Akron mailing address. Provide the actual street address, gate instructions, and door or operator model so a commercial request can be routed to the right property."
+}
