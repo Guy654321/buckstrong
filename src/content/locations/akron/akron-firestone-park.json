@@ -1,0 +1,32 @@
+{
+  "name": "Firestone Park",
+  "slug": "akron-firestone-park",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.042611,
+    "lng": -81.519567
+  },
+  "areaType": "Place",
+  "zips": [
+    "44301"
+  ],
+  "surroundingAreas": [
+    "Kenmore",
+    "Coventry Township",
+    "Goodyear Heights",
+    "Ellet"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Firestone Park, Akron, OH",
+  "metaTitle": "Firestone Park, Akron, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Firestone Park, Akron, OH. A practical inspection for everyday garage access. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "A practical inspection for everyday garage access",
+  "localIntro": "Firestone Park homeowners south of central Akron can request door and opener service through our Akron team. If a door has become noisy or unreliable, describe where in its travel the problem occurs so the inspection can address the cause.",
+  "localIssues": "When the door hesitates at the same point each time, track position and panel movement deserve a check. Increasing opener force can hide resistance without correcting it.",
+  "localAdvice": "Note where travel stops and whether the wall control behaves differently from the remote. Do not reach into the track or adjust tensioned hardware.",
+  "localCommercialIntro": "Firestone Park is a recognized neighborhood south of central Akron. For a business or managed garage here, confirm the site contact, access permissions, and the opening that needs work before arranging an equipment assessment."
+}

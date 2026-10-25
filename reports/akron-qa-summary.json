@@ -1,0 +1,232 @@
+{
+  "verifiedAt": "2026-10-23T11:30:35.991049+00:00",
+  "branch": "codex/akron-market-hub",
+  "base": "e0c7204",
+  "phone": "(234) 231-6525",
+  "clickToCall": "tel:2342316525",
+  "locationRecords": 36,
+  "newCanonicalUrls": 936,
+  "build": "passed with Node 24.22.1",
+  "typecheck": {
+    "errors": 0,
+    "warnings": 0,
+    "existingHints": 16
+  },
+  "tests": {
+    "passed": 38,
+    "failed": 0
+  },
+  "sitemapUrls": 3999,
+  "crawl": {
+    "pages": 936,
+    "locations": 36,
+    "internalLinksChecked": 183943,
+    "assetsChecked": 11196,
+    "jsonLdBlocks": 2988,
+    "cityNormalizedDuplicateBodies": 0,
+    "issues": 0,
+    "failures": []
+  },
+  "ui": {
+    "allNewPagesAt390px": 936,
+    "representativeChecks": 152,
+    "widths": [
+      320,
+      390,
+      840,
+      1280
+    ],
+    "contactPostFixChecks": 4,
+    "unresolvedFailures": 0
+  },
+  "lighthouse": [
+    {
+      "page": "/locations/akron",
+      "name": "hub-mobile",
+      "version": "12.8.2",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "failures": []
+    },
+    {
+      "page": "/locations/akron",
+      "name": "hub-desktop",
+      "version": "12.8.2",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "failures": []
+    },
+    {
+      "page": "/stow-oh/garage-door-repair",
+      "name": "repair-mobile",
+      "version": "12.8.2",
+      "scores": {
+        "performance": 98,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "failures": []
+    },
+    {
+      "page": "/fairlawn-oh/opener-repair",
+      "name": "opener-mobile",
+      "version": "12.8.2",
+      "scores": {
+        "performance": 97,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "failures": []
+    },
+    {
+      "page": "/green-oh/garage-door-installation",
+      "name": "installation-mobile",
+      "version": "12.8.2",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "failures": []
+    },
+    {
+      "page": "/kent-oh/commercial-jobs",
+      "name": "commercial-mobile",
+      "version": "12.8.2",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "failures": []
+    },
+    {
+      "page": "/bath-township-oh/garage-door-spring-replacement",
+      "name": "detail-mobile",
+      "version": "12.8.2",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "failures": []
+    },
+    {
+      "page": "/contact",
+      "name": "contact-mobile",
+      "version": "12.8.2",
+      "scores": {
+        "performance": 98,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "failures": []
+    }
+  ],
+  "regression": {
+    "existingPagesCompared": 2231,
+    "existingMarketPagesCompared": 2225,
+    "existingMarketMainContentChanged": [],
+    "sharedPagesChanged": [
+      "/.",
+      "/privacy-policy",
+      "/services/opener-repair",
+      "/services/commercial-jobs",
+      "/services/garage-door-repair",
+      "/services/garage-door-installation"
+    ],
+    "compiledStylesheetsUnchanged": true
+  },
+  "forms": {
+    "builtNode24Handler": true,
+    "isolatedLocalReceiver": true,
+    "mainHubAndFourDetailFamiliesPassed": true,
+    "existingCincinnatiClevelandHubsPassed": true,
+    "contactFinalPassed": {
+      "mainLandmark": 1,
+      "reset": true,
+      "source": "http://127.0.0.1:4323/contact",
+      "status": "Thanks! Your request has been sent. We will be in touch shortly.",
+      "submitEnabled": true,
+      "receiverConfirmed": true,
+      "receivedIssue": "opener-problems",
+      "receivedSource": "http://127.0.0.1:4323/contact"
+    },
+    "requiredValidationPassed": true,
+    "errorRetentionAndRetryPassed": true
+  },
+  "limitations": [
+    "No carrier/incoming-call test performed.",
+    "Akron hours remain unconfirmed.",
+    "Production Turnstile and live CRM/email delivery require post-deployment verification.",
+    "A Vercel preview is published; the source changes are prepared for GitHub review and production is unchanged."
+  ],
+  "deployment": {
+    "deploymentId": "dpl_3ELwUfFBbBd7VEJcjT6zTS9oByM4",
+    "projectId": "prj_08Ya6FgbjsHICCebf0chaIkwCYoC",
+    "project": "buckstrong",
+    "teamId": "team_wKvJut7pEDSetgZEmPDnXOZ9",
+    "url": "https://buckstrong-pqfnwd5ww-guy654321s-projects.vercel.app",
+    "hubUrl": "https://buckstrong-pqfnwd5ww-guy654321s-projects.vercel.app/locations/akron",
+    "status": "READY",
+    "target": "preview",
+    "framework": "Astro",
+    "source": "local uncommitted working tree based on e0c7204",
+    "buildSeconds": 325,
+    "productionChanged": false,
+    "gitCommitted": false,
+    "gitPushed": false,
+    "verification": {
+      "sitemapUrls": 3987,
+      "akronUrls": 936,
+      "missingAkronSitemapEntries": [],
+      "hubStatus": 200,
+      "hubPhone": true,
+      "hubAddress": true,
+      "jsonLdValid": 3,
+      "turnstileWidgetPresent": false,
+      "robotsReferencesSitemap": true,
+      "llmsContainsAkron": true,
+      "llmsContainsPhone": true,
+      "previewRobotsHeader": "noindex",
+      "sitemaps": {
+        "custom": 3987,
+        "generated": 3999,
+        "combined": 3999,
+        "onlyGenerated": [
+          "https://www.buckstronggaragedoors.com/garage-door-aluminum-garage-doors-cincinnati-oh",
+          "https://www.buckstronggaragedoors.com/garage-door-carriage-house-garage-doors-cincinnati-oh",
+          "https://www.buckstronggaragedoors.com/garage-door-commercial-dock-industrial-door-equipment-service-cincinnati-oh",
+          "https://www.buckstronggaragedoors.com/garage-door-commercial-retail-municipal-garage-door-service-cincinnati-oh",
+          "https://www.buckstronggaragedoors.com/garage-door-commercial-warehouse-distribution-door-service-cincinnati-oh",
+          "https://www.buckstronggaragedoors.com/garage-door-opener-belt-drive-repair-cincinnati-oh",
+          "https://www.buckstronggaragedoors.com/garage-door-opener-chain-drive-repair-cincinnati-oh",
+          "https://www.buckstronggaragedoors.com/garage-door-opener-jackshaft-opener-repair-cincinnati-oh",
+          "https://www.buckstronggaragedoors.com/garage-door-opener-screw-drive-opener-repair-cincinnati-oh",
+          "https://www.buckstronggaragedoors.com/garage-door-steel-garage-doors-cincinnati-oh",
+          "https://www.buckstronggaragedoors.com/garage-door-wood-garage-doors-cincinnati-oh",
+          "https://www.buckstronggaragedoors.com/privacy-policy"
+        ]
+      },
+      "representativePages": "Akron hub, Kent location, Stow repair, Fairlawn opener, Green installation, Kent commercial, Bath Township spring detail, contact, Cincinnati hub, Cleveland hub: HTTP 200",
+      "remoteFunctionRuntime": "nodejs24.x confirmed in Vercel runtime logs; GET rejected because only POST is implemented",
+      "liveFormDelivery": "Not submitted or verified",
+      "browserVisualCheck": "Declined by user in browser permission prompt; no deployed screenshot captured",
+      "turnstile": "Widget not present in preview HTML; production environment remains unchanged"
+    }
+  }
+}

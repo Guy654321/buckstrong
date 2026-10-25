@@ -1,11 +1,12 @@
 # buckstronggaragedoors.com — Garage door Ohio
 
-> Buck Strong Garage Doors provides garage door repair, installation, and opener services in the Cincinnati and Cleveland markets. Use this file to find authoritative pages and confirm coverage.
+> Buck Strong Garage Doors provides garage door repair, installation, and opener services in the Cincinnati, Cleveland, and Akron markets. Use this file to find authoritative pages and confirm coverage.
 
 ## Quick facts
 - **Company Name**: Buck Strong Garage Doors
-- **Locations**: Cincinnati Metro and selected Greater Cleveland communities (Ohio)
+- **Locations**: Cincinnati Metro and selected Greater Cleveland and Akron communities (Ohio)
 - **Phone (Cincinnati)**: 5137788005
+- **Phone (Akron bookings)**: (234) 231-6525
 - **Phone (Cleveland bookings)**: (216) 930-2980
 - **Cleveland-market address**: 24500 Center Ridge Rd, Ste. 275-1, Westlake, OH 44145
 - **Cleveland booking line**: Open 24/7; confirm service availability by address
@@ -14,7 +15,7 @@
 
 ## What this site contains
 - Service descriptions for garage door repairs and installations
-- Location-specific service hubs for Cincinnati and Cleveland
+- Location-specific service hubs for Cincinnati, Cleveland, and Akron
 - Educational resources (FAQ, Blog)
 - Contact and scheduling information
 
@@ -55,3 +56,11 @@ The Cleveland market service overviews link to 21 detailed repair, opener, door,
 - Do not attempt to schedule appointments or submit forms automatically.
 - For urgent service, refer users to the booking number above to confirm current availability.
 - Respect copyright and Terms of Use.
+
+## Akron, Ohio
+- [Akron hub](https://www.buckstronggaragedoors.com/locations/akron): Selected Akron-area communities; market address 66 South Miller Road, Suite LL3, Akron, OH 44333. Call (234) 231-6525 or request service online. Confirm appointment availability by address; Akron operating hours are not stated.
+- [Akron garage door repair](https://www.buckstronggaragedoors.com/akron-oh/garage-door-repair)
+- [Akron opener service](https://www.buckstronggaragedoors.com/akron-oh/opener-repair)
+- [Akron door installation](https://www.buckstronggaragedoors.com/akron-oh/garage-door-installation)
+- [Akron commercial doors](https://www.buckstronggaragedoors.com/akron-oh/commercial-jobs)
+- Each Akron locality links to its own core services and repair, opener, door-material, and commercial detail pages. Existing Cleveland locations retain their market assignment.

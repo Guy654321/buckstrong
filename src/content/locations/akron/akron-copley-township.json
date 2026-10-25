@@ -1,0 +1,32 @@
+{
+  "name": "Copley Township",
+  "slug": "akron-copley-township",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.085038,
+    "lng": -81.632306
+  },
+  "areaType": "AdministrativeArea",
+  "zips": [
+    "44321"
+  ],
+  "surroundingAreas": [
+    "Fairlawn",
+    "Norton",
+    "Northwest Akron",
+    "Wallhaven"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Copley Township, OH",
+  "metaTitle": "Copley Township, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Copley Township, OH. Repair choices for the western Akron corridor. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Repair choices for the western Akron corridor",
+  "localIntro": "Copley Township lies west of Akron, beside Fairlawn and Norton. For an unreliable garage door, we check how the door moves under its own spring balance as well as how the opener responds, so a motor adjustment does not conceal worn hardware.",
+  "localIssues": "An insulated door still needs sound hinges, secure track, and a consistent perimeter seal. We check how the existing system moves before discussing cosmetic or energy-related upgrades.",
+  "localAdvice": "If the opener has become noisy, describe whether the sound comes from the ceiling unit or follows the moving door. That distinction helps the technician prepare.",
+  "localCommercialIntro": "For commercial doors in Copley Township, distinguish the facility address from the broader Montrose mailing or business-area name. Include loading access, parking restrictions, and the opening that needs assessment."
+}

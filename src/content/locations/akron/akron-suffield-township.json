@@ -1,0 +1,32 @@
+{
+  "name": "Suffield Township",
+  "slug": "akron-suffield-township",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.025518,
+    "lng": -81.341883
+  },
+  "areaType": "AdministrativeArea",
+  "zips": [
+    "44260"
+  ],
+  "surroundingAreas": [
+    "Hartville",
+    "Brimfield Township",
+    "Mogadore",
+    "Lakemore"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Suffield Township, OH",
+  "metaTitle": "Suffield Township, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Suffield Township, OH. Checking garage systems south of Mogadore. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Checking garage systems south of Mogadore",
+  "localIntro": "Suffield Township homeowners near Mogadore can request help with door hardware, opener problems, or a replacement project. For an upgrade, tell us about storage or utilities near the opening so clearance can be reviewed during measurement.",
+  "localIssues": "Before recommending a wall-mounted opener, we check the door's shaft, lift arrangement, and available side clearance. That equipment cannot be selected from ceiling height alone.",
+  "localAdvice": "Mention any storage, utilities, or obstructions beside the opening when asking about an upgrade. Final equipment choices depend on an on-site measurement and safety assessment.",
+  "localCommercialIntro": "For a Suffield Township commercial site, explain access from the driveway to the affected bay. Include any obstructions, operator labels, and whether the door can currently be secured without forcing it."
+}

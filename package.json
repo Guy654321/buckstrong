@@ -11,6 +11,7 @@
     "astro": "astro",
     "validate-sitemap": "node scripts/validate-sitemap.js",
     "check:orphaned": "node scripts/check-orphaned-pages.js",
+    "check:akron": "node scripts/check-akron-pages.mjs",
     "sitemap:build": "npm run build && npm run validate-sitemap",
     "test": "node --test"
   },
@@ -32,6 +33,6 @@
     "esbuild": "^0.25.0"
   },
   "engines": {
-    "node": ">=20.11.1 <21"
+    "node": "24.x"
   }
 }

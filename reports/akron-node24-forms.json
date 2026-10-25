@@ -1,0 +1,55 @@
+{
+  "runtime": "v24.22.1",
+  "builtFunctionRuntime": "nodejs24.x",
+  "successfulDeliveries": 7,
+  "deliveryTarget": "isolated localhost receiver, no live recipients",
+  "submissions": [
+    {
+      "page": "http://127.0.0.1:4323/locations/akron",
+      "zip": "44333",
+      "issue": "door-wont-open",
+      "consent": true
+    },
+    {
+      "page": "http://127.0.0.1:4323/stow-oh/garage-door-spring-replacement",
+      "zip": "44224",
+      "issue": "broken-spring",
+      "consent": true
+    },
+    {
+      "page": "http://127.0.0.1:4323/fairlawn-oh/garage-door-opener-belt-drive-repair",
+      "zip": "44333",
+      "issue": "opener-problems",
+      "consent": true
+    },
+    {
+      "page": "http://127.0.0.1:4323/green-oh/garage-door-steel-garage-doors",
+      "zip": "44312",
+      "issue": "new-installation",
+      "consent": true
+    },
+    {
+      "page": "http://127.0.0.1:4323/kent-oh/garage-door-commercial-retail-municipal-garage-door-service",
+      "zip": "44240",
+      "issue": "other",
+      "consent": true
+    },
+    {
+      "page": "http://127.0.0.1:4323/locations/cincinnati",
+      "zip": "45206",
+      "issue": "other",
+      "consent": true
+    },
+    {
+      "page": "http://127.0.0.1:4323/locations/cleveland",
+      "zip": "44145",
+      "issue": "other",
+      "consent": true
+    }
+  ],
+  "errorUI": {
+    "status": "We could not deliver your request. Please try again later.",
+    "valuesRetained": true,
+    "submitEnabled": true
+  }
+}

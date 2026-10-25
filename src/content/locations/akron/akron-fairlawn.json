@@ -1,0 +1,32 @@
+{
+  "name": "Fairlawn",
+  "slug": "akron-fairlawn",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.131014,
+    "lng": -81.622307
+  },
+  "areaType": "City",
+  "zips": [
+    "44333"
+  ],
+  "surroundingAreas": [
+    "Northwest Akron",
+    "Copley Township",
+    "Bath Township",
+    "Wallhaven"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Fairlawn, OH",
+  "metaTitle": "Fairlawn, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Fairlawn, OH. Garage door service near our Akron market address. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Garage door service near our Akron market address",
+  "localIntro": "Our Akron-market address is on South Miller Road, near Fairlawn homeowners on the city’s western side. Request help with a door that binds, an opener that reverses, or a replacement project, and we will review the equipment and scheduling options with you.",
+  "localIssues": "A gap along the bottom edge can come from a worn seal, a damaged retainer, or the way the door meets the floor. The cause determines which repair makes sense.",
+  "localAdvice": "For a new door, share the opening width and height if known, but treat them as preliminary. Final measurements include headroom, side room, and track clearance.",
+  "localCommercialIntro": "For a Fairlawn commercial opening, share tenant access requirements and whether work must be coordinated with the building manager. Our South Miller Road market address does not replace an on-site equipment assessment."
+}

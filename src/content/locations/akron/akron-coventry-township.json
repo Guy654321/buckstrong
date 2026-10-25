@@ -1,0 +1,32 @@
+{
+  "name": "Coventry Township",
+  "slug": "akron-coventry-township",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.004636,
+    "lng": -81.534511
+  },
+  "areaType": "AdministrativeArea",
+  "zips": [
+    "44319"
+  ],
+  "surroundingAreas": [
+    "Firestone Park",
+    "Kenmore",
+    "Barberton",
+    "New Franklin"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Coventry Township, OH",
+  "metaTitle": "Coventry Township, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Coventry Township, OH. A township-specific route for Portage Lakes requests. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "A township-specific route for Portage Lakes requests",
+  "localIntro": "Coventry Township homes are part of the Portage Lakes area south of Akron. When requesting service, include the street address and any access restrictions, along with whether the garage door can still be closed and secured.",
+  "localIssues": "Small gaps, rough travel, and damaged lower sections need different remedies. We assess the door's position and hardware before discussing seals, panel work, or a replacement.",
+  "localAdvice": "For a garage with limited ceiling space, include that detail in the request. Track layout and available headroom affect both new doors and opener options.",
+  "localCommercialIntro": "A Coventry Township business request should include the full address within the Portage Lakes area. Shared geographic names do not identify the building; note the affected opening and any access restrictions or delivery commitments."
+}

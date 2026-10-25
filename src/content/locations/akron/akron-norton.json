@@ -1,0 +1,32 @@
+{
+  "name": "Norton",
+  "slug": "akron-norton",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.028931,
+    "lng": -81.645535
+  },
+  "areaType": "City",
+  "zips": [
+    "44203"
+  ],
+  "surroundingAreas": [
+    "Barberton",
+    "Copley Township",
+    "Doylestown",
+    "Wadsworth"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Norton, OH",
+  "metaTitle": "Norton, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Norton, OH. A complete check for heavy or uneven doors. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "A complete check for heavy or uneven doors",
+  "localIntro": "Norton homeowners west of Barberton can request help with a heavy, crooked, or unreliable garage door. Tell us whether the door can close and whether a vehicle is inside; avoid moving a door with a loose cable or visibly damaged spring.",
+  "localIssues": "Frayed cables, worn drums, and poor spring balance can all cause uneven lifting. We inspect their relationship before replacing a single failed part.",
+  "localAdvice": "Keep the opening clear and tell us whether a car is trapped inside. Do not attempt to pull a cable back onto its drum or adjust bottom brackets yourself.",
+  "localCommercialIntro": "At a Norton commercial site, describe how vehicles or deliveries normally use the affected opening. Let us know about alternate access and any equipment that must stay clear while the lifting system is inspected."
+}

@@ -25,10 +25,10 @@ const filterStrings = (value: string | undefined | null): value is string =>
 
 const buildTelephoneHref = (phone: string) => `tel:${phone.replace(/[^0-9+]/g, '') || phone}`;
 const resolvePhoneDetails = (location?: (typeof locations)[number]) => {
-  const phoneDisplay = location?.phone?.trim() || BUSINESS_INFO.telephone;
+  const phoneDisplay = location?.market === 'Akron Metro' ? location.phone.trim() : location?.phone?.trim() || BUSINESS_INFO.telephone;
   return {
     phoneDisplay,
-    phoneHref: buildTelephoneHref(phoneDisplay),
+    phoneHref: phoneDisplay ? buildTelephoneHref(phoneDisplay) : "/contact?market=akron#contact-form",
   };
 };
 
@@ -148,7 +148,7 @@ const locationServiceDirectory = locations.map((location) => ({
 
 <Base
   title="Buck Strong Garage Doors | Service Areas"
-  description="Explore Buck Strong Garage Doors service areas in the Cincinnati and Cleveland markets. Find your community, core services, and booking information."
+  description="Explore Buck Strong Garage Doors service areas in the Cincinnati, Cleveland, and Akron markets. Find your community, core services, and booking information."
 >
   <Nav />
   <Breadcrumbs items={breadcrumbs} />
@@ -158,7 +158,7 @@ const locationServiceDirectory = locations.map((location) => ({
     <div class="absolute inset-0">
       <Image
         src={heroImage}
-        alt="Ohio garage door service areas around Cincinnati and Cleveland"
+        alt="Ohio garage door service areas around Cincinnati, Cleveland, and Akron"
         width="1200"
         height="675"
         class="w-full h-full object-cover"
@@ -195,7 +195,7 @@ const locationServiceDirectory = locations.map((location) => ({
                     class="inline-flex items-center gap-2 hover:text-accent transition-colors"
                     title={`Call ${hub?.name ?? market} at ${phoneDisplay}`}
                   >
-                    Call Now: <span class="nap-phone">{phoneDisplay}</span>
+                    {phoneDisplay ? <>Call Now: <span class="nap-phone">{phoneDisplay || "Request Akron service"}</span></> : "Request Akron service"}
                   </a>
                 </p>
                 <div class="flex flex-wrap gap-3">
@@ -262,7 +262,7 @@ const locationServiceDirectory = locations.map((location) => ({
                     href={phoneHref}
                     class="hover:text-primary transition-colors"
                   >
-                    <span class="nap-phone">{phoneDisplay}</span>
+                    <span class="nap-phone">{phoneDisplay || "Request Akron service"}</span>
                   </a>
                 </p>
                 {hub?.serviceAreaBusiness && !hub.showAddress && (
@@ -415,9 +415,9 @@ const locationServiceDirectory = locations.map((location) => ({
   </section>
 
   <HiddenSeoText
-    title="Cincinnati and Cleveland service area details"
+    title="Cincinnati, Cleveland, and Akron service area details"
     paragraphs={[
-      'Buck Strong lists separate Cincinnati and Cleveland hubs with community pages, local phone numbers, and links to repair, opener, installation, and commercial service information.',
+      'Buck Strong lists separate Cincinnati, Cleveland, and Akron hubs with community pages, local phone numbers, and links to repair, opener, installation, and commercial service information.',
       'Call with the property address and the door issue so the appropriate market team can confirm coverage and appointment availability.',
       'For commercial or property management work, describe the opening, equipment type, and access requirements when requesting service.'
     ]}
@@ -434,12 +434,12 @@ const locationServiceDirectory = locations.map((location) => ({
   <HiddenSeoText
     title="How our Ohio locations support homeowners and businesses"
     paragraphs={[
-      'The Cincinnati and Cleveland hubs connect homeowners to the nearest relevant location and service pages.',
+      'The Cincinnati, Cleveland, and Akron hubs connect homeowners to the nearest relevant location and service pages.',
       'Garage door concerns vary by opening and use. We can discuss springs, cables, seals, panels, opener settings, and safety features after reviewing the problem.',
       'Facilities and retail teams can share operating hours, equipment details, and access instructions when arranging commercial service.'
     ]}
     bullets={[
-      'Service areas include selected residential and commercial communities around Cincinnati and Cleveland',
+      'Service areas include selected residential and commercial communities around Cincinnati, Cleveland, and Akron',
       'Find local repair, opener, installation, and commercial service details through each hub',
       'Call the appropriate market number to confirm coverage and scheduling'
     ]}

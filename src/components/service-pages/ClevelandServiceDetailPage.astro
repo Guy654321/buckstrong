@@ -9,6 +9,8 @@ import Breadcrumbs from '../Breadcrumbs.astro';
 import ContactForm from '../ContactForm.astro';
 import { BUSINESS_INFO } from '../../data/business';
 import cleveland from '../../content/locations/cleveland.json';
+import akron from '../../content/locations/akron.json';
+import { AKRON_SERVICE_INTROS } from '../../data/akron-service-details';
 import { CLEVELAND_SERVICE_INTROS } from '../../data/cleveland-service-details';
 import type { Location } from '../../lib/locations';
 import { buildLocalizedServicePath } from '../../lib/location-routing';
@@ -35,6 +37,8 @@ interface Props {
 }
 
 const { group, service, location } = Astro.props as Props;
+const isAkronMarket = location?.market === 'Akron Metro';
+const marketHub = isAkronMarket ? akron : cleveland;
 const cityName = location?.name ?? 'Cleveland';
 const cityState = `${cityName}, OH`;
 const hubPaths = {
@@ -50,6 +54,7 @@ const hubLabels = {
   commercial: 'Commercial Garage Door Service',
 };
 const detailPath = (slug: string) => {
+  if (isAkronMarket && location) return buildLocalizedServicePath(location.slug, `garage-door-${group === 'opener' ? 'opener-' : group === 'commercial' ? 'commercial-' : ''}${slug}`);
   if (group === 'repair') return `/cleveland-oh/garage-door-${slug}`;
   if (group === 'opener') return `/garage-door-opener-${slug}-cleveland-oh`;
   if (group === 'commercial') return `/garage-door-commercial-${slug}-cleveland-oh`;
@@ -59,11 +64,11 @@ const localDetailSlug = group === 'opener' ? `opener-${service.slug}` : group ==
 const canonical = location
   ? buildLocalizedServicePath(location.slug, `garage-door-${localDetailSlug}`)
   : detailPath(service.slug);
-const marketIntro = CLEVELAND_SERVICE_INTROS[service.slug];
+const marketIntro = (isAkronMarket ? AKRON_SERVICE_INTROS : CLEVELAND_SERVICE_INTROS)[service.slug];
 if (!marketIntro) throw new Error(`Missing Cleveland service introduction: ${service.slug}`);
 const intro = location ? marketIntro.replaceAll('Cleveland', cityName) : marketIntro;
-const phone = location?.phone ?? cleveland.phone;
-const phoneHref = `tel:${phone.replace(/[^\d+]/g, '')}`;
+const phone = location?.phone ?? marketHub.phone;
+const phoneHref = phone ? `tel:${phone.replace(/[^\d+]/g, '')}` : '#service-quote';
 const shortLocalTitles: Record<string, string> = {
   'spring-replacement': 'Garage Door Spring Replacement',
   'opener-repair': 'Garage Door Opener Repair',
@@ -87,12 +92,14 @@ const shortLocalTitles: Record<string, string> = {
   'dock-industrial-door-equipment-service': 'Dock Equipment Service',
   'retail-municipal-garage-door-service': 'Retail & Municipal Door Service',
 };
+const isOpenerDiagnostics = isAkronMarket && group === 'repair' && service.slug === 'opener-repair';
+const localServiceName = isOpenerDiagnostics ? 'Garage Door Opener Diagnostics' : isAkronMarket ? shortLocalTitles[service.slug] ?? service.serviceName : service.serviceName;
 const title = location
-  ? `${cityState}: ${shortLocalTitles[service.slug] ?? service.serviceName} | Buck Strong`
+  ? `${cityState}: ${isOpenerDiagnostics ? localServiceName : shortLocalTitles[service.slug] ?? service.serviceName} | Buck Strong`
   : group === 'repair' && service.slug === 'opener-repair'
     ? 'Garage Door Opener Diagnostics in Cleveland, OH | Buck Strong'
     : `${service.serviceName} in ${cityState} | Buck Strong`;
-const description = location
+const description = isAkronMarket ? `${localServiceName} in ${cityState}. ${intro.split('. ')[0]}. Request a quote for equipment assessment and scheduling.` : location
   ? `${service.serviceName} in ${cityState}. ${intro} Call ${phone} to check availability.`
   : `${intro} Call Buck Strong at ${phone} for Cleveland-area service and availability.`;
 const overviewPath = location
@@ -101,8 +108,8 @@ const overviewPath = location
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: 'Locations', href: '/locations' },
-  { label: 'Cleveland, OH', href: '/locations/cleveland' },
-  ...(location ? [{ label: cityState, href: `/locations/${location.slug}` }] : []),
+  { label: `${marketHub.name}, OH`, href: `/locations/${marketHub.slug}` },
+  ...(location && !location.isHub ? [{ label: cityState, href: `/locations/${location.slug}` }] : []),
   { label: hubLabels[group], href: overviewPath },
   { label: service.cardTitle },
 ];
@@ -125,15 +132,19 @@ const relatedLinks = service.relatedSlugs
     ? buildLocalizedServicePath(location.slug, `garage-door-${group === 'commercial' ? 'commercial-' : ''}${slug}`)
     : group === 'opener' ? `/cleveland-oh/garage-door-${slug}` : detailPath(slug) }));
 const localNotes = location
-  ? group === 'door'
+  ? isAkronMarket
+    ? group === 'commercial'
+      ? [location.localCommercialIntro, `Before scheduling, provide the opening size, operator type, and whether the door can be secured. We review the equipment and access needs with your site contact.`]
+      : group === 'door' ? [location.localIntro, location.localAdvice] : [location.localIntro, location.localIssues]
+    : group === 'door'
     ? [location.localAdvice, `We measure the opening, check track clearance, and review insulation and hardware before ordering a new door for a ${cityName} home.`]
     : group === 'commercial'
-      ? [`For a ${cityName} facility, tell us the door type, opening size, operating schedule, and access requirements. That helps us plan the visit around the site.`, `We confirm coverage and appointment availability for each address in the Cleveland service area before scheduling.`]
+      ? [`For a ${cityName} facility, tell us the door type, opening size, operating schedule, and access requirements. That helps us plan the visit around the site.`, `We confirm coverage and appointment availability for each address in the ${marketHub.name} service area before scheduling.`]
       : [location.localIntro, location.localIssues]
   : [];
 ---
 
-<Base title={title} description={description} canonical={canonical} callNowPhoneNumber={phone} market="Cleveland Metro">
+<Base title={title} description={description} canonical={canonical} callNowPhoneNumber={phone} market={marketHub.market}>
   <Nav />
   <Breadcrumbs items={breadcrumbs} />
 
@@ -144,21 +155,21 @@ const localNotes = location
     description,
     serviceType: service.serviceName,
     areaServed: location
-      ? [{ '@type': location.areaType ?? 'City', name: cityName }, { '@type': 'AdministrativeArea', name: 'Greater Cleveland' }]
-      : [{ '@type': 'City', name: 'Cleveland' }, { '@type': 'City', name: 'Westlake' }, { '@type': 'AdministrativeArea', name: 'Greater Cleveland' }],
+      ? [{ '@type': location.areaType ?? 'City', name: cityName, ...(location.areaType === 'Place' ? { containedInPlace: { '@type': location.containedInPlace ? 'AdministrativeArea' : 'City', name: location.containedInPlace || marketHub.name } } : {}) }, { '@type': 'AdministrativeArea', name: `Greater ${marketHub.name}` }]
+      : [{ '@type': 'City', name: 'Cleveland' }, { '@type': 'City', name: 'Westlake' }, { '@type': 'AdministrativeArea', name: `Greater ${marketHub.name}` }],
     provider: {
       '@type': 'LocalBusiness',
       name: BUSINESS_INFO.name,
       legalName: BUSINESS_INFO.legalName,
-      '@id': `${getSiteOrigin()}/locations/cleveland#local-business`,
-      telephone: phone,
-      address: { '@type': 'PostalAddress', ...cleveland.address },
-      openingHoursSpecification: [{
+      '@id': `${getSiteOrigin()}/locations/${marketHub.slug}#local-business`,
+      telephone: phone || undefined,
+      address: { '@type': 'PostalAddress', ...marketHub.address },
+      ...(!isAkronMarket ? { openingHoursSpecification: [{
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
         opens: '00:00',
         closes: '23:59',
-      }],
+      }] } : {}),
     },
   }} />
 
@@ -166,16 +177,16 @@ const localNotes = location
   <section class="py-16 bg-muted">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid items-center gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
       <div>
-        <h1 class="text-4xl md:text-5xl font-bold text-ink mb-6">{service.serviceName} in {cityState}</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-ink mb-6">{localServiceName} in {cityState}</h1>
         <p class="text-lg leading-relaxed text-ink/80 mb-4">{intro}</p>
-        <p class="text-lg leading-relaxed text-ink/80 mb-6">We serve {cityName} from our Westlake market. Call with your address so we can confirm coverage and appointment availability.</p>
+        <p class="text-lg leading-relaxed text-ink/80 mb-6">{isAkronMarket ? `Request service for your ${cityName} property through our Akron team. Include the address and equipment details so we can confirm coverage and scheduling.` : `We serve ${cityName} from our Westlake market. Call with your address so we can confirm coverage and appointment availability.`}</p>
         <div class="flex flex-col sm:flex-row gap-3">
-          <a href={phoneHref} class="btn-accent px-6 py-3 text-center">Call Now: {phone}</a>
+          <a href={phoneHref} class="btn-accent px-6 py-3 text-center">{phone ? `Call Now: ${phone}` : "Request Service"}</a>
           <a href="#service-quote" class="btn-primary px-6 py-3 text-center">Get a Quote</a>
         </div>
       </div>
       <div class="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 bg-white/50">
-        <Picture src={service.heroImage} alt={service.heroAlt.replaceAll('Cincinnati', cityName).replaceAll('Cleveland', cityName)} widths={[480, 768, 1024]} sizes="(min-width: 1024px) 40vw, 100vw" quality={82} loading="eager" fetchpriority="high" class="h-full w-full object-cover" />
+        <Picture src={service.heroImage} alt={isAkronMarket ? service.cardTitle : service.heroAlt.replaceAll('Cincinnati', cityName).replaceAll('Cleveland', cityName)} widths={[480, 768, 1024]} sizes="(min-width: 1024px) 40vw, 100vw" quality={82} loading="eager" fetchpriority="high" class="h-full w-full object-cover" />
       </div>
     </div>
   </section>
@@ -226,7 +237,7 @@ const localNotes = location
       <ul class="list-disc list-inside space-y-2 text-lg">
         {relatedLinks.map((link) => <li><a class="text-primary underline" href={link.href}>{link.label}</a></li>)}
       </ul>
-      <p class="text-lg text-ink/80 leading-relaxed mt-6">Buck Strong Garage Doors · {cleveland.address.streetAddress}, {cleveland.address.addressLocality}, {cleveland.address.addressRegion} {cleveland.address.postalCode}. Open 24/7 for calls at <a class="text-primary underline" href={phoneHref}>{phone}</a>.</p>
+      <p class="text-lg text-ink/80 leading-relaxed mt-6">Buck Strong Garage Doors · {marketHub.address.streetAddress}, {marketHub.address.addressLocality}, {marketHub.address.addressRegion} {marketHub.address.postalCode}. {phone ? <>{isAkronMarket ? 'Contact our Akron team at ' : 'Open 24/7 for calls at '}<a class="text-primary underline" href={phoneHref}>{phone}</a>.</> : <>Request service through the <a class="text-primary underline" href="#service-quote">quote form</a>.</>}</p>
     </div>
   </section>
 

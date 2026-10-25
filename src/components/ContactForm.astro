@@ -51,7 +51,7 @@ const isTurnstileEnabled = Boolean(turnstileSiteKey);
 const turnstileScriptSrc = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
 ---
 
-<section id={id} class={`py-16 ${bgColor === 'white' ? 'bg-white' : 'bg-muted'}`}>
+<section id={id} class={`py-16 ${bgColor === 'white' ? 'bg-white' : 'bg-muted'}`} style="scroll-margin-top: 7rem;">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-8">
       <h2 class="text-3xl font-bold text-ink mb-4">{title}</h2>
@@ -64,6 +64,7 @@ const turnstileScriptSrc = 'https://challenges.cloudflare.com/turnstile/v0/api.j
       method="POST"
       action="/api/contact"
       class={`${formBgColor === 'muted' ? 'bg-muted' : 'bg-white'} rounded-lg shadow-lg px-4 sm:px-5 lg:px-6 py-8`}
+      style="scroll-margin-top: 7rem;"
       data-contact-form-module={contactFormModuleUrl}
       data-contact-form
       data-turnstile-src={isTurnstileEnabled ? turnstileScriptSrc : undefined}

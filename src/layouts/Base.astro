@@ -3,6 +3,7 @@
 import tailwindStylesHref from '../styles/tailwind.css?url';
 import { BUSINESS_INFO } from '../data/business';
 import clevelandHub from '../content/locations/cleveland.json';
+import akronHub from '../content/locations/akron.json';
 import speedInsightsLoaderUrl from '../scripts/speed-insights-loader.js?url';
 import speedInsightsConfigScriptUrl from '../scripts/speed-insights-config.js?url';
 import analyticsLoaderUrl from '../scripts/analytics-consent-loader.js?url';
@@ -23,7 +24,7 @@ export interface Props {
   articleType?: 'article' | 'website';
   schemaType?: 'LocalBusiness' | 'Service' | 'Article' | 'FAQPage';
   callNowPhoneNumber?: string;
-  market?: 'Cleveland Metro' | 'Cincinnati Metro';
+  market?: string;
 }
 
 const {
@@ -179,13 +180,14 @@ const normalizedAuthor = normalizeBrandMentions(author);
 
 const fullTitle = buildTitle(normalizedTitleInput);
 const isClevelandPage = market === 'Cleveland Metro' || Astro.url.pathname.startsWith('/locations/cleveland') || Astro.url.pathname.startsWith('/cleveland-oh/') || Astro.url.pathname.replace(/\/$/, '').endsWith('-cleveland-oh');
+const isAkronPage = market === 'Akron Metro' || Astro.url.pathname.startsWith('/locations/akron') || Astro.url.pathname.startsWith('/akron-oh/');
 const isGeneralServicePage = Astro.url.pathname.startsWith('/services/');
 const isSharedMarketPage = isGeneralServicePage || ['/', '/faq', '/contact', '/services', '/safety', '/blog', '/locations', '/privacy-policy', '/404'].includes(Astro.url.pathname.replace(/\/$/, '') || '/');
-const normalizedDescription = normalizeDescription(normalizedDescriptionInput, fullTitle, isClevelandPage || isSharedMarketPage);
+const normalizedDescription = normalizeDescription(normalizedDescriptionInput, fullTitle, isClevelandPage || isAkronPage || isSharedMarketPage);
 const ogImageUrl = buildAbsoluteUrl(ogImage, siteOrigin);
 const imageAltText = `${fullTitle} - Professional garage door services`;
 const isHomepage = Astro.url.pathname === '/';
-const businessAddress = isClevelandPage ? clevelandHub.address : BUSINESS_INFO.address;
+const businessAddress = isAkronPage ? akronHub.address : isClevelandPage ? clevelandHub.address : BUSINESS_INFO.address;
 const speedInsightsBasePath = import.meta.env.PUBLIC_VERCEL_OBSERVABILITY_BASEPATH;
 const speedInsightsScriptSrc = speedInsightsBasePath
   ? `${speedInsightsBasePath}/speed-insights/script.js`
@@ -209,7 +211,7 @@ const websiteSchema = JSON.stringify({
   '@id': `${siteOrigin}#website`,
   url: siteOrigin,
   name: BUSINESS_INFO.name,
-  description: 'Garage door repair and installation services in the Cincinnati and Cleveland markets, Ohio',
+  description: 'Garage door repair and installation services in the Cincinnati, Cleveland, and Akron markets, Ohio',
   publisher: {
     '@type': 'Organization',
     name: BUSINESS_INFO.name,
@@ -397,18 +399,18 @@ const localBusinessSchema = JSON.stringify({
     {!isHomepage && schemaType !== 'Service' && (
       <script type="application/ld+json" is:inline set:html={websiteSchema}></script>
     )}
-    {schemaType === 'LocalBusiness' && !isClevelandPage && !isSharedMarketPage && (
+    {schemaType === 'LocalBusiness' && !isClevelandPage && !isAkronPage && !isSharedMarketPage && (
       <script type="application/ld+json" is:inline set:html={localBusinessSchema}></script>
     )}
   </head>
   <body class="bg-card text-ink antialiased" data-schema-type={schemaType || undefined}>
     <IconSprite />
     <slot />
-    <CallNowButton phoneNumber={callNowPhoneNumber} />
+    {callNowPhoneNumber !== '' && <CallNowButton phoneNumber={callNowPhoneNumber} />}
 
     <script type="module" src={contactFormLoaderUrl}></script>
 
-    {!isClevelandPage && !isGeneralServicePage && !isSharedMarketPage && <div class="sr-only" data-text-ratio-helper>
+    {!isClevelandPage && !isAkronPage && !isGeneralServicePage && !isSharedMarketPage && <div class="sr-only" data-text-ratio-helper>
       <p>
         Buck Strong Garage Doors provides dependable residential and commercial overhead door services across the Cincinnati metro.
         Our insured technicians handle garage door repair, opener troubleshooting, spring replacement, cable resets, and

@@ -2,6 +2,7 @@
 import { DEFAULT_LOCATION_MAP_ZOOM } from '../data/locations';
 
 type Props = {
+  background?: 'white' | 'muted';
   name: string;
   city: string;
   state: string;
@@ -10,7 +11,7 @@ type Props = {
   zoom?: number | null;
 };
 
-const { name, city, state, lat, lng, zoom } = Astro.props as Props;
+const { name, city, state, lat, lng, zoom, background = 'white' } = Astro.props as Props;
 const hasCoordinates = Number.isFinite(lat) && Number.isFinite(lng);
 const nameToken = name?.trim();
 const cityToken = city?.trim();
@@ -31,7 +32,7 @@ const mapTitle = `${name} Service Area Map`;
 const isDev = import.meta.env.DEV;
 ---
 
-<section class="py-12 bg-white">
+<section class:list={["py-12", background === "muted" ? "bg-muted" : "bg-white"]}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="max-w-3xl mx-auto text-center mb-6">
       <p class="text-xs font-semibold uppercase tracking-[0.25em] text-ink/60">Service Area Coverage</p>

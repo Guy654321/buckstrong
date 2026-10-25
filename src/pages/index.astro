@@ -13,7 +13,6 @@ import { getServices, type ServiceSummary } from '../lib/services';
 import { getLocationHubs } from '../lib/locations';
 import { BUSINESS_INFO } from '../data/business';
 import HiddenSeoText from '../components/HiddenSeoText.astro';
-import CallNowButton from '../components/CallNowButton.astro';
 import {
   HERO_IMAGE_QUALITY,
   HERO_IMAGE_QUALITY_AVIF,
@@ -100,7 +99,7 @@ const breadcrumbSchema = JSON.stringify({
 
 <Base
   title="Ohio Garage Door Repair & Installation | Buck Strong Garage Doors"
-  description="Garage door repair, opener service, and installation across the Cincinnati and Cleveland metro areas. Call Buck Strong to confirm availability at your address."
+  description="Garage door repair, opener service, and installation across the Cincinnati, Cleveland, and Akron metro areas. Call Buck Strong to confirm availability at your address."
   schemaType="Service"
 >
   <Fragment slot="head">
@@ -145,7 +144,7 @@ const breadcrumbSchema = JSON.stringify({
       legalName: BUSINESS_INFO.legalName,
       alternateName: 'Buck Strong Garage Door Services',
       description:
-        'Ohio-based garage door repair, opener service, installation, and commercial overhead door support for the Cincinnati and Cleveland metro areas.',
+        'Ohio-based garage door repair, opener service, installation, and commercial overhead door support for the Cincinnati, Cleveland, and Akron metro areas.',
       url: BUSINESS_INFO.url,
       logo: BUSINESS_INFO.logo,
       image: heroImageAbsoluteUrl,
@@ -218,7 +217,7 @@ const breadcrumbSchema = JSON.stringify({
         }
       ],
       foundingDate: '2010',
-      slogan: 'Ohio garage door services in the Cincinnati and Cleveland markets'
+      slogan: 'Ohio garage door services in the Cincinnati, Cleveland, and Akron markets'
     }}
   />
 
@@ -240,12 +239,18 @@ const breadcrumbSchema = JSON.stringify({
         class="inline-block align-middle font-semibold text-white/90 underline decoration-2 decoration-white/50 underline-offset-2 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80 transition-colors duration-200"
       >
         Cincinnati
-      </a>{' '}and{' '}
+      </a>,{' '}
       <a
         href="/locations/cleveland"
         class="inline-block align-middle font-semibold text-white/90 underline decoration-2 decoration-white/50 underline-offset-2 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80 transition-colors duration-200"
       >
         Cleveland
+      </a>, and{' '}
+      <a
+        href="/locations/akron"
+        class="inline-block align-middle font-semibold text-white/90 underline decoration-2 decoration-white/50 underline-offset-2 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80 transition-colors duration-200"
+      >
+        Akron
       </a>{' '}metro areas with garage door repair, opener service, and new door installation. From broken springs and faulty openers to complete door replacements, we inspect the system, explain the options, and confirm service availability for your address before scheduling.
     </Fragment>
   </Hero>
@@ -261,7 +266,7 @@ const breadcrumbSchema = JSON.stringify({
             Ohio Garage Door Services You Can Count On
           </h2>
           <p class="text-lg sm:text-xl text-ink/70 leading-relaxed max-w-3xl mx-auto">
-            Explore the garage door repairs, opener service, and new door installations available across the Cincinnati and Greater Cleveland areas.
+            Explore the garage door repairs, opener service, and new door installations available across the Cincinnati, Greater Cleveland, and Akron areas.
           </p>
         </div>
 
@@ -332,14 +337,14 @@ const breadcrumbSchema = JSON.stringify({
   <HiddenSeoText
     title="In-depth Ohio garage door service details"
     paragraphs={[
-      'Buck Strong Garage Doors serves Cincinnati and Greater Cleveland with garage door repair, opener troubleshooting, and new door installation. We inspect broken springs, stuck doors, failed openers, and hardware damage, then explain the service options and scheduling availability for each address.',
+      'Buck Strong Garage Doors serves Cincinnati, Greater Cleveland, and Akron with garage door repair, opener troubleshooting, and new door installation. We inspect broken springs, stuck doors, failed openers, and hardware damage, then explain the service options and scheduling availability for each address.',
       'Our technicians complete balance checks, track alignment, photo eye calibration, and weather-seal inspections on every job to ensure safe performance after we leave. Customers receive digital estimates, approvals, and receipts for easy recordkeeping.',
       'Beyond repairs, we manage design consultations and installations for insulated steel, carriage-style, and modern glass doors that suit Ohio architecture. Commercial overhead door maintenance and dock door tune-ups are scheduled around facility downtime to reduce disruptions.'
       ]}
       bullets={[
-        'Primary service hubs: Cincinnati and Cleveland',
+        'Primary service hubs: Cincinnati, Cleveland, and Akron',
         'Core offerings: garage door repair, opener troubleshooting, new door installation, and commercial overhead door maintenance',
-        '24/7 phone booking, address-based appointment confirmation, and clear service options'
+        '24/7 Cincinnati and Cleveland booking lines, address-based appointment confirmation, and clear service options'
     ]}
   />
 
@@ -348,7 +353,7 @@ const breadcrumbSchema = JSON.stringify({
     paragraphs={[
       'Arrival notifications include technician names, vehicle descriptions, and license details so customers know exactly who is on the way. We document access instructions, gate codes, and HOA preferences for future visits.',
       'Garage door weatherization guidance is tailored to Ohio humidity, wind, and temperature swings. We adjust opener force settings, recommend insulated panels, and replace perimeter seals to keep garages energy efficient.',
-      'Commercial facilities in the Cincinnati and Cleveland markets can describe loading dock schedules, shift changes, and access rules when requesting overhead door service. We confirm coverage and plan the next steps for the equipment at each address.'
+      'Commercial facilities in the Cincinnati, Cleveland, and Akron markets can describe loading dock schedules, shift changes, and access rules when requesting overhead door service. We confirm coverage and plan the next steps for the equipment at each address.'
     ]}
     bullets={[
       'Dispatch coverage includes emergency weekend availability and coordinated multi-property visits',
@@ -371,7 +376,6 @@ const breadcrumbSchema = JSON.stringify({
     }}
   />
 
-  <CallNowButton />
   </main>
 
   <Footer />

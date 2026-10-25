@@ -1,0 +1,33 @@
+{
+  "name": "Brimfield Township",
+  "slug": "akron-brimfield-township",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.094856,
+    "lng": -81.342265
+  },
+  "areaType": "AdministrativeArea",
+  "zips": [
+    "44240",
+    "44260"
+  ],
+  "surroundingAreas": [
+    "Kent",
+    "Suffield Township",
+    "Mogadore",
+    "Tallmadge"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Brimfield Township, OH",
+  "metaTitle": "Brimfield Township, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Brimfield Township, OH. Keeping township and mailing addresses clear. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Keeping township and mailing addresses clear",
+  "localIntro": "For Brimfield Township homeowners between Akron and Kent, a useful repair request describes what the door does and when the problem started. Mention whether it stops partway, moves unevenly, or responds differently to the wall control and remote.",
+  "localIssues": "If a replacement door is planned, we check the opening and existing track arrangement before discussing panel styles. A wider door can place different demands on reinforcement and the spring system.",
+  "localAdvice": "Send the street address and note whether the garage is attached or detached. If there are association requirements, have those available when comparing new-door options.",
+  "localCommercialIntro": "A Brimfield Township facility may have a Kent or Mogadore postal address. Give the street address and bay identification so service planning follows the actual building, its equipment, and its delivery access."
+}

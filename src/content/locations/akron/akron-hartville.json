@@ -1,0 +1,32 @@
+{
+  "name": "Hartville",
+  "slug": "akron-hartville",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 40.961452,
+    "lng": -81.335123
+  },
+  "areaType": "City",
+  "zips": [
+    "44632"
+  ],
+  "surroundingAreas": [
+    "Suffield Township",
+    "Uniontown",
+    "North Canton",
+    "Lakemore"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Hartville, OH",
+  "metaTitle": "Hartville, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Hartville, OH. Matching repair work to the existing opening. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Matching repair work to the existing opening",
+  "localIntro": "For a Hartville home, a replacement door should suit both the opening and the way the garage is used. We review measurements, headroom, panel construction, and lifting hardware alongside the style and finish you prefer.",
+  "localIssues": "A new panel must match the existing system's dimensions and connection points. We review compatibility and the remaining door condition before presenting a section-repair option.",
+  "localAdvice": "If appearance is part of the project, share whether you want to keep existing windows or hardware. We can compare those preferences with the available door designs after inspection.",
+  "localCommercialIntro": "At a Hartville business, note whether the door serves customers, deliveries, or equipment storage. Include the responsible site contact and any restrictions on access while the opening is inspected."
+}

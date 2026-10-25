@@ -1,0 +1,34 @@
+{
+  "name": "Green",
+  "slug": "akron-green",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 40.953816,
+    "lng": -81.472042
+  },
+  "areaType": "City",
+  "zips": [
+    "44312",
+    "44319",
+    "44685"
+  ],
+  "surroundingAreas": [
+    "Springfield Township",
+    "Uniontown",
+    "Coventry Township",
+    "Lakemore"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Green, OH",
+  "metaTitle": "Green, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Green, OH. Door and opener options south of Akron. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Door and opener options south of Akron",
+  "localIntro": "Green homeowners can request garage door repair, opener troubleshooting, or a new-door estimate from our Akron team. Include the property's city and street address when booking, especially if the mailing address uses Uniontown or Akron.",
+  "localIssues": "For an attached garage, a replacement decision can include panel insulation, weather seals, opener sound, and battery-backup options. Fit and safe movement remain the first checks.",
+  "localAdvice": "Provide the property's city or township as well as its ZIP when you can. Shared mailing names do not establish the municipal boundary or guarantee an appointment window.",
+  "localCommercialIntro": "A Green business can use a Uniontown mailing address without being in the Uniontown community. Include the site jurisdiction where known, plus operator details and the operating hours that service planning must accommodate."
+}

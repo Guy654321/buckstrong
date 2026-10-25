@@ -1,0 +1,98 @@
+[
+  {
+    "page": "/locations/akron",
+    "name": "hub-mobile",
+    "version": "12.8.2",
+    "scores": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "failures": []
+  },
+  {
+    "page": "/locations/akron",
+    "name": "hub-desktop",
+    "version": "12.8.2",
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "failures": []
+  },
+  {
+    "page": "/stow-oh/garage-door-repair",
+    "name": "repair-mobile",
+    "version": "12.8.2",
+    "scores": {
+      "performance": 98,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "failures": []
+  },
+  {
+    "page": "/fairlawn-oh/opener-repair",
+    "name": "opener-mobile",
+    "version": "12.8.2",
+    "scores": {
+      "performance": 97,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "failures": []
+  },
+  {
+    "page": "/green-oh/garage-door-installation",
+    "name": "installation-mobile",
+    "version": "12.8.2",
+    "scores": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "failures": []
+  },
+  {
+    "page": "/kent-oh/commercial-jobs",
+    "name": "commercial-mobile",
+    "version": "12.8.2",
+    "scores": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "failures": []
+  },
+  {
+    "page": "/bath-township-oh/garage-door-spring-replacement",
+    "name": "detail-mobile",
+    "version": "12.8.2",
+    "scores": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "failures": []
+  },
+  {
+    "page": "/contact",
+    "name": "contact-mobile",
+    "version": "12.8.2",
+    "scores": {
+      "performance": 98,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "failures": []
+  }
+]

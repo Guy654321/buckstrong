@@ -78,6 +78,8 @@ export function getLastModified(pathname) {
     return new Date('2026-09-24');
   }
 
+  if (normalizedPath.startsWith('/locations/akron') || normalizedPath.startsWith('/akron-oh/')) return new Date('2026-10-23');
+
   // Use more realistic dates based on actual content update patterns
   const baseDate = new Date('2024-09-15'); // Base date for most static content
 

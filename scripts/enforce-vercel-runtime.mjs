@@ -2,7 +2,7 @@ import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const TARGET_RUNTIME = process.env.VERCEL_SERVERLESS_RUNTIME ?? 'nodejs20.x';
+const TARGET_RUNTIME = process.env.VERCEL_SERVERLESS_RUNTIME ?? 'nodejs24.x';
 const projectRoot = fileURLToPath(new URL('..', import.meta.url));
 const functionsDir = join(projectRoot, '.vercel', 'output', 'functions');
 

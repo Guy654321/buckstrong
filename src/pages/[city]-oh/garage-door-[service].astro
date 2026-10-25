@@ -77,7 +77,7 @@ export async function getStaticPaths() {
   ];
 
   return locations.flatMap((location) =>
-    (location.market === 'Cleveland Metro' && !location.isHub ? clevelandDetails : repairDetails).map(({ group, service, routeSlug }) => ({
+    ((location.market === 'Cleveland Metro' && !location.isHub) || location.market === 'Akron Metro' ? clevelandDetails : repairDetails).map(({ group, service, routeSlug }) => ({
       params: { city: buildLocationCitySlug(location.slug), service: routeSlug },
       props: { location, service, detailGroup: group },
     })),
@@ -85,7 +85,7 @@ export async function getStaticPaths() {
 }
 
 const { location, service, detailGroup } = Astro.props as { location: Location; service: DetailService; detailGroup: ClevelandDetailGroup };
-const isClevelandMarket = location.market === 'Cleveland Metro';
+const isClevelandMarket = location.market === 'Cleveland Metro' || location.market === 'Akron Metro';
 const cityName = getLocationServiceCityName(location) ?? location.name;
 const cityState = `${cityName}, ${location.state}`;
 const detailSlug = detailGroup === 'opener' ? `opener-${service.slug}` : detailGroup === 'commercial' ? `commercial-${service.slug}` : service.slug;

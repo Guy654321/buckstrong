@@ -1,0 +1,32 @@
+{
+  "name": "Silver Lake",
+  "slug": "akron-silver-lake",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.156278,
+    "lng": -81.455664
+  },
+  "areaType": "City",
+  "zips": [
+    "44224"
+  ],
+  "surroundingAreas": [
+    "Munroe Falls",
+    "Stow",
+    "Tallmadge",
+    "Goodyear Heights"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Silver Lake, OH",
+  "metaTitle": "Silver Lake, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Silver Lake, OH. Careful measurements for residential openings. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Careful measurements for residential openings",
+  "localIntro": "For a Silver Lake home beside Stow and Cuyahoga Falls, we assess repair and replacement options around the opening we inspect. Door dimensions, panel compatibility, track clearance, and spring balance all matter when choosing the work.",
+  "localIssues": "For a quieter system, roller condition, loose fasteners, and opener mounting matter alongside drive type. We look at the source of vibration before recommending an upgrade.",
+  "localAdvice": "Save the model information from the existing door when possible. Matching a damaged section requires more than finding a similar color or panel pattern.",
+  "localCommercialIntro": "At a Silver Lake managed property, clarify who controls the garage equipment and who authorizes repairs. Access controls, resident access, and maintenance responsibilities should be discussed alongside the mechanical fault."
+}

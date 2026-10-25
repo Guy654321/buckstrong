@@ -2,7 +2,7 @@ import { buildLocalizedServicePath } from './location-routing';
 
 export const LEGACY_MARKET_REDIRECTS: Record<string, string> = {};
 
-const CANONICAL_HUB_SLUGS = new Set(['cincinnati', 'cleveland']);
+const CANONICAL_HUB_SLUGS = new Set(['cincinnati', 'cleveland', 'akron']);
 
 function normalizeSlug(slug: string | undefined | null): string {
   return typeof slug === 'string' ? slug.trim() : '';

@@ -12,6 +12,7 @@ export const LOCATION_MAPS: Record<string, LocationMapConfig> = {
     lng: -84.512,
     zoom: 12,
   },
+  akron: { lat: 41.0814, lng: -81.519, zoom: 11 },
   cleveland: {
     lat: 41.4993,
     lng: -81.6944,

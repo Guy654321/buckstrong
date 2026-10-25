@@ -1,0 +1,32 @@
+{
+  "name": "Kent",
+  "slug": "akron-kent",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.147561,
+    "lng": -81.361965
+  },
+  "areaType": "City",
+  "zips": [
+    "44240"
+  ],
+  "surroundingAreas": [
+    "Brimfield Township",
+    "Munroe Falls",
+    "Tallmadge",
+    "Stow"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Kent, OH",
+  "metaTitle": "Kent, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Kent, OH. Residential garage service east of Akron. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Residential garage service east of Akron",
+  "localIntro": "Kent properties include owner-occupied homes, rentals, and business premises. Tell us who can authorize work and provide access so a garage door repair or equipment assessment can be coordinated with the right person.",
+  "localIssues": "For a rental garage, remotes and keypad access may be as important as the door repair. We can review programming needs along with mechanical and safety checks.",
+  "localAdvice": "Confirm the property owner's approval before arranging changes to shared equipment. Include the unit or garage number where several doors serve the same site.",
+  "localCommercialIntro": "At a Kent rental or commercial garage, confirm the owner or manager who can approve work. List any tenant-access obligations and keypad or remote requirements along with the mechanical door problem."
+}

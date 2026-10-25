@@ -1,0 +1,32 @@
+{
+  "name": "Tallmadge",
+  "slug": "akron-tallmadge",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.106119,
+    "lng": -81.424834
+  },
+  "areaType": "City",
+  "zips": [
+    "44278"
+  ],
+  "surroundingAreas": [
+    "Munroe Falls",
+    "Goodyear Heights",
+    "Mogadore",
+    "Ellet"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Tallmadge, OH",
+  "metaTitle": "Tallmadge, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Tallmadge, OH. Checking the opening before choosing parts. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Checking the opening before choosing parts",
+  "localIntro": "For a Tallmadge garage door that sticks or no longer closes consistently, describe what changed before the problem began. We inspect the door sections, track, lifting hardware, and controls rather than treating every symptom as an opener fault.",
+  "localIssues": "The space above and beside the opening determines which track and spring arrangements fit. We inspect those clearances rather than choosing replacement equipment from the door's outside appearance.",
+  "localAdvice": "If a vehicle struck the door, leave it stopped and share a photo from a safe distance. A panel can hide damage to hinges, rollers, or track brackets.",
+  "localCommercialIntro": "Tallmadge properties can lie on either side of the Summit–Portage county line. Include the full site address with a description of the opening and any required property-manager or facility approvals."
+}

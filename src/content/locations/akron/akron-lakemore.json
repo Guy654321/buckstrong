@@ -1,0 +1,33 @@
+{
+  "name": "Lakemore",
+  "slug": "akron-lakemore",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.022654,
+    "lng": -81.423439
+  },
+  "areaType": "City",
+  "zips": [
+    "44250",
+    "44312"
+  ],
+  "surroundingAreas": [
+    "Springfield Township",
+    "Ellet",
+    "Mogadore",
+    "Uniontown"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Lakemore, OH",
+  "metaTitle": "Lakemore, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Lakemore, OH. Clear repair information for Lakemore homeowners. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Clear repair information for Lakemore homeowners",
+  "localIntro": "Lakemore homeowners beside Springfield Township can request repair, opener service, or a new-door estimate. If a panel is damaged, a photograph of the full opening and any readable model label can help explain the issue before the visit.",
+  "localIssues": "A lower panel can be damaged while the rest of the system is still usable. We compare compatible section replacement with a new door after checking the remaining hardware.",
+  "localAdvice": "Include a photograph of the full closed door when safe. Close-up photos alone may not show the panel pattern, opening shape, or track movement involved.",
+  "localCommercialIntro": "For a Lakemore business or managed property, identify whether the door is shared with residents or other tenants. Access arrangements and authorization should be clear before a commercial equipment visit is scheduled."
+}

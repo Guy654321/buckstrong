@@ -1,0 +1,33 @@
+{
+  "name": "New Franklin",
+  "slug": "akron-new-franklin",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 40.954288,
+    "lng": -81.584869
+  },
+  "areaType": "City",
+  "zips": [
+    "44319",
+    "44216"
+  ],
+  "surroundingAreas": [
+    "Barberton",
+    "Canal Fulton",
+    "Coventry Township",
+    "Kenmore"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in New Franklin, OH",
+  "metaTitle": "New Franklin, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in New Franklin, OH. Assessing garage access near Portage Lakes. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Assessing garage access near Portage Lakes",
+  "localIntro": "New Franklin homeowners in the Portage Lakes area can request garage door repairs and replacement estimates through our Akron team. If a door is stuck, explain whether there is another garage entrance and whether the opening is secure.",
+  "localIssues": "Water or drafts at the opening call for a check of the seal contact and door alignment. A new bottom seal cannot correct every floor or panel-fit problem.",
+  "localAdvice": "When a door is stuck, describe any alternate entrance to the garage. Safe access lets the technician inspect the system without forcing the opening.",
+  "localCommercialIntro": "For a New Franklin facility, use the street address rather than only the Portage Lakes or Manchester area name. Identify the bay, its daily use, and the person responsible for approving equipment work."
+}

@@ -1,0 +1,258 @@
+{
+  "localPages": [
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Repair & Installation in Akron, OH",
+      "navVisible": false,
+      "overflow": false,
+      "path": "/locations/akron",
+      "width": 390
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Repair & Installation in Bath Township, OH",
+      "navVisible": false,
+      "overflow": false,
+      "path": "/locations/akron-bath-township",
+      "width": 390
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Repair in Stow, OH",
+      "navVisible": false,
+      "overflow": false,
+      "path": "/stow-oh/garage-door-repair",
+      "width": 390
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Opener Repair in Fairlawn, OH",
+      "navVisible": false,
+      "overflow": false,
+      "path": "/fairlawn-oh/opener-repair",
+      "width": 390
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Installation in Green, OH",
+      "navVisible": false,
+      "overflow": false,
+      "path": "/green-oh/garage-door-installation",
+      "width": 390
+    },
+    {
+      "brokenImages": [],
+      "h1": "Commercial Door Support for Kent, OH",
+      "navVisible": false,
+      "overflow": false,
+      "path": "/kent-oh/commercial-jobs",
+      "width": 390
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Spring Replacement in Bath Township, OH",
+      "navVisible": false,
+      "overflow": false,
+      "path": "/bath-township-oh/garage-door-spring-replacement",
+      "width": 390
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Repair & Installation in Akron, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/locations/akron",
+      "width": 840
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Repair & Installation in Bath Township, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/locations/akron-bath-township",
+      "width": 840
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Repair in Stow, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/stow-oh/garage-door-repair",
+      "width": 840
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Opener Repair in Fairlawn, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/fairlawn-oh/opener-repair",
+      "width": 840
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Installation in Green, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/green-oh/garage-door-installation",
+      "width": 840
+    },
+    {
+      "brokenImages": [],
+      "h1": "Commercial Door Support for Kent, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/kent-oh/commercial-jobs",
+      "width": 840
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Spring Replacement in Bath Township, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/bath-township-oh/garage-door-spring-replacement",
+      "width": 840
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Repair & Installation in Akron, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/locations/akron",
+      "width": 1280
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Repair & Installation in Bath Township, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/locations/akron-bath-township",
+      "width": 1280
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Repair in Stow, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/stow-oh/garage-door-repair",
+      "width": 1280
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Opener Repair in Fairlawn, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/fairlawn-oh/opener-repair",
+      "width": 1280
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Installation in Green, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/green-oh/garage-door-installation",
+      "width": 1280
+    },
+    {
+      "brokenImages": [],
+      "h1": "Commercial Door Support for Kent, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/kent-oh/commercial-jobs",
+      "width": 1280
+    },
+    {
+      "brokenImages": [],
+      "h1": "Garage Door Spring Replacement in Bath Township, OH",
+      "navVisible": true,
+      "overflow": false,
+      "path": "/bath-township-oh/garage-door-spring-replacement",
+      "width": 1280
+    }
+  ],
+  "sharedPages": [
+    {
+      "akronLink": true,
+      "brokenImages": 0,
+      "overflow": false,
+      "path": "/",
+      "width": 390
+    },
+    {
+      "akronLink": true,
+      "brokenImages": 0,
+      "overflow": false,
+      "path": "/faq",
+      "width": 390
+    },
+    {
+      "akronLink": true,
+      "brokenImages": 0,
+      "overflow": false,
+      "path": "/services/garage-door-repair",
+      "width": 390
+    },
+    {
+      "akronLink": true,
+      "brokenImages": 0,
+      "overflow": false,
+      "path": "/contact",
+      "width": 390
+    },
+    {
+      "akronLink": true,
+      "brokenImages": 0,
+      "overflow": false,
+      "path": "/",
+      "width": 840
+    },
+    {
+      "akronLink": true,
+      "brokenImages": 0,
+      "overflow": false,
+      "path": "/faq",
+      "width": 840
+    },
+    {
+      "akronLink": true,
+      "brokenImages": 0,
+      "overflow": false,
+      "path": "/services/garage-door-repair",
+      "width": 840
+    },
+    {
+      "akronLink": true,
+      "brokenImages": 0,
+      "overflow": false,
+      "path": "/contact",
+      "width": 840
+    },
+    {
+      "akronLink": true,
+      "brokenImages": 0,
+      "overflow": false,
+      "path": "/",
+      "width": 1280
+    },
+    {
+      "akronLink": true,
+      "brokenImages": 0,
+      "overflow": false,
+      "path": "/faq",
+      "width": 1280
+    },
+    {
+      "akronLink": true,
+      "brokenImages": 0,
+      "overflow": false,
+      "path": "/services/garage-door-repair",
+      "width": 1280
+    },
+    {
+      "akronLink": true,
+      "brokenImages": 0,
+      "overflow": false,
+      "path": "/contact",
+      "width": 1280
+    }
+  ]
+}

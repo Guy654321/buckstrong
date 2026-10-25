@@ -1,0 +1,33 @@
+{
+  "name": "Cuyahoga Falls",
+  "slug": "akron-cuyahoga-falls",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 41.182881,
+    "lng": -81.553008
+  },
+  "areaType": "City",
+  "zips": [
+    "44221",
+    "44223"
+  ],
+  "surroundingAreas": [
+    "Northwest Akron",
+    "Wallhaven",
+    "Fairlawn",
+    "Bath Township"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Cuyahoga Falls, OH",
+  "metaTitle": "Cuyahoga Falls, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Cuyahoga Falls, OH. Garage doors north of Akron. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Garage doors north of Akron",
+  "localIntro": "If a Cuyahoga Falls garage door starts lifting unevenly, tell us whether one side moves before the other and whether the opener still runs. Those details help us prepare to inspect the cables, rollers, track, and spring balance together.",
+  "localIssues": "A worn roller and an unbalanced spring system can produce similar noises. We check the door under its own load before deciding whether the opener needs work.",
+  "localAdvice": "For a detached garage, include how the technician can reach the door when it will not open. Keep people away from a hanging cable or crooked panel.",
+  "localCommercialIntro": "At a Cuyahoga Falls commercial property, confirm whether the door serves one tenant or a shared building. Include the responsible manager and any access rules so assessment and approval can be coordinated before work starts."
+}

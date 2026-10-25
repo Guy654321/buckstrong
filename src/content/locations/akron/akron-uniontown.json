@@ -1,0 +1,33 @@
+{
+  "name": "Uniontown",
+  "slug": "akron-uniontown",
+  "state": "OH",
+  "phone": "",
+  "market": "Akron Metro",
+  "parentHub": "akron",
+  "showAddress": false,
+  "serviceAreaBusiness": true,
+  "geo": {
+    "lat": 40.959366,
+    "lng": -81.403701
+  },
+  "areaType": "Place",
+  "zips": [
+    "44685"
+  ],
+  "surroundingAreas": [
+    "Springfield Township",
+    "Lakemore",
+    "Green",
+    "Hartville"
+  ],
+  "heroTitle": "Garage Door Repair & Installation in Uniontown, OH",
+  "metaTitle": "Uniontown, OH Garage Door Service | Buck Strong",
+  "metaDescription": "Garage door service in Uniontown, OH. Recognizing Uniontown and its mailing area. Request repair, opener, installation, or commercial service with Buck Strong.",
+  "localHeading": "Recognizing Uniontown and its mailing area",
+  "localIntro": "Uniontown homeowners in Lake Township, Stark County, can request garage door repair, opener service, and replacement estimates. Include the actual city or township with the street address, since the Uniontown mailing name also reaches neighboring jurisdictions.",
+  "localIssues": "For a door that sometimes fails to close, note whether sunlight, sensor lights, or visible obstructions coincide with the problem. We test the safety system and door resistance together.",
+  "localAdvice": "Include the actual city or township with the street address where possible. If the garage serves more than one household, identify the affected opening and who can provide access for the visit.",
+  "containedInPlace": "Lake Township, Stark County, OH",
+  "localCommercialIntro": "For a Uniontown commercial request, include the actual city or township if known. The mailing name covers several jurisdictions; accurate site details help distinguish the Uniontown community from nearby Green properties."
+}
