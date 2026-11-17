@@ -12,39 +12,163 @@ const breadcrumbs = [
   { label: 'Privacy Policy' }
 ];
 
-const lastUpdated = 'September 2026';
+const lastUpdated = 'November 17, 2026';
 
 const policySections = [
   {
-    title: 'Information We Collect',
-    points: [
-      'Contact details you provide when requesting service (name, phone number, email, and address).',
-      'Service details you share when describing an issue, booking an appointment, or completing a job.',
-      'Technical data captured through our website such as IP address, browser type, and pages visited for security and analytics.'
+    "id": "agency-0",
+    "title": "IMPORTANT NOTICE REGARDING TEXT MESSAGING DATA",
+    "points": [
+      "Buck Strong Garage Doors (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) DOES NOT share customer opt-in information, including phone numbers and consent records, with any affiliates or third parties for marketing, promotional, or any other purposes unrelated to providing our direct services. All text messaging originator opt-in data is kept strictly confidential."
     ]
   },
   {
-    title: 'How We Use Your Information',
-    points: [
-      'Responding to service inquiries, scheduling appointments, and providing estimates.',
-      'Improving our website experience, including troubleshooting errors and measuring performance.',
-      'Sending important updates about scheduled work or changes to this policy when relevant.'
+    "id": "agency-1",
+    "title": "1. Information We Collect",
+    "points": [
+      "We collect the following types of information:",
+      "<strong>Personal Information:</strong>",
+      "• Name, email address, phone number, physical address",
+      "• Payment information when you make a purchase or pay for services",
+      "• Opt-in records and timestamps for all communication channels (SMS, email, etc.)",
+      "<strong>Non-Personal Information:</strong>",
+      "• IP address, browser type, device information",
+      "• Website usage patterns and analytics",
+      "• Cookies and similar technologies",
+      "<strong>Customer Communication:</strong>",
+      "• Records of inquiries and service requests",
+      "• Appointment details and preferences",
+      "• Service history and feedback"
     ]
   },
   {
-    title: 'When We Share Information',
-    points: [
-      'Trusted service partners who help deliver, schedule, or complete your garage door project.',
-      'Vendors that provide secure hosting, analytics, and communication tools needed to operate our website.',
-      'Legal or safety reasons, including complying with lawful requests or protecting our customers and business.'
+    "id": "agency-2",
+    "title": "2. How We Use Your Information",
+    "points": [
+      "We use collected data for:",
+      "• Providing and improving our services",
+      "• Processing transactions and payments",
+      "• Communicating with you about your inquiries, appointments, and promotions",
+      "• Enhancing website functionality and user experience",
+      "• Ensuring security and fraud prevention",
+      "• Maintaining records of your communication preferences and consent"
     ]
   },
   {
-    title: 'Your Choices & Data Stewardship',
-    points: [
-      'You can update or request deletion of your contact details by emailing our team.',
-      'Most browsers allow you to manage cookies and tracking preferences. Disabling them may affect site performance.',
-      'We retain service records only as long as needed for scheduling, warranty, legal, or operational purposes.'
+    "id": "text-messages",
+    "title": "3. SMS Messaging & Compliance",
+    "points": [
+      "<strong>Text Message Program Terms &amp; Conditions</strong>",
+      "By opting into our SMS messaging services, you agree to receive the message categories you selected. Service-related messages include responses to garage door inquiries, estimates, appointment scheduling and reminders, customer support, and service updates. Marketing messages about special offers, discounts, and garage door services require separate, specific marketing consent. Consent is optional and is not a condition of purchase.",
+      "<strong>Opt-In &amp; Consent:</strong>",
+      "• You will only receive messages if you have explicitly opted in",
+      "• We maintain timestamped records of all opt-in actions",
+      "• We comply with the Telephone Consumer Protection Act (TCPA) and all applicable laws",
+      "<strong>Opt-Out Instructions:</strong>",
+      "• You can cancel SMS notifications at any time by replying &quot;STOP&quot;",
+      "• You will receive a final confirmation message, and no further messages will be sent unless you re-opt in",
+      "• All opt-out requests are processed immediately.",
+      "<strong>Message Frequency &amp; Content:</strong>",
+      "• Message frequency varies based on your interactions with our business",
+      "• Messages will be directly related to the services you have requested",
+      "• We do not send promotional content without specific consent",
+      "<strong>Help &amp; Support:</strong>",
+      "• Reply &quot;HELP&quot; for assistance or contact us at hello@buckstronggaragedoors.com",
+      "• Customer support is available during regular business hours",
+      "<strong>Carrier Information:</strong>",
+      "• Standard message and data rates may apply",
+      "• Carriers are not liable for delayed or undelivered messages",
+      "• Supported carriers include AT&amp;T, Verizon, T-Mobile, Sprint, and most regional carriers",
+      "<strong>SMS Data Protection Statement</strong>",
+      "No mobile information will be shared with third parties/affiliates for marketing/promotional purposes. Information sharing to subcontractors in support services, such as customer service is permitted. All other use case categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.",
+      "We implement strict data protection measures to safeguard your SMS opt-in information and consent records."
+    ]
+  },
+  {
+    "id": "agency-4",
+    "title": "4. Information Sharing & Disclosure",
+    "points": [
+      "We do not sell, rent, or trade personal information. We may share information with:",
+      "<strong>Service Providers:</strong>",
+      "• Third-party vendors who assist in our operations (e.g., payment processing, appointment scheduling)",
+      "• SMS aggregators and providers solely for the purpose of delivering messages you&#39;ve consented to receive",
+      "• All service providers are contractually obligated to maintain confidentiality and security",
+      "<strong>Legal Compliance:</strong>",
+      "• If required by law, legal process, or to protect our rights",
+      "• In response to valid law enforcement requests or court orders",
+      "<strong>Business Transfers:</strong>",
+      "• In case of mergers, acquisitions, or sale of assets",
+      "• In such cases, your data remains protected under the terms of this policy",
+      "All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties, excluding aggregators and providers of the Text Message services."
+    ]
+  },
+  {
+    "id": "agency-5",
+    "title": "5. Data Security",
+    "points": [
+      "We implement and maintain reasonable security measures to protect your personal information:",
+      "• Encryption of sensitive data in transit and at rest",
+      "• Secure access controls and authentication mechanisms",
+      "• Regular security assessments and updates",
+      "• Employee training on data protection",
+      "• Breach notification protocols in accordance with applicable laws",
+      "• Secure backup systems and disaster recovery procedures",
+      "Despite these measures, no method of transmission over the Internet or electronic storage is 100% secure. We strive to use commercially acceptable means to protect your personal information but cannot guarantee absolute security."
+    ]
+  },
+  {
+    "id": "tracking",
+    "title": "6. Cookies & Tracking Technologies",
+    "points": [
+      "We use cookies and similar technologies to:",
+      "• Analyze site traffic and user behavior",
+      "• Remember your preferences",
+      "• Improve website functionality and user experience",
+      "• Measure the effectiveness of our services",
+      "You may control cookies through your browser settings. Disabling cookies may limit your ability to use certain features of our website."
+    ]
+  },
+  {
+    "id": "your-choices",
+    "title": "7. Your Rights & Choices",
+    "points": [
+      "You have the right to:",
+      "• Access, update, or delete your personal information",
+      "• Opt-out of marketing emails by clicking &quot;unsubscribe&quot; in our emails",
+      "• Opt-out of SMS messages by replying &quot;STOP&quot;",
+      "• Request information on how we process your data",
+      "• Withdraw consent at any time for future communications",
+      "• Lodge a complaint with a supervisory authority if you believe your rights have been violated",
+      "To exercise these rights, please contact us using the information in Section 10."
+    ]
+  },
+  {
+    "id": "agency-8",
+    "title": "8. Third-Party Links",
+    "points": [
+      "Our website may contain links to third-party websites. We are not responsible for their privacy practices and encourage you to review their policies. This privacy policy applies only to information collected by Buck Strong Garage Doors."
+    ]
+  },
+  {
+    "id": "agency-9",
+    "title": "9. Changes to This Privacy Policy",
+    "points": [
+      "We may update this policy periodically. The latest version will always be available on our website with the effective date. For significant changes, we will notify you by email or through a notice on our website."
+    ]
+  },
+  {
+    "id": "terms",
+    "title": "SMS Terms & Conditions",
+    "points": [
+      "1. Program Description: This messaging program sends service-related text messages to customers who request garage door service or estimates, schedule appointments with Buck Strong Garage Doors, or contact us through https://www.buckstronggaragedoors.com or our landing pages at https://offers.buckstronggaragedoors.com, and explicitly opt in to SMS messages. Opt-in is collected through a dedicated, optional SMS consent checkbox that is unchecked by default. Service messages include responses to inquiries, estimates, scheduling confirmations, appointment reminders, rescheduling updates, service updates, and customer support communications. Marketing messages about special offers, discounts, and garage door services are sent only with separate, specific marketing consent. You may opt into service messages, marketing messages, both, or neither, where those choices are offered. Consent is not a condition of purchase.",
+      "2. Cancellation Instructions: You can cancel the SMS service at any time. Simply text &quot;STOP&quot; to the same number that sent you messages. Upon sending &quot;STOP,&quot; we will confirm your unsubscribe status via SMS. Following this confirmation, you will no longer receive SMS messages from us. To rejoin, sign up as you did initially, and we will resume sending SMS messages to you.",
+      "3. Support Information: If you experience issues with the messaging program, reply with the keyword &quot;HELP&quot; for more assistance, or reach out directly to hello@buckstronggaragedoors.com or call (216) 208-3556 during business hours.",
+      "4. Carrier Liability: Carriers are not liable for delayed or undelivered messages.",
+      "5. Message &amp; Data Rates: Message and data rates may apply for messages sent to you from us and to us from you. Message frequency varies based on your service usage and appointment schedule. For questions about your text plan or data plan, contact your wireless provider.",
+      "6. Supported Carriers: Our SMS program works with all major U.S. wireless carriers, including AT&amp;T, T-Mobile, Verizon, Sprint, and most regional carriers.",
+      "7. Age Restriction: You must be 18 years or older to participate in our SMS program.",
+      "8. Privacy Policy: For privacy-related inquiries, please refer to our Privacy Policy at https://www.buckstronggaragedoors.com/privacy-policy",
+      "We comply with all applicable laws and regulations, including the Telephone Consumer Protection Act (TCPA) and CTIA guidelines, regarding the use of SMS communications."
     ]
   }
 ];
@@ -65,18 +189,18 @@ const policySections = [
         <p class="text-sm font-semibold uppercase tracking-[0.25em] text-accent mb-3">Privacy Policy</p>
         <h1 class="text-3xl sm:text-4xl font-bold text-ink mb-4">Your privacy matters to Buck Strong Garage Doors</h1>
         <p class="text-base text-ink/80 leading-relaxed">
-          We collect information needed to respond to service requests, communicate with you, and keep our website secure. This policy applies to customers in the Cincinnati, Cleveland, and Akron markets.
+          We collect information needed to respond to service requests, communicate with you, and keep our website secure. This policy applies to our main website, offer landing pages, forms, and booking pages for Cincinnati, Cleveland, and Akron.
         </p>
         <p class="text-sm text-ink/60 mt-6">Last updated: {lastUpdated}</p>
       </section>
 
       <section class="space-y-6">
         {policySections.map(section => (
-          <article class="bg-white rounded-xl shadow-sm ring-1 ring-black/5 p-6 sm:p-8">
+          <article id={section.id} class="bg-white rounded-xl shadow-sm ring-1 ring-black/5 p-6 sm:p-8">
             <h2 class="text-2xl font-semibold text-ink mb-4">{section.title}</h2>
             <ul class="space-y-3 text-base text-ink/80 leading-relaxed list-disc list-inside">
               {section.points.map(point => (
-                <li>{point}</li>
+                <li set:html={point} />
               ))}
             </ul>
           </article>
@@ -85,7 +209,7 @@ const policySections = [
 
       <section class="bg-primary text-white rounded-2xl p-8 sm:p-10 shadow-lg shadow-primary/20">
         <div class="space-y-4">
-          <h2 class="text-2xl font-semibold">Questions about this policy?</h2>
+          <h2 class="text-2xl font-semibold">10. Contact Us</h2>
           <p class="text-white/80 leading-relaxed">
             We are committed to transparent communication. If you have questions about how we handle your data or want to request an update, reach out anytime.
           </p>
