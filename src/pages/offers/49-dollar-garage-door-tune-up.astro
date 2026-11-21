@@ -1,0 +1,103 @@
+---
+import Base from '../../layouts/Base.astro';
+const turnstileKey = process.env.PUBLIC_TURNSTILE_SITE_KEY || process.env.TURNSTILE_SITE_KEY || '';
+---
+<Base title="$49 Garage Door Tune-Up in Cleveland & Akron | Buck Strong" description="Book a $49 garage door tune-up in Cleveland or Akron with Buck Strong Garage Doors. Choose your preferred visit date at least two days ahead and request an appointment.">
+  <Fragment slot="head">
+    <meta property="og:description" content="A professional garage door tune-up for $49. Serving Cleveland and Akron. Request your preferred visit online." />
+  </Fragment>
+  <main class="min-h-screen bg-[#f6f7f8] text-[#172232]">
+    <header class="bg-white border-b border-slate-200">
+      <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
+        <a href="/" aria-label="Buck Strong Garage Doors homepage" class="flex items-center gap-3">
+          <img src="/images/ohio%20logo.png" alt="Buck Strong Garage Doors" class="h-12 w-auto max-w-[160px] object-contain" />
+          <span class="font-extrabold text-lg hidden sm:block">BUCK STRONG <span class="text-[#b72d30]">GARAGE DOORS</span></span>
+        </a>
+        <span class="text-xs sm:text-sm text-slate-600 font-semibold">Cleveland & Akron, Ohio</span>
+      </div>
+    </header>
+    <section class="bg-[#15263d] text-white overflow-hidden">
+      <div class="max-w-6xl mx-auto px-5 py-12 lg:py-20 grid lg:grid-cols-[1.06fr_.94fr] gap-10 items-center">
+        <div>
+          <p class="uppercase tracking-[.18em] text-[#e8b7b7] font-bold text-xs mb-5">A little maintenance goes a long way</p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.07] tracking-tight">Keep Your Garage Door Running Smoothly. <span class="text-[#ffcfbd]">For Just $49.</span></h1>
+          <p class="text-lg sm:text-xl text-slate-200 mt-6 max-w-xl leading-relaxed">A noisy, shaky, or slow garage door shouldn't turn into an unexpected repair. Have a Buck Strong technician inspect and tune up your door before small issues become bigger ones.</p>
+          <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold mt-8 text-white"><span>✓ Safety & hardware inspection</span><span>✓ Lubrication & adjustments</span><span>✓ Clear recommendations</span></div>
+          <a href="#book" class="inline-flex mt-9 bg-[#c52e35] hover:bg-[#a8242b] rounded-xl px-7 py-4 font-extrabold shadow-lg">Schedule My $49 Tune-Up →</a>
+          <p class="text-xs text-slate-300 mt-4">Residential garage doors · Cleveland, Akron & nearby communities</p>
+        </div>
+        <div id="book" class="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl scroll-mt-5">
+          <div class="flex justify-between gap-3 items-start pb-5 border-b border-slate-200 mb-5">
+            <div><p class="text-xs uppercase tracking-widest text-[#a62931] font-extrabold">Request your appointment</p><h2 class="text-2xl font-black mt-1">Book Your Tune-Up</h2><p class="text-sm text-slate-500 mt-1">Choose a preferred date at least 2 days ahead.</p></div>
+            <div class="bg-[#fff0ef] px-4 py-2 rounded-xl text-center"><span class="block text-3xl font-black text-[#a62931]">$49</span><span class="text-[10px] uppercase font-bold">Tune-up</span></div>
+          </div>
+          <form id="tune-form" action="/api/contact" method="post" data-turnstile-key={turnstileKey} class="space-y-4">
+            <div class="hidden" aria-hidden="true"><label>Company <input name="company" tabindex="-1" autocomplete="off" /></label><input name="bot-field" tabindex="-1" /><input name="form_loaded_at" id="loaded-at" /></div>
+            <input name="issue" type="hidden" value="maintenance" />
+            <input name="page" id="source-page" type="hidden" />
+            <input name="message" id="booking-message" type="hidden" />
+            <div><label for="market" class="block text-sm font-semibold mb-1.5">Service area</label><select id="market" required class="w-full rounded-xl border border-slate-300 px-4 py-3 bg-white"><option value="">Choose your area</option><option>Cleveland area</option><option>Akron area</option></select></div>
+            <div class="grid sm:grid-cols-2 gap-4"><div><label for="visit" class="block text-sm font-semibold mb-1.5">Preferred date</label><input id="visit" type="date" required class="w-full rounded-xl border border-slate-300 px-4 py-3 bg-white" /><p class="text-xs text-slate-500 mt-1">At least 2 calendar days from today.</p></div><div><label for="window" class="block text-sm font-semibold mb-1.5">Preferred arrival window</label><select id="window" required class="w-full rounded-xl border border-slate-300 px-4 py-3 bg-white"><option value="">Select a window</option><option>9 AM – 12 PM</option><option>12 PM – 3 PM</option><option>3 PM – 6 PM</option></select></div></div>
+            <div class="grid sm:grid-cols-2 gap-4"><div><label for="customer" class="block text-sm font-semibold mb-1.5">Full name</label><input id="customer" name="name" type="text" autocomplete="name" required class="w-full rounded-xl border border-slate-300 px-4 py-3" placeholder="Your name" /></div><div><label for="phone" class="block text-sm font-semibold mb-1.5">Phone number</label><input id="phone" name="phone" type="tel" autocomplete="tel" required class="w-full rounded-xl border border-slate-300 px-4 py-3" placeholder="(216) 555-0123" /></div></div>
+            <div class="grid sm:grid-cols-2 gap-4"><div><label for="email" class="block text-sm font-semibold mb-1.5">Email address <span class="text-slate-400 font-normal">(optional)</span></label><input id="email" name="email" type="email" autocomplete="email" class="w-full rounded-xl border border-slate-300 px-4 py-3" placeholder="you@example.com" /></div><div><label for="zip" class="block text-sm font-semibold mb-1.5">Service ZIP code</label><input id="zip" name="zip" type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required class="w-full rounded-xl border border-slate-300 px-4 py-3" placeholder="44101" /></div></div>
+            <div><label for="address" class="block text-sm font-semibold mb-1.5">Street address</label><input id="address" autocomplete="street-address" required class="w-full rounded-xl border border-slate-300 px-4 py-3" placeholder="Street address" /></div>
+            <div><label for="details" class="block text-sm font-semibold mb-1.5">Anything we should know? <span class="text-slate-400 font-normal">(optional)</span></label><textarea id="details" rows="2" class="w-full rounded-xl border border-slate-300 px-4 py-3" placeholder="Noisy door, slow opener, general maintenance…"></textarea></div>
+            {turnstileKey && <div class="cf-turnstile" data-sitekey={turnstileKey} data-action="contact" data-theme="light"></div>}
+            <label class="flex gap-3 text-xs text-slate-600 leading-relaxed"><input type="checkbox" name="consent" required class="mt-1" /><span>I agree that Buck Strong Garage Doors may contact me about this appointment request. <a class="underline" href="/privacy-policy">Privacy Policy</a>.</span></label>
+            <button type="submit" id="submit" class="w-full bg-[#bc2b32] hover:bg-[#9e2329] text-white rounded-xl py-4 px-5 font-extrabold text-lg">Request My $49 Tune-Up →</button>
+            <p class="text-xs text-center text-slate-500">No payment required to submit. Your appointment is confirmed only after our team verifies availability.</p>
+            <p id="feedback" role="status" aria-live="polite" class="text-sm font-semibold hidden"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section class="max-w-6xl mx-auto px-5 py-14 lg:py-20">
+      <div class="text-center max-w-2xl mx-auto"><p class="text-sm font-extrabold tracking-widest uppercase text-[#a62931]">What's included</p><h2 class="text-3xl sm:text-4xl font-black mt-3">The attention your garage door deserves.</h2><p class="text-slate-600 mt-4">A practical maintenance visit designed to help your garage door operate safely and reliably.</p></div>
+      <div class="grid sm:grid-cols-3 gap-5 mt-10">
+        <div class="bg-white p-7 rounded-2xl border border-slate-200"><div class="text-3xl mb-4">◉</div><h3 class="font-black text-xl">Safety & condition check</h3><p class="mt-3 text-slate-600 leading-relaxed">We check visible springs, cables, rollers, tracks, hardware, and safety-reversal functions for signs of wear or trouble.</p></div>
+        <div class="bg-white p-7 rounded-2xl border border-slate-200"><div class="text-3xl mb-4">✧</div><h3 class="font-black text-xl">Lubrication & tune-up</h3><p class="mt-3 text-slate-600 leading-relaxed">We lubricate appropriate moving components and make routine hardware adjustments where safe and applicable.</p></div>
+        <div class="bg-white p-7 rounded-2xl border border-slate-200"><div class="text-3xl mb-4">✓</div><h3 class="font-black text-xl">Straight answers</h3><p class="mt-3 text-slate-600 leading-relaxed">We explain what we found, what looks good, and whether anything needs attention. Extra repairs are quoted separately and never automatic.</p></div>
+      </div>
+      <div class="mt-10 bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"><div><h3 class="text-2xl font-black">Serving Greater Cleveland & Akron</h3><p class="text-slate-600 mt-2">Choose your preferred appointment date and we'll confirm service coverage and availability for your address.</p></div><a href="#book" class="bg-[#bc2b32] text-white rounded-xl px-6 py-4 text-center font-extrabold whitespace-nowrap">Request a Tune-Up</a></div>
+      <p class="text-xs text-slate-500 mt-8 text-center">$49 promotional tune-up applies to one residential garage door. Replacement parts and repairs are not included. Additional work is quoted separately with your approval. Appointment dates and times are requests, subject to confirmation.</p>
+    </section>
+    <footer class="bg-[#15263d] text-slate-300 text-sm py-8"><div class="max-w-6xl mx-auto px-5 flex flex-col sm:flex-row justify-between gap-3"><span>© Buck Strong Garage Doors · Cleveland & Akron, Ohio</span><div class="flex gap-5"><a href="/privacy-policy" class="underline">Privacy</a><a href="/" class="underline">Main website</a></div></div></footer>
+  </main>
+</Base>
+{turnstileKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+<script>
+  const form = document.getElementById('tune-form') as HTMLFormElement | null;
+  const date = document.getElementById('visit') as HTMLInputElement | null;
+  const feedback = document.getElementById('feedback') as HTMLParagraphElement | null;
+  const submit = document.getElementById('submit') as HTMLButtonElement | null;
+  const ohioDate = () => new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  const minDate = () => { const parts=ohioDate().split('-').map(Number); const d=new Date(Date.UTC(parts[0],parts[1]-1,parts[2]+2)); return d.toISOString().slice(0,10); };
+  if (form && date && feedback && submit) {
+    document.getElementById('loaded-at')?.setAttribute('value',new Date().toISOString());
+    const refreshMin=()=>{ const min=minDate(); date.min=min; if(date.value && date.value<min) date.value=''; };
+    refreshMin();
+    form.addEventListener('submit', async (event)=>{
+      event.preventDefault();refreshMin();
+      if (!form.reportValidity()) return;
+      if (date.value < minDate()) {feedback.textContent='Please select a date at least two days ahead.';feedback.classList.remove('hidden');return;}
+      const market=(document.getElementById('market') as HTMLSelectElement).value;
+      const address=(document.getElementById('address') as HTMLInputElement).value.trim();
+      const windowValue=(document.getElementById('window') as HTMLSelectElement).value;
+      const details=(document.getElementById('details') as HTMLTextAreaElement).value.trim();
+      const params=new URLSearchParams(window.location.search);
+      const tracking=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'].map(k=>params.get(k)?k+': '+params.get(k):null).filter(Boolean).join(' | ');
+      (document.getElementById('booking-message') as HTMLInputElement).value='SPECIAL OFFER: $49 residential garage door tune-up\nMarket: '+market+'\nPreferred date: '+date.value+'\nArrival window: '+windowValue+'\nAddress: '+address+'\nNotes: '+(details||'None')+'\nCampaign: '+(tracking||'not supplied')+'\nAppointment status: REQUESTED — not confirmed.';
+      (document.getElementById('source-page') as HTMLInputElement).value=window.location.href.slice(0,500);
+      submit.disabled=true;submit.textContent='Sending request…';feedback.classList.add('hidden');
+      try{
+        const response=await fetch('/api/contact',{method:'POST',body:new FormData(form)});
+        if(response.status===204) throw new Error('We could not verify your request. Please refresh and try again.');
+        const data=await response.json().catch(()=>({}));
+        if(!response.ok || !data.success) throw new Error(data.message||'Could not send your request. Please try again.');
+        form.reset();refreshMin();feedback.textContent='Thank you! We received your $49 tune-up request. Our team will contact you to confirm the appointment.';feedback.className='text-sm font-semibold text-green-700';
+        submit.textContent='Request received';return;
+      }catch(error){feedback.textContent=error instanceof Error?error.message:'Unable to submit. Please try again.';feedback.className='text-sm font-semibold text-red-700';}
+      finally{submit.disabled=false;if(submit.textContent!=='Request received')submit.textContent='Request My $49 Tune-Up →';}
+    });
+  }
+</script>
